@@ -1,0 +1,63 @@
+# webhook and jira and update jira
+
+This folder contains the **webhook and jira and update jira** workflow. Its executable nodes use `jira`, `mattermost`, `pagerDuty`, `webhook`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+
+**Status:** Published sanitized source; not runtime-tested.
+
+## Files
+
+- [`webhook-and-jira-and-update-jira.json`](webhook-and-jira-and-update-jira.json): sanitized, inactive import copy with an overview sticky note.
+- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
+- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
+
+## Setup
+
+1. Import the JSON into an isolated n8n instance, leaving it inactive.
+2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
+3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
+4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
+
+**Credential types referenced by the source:** `jiraSoftwareCloudApi`, `mattermostApi`, `pagerDutyApi`
+
+**Entry nodes:** Ack, Resolve, Webhook
+
+## Configured nodes
+
+| Node | Type | Resource / operation |
+|---|---|---|
+| Ack | `webhook` | Inspect parameters |
+| Resolve | `webhook` | Inspect parameters |
+| Webhook | `webhook` | Inspect parameters |
+| Jira1 | `jira` | Inspect parameters |
+| Jira2 | `jira` | update |
+| PagerDuty1 | `pagerDuty` | incident / update |
+| PagerDuty2 | `pagerDuty` | incident / update |
+| Mattermost5 | `mattermost` | Inspect parameters |
+| Mattermost6 | `mattermost` | Inspect parameters |
+| Mattermost4 | `mattermost` | Inspect parameters |
+| Mattermost3 | `mattermost` | Inspect parameters |
+| Mattermost2 | `mattermost` | channel / addUser |
+| Mattermost1 | `mattermost` | channel |
+| Mattermost7 | `mattermost` | Inspect parameters |
+
+## Connection map
+
+- Ack → PagerDuty1 (`main`, output 0, input 0)
+- Jira1 → Mattermost3 (`main`, output 0, input 0)
+- Jira1 → Mattermost4 (`main`, output 0, input 0)
+- Jira2 → Mattermost6 (`main`, output 0, input 0)
+- Jira2 → Mattermost7 (`main`, output 0, input 0)
+- Resolve → PagerDuty2 (`main`, output 0, input 0)
+- Webhook → Mattermost1 (`main`, output 0, input 0)
+- PagerDuty1 → Mattermost5 (`main`, output 0, input 0)
+- PagerDuty2 → Jira2 (`main`, output 0, input 0)
+- Mattermost1 → Mattermost2 (`main`, output 0, input 0)
+- Mattermost2 → Jira1 (`main`, output 0, input 0)
+
+## Verification and provenance
+
+Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
+
+Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Mattermost/0850_Mattermost_Pagerduty_Automate_Webhook.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Mattermost/0850_Mattermost_Pagerduty_Automate_Webhook.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
+
+Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
