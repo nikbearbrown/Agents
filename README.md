@@ -1,6 +1,6 @@
 # N8N workflow collection
 
-A documented collection of **1,900 canonical workflow folders**, consolidated from 8,070 snapshots. **1,900 workflow JSON files** have redistribution evidence and are included; all 1,900 selected workflow files are included. Start with the [searchable JSON catalog](catalog.json) or [linked workflow index](CATALOG.md).
+A documented collection of **1,876 workflow folders**, consolidated from 8,070 snapshots. **1,876 workflow JSON files** have redistribution evidence and are included; 24 formatting-only snapshot pairs have been consolidated. Start with the [searchable JSON catalog](catalog.json) or [linked workflow index](CATALOG.md).
 
 ## What is in this repository?
 
@@ -28,7 +28,7 @@ Published workflows include an overview sticky note. It describes observed struc
 
 ## Scope and counts
 
-The local cleanup selected 1,900 families from 8,070 snapshots, archiving 6,167 noncanonical copies and quarantining 3 malformed files. This repository retains one documented folder per family. See [publication-report.json](publication-report.json) for excluded JSON files and current counts.
+The local cleanup selected 1,900 families from 8,070 snapshots, archiving 6,167 noncanonical copies and quarantining 3 malformed files. A second comparison consolidated 24 pairs into 1,876 published folders. Matching executable graphs differed only in horizontal whitespace within strings; retained JSON is unchanged. This is not a claim that all remaining workflows are semantically distinct or runtime-tested. See [the consolidation manifest](consolidation.json) for retired names, both source/license records, and recoverable Git history. See [publication-report.json](publication-report.json) for excluded JSON files and current counts.
 
 ## Licensing and attribution
 
