@@ -8,6 +8,10 @@ Each folder under `workflows/` represents one selected workflow family. Its READ
 
 Published workflows include an overview sticky note. It describes observed structure and setup requirements; it is not a claim that the workflow has been executed. The original inputs and redundant snapshots are preserved outside this repository, not uploaded.
 
+## Original workflows (not part of the 1,900)
+
+[`lectern-job-search/`](lectern-job-search/README.md) holds five workflows written and tested for a course, not collected from elsewhere: collect, filter, delta, post to Discord and a daily runner, which rebuild a Python job-search pipeline as native n8n nodes. Each is tested against the Python's output (the filter agrees on 2,465 real postings), run headless in a disposable n8n 1.113.3 profile. The Discord node has not sent a message from n8n, and SmartRecruiters is not read live; the folder's README lists what is and is not tested. The counts and checks in this repository's other sections do not cover this folder.
+
 ## Use a workflow
 
 1. Choose a folder in [CATALOG.md](CATALOG.md) and read its README.
