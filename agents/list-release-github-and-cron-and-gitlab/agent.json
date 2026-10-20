@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "list-release-github-and-cron-and-gitlab",
+  "title": "Github Workflow",
+  "purpose": "Adapt the published “Github Workflow” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 0 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "Get latest release",
+    "Cron",
+    "Merge",
+    "No issue for release?",
+    "Create issue",
+    "List issues",
+    "Error Handler"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get latest release",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No issue for release?",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create issue",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "List issues",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": []
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/list-release-github-and-cron-and-gitlab/implementations/n8n",
+      "files": [
+        "agents/list-release-github-and-cron-and-gitlab/implementations/n8n/list-release-github-and-cron-and-gitlab.json"
+      ],
+      "sha256": "09b09bd18ec70f894717d5e97e0fb413bc0f0e90460bd529a1453e1ae3ba11f7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/list-release-github-and-cron-and-gitlab/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/list-release-github-and-cron-and-gitlab/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/list-release-github-and-cron-and-gitlab/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/list-release-github-and-cron-and-gitlab/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/list-release-github-and-cron-and-gitlab/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/list-release-github-and-cron-and-gitlab/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/list-release-github-and-cron-and-gitlab/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/list-release-github-and-cron-and-gitlab/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/list-release-github-and-cron-and-gitlab/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/list-release-github-and-cron-and-gitlab/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/list-release-github-and-cron-and-gitlab/implementations/n8n/provenance.json"
+}

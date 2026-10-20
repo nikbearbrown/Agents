@@ -1,0 +1,26 @@
+flowchart LR
+  n0["Webhook"]
+  n1["Code"]
+  n2["user info"]
+  n3["send back login page"]
+  n4["IF token is present"]
+  n5["Welcome page"]
+  n6["send back welcome page"]
+  n7["IF user info ok"]
+  n8["login form"]
+  n9["Set variables : auth, token, userinfo, client id, scope"]
+  n10["IF we have code in URI and not in PKCE mode"]
+  n11["get access_token from /token endpoint with code"]
+  n1 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 1 to in 0"| n8
+  n4 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 1 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 1 to in 0"| n4
+  n11 -->|"main out 0 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n1

@@ -1,0 +1,38 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Fetch Essay List"]
+  n2["Extract essay names"]
+  n3["Split out into items"]
+  n4["Fetch essay texts"]
+  n5["Limit to first 3"]
+  n6["Extract Text Only"]
+  n7["Recursive Character Text Splitter1"]
+  n8["Generate response"]
+  n9["Compose citations"]
+  n10["Answer the query based on chunks"]
+  n11["Prepare chunks"]
+  n12["Set max chunks to send to model"]
+  n13["Embeddings OpenAI2"]
+  n14["When chat message received"]
+  n15["Milvus Vector Store in retrieval"]
+  n16["Milvus Vector Store"]
+  n17["Embeddings OpenAI"]
+  n18["Default Data Loader"]
+  n19["OpenAI Chat Model"]
+  n11 -->|"main out 0 to in 0"| n10
+  n1 -->|"main out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n8
+  n17 -->|"ai_embedding out 0 to in 0"| n16
+  n6 -->|"main out 0 to in 0"| n16
+  n4 -->|"main out 0 to in 0"| n6
+  n19 -->|"ai_languageModel out 0 to in 0"| n10
+  n13 -->|"ai_embedding out 0 to in 0"| n15
+  n18 -->|"ai_document out 0 to in 0"| n16
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n5
+  n12 -->|"main out 0 to in 0"| n15
+  n10 -->|"main out 0 to in 0"| n9
+  n15 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 0"| n1
+  n7 -->|"ai_textSplitter out 0 to in 0"| n18

@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "slug": "ai-logo-sheet-extractor-to-airtable",
+  "title": "AI Logo Sheet Extractor to Airtable",
+  "purpose": "Adapt the published “AI Logo Sheet Extractor to Airtable” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 33 executable nodes and 37 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission"
+  ],
+  "terminal_nodes": [
+    "Structured Output Parser",
+    "Save all this juicy data",
+    "gpt-4o",
+    "Table: Attributes",
+    "make it a readable list"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve and Parser Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "JSON it",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if Attribute exists",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Map Attribute ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Attributes",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "All Attributes",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Attribute Creation",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Change each Attribute to the corresponding RecID",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Tools",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out each Attribute String",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Unique Hash for Name",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create if not Exist",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Old Data + RecID",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Only what we need",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Determine Attributes we should save",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out similar",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Generate Unique Hash for Similar",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "It Should exists",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "All Similar",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge2",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Change each Smiliar to the corresponding RecID",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Determine Similar we should save",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Save all this juicy data",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Map Agent Input",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Table: Tools",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Table: Attributes",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "make it a readable list",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": true
+      },
+      {
+        "name": "Get Schema",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": true
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Map Attribute ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge1",
+        "to": "All Similar",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge2",
+        "to": "Change each Smiliar to the corresponding RecID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-4o",
+        "to": "Retrieve and Parser Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "JSON it",
+        "to": "Split Out Tools",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Schema",
+        "to": "make it a readable list",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "All Similar",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Table: Tools",
+        "to": "Table: Tools",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Table: Tools",
+        "to": "Table: Attributes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "All Attributes",
+        "to": "Wait for Attribute Creation",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Map Agent Input",
+        "to": "Retrieve and Parser Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Tools",
+        "to": "Loop Over Attributes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Tools",
+        "to": "Wait for Attribute Creation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "It Should exists",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Attribute ID",
+        "to": "Loop Over Attributes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only what we need",
+        "to": "Merge Old Data + RecID",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Split Out similar",
+        "to": "Generate Unique Hash for Similar",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out similar",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "On form submission",
+        "to": "Map Agent Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create if not Exist",
+        "to": "Only what we need",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Attributes",
+        "to": "All Attributes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Attributes",
+        "to": "Split Out each Attribute String",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Merge Old Data + RecID",
+        "to": "Determine Attributes we should save",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Retrieve and Parser Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Attribute exists",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve and Parser Agent",
+        "to": "JSON it",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Attribute Creation",
+        "to": "Change each Attribute to the corresponding RecID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Unique Hash for Name",
+        "to": "Create if not Exist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Unique Hash for Name",
+        "to": "Merge Old Data + RecID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out each Attribute String",
+        "to": "Check if Attribute exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out each Attribute String",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Determine Similar we should save",
+        "to": "Save all this juicy data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Unique Hash for Similar",
+        "to": "It Should exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine Attributes we should save",
+        "to": "Split Out similar",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine Attributes we should save",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Change each Smiliar to the corresponding RecID",
+        "to": "Determine Similar we should save",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Change each Attribute to the corresponding RecID",
+        "to": "Generate Unique Hash for Name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/implementations/n8n",
+      "files": [
+        "agents/ai-logo-sheet-extractor-to-airtable/implementations/n8n/ai-logo-sheet-extractor-to-airtable.json"
+      ],
+      "sha256": "c921f9fc85efa784b61a161e4ea950c73ff3f5a245744dbe79e4104bdf00f04a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-logo-sheet-extractor-to-airtable/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-logo-sheet-extractor-to-airtable/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,479 @@
+{
+  "schema_version": 1,
+  "slug": "submit-batch-request-to-anthropic",
+  "title": "Submit batch request to Anthropic",
+  "purpose": "Adapt the published “Submit batch request to Anthropic” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 27 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "Run example"
+  ],
+  "terminal_nodes": [
+    "Simple Memory Store",
+    "First Prompt Result",
+    "Second Prompt Result",
+    "Split Out Parsed Results"
+  ],
+  "credential_types": [
+    "anthropicApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Submit batch",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Check batch status",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get results",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Parse response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If ended processing",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Batch Status Poll Interval",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Run example",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "One query example",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Delete original properties",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Construct 'requests' array",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set desired 'anthropic-version'",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow 'Process Multiple Prompts in Parallel with Anthropic Claude Batch API'",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Build batch 'request' object for single query",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory Store",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Fill Chat Memory with example data",
+        "type": "@n8n/n8n-nodes-langchain.memoryManager",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Build batch 'request' object from Chat Memory and execution data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Load Chat Memory Data",
+        "type": "@n8n/n8n-nodes-langchain.memoryManager",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "First Prompt Result",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Second Prompt Result",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Parsed Results",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Second Prompt Results",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter First Prompt Results",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Join two example requests into array",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "Append execution data for single query example",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Append execution data for chat memory example",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Truncate Chat Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryManager",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get results",
+        "to": "Parse response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run example",
+        "to": "One query example",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run example",
+        "to": "Truncate Chat Memory",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Submit batch",
+        "to": "If ended processing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse response",
+        "to": "Split Out Parsed Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "One query example",
+        "to": "Append execution data for single query example",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check batch status",
+        "to": "If ended processing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If ended processing",
+        "to": "Get results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If ended processing",
+        "to": "Batch Status Poll Interval",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory Store",
+        "to": "Load Chat Memory Data",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory Store",
+        "to": "Fill Chat Memory with example data",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory Store",
+        "to": "Truncate Chat Memory",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Truncate Chat Memory",
+        "to": "Fill Chat Memory with example data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load Chat Memory Data",
+        "to": "Append execution data for chat memory example",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Batch Status Poll Interval",
+        "to": "Check batch status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Construct 'requests' array",
+        "to": "Set desired 'anthropic-version'",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete original properties",
+        "to": "Join two example requests into array",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Filter First Prompt Results",
+        "to": "First Prompt Result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Second Prompt Results",
+        "to": "Second Prompt Result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set desired 'anthropic-version'",
+        "to": "Execute Workflow 'Process Multiple Prompts in Parallel with Anthropic Claude Batch API'",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Submit batch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fill Chat Memory with example data",
+        "to": "Load Chat Memory Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Join two example requests into array",
+        "to": "Construct 'requests' array",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Append execution data for chat memory example",
+        "to": "Build batch 'request' object from Chat Memory and execution data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build batch 'request' object for single query",
+        "to": "Delete original properties",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Append execution data for single query example",
+        "to": "Build batch 'request' object for single query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build batch 'request' object from Chat Memory and execution data",
+        "to": "Join two example requests into array",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow 'Process Multiple Prompts in Parallel with Anthropic Claude Batch API'",
+        "to": "Filter First Prompt Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow 'Process Multiple Prompts in Parallel with Anthropic Claude Batch API'",
+        "to": "Filter Second Prompt Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/submit-batch-request-to-anthropic/implementations/n8n",
+      "files": [
+        "agents/submit-batch-request-to-anthropic/implementations/n8n/submit-batch-request-to-anthropic.json"
+      ],
+      "sha256": "ae005fa1203bf0d4b63212ce199f63e50c1de6decaa0cee7129d38a1c1858d1b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/submit-batch-request-to-anthropic/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/submit-batch-request-to-anthropic/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/submit-batch-request-to-anthropic/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/submit-batch-request-to-anthropic/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/submit-batch-request-to-anthropic/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/submit-batch-request-to-anthropic/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/submit-batch-request-to-anthropic/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/submit-batch-request-to-anthropic/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/submit-batch-request-to-anthropic/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/submit-batch-request-to-anthropic/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/submit-batch-request-to-anthropic/implementations/n8n/provenance.json"
+}

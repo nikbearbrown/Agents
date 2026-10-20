@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "slug": "receive-the-weather-information-of-any-city",
+  "title": "Receive the weather information of any city",
+  "purpose": "Adapt the published “Receive the weather information of any city” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Set"
+  ],
+  "credential_types": [
+    "openWeatherMapApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenWeatherMap",
+        "type": "n8n-nodes-base.openWeatherMap",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "OpenWeatherMap",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenWeatherMap",
+        "to": "Set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-the-weather-information-of-any-city/implementations/n8n",
+      "files": [
+        "agents/receive-the-weather-information-of-any-city/implementations/n8n/receive-the-weather-information-of-any-city.json"
+      ],
+      "sha256": "7b7bf1a3992e214cee0eaacfb13696102952c1dc1f914421e21f719234bc5220",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-the-weather-information-of-any-city/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-the-weather-information-of-any-city/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-the-weather-information-of-any-city/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-the-weather-information-of-any-city/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-the-weather-information-of-any-city/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-the-weather-information-of-any-city/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-the-weather-information-of-any-city/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-the-weather-information-of-any-city/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-the-weather-information-of-any-city/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-the-weather-information-of-any-city/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-the-weather-information-of-any-city/implementations/n8n/provenance.json"
+}

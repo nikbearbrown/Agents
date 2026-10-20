@@ -1,0 +1,18 @@
+flowchart LR
+  n0["Keep only messages from a specific chat id"]
+  n1["Deactivate the marketing workflow"]
+  n2["Deactivate the sales workflow"]
+  n3["Activate the marketing workflow"]
+  n4["Switch depending on content #40;activate#41;"]
+  n5["Receive commands from Telegram"]
+  n6["Activate the sales workflow"]
+  n7["Switch depending on command"]
+  n8["Switch depending on content #40;deactivate#41;"]
+  n7 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 1 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 1 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 1 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n7

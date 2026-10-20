@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "slug": "open-ai-assistant-and-tool-calculator-and-aggregate",
+  "title": "open ai assistant and tool calculator and aggregate",
+  "purpose": "Adapt the published “open ai assistant and tool calculator and aggregate” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Chat Trigger"
+  ],
+  "terminal_nodes": [
+    "Calculator",
+    "Edit Fields",
+    "Window Buffer Memory"
+  ],
+  "credential_types": [
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Assistant",
+        "type": "@n8n/n8n-nodes-langchain.openAiAssistant",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Memory Manager",
+        "type": "@n8n/n8n-nodes-langchain.memoryManager",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Memory Manager1",
+        "type": "@n8n/n8n-nodes-langchain.memoryManager",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Limit",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Trigger",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Limit",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "OpenAI Assistant",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator",
+        "to": "OpenAI Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Trigger",
+        "to": "Chat Memory Manager",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Assistant",
+        "to": "Chat Memory Manager1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Memory Manager",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Memory Manager1",
+        "to": "Limit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Chat Trigger",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Chat Memory Manager",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Chat Memory Manager1",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/n8n",
+      "files": [
+        "agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/n8n/open-ai-assistant-and-tool-calculator-and-aggregate.json"
+      ],
+      "sha256": "96b5e8ec736c731f938f6341f54ac5e1452263416be1b2b423bb4240baa4b980",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/n8n/provenance.json"
+}

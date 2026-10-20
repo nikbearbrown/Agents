@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "slug": "clockifyblockiaworkflow",
+  "title": "ClockifyBlockiaWorkflow",
+  "purpose": "Adapt the published “ClockifyBlockiaWorkflow” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Slack Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Calculator",
+    "Create New Time Entry",
+    "GetClientsTool",
+    "Get All Time Entries",
+    "Current loggedin user",
+    "GetProjectsTool",
+    "Update Time Entry",
+    "Delete Time Entry",
+    "DateConverter",
+    "Window Buffer Memory",
+    "Add reaction",
+    "Send reply"
+  ],
+  "credential_types": [
+    "clockifyApi",
+    "openAiApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create New Time Entry",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "GetClientsTool",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get All Time Entries",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Current loggedin user",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "GetProjectsTool",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Update Time Entry",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Delete Time Entry",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DateConverter",
+        "type": "@n8n/n8n-nodes-langchain.toolCode",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "ClockifyBlockia",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Slack Trigger",
+        "type": "n8n-nodes-base.slackTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Add reaction",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Send reply",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Calculator",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DateConverter",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Slack Trigger",
+        "to": "Execution Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data",
+        "to": "ClockifyBlockia",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data",
+        "to": "Add reaction",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GetClientsTool",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ClockifyBlockia",
+        "to": "Send reply",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GetProjectsTool",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete Time Entry",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "ClockifyBlockia",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Time Entry",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get All Time Entries",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "ClockifyBlockia",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create New Time Entry",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Current loggedin user",
+        "to": "ClockifyBlockia",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/clockifyblockiaworkflow/implementations/n8n",
+      "files": [
+        "agents/clockifyblockiaworkflow/implementations/n8n/clockifyblockiaworkflow.json"
+      ],
+      "sha256": "50a658c396dff2d9e042194ab7eac66d2e557d8896b9d04f0e1c893cdc9d8792",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/clockifyblockiaworkflow/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/clockifyblockiaworkflow/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/clockifyblockiaworkflow/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/clockifyblockiaworkflow/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/clockifyblockiaworkflow/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/clockifyblockiaworkflow/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/clockifyblockiaworkflow/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/clockifyblockiaworkflow/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/clockifyblockiaworkflow/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/clockifyblockiaworkflow/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/clockifyblockiaworkflow/implementations/n8n/provenance.json"
+}

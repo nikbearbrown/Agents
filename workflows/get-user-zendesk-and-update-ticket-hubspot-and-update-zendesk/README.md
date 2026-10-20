@@ -1,65 +1,9 @@
 # get user zendesk and update ticket hubspot and update zendesk
 
-This folder contains the **get user zendesk and update ticket hubspot and update zendesk** workflow. Its executable nodes use `cron`, `functionItem`, `hubspot`, `if`, `merge`, `set`, `zendesk`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk](../../agents/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk/implementations/n8n/README.md)
+- [Importable JSON](../../agents/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk/implementations/n8n/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk)
 
-## Files
-
-- [`get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk.json`](get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** `hubspotOAuth2Api`, `zendeskApi`
-
-**Entry nodes:** Every 5 minutes
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| Ticket Exists | `if` | Inspect parameters |
-| Get user data of Ticket requester | `zendesk` | user / get |
-| Only keep needed data | `set` | Inspect parameters |
-| Add user data | `merge` | Inspect parameters |
-| Update existing ticket | `hubspot` | ticket / update |
-| Update Zendesk ticket with External Id | `zendesk` | update |
-| Get last execution timestamp | `functionItem` | Inspect parameters |
-| Get tickets updated after last execution | `zendesk` | getAll |
-| Set new last execution timestamp | `functionItem` | Inspect parameters |
-| Every 5 minutes | `cron` | Inspect parameters |
-| Create new Ticket | `hubspot` | ticket |
-| Update External Id in Zendesk for contact | `zendesk` | user / update |
-| Create or update contact | `hubspot` | contact |
-
-## Connection map
-
-- Add user data → Ticket Exists (`main`, output 0, input 0)
-- Ticket Exists → Update existing ticket (`main`, output 0, input 0)
-- Ticket Exists → Create or update contact (`main`, output 1, input 0)
-- Every 5 minutes → Get last execution timestamp (`main`, output 0, input 0)
-- Create new Ticket → Update Zendesk ticket with External Id (`main`, output 0, input 0)
-- Only keep needed data → Add user data (`main`, output 0, input 1)
-- Update existing ticket → Set new last execution timestamp (`main`, output 0, input 0)
-- Create or update contact → Update External Id in Zendesk for contact (`main`, output 0, input 0)
-- Get last execution timestamp → Get tickets updated after last execution (`main`, output 0, input 0)
-- Get user data of Ticket requester → Only keep needed data (`main`, output 0, input 0)
-- Update Zendesk ticket with External Id → Set new last execution timestamp (`main`, output 0, input 0)
-- Get tickets updated after last execution → Get user data of Ticket requester (`main`, output 0, input 0)
-- Get tickets updated after last execution → Add user data (`main`, output 0, input 0)
-- Update External Id in Zendesk for contact → Create new Ticket (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Zendesk/0286_Zendesk_HubSpot_Create_Scheduled.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Zendesk/0286_Zendesk_HubSpot_Create_Scheduled.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

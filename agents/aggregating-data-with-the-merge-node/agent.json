@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "slug": "aggregating-data-with-the-merge-node",
+  "title": "Aggregating data with the Merge node",
+  "purpose": "Adapt the published “Aggregating data with the Merge node” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Ingredients in stock from recipe",
+    "Super Band",
+    "Merge recipe"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Ingredients in stock from recipe",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Super Band",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "A. Ingredients Needed",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "B. Ingredients in stock",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge recipe",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "A. Ingredients",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "B. Recipe quantities",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "A. Queen",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "B. Led Zeppelin",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "A. Queen",
+        "to": "Super Band",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "A. Ingredients",
+        "to": "Merge recipe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "B. Led Zeppelin",
+        "to": "Super Band",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "B. Recipe quantities",
+        "to": "Merge recipe",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "A. Ingredients Needed",
+        "to": "Ingredients in stock from recipe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "A. Ingredients Needed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "B. Ingredients in stock",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "A. Ingredients",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "B. Recipe quantities",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "A. Queen",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "B. Led Zeppelin",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "B. Ingredients in stock",
+        "to": "Ingredients in stock from recipe",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/aggregating-data-with-the-merge-node/implementations/n8n",
+      "files": [
+        "agents/aggregating-data-with-the-merge-node/implementations/n8n/aggregating-data-with-the-merge-node.json"
+      ],
+      "sha256": "a4b0be4ca25e1c3fcc89168d47f04f29fe35672490c459553614e57122459253",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/aggregating-data-with-the-merge-node/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/aggregating-data-with-the-merge-node/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/aggregating-data-with-the-merge-node/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/aggregating-data-with-the-merge-node/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/aggregating-data-with-the-merge-node/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/aggregating-data-with-the-merge-node/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/aggregating-data-with-the-merge-node/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/aggregating-data-with-the-merge-node/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/aggregating-data-with-the-merge-node/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/aggregating-data-with-the-merge-node/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/aggregating-data-with-the-merge-node/implementations/n8n/provenance.json"
+}

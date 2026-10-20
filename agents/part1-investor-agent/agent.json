@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "slug": "part1-investor-agent",
+  "title": "Part1 -Investor_ Agent",
+  "purpose": "Adapt the published “Part1 -Investor_ Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook - Chat Interface"
+  ],
+  "terminal_nodes": [
+    "Send Response"
+  ],
+  "credential_types": [
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook - Chat Interface",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Parse User Question",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DB - Get Recent Deals",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.4,
+        "disabled": false
+      },
+      {
+        "name": "Format Chatbot Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get top investor",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Route by Query Type ",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Investor Profile SQL node",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Startup Investors SQL node",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook - Chat Interface",
+        "to": "Parse User Question",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse User Question",
+        "to": "Route by Query Type ",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB - Get Recent Deals",
+        "to": "Format Chatbot Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Chatbot Response",
+        "to": "Send Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get top investor",
+        "to": "Format Chatbot Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route by Query Type ",
+        "to": "Get top investor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route by Query Type ",
+        "to": "DB - Get Recent Deals",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Route by Query Type ",
+        "to": "Investor Profile SQL node",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Route by Query Type ",
+        "to": "Startup Investors SQL node",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Investor Profile SQL node",
+        "to": "Format Chatbot Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Startup Investors SQL node",
+        "to": "Format Chatbot Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/part1-investor-agent/implementations/n8n",
+      "files": [
+        "agents/part1-investor-agent/implementations/n8n/part1-investor-agent.json"
+      ],
+      "sha256": "fe0ec0bd2944c296a3596721db681a472cebb11f02d9f9bcf05eb60473990a1b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/part1-investor-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/part1-investor-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/part1-investor-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/part1-investor-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/part1-investor-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/part1-investor-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/part1-investor-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/part1-investor-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/part1-investor-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/part1-investor-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/part1-investor-agent/implementations/n8n/provenance.json"
+}

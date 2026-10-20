@@ -1,0 +1,16 @@
+flowchart LR
+  n0["When Invoice Paid"]
+  n1["Update Deal to Paid"]
+  n2["Find Deal based on PO Number"]
+  n3["If no PO Number"]
+  n4["If no deal found for PO"]
+  n5["Send invoice paid message"]
+  n6["Send no PO Message"]
+  n7["Send Deal not found message"]
+  n3 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 1 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 1 to in 0"| n1
+  n2 -->|"main out 0 to in 0"| n4

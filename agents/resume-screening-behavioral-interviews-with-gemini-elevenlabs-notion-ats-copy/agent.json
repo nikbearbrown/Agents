@@ -1,0 +1,586 @@
+{
+  "schema_version": 1,
+  "slug": "resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy",
+  "title": "Resume Screening & Behavioral Interviews with Gemini, Elevenlabs, & Notion ATS copy",
+  "purpose": "Adapt the published “Resume Screening & Behavioral Interviews with Gemini, Elevenlabs, & Notion ATS copy” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 33 executable nodes and 38 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "ElevenLabs Web Hook",
+    "Application Form 1 of 3",
+    "Application Form 2 of 3",
+    "Application form 3 of 3"
+  ],
+  "terminal_nodes": [
+    "Structured Output Parser",
+    "Link Audio in Notion",
+    "Embed Resume in Notion",
+    "Create Applicant Record",
+    "Google Gemini",
+    "Evaluation Criteria",
+    "Google Gemini Model"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googlePalmApi",
+    "googleSheetsOAuth2Api",
+    "notionApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "HR Expert",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Upload CV",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Extract Resume",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Applicant Summary",
+        "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Job Description Summary",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Applicant Qualifications",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Applicant Personal Data",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Application Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "ElevenLabs Web Hook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "ai_convo_items",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract_Audio",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter_Notion_db",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Link Audio in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Resume URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Applicant Record",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Embed Resume in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Application Form 1 of 3",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Application Form 2 of 3",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Application form 3 of 3",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Job Description",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Job Description Mapping",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Applicant Data Backup",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Create Applicant Record",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Audio to Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Evaluation Criteria",
+        "type": "n8n-nodes-base.notionTool",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Applicant Record",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update_Applicant_Record",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "Get Applicant Record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Applicant Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Applicant Record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HR Expert",
+        "to": "Applicant Data Backup",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload CV",
+        "to": "Resume URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Resume URL",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract_Audio",
+        "to": "Upload Audio to Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini",
+        "to": "Applicant Summary",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini",
+        "to": "Applicant Qualifications",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini",
+        "to": "HR Expert",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini",
+        "to": "Applicant Personal Data",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini",
+        "to": "Job Description Summary",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Resume",
+        "to": "Applicant Qualifications",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Resume",
+        "to": "Applicant Personal Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ai_convo_items",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Applicant Record",
+        "to": "Filter_Notion_db",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Application Data",
+        "to": "Extract Resume",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter_Notion_db",
+        "to": "Update_Applicant_Record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Applicant Summary",
+        "to": "Get Job Description",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ElevenLabs Web Hook",
+        "to": "ai_convo_items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Evaluation Criteria",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Job Description",
+        "to": "Job Description Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Applicant Record",
+        "to": "Embed Resume in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Applicant Data Backup",
+        "to": "Create Applicant Record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Audio to Drive",
+        "to": "Link Audio in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Applicant Personal Data",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Application Form 1 of 3",
+        "to": "Upload CV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Application Form 1 of 3",
+        "to": "Application Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Application Form 2 of 3",
+        "to": "Upload CV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Application Form 2 of 3",
+        "to": "Application Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Application form 3 of 3",
+        "to": "Upload CV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Application form 3 of 3",
+        "to": "Application Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Job Description Mapping",
+        "to": "HR Expert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Job Description Summary",
+        "to": "Job Description Mapping",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update_Applicant_Record",
+        "to": "Extract_Audio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Applicant Qualifications",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "HR Expert",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/n8n",
+      "files": [
+        "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/n8n/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy.json"
+      ],
+      "sha256": "a58f1c43f91f2bca9b4ed1b82da0a09fd1341b490a3db836488e0d166c672f7f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/n8n/provenance.json"
+}

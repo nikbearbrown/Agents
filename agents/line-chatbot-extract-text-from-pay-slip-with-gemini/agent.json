@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "slug": "line-chatbot-extract-text-from-pay-slip-with-gemini",
+  "title": "Line_Chatbot_Extract_Text_from_Pay_Slip_with_Gemini",
+  "purpose": "Adapt the published “Line_Chatbot_Extract_Text_from_Pay_Slip_with_Gemini” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Line: Messaging API"
+  ],
+  "terminal_nodes": [
+    "Window Buffer Memory",
+    "Line: Text Response to User",
+    "Text from Slip Result",
+    "Google Gemini for Text",
+    "Google Gemini for Image"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "googleSheetsOAuth2Api",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Line: Get Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Message Type",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Message Classification",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Text Message Processing",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Image Message Processing",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Line: Response to User",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Line: Text Response to User",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Text from Slip Result",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Line: Messaging API",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini for Text",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini for Image",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Message Type",
+        "to": "Message Classification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Line: Get Image",
+        "to": "Image Message Processing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Line: Messaging API",
+        "to": "Message Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Text Message Processing",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini for Text",
+        "to": "Text Message Processing",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Line: Response to User",
+        "to": "Text from Slip Result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message Classification",
+        "to": "Text Message Processing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message Classification",
+        "to": "Line: Get Image",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini for Image",
+        "to": "Image Message Processing",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Message Processing",
+        "to": "Line: Text Response to User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Image Message Processing",
+        "to": "Line: Response to User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/n8n",
+      "files": [
+        "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/n8n/line-chatbot-extract-text-from-pay-slip-with-gemini.json"
+      ],
+      "sha256": "356f889ee8fddfe846464f6e5c7b8581ec88053d7f2391f9584f3efd2895c27e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/n8n/provenance.json"
+}

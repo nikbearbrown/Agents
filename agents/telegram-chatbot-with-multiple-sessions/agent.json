@@ -1,0 +1,518 @@
+{
+  "schema_version": 1,
+  "slug": "telegram-chatbot-with-multiple-sessions",
+  "title": "Telegram ChatBot with multiple sessions",
+  "purpose": "Adapt the published “Telegram ChatBot with multiple sessions” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 31 executable nodes and 30 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Get message"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Simple Memory",
+    "Session activated",
+    "Update database",
+    "OpenAI Chat Model1",
+    "OpenAI Chat Model2",
+    "OK",
+    "KO",
+    "Send summary",
+    "Send answer",
+    "Send current session"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Get message",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Command or text?",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get session",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Disable previous session",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Set new session",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Session activated",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send response",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Update database",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Summarization Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Get message1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Set to expire",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Exist?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "OK",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "KO",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Trim resume",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get session1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Prompt + Resume",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send summary",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get message2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Trim question",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set new current session",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Response + Text",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "fullText",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send answer",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send current session",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Chatbot",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.9,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Exist?",
+        "to": "KO",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Exist?",
+        "to": "OK",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "fullText",
+        "to": "Basic LLM Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get message",
+        "to": "Get session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get session",
+        "to": "Command or text?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trim resume",
+        "to": "Set to expire",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get message1",
+        "to": "Trim resume",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get message2",
+        "to": "Trim question",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get session1",
+        "to": "Prompt + Resume",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send response",
+        "to": "Update database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set to expire",
+        "to": "Set new current session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory",
+        "to": "Telegram Chatbot",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trim question",
+        "to": "Response + Text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain",
+        "to": "Send answer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prompt + Resume",
+        "to": "Summarization Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Response + Text",
+        "to": "fullText",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set new session",
+        "to": "Session activated",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Command or text?",
+        "to": "Disable previous session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Command or text?",
+        "to": "Send current session",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Command or text?",
+        "to": "Get message1",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Command or text?",
+        "to": "Get session1",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Command or text?",
+        "to": "Get message2",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Command or text?",
+        "to": "Telegram Chatbot",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Telegram Chatbot",
+        "to": "Send response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Telegram Chatbot",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Summarization Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Basic LLM Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarization Chain",
+        "to": "Send summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set new current session",
+        "to": "Exist?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Disable previous session",
+        "to": "Set new session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/implementations/n8n",
+      "files": [
+        "agents/telegram-chatbot-with-multiple-sessions/implementations/n8n/telegram-chatbot-with-multiple-sessions.json"
+      ],
+      "sha256": "ce8e198cf36c26b73dc6387aa75894e2c5a9ebd2ff0249cdd860255e1a6e8b0e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/telegram-chatbot-with-multiple-sessions/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/telegram-chatbot-with-multiple-sessions/implementations/n8n/provenance.json"
+}

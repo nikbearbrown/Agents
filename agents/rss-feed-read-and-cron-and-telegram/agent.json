@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "slug": "rss-feed-read-and-cron-and-telegram",
+  "title": "rss feed read and cron and telegram",
+  "purpose": "Adapt the published “rss feed read and cron and telegram” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "Telegram_IT",
+    "Telegram_Security",
+    "Telegram_M365",
+    "Clear Function"
+  ],
+  "credential_types": [
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "RSS Feed Read",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SplitInBatches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "only get new RSS",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram_IT",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram_Security",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "RSS Source",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram_M365",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF-2",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF-1",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Clear Function",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron",
+        "to": "RSS Source",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF-1",
+        "to": "Telegram_M365",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF-1",
+        "to": "IF-2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "IF-2",
+        "to": "Telegram_Security",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF-2",
+        "to": "Telegram_IT",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "RSS Source",
+        "to": "SplitInBatches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RSS Feed Read",
+        "to": "SplitInBatches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RSS Feed Read",
+        "to": "only get new RSS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SplitInBatches",
+        "to": "RSS Feed Read",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "only get new RSS",
+        "to": "IF-1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/implementations/n8n",
+      "files": [
+        "agents/rss-feed-read-and-cron-and-telegram/implementations/n8n/rss-feed-read-and-cron-and-telegram.json"
+      ],
+      "sha256": "788c46acc082077dd5fad4879da3ec7a002f0989723463272a597414649ea42c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/rss-feed-read-and-cron-and-telegram/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/rss-feed-read-and-cron-and-telegram/implementations/n8n/provenance.json"
+}

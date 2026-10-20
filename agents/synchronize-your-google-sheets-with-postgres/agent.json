@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "slug": "synchronize-your-google-sheets-with-postgres",
+  "title": "Synchronize your Google Sheets with Postgres",
+  "purpose": "Adapt the published “Synchronize your Google Sheets with Postgres” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Insert Rows",
+    "Update Rows"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Relevant Fields",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Sheets Data",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Select Rows in Postgres",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Insert Rows",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Rows",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Compare Datasets",
+        "to": "Insert Rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Update Rows",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Retrieve Sheets Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Select Rows in Postgres",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Sheets Data",
+        "to": "Split Out Relevant Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Select Rows in Postgres",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Split Out Relevant Fields",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/implementations/n8n",
+      "files": [
+        "agents/synchronize-your-google-sheets-with-postgres/implementations/n8n/synchronize-your-google-sheets-with-postgres.json"
+      ],
+      "sha256": "c72dcde153a76f0c942bcb41f4fcd9d5ab11007fb01903bd029cfb70958dd377",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/synchronize-your-google-sheets-with-postgres/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/synchronize-your-google-sheets-with-postgres/implementations/n8n/provenance.json"
+}

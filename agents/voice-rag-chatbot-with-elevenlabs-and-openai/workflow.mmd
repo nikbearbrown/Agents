@@ -1,0 +1,35 @@
+flowchart LR
+  n0["AI Agent"]
+  n1["Vector Store Tool"]
+  n2["Qdrant Vector Store"]
+  n3["Embeddings OpenAI"]
+  n4["When clicking #8216;Test workflow#8217;"]
+  n5["Create collection"]
+  n6["Refresh collection"]
+  n7["Get folder"]
+  n8["Download Files"]
+  n9["Default Data Loader"]
+  n10["Token Splitter"]
+  n11["Qdrant Vector Store1"]
+  n12["Embeddings OpenAI1"]
+  n13["Respond to ElevenLabs"]
+  n14["OpenAI"]
+  n15["Listen"]
+  n16["Window Buffer Memory"]
+  n17["OpenAI Chat Model"]
+  n15 -->|"main out 0 to in 0"| n0
+  n14 -->|"ai_languageModel out 0 to in 0"| n0
+  n0 -->|"main out 0 to in 0"| n13
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n11
+  n10 -->|"ai_textSplitter out 0 to in 0"| n9
+  n3 -->|"ai_embedding out 0 to in 0"| n2
+  n17 -->|"ai_languageModel out 0 to in 0"| n1
+  n1 -->|"ai_tool out 0 to in 0"| n0
+  n12 -->|"ai_embedding out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n7
+  n9 -->|"ai_document out 0 to in 0"| n11
+  n2 -->|"ai_vectorStore out 0 to in 0"| n1
+  n16 -->|"ai_memory out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n6

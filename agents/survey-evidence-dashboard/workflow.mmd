@@ -1,0 +1,43 @@
+flowchart LR
+  n0["Survey Data Webhook"]
+  n1["Daily Survey Check"]
+  n2["Validate Survey Data"]
+  n3["Clean and Preprocess Data"]
+  n4["Prepare Analysis Prompt"]
+  n5["Prepare Segmentation Prompt"]
+  n6["Aggregate and Enrich Results"]
+  n7["Prepare Slack Notification"]
+  n8["Send Slack Notification"]
+  n9["HTTP Request"]
+  n10["Extract from File"]
+  n11["Message a model"]
+  n12["Message a model1"]
+  n13["Update Grafana Dashboards"]
+  n14["Prepare Grafana Config"]
+  n15["Code"]
+  n16["Switch"]
+  n17["Code1"]
+  n18["Insert Sentiment Distribution"]
+  n19["Insert NPS Score"]
+  n20["Fetch UID"]
+  n0 -->|"main out 0 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n11
+  n5 -->|"main out 0 to in 0"| n12
+  n6 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n15
+  n7 -->|"main out 0 to in 0"| n8
+  n9 -->|"main out 0 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n17
+  n11 -->|"main out 0 to in 0"| n5
+  n12 -->|"main out 0 to in 0"| n6
+  n14 -->|"main out 0 to in 0"| n13
+  n15 -->|"main out 0 to in 0"| n16
+  n16 -->|"main out 0 to in 0"| n18
+  n16 -->|"main out 1 to in 0"| n19
+  n17 -->|"main out 0 to in 0"| n2
+  n18 -->|"main out 0 to in 0"| n20
+  n19 -->|"main out 0 to in 0"| n20
+  n20 -->|"main out 0 to in 0"| n14

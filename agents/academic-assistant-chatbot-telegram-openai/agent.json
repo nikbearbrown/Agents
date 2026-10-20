@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "slug": "academic-assistant-chatbot-telegram-openai",
+  "title": "Academic Assistant Chatbot (Telegram + OpenAI)",
+  "purpose": "Adapt the published “Academic Assistant Chatbot (Telegram + OpenAI)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 0 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Telegram Trigger"
+  ],
+  "terminal_nodes": [
+    "Telegram Trigger",
+    "OpenAI Chat Model",
+    "Academic Assistant AI Agent",
+    "Send Telegram Response",
+    "Error Handler"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Academic Assistant AI Agent",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Send Telegram Response",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": []
+  },
+  "unresolved": [
+    "Unresolved connection: 20a2d959-5412-447b-a2c4-7736b6b758b3 -> error-handler-20a2d959-5412-447b-a2c4-7736b6b758b3-d3388f15",
+    "Unresolved connection: 8b30f207-8204-4548-8f51-38c387d98ae9 -> error-handler-8b30f207-8204-4548-8f51-38c387d98ae9-061eba47",
+    "Unresolved connection: 15bb5fd5-7dfe-4da9-830c-e1d905831640 -> error-handler-15bb5fd5-7dfe-4da9-830c-e1d905831640-68c06fa7",
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/implementations/n8n",
+      "files": [
+        "agents/academic-assistant-chatbot-telegram-openai/implementations/n8n/academic-assistant-chatbot-telegram-openai.json"
+      ],
+      "sha256": "fad88be28f0ffc2cfdab774f9ce5d15a56a8d1efb0196ffe4e048ec303f975f3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/academic-assistant-chatbot-telegram-openai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/academic-assistant-chatbot-telegram-openai/implementations/n8n/provenance.json"
+}

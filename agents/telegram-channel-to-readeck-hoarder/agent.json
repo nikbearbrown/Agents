@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "slug": "telegram-channel-to-readeck-hoarder",
+  "title": "Telegram channel to Readeck & Hoarder",
+  "purpose": "Adapt the published “Telegram channel to Readeck & Hoarder” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "save_link_rd",
+    "save_link_hd"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "not_saved_links_hd",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "not_saved_links_rd",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "saved_links_rd",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "save_link_rd",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "save_link_hd",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "get_links_rd",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "get_links_hd",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "saved_links_hd",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "channel_links_tg",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "channel_items_tg",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split Out",
+        "to": "saved_links_hd",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_links_hd",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_links_rd",
+        "to": "saved_links_rd",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "saved_links_hd",
+        "to": "not_saved_links_hd",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "saved_links_rd",
+        "to": "not_saved_links_rd",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "channel_items_tg",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "channel_items_tg",
+        "to": "channel_links_tg",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "channel_links_tg",
+        "to": "get_links_rd",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "channel_links_tg",
+        "to": "get_links_hd",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "not_saved_links_hd",
+        "to": "save_link_hd",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "not_saved_links_rd",
+        "to": "save_link_rd",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/telegram-channel-to-readeck-hoarder/implementations/n8n",
+      "files": [
+        "agents/telegram-channel-to-readeck-hoarder/implementations/n8n/telegram-channel-to-readeck-hoarder.json"
+      ],
+      "sha256": "4b61fceb67e9dbd0cf6bbca0e97c00c89b290db947bf6fb63cac4b00f842cb33",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/telegram-channel-to-readeck-hoarder/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/telegram-channel-to-readeck-hoarder/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/telegram-channel-to-readeck-hoarder/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/telegram-channel-to-readeck-hoarder/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/telegram-channel-to-readeck-hoarder/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/telegram-channel-to-readeck-hoarder/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/telegram-channel-to-readeck-hoarder/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/telegram-channel-to-readeck-hoarder/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/telegram-channel-to-readeck-hoarder/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/telegram-channel-to-readeck-hoarder/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/telegram-channel-to-readeck-hoarder/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "slug": "clockify-to-syncro",
+  "title": "Clockify to Syncro",
+  "purpose": "Adapt the published “Clockify to Syncro” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Google Sheets",
+    "UpdateSyncroTimer",
+    "NoOp"
+  ],
+  "credential_types": [
+    "googleApi",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ForGoogle",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ForSyncro",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "FindMatch",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "NewSyncroTimer",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "UpdateSyncroTimer",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "EnvVariables",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SetTechnicians",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MatchTechnician",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF1",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "NoOp",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "IF",
+        "to": "UpdateSyncroTimer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "NewSyncroTimer",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "IF1",
+        "to": "EnvVariables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF1",
+        "to": "NoOp",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "IF1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "FindMatch",
+        "to": "IF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ForGoogle",
+        "to": "Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ForSyncro",
+        "to": "SetTechnicians",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "EnvVariables",
+        "to": "ForSyncro",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "NewSyncroTimer",
+        "to": "ForGoogle",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SetTechnicians",
+        "to": "MatchTechnician",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MatchTechnician",
+        "to": "FindMatch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/clockify-to-syncro/implementations/n8n",
+      "files": [
+        "agents/clockify-to-syncro/implementations/n8n/clockify-to-syncro.json"
+      ],
+      "sha256": "71d6884b8c05bc96673a9e208dee34f58b408a217444c6c61ff82e9f0cbda48a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/clockify-to-syncro/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/clockify-to-syncro/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/clockify-to-syncro/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/clockify-to-syncro/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/clockify-to-syncro/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/clockify-to-syncro/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/clockify-to-syncro/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/clockify-to-syncro/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/clockify-to-syncro/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/clockify-to-syncro/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/clockify-to-syncro/implementations/n8n/provenance.json"
+}

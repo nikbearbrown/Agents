@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "slug": "moving-metrics-from-google-sheets-to-orbit",
+  "title": "Moving metrics from Google Sheets to Orbit",
+  "purpose": "Adapt the published “Moving metrics from Google Sheets to Orbit” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Add Activities"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "orbitApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Members",
+        "type": "n8n-nodes-base.orbit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all members",
+        "type": "n8n-nodes-base.orbit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Members",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Activities",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Activities",
+        "type": "n8n-nodes-base.orbit",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Add Activities",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Members",
+        "to": "Get Activities",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Members",
+        "to": "Add Members",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Activities",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all members",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/implementations/n8n",
+      "files": [
+        "agents/moving-metrics-from-google-sheets-to-orbit/implementations/n8n/moving-metrics-from-google-sheets-to-orbit.json"
+      ],
+      "sha256": "cef04f2518f56ea3754ef47f03e41deca5e6b39454b4b4cac417ccb62393eaec",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/moving-metrics-from-google-sheets-to-orbit/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/moving-metrics-from-google-sheets-to-orbit/implementations/n8n/provenance.json"
+}

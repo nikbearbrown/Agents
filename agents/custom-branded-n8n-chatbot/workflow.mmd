@@ -1,0 +1,33 @@
+flowchart LR
+  n0["Window Buffer Memory"]
+  n1["Respond to Webhook"]
+  n2["OpenAI Chat Model"]
+  n3["Make Appointment"]
+  n4["Execute Workflow Trigger"]
+  n5["varResponse"]
+  n6["freeTimeSlots"]
+  n7["Get Events"]
+  n8["Get Availability"]
+  n9["Send Message"]
+  n10["Chat Trigger"]
+  n11["Switch"]
+  n12["varMessageResponse"]
+  n13["Send Message1"]
+  n14["AI Agent"]
+  n15["If"]
+  n16["Respond With Initial Message"]
+  n15 -->|"main out 0 to in 0"| n14
+  n15 -->|"main out 1 to in 0"| n16
+  n11 -->|"main out 0 to in 0"| n7
+  n11 -->|"main out 1 to in 0"| n13
+  n14 -->|"main out 0 to in 0"| n1
+  n7 -->|"main out 0 to in 0"| n6
+  n10 -->|"main out 0 to in 0"| n15
+  n9 -->|"ai_tool out 0 to in 0"| n14
+  n13 -->|"main out 0 to in 0"| n12
+  n6 -->|"main out 0 to in 0"| n5
+  n8 -->|"ai_tool out 0 to in 0"| n14
+  n3 -->|"ai_tool out 0 to in 0"| n14
+  n2 -->|"ai_languageModel out 0 to in 0"| n14
+  n0 -->|"ai_memory out 0 to in 0"| n14
+  n4 -->|"main out 0 to in 0"| n11

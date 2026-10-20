@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "slug": "integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting",
+  "title": "Integrating AI with Open-Meteo API for Enhanced Weather Forecasting",
+  "purpose": "Adapt the published “Integrating AI with Open-Meteo API for Enhanced Weather Forecasting” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Generic AI Tool Agent",
+    "Chat Memory Buffer",
+    "A tool to get the weather forecast based on geolocation",
+    "A tool for inputting the city and obtaining geolocation"
+  ],
+  "credential_types": [
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generic AI Tool Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Chat Memory Buffer",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "A tool to get the weather forecast based on geolocation",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "A tool for inputting the city and obtaining geolocation",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Generic AI Tool Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Memory Buffer",
+        "to": "When chat message received",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Memory Buffer",
+        "to": "Generic AI Tool Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Generic AI Tool Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "A tool for inputting the city and obtaining geolocation",
+        "to": "Generic AI Tool Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "A tool to get the weather forecast based on geolocation",
+        "to": "Generic AI Tool Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/n8n",
+      "files": [
+        "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/n8n/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting.json"
+      ],
+      "sha256": "6db9efb57d30b3dc9e7a8d3fa5eb96b0b342099c4c62f011379ccb6fb02bdb62",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/n8n/provenance.json"
+}

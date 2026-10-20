@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "slug": "generate-seo-optimized-wordpress-content-with-perplexity-research",
+  "title": "🔍🛠️Generate SEO-Optimized WordPress Content with Perplexity Research",
+  "purpose": "Adapt the published “🔍🛠️Generate SEO-Optimized WordPress Content with Perplexity Research” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Structured Output Parser",
+    "Send Success Message to Telegram",
+    "gpt-4o-mini"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "openAiApi",
+    "telegramApi",
+    "wordpressApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Wordpress",
+        "type": "n8n-nodes-base.wordpress",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Title, Slug, Meta",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Create HTML",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Upload Image to Wordpress",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Image on Wordpress Post",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Perplexity Research",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Cleanup Links",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Copywriter AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Cleanup HTML ",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "GET Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Image URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send Success Message to Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o-mini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Combine Blog Details",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Combine Blog Details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET Image",
+        "to": "Upload Image to Wordpress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wordpress",
+        "to": "Set Image URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create HTML",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-4o-mini",
+        "to": "Copywriter AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cleanup HTML ",
+        "to": "Wordpress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cleanup Links",
+        "to": "Copywriter AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Image URL",
+        "to": "GET Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Create Title, Slug, Meta",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "Perplexity Research",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Copywriter AI Agent",
+        "to": "Create HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Copywriter AI Agent",
+        "to": "Create Title, Slug, Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Copywriter AI Agent",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Perplexity Research",
+        "to": "Cleanup Links",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Blog Details",
+        "to": "Cleanup HTML ",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Title, Slug, Meta",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Create Title, Slug, Meta",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Image to Wordpress",
+        "to": "Set Image on Wordpress Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Image on Wordpress Post",
+        "to": "Send Success Message to Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/n8n",
+      "files": [
+        "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/n8n/generate-seo-optimized-wordpress-content-with-perplexity-research.json"
+      ],
+      "sha256": "318511f23f0eafac9865a62d851982e1f820663b3ff07328c076bb5ccbaa4ae3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/n8n/provenance.json"
+}

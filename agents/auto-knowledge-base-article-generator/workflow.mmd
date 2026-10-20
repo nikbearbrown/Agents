@@ -1,0 +1,43 @@
+flowchart LR
+  n0["Create Perplexity Content"]
+  n1["AI Writer Agent"]
+  n2["AI Editor Agent"]
+  n3["OpenAI Chat Model"]
+  n4["OpenAI Chat Model1"]
+  n5["Accept and Publish"]
+  n6["When chat message received"]
+  n7["JSON.parse1"]
+  n8["Merge"]
+  n9["Format"]
+  n10["JSON.parse"]
+  n11["Format Perplexity Output #38; Add Citations"]
+  n12["Initialize Count"]
+  n13["Increment Count"]
+  n14["Check Limit"]
+  n15["Stop Here"]
+  n16["Execute Workflow"]
+  n17["JSON.parse3"]
+  n18["should submit"]
+  n8 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n2
+  n15 -->|"main out 0 to in 0"| n17
+  n10 -->|"main out 0 to in 0"| n1
+  n10 -->|"main out 0 to in 0"| n13
+  n14 -->|"main out 0 to in 0"| n15
+  n14 -->|"main out 1 to in 0"| n18
+  n7 -->|"main out 0 to in 0"| n8
+  n17 -->|"main out 0 to in 0"| n16
+  n18 -->|"main out 0 to in 0"| n17
+  n18 -->|"main out 1 to in 0"| n10
+  n2 -->|"main out 0 to in 0"| n14
+  n1 -->|"main out 0 to in 0"| n0
+  n1 -->|"main out 0 to in 0"| n7
+  n13 -->|"main out 0 to in 2"| n8
+  n12 -->|"main out 0 to in 0"| n1
+  n12 -->|"main out 0 to in 0"| n13
+  n3 -->|"ai_languageModel out 0 to in 0"| n1
+  n5 -->|"ai_tool out 0 to in 0"| n2
+  n4 -->|"ai_languageModel out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n12
+  n11 -->|"main out 0 to in 1"| n8

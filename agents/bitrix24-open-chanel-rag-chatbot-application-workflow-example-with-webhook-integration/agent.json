@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "slug": "bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration",
+  "title": "Bitrix24 Open Chanel RAG Chatbot Application Workflow example with Webhook Integration",
+  "purpose": "Adapt the published “Bitrix24 Open Chanel RAG Chatbot Application Workflow example with Webhook Integration” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 33 executable nodes and 36 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Bitrix24 Handler",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Success Response",
+    "Error Response",
+    "Default Data Loader",
+    "Recursive Character Text Splitter",
+    "Move files to Vector stored folder",
+    "Qdrant Vector Store",
+    "Embeddings Ollama",
+    "Vector Store Retriever",
+    "Embeddings Ollama1",
+    "Google Gemini Chat Model",
+    "Qdrant Vector Store1"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Bitrix24 Handler",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Credentials",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Validate Token",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Route Event",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Process Message",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Process Join",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Process Install",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Register Bot",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Message",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Join Message",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Process Delete",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Success Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Error Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge parameters for Subworkflow",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get a list of available storages",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get a list of List of Files and Folders",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get a list of Folders files",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Download file",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out folder files and folders",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter for files",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Move files to Vector stored folder",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Qdrant Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Ollama",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Vector Store Retriever",
+        "type": "@n8n/n8n-nodes-langchain.retrieverVectorStore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Question and Answer Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Prepare output parameters",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Ollama1",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Qdrant Vector Store1",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execute subworkflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Credentials",
+        "to": "Validate Token",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Credentials",
+        "to": "Merge parameters for Subworkflow",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Route Event",
+        "to": "Process Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route Event",
+        "to": "Process Join",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Route Event",
+        "to": "Process Install",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Route Event",
+        "to": "Process Delete",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Process Join",
+        "to": "Send Join Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Register Bot",
+        "to": "Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Register Bot",
+        "to": "Merge parameters for Subworkflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Message",
+        "to": "Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download file",
+        "to": "Move files to Vector stored folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download file",
+        "to": "Qdrant Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Delete",
+        "to": "Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate Token",
+        "to": "Route Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate Token",
+        "to": "Error Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Process Install",
+        "to": "Register Bot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Message",
+        "to": "Question and Answer Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Bitrix24 Handler",
+        "to": "Credentials",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter for files",
+        "to": "Download file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Ollama",
+        "to": "Qdrant Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Join Message",
+        "to": "Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Ollama1",
+        "to": "Qdrant Vector Store1",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Qdrant Vector Store",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute subworkflow",
+        "to": "Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Qdrant Vector Store1",
+        "to": "Vector Store Retriever",
+        "kind": "ai_vectorStore",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Vector Store Retriever",
+        "to": "Question and Answer Chain",
+        "kind": "ai_retriever",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Get a list of available storages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Question and Answer Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare output parameters",
+        "to": "Send Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Question and Answer Chain",
+        "to": "Prepare output parameters",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get a list of Folders files",
+        "to": "Split Out folder files and folders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get a list of available storages",
+        "to": "Get a list of List of Files and Folders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge parameters for Subworkflow",
+        "to": "Execute subworkflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out folder files and folders",
+        "to": "Filter for files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get a list of List of Files and Folders",
+        "to": "Get a list of Folders files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/n8n",
+      "files": [
+        "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/n8n/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration.json"
+      ],
+      "sha256": "a7f542470af16daaf2d2aaaf440ceb75ffaf1f8cd02bd28bb708869b673cf782",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/n8n/provenance.json"
+}

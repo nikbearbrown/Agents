@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "slug": "available-source-and-target-languages",
+  "title": "Available source and target languages`*`:",
+  "purpose": "Adapt the published “Available source and target languages`*`:” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Run manually"
+  ],
+  "terminal_nodes": [
+    "Uplad to original folder"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Run manually",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get files from specified folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Use only PDF documents",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Download files",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Send translate request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Check translation status",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait a bit",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "file translated?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Wait between documents",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get translated document from deepL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Uplad to original folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "⚙️ config",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait a bit",
+        "to": "file translated?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run manually",
+        "to": "⚙️ config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "⚙️ config",
+        "to": "Get files from specified folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download files",
+        "to": "Send translate request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "file translated?",
+        "to": "Wait between documents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "file translated?",
+        "to": "Check translation status",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Send translate request",
+        "to": "Check translation status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Use only PDF documents",
+        "to": "Download files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait between documents",
+        "to": "Get translated document from deepL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check translation status",
+        "to": "Wait a bit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get files from specified folder",
+        "to": "Use only PDF documents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get translated document from deepL",
+        "to": "Uplad to original folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/available-source-and-target-languages/implementations/n8n",
+      "files": [
+        "agents/available-source-and-target-languages/implementations/n8n/available-source-and-target-languages.json"
+      ],
+      "sha256": "b8ee904738b1eef14175c5551e9935763c48f603273f5f94004375d50f87a4e8",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/available-source-and-target-languages/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/available-source-and-target-languages/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/available-source-and-target-languages/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/available-source-and-target-languages/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/available-source-and-target-languages/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/available-source-and-target-languages/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/available-source-and-target-languages/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/available-source-and-target-languages/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/available-source-and-target-languages/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/available-source-and-target-languages/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/available-source-and-target-languages/implementations/n8n/provenance.json"
+}

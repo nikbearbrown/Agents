@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "slug": "receive-form-events-and-completion-form-and-enter-date-time",
+  "title": "receive form events and completion form and enter date time",
+  "purpose": "Adapt the published “receive form events and completion form and enter date time” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "n8n Form Trigger",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Form End",
+    "OpenAI Chat Model",
+    "OpenAI Chat Model1",
+    "Create Appointment",
+    "Send Rejection",
+    "Decline",
+    "Decline1"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleCalendarOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "n8n Form Trigger",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Form End",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Enter Date & Time",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Form Values",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Terms & Conditions",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Has Accepted?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Receipt",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Approval",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Has Approval?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Appointment",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Rejection",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Decline",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Decline1",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Trigger Approval Process",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarise Enquiry",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Enquiry Classifier",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Send Receipt",
+        "to": "Form End",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Accepted?",
+        "to": "Enter Date & Time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Accepted?",
+        "to": "Decline1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Has Approval?",
+        "to": "Create Appointment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Approval?",
+        "to": "Send Rejection",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Form Values",
+        "to": "Trigger Approval Process",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "n8n Form Trigger",
+        "to": "Enquiry Classifier",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Enter Date & Time",
+        "to": "Get Form Values",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Enquiry Classifier",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarise Enquiry",
+        "to": "Wait for Approval",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Approval",
+        "to": "Has Approval?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Enquiry Classifier",
+        "to": "Terms & Conditions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Enquiry Classifier",
+        "to": "Decline",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Summarise Enquiry",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Terms & Conditions",
+        "to": "Has Accepted?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Summarise Enquiry",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger Approval Process",
+        "to": "Send Receipt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/n8n",
+      "files": [
+        "agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/n8n/receive-form-events-and-completion-form-and-enter-date-time.json"
+      ],
+      "sha256": "2337b105a5212a2f733bf326ea3cac2bb4b4be02a4f4bcbda0bb637e2b0e7e22",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-form-events-and-completion-form-and-enter-date-time/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/n8n/provenance.json"
+}

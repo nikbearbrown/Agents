@@ -1,0 +1,694 @@
+{
+  "schema_version": 1,
+  "slug": "puq-docker-immich-deploy",
+  "title": "puq-docker-immich-deploy",
+  "purpose": "Adapt the published “puq-docker-immich-deploy” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 34 executable nodes and 54 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "API"
+  ],
+  "terminal_nodes": [
+    "422-Invalid server domain",
+    "API answer"
+  ],
+  "credential_types": [
+    "httpBasicAuth",
+    "sshPassword"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Parametrs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "API",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "422-Invalid server domain",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Code1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "SSH",
+        "type": "n8n-nodes-base.ssh",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Container Actions",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Service Actions",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "API answer",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Inspect",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Stat",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Start",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Stop",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Test Connection1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Deploy",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Suspend",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Terminated",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Unsuspend",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Mount Disk",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Unmount Disk",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Log",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "ChangePackage",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Deploy-docker-compose",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Version",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Users",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "If1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "nginx",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Container Stat",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "GET ACL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "SET ACL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "GET NET",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Dependent containers Stat",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Change Password",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Immich",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "Container Stat",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Container Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Immich",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "If1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "422-Invalid server domain",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "API",
+        "to": "Parametrs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "nginx",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "Service Actions",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Log",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SSH",
+        "to": "Code1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SSH",
+        "to": "Code1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Stat",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Stop",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code1",
+        "to": "API answer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Users",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "nginx",
+        "to": "Deploy-docker-compose",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Deploy",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Immich",
+        "to": "Version",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Immich",
+        "to": "Users",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Immich",
+        "to": "Change Password",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "GET ACL",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET NET",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Inspect",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SET ACL",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Suspend",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Version",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parametrs",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unsuspend",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mount Disk",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Terminated",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unmount Disk",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ChangePackage",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Container Stat",
+        "to": "Inspect",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Container Stat",
+        "to": "Stat",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Container Stat",
+        "to": "Log",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Container Stat",
+        "to": "Dependent containers Stat",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Change Password",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Test Connection1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Deploy",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Suspend",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Unsuspend",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Terminated",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "ChangePackage",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Test Connection1",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "Start",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "Stop",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "Mount Disk",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "Unmount Disk",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "GET ACL",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "SET ACL",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "GET NET",
+        "kind": "main",
+        "output": 6,
+        "input": 0
+      },
+      {
+        "from": "Deploy-docker-compose",
+        "to": "Service Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dependent containers Stat",
+        "to": "SSH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/puq-docker-immich-deploy/implementations/n8n",
+      "files": [
+        "agents/puq-docker-immich-deploy/implementations/n8n/puq-docker-immich-deploy.json"
+      ],
+      "sha256": "d980893d33822b0d3650f432a783eed8083e491608ba836f3d9679a9f8c98eff",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/puq-docker-immich-deploy/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/puq-docker-immich-deploy/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/puq-docker-immich-deploy/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/puq-docker-immich-deploy/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/puq-docker-immich-deploy/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/puq-docker-immich-deploy/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/puq-docker-immich-deploy/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/puq-docker-immich-deploy/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/puq-docker-immich-deploy/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/puq-docker-immich-deploy/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/puq-docker-immich-deploy/implementations/n8n/provenance.json"
+}

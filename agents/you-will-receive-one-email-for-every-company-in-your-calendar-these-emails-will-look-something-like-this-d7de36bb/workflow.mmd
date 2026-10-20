@@ -1,0 +1,38 @@
+flowchart LR
+  n0["Setup"]
+  n1["Every morning #64; 7"]
+  n2["Get meetings for today"]
+  n3["Get attendees email domains"]
+  n4["Split Out"]
+  n5["Get recent LinkedIn posts"]
+  n6["Enrich attendee company"]
+  n7["Gmail"]
+  n8["Combine all activity for a company"]
+  n9["Extract data for email"]
+  n10["Prepare email template"]
+  n11["Keep only ones with the domain"]
+  n12["Extract important data"]
+  n13["Extract important data again"]
+  n14["Ask AI to summerize"]
+  n15["Switch"]
+  n16["Wrap everything together"]
+  n17["Get latest tweets"]
+  n0 -->|"main out 0 to in 0"| n2
+  n15 -->|"main out 0 to in 0"| n5
+  n15 -->|"main out 1 to in 0"| n17
+  n4 -->|"main out 0 to in 0"| n11
+  n1 -->|"main out 0 to in 0"| n0
+  n17 -->|"main out 0 to in 0"| n13
+  n14 -->|"main out 0 to in 0"| n16
+  n9 -->|"main out 0 to in 1"| n16
+  n12 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n15
+  n16 -->|"main out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n4
+  n13 -->|"main out 0 to in 1"| n8
+  n11 -->|"main out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n14
+  n8 -->|"main out 0 to in 0"| n9

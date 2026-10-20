@@ -1,0 +1,34 @@
+flowchart LR
+  n0["slack_action_payload"]
+  n1["slack_action_drink_data"]
+  n2["OpenAI"]
+  n3["Schedule Trigger"]
+  n4["Limit"]
+  n5["Google Sheets - Get Target"]
+  n6["Summarize"]
+  n7["combine data"]
+  n8["If"]
+  n9["Wait"]
+  n10["slack drink webhook"]
+  n11["Slack send drink notification"]
+  n12["Send to Slack with confirm"]
+  n13["Edit Fields-Set progress"]
+  n14["Google Sheets - log water value to sheet"]
+  n15["Google Sheets - Get Today Water Log"]
+  n8 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 1 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 1"| n7
+  n2 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 2"| n7
+  n7 -->|"main out 0 to in 0"| n13
+  n3 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n15
+  n10 -->|"main out 0 to in 0"| n0
+  n0 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n14
+  n1 -->|"main out 0 to in 0"| n12
+  n13 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n7
+  n15 -->|"main out 0 to in 0"| n4
+  n15 -->|"main out 0 to in 0"| n6

@@ -1,0 +1,25 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Extract from File"]
+  n2["If is archived is false"]
+  n3["OpenAI Chat Model"]
+  n4["If extension is json"]
+  n5["Search in #34;Keep#34; folder"]
+  n6["Loop every 10 items"]
+  n7["Download the files"]
+  n8["Put some AI treatment here if you need it"]
+  n9["Set the fields for export"]
+  n10["Add to google sheet"]
+  n11["Filter"]
+  n11 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n11
+  n3 -->|"ai_languageModel out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n1
+  n10 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 1 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n5
+  n8 -->|"main out 0 to in 0"| n9

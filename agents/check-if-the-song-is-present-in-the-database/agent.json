@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "slug": "check-if-the-song-is-present-in-the-database",
+  "title": "Check if the song is present in the database",
+  "purpose": "Adapt the published “Check if the song is present in the database” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 27 executable nodes and 33 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "End"
+  ],
+  "credential_types": [
+    "nocoDbApiToken",
+    "spotifyOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get current date",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get last 10 liked tracks",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check if track is saved",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Is not saved",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create song entry",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get all user playlist",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get monthly playlist",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get playlist in DB",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Monthly playlist exist in Spotify ?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Playlist exist  in DB ?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create playlist in Spotify",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create playlist in DB1",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Create playlist in DB",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Clean op",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Clean op2",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get this month playlist in DB",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get this month tracks in DB",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Add song to the playlist",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "For each tracks in liked song",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "For each monthly tracks in DB",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get this month tracks in Spotify",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Song is not present in the playlist ?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Clean op1",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "End",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Get this month playlist in DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter1",
+        "to": "Song is not present in the playlist ?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean op",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean op1",
+        "to": "For each monthly tracks in DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean op2",
+        "to": "For each tracks in liked song",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is not saved",
+        "to": "Create song entry",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is not saved",
+        "to": "Clean op2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get current date",
+        "to": "Get all user playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get current date",
+        "to": "Get last 10 liked tracks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get current date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create song entry",
+        "to": "Clean op2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get playlist in DB",
+        "to": "Playlist exist  in DB ?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get monthly playlist",
+        "to": "Monthly playlist exist in Spotify ?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create playlist in DB",
+        "to": "Clean op",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all user playlist",
+        "to": "Get monthly playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create playlist in DB1",
+        "to": "Clean op",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if track is saved",
+        "to": "Is not saved",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Playlist exist  in DB ?",
+        "to": "Clean op",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Playlist exist  in DB ?",
+        "to": "Create playlist in DB",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Add song to the playlist",
+        "to": "Clean op1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get last 10 liked tracks",
+        "to": "For each tracks in liked song",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create playlist in Spotify",
+        "to": "Create playlist in DB1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get this month tracks in DB",
+        "to": "For each monthly tracks in DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For each monthly tracks in DB",
+        "to": "End",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For each monthly tracks in DB",
+        "to": "Get this month tracks in Spotify",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "For each tracks in liked song",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "For each tracks in liked song",
+        "to": "Check if track is saved",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get this month playlist in DB",
+        "to": "Get this month tracks in DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get this month tracks in Spotify",
+        "to": "Filter1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Monthly playlist exist in Spotify ?",
+        "to": "Get playlist in DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Monthly playlist exist in Spotify ?",
+        "to": "Create playlist in Spotify",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Song is not present in the playlist ?",
+        "to": "Add song to the playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Song is not present in the playlist ?",
+        "to": "Clean op1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/check-if-the-song-is-present-in-the-database/implementations/n8n",
+      "files": [
+        "agents/check-if-the-song-is-present-in-the-database/implementations/n8n/check-if-the-song-is-present-in-the-database.json"
+      ],
+      "sha256": "5a826a052ea44a9a92b4cb74e056f0bdc28031f2a1d8b0ce3a1b046642cb2571",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/check-if-the-song-is-present-in-the-database/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/check-if-the-song-is-present-in-the-database/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/check-if-the-song-is-present-in-the-database/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/check-if-the-song-is-present-in-the-database/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/check-if-the-song-is-present-in-the-database/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/check-if-the-song-is-present-in-the-database/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/check-if-the-song-is-present-in-the-database/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/check-if-the-song-is-present-in-the-database/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/check-if-the-song-is-present-in-the-database/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/check-if-the-song-is-present-in-the-database/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/check-if-the-song-is-present-in-the-database/implementations/n8n/provenance.json"
+}

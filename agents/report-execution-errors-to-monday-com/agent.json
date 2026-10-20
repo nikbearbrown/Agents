@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "slug": "report-execution-errors-to-monday-com",
+  "title": "report execution errors to monday com",
+  "purpose": "Adapt the published “report execution errors to monday com” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Error Trigger"
+  ],
+  "terminal_nodes": [
+    "UPDATE"
+  ],
+  "credential_types": [
+    "mondayComApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Monday",
+        "type": "n8n-nodes-base.mondayCom",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Date & Time",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Error Trigger",
+        "type": "n8n-nodes-base.errorTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Code",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "UPDATE",
+        "type": "n8n-nodes-base.mondayCom",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Code",
+        "to": "UPDATE",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Monday",
+        "to": "Date & Time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Date & Time",
+        "to": "Code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Error Trigger",
+        "to": "Monday",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/report-execution-errors-to-monday-com/implementations/n8n",
+      "files": [
+        "agents/report-execution-errors-to-monday-com/implementations/n8n/report-execution-errors-to-monday-com.json"
+      ],
+      "sha256": "255888c5be70bdf33e931c86f04cb6545cdee5720a3ee2546a3be24d628c6148",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-monday-com/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-monday-com/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-monday-com/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-monday-com/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-monday-com/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/report-execution-errors-to-monday-com/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/report-execution-errors-to-monday-com/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/report-execution-errors-to-monday-com/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/report-execution-errors-to-monday-com/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/report-execution-errors-to-monday-com/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/report-execution-errors-to-monday-com/implementations/n8n/provenance.json"
+}

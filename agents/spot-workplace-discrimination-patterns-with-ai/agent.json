@@ -1,0 +1,454 @@
+{
+  "schema_version": 1,
+  "slug": "spot-workplace-discrimination-patterns-with-ai",
+  "title": "Spot Workplace Discrimination Patterns with AI",
+  "purpose": "Adapt the published “Spot Workplace Discrimination Patterns with AI” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model1",
+    "OpenAI Chat Model2",
+    "OpenAI Chat Model",
+    "Quickchart Scatterplot",
+    "QuickChart Bar Chart",
+    "Text Analysis of Bias Data"
+  ],
+  "credential_types": [
+    "httpQueryAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SET company_name",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Define dictionary of demographic keys",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "ScrapingBee Search Glassdoor",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract company url path",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "ScrapingBee GET company page contents",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract reviews page url path",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "ScrapingBee GET Glassdoor Reviews Content",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Overall Review Summary",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Demographics Module",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract overall ratings and distribution percentages",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract demographic distributions",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Define contributions to variance",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Set variance and std_dev",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Calculate P-Scores",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Sort Effect Sizes",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Z-Scores and Effect Sizes",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format dataset for scatterplot",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Specify additional parameters for scatterplot",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Quickchart Scatterplot",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "QuickChart Bar Chart",
+        "type": "n8n-nodes-base.quickChart",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Text Analysis of Bias Data",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Calculate Z-Scores and Effect Sizes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SET company_name",
+        "to": "Define dictionary of demographic keys",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Text Analysis of Bias Data",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort Effect Sizes",
+        "to": "QuickChart Bar Chart",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort Effect Sizes",
+        "to": "Text Analysis of Bias Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate P-Scores",
+        "to": "Sort Effect Sizes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Extract demographic distributions",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Extract overall ratings and distribution percentages",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract company url path",
+        "to": "ScrapingBee GET company page contents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set variance and std_dev",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Demographics Module",
+        "to": "Extract demographic distributions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ScrapingBee Search Glassdoor",
+        "to": "Extract company url path",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract reviews page url path",
+        "to": "ScrapingBee GET Glassdoor Reviews Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Overall Review Summary",
+        "to": "Extract overall ratings and distribution percentages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format dataset for scatterplot",
+        "to": "Specify additional parameters for scatterplot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Define contributions to variance",
+        "to": "Set variance and std_dev",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract demographic distributions",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "SET company_name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Z-Scores and Effect Sizes",
+        "to": "Calculate P-Scores",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Z-Scores and Effect Sizes",
+        "to": "Format dataset for scatterplot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Define dictionary of demographic keys",
+        "to": "ScrapingBee Search Glassdoor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ScrapingBee GET company page contents",
+        "to": "Extract reviews page url path",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ScrapingBee GET Glassdoor Reviews Content",
+        "to": "Extract Demographics Module",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ScrapingBee GET Glassdoor Reviews Content",
+        "to": "Extract Overall Review Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Specify additional parameters for scatterplot",
+        "to": "Quickchart Scatterplot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract overall ratings and distribution percentages",
+        "to": "Define contributions to variance",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/implementations/n8n",
+      "files": [
+        "agents/spot-workplace-discrimination-patterns-with-ai/implementations/n8n/spot-workplace-discrimination-patterns-with-ai.json"
+      ],
+      "sha256": "10c6a590beabc0325730f041eee91c9f393c21e90e36f60639d4f36122888577",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/spot-workplace-discrimination-patterns-with-ai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/spot-workplace-discrimination-patterns-with-ai/implementations/n8n/provenance.json"
+}

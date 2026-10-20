@@ -1,0 +1,586 @@
+{
+  "schema_version": 1,
+  "slug": "tech-radar",
+  "title": "Tech Radar",
+  "purpose": "Adapt the published “Tech Radar” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 37 executable nodes and 32 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron",
+    "Google Drive - Doc File Updated",
+    "When Executed by Another Workflow",
+    "API Request - Webhook"
+  ],
+  "terminal_nodes": [
+    "Doc File Data Loader",
+    "MySQL - insert all from sheets",
+    "Google Docs - Update GDoc",
+    "Content - Recursive Character Text Splitter",
+    "1_Get DB Schema and Tables List",
+    "2_Get Table Definition",
+    "3_Execute actual query",
+    "AI Agent -DB Sql Agent",
+    "Pinecone Vector Store (Retrieval)",
+    "4_RagTool",
+    "AI Agent - RAG",
+    "Embeddings - Tech Radar Data Embedding",
+    "Pinecone - Vector Store for Embedding Content",
+    "Retrieve Embeddings - Tech Radar Vector DB",
+    "AI Agent - Retrieval",
+    "AI Chat Model - Claude 3.5 Sonnet",
+    "AI Chat Model - QwQ 32b",
+    "AI Chatmodel - Deepseek 32B",
+    "AI Chat Model - llama3-8b",
+    "API Response - Respond to Webhook",
+    "User Conversation history"
+  ],
+  "credential_types": [
+    "anthropicApi",
+    "googleApi",
+    "googleDriveOAuth2Api",
+    "googlePalmApi",
+    "googleSheetsOAuth2Api",
+    "groqApi",
+    "mySql",
+    "pineconeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Download Doc File From Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Doc File Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MySQL -delete all data",
+        "type": "n8n-nodes-base.mySql",
+        "version": 2.4,
+        "disabled": false
+      },
+      {
+        "name": "MySQL - insert all from sheets",
+        "type": "n8n-nodes-base.mySql",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets - Tech Radar",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Code - Transform table into rows",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Docs - Update GDoc",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive - Doc File Updated",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Content - Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets - Read TechRadar",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Code - Simplify Mapping to Original Query",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Codes - Simplify Mapping to Original Query",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow - Sql Agent",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow - RAG Agent",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent - Output Guardrail",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "LLM - Determine - Agent Input Router",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": true
+      },
+      {
+        "name": "1_Get DB Schema and Tables List",
+        "type": "n8n-nodes-base.mySqlTool",
+        "version": 2.4,
+        "disabled": true
+      },
+      {
+        "name": "2_Get Table Definition",
+        "type": "n8n-nodes-base.mySqlTool",
+        "version": 2.4,
+        "disabled": true
+      },
+      {
+        "name": "3_Execute actual query",
+        "type": "n8n-nodes-base.mySqlTool",
+        "version": 2.4,
+        "disabled": true
+      },
+      {
+        "name": "AI Agent -DB Sql Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": true
+      },
+      {
+        "name": "Pinecone Vector Store (Retrieval)",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "4_RagTool",
+        "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "AI Agent - RAG",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": true
+      },
+      {
+        "name": "Embeddings - Tech Radar Data Embedding",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Pinecone - Vector Store for Embedding Content",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Embeddings - Tech Radar Vector DB",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "AI Agent - Retrieval",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "AI Chat Model - Claude 3.5 Sonnet",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.2,
+        "disabled": true
+      },
+      {
+        "name": "AI Chat Model - QwQ 32b",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "AI Chatmodel - Deepseek 32B",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AI Chat Model - llama3-8b",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "API Response - Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "API Request - Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Determine if  is 'RAG'",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "User Conversation history",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron",
+        "to": "MySQL -delete all data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "4_RagTool",
+        "to": "AI Agent - RAG",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent - Retrieval",
+        "to": "4_RagTool",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Doc File Data Loader",
+        "to": "Pinecone - Vector Store for Embedding Content",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "API Request - Webhook",
+        "to": "LLM - Determine - Agent Input Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "2_Get Table Definition",
+        "to": "AI Agent -DB Sql Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "3_Execute actual query",
+        "to": "AI Agent -DB Sql Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine if  is 'RAG'",
+        "to": "Code - Simplify Mapping to Original Query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine if  is 'RAG'",
+        "to": "Codes - Simplify Mapping to Original Query",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "MySQL -delete all data",
+        "to": "Google Sheets - Read TechRadar",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Chat Model - QwQ 32b",
+        "to": "AI Agent - RAG",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Chat Model - llama3-8b",
+        "to": "AI Agent - Output Guardrail",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "User Conversation history",
+        "to": "AI Agent - Output Guardrail",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets - Tech Radar",
+        "to": "Code - Transform table into rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent - Output Guardrail",
+        "to": "API Response - Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Chatmodel - Deepseek 32B",
+        "to": "LLM - Determine - Agent Input Router",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow - RAG Agent",
+        "to": "AI Agent - Output Guardrail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow - Sql Agent",
+        "to": "AI Agent - Output Guardrail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets - Read TechRadar",
+        "to": "MySQL - insert all from sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "1_Get DB Schema and Tables List",
+        "to": "AI Agent -DB Sql Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive - Doc File Updated",
+        "to": "Download Doc File From Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code - Transform table into rows",
+        "to": "Google Docs - Update GDoc",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Chat Model - Claude 3.5 Sonnet",
+        "to": "AI Agent -DB Sql Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Pinecone Vector Store (Retrieval)",
+        "to": "4_RagTool",
+        "kind": "ai_vectorStore",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "AI Agent -DB Sql Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Doc File From Google Drive",
+        "to": "Pinecone - Vector Store for Embedding Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LLM - Determine - Agent Input Router",
+        "to": "Determine if  is 'RAG'",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings - Tech Radar Data Embedding",
+        "to": "Pinecone - Vector Store for Embedding Content",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code - Simplify Mapping to Original Query",
+        "to": "Execute Workflow - RAG Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Codes - Simplify Mapping to Original Query",
+        "to": "Execute Workflow - Sql Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Embeddings - Tech Radar Vector DB",
+        "to": "Pinecone Vector Store (Retrieval)",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Content - Recursive Character Text Splitter",
+        "to": "Doc File Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/tech-radar/implementations/n8n",
+      "files": [
+        "agents/tech-radar/implementations/n8n/tech-radar.json"
+      ],
+      "sha256": "bc8c644f0dc43b7da678272959cb533d52c69e145125a48fd37f1e393a87f339",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/tech-radar/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/tech-radar/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/tech-radar/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/tech-radar/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/tech-radar/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/tech-radar/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/tech-radar/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/tech-radar/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/tech-radar/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/tech-radar/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/tech-radar/implementations/n8n/provenance.json"
+}

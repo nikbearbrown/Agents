@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "slug": "comparativeanalysisagent",
+  "title": "ComparativeAnalysisAgent",
+  "purpose": "Adapt the published “ComparativeAnalysisAgent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Execute workflow’"
+  ],
+  "terminal_nodes": [
+    "Code in JavaScript",
+    "Aggregate",
+    "Aggregate1"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Execute workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Peer Company List",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Subsector",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Store Variables & Keys",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Financial Overview",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Financial Time Series",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Code in JavaScript",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Loop - News",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Code in Python (Beta)1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Code in Python (Beta)",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate1",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "When clicking ‘Execute workflow’",
+        "to": "Subsector",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Subsector",
+        "to": "Peer Company List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Peer Company List",
+        "to": "Store Variables & Keys",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Variables & Keys",
+        "to": "Fetch Financial Overview",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Variables & Keys",
+        "to": "Fetch Financial Time Series",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Variables & Keys",
+        "to": "Loop - News",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Variables & Keys",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Financial Overview",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Financial Time Series",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge",
+        "to": "Code in JavaScript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop - News",
+        "to": "Aggregate1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop - News",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Code in Python (Beta)1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code in Python (Beta)1",
+        "to": "Loop - News",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "HTTP Request1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request1",
+        "to": "Code in Python (Beta)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code in Python (Beta)",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/comparativeanalysisagent/implementations/n8n",
+      "files": [
+        "agents/comparativeanalysisagent/implementations/n8n/comparativeanalysisagent.json"
+      ],
+      "sha256": "8c889e53c92fc3b0c55fc65aab616edc972834cec5446286abb40a00c2870c21",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/comparativeanalysisagent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/comparativeanalysisagent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/comparativeanalysisagent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/comparativeanalysisagent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/comparativeanalysisagent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/comparativeanalysisagent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/comparativeanalysisagent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/comparativeanalysisagent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/comparativeanalysisagent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/comparativeanalysisagent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/comparativeanalysisagent/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,24 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["List Invoices"]
+  n2["Inject s3 Subpath"]
+  n3["Set-Subpath"]
+  n4["We do only Invoice Objects"]
+  n5["It shouldn#39;t be something else"]
+  n6["ENV#42;"]
+  n7["Download Invoice PDF from Stripe"]
+  n8["Every Month the First Day of the Month"]
+  n9["Get all Invoices#42;"]
+  n10["Upload to S3 Bucket#42;"]
+  n11["Clean and Escape ENV"]
+  n6 -->|"main out 0 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n10
+  n1 -->|"main out 0 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 0 to in 0"| n3
+  n11 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 1 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n6

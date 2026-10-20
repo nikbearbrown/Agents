@@ -1,0 +1,563 @@
+{
+  "schema_version": 1,
+  "slug": "use-config-bot-to-setup-your-telegram-details-like",
+  "title": "Use Config Bot to setup your telegram details, like:",
+  "purpose": "Adapt the published “Use Config Bot to setup your telegram details, like:” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 31 executable nodes and 38 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Telegram-Bot"
+  ],
+  "terminal_nodes": [
+    "No Operation, do nothing"
+  ],
+  "credential_types": [
+    "redis",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "New User ?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Bot-Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Topic (Chat Ticket)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Save Topic ID",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get User Chat Topic",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Forward New Message",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "IF No Topic Created",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ReCreate Topic (Chat Ticket)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "ReSave Topic ID",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update User Data",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Save User Data",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Support Forum",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "From Ticket",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Forward Support Reply To User",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "IF Topic Created",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Forward New Message to the recrated topic",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check User in Database",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send User Ticket Created Notification",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Bot-Config",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram-Bot",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "1st",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split In Batches1",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Wait1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format Users",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Broadcast Channel Post into Users",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Blocked Member",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF Verified Channel",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Blocked Users",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve all users in DB",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "1st",
+        "to": "Check User in Database",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "1st",
+        "to": "Support Forum",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "1st",
+        "to": "IF Verified Channel",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Wait1",
+        "to": "Split In Batches1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format",
+        "to": "Bot-Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Bot-Config",
+        "to": "Format",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Bot-Fields",
+        "to": "1st",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New User ?",
+        "to": "Save User Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New User ?",
+        "to": "Update User Data",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "From Ticket",
+        "to": "Forward Support Reply To User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "From Ticket",
+        "to": "IF Topic Created",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Format Users",
+        "to": "Filter Blocked Users",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram-Bot",
+        "to": "Bot-Config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Topic ID",
+        "to": "Forward New Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Support Forum",
+        "to": "From Ticket",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save User Data",
+        "to": "Create Topic (Chat Ticket)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ReSave Topic ID",
+        "to": "Forward New Message to the recrated topic",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF Topic Created",
+        "to": "Send User Ticket Created Notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update User Data",
+        "to": "Get User Chat Topic",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split In Batches1",
+        "to": "Broadcast Channel Post into Users",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Blocked Member",
+        "to": "Split In Batches1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Forward New Message",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Forward New Message",
+        "to": "IF No Topic Created",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get User Chat Topic",
+        "to": "Forward New Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF No Topic Created",
+        "to": "ReCreate Topic (Chat Ticket)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF No Topic Created",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "IF Verified Channel",
+        "to": "Retrieve all users in DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF Verified Channel",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Filter Blocked Users",
+        "to": "Split In Batches1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check User in Database",
+        "to": "New User ?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve all users in DB",
+        "to": "Format Users",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Topic (Chat Ticket)",
+        "to": "Save Topic ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ReCreate Topic (Chat Ticket)",
+        "to": "ReSave Topic ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Forward Support Reply To User",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Broadcast Channel Post into Users",
+        "to": "Wait1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Broadcast Channel Post into Users",
+        "to": "Set Blocked Member",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Send User Ticket Created Notification",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Forward New Message to the recrated topic",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/implementations/n8n",
+      "files": [
+        "agents/use-config-bot-to-setup-your-telegram-details-like/implementations/n8n/use-config-bot-to-setup-your-telegram-details-like.json"
+      ],
+      "sha256": "6726160234b39a44a939eebda7e84f5f02130ee0d81ad31be464f95f97a2f09f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/use-config-bot-to-setup-your-telegram-details-like/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/use-config-bot-to-setup-your-telegram-details-like/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,25 @@
+flowchart LR
+  n0["Slack"]
+  n1["OpenAI Chat Model"]
+  n2["Structured Output Parser"]
+  n3["Schedule Trigger"]
+  n4["Get Values"]
+  n5["Create New Ticket#63;"]
+  n6["Get Existing Issues"]
+  n7["Generate Ticket Using ChatGPT"]
+  n8["Create Ticket"]
+  n9["Merge"]
+  n10["Get Hashes Only"]
+  n11["Collect Descriptions"]
+  n9 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n6
+  n10 -->|"main out 0 to in 1"| n9
+  n3 -->|"main out 0 to in 0"| n0
+  n1 -->|"ai_languageModel out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n10
+  n2 -->|"ai_outputParser out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n8

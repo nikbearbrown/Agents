@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "slug": "update-email-addresses-6682b576",
+  "title": "Update email addresses",
+  "purpose": "Adapt the published “Update email addresses” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Email"
+  ],
+  "credential_types": [
+    "smtp",
+    "sshPassword"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check RAM usage",
+        "type": "n8n-nodes-base.ssh",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Disk usage",
+        "type": "n8n-nodes-base.ssh",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check CPU usage",
+        "type": "n8n-nodes-base.ssh",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge check results",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Check results against thresholds",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Check CPU usage",
+        "to": "Merge check results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check RAM usage",
+        "to": "Check Disk usage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check RAM usage",
+        "to": "Merge check results",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Check Disk usage",
+        "to": "Check CPU usage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Disk usage",
+        "to": "Merge check results",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Check RAM usage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge check results",
+        "to": "Check results against thresholds",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check results against thresholds",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/update-email-addresses-6682b576/implementations/n8n",
+      "files": [
+        "agents/update-email-addresses-6682b576/implementations/n8n/update-email-addresses-6682b576.json"
+      ],
+      "sha256": "bcf1f2e92d44f027d335a1d9fddaa8172ddc35ef3419e7763a2c8e20f6131b87",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/update-email-addresses-6682b576/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/update-email-addresses-6682b576/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/update-email-addresses-6682b576/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/update-email-addresses-6682b576/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/update-email-addresses-6682b576/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/update-email-addresses-6682b576/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/update-email-addresses-6682b576/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/update-email-addresses-6682b576/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/update-email-addresses-6682b576/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/update-email-addresses-6682b576/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/update-email-addresses-6682b576/implementations/n8n/provenance.json"
+}

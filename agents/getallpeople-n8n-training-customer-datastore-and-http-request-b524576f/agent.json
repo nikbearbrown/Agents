@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "slug": "getallpeople-n8n-training-customer-datastore-and-http-request-b524576f",
+  "title": "getallpeople n8n training customer datastore and http request b524576f",
+  "purpose": "Adapt the published “getallpeople n8n training customer datastore and http request b524576f” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Replace Me"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Customer Datastore",
+        "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SplitInBatches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Replace Me",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "SplitInBatches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Replace Me",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SplitInBatches",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Customer Datastore",
+        "to": "SplitInBatches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Customer Datastore",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/n8n",
+      "files": [
+        "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/n8n/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f.json"
+      ],
+      "sha256": "6adfa774be919a6b3b57b30e67c84f4ff5ef55e2cc836dff7cb1747d7f4c8cd9",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/n8n/provenance.json"
+}

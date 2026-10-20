@@ -1,0 +1,33 @@
+flowchart LR
+  n0["Read PDF"]
+  n1["Configure"]
+  n2["Is PDF"]
+  n3["Not a PDF"]
+  n4["Is matched"]
+  n5["This is a matched PDF"]
+  n6["This is not a matched PDF"]
+  n7["Iterate over email attachments"]
+  n8["OpenAI matches PDF textual content"]
+  n9["Merge"]
+  n10["Upload file to folder"]
+  n11["On email received"]
+  n12["Ignore large PDFs"]
+  n13["Is text within token limit#63;"]
+  n14["Has attachments#63;"]
+  n15["There are no attachments"]
+  n9 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 1 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n13
+  n1 -->|"main out 0 to in 0"| n14
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 1 to in 0"| n6
+  n14 -->|"main out 0 to in 0"| n7
+  n14 -->|"main out 1 to in 0"| n15
+  n11 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n10
+  n13 -->|"main out 0 to in 0"| n8
+  n13 -->|"main out 0 to in 1"| n9
+  n13 -->|"main out 1 to in 0"| n12
+  n7 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n9

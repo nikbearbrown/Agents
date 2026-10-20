@@ -1,0 +1,21 @@
+flowchart LR
+  n0["Get All Databases"]
+  n1["Get All Database Pages"]
+  n2["Get Page Blocks"]
+  n3["Process Blocks"]
+  n4["SplitInBatches"]
+  n5["Check for empty properties"]
+  n6["Archive Page"]
+  n7["If toDelete"]
+  n8["If Empty Properties"]
+  n9["Every day #64; 2am"]
+  n7 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n8

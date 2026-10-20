@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "slug": "scrape-trustpilot-reviews-to-google-sheets",
+  "title": "Scrape Trustpilot Reviews to Google Sheets",
+  "purpose": "Adapt the published “Scrape Trustpilot Reviews to Google Sheets” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "General sheet",
+    "HelpfulCrowd Sheets"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get reviews",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Global",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Parse reviews",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "HelpfulCrowd edits",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "General edits",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "General sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "HelpfulCrowd Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Global",
+        "to": "Get reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "HelpfulCrowd edits",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "General edits",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get reviews",
+        "to": "Parse reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "General edits",
+        "to": "General sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse reviews",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Global",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HelpfulCrowd edits",
+        "to": "HelpfulCrowd Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Global",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/implementations/n8n",
+      "files": [
+        "agents/scrape-trustpilot-reviews-to-google-sheets/implementations/n8n/scrape-trustpilot-reviews-to-google-sheets.json"
+      ],
+      "sha256": "302bfad52a28b48941e4617eb466eeefb717f7456312c889b1a7e02370bed436",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/scrape-trustpilot-reviews-to-google-sheets/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/scrape-trustpilot-reviews-to-google-sheets/implementations/n8n/provenance.json"
+}

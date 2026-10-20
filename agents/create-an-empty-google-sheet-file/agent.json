@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "slug": "create-an-empty-google-sheet-file",
+  "title": "Create an empty google sheet file",
+  "purpose": "Adapt the published “Create an empty google sheet file” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If is archived is false",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "If extension is json",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Search in \"Keep\" folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Loop every 10 items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Download the files",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Put some AI treatment here if you need it",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Set the fields for export",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Add to google sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Filter",
+        "to": "If is archived is false",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Put some AI treatment here if you need it",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download the files",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add to google sheet",
+        "to": "Loop every 10 items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop every 10 items",
+        "to": "If extension is json",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If extension is json",
+        "to": "Download the files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If is archived is false",
+        "to": "Put some AI treatment here if you need it",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search in \"Keep\" folder",
+        "to": "Loop every 10 items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set the fields for export",
+        "to": "Add to google sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Search in \"Keep\" folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Put some AI treatment here if you need it",
+        "to": "Set the fields for export",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-an-empty-google-sheet-file/implementations/n8n",
+      "files": [
+        "agents/create-an-empty-google-sheet-file/implementations/n8n/create-an-empty-google-sheet-file.json"
+      ],
+      "sha256": "218d66051a7bdf77d67f48a11741e434944a396dbf487ba52ee3deb51be876c4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-an-empty-google-sheet-file/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-an-empty-google-sheet-file/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-an-empty-google-sheet-file/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-an-empty-google-sheet-file/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-an-empty-google-sheet-file/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-an-empty-google-sheet-file/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-an-empty-google-sheet-file/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-an-empty-google-sheet-file/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-an-empty-google-sheet-file/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-an-empty-google-sheet-file/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-an-empty-google-sheet-file/implementations/n8n/provenance.json"
+}

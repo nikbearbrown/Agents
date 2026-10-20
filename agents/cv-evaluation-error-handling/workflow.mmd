@@ -1,0 +1,21 @@
+flowchart LR
+  n0["Error Trigger"]
+  n1["Gmail"]
+  n2["Merge"]
+  n3["Config"]
+  n4["Constants"]
+  n5["If"]
+  n6["HTML for Execution Error"]
+  n7["HTML for Trigger Error"]
+  n8["KeepEitherOfHTMLs"]
+  n9["Code"]
+  n5 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 1 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 1"| n2
+  n4 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 1"| n8
+  n6 -->|"main out 0 to in 0"| n8

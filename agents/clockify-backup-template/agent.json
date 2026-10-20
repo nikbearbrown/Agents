@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "slug": "clockify-backup-template",
+  "title": "Clockify Backup Template",
+  "purpose": "Adapt the published “Clockify Backup Template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 16 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Stop and Error",
+    "Update file in GitHub",
+    "Create file in GitHub"
+  ],
+  "credential_types": [
+    "clockifyApi",
+    "githubApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Set month indexes",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Split Out indexes",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set intervals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Skip empty reports",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get first workspace",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get detailed monthly report",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if file exists in GitHub",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Point to new data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Check for 404 error message",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update file in GitHub",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create file in GitHub",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Globals",
+        "to": "Set month indexes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set intervals",
+        "to": "Get detailed monthly report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Update file in GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get first workspace",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Point to new data",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set month indexes",
+        "to": "Split Out indexes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out indexes",
+        "to": "Set intervals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Skip empty reports",
+        "to": "Create file in GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get first workspace",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for 404 error message",
+        "to": "Skip empty reports",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for 404 error message",
+        "to": "Stop and Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get detailed monthly report",
+        "to": "Check if file exists in GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if file exists in GitHub",
+        "to": "Point to new data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if file exists in GitHub",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if file exists in GitHub",
+        "to": "Check for 404 error message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/clockify-backup-template/implementations/n8n",
+      "files": [
+        "agents/clockify-backup-template/implementations/n8n/clockify-backup-template.json"
+      ],
+      "sha256": "7e71f5c47718bedcf8e29ce6c59ee465351b3dee20b8b1ce21b67b8c4d3df445",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/clockify-backup-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/clockify-backup-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/clockify-backup-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/clockify-backup-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/clockify-backup-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/clockify-backup-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/clockify-backup-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/clockify-backup-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/clockify-backup-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/clockify-backup-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/clockify-backup-template/implementations/n8n/provenance.json"
+}

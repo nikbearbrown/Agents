@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-html-extract-and-list-news-url",
+  "title": "http request and html extract and list news url",
+  "purpose": "Adapt the published “http request and html extract and list news url” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Send email notification"
+  ],
+  "credential_types": [
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTML Extract",
+        "type": "n8n-nodes-base.htmlExtract",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "list news url",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "list news title",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Spreadsheet File",
+        "type": "n8n-nodes-base.spreadsheetFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send email notification",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Spreadsheet File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTML Extract",
+        "to": "list news title",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTML Extract",
+        "to": "list news url",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "HTML Extract",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "list news url",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "list news title",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Spreadsheet File",
+        "to": "Send email notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/implementations/n8n",
+      "files": [
+        "agents/http-request-and-html-extract-and-list-news-url/implementations/n8n/http-request-and-html-extract-and-list-news-url.json"
+      ],
+      "sha256": "44a3ae4de03061567e04dfb8128ebcf77de3b977922a4e72a4818a16fb2c5598",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-html-extract-and-list-news-url/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-html-extract-and-list-news-url/implementations/n8n/provenance.json"
+}

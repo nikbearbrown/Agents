@@ -1,0 +1,417 @@
+{
+  "schema_version": 1,
+  "slug": "media-narrative-novelty",
+  "title": "Media Narrative Tracker — Mycroft Agent 3 (Groq)",
+  "purpose": "Adapt the published “Media Narrative Tracker — Mycroft Agent 3 (Groq)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 21 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron Trigger",
+    "Manual Pipeline Webhook"
+  ],
+  "terminal_nodes": [
+    "Pipeline Response"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Manual Pipeline Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Watchlist",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch FT RSS",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Reuters RSS",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Seeking Alpha RSS",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch CNBC RSS",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Yahoo Finance RSS",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Parse & Clean Articles",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Deduplicate Against Supabase",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate for Groq",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Groq 1: Core Claim Extractor",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Groq 2: Information Age Scorer",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Groq 3: Company Mention Extractor",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Signal Assembler",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Insert to Supabase",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Report",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Store Report in Supabase",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Pipeline Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron Trigger",
+        "to": "Fetch Watchlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Pipeline Webhook",
+        "to": "Fetch Watchlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch FT RSS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch Reuters RSS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch Seeking Alpha RSS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch CNBC RSS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch Yahoo Finance RSS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch FT RSS",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Reuters RSS",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Parse & Clean Articles",
+        "to": "Deduplicate Against Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Deduplicate Against Supabase",
+        "to": "Aggregate for Groq",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Groq",
+        "to": "Groq 1: Core Claim Extractor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Groq",
+        "to": "Groq 2: Information Age Scorer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Groq",
+        "to": "Groq 3: Company Mention Extractor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq 1: Core Claim Extractor",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq 2: Information Age Scorer",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Signal Assembler",
+        "to": "Insert to Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Insert to Supabase",
+        "to": "Generate Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Report",
+        "to": "Store Report in Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Report in Supabase",
+        "to": "Pipeline Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq 3: Company Mention Extractor",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Fetch Seeking Alpha RSS",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Merge",
+        "to": "Parse & Clean Articles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch CNBC RSS",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Fetch Yahoo Finance RSS",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Merge1",
+        "to": "Signal Assembler",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/media-narrative-novelty/implementations/n8n",
+      "files": [
+        "agents/media-narrative-novelty/implementations/n8n/media-narrative-novelty.json"
+      ],
+      "sha256": "ead2a48b4c0eb813b4ef2741546ebb3617afff00db5337a1d272e2f0edb42547",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/media-narrative-novelty/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/media-narrative-novelty/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/media-narrative-novelty/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/media-narrative-novelty/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/media-narrative-novelty/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/media-narrative-novelty/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/media-narrative-novelty/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/media-narrative-novelty/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/media-narrative-novelty/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/media-narrative-novelty/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/media-narrative-novelty/implementations/n8n/provenance.json"
+}

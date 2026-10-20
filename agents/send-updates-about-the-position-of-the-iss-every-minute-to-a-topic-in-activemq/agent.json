@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq",
+  "title": "Send updates about the position of the ISS every minute to a topic in ActiveMQ",
+  "purpose": "Adapt the published “Send updates about the position of the ISS every minute to a topic in ActiveMQ” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "AMQP Sender"
+  ],
+  "credential_types": [
+    "amqp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AMQP Sender",
+        "type": "n8n-nodes-base.amqp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set",
+        "to": "AMQP Sender",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cron",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/n8n",
+      "files": [
+        "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/n8n/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq.json"
+      ],
+      "sha256": "f333cf3c4c1a47dfabf75b2b377a6a706dbe4fb250c3b10cabf3e46c474bc386",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/n8n/provenance.json"
+}

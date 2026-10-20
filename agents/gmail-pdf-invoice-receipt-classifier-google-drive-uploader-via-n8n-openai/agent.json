@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "slug": "gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai",
+  "title": "Gmail PDF Invoice/Receipt Classifier & Google Drive Uploader (via n8n & OpenAI)",
+  "purpose": "Adapt the published “Gmail PDF Invoice/Receipt Classifier & Google Drive Uploader (via n8n & OpenAI)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Not a PDF",
+    "Upload file to folder",
+    "Respond to Webhook",
+    "Send to my accountant"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDriveOAuth2Api",
+    "httpHeaderAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Configure",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Iterate over email attachments",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Not a PDF",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is text within token limit?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Is matched",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload file to folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Create folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate attachments",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send email with invoices?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Send to my accountant",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get emails with attachments",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Read PDF email attachments",
+        "type": "n8n-nodes-base.readPDF",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is attachment a PDF?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Optional filter for emails",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Is matched",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Create folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Configure",
+        "to": "Get emails with attachments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is matched",
+        "to": "Upload file to folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is matched",
+        "to": "Send email with invoices?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create folder",
+        "to": "Configure",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create folder",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is attachment a PDF?",
+        "to": "Read PDF email attachments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is attachment a PDF?",
+        "to": "Not a PDF",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Aggregate attachments",
+        "to": "Send to my accountant",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send email with invoices?",
+        "to": "Aggregate attachments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Optional filter for emails",
+        "to": "Iterate over email attachments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read PDF email attachments",
+        "to": "Is text within token limit?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get emails with attachments",
+        "to": "Optional filter for emails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is text within token limit?",
+        "to": "OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is text within token limit?",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Iterate over email attachments",
+        "to": "Is attachment a PDF?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/n8n",
+      "files": [
+        "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/n8n/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai.json"
+      ],
+      "sha256": "5785b66f7ca8bf47ddacc8423359f64da36e6afdda0b8e5b42ebc630c33885e9",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,13 @@
+flowchart LR
+  n0["Get Elastic Alert"]
+  n1["Send Email Notification"]
+  n2["Schedule Trigger"]
+  n3["Response is not empty"]
+  n4["No Operation, do nothing"]
+  n5["Loop Over Each Alert Items"]
+  n6["No Operation, end of loop"]
+  n3 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 1 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 1 to in 0"| n1

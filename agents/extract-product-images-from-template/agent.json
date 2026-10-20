@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "slug": "extract-product-images-from-template",
+  "title": "Extract Product Images from Template",
+  "purpose": "Adapt the published “Extract Product Images from Template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking 'Test workflow'"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Insert Image URL in Table",
+    "Convert to File"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "Read Image URLs",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Download Images",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Analyze Images",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Product Photography Prompt",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Send Image with Prompt to OpenAI",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Convert Base64 to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Upload to Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Insert Image URL in Table",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "When clicking 'Test workflow'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Send Image with Prompt to OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyze Images",
+        "to": "Product Photography Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Image",
+        "to": "Convert to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Images",
+        "to": "Analyze Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Images",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Image URLs",
+        "to": "Download Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload to Drive",
+        "to": "Insert Image URL in Table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Product Photography Prompt",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Base64 to File",
+        "to": "Upload to Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Product Photography Prompt",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "When clicking 'Test workflow'",
+        "to": "Read Image URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Image with Prompt to OpenAI",
+        "to": "Convert Base64 to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/extract-product-images-from-template/implementations/n8n",
+      "files": [
+        "agents/extract-product-images-from-template/implementations/n8n/extract-product-images-from-template.json"
+      ],
+      "sha256": "59dfaa78353012ee451be60b9c598c8bbc06db5de94fa4130596c5811b9a4e3d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/extract-product-images-from-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/extract-product-images-from-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/extract-product-images-from-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/extract-product-images-from-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/extract-product-images-from-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/extract-product-images-from-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/extract-product-images-from-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/extract-product-images-from-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/extract-product-images-from-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/extract-product-images-from-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/extract-product-images-from-template/implementations/n8n/provenance.json"
+}

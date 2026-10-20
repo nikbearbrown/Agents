@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "slug": "deepseek-v3-1",
+  "title": "DeepSeek v3.1",
+  "purpose": "Adapt the published “DeepSeek v3.1” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Watch Notion Updates"
+  ],
+  "terminal_nodes": [
+    "AI Task Planner",
+    "Send Email",
+    "Publish Blog Post",
+    "Notion List Available Tools",
+    "Notion Run a Tool",
+    "DeepSeek Chat Model"
+  ],
+  "credential_types": [
+    "deepSeekApi",
+    "gmailOAuth2",
+    "mcpClientApi",
+    "notionApi",
+    "wordpressApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Watch Notion Updates",
+        "type": "n8n-nodes-base.notionTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AI Task Planner",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.gmailTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Publish Blog Post",
+        "type": "n8n-nodes-base.wordpressTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Notion List Available Tools",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Notion Run a Tool",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Workflow Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "DeepSeek Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Send Email",
+        "to": "AI Task Planner",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion Run a Tool",
+        "to": "AI Task Planner",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Publish Blog Post",
+        "to": "AI Task Planner",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DeepSeek Chat Model",
+        "to": "AI Task Planner",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Watch Notion Updates",
+        "to": "Edit Workflow Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Workflow Variables",
+        "to": "AI Task Planner",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion List Available Tools",
+        "to": "AI Task Planner",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/deepseek-v3-1/implementations/n8n",
+      "files": [
+        "agents/deepseek-v3-1/implementations/n8n/deepseek-v3-1.json"
+      ],
+      "sha256": "504bf8f3a86d65eb4e75393f01a27190eaa5d47d642838a835b88f32efec7c81",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/deepseek-v3-1/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/deepseek-v3-1/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/deepseek-v3-1/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/deepseek-v3-1/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/deepseek-v3-1/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/deepseek-v3-1/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/deepseek-v3-1/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/deepseek-v3-1/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/deepseek-v3-1/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/deepseek-v3-1/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/deepseek-v3-1/implementations/n8n/provenance.json"
+}

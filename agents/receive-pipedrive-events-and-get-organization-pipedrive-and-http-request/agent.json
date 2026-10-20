@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "slug": "receive-pipedrive-events-and-get-organization-pipedrive-and-http-request",
+  "title": "receive pipedrive events and get organization pipedrive and http request",
+  "purpose": "Adapt the published “receive pipedrive events and get organization pipedrive and http request” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On deal updated"
+  ],
+  "terminal_nodes": [
+    "Create customer"
+  ],
+  "credential_types": [
+    "pipedriveApi",
+    "stripeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Current won time Not Equal to Previous",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "On deal updated",
+        "type": "n8n-nodes-base.pipedriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get organisation details",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search customer",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Customer does not exist",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Continue with organisation data",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create customer",
+        "type": "n8n-nodes-base.stripe",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "On deal updated",
+        "to": "Current won time Not Equal to Previous",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search customer",
+        "to": "Customer does not exist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Customer does not exist",
+        "to": "Continue with organisation data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get organisation details",
+        "to": "Search customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get organisation details",
+        "to": "Continue with organisation data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Continue with organisation data",
+        "to": "Create customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Current won time Not Equal to Previous",
+        "to": "Get organisation details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/n8n",
+      "files": [
+        "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/n8n/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request.json"
+      ],
+      "sha256": "b206471a75648b1e11c74dd6f5d1b76c320322e96a6df1aa012ea52b467b3692",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/n8n/provenance.json"
+}

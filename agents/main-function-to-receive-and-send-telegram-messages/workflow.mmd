@@ -1,0 +1,38 @@
+flowchart LR
+  n0["Incoming Message"]
+  n1["MCP Server Trigger"]
+  n2["AI Agent"]
+  n3["MCP Client"]
+  n4["OpenAI Chat Model"]
+  n5["Simple Memory"]
+  n6["chatInput"]
+  n7["create_todays_task"]
+  n8["chatOutput"]
+  n9["sendMessage"]
+  n10["create_upcoming_task"]
+  n11["complete_task"]
+  n12["get_todays_tasks"]
+  n13["get_upcoming_tasks"]
+  n14["Switch"]
+  n15["audio_id"]
+  n16["download_audio"]
+  n17["transcribeAudio"]
+  n18["audioInput"]
+  n14 -->|"main out 0 to in 0"| n15
+  n14 -->|"main out 1 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n8
+  n15 -->|"main out 0 to in 0"| n16
+  n6 -->|"main out 0 to in 0"| n2
+  n3 -->|"ai_tool out 0 to in 0"| n2
+  n18 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n9
+  n5 -->|"ai_memory out 0 to in 0"| n2
+  n11 -->|"ai_tool out 0 to in 0"| n1
+  n16 -->|"main out 0 to in 0"| n17
+  n17 -->|"main out 0 to in 0"| n18
+  n0 -->|"main out 0 to in 0"| n14
+  n12 -->|"ai_tool out 0 to in 0"| n1
+  n4 -->|"ai_languageModel out 0 to in 0"| n2
+  n7 -->|"ai_tool out 0 to in 0"| n1
+  n13 -->|"ai_tool out 0 to in 0"| n1
+  n10 -->|"ai_tool out 0 to in 0"| n1

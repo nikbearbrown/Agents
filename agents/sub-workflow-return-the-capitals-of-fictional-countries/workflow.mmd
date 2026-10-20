@@ -1,0 +1,26 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["OpenAI"]
+  n2["Simple Memory"]
+  n3["When Executed by Another Workflow"]
+  n4["Tool to call the workflow below"]
+  n5["Tool: Get current date and time"]
+  n6["List countries#63;"]
+  n7["Mapping data"]
+  n8["Concatenate country names"]
+  n9["Return country list"]
+  n10["Mapping data1"]
+  n11["Get the matching country#39;s details"]
+  n12["Return specific capital"]
+  n7 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 1"| n11
+  n2 -->|"ai_memory out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 1 to in 0"| n11
+  n6 -->|"main out 1 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n1
+  n4 -->|"ai_tool out 0 to in 0"| n1
+  n5 -->|"ai_tool out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 0 to in 0"| n12

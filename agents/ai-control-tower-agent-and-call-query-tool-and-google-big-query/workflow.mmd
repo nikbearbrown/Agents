@@ -1,0 +1,15 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["AI Control Tower Agent"]
+  n2["Call Query Tool"]
+  n3["Query Database"]
+  n4["Trigger Executed by the AI Tool"]
+  n5["Sanitising the Query"]
+  n6["Chat Memory"]
+  n7["Chat with the User"]
+  n6 -->|"ai_memory out 0 to in 0"| n1
+  n2 -->|"ai_tool out 0 to in 0"| n1
+  n0 -->|"ai_languageModel out 0 to in 0"| n1
+  n7 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 0 to in 0"| n5

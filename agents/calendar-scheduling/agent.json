@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "slug": "calendar-scheduling",
+  "title": "Calendar_scheduling",
+  "purpose": "Adapt the published “Calendar_scheduling” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Gmail Trigger",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Chat OpenAI",
+    "Workflow Tool",
+    "Chat OpenAI1",
+    "Stringify Response",
+    "Structured Output Parser",
+    "Mark as read",
+    "Send Reply"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleCalendarOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Gmail Trigger",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat OpenAI1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Calendar",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format response",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Stringify Response",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract start, end and name",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter only confirmed and with set time",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is appointment request",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Classify appointment",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sort",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Mark as read",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Reply",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Sort",
+        "to": "Format response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Agent",
+        "to": "Send Reply",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Agent",
+        "to": "Mark as read",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat OpenAI",
+        "to": "Classify appointment",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat OpenAI1",
+        "to": "Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail Trigger",
+        "to": "Classify appointment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Tool",
+        "to": "Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format response",
+        "to": "Stringify Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Calendar",
+        "to": "Filter only confirmed and with set time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Classify appointment",
+        "to": "Is appointment request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is appointment request",
+        "to": "Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Google Calendar",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Classify appointment",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract start, end and name",
+        "to": "Sort",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter only confirmed and with set time",
+        "to": "Extract start, end and name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/calendar-scheduling/implementations/n8n",
+      "files": [
+        "agents/calendar-scheduling/implementations/n8n/calendar-scheduling.json"
+      ],
+      "sha256": "8b5975a58fc683d4672c33c0b3f2ae6bab58f60a73707ded12fdcf7e21f52925",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/calendar-scheduling/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/calendar-scheduling/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/calendar-scheduling/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/calendar-scheduling/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/calendar-scheduling/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/calendar-scheduling/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/calendar-scheduling/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/calendar-scheduling/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/calendar-scheduling/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/calendar-scheduling/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/calendar-scheduling/implementations/n8n/provenance.json"
+}

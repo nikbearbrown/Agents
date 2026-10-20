@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "slug": "ai-talent-intelligence-agent",
+  "title": "AI Talent Intelligence Agent",
+  "purpose": "Adapt the published “AI Talent Intelligence Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "▶️ START - Run Complete Analysis",
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "💾 Save to Database",
+    "📬 Send Email Report",
+    "Groq Chat Model"
+  ],
+  "credential_types": [
+    "groqApi",
+    "httpHeaderAuth",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "▶️ START - Run Complete Analysis",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "📚 SOURCE 1: ArXiv Papers",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "📰 SOURCE 2: News Search",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "🔄 Parse ArXiv Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🔄 Parse News Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🔍 FILTER: High Significance Only",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "📊 AGGREGATE Statistics",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "📋 Generate Intelligence Report",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "💾 Save to Database",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.4,
+        "disabled": false
+      },
+      {
+        "name": "📧 Format Email Report",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "📬 Send Email Report",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Code",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Groq Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "▶️ START - Run Complete Analysis",
+        "to": "📚 SOURCE 1: ArXiv Papers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "▶️ START - Run Complete Analysis",
+        "to": "📰 SOURCE 2: News Search",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "▶️ START - Run Complete Analysis",
+        "to": "Code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📚 SOURCE 1: ArXiv Papers",
+        "to": "🔄 Parse ArXiv Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📰 SOURCE 2: News Search",
+        "to": "🔄 Parse News Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🔄 Parse ArXiv Data",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🔄 Parse News Data",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "🔍 FILTER: High Significance Only",
+        "to": "📊 AGGREGATE Statistics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📊 AGGREGATE Statistics",
+        "to": "📋 Generate Intelligence Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📋 Generate Intelligence Report",
+        "to": "💾 Save to Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📋 Generate Intelligence Report",
+        "to": "📧 Format Email Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📧 Format Email Report",
+        "to": "📬 Send Email Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Merge",
+        "to": "Basic LLM Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq Chat Model",
+        "to": "Basic LLM Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Basic LLM Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain",
+        "to": "🔍 FILTER: High Significance Only",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-talent-intelligence-agent/implementations/n8n",
+      "files": [
+        "agents/ai-talent-intelligence-agent/implementations/n8n/ai-talent-intelligence-agent.json"
+      ],
+      "sha256": "b66ae39976339034fbbc0a6bd56ab40ec22e254ab955bc286e4f355c65f221bf",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-talent-intelligence-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-talent-intelligence-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-talent-intelligence-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-talent-intelligence-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-talent-intelligence-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-talent-intelligence-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-talent-intelligence-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-talent-intelligence-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-talent-intelligence-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-talent-intelligence-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-talent-intelligence-agent/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,37 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Get all n8n Workflows"]
+  n2["Backup to Google Drive2"]
+  n3["Loop Over Items"]
+  n4["Backup to Google Drive4"]
+  n5["ifDriveEmpty"]
+  n6["firstWorkflowJson"]
+  n7["JsonToFile"]
+  n8["CodeJsonToFile1"]
+  n9["Limit"]
+  n10["Workflow Data"]
+  n11["successEmail"]
+  n12["failureEmail"]
+  n13["getDriveFileData"]
+  n14["When Executed by Another Workflow"]
+  n15["Execute Workflow"]
+  n16["Parameters"]
+  n17["Discord"]
+  n9 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 0 to in 0"| n17
+  n7 -->|"main out 0 to in 0"| n4
+  n16 -->|"main out 0 to in 0"| n13
+  n5 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 1 to in 0"| n6
+  n10 -->|"main out 0 to in 0"| n16
+  n8 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 1 to in 0"| n15
+  n15 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n1
+  n13 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 1 to in 0"| n12
+  n4 -->|"main out 1 to in 0"| n12
+  n14 -->|"main out 0 to in 0"| n10

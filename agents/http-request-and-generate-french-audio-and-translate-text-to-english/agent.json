@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-generate-french-audio-and-translate-text-to-english",
+  "title": "http request and generate french audio and translate text to english",
+  "purpose": "Adapt the published “http request and generate french audio and translate text to english” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\""
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model1",
+    "Translate English text to speech"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Transcribe audio",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set ElevenLabs voice ID and text",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Generate French Audio",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Translate Text to English",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Translate English text to speech",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Add Filename",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Add Filename",
+        "to": "Transcribe audio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transcribe audio",
+        "to": "Translate Text to English",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Translate Text to English",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate French Audio",
+        "to": "Add Filename",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Translate Text to English",
+        "to": "Translate English text to speech",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set ElevenLabs voice ID and text",
+        "to": "Generate French Audio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Set ElevenLabs voice ID and text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/n8n",
+      "files": [
+        "agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/n8n/http-request-and-generate-french-audio-and-translate-text-to-english.json"
+      ],
+      "sha256": "b6d3ba4721ee38993e98004b780b6148f8f7d6cb05c0d068865f009f61587a1e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/n8n/provenance.json"
+}

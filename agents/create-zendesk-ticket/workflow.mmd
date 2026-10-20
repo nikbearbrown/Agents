@@ -1,0 +1,55 @@
+flowchart LR
+  n0["Check if user found"]
+  n1["Check if available"]
+  n2["Check for malformed date"]
+  n3["Create Ticket"]
+  n4["Create Customer in DB"]
+  n5["Check if submitted succesfully"]
+  n6["Ticket Created Successfully"]
+  n7["Error Creating Ticket"]
+  n8["Airtable Endpoint"]
+  n9["Gcal Endpoint"]
+  n10["Zendesk Endpoint"]
+  n11["Voiceflow Endpoint"]
+  n12["Extract Phone Number"]
+  n13["Extract Zendesk Fields"]
+  n14["Extract Gcal Data"]
+  n15["Extract Airtable Data"]
+  n16["Create Airtable Data"]
+  n17["Query Google Sheets for Phone"]
+  n18["Respond to Webhook with Customer Data"]
+  n19["Respond to Webhook with Error"]
+  n20["Set Error Data"]
+  n21["Check Calendar Availability"]
+  n22["Create Calendar Event"]
+  n23["Set Calendar Success Message"]
+  n24["Respond with Success"]
+  n25["Set Calendar Error Data"]
+  n26["Respond With Calendar Error data"]
+  n27["Set Invalid Data Error"]
+  n28["Respond with Generic Error"]
+  n3 -->|"main out 0 to in 0"| n5
+  n9 -->|"main out 0 to in 0"| n14
+  n20 -->|"main out 0 to in 0"| n19
+  n10 -->|"main out 0 to in 0"| n13
+  n8 -->|"main out 0 to in 0"| n15
+  n14 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n22
+  n1 -->|"main out 1 to in 0"| n25
+  n11 -->|"main out 0 to in 0"| n12
+  n0 -->|"main out 0 to in 0"| n18
+  n0 -->|"main out 1 to in 0"| n20
+  n12 -->|"main out 0 to in 0"| n17
+  n22 -->|"main out 0 to in 0"| n23
+  n4 -->|"main out 0 to in 0"| n3
+  n15 -->|"main out 0 to in 0"| n16
+  n13 -->|"main out 0 to in 0"| n4
+  n27 -->|"main out 0 to in 0"| n28
+  n25 -->|"main out 0 to in 0"| n26
+  n2 -->|"main out 0 to in 0"| n21
+  n2 -->|"main out 1 to in 0"| n27
+  n21 -->|"main out 0 to in 0"| n1
+  n23 -->|"main out 0 to in 0"| n24
+  n17 -->|"main out 0 to in 0"| n0
+  n5 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 1 to in 0"| n7

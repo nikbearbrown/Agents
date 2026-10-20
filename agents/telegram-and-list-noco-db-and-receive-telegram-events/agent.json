@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "slug": "telegram-and-list-noco-db-and-receive-telegram-events",
+  "title": "telegram and list noco db and receive telegram events",
+  "purpose": "Adapt the published “telegram and list noco db and receive telegram events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Telegram Trigger"
+  ],
+  "terminal_nodes": [
+    "msg_greet",
+    "msg_welcomeback",
+    "msg_help",
+    "msg_wrongcommand",
+    "AddUser",
+    "UpdateUser"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "nocoDb",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "chatID",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "msg_greet",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "msg_welcomeback",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "msg_help",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "msg_wrongcommand",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "New user?",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CheckUser",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "LoadDictionary",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "botmessages",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP AddUser",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP UpdateUser",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AddUser",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "UpdateUser",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 1,
+        "disabled": true
+      }
+    ],
+    "edges": [
+      {
+        "from": "IF",
+        "to": "HTTP AddUser",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "HTTP UpdateUser",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "New user?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "msg_help",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "msg_wrongcommand",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "chatID",
+        "to": "LoadDictionary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CheckUser",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "New user?",
+        "to": "IF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "botmessages",
+        "to": "CheckUser",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP AddUser",
+        "to": "msg_greet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LoadDictionary",
+        "to": "botmessages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP UpdateUser",
+        "to": "msg_welcomeback",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger",
+        "to": "chatID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/n8n",
+      "files": [
+        "agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/n8n/telegram-and-list-noco-db-and-receive-telegram-events.json"
+      ],
+      "sha256": "a3e037da92fdd9874719ed0a5178df889b1faca1693726740f82b720abca9ded",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/telegram-and-list-noco-db-and-receive-telegram-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/n8n/provenance.json"
+}

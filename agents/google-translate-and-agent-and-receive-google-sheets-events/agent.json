@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "slug": "google-translate-and-agent-and-receive-google-sheets-events",
+  "title": "google translate and agent and receive google sheets events",
+  "purpose": "Adapt the published “google translate and agent and receive google sheets events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger Added Row"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Structured Output Parser",
+    "No Operation, do nothing",
+    "Add Results in Sheet"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Google Translate",
+        "type": "n8n-nodes-base.googleTranslate",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Trigger Added Row",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload Picture",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get Picture",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Call API Pexels",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Take initialText",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract Image Link",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Final Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Extract Pinyin and Example",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "initialText is empty?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Add Results in Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Final Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Extract Pinyin and Example",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Merge",
+        "to": "Add Results in Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Picture",
+        "to": "Upload Picture",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Fields",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Picture",
+        "to": "Extract Image Link",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call API Pexels",
+        "to": "Get Picture",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Translate",
+        "to": "Extract Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Translate",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Take initialText",
+        "to": "Call API Pexels",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger Added Row",
+        "to": "initialText is empty?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger Added Row",
+        "to": "Take initialText",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Image Link",
+        "to": "Final Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "initialText is empty?",
+        "to": "Google Translate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "initialText is empty?",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "AI Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Pinyin and Example",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/n8n",
+      "files": [
+        "agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/n8n/google-translate-and-agent-and-receive-google-sheets-events.json"
+      ],
+      "sha256": "5100c164ab17e5078b7acc129af033af7a6b7eafd61d7f22a712f664acac084b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/google-translate-and-agent-and-receive-google-sheets-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "slug": "load-data-into-database-871ea973",
+  "title": "Load data into database",
+  "purpose": "Adapt the published “Load data into database” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking 'Chat' button below",
+    "When clicking 'Test Workflow' button"
+  ],
+  "terminal_nodes": [
+    "Recursive Character Text Splitter",
+    "Embeddings OpenAI",
+    "Default Data Loader",
+    "Question and Answer Chain",
+    "OpenAI Chat Model",
+    "Embeddings OpenAI2",
+    "Vector Store Retriever",
+    "Read Pinecone Vector Store",
+    "Insert into Pinecone vector store"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "openAiApi",
+    "pineconeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Question and Answer Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI2",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Vector Store Retriever",
+        "type": "@n8n/n8n-nodes-langchain.retrieverVectorStore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Pinecone Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Insert into Pinecone vector store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When clicking 'Chat' button below",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When clicking 'Test Workflow' button",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Google Drive file URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Google Drive",
+        "to": "Insert into Pinecone vector store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI",
+        "to": "Insert into Pinecone vector store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Question and Answer Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI2",
+        "to": "Read Pinecone Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Insert into Pinecone vector store",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Vector Store Retriever",
+        "to": "Question and Answer Chain",
+        "kind": "ai_retriever",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Google Drive file URL",
+        "to": "Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Pinecone Vector Store",
+        "to": "Vector Store Retriever",
+        "kind": "ai_vectorStore",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking 'Chat' button below",
+        "to": "Question and Answer Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking 'Test Workflow' button",
+        "to": "Set Google Drive file URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/load-data-into-database-871ea973/implementations/n8n",
+      "files": [
+        "agents/load-data-into-database-871ea973/implementations/n8n/load-data-into-database-871ea973.json"
+      ],
+      "sha256": "95cfbec7fbb9692f9102f4776cd2e265d0607719f1273d10fa2f918a5bab5712",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/load-data-into-database-871ea973/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/load-data-into-database-871ea973/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/load-data-into-database-871ea973/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/load-data-into-database-871ea973/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/load-data-into-database-871ea973/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/load-data-into-database-871ea973/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/load-data-into-database-871ea973/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/load-data-into-database-871ea973/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/load-data-into-database-871ea973/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/load-data-into-database-871ea973/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/load-data-into-database-871ea973/implementations/n8n/provenance.json"
+}

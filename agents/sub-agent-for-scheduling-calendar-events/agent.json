@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "slug": "sub-agent-for-scheduling-calendar-events",
+  "title": "Sub-Agent for scheduling calendar events",
+  "purpose": "Adapt the published “Sub-Agent for scheduling calendar events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 24 executable nodes and 21 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received",
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model2",
+    "Respond to Webhook",
+    "calendarAgent",
+    "taskAgent",
+    "Window Buffer Memory",
+    "OpenAI Chat Model",
+    "HTTP Request",
+    "Format output",
+    "Window Buffer Memory1",
+    "Get calendar availability",
+    "Book appointment",
+    "OpenAI Chat Model1",
+    "Format output1",
+    "Window Buffer Memory2"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "calendarAgent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "taskAgent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Map Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Map Fields1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Exclude Previews from Speech",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Main Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Settings",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Notion Task Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory1",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get calendar availability",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Book appointment",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Calendar Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Settings1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format output1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory2",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Map Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Settings",
+        "to": "Notion Task Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Settings1",
+        "to": "Google Calendar Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "taskAgent",
+        "to": "Main Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Main Agent",
+        "to": "Exclude Previews from Speech",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Fields",
+        "to": "Main Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Fields1",
+        "to": "Main Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Notion Task Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "calendarAgent",
+        "to": "Main Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Book appointment",
+        "to": "Google Calendar Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion Task Agent",
+        "to": "Format output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Notion Task Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Google Calendar Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Main Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Main Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Calendar Agent",
+        "to": "Format output1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory1",
+        "to": "Notion Task Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory2",
+        "to": "Google Calendar Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get calendar availability",
+        "to": "Google Calendar Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Map Fields1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Exclude Previews from Speech",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/implementations/n8n",
+      "files": [
+        "agents/sub-agent-for-scheduling-calendar-events/implementations/n8n/sub-agent-for-scheduling-calendar-events.json"
+      ],
+      "sha256": "bfea2a54d9033f5ff0b0efefdd9a388bc5b72b47f448035dbe0724368189ce6c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/sub-agent-for-scheduling-calendar-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/sub-agent-for-scheduling-calendar-events/implementations/n8n/provenance.json"
+}

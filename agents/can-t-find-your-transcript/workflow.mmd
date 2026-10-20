@@ -1,0 +1,37 @@
+flowchart LR
+  n0["OpenAI Chat Model1"]
+  n1["Get Meeting ConferenceRecords"]
+  n2["Get Meeting Transcript Location"]
+  n3["Get Transcript File"]
+  n4["When clicking #34;Test workflow#34;"]
+  n5["PDF Loader"]
+  n6["Get Calendar Event"]
+  n7["Structured Output Parser"]
+  n8["Execute Workflow Trigger"]
+  n9["Response"]
+  n10["Edit Fields"]
+  n11["Fallback Response"]
+  n12["Actions Router"]
+  n13["Get Attendees"]
+  n14["Attendees List"]
+  n15["Add Attendee to Invite"]
+  n16["Create Calendar Event1"]
+  n17["Schedule Meeting"]
+  n18["AI Agent"]
+  n5 -->|"main out 0 to in 0"| n18
+  n10 -->|"main out 0 to in 0"| n12
+  n13 -->|"main out 0 to in 0"| n14
+  n12 -->|"main out 0 to in 0"| n16
+  n12 -->|"main out 1 to in 0"| n11
+  n14 -->|"main out 0 to in 0"| n15
+  n17 -->|"ai_tool out 0 to in 0"| n18
+  n6 -->|"main out 0 to in 0"| n1
+  n0 -->|"ai_languageModel out 0 to in 0"| n18
+  n3 -->|"main out 0 to in 0"| n5
+  n15 -->|"main out 0 to in 0"| n9
+  n16 -->|"main out 0 to in 0"| n13
+  n8 -->|"main out 0 to in 0"| n10
+  n7 -->|"ai_outputParser out 0 to in 0"| n18
+  n1 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n3

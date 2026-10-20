@@ -1,0 +1,27 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Fetch essay list"]
+  n2["Extract essay names"]
+  n3["Fetch essay texts"]
+  n4["Extract title"]
+  n5["Clean up"]
+  n6["Split out into items"]
+  n7["Limit to first 3"]
+  n8["Default Data Loader"]
+  n9["Recursive Character Text Splitter"]
+  n10["OpenAI Chat Model1"]
+  n11["Merge"]
+  n12["Summarization Chain"]
+  n11 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n11
+  n1 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n12
+  n10 -->|"ai_languageModel out 0 to in 0"| n12
+  n8 -->|"ai_document out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n6
+  n12 -->|"main out 0 to in 1"| n11
+  n6 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n1
+  n9 -->|"ai_textSplitter out 0 to in 0"| n8

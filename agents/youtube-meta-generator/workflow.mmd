@@ -1,0 +1,18 @@
+flowchart LR
+  n0["On form submission"]
+  n1["syncbricks information"]
+  n2["OpenAI Chat Model"]
+  n3["Extract Video ID"]
+  n4["Youtube Meta Generator"]
+  n5["YouTube"]
+  n6["Format Tags"]
+  n7["Output Parser"]
+  n8["Form"]
+  n5 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n5
+  n7 -->|"ai_outputParser out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n6
+  n2 -->|"ai_languageModel out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n3
+  n1 -->|"ai_tool out 0 to in 0"| n4

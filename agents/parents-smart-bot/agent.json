@@ -1,0 +1,498 @@
+{
+  "schema_version": 1,
+  "slug": "parents-smart-bot",
+  "title": "Parents smart bot",
+  "purpose": "Adapt the published “Parents smart bot” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 27 executable nodes and 30 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Telegram Trigger"
+  ],
+  "terminal_nodes": [
+    "Email Agent",
+    "Contact Agent",
+    "Content Creator Agent",
+    "Tavily",
+    "Calendar Agent",
+    "Calculator1",
+    "Response1",
+    "Wikipedia",
+    "Default Data Loader",
+    "Recursive Character Text Splitter",
+    "OpenAI Chat Model",
+    "Embeddings OpenAI1",
+    "Qdrant Vector Store1",
+    "Embeddings OpenAI",
+    "Window Buffer Memory"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "qdrantApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Ultimate Assistant",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Email Agent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Contact Agent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Content Creator Agent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Tavily",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Calendar Agent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Download File",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Transcribe",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Calculator1",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set 'Text'1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Switch1",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Response1",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Qdrant Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI1",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Qdrant Vector Store1",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Download File1",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Code",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Email Agent",
+        "to": "Ultimate Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Contact Agent",
+        "to": "Ultimate Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Content Creator Agent",
+        "to": "Ultimate Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tavily",
+        "to": "Ultimate Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calendar Agent",
+        "to": "Ultimate Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ultimate Assistant",
+        "to": "Response1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download File",
+        "to": "Transcribe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transcribe",
+        "to": "Ultimate Assistant",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator1",
+        "to": "Ultimate Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set 'Text'1",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch1",
+        "to": "Download File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch1",
+        "to": "Set 'Text'1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch1",
+        "to": "Download File1",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Wikipedia",
+        "to": "Ultimate Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Qdrant Vector Store",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Ultimate Assistant",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI1",
+        "to": "Qdrant Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Qdrant Vector Store1",
+        "to": "Ultimate Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI",
+        "to": "Qdrant Vector Store1",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Ultimate Assistant",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Qdrant Vector Store",
+        "to": "Edit Fields1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger",
+        "to": "Switch1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download File1",
+        "to": "Code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code",
+        "to": "Qdrant Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code",
+        "to": "Ultimate Assistant",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Ultimate Assistant",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Qdrant Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields1",
+        "to": "Ultimate Assistant",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/parents-smart-bot/implementations/n8n",
+      "files": [
+        "agents/parents-smart-bot/implementations/n8n/parents-smart-bot.json"
+      ],
+      "sha256": "573598d18151e27194d8beeff0fed9fb2fe35288b3a9e8a8c4617b12142cc091",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/parents-smart-bot/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/parents-smart-bot/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/parents-smart-bot/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/parents-smart-bot/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/parents-smart-bot/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/parents-smart-bot/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/parents-smart-bot/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/parents-smart-bot/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/parents-smart-bot/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/parents-smart-bot/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/parents-smart-bot/implementations/n8n/provenance.json"
+}

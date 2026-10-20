@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "slug": "dsp-agent-a1f0c8bf",
+  "title": "Dsp agent",
+  "purpose": "Adapt the published “Dsp agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Telegram Trigger"
+  ],
+  "terminal_nodes": [
+    "Google Gemini Chat Model",
+    "Telegram1",
+    "Calculator",
+    "Wikipedia",
+    "Simple Memory",
+    "OpenAI Chat Model",
+    "memory_tool",
+    "contentCreatorAgent",
+    "Email Agent"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram1",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "memory_tool",
+        "type": "n8n-nodes-base.airtableTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "contentCreatorAgent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Email Agent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Telegram Trigger",
+        "to": "Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Telegram",
+        "to": "OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Telegram1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wikipedia",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory",
+        "to": "AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "memory_tool",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "contentCreatorAgent",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email Agent",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/dsp-agent-a1f0c8bf/implementations/n8n",
+      "files": [
+        "agents/dsp-agent-a1f0c8bf/implementations/n8n/dsp-agent-a1f0c8bf.json"
+      ],
+      "sha256": "1380fa0763c7eabb4e138327ee05083accd2b1e72ef5939b39a4133e7a2ff911",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/dsp-agent-a1f0c8bf/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/dsp-agent-a1f0c8bf/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/dsp-agent-a1f0c8bf/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/dsp-agent-a1f0c8bf/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/dsp-agent-a1f0c8bf/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/dsp-agent-a1f0c8bf/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/dsp-agent-a1f0c8bf/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/dsp-agent-a1f0c8bf/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/dsp-agent-a1f0c8bf/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/dsp-agent-a1f0c8bf/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/dsp-agent-a1f0c8bf/implementations/n8n/provenance.json"
+}

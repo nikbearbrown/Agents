@@ -1,0 +1,33 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Get Past Events"]
+  n2["Loop Over Items"]
+  n3["Flag to Follow Up"]
+  n4["Only Follow Ups"]
+  n5["Get Emails Since"]
+  n6["Output"]
+  n7["Availability"]
+  n8["Model"]
+  n9["Meeting Availability Agent"]
+  n10["Generate Message"]
+  n11["Meetings"]
+  n12["Model1"]
+  n13["Meeting Booking Agent"]
+  n14["Mark as Seen"]
+  n15["Send for Human Approval"]
+  n8 -->|"ai_languageModel out 0 to in 0"| n9
+  n12 -->|"ai_languageModel out 0 to in 0"| n13
+  n6 -->|"ai_outputParser out 0 to in 0"| n9
+  n11 -->|"ai_tool out 0 to in 0"| n13
+  n7 -->|"ai_tool out 0 to in 0"| n9
+  n14 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n14
+  n2 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 1 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n9
+  n10 -->|"main out 0 to in 0"| n15
+  n5 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n2
+  n15 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n10

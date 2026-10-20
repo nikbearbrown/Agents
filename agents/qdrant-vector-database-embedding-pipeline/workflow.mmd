@@ -1,0 +1,17 @@
+flowchart LR
+  n0["Qdrant Vector Store"]
+  n1["When clicking #8216;Test workflow#8217;"]
+  n2["Embeddings OpenAI"]
+  n3["Default Data Loader"]
+  n4["Character Text Splitter"]
+  n5["List all the files"]
+  n6["Loop over one item"]
+  n7["Downloading item"]
+  n7 -->|"main out 0 to in 0"| n0
+  n2 -->|"ai_embedding out 0 to in 0"| n0
+  n5 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 1 to in 0"| n7
+  n3 -->|"ai_document out 0 to in 0"| n0
+  n0 -->|"main out 0 to in 0"| n5
+  n4 -->|"ai_textSplitter out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n5

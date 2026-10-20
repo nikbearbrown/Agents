@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "slug": "searchapi-youtube-video-summary",
+  "title": "SearchApi Youtube Video Summary",
+  "purpose": "Adapt the published “SearchApi Youtube Video Summary” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Summarization Chain",
+    "Recursive Character Text Splitter",
+    "OpenAI Chat Model"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarization Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarize",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "SearchApi",
+        "type": "@searchapi/n8n-nodes-searchapi.searchApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "SearchApi",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Summarize",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize",
+        "to": "Summarization Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Summarization Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Summarization Chain",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "SearchApi",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/searchapi-youtube-video-summary/implementations/n8n",
+      "files": [
+        "agents/searchapi-youtube-video-summary/implementations/n8n/searchapi-youtube-video-summary.json"
+      ],
+      "sha256": "a4e19c9a12a1a7bed8888b96e080935a6d4d45e071d4336f5a74760fc87c5e22",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/searchapi-youtube-video-summary/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/searchapi-youtube-video-summary/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/searchapi-youtube-video-summary/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/searchapi-youtube-video-summary/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/searchapi-youtube-video-summary/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/searchapi-youtube-video-summary/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/searchapi-youtube-video-summary/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/searchapi-youtube-video-summary/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/searchapi-youtube-video-summary/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/searchapi-youtube-video-summary/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/searchapi-youtube-video-summary/implementations/n8n/provenance.json"
+}

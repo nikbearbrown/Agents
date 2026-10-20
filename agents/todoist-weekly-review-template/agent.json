@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "slug": "todoist-weekly-review-template",
+  "title": "Todoist Weekly Review Template",
+  "purpose": "Adapt the published “Todoist Weekly Review Template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Every Friday afternoon"
+  ],
+  "terminal_nodes": [
+    "Send Email"
+  ],
+  "credential_types": [
+    "todoistApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get completed tasks via Todoist API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Optional: Ignore specific projects",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format the email body",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Every Friday afternoon",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Format the email body",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every Friday afternoon",
+        "to": "Get completed tasks via Todoist API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get completed tasks via Todoist API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Optional: Ignore specific projects",
+        "to": "Format the email body",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get completed tasks via Todoist API",
+        "to": "Optional: Ignore specific projects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/todoist-weekly-review-template/implementations/n8n",
+      "files": [
+        "agents/todoist-weekly-review-template/implementations/n8n/todoist-weekly-review-template.json"
+      ],
+      "sha256": "ad4dd1f67802bd98f2ec1c567a6d94c1ede2d59eefcd8a72c2eac6cf9aa6aa32",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/todoist-weekly-review-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/todoist-weekly-review-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/todoist-weekly-review-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/todoist-weekly-review-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/todoist-weekly-review-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/todoist-weekly-review-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/todoist-weekly-review-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/todoist-weekly-review-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/todoist-weekly-review-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/todoist-weekly-review-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/todoist-weekly-review-template/implementations/n8n/provenance.json"
+}

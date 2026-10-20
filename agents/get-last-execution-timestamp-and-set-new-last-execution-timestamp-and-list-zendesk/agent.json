@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "slug": "get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk",
+  "title": "get last execution timestamp and set new last execution timestamp and list zendesk",
+  "purpose": "Adapt the published “get last execution timestamp and set new last execution timestamp and list zendesk” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Every 5 minutes"
+  ],
+  "terminal_nodes": [
+    "Set new last execution timestamp"
+  ],
+  "credential_types": [
+    "pipedriveApi",
+    "zendeskApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get last execution timestamp",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set new last execution timestamp",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get tickets created after last execution",
+        "type": "n8n-nodes-base.zendesk",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get requester information",
+        "type": "n8n-nodes-base.zendesk",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Keep only needed requester information",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Keep only requester owner email",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Every 5 minutes",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add requester information to ticket data",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search requester in pipedrive",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get owner information of Pipedrive contact",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get agents and admins",
+        "type": "n8n-nodes-base.zendesk",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Keep only email and Id",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Pipedrive agent data to pipedrive contact information",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add contact owner to ticket data",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Contact exists in Pipedrive",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Change assignee to Pipedrive contact owner",
+        "type": "n8n-nodes-base.zendesk",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add a note requester not found",
+        "type": "n8n-nodes-base.zendesk",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Every 5 minutes",
+        "to": "Get last execution timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get agents and admins",
+        "to": "Keep only email and Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep only email and Id",
+        "to": "Add Pipedrive agent data to pipedrive contact information",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Get requester information",
+        "to": "Keep only needed requester information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Contact exists in Pipedrive",
+        "to": "Change assignee to Pipedrive contact owner",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Contact exists in Pipedrive",
+        "to": "Add a note requester not found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get last execution timestamp",
+        "to": "Get tickets created after last execution",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search requester in pipedrive",
+        "to": "Get owner information of Pipedrive contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add a note requester not found",
+        "to": "Set new last execution timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep only requester owner email",
+        "to": "Add Pipedrive agent data to pipedrive contact information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add contact owner to ticket data",
+        "to": "Contact exists in Pipedrive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep only needed requester information",
+        "to": "Add requester information to ticket data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Add requester information to ticket data",
+        "to": "Search requester in pipedrive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add requester information to ticket data",
+        "to": "Add contact owner to ticket data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get tickets created after last execution",
+        "to": "Add requester information to ticket data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get tickets created after last execution",
+        "to": "Get requester information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Change assignee to Pipedrive contact owner",
+        "to": "Set new last execution timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get owner information of Pipedrive contact",
+        "to": "Keep only requester owner email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Pipedrive agent data to pipedrive contact information",
+        "to": "Add contact owner to ticket data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/n8n",
+      "files": [
+        "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/n8n/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk.json"
+      ],
+      "sha256": "28b99abd964fad655a0bef0fa26334362d0ef0ff9a0d2b9b24bc1828b561268d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/n8n/provenance.json"
+}

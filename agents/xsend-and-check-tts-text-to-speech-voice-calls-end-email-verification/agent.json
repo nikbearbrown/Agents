@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "slug": "xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification",
+  "title": "xSend and check TTS (Text-to-speech) voice calls end email verification",
+  "purpose": "Adapt the published “xSend and check TTS (Text-to-speech) voice calls end email verification” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission"
+  ],
+  "terminal_nodes": [
+    "Fail voice code",
+    "Success",
+    "Fail email code"
+  ],
+  "credential_types": [
+    "httpBasicAuth",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Send Voice",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Code for voice",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set voice code",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Verify voice code",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fail voice code",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set email code",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Verify email code",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is email code correct?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Is voice code correct?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Success",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fail email code",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Send Email",
+        "to": "Verify email code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Voice",
+        "to": "Verify voice code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code for voice",
+        "to": "Send Voice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set email code",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set voice code",
+        "to": "Code for voice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify email code",
+        "to": "Is email code correct?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify voice code",
+        "to": "Is voice code correct?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "Set voice code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is email code correct?",
+        "to": "Success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is email code correct?",
+        "to": "Fail email code",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Is voice code correct?",
+        "to": "Set email code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is voice code correct?",
+        "to": "Fail voice code",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/n8n",
+      "files": [
+        "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/n8n/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification.json"
+      ],
+      "sha256": "ede7f0becd3d7a369090ce9043bfacd732d3d4bd18a9e69e9411767a6ded905e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/n8n/provenance.json"
+}

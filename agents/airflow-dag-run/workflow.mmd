@@ -1,0 +1,27 @@
+flowchart LR
+  n0["Airflow: dag_run"]
+  n1["Airflow: dag_run - state"]
+  n2["count"]
+  n3["dag run fail"]
+  n4["if state #61;#61; queued"]
+  n5["dag run wait too long"]
+  n6["Airflow: dag_run - get result"]
+  n7["Switch: state"]
+  n8["in data"]
+  n9["Wait"]
+  n10["If count #62; wait_time"]
+  n11["airflow-api"]
+  n9 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n0
+  n7 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 1 to in 0"| n2
+  n7 -->|"main out 2 to in 0"| n2
+  n7 -->|"main out 3 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 1 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n5
+  n10 -->|"main out 1 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n7

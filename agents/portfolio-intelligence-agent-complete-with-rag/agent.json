@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "slug": "portfolio-intelligence-agent-complete-with-rag",
+  "title": "Portfolio Intelligence Agent - Complete with RAG",
+  "purpose": "Adapt the published “Portfolio Intelligence Agent - Complete with RAG” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 23 executable nodes and 22 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Manual Trigger",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Send a message",
+    "Append Portfolio History1",
+    "Append Daily Summary"
+  ],
+  "credential_types": [
+    "gmailOAuth2"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Read Holdings File",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse JSON Holdings",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Portfolio Metrics",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Read Previous Summaries",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fetch & Extract Stock Prices",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Summaries CSV",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Daily Return",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Read Knowledge Base1",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Knowledge Base CSV",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Read Portfolio History CSV",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Portfolio History Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Build Portfolio Analysis",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "RAG-Retrieve Context",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract AI Summary",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate AI Summary (Groq)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Send a message",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Append Portfolio History1",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Holdings to CSV",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Summary to CSV",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Append Daily Summary",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Manual Trigger",
+        "to": "Read Holdings File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Read Holdings File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Holdings File",
+        "to": "Parse JSON Holdings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse JSON Holdings",
+        "to": "Fetch & Extract Stock Prices",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Portfolio Metrics",
+        "to": "Read Portfolio History CSV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Previous Summaries",
+        "to": "Parse Summaries CSV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch & Extract Stock Prices",
+        "to": "Calculate Portfolio Metrics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Summaries CSV",
+        "to": "Calculate Daily Return",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Daily Return",
+        "to": "Read Knowledge Base1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Knowledge Base1",
+        "to": "Parse Knowledge Base CSV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Portfolio History CSV",
+        "to": "Parse Portfolio History Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Portfolio History Data",
+        "to": "Build Portfolio Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Portfolio Analysis",
+        "to": "Read Previous Summaries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Knowledge Base CSV",
+        "to": "RAG-Retrieve Context",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RAG-Retrieve Context",
+        "to": "Generate AI Summary (Groq)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract AI Summary",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract AI Summary",
+        "to": "Convert Summary to CSV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract AI Summary",
+        "to": "Send a message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate AI Summary (Groq)",
+        "to": "Extract AI Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Convert Holdings to CSV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Holdings to CSV",
+        "to": "Append Portfolio History1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Summary to CSV",
+        "to": "Append Daily Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/implementations/n8n",
+      "files": [
+        "agents/portfolio-intelligence-agent-complete-with-rag/implementations/n8n/portfolio-intelligence-agent-complete-with-rag.json"
+      ],
+      "sha256": "e933ab6a639013f22428ab0247bd69a2bb930983702fc935cc0914b7577d100b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/portfolio-intelligence-agent-complete-with-rag/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/portfolio-intelligence-agent-complete-with-rag/implementations/n8n/provenance.json"
+}

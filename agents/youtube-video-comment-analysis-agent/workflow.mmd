@@ -1,0 +1,34 @@
+flowchart LR
+  n0["When Executed by Another Workflow"]
+  n1["Create YouTube API URL"]
+  n2["Get YouTube Video Details"]
+  n3["Merge YouTube Details #38; Transcript"]
+  n4["Create One JSON Object"]
+  n5["Workflow Variables"]
+  n6["Combine Comments"]
+  n7["Split Out Comments"]
+  n8["Get YouTube Video Comments"]
+  n9["When clicking #8216;Test workflow#8217;"]
+  n10["Create YouTube API URL for Comments"]
+  n11["Gmail Report"]
+  n12["gpt-4o-mini"]
+  n13["Markdown to HTML"]
+  n14["YouTube Video Report Agent"]
+  n15["Get Video Comments with Pagination"]
+  n16["Save Report to Google Drive"]
+  n12 -->|"ai_languageModel out 0 to in 0"| n14
+  n6 -->|"main out 0 to in 1"| n3
+  n13 -->|"main out 0 to in 0"| n11
+  n13 -->|"main out 0 to in 0"| n16
+  n7 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n15
+  n4 -->|"main out 0 to in 0"| n14
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n14 -->|"main out 0 to in 0"| n13
+  n0 -->|"main out 0 to in 0"| n5
+  n9 -->|"main out 0 to in 0"| n5
+  n15 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n4
+  n10 -->|"main out 0 to in 0"| n8

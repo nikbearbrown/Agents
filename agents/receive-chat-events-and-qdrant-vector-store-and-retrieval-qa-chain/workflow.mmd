@@ -1,0 +1,12 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["Google Gemini Chat Model"]
+  n2["Embeddings Ollama"]
+  n3["Qdrant Vector Store"]
+  n4["Retrieval QA Chain"]
+  n5["RAG Evaluation Webhook"]
+  n0 -->|"main out 0 to in 0"| n4
+  n1 -->|"ai_languageModel out 0 to in 0"| n4
+  n2 -->|"ai_embedding out 0 to in 0"| n3
+  n3 -->|"ai_retriever out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n5

@@ -1,0 +1,37 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Convert to File"]
+  n2["Split Out"]
+  n3["Schedule Trigger"]
+  n4["Request breaches"]
+  n5["Read last breach"]
+  n6["Get JSON from file"]
+  n7["Check for content"]
+  n8["Set to none"]
+  n9["If - check for new"]
+  n10["Set breach name"]
+  n11["Write breach name to file"]
+  n12["New breach"]
+  n13["Old breach"]
+  n14["Set empty json"]
+  n15["Write cache.json"]
+  n16["Convert json to file"]
+  n17["Add information about the last breach we alerted"]
+  n2 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 1"| n17
+  n14 -->|"main out 0 to in 0"| n16
+  n1 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n17
+  n3 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 0 to in 1"| n17
+  n7 -->|"main out 1 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n12
+  n9 -->|"main out 1 to in 0"| n13
+  n16 -->|"main out 0 to in 0"| n15
+  n0 -->|"main out 0 to in 0"| n14
+  n17 -->|"main out 0 to in 0"| n9

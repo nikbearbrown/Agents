@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "slug": "insert-and-retrieve-documents",
+  "title": "Insert and retrieve documents",
+  "purpose": "Adapt the published “Insert and retrieve documents” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 20 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\"",
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "Recursive Character Text Splitter1",
+    "Generate response",
+    "Embeddings OpenAI2",
+    "When chat message received",
+    "Milvus Vector Store",
+    "Embeddings OpenAI",
+    "Default Data Loader",
+    "OpenAI Chat Model"
+  ],
+  "credential_types": [
+    "milvusApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Essay List",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract essay names",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Split out into items",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fetch essay texts",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Limit to first 3",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Text Only",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter1",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Compose citations",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Answer the query based on chunks",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare chunks",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set max chunks to send to model",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI2",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Milvus Vector Store in retrieval",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Milvus Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Prepare chunks",
+        "to": "Answer the query based on chunks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Essay List",
+        "to": "Extract essay names",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit to first 3",
+        "to": "Fetch essay texts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compose citations",
+        "to": "Generate response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI",
+        "to": "Milvus Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Text Only",
+        "to": "Milvus Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch essay texts",
+        "to": "Extract Text Only",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Answer the query based on chunks",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI2",
+        "to": "Milvus Vector Store in retrieval",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Milvus Vector Store",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract essay names",
+        "to": "Split out into items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split out into items",
+        "to": "Limit to first 3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set max chunks to send to model",
+        "to": "Milvus Vector Store in retrieval",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Answer the query based on chunks",
+        "to": "Compose citations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Milvus Vector Store in retrieval",
+        "to": "Prepare chunks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Fetch Essay List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter1",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/insert-and-retrieve-documents/implementations/n8n",
+      "files": [
+        "agents/insert-and-retrieve-documents/implementations/n8n/insert-and-retrieve-documents.json"
+      ],
+      "sha256": "9cdd61a763b27bedc7b1638a5743863939eb725115f1d85127a91c9bd8b79a0f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/insert-and-retrieve-documents/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/insert-and-retrieve-documents/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/insert-and-retrieve-documents/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/insert-and-retrieve-documents/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/insert-and-retrieve-documents/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/insert-and-retrieve-documents/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/insert-and-retrieve-documents/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/insert-and-retrieve-documents/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/insert-and-retrieve-documents/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/insert-and-retrieve-documents/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/insert-and-retrieve-documents/implementations/n8n/provenance.json"
+}

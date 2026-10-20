@@ -1,0 +1,33 @@
+flowchart LR
+  n0["Gmail Trigger"]
+  n1["Chat OpenAI"]
+  n2["Workflow Tool"]
+  n3["Chat OpenAI1"]
+  n4["Google Calendar"]
+  n5["Execute Workflow Trigger"]
+  n6["Format response"]
+  n7["Stringify Response"]
+  n8["Extract start, end and name"]
+  n9["Filter only confirmed and with set time"]
+  n10["Is appointment request"]
+  n11["Classify appointment"]
+  n12["Structured Output Parser"]
+  n13["Sort"]
+  n14["Mark as read"]
+  n15["Send Reply"]
+  n16["Agent"]
+  n13 -->|"main out 0 to in 0"| n6
+  n16 -->|"main out 0 to in 0"| n15
+  n16 -->|"main out 0 to in 0"| n14
+  n1 -->|"ai_languageModel out 0 to in 0"| n11
+  n3 -->|"ai_languageModel out 0 to in 0"| n16
+  n0 -->|"main out 0 to in 0"| n11
+  n2 -->|"ai_tool out 0 to in 0"| n16
+  n6 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 0 to in 0"| n9
+  n11 -->|"main out 0 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n16
+  n5 -->|"main out 0 to in 0"| n4
+  n12 -->|"ai_outputParser out 0 to in 0"| n11
+  n8 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n8

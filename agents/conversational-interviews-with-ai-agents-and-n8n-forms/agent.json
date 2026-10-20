@@ -1,0 +1,989 @@
+{
+  "schema_version": 1,
+  "slug": "conversational-interviews-with-ai-agents-and-n8n-forms",
+  "title": "conversational interviews with ai agents and n8n forms",
+  "purpose": "Adapt the published “conversational interviews with ai agents and n8n forms” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 64 executable nodes and 68 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission",
+    "DeepResearch Subworkflow"
+  ],
+  "terminal_nodes": [
+    "Structured Output Parser",
+    "OpenAI Chat Model",
+    "OpenAI Chat Model1",
+    "OpenAI Chat Model2",
+    "Structured Output Parser1",
+    "Structured Output Parser2",
+    "OpenAI Chat Model3",
+    "End Form",
+    "OpenAI Chat Model4",
+    "Structured Output Parser4",
+    "Set Done",
+    "Google Gemini Chat Model",
+    "Generate Report",
+    "Combine & Send back to Loop",
+    "Stop and Error"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "httpHeaderAuth",
+    "httpQueryAuth",
+    "notionApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser1",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate SERP Queries",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser2",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model3",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Initial Query",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "SERP to Items",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Item Ref",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Research Goal + Learnings",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Accumulate Results",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "DeepResearch Results",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Results to Items",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Next Queries",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "For Each Query...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Feedback to Items",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Ask Clarity Questions",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "For Each Question...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "DeepResearch Subworkflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Clarifying Questions",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "End Form",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Initiate DeepResearch",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "JobType Router",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model4",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Initial Query",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser4",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Row",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Report Page Generator",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Is Depth Reached?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Research Results",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Existing Row",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set In-Progress",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Done",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Tags to Items",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert to HTML",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTML to Array",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Notion Block Generator",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse JSON blocks",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Upload to Notion Page",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Existing Row1",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "DeepResearch Report",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "DeepResearch Learnings",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Generate Report",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Learnings",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Confirmation",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Research Request",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Valid Blocks",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Append Blocks",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "URL Sources to Lists",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Empty Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Has Content?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Combine & Send back to Loop",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "For Each Block...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Valid Results",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "RAG Web Browser",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Markdown + URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Is Apify Auth Error?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Item Ref",
+        "to": "RAG Web Browser",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Row",
+        "to": "Initiate DeepResearch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Confirmation",
+        "to": "End Form",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Content?",
+        "to": "Get Markdown + URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Content?",
+        "to": "Empty Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Valid Blocks",
+        "to": "Append Blocks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Append Blocks",
+        "to": "For Each Block...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTML to Array",
+        "to": "Tags to Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SERP to Items",
+        "to": "For Each Query...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Variables",
+        "to": "Clarifying Questions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tags to Items",
+        "to": "Notion Block Generator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Valid Results",
+        "to": "Has Content?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Empty Response",
+        "to": "For Each Query...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data",
+        "to": "JobType Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "JobType Router",
+        "to": "Get Existing Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "JobType Router",
+        "to": "Generate SERP Queries",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "JobType Router",
+        "to": "Get Existing Row1",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Convert to HTML",
+        "to": "HTML to Array",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RAG Web Browser",
+        "to": "Is Apify Auth Error?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set In-Progress",
+        "to": "Set Initial Query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Existing Row",
+        "to": "Set In-Progress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Research Request",
+        "to": "Set Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Results to Items",
+        "to": "Set Next Queries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Next Queries",
+        "to": "Generate Learnings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Feedback to Items",
+        "to": "For Each Question...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Block...",
+        "to": "Set Done",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Block...",
+        "to": "Upload to Notion Page",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "For Each Query...",
+        "to": "Combine & Send back to Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Query...",
+        "to": "Item Ref",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Existing Row1",
+        "to": "DeepResearch Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Initial Query",
+        "to": "Report Page Generator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Depth Reached?",
+        "to": "Get Research Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Depth Reached?",
+        "to": "DeepResearch Results",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "DeepResearch Learnings",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse JSON blocks",
+        "to": "Valid Blocks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse JSON blocks",
+        "to": "URL Sources to Lists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Initial Query",
+        "to": "Generate Learnings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Accumulate Results",
+        "to": "Is Depth Reached?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Learnings",
+        "to": "Accumulate Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Markdown + URL",
+        "to": "DeepResearch Learnings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "Research Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "DeepResearch Report",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Clarifying Questions",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model3",
+        "to": "Generate SERP Queries",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model4",
+        "to": "Report Page Generator",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DeepResearch Report",
+        "to": "Convert to HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clarifying Questions",
+        "to": "Feedback to Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DeepResearch Results",
+        "to": "Results to Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Question...",
+        "to": "Get Initial Query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Question...",
+        "to": "Ask Clarity Questions",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Research Results",
+        "to": "Generate Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Apify Auth Error?",
+        "to": "Stop and Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Apify Auth Error?",
+        "to": "Valid Results",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "URL Sources to Lists",
+        "to": "Append Blocks",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Ask Clarity Questions",
+        "to": "For Each Question...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate SERP Queries",
+        "to": "SERP to Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Initiate DeepResearch",
+        "to": "Confirmation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Report Page Generator",
+        "to": "Create Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload to Notion Page",
+        "to": "For Each Block...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DeepResearch Learnings",
+        "to": "Research Goal + Learnings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion Block Generator",
+        "to": "Parse JSON blocks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DeepResearch Subworkflow",
+        "to": "Execution Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Notion Block Generator",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "DeepResearch Learnings",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Research Goal + Learnings",
+        "to": "For Each Query...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser1",
+        "to": "Clarifying Questions",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser2",
+        "to": "Generate SERP Queries",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser4",
+        "to": "Report Page Generator",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/n8n",
+      "files": [
+        "agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/n8n/conversational-interviews-with-ai-agents-and-n8n-forms.json"
+      ],
+      "sha256": "db94e46e907dacce021dc7fa76b6e53b8fe0fa634a2109b388ee5498108e145b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/n8n/provenance.json"
+}

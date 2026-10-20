@@ -1,0 +1,525 @@
+{
+  "schema_version": 1,
+  "slug": "integration-data-processing",
+  "title": "Integration Data Processing",
+  "purpose": "Adapt the published “Integration Data Processing” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 30 executable nodes and 33 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Update Notion Call object with AI data",
+    "Merge Objection Threads",
+    "Merge Integration Thread",
+    "Merge Competitor Thread",
+    "Merge Use Case Thread"
+  ],
+  "credential_types": [
+    "notionApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Check if Competitor Data Found",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if Integration Data Found",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check if objection found",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Competitors in DB",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Integrations",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Call with Objection Summary",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check for use cases",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Notion Call object with AI data",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out all objections",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format Tag Data for notion",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Bundle all Tags",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Objection Tag to Notion",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for rate limiting again",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Objection Threads",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait for rate limiting - Integration",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Integration data",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Bundle Integration Data to 1 object",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Integration Thread",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait for rate limiting - Competitors",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait for rate limiting - Objection",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait for rate limiting - Use Cases",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Use Cases",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Use Cases",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Bundle Use Case Data to 1 object",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Bundle Competitor Data to 1 object",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Competitor Data",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get AI Response - Competitors",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge Competitor Thread",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge Use Case Thread",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Bundle all Tags",
+        "to": "Add Objection Tag to Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Use Cases",
+        "to": "Bundle Use Case Data to 1 object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for use cases",
+        "to": "Wait for rate limiting - Use Cases",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for use cases",
+        "to": "Merge Use Case Thread",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create Integrations",
+        "to": "Bundle Integration Data to 1 object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Use Cases",
+        "to": "Create Use Cases",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if objection found",
+        "to": "Wait for rate limiting - Objection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if objection found",
+        "to": "Merge Objection Threads",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create Competitors in DB",
+        "to": "Bundle Competitor Data to 1 object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Check if Integration Data Found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Check if Competitor Data Found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Check if objection found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Update Notion Call object with AI data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Check for use cases",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out all objections",
+        "to": "Format Tag Data for notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Competitor Data",
+        "to": "Create Competitors in DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Tag Data for notion",
+        "to": "Bundle all Tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Integration data",
+        "to": "Create Integrations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Objection Tag to Notion",
+        "to": "Wait for rate limiting again",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for rate limiting again",
+        "to": "Update Call with Objection Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get AI Response - Competitors",
+        "to": "Split Out Competitor Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Competitor Data Found",
+        "to": "Wait for rate limiting - Competitors",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Competitor Data Found",
+        "to": "Merge Competitor Thread",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check if Integration Data Found",
+        "to": "Wait for rate limiting - Integration",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Integration Data Found",
+        "to": "Merge Integration Thread",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Bundle Use Case Data to 1 object",
+        "to": "Merge Use Case Thread",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Bundle Competitor Data to 1 object",
+        "to": "Merge Competitor Thread",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Call with Objection Summary",
+        "to": "Merge Objection Threads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for rate limiting - Objection",
+        "to": "Split Out all objections",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for rate limiting - Use Cases",
+        "to": "Split Out Use Cases",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Bundle Integration Data to 1 object",
+        "to": "Merge Integration Thread",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for rate limiting - Competitors",
+        "to": "Get AI Response - Competitors",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for rate limiting - Integration",
+        "to": "Split Out Integration data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/integration-data-processing/implementations/n8n",
+      "files": [
+        "agents/integration-data-processing/implementations/n8n/integration-data-processing.json"
+      ],
+      "sha256": "42212faac3f035845f2e851a58c1173ee195d7315e7843749a3e325aec08139d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/integration-data-processing/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/integration-data-processing/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/integration-data-processing/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/integration-data-processing/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/integration-data-processing/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/integration-data-processing/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/integration-data-processing/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/integration-data-processing/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/integration-data-processing/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/integration-data-processing/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/integration-data-processing/implementations/n8n/provenance.json"
+}

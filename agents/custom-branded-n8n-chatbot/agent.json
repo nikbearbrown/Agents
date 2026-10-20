@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "slug": "custom-branded-n8n-chatbot",
+  "title": "Custom Branded n8n Chatbot",
+  "purpose": "Adapt the published “Custom Branded n8n Chatbot” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger",
+    "Chat Trigger"
+  ],
+  "terminal_nodes": [
+    "Window Buffer Memory",
+    "Respond to Webhook",
+    "OpenAI Chat Model",
+    "Make Appointment",
+    "varResponse",
+    "Get Availability",
+    "Send Message",
+    "varMessageResponse",
+    "Respond With Initial Message"
+  ],
+  "credential_types": [
+    "microsoftOutlookOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Make Appointment",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "varResponse",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "freeTimeSlots",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Events",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Availability",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Message",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Chat Trigger",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "varMessageResponse",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send Message1",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Respond With Initial Message",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Respond With Initial Message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Get Events",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Send Message1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Events",
+        "to": "freeTimeSlots",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Trigger",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Message",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Message1",
+        "to": "varMessageResponse",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "freeTimeSlots",
+        "to": "varResponse",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Availability",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Make Appointment",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/custom-branded-n8n-chatbot/implementations/n8n",
+      "files": [
+        "agents/custom-branded-n8n-chatbot/implementations/n8n/custom-branded-n8n-chatbot.json"
+      ],
+      "sha256": "b13497fcd5d275539492b0c23bf50831ac8f3fcaecdd7164d17d6d80d95002f6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/custom-branded-n8n-chatbot/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/custom-branded-n8n-chatbot/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/custom-branded-n8n-chatbot/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/custom-branded-n8n-chatbot/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/custom-branded-n8n-chatbot/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/custom-branded-n8n-chatbot/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/custom-branded-n8n-chatbot/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/custom-branded-n8n-chatbot/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/custom-branded-n8n-chatbot/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/custom-branded-n8n-chatbot/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/custom-branded-n8n-chatbot/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,524 @@
+{
+  "schema_version": 1,
+  "slug": "receive-telegram-events-and-telegram-and-google-drive",
+  "title": "receive telegram events and telegram and google drive",
+  "purpose": "Adapt the published “receive telegram events and telegram and google drive” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 32 executable nodes and 30 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Telegram Trigger"
+  ],
+  "terminal_nodes": [
+    "Clear State",
+    "addGPS",
+    "Welcome Message",
+    "addGPS result",
+    "addShipmentNumber",
+    "addShipmentNumber result",
+    "Store Shipment",
+    "Store GPS",
+    "Instructions",
+    "addPhoto result",
+    "sendPhoto",
+    "Confirmation Driver",
+    "Store fileName",
+    "Initiate Workflow Data",
+    "Load Delivery Information"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check State",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Clear State",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "addGPS",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Welcome Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Command?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Store GPS Location",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "addGPS result",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "addShipmentNumber",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Shipment Number",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "addShipmentNumber result",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store Shipment",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Store GPS",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Load Workspace Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "waitingShipmentNumber",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "waitingGPS",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Instructions",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "waitingPhoto",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Waiting Conditions",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "addPhoto result",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "sendPhoto",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Picture",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Save Public Image Link",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Confirmation Driver",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Distribution Team Confirmation",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract FileName",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Store fileName",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Picture",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Share Picture",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Initiate Workflow Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Switch Command",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Load Delivery Information",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Command?",
+        "to": "Switch Command",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Command?",
+        "to": "Waiting Conditions",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "waitingGPS",
+        "to": "addGPS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check State",
+        "to": "Shipment Number",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check State",
+        "to": "Store GPS Location",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check State",
+        "to": "Get Picture",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Check State",
+        "to": "Instructions",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Get Picture",
+        "to": "Upload Picture",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Picture",
+        "to": "Extract FileName",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "waitingPhoto",
+        "to": "sendPhoto",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Share Picture",
+        "to": "Save Public Image Link",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch Command",
+        "to": "waitingShipmentNumber",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch Command",
+        "to": "waitingGPS",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch Command",
+        "to": "waitingPhoto",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch Command",
+        "to": "Load Workspace Data",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Switch Command",
+        "to": "Welcome Message",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Upload Picture",
+        "to": "Share Picture",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Shipment Number",
+        "to": "addShipmentNumber result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Shipment Number",
+        "to": "Store Shipment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract FileName",
+        "to": "Store fileName",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger",
+        "to": "Command?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store GPS Location",
+        "to": "addGPS result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store GPS Location",
+        "to": "Store GPS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Waiting Conditions",
+        "to": "Check State",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load Workspace Data",
+        "to": "Load Delivery Information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load Workspace Data",
+        "to": "Confirmation Driver",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load Workspace Data",
+        "to": "Distribution Team Confirmation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "waitingShipmentNumber",
+        "to": "addShipmentNumber",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Public Image Link",
+        "to": "addPhoto result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Distribution Team Confirmation",
+        "to": "Clear State",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/implementations/n8n",
+      "files": [
+        "agents/receive-telegram-events-and-telegram-and-google-drive/implementations/n8n/receive-telegram-events-and-telegram-and-google-drive.json"
+      ],
+      "sha256": "0b0c95374b71215c3fee3055aa0fb84af20779ef81457d9df00ef55c36b0168e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-telegram-events-and-telegram-and-google-drive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-telegram-events-and-telegram-and-google-drive/implementations/n8n/provenance.json"
+}

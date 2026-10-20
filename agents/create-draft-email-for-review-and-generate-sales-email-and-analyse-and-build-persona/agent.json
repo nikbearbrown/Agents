@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "slug": "create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona",
+  "title": "create draft email for review and generate sales email and analyse and build persona",
+  "purpose": "Adapt the published “create draft email for review and generate sales email and analyse and build persona” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Google Gemini Chat Model",
+    "Google Gemini Chat Model1"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googlePalmApi",
+    "hubspotAppToken"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Draft Email For Review",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Sales Email",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Analyse and Build Persona",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get All Customer's Correspondence",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Contacts",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "For Each Contact",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Contact Ref",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Variables",
+        "to": "Get All Customer's Correspondence",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Contact Ref",
+        "to": "Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Contacts",
+        "to": "For Each Contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Contact",
+        "to": "Contact Ref",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Generate Sales Email",
+        "to": "Create Draft Email For Review",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Analyse and Build Persona",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyse and Build Persona",
+        "to": "Generate Sales Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model1",
+        "to": "Generate Sales Email",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Draft Email For Review",
+        "to": "For Each Contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get All Customer's Correspondence",
+        "to": "Analyse and Build Persona",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get Contacts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/n8n",
+      "files": [
+        "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/n8n/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona.json"
+      ],
+      "sha256": "85c5a446febd4f38b34438fb3921b11f91e0f4ae03bace2bbceff3b32a9b2517",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/n8n/provenance.json"
+}

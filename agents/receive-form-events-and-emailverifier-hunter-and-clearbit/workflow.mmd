@@ -1,0 +1,27 @@
+flowchart LR
+  n0["n8n Form Trigger"]
+  n1["Check if the email is valid"]
+  n2["Email is not valid, do nothing"]
+  n3["Verify email with Hunter"]
+  n4["Clearbit"]
+  n5["Person already exists in Pipedrive, do nothing"]
+  n6["Is this a new person#63;"]
+  n7["Search for person in Pipedrive"]
+  n8["Is this a new organization#63;"]
+  n9["Create Organization"]
+  n10["Search for organization in Pipedrive"]
+  n11["Create Person"]
+  n12["Create lead"]
+  n4 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 0 to in 0"| n12
+  n0 -->|"main out 0 to in 0"| n3
+  n9 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 1 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 1 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 1 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n6
+  n10 -->|"main out 0 to in 0"| n8

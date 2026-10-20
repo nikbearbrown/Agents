@@ -1,0 +1,24 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Fetch Latest Channel Messages"]
+  n2["OpenAI Chat Model"]
+  n3["Team Member Weekly Report Agent"]
+  n4["Merge Report With User Data"]
+  n5["OpenAI Chat Model1"]
+  n6["Reports to Single List"]
+  n7["Team Weekly Report Agent"]
+  n8["Markdown to HTML"]
+  n9["Send Report to Channel"]
+  n10["Group Messages By UserId"]
+  n11["Groups to Items"]
+  n11 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n1
+  n2 -->|"ai_languageModel out 0 to in 0"| n3
+  n5 -->|"ai_languageModel out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n8
+  n4 -->|"main out 0 to in 0"| n6
+  n1 -->|"main out 0 to in 0"| n10
+  n3 -->|"main out 0 to in 0"| n4

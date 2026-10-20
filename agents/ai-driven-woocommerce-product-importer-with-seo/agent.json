@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "slug": "ai-driven-woocommerce-product-importer-with-seo",
+  "title": "AI-Driven WooCommerce Product Importer with SEO",
+  "purpose": "Adapt the published “AI-Driven WooCommerce Product Importer with SEO” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "OpenRouter Chat Model",
+    "Send message",
+    "Structured Output Parser"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openRouterApi",
+    "telegramApi",
+    "wooCommerceApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenRouter Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SEO Expert",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Get products",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Map categories",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create product",
+        "type": "n8n-nodes-base.wooCommerce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Creation done",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Update meta",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Set SEO meta",
+        "type": "n8n-nodes-base.wooCommerce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop products",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Send message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "SEO Expert",
+        "to": "Set SEO meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update meta",
+        "to": "Loop products",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get products",
+        "to": "Loop products",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set SEO meta",
+        "to": "Update meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Creation done",
+        "to": "SEO Expert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop products",
+        "to": "Send message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop products",
+        "to": "Map categories",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create product",
+        "to": "Creation done",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map categories",
+        "to": "Create product",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenRouter Chat Model",
+        "to": "SEO Expert",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "SEO Expert",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get products",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/implementations/n8n",
+      "files": [
+        "agents/ai-driven-woocommerce-product-importer-with-seo/implementations/n8n/ai-driven-woocommerce-product-importer-with-seo.json"
+      ],
+      "sha256": "cdb58cce9d6f311541c6d17fce03b352d7ad2f3bd9516b37f2d726c40cdb3a68",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-driven-woocommerce-product-importer-with-seo/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-driven-woocommerce-product-importer-with-seo/implementations/n8n/provenance.json"
+}

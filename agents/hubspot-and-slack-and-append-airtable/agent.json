@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "slug": "hubspot-and-slack-and-append-airtable",
+  "title": "hubspot and slack and append airtable",
+  "purpose": "Adapt the published “hubspot and slack and append airtable” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Hubspot Trigger"
+  ],
+  "terminal_nodes": [
+    "high-priority",
+    "low-priority",
+    "#closedwon",
+    "Airtable",
+    "Google Slides"
+  ],
+  "credential_types": [
+    "airtableApi",
+    "googleSlidesOAuth2Api",
+    "hubspotApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "high-priority",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "low-priority",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "#closedwon",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Slides",
+        "type": "n8n-nodes-base.googleSlides",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Hubspot Trigger",
+        "type": "n8n-nodes-base.hubspotTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Hubspot",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "IF",
+        "to": "high-priority",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "low-priority",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set",
+        "to": "IF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "#closedwon",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Google Slides",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Airtable",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Hubspot",
+        "to": "Set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Hubspot Trigger",
+        "to": "Hubspot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/hubspot-and-slack-and-append-airtable/implementations/n8n",
+      "files": [
+        "agents/hubspot-and-slack-and-append-airtable/implementations/n8n/hubspot-and-slack-and-append-airtable.json"
+      ],
+      "sha256": "bf4673b6e13f6dbedcd52b65df28d8cb55544d8b45847e80ae610b7cad96bad4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/hubspot-and-slack-and-append-airtable/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/hubspot-and-slack-and-append-airtable/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/hubspot-and-slack-and-append-airtable/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/hubspot-and-slack-and-append-airtable/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/hubspot-and-slack-and-append-airtable/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/hubspot-and-slack-and-append-airtable/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/hubspot-and-slack-and-append-airtable/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/hubspot-and-slack-and-append-airtable/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/hubspot-and-slack-and-append-airtable/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/hubspot-and-slack-and-append-airtable/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/hubspot-and-slack-and-append-airtable/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "slug": "monday-get-full-item",
+  "title": "MONDAY GET FULL ITEM",
+  "purpose": "Adapt the published “MONDAY GET FULL ITEM” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 21 executable nodes and 23 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Merge1",
+    "Execute Workflow"
+  ],
+  "credential_types": [
+    "mondayComApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "GET ALL COLUMNS",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "GET ALL RELATIONS",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "PULL LINKEDPULSE1",
+        "type": "n8n-nodes-base.mondayCom",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET LINKEDPULSES1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "SPLIT LINKED PULSES1",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SPLIT SUBITEMS1",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET EACH SUBITEM1",
+        "type": "n8n-nodes-base.mondayCom",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET ALL COLUMNS1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "GET ALL COLUMNS2",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate1",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "PULL SUBITEMS",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "GET ITEM",
+        "type": "n8n-nodes-base.mondayCom",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET ALL COLUMNS3",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge4",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge2",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge2",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge4",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "GET ALL COLUMNS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "GET ALL COLUMNS2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "PULL SUBITEMS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate1",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Execute Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "PULL SUBITEMS",
+        "to": "SPLIT SUBITEMS1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ALL COLUMNS",
+        "to": "GET ALL RELATIONS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ALL COLUMNS",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SPLIT SUBITEMS1",
+        "to": "GET EACH SUBITEM1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ALL COLUMNS1",
+        "to": "Aggregate1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ALL COLUMNS2",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "GET ALL COLUMNS3",
+        "to": "Merge4",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "GET ALL RELATIONS",
+        "to": "GET LINKEDPULSES1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ALL RELATIONS",
+        "to": "Merge4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET EACH SUBITEM1",
+        "to": "GET ALL COLUMNS1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET LINKEDPULSES1",
+        "to": "SPLIT LINKED PULSES1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "PULL LINKEDPULSE1",
+        "to": "GET ALL COLUMNS3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SPLIT LINKED PULSES1",
+        "to": "PULL LINKEDPULSE1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "GET ITEM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/monday-get-full-item/implementations/n8n",
+      "files": [
+        "agents/monday-get-full-item/implementations/n8n/monday-get-full-item.json"
+      ],
+      "sha256": "00e12a38333a746df5695dfb878a304efc28cd5af71fd1a8a1d13f56341c862c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/monday-get-full-item/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/monday-get-full-item/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/monday-get-full-item/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/monday-get-full-item/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/monday-get-full-item/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/monday-get-full-item/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/monday-get-full-item/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/monday-get-full-item/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/monday-get-full-item/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/monday-get-full-item/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/monday-get-full-item/implementations/n8n/provenance.json"
+}

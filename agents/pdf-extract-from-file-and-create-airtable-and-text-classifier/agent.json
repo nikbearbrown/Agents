@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "slug": "pdf-extract-from-file-and-create-airtable-and-text-classifier",
+  "title": "pdf extract from file and create airtable and text classifier",
+  "purpose": "Adapt the published “pdf extract from file and create airtable and text classifier” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Step 1 of 2 - Upload Document"
+  ],
+  "terminal_nodes": [
+    "Structured Output Parser",
+    "Upload File to Record",
+    "Google Gemini Chat Model1",
+    "Google Gemini Chat Model"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "googlePalmApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Save to Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Classify Document",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload File to Record",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Application Suitability Agent",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "File Upload Retry",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Step 1 of 2 - Upload Document",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Files",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Extract from File",
+        "to": "Classify Document",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Application Suitability Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save to Airtable",
+        "to": "Upload File to Record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Classify Document",
+        "to": "Application Suitability Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Classify Document",
+        "to": "File Upload Retry",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Application Suitability Agent",
+        "to": "Save to Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File Upload Retry",
+        "to": "Split Files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model1",
+        "to": "Classify Document",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Application Suitability Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Step 1 of 2 - Upload Document",
+        "to": "Split Files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Files",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/n8n",
+      "files": [
+        "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/n8n/pdf-extract-from-file-and-create-airtable-and-text-classifier.json"
+      ],
+      "sha256": "2c958302506844f4570365c4462753edd4a5b550b1ec2ea766f1c0bdd374564b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/n8n/provenance.json"
+}

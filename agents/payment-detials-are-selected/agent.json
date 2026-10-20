@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "slug": "payment-detials-are-selected",
+  "title": "Payment Detials are Selected",
+  "purpose": "Adapt the published “Payment Detials are Selected” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Send Email"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Event Capture Type",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Order Details",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Email Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "getJSON",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Event Capture Type1",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Conver to File",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "Event Capture Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "getJSON",
+        "to": "Conver to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email Data",
+        "to": "Event Capture Type1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Conver to File",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Order Details",
+        "to": "Email Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Event Capture Type",
+        "to": "Get Order Details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Event Capture Type1",
+        "to": "getJSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/payment-detials-are-selected/implementations/n8n",
+      "files": [
+        "agents/payment-detials-are-selected/implementations/n8n/payment-detials-are-selected.json"
+      ],
+      "sha256": "2122fcd2568500acacbf8d57a9160726300d26448641a7e0619c87bb4b7e6be5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/payment-detials-are-selected/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/payment-detials-are-selected/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/payment-detials-are-selected/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/payment-detials-are-selected/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/payment-detials-are-selected/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/payment-detials-are-selected/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/payment-detials-are-selected/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/payment-detials-are-selected/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/payment-detials-are-selected/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/payment-detials-are-selected/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/payment-detials-are-selected/implementations/n8n/provenance.json"
+}

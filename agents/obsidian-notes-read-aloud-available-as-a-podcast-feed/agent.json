@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "slug": "obsidian-notes-read-aloud-available-as-a-podcast-feed",
+  "title": "Obsidian Notes Read Aloud: Available as a Podcast Feed",
+  "purpose": "Adapt the published “Obsidian Notes Read Aloud: Available as a Podcast Feed” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook GET Note",
+    "Webhook GET Podcast Feed"
+  ],
+  "terminal_nodes": [
+    "Send Audio to Obsidian",
+    "Append Item to Google Sheet",
+    "Return Podcast Feed to Webhook"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "httpCustomAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI1",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Webhook GET Note",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook GET Podcast Feed",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Audio to Cloudinary",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Give Audio Unique Name",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send Audio to Obsidian",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Rename Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Append Item to Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get Items from Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Write RSS Feed",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Return Podcast Feed to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Manually Enter Other Data for Podcast Feed",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "OpenAI1",
+        "to": "Give Audio Unique Name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "Rename Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename Fields",
+        "to": "Append Item to Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write RSS Feed",
+        "to": "Return Podcast Feed to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook GET Note",
+        "to": "OpenAI1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook GET Note",
+        "to": "OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Give Audio Unique Name",
+        "to": "Upload Audio to Cloudinary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Give Audio Unique Name",
+        "to": "Send Audio to Obsidian",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook GET Podcast Feed",
+        "to": "Get Items from Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Audio to Cloudinary",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Items from Google Sheets",
+        "to": "Manually Enter Other Data for Podcast Feed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manually Enter Other Data for Podcast Feed",
+        "to": "Write RSS Feed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/n8n",
+      "files": [
+        "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/n8n/obsidian-notes-read-aloud-available-as-a-podcast-feed.json"
+      ],
+      "sha256": "c850f4023dcaf62f202305b09bb030886aff30dc114099dcb5415fa2985bd11b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/n8n/provenance.json"
+}

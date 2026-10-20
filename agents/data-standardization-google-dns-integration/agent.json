@@ -1,0 +1,430 @@
+{
+  "schema_version": 1,
+  "slug": "data-standardization-google-dns-integration",
+  "title": "Data Standardization & Google DNS Integration",
+  "purpose": "Adapt the published “Data Standardization & Google DNS Integration” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 23 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook",
+    "Form Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Report Slack",
+    "Send Report Email"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "VirusTotal result",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "DNS Lookup",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set IP From Lookup",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set IP",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge VirusTotal & Greynoise results",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Is IP?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Start VirusTotal Scan",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "VirusTotal Summary",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "VirusTotal ready?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 5s",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get List of URLs",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Set Email",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Greynoise results",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Report Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Report Email",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Greynoise Summary",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Combine looped items",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GreyNoise RIOT lookup",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "GreyNoise IP Check",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Form Trigger",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Start VirusTotal Scan",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "GreyNoise IP Check",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "GreyNoise RIOT lookup",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter",
+        "to": "VirusTotal ready?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is IP?",
+        "to": "Set IP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is IP?",
+        "to": "DNS Lookup",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set IP",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait 5s",
+        "to": "VirusTotal result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Get List of URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Email",
+        "to": "Is IP?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DNS Lookup",
+        "to": "Set IP From Lookup",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Form Trigger",
+        "to": "Is IP?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get List of URLs",
+        "to": "Set Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Greynoise Summary",
+        "to": "Merge VirusTotal & Greynoise results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "VirusTotal ready?",
+        "to": "Combine looped items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "VirusTotal ready?",
+        "to": "Wait 5s",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "VirusTotal result",
+        "to": "Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GreyNoise IP Check",
+        "to": "Merge Greynoise results",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Set IP From Lookup",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "VirusTotal Summary",
+        "to": "Merge VirusTotal & Greynoise results",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Combine looped items",
+        "to": "VirusTotal Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GreyNoise RIOT lookup",
+        "to": "Merge Greynoise results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start VirusTotal Scan",
+        "to": "Wait 5s",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Greynoise results",
+        "to": "Greynoise Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge VirusTotal & Greynoise results",
+        "to": "Send Report Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge VirusTotal & Greynoise results",
+        "to": "Send Report Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/data-standardization-google-dns-integration/implementations/n8n",
+      "files": [
+        "agents/data-standardization-google-dns-integration/implementations/n8n/data-standardization-google-dns-integration.json"
+      ],
+      "sha256": "6cd0af8dbf260d70a325d61274dfe53e64e9e93d926c08a3c808a886fd207699",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/data-standardization-google-dns-integration/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/data-standardization-google-dns-integration/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/data-standardization-google-dns-integration/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/data-standardization-google-dns-integration/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/data-standardization-google-dns-integration/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/data-standardization-google-dns-integration/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/data-standardization-google-dns-integration/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/data-standardization-google-dns-integration/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/data-standardization-google-dns-integration/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/data-standardization-google-dns-integration/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/data-standardization-google-dns-integration/implementations/n8n/provenance.json"
+}

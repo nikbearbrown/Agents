@@ -1,70 +1,9 @@
 # e-mail Chatbot with both semantic and structured RAG, using Telegram and Pgvector
 
-This folder contains the **e-mail Chatbot with both semantic and structured RAG, using Telegram and Pgvector** workflow. Its executable nodes use `agent`, `chatTrigger`, `code`, `embeddingsOllama`, `if`, `lmChatOpenAi`, `memoryBufferWindow`, `noOp`, `set`, `splitInBatches`, `telegram`, `telegramTrigger`, `toolWorkflow`, `vectorStorePGVector`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector](../../agents/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector/implementations/n8n/README.md)
+- [Importable JSON](../../agents/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector/implementations/n8n/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector)
 
-## Files
-
-- [`e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector.json`](e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** `ollamaApi`, `openAiApi`, `postgres`, `telegramApi`
-
-**Entry nodes:** Telegram Trigger, When chat message received
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| Telegram Trigger | `telegramTrigger` | Inspect parameters |
-| Loop Over Items | `splitInBatches` | Inspect parameters |
-| Came from Telegram? | `if` | Inspect parameters |
-| When chat message received | `chatTrigger` | Inspect parameters |
-| Postgres PGVector Store | `vectorStorePGVector` | Inspect parameters |
-| Call the SQL composer Workflow | `toolWorkflow` | Inspect parameters |
-| Embeddings Ollama | `embeddingsOllama` | Inspect parameters |
-| Beautify chat response | `set` | Inspect parameters |
-| Split text into chunks | `code` | Inspect parameters |
-| Respond on Telegram in batches | `telegram` | Inspect parameters |
-| Escape Markdown | `code` | Inspect parameters |
-| No Operation, do nothing | `noOp` | Inspect parameters |
-| Simple Memory | `memoryBufferWindow` | Inspect parameters |
-| AI Agent | `agent` | Inspect parameters |
-| OpenAI Chat Model | `lmChatOpenAi` | Inspect parameters |
-| Generate session id | `set` | Inspect parameters |
-
-## Connection map
-
-- AI Agent → Came from Telegram? (`main`, output 0, input 0)
-- Simple Memory → AI Agent (`ai_memory`, output 0, input 0)
-- Escape Markdown → Respond on Telegram in batches (`main`, output 0, input 0)
-- Loop Over Items → No Operation, do nothing (`main`, output 0, input 0)
-- Loop Over Items → Escape Markdown (`main`, output 1, input 0)
-- Telegram Trigger → Generate session id (`main`, output 0, input 0)
-- Embeddings Ollama → Postgres PGVector Store (`ai_embedding`, output 0, input 0)
-- OpenAI Chat Model → AI Agent (`ai_languageModel`, output 0, input 0)
-- Came from Telegram? → Split text into chunks (`main`, output 0, input 0)
-- Came from Telegram? → Beautify chat response (`main`, output 1, input 0)
-- Generate session id → AI Agent (`main`, output 0, input 0)
-- Split text into chunks → Loop Over Items (`main`, output 0, input 0)
-- Postgres PGVector Store → AI Agent (`ai_tool`, output 0, input 0)
-- When chat message received → Generate session id (`main`, output 0, input 0)
-- Call the SQL composer Workflow → AI Agent (`ai_tool`, output 0, input 0)
-- Respond on Telegram in batches → Loop Over Items (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Telegram/1843_Telegram_Code_Automate_Triggered.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Telegram/1843_Telegram_Code_Automate_Triggered.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

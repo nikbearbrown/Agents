@@ -1,0 +1,598 @@
+{
+  "schema_version": 1,
+  "slug": "suspicious-login-detection",
+  "title": "Suspicious_login_detection",
+  "purpose": "Adapt the published “Suspicious_login_detection” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 33 executable nodes and 40 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "New /login event",
+    "When clicking \"Execute Workflow\""
+  ],
+  "terminal_nodes": [
+    "Inform user",
+    "Slack",
+    "Known, Do Nothing",
+    "Known Location",
+    "Old Device/Browser",
+    "Not Riot"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "httpHeaderAuth",
+    "httpQueryAuth",
+    "postgres",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Extract relevant data",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "New /login event",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Unknown threat?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get last 10 logins from the same user",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.2,
+        "disabled": true
+      },
+      {
+        "name": "Query IP API1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "New location?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse User Agent",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "New Device/Browser?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Complete login info",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Query user by ID",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.2,
+        "disabled": true
+      },
+      {
+        "name": "New Location",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "New Device/Browser",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "User has email?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTML",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Inform user",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": true
+      },
+      {
+        "name": "noise?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2,
+        "disabled": true
+      },
+      {
+        "name": "Check trust level",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check classification",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "riot?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "🔴 Priority: HIGH",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🟡 Priority: MEDIUM",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🟢 Priority: LOW",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "GreyNoise",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "IP API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "UserParser",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Example event",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Known, Do Nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Known Location",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Old Device/Browser",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Not Riot",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "HTML",
+        "to": "Inform user",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Complete login info",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "riot?",
+        "to": "Check trust level",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "riot?",
+        "to": "Not Riot",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "IP API",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "noise?",
+        "to": "Check classification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "noise?",
+        "to": "riot?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "GreyNoise",
+        "to": "Complete login info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GreyNoise",
+        "to": "noise?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "UserParser",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "New Location",
+        "to": "Query user by ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Example event",
+        "to": "Extract relevant data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New location?",
+        "to": "New Location",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New location?",
+        "to": "Known Location",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Query IP API1",
+        "to": "New location?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unknown threat?",
+        "to": "Get last 10 logins from the same user",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unknown threat?",
+        "to": "Known, Do Nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "User has email?",
+        "to": "HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New /login event",
+        "to": "Extract relevant data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse User Agent",
+        "to": "New Device/Browser?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query user by ID",
+        "to": "User has email?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check trust level",
+        "to": "🔴 Priority: HIGH",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check trust level",
+        "to": "🟡 Priority: MEDIUM",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Check trust level",
+        "to": "🟢 Priority: LOW",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "New Device/Browser",
+        "to": "Query user by ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🟢 Priority: LOW",
+        "to": "Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Complete login info",
+        "to": "Unknown threat?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Device/Browser?",
+        "to": "New Device/Browser",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Device/Browser?",
+        "to": "Old Device/Browser",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "🔴 Priority: HIGH",
+        "to": "Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check classification",
+        "to": "🔴 Priority: HIGH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check classification",
+        "to": "🟡 Priority: MEDIUM",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check classification",
+        "to": "🟢 Priority: LOW",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Extract relevant data",
+        "to": "GreyNoise",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract relevant data",
+        "to": "UserParser",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract relevant data",
+        "to": "IP API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🟡 Priority: MEDIUM",
+        "to": "Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Example event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get last 10 logins from the same user",
+        "to": "Query IP API1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get last 10 logins from the same user",
+        "to": "Parse User Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/suspicious-login-detection/implementations/n8n",
+      "files": [
+        "agents/suspicious-login-detection/implementations/n8n/suspicious-login-detection.json"
+      ],
+      "sha256": "bd3efa4a924306e30a5b84c097951e7cb7b5985b75aac7e3f660b7fdce4b0ce2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/suspicious-login-detection/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/suspicious-login-detection/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/suspicious-login-detection/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/suspicious-login-detection/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/suspicious-login-detection/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/suspicious-login-detection/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/suspicious-login-detection/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/suspicious-login-detection/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/suspicious-login-detection/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/suspicious-login-detection/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/suspicious-login-detection/implementations/n8n/provenance.json"
+}

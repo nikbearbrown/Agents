@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "slug": "perform-batch-processing-of-email-verifications-with-icypeas",
+  "title": "Perform Batch Processing of Email verifications with Icypeas",
+  "purpose": "Adapt the published “Perform Batch Processing of Email verifications with Icypeas” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\""
+  ],
+  "terminal_nodes": [
+    "Run bulk search (email-verif)"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Authenticates to your Icypeas account",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Reads lastname,firstname and company from your sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Run bulk search (email-verif)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Reads lastname,firstname and company from your sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Authenticates to your Icypeas account",
+        "to": "Run bulk search (email-verif)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Reads lastname,firstname and company from your sheet",
+        "to": "Authenticates to your Icypeas account",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/n8n",
+      "files": [
+        "agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/n8n/perform-batch-processing-of-email-verifications-with-icypeas.json"
+      ],
+      "sha256": "67fcd256f6360cdc30d3baea64ae22c25cd05ac6f375c16ea4203446c37ca32f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/perform-batch-processing-of-email-verifications-with-icypeas/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/n8n/provenance.json"
+}

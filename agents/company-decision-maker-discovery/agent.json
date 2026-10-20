@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "slug": "company-decision-maker-discovery",
+  "title": "🏢 Company Decision Maker Discovery",
+  "purpose": "Adapt the published “🏢 Company Decision Maker Discovery” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 25 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Google Sheets Trigger",
+    "Weekly Report Trigger"
+  ],
+  "terminal_nodes": [
+    "Enrich Contacts",
+    "Approve Company Website",
+    "Send Weekly Report"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Google Sheets Trigger",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Apollo Organization Enrichment",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Apollo People Search URL",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items (1000 per Batch)",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Apollo Find Decision Makers",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Add Contacts",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Apollo Enrich Decision Makers",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Apollo People Enrichment Payload",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Enrich Contacts",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items For Bulk Enrichment (10 per batch)",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Determine Contact's Department",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Apollo Organization Search",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Add Company Website",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Approve Company Website",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Add Company Details",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Select Unprocessed Companies",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Domain Already Provided?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Core Business",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Batched Decision Maker Response",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Batched Enrichment Response",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Weekly Report",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Verified Leads",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Derive Past Week's Lead Gen. Metrics",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Weekly Report Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Rows Which Now All Contain Domains",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Add Contacts",
+        "to": "Loop Over Items For Bulk Enrichment (10 per batch)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Company Details",
+        "to": "Loop Over Items (1000 per Batch)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Company Website",
+        "to": "Approve Company Website",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Company Website",
+        "to": "Merge Rows Which Now All Contain Domains",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets Trigger",
+        "to": "Select Unprocessed Companies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Weekly Report Trigger",
+        "to": "Retrieve Verified Leads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Verified Leads",
+        "to": "Derive Past Week's Lead Gen. Metrics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Core Business",
+        "to": "Add Company Details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Apollo Organization Search",
+        "to": "Add Company Website",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Apollo Find Decision Makers",
+        "to": "Loop Over Items (1000 per Batch)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Domain Already Provided?",
+        "to": "Merge Rows Which Now All Contain Domains",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Is Domain Already Provided?",
+        "to": "Apollo Organization Search",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Select Unprocessed Companies",
+        "to": "Is Domain Already Provided?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Apollo Enrich Decision Makers",
+        "to": "Loop Over Items For Bulk Enrichment (10 per batch)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Apollo Organization Enrichment",
+        "to": "Summarize Core Business",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine Contact's Department",
+        "to": "Add Contacts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Apollo People Search URL",
+        "to": "Apollo Find Decision Makers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items (1000 per Batch)",
+        "to": "Split Out Batched Decision Maker Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items (1000 per Batch)",
+        "to": "Create Apollo People Search URL",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Derive Past Week's Lead Gen. Metrics",
+        "to": "Send Weekly Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Batched Enrichment Response",
+        "to": "Enrich Contacts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Apollo People Enrichment Payload",
+        "to": "Apollo Enrich Decision Makers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Rows Which Now All Contain Domains",
+        "to": "Apollo Organization Enrichment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Batched Decision Maker Response",
+        "to": "Determine Contact's Department",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items For Bulk Enrichment (10 per batch)",
+        "to": "Split Out Batched Enrichment Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items For Bulk Enrichment (10 per batch)",
+        "to": "Create Apollo People Enrichment Payload",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/company-decision-maker-discovery/implementations/n8n",
+      "files": [
+        "agents/company-decision-maker-discovery/implementations/n8n/company-decision-maker-discovery.json"
+      ],
+      "sha256": "5ff6419f7f28af91ccb99143b33a1c066fb01c091845493a0bfcc9872dbf1d18",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/company-decision-maker-discovery/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/company-decision-maker-discovery/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/company-decision-maker-discovery/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/company-decision-maker-discovery/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/company-decision-maker-discovery/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/company-decision-maker-discovery/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/company-decision-maker-discovery/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/company-decision-maker-discovery/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/company-decision-maker-discovery/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/company-decision-maker-discovery/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/company-decision-maker-discovery/implementations/n8n/provenance.json"
+}

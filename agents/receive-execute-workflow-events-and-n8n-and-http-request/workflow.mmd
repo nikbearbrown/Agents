@@ -1,0 +1,51 @@
+flowchart LR
+  n0["On clicking #39;execute#39;"]
+  n1["Execute Workflow Trigger"]
+  n2["n8n"]
+  n3["Return"]
+  n4["Get File"]
+  n5["If file too large"]
+  n6["Merge Items"]
+  n7["isDiffOrNew"]
+  n8["Check Status"]
+  n9["Same file - Do nothing"]
+  n10["File is different"]
+  n11["File is new"]
+  n12["Create new file"]
+  n13["Edit existing file"]
+  n14["Loop Over Items"]
+  n15["Schedule Trigger"]
+  n16["Create sub path"]
+  n17["Starting Message"]
+  n18["Execute Workflow"]
+  n19["Completed Notification"]
+  n20["Failed Flows"]
+  n21["Get file data"]
+  n22["Config"]
+  n2 -->|"main out 0 to in 0"| n14
+  n22 -->|"main out 0 to in 0"| n21
+  n22 -->|"main out 0 to in 1"| n6
+  n4 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 0 to in 0"| n12
+  n6 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n16
+  n8 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 1 to in 0"| n10
+  n8 -->|"main out 2 to in 0"| n11
+  n20 -->|"main out 0 to in 0"| n14
+  n21 -->|"main out 0 to in 0"| n5
+  n12 -->|"main out 0 to in 0"| n3
+  n16 -->|"main out 0 to in 0"| n8
+  n14 -->|"main out 0 to in 0"| n19
+  n14 -->|"main out 1 to in 0"| n18
+  n18 -->|"main out 0 to in 0"| n14
+  n18 -->|"main out 1 to in 0"| n20
+  n15 -->|"main out 0 to in 0"| n17
+  n17 -->|"main out 0 to in 0"| n2
+  n10 -->|"main out 0 to in 0"| n13
+  n5 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 1 to in 0"| n6
+  n13 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n17
+  n9 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n22

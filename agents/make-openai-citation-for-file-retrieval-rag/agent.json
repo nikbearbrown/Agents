@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "slug": "make-openai-citation-for-file-retrieval-rag",
+  "title": "Make OpenAI Citation for File Retrieval RAG",
+  "purpose": "Adapt the published “Make OpenAI Citation for File Retrieval RAG” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Create a simple Trigger to have the Chat button within N8N"
+  ],
+  "terminal_nodes": [
+    "Window Buffer Memory",
+    "Optional Markdown to HTML"
+  ],
+  "credential_types": [
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Create a simple Trigger to have the Chat button within N8N",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Assistant with Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Get ALL Thread Content",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split all message iterations from a thread",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split all content from a single message",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split all citations from a single message",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve file name from a file ID",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Regularize output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Optional Markdown to HTML",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Finnaly format the output",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Aggregate",
+        "to": "Finnaly format the output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Regularize output",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "OpenAI Assistant with Vector Store",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get ALL Thread Content",
+        "to": "Split all message iterations from a thread",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Finnaly format the output",
+        "to": "Optional Markdown to HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve file name from a file ID",
+        "to": "Regularize output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Assistant with Vector Store",
+        "to": "Get ALL Thread Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split all content from a single message",
+        "to": "Split all citations from a single message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split all citations from a single message",
+        "to": "Retrieve file name from a file ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split all message iterations from a thread",
+        "to": "Split all content from a single message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create a simple Trigger to have the Chat button within N8N",
+        "to": "OpenAI Assistant with Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/implementations/n8n",
+      "files": [
+        "agents/make-openai-citation-for-file-retrieval-rag/implementations/n8n/make-openai-citation-for-file-retrieval-rag.json"
+      ],
+      "sha256": "ea2bc02f0e892441875633a5abed448cc32399ab7eb1816fd6f9ebb986905084",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/make-openai-citation-for-file-retrieval-rag/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/make-openai-citation-for-file-retrieval-rag/implementations/n8n/provenance.json"
+}

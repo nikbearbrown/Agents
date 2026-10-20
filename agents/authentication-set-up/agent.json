@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "slug": "authentication-set-up",
+  "title": "My workflow 2",
+  "purpose": "Adapt the published “My workflow 2” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 21 executable nodes and 22 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Every 5 minutes start"
+  ],
+  "terminal_nodes": [
+    "Create email template",
+    "Update existing email template in Braze"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Token Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Assign Credentials",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Dartagnan Project list",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Create email template",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "List Available Email Template Braze",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Filtered Project Campaign",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Filtering Dartagnan Campaigns",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filtering Braze Email Template",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Not existing In Braze",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Existing In Braze",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Dartagnan HTML & MEDIA To Update",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Encode Content To Update",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Dartagnan HTML & MEDIA Campagne to Create",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Encode Content to Create",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "If campaign is modified recently",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Braze vs Dartagnan",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Embed image in HTML",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Embed image in HTML 1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Every 5 minutes start",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Update existing email template in Braze",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split Out",
+        "to": "Filtering Braze Email Template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Token Request",
+        "to": "Dartagnan Project list",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Existing In Braze",
+        "to": "If campaign is modified recently",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign Credentials",
+        "to": "List Available Email Template Braze",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign Credentials",
+        "to": "Token Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embed image in HTML",
+        "to": "Encode Content To Update",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embed image in HTML 1",
+        "to": "Encode Content to Create",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every 5 minutes start",
+        "to": "Assign Credentials",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Not existing In Braze",
+        "to": "Filter Braze vs Dartagnan",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dartagnan Project list",
+        "to": "Filtered Project Campaign",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Encode Content To Update",
+        "to": "Update existing email template in Braze",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Encode Content to Create",
+        "to": "Create email template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Braze vs Dartagnan",
+        "to": "Dartagnan HTML & MEDIA Campagne to Create",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filtered Project Campaign",
+        "to": "Filtering Dartagnan Campaigns",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filtering Dartagnan Campaigns",
+        "to": "Existing In Braze",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filtering Dartagnan Campaigns",
+        "to": "Not existing In Braze",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filtering Braze Email Template",
+        "to": "Existing In Braze",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Filtering Braze Email Template",
+        "to": "Not existing In Braze",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Dartagnan HTML & MEDIA To Update",
+        "to": "Embed image in HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If campaign is modified recently",
+        "to": "Dartagnan HTML & MEDIA To Update",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List Available Email Template Braze",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dartagnan HTML & MEDIA Campagne to Create",
+        "to": "Embed image in HTML 1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/authentication-set-up/implementations/n8n",
+      "files": [
+        "agents/authentication-set-up/implementations/n8n/authentication-set-up.json"
+      ],
+      "sha256": "2fa71f65cc863ab5b7d991d7de397278aaded8d62f51a0e07faab6db37cf5e8e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/authentication-set-up/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/authentication-set-up/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/authentication-set-up/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/authentication-set-up/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/authentication-set-up/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/authentication-set-up/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/authentication-set-up/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/authentication-set-up/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/authentication-set-up/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/authentication-set-up/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/authentication-set-up/implementations/n8n/provenance.json"
+}

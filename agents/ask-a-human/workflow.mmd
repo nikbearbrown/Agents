@@ -1,0 +1,19 @@
+flowchart LR
+  n0["Window Buffer Memory"]
+  n1["Not sure#63;"]
+  n2["Execute Workflow Trigger"]
+  n3["Chat Trigger"]
+  n4["Prompt the user to provide an email"]
+  n5["Confirm that we#39;ve messaged a human"]
+  n6["AI Agent"]
+  n7["Check if user has provided email"]
+  n8["Message Slack for help"]
+  n9["GPT4"]
+  n9 -->|"ai_languageModel out 0 to in 0"| n6
+  n1 -->|"ai_tool out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n6
+  n0 -->|"ai_memory out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 1 to in 0"| n4

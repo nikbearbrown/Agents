@@ -1,0 +1,36 @@
+flowchart LR
+  n0["OpenAI Model"]
+  n1["Structured Output Parser"]
+  n2["Upload to LlamaParse"]
+  n3["Receiving Invoices"]
+  n4["Append to Reconciliation Sheet"]
+  n5["Get Processing Status"]
+  n6["Wait to stay within service limits"]
+  n7["Is Job Ready#63;"]
+  n8["Add #34;invoice synced#34; Label"]
+  n9["Get Parsed Invoice Data"]
+  n10["Map Output"]
+  n11["Apply Data Extraction Rules"]
+  n12["Should Process Email#63;"]
+  n13["Split Out Labels"]
+  n14["Get Labels Names"]
+  n15["Combine Label Names"]
+  n16["Email with Label Names"]
+  n10 -->|"main out 0 to in 0"| n4
+  n0 -->|"ai_languageModel out 0 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n9
+  n7 -->|"main out 3 to in 0"| n6
+  n14 -->|"main out 0 to in 0"| n15
+  n13 -->|"main out 0 to in 0"| n14
+  n3 -->|"main out 0 to in 0"| n13
+  n3 -->|"main out 0 to in 0"| n16
+  n15 -->|"main out 0 to in 1"| n16
+  n2 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n7
+  n12 -->|"main out 0 to in 0"| n2
+  n16 -->|"main out 0 to in 0"| n12
+  n9 -->|"main out 0 to in 0"| n11
+  n1 -->|"ai_outputParser out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n5

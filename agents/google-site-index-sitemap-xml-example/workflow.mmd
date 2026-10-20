@@ -1,0 +1,35 @@
+flowchart LR
+  n0["When clicking #34;Test workflow#34;"]
+  n1["Split Out"]
+  n2["Check status"]
+  n3["Loop Over Items"]
+  n4["Wait"]
+  n5["URL Updated"]
+  n6["Schedule Trigger"]
+  n7["is new#63;"]
+  n8["Get content-specific sitemaps"]
+  n9["Convert sitemap to JSON"]
+  n10["Force urlset.url to array"]
+  n11["Assign mandatiry sitemap fields"]
+  n12["convert page data to JSON"]
+  n13["Get sitemap.xml"]
+  n14["Get content of each sitemap"]
+  n15["Sort"]
+  n15 -->|"main out 0 to in 0"| n11
+  n4 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 1 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n15
+  n5 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 1 to in 0"| n5
+  n13 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 1 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n1
+  n12 -->|"main out 0 to in 0"| n10
+  n14 -->|"main out 0 to in 0"| n12
+  n8 -->|"main out 0 to in 0"| n14
+  n0 -->|"main out 0 to in 0"| n13
+  n11 -->|"main out 0 to in 0"| n3

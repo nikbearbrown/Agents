@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "slug": "receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent",
+  "title": "receive chat events and query workflow credentials database and workflow credentials helper agent",
+  "purpose": "Adapt the published “receive chat events and query workflow credentials database and workflow credentials helper agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test workflow\"",
+    "Chat Trigger"
+  ],
+  "terminal_nodes": [
+    "Save to Database",
+    "Query Workflow Credentials Database",
+    "OpenAI Chat Model",
+    "Window Buffer Memory",
+    "Workflow Credentials Helper Agent"
+  ],
+  "credential_types": [
+    "n8nApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Map Workflows & Credentials",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Save to Database",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Chat Trigger",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Query Workflow Credentials Database",
+        "type": "@n8n/n8n-nodes-langchain.toolCode",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Credentials Helper Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "n8n",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "n8n",
+        "to": "Map Workflows & Credentials",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Trigger",
+        "to": "Workflow Credentials Helper Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Workflow Credentials Helper Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Workflow Credentials Helper Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Workflows & Credentials",
+        "to": "Save to Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "n8n",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query Workflow Credentials Database",
+        "to": "Workflow Credentials Helper Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/n8n",
+      "files": [
+        "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/n8n/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent.json"
+      ],
+      "sha256": "28fdf5aa3d54863ea19e8271d973e1ad5f96b4e19c70426ac18c08f1da473eb2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/n8n/provenance.json"
+}

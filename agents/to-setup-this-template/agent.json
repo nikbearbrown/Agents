@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "slug": "to-setup-this-template",
+  "title": "💫 To setup this template",
+  "purpose": "Adapt the published “💫 To setup this template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Update priority in todoist"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "todoistApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Update priority in todoist",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get inbox tasks",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Your Projects",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Categorize",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "If task is not a subtask",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "If other or ai hallucinates",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Categorize",
+        "to": "If other or ai hallucinates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Your Projects",
+        "to": "Get inbox tasks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get inbox tasks",
+        "to": "If task is not a subtask",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Your Projects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If task is not a subtask",
+        "to": "Categorize",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If other or ai hallucinates",
+        "to": "Update priority in todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/to-setup-this-template/implementations/n8n",
+      "files": [
+        "agents/to-setup-this-template/implementations/n8n/to-setup-this-template.json"
+      ],
+      "sha256": "ee8328f2f9863e1bca01f535546b052538d18cab5a268352f15dacbdbe968260",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/to-setup-this-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/to-setup-this-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/to-setup-this-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/to-setup-this-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/to-setup-this-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/to-setup-this-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/to-setup-this-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/to-setup-this-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/to-setup-this-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/to-setup-this-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/to-setup-this-template/implementations/n8n/provenance.json"
+}

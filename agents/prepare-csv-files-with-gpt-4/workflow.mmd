@@ -1,0 +1,19 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["OpenAI"]
+  n2["Split In Batches"]
+  n3["Parse JSON"]
+  n4["Make JSON Table"]
+  n5["Convert to CSV"]
+  n6["Save to Disk"]
+  n7["Strip UTF BOM bytes"]
+  n8["Create valid binary"]
+  n1 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n1

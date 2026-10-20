@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "slug": "fetch-the-most-recent-document-from-google-drive",
+  "title": "Fetch the Most Recent Document from Google Drive",
+  "purpose": "Adapt the published “Fetch the Most Recent Document from Google Drive” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Google Drive "
+  ],
+  "terminal_nodes": [
+    "Wikipedia",
+    "Calculator",
+    "Google Sheets"
+  ],
+  "credential_types": [
+    "googleDocsOAuth2Api",
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Google Docs",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive ",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Summary AI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wikipedia",
+        "to": "Generate Summary AI",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator",
+        "to": "Generate Summary AI",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Docs",
+        "to": "Generate Summary AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive ",
+        "to": "Google Docs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Summary AI",
+        "to": "Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/implementations/n8n",
+      "files": [
+        "agents/fetch-the-most-recent-document-from-google-drive/implementations/n8n/fetch-the-most-recent-document-from-google-drive.json"
+      ],
+      "sha256": "e8e34372e1d482527f142b21beb44bda3a9b673eeb2a3f1dc5c56671aa5cab31",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/fetch-the-most-recent-document-from-google-drive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/fetch-the-most-recent-document-from-google-drive/implementations/n8n/provenance.json"
+}

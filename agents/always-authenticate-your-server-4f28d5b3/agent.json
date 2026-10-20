@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "slug": "always-authenticate-your-server-4f28d5b3",
+  "title": "Always Authenticate Your Server!",
+  "purpose": "Adapt the published “Always Authenticate Your Server!” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "SQLite MCP Server"
+  ],
+  "terminal_nodes": [
+    "SQLite MCP Server",
+    "CreateRecord",
+    "UpdateRecord",
+    "ReadRecords",
+    "DescribeTables",
+    "ListTables",
+    "CreateRecords",
+    "UpdateRows",
+    "ReadRows"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Operation",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "SQLite MCP Server",
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CreateRecord",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "UpdateRecord",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "ReadRecords",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DescribeTables",
+        "type": "@n8n/n8n-nodes-langchain.toolCode",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "ListTables",
+        "type": "@n8n/n8n-nodes-langchain.toolCode",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "CreateRecords",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "UpdateRows",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "ReadRows",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "ReadRows",
+        "to": "SQLite MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Operation",
+        "to": "ReadRecords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Operation",
+        "to": "CreateRecord",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Operation",
+        "to": "UpdateRecord",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "ListTables",
+        "to": "SQLite MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "UpdateRows",
+        "to": "SQLite MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CreateRecords",
+        "to": "SQLite MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DescribeTables",
+        "to": "SQLite MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Operation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/implementations/n8n",
+      "files": [
+        "agents/always-authenticate-your-server-4f28d5b3/implementations/n8n/always-authenticate-your-server-4f28d5b3.json"
+      ],
+      "sha256": "b422f1817fafc670f6e025487a8f5be0b009b01651f51d0dd9c1c2d5becd8072",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/always-authenticate-your-server-4f28d5b3/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/always-authenticate-your-server-4f28d5b3/implementations/n8n/provenance.json"
+}

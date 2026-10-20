@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "slug": "receive-typeform-events-and-slack-and-list-airtable",
+  "title": "receive typeform events and slack and list airtable",
+  "purpose": "Adapt the published “receive typeform events and slack and list airtable” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Typeform Trigger"
+  ],
+  "terminal_nodes": [
+    "Slack1",
+    "Slack"
+  ],
+  "credential_types": [
+    "airtableApi",
+    "dropcontactApi",
+    "slackApi",
+    "typeformApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Typeform Trigger",
+        "type": "n8n-nodes-base.typeformTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack1",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable - Contact List",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable - Update Contacts1",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set - Contacts to update",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Dropcontact",
+        "type": "n8n-nodes-base.dropcontact",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Contact ID empty ?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable - Create Contacts",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set - Contacts to create",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Dropcontact",
+        "to": "Airtable - Contact List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Typeform Trigger",
+        "to": "Dropcontact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Contact ID empty ?",
+        "to": "Set - Contacts to update",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Contact ID empty ?",
+        "to": "Set - Contacts to create",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Airtable - Contact List",
+        "to": "Contact ID empty ?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set - Contacts to create",
+        "to": "Airtable - Update Contacts1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set - Contacts to update",
+        "to": "Airtable - Create Contacts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable - Create Contacts",
+        "to": "Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable - Update Contacts1",
+        "to": "Slack1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/implementations/n8n",
+      "files": [
+        "agents/receive-typeform-events-and-slack-and-list-airtable/implementations/n8n/receive-typeform-events-and-slack-and-list-airtable.json"
+      ],
+      "sha256": "7f64018b46aed92ab2e30cd3c40f41b8795eb28424a0d2979a6945ee939a2e37",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-typeform-events-and-slack-and-list-airtable/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-typeform-events-and-slack-and-list-airtable/implementations/n8n/provenance.json"
+}

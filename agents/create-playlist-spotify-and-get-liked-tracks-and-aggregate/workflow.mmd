@@ -1,0 +1,37 @@
+flowchart LR
+  n0["If no playlist"]
+  n1["Create Downloads Playlist"]
+  n2["Get Liked Tracks"]
+  n3["Loop Over Items"]
+  n4["Aggregate"]
+  n5["Split Out"]
+  n6["Add tracks to Downloads"]
+  n7["Get Downloads Playlist"]
+  n8["Filter out new tracks"]
+  n9["Get tracks to remove"]
+  n10["Remove oldest tracks from Downloads"]
+  n11["Filter out Downloads Playlist"]
+  n12["Get Updated Downloads Playlist"]
+  n13["Get all Playlists"]
+  n14["Schedule Trigger"]
+  n15["If no Downloads Playlist found"]
+  n16["Globals"]
+  n16 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 0 to in 0"| n15
+  n5 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 0"| n1
+  n0 -->|"main out 1 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n12
+  n3 -->|"main out 1 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n8
+  n14 -->|"main out 0 to in 0"| n16
+  n13 -->|"main out 0 to in 0"| n0
+  n9 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n13
+  n11 -->|"main out 0 to in 0"| n7
+  n12 -->|"main out 0 to in 0"| n9
+  n15 -->|"main out 0 to in 0"| n1
+  n15 -->|"main out 1 to in 0"| n5

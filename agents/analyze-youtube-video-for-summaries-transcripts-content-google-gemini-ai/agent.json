@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "slug": "analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai",
+  "title": "🎥 Analyze YouTube Video for Summaries, Transcripts & Content + Google Gemini AI",
+  "purpose": "Adapt the published “🎥 Analyze YouTube Video for Summaries, Transcripts & Content + Google Gemini AI” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Start Workflow"
+  ],
+  "terminal_nodes": [
+    "Save to Google Drive as Text File",
+    "Send to Gmail as HTML",
+    "Provide YouTube Information to User as HTML"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDriveOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Config",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Video Audience MetaData",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Compose Prompts",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract MetaData Object",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Prompt by Prompt Type",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Define Audience Meta Prompt",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get YouTube Information by Prompt Type",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Save to Google Drive as Text File",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Send to Gmail as HTML",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Markdown to HTML",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Provide YouTube Information to User as HTML",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Start Workflow",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create YouTube API URL",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get YouTube Video Details",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Compose Prompts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Config",
+        "to": "Create YouTube API URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Config",
+        "to": "Define Audience Meta Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start Workflow",
+        "to": "Config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compose Prompts",
+        "to": "Get Prompt by Prompt Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create YouTube API URL",
+        "to": "Get YouTube Video Details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract MetaData Object",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Convert Markdown to HTML",
+        "to": "Send to Gmail as HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Markdown to HTML",
+        "to": "Provide YouTube Information to User as HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Prompt by Prompt Type",
+        "to": "Get YouTube Information by Prompt Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get YouTube Video Details",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Define Audience Meta Prompt",
+        "to": "Get Video Audience MetaData",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Video Audience MetaData",
+        "to": "Extract MetaData Object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get YouTube Information by Prompt Type",
+        "to": "Convert Markdown to HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get YouTube Information by Prompt Type",
+        "to": "Save to Google Drive as Text File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/n8n",
+      "files": [
+        "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/n8n/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai.json"
+      ],
+      "sha256": "8b1ba24211a22e6c4c7eac5c898988a70afb4c4044a91f9e76d1ac9a2af3af5e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/n8n/provenance.json"
+}

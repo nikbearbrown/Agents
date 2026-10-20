@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "slug": "information-edit-image-and-resize-edit-image-and-multistep-edit-image",
+  "title": "information edit image and resize edit image and multistep edit image",
+  "purpose": "Adapt the published “information edit image and resize edit image and multistep edit image” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Google Gemini Chat Model",
+    "Structured Output Parser",
+    "Apply Caption to Image"
+  ],
+  "credential_types": [
+    "googlePalmApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Info",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Resize For AI",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Positioning",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Apply Caption to Image",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Image & Caption",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Merge Caption & Positions",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Image Captioning Agent",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Info",
+        "to": "Merge Image & Caption",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image",
+        "to": "Resize For AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image",
+        "to": "Get Info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Resize For AI",
+        "to": "Image Captioning Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Positioning",
+        "to": "Merge Caption & Positions",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge Image & Caption",
+        "to": "Calculate Positioning",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Image & Caption",
+        "to": "Merge Caption & Positions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Image Captioning Agent",
+        "to": "Merge Image & Caption",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Image Captioning Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Image Captioning Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Caption & Positions",
+        "to": "Apply Caption to Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/n8n",
+      "files": [
+        "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/n8n/information-edit-image-and-resize-edit-image-and-multistep-edit-image.json"
+      ],
+      "sha256": "80279280ca8b29ea56887e7ddfd4de376f5aa0fd3b71b3efeb7562d98166e25c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/n8n/provenance.json"
+}

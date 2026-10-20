@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-append-google-sheets-and-receive-form-events",
+  "title": "http request and append google sheets and receive form events",
+  "purpose": "Adapt the published “http request and append google sheets and receive form events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission - Amazon Reviews"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Gmail - Sending creative to Media Buyers"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Snapshot Progress",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request- Post API call to Bright Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait - Polling Bright Data",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "If - Checking status of Snapshot - if data is ready or not",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request - Getting data from Bright Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets - Adding All Reviews",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "On form submission - Amazon Reviews",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregating all reviews",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain - Summary of Recent reviews",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI- Generating image",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Sending creative to Media Buyers",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Basic LLM Chain - Summary of Recent reviews",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Snapshot Progress",
+        "to": "If - Checking status of Snapshot - if data is ready or not",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregating all reviews",
+        "to": "Basic LLM Chain - Summary of Recent reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI- Generating image",
+        "to": "Gmail - Sending creative to Media Buyers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait - Polling Bright Data",
+        "to": "Snapshot Progress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets - Adding All Reviews",
+        "to": "Aggregating all reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission - Amazon Reviews",
+        "to": "HTTP Request- Post API call to Bright Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request- Post API call to Bright Data",
+        "to": "Wait - Polling Bright Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain - Summary of Recent reviews",
+        "to": "OpenAI- Generating image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request - Getting data from Bright Data",
+        "to": "Google Sheets - Adding All Reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If - Checking status of Snapshot - if data is ready or not",
+        "to": "Wait - Polling Bright Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If - Checking status of Snapshot - if data is ready or not",
+        "to": "HTTP Request - Getting data from Bright Data",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/n8n",
+      "files": [
+        "agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/n8n/http-request-and-append-google-sheets-and-receive-form-events.json"
+      ],
+      "sha256": "2af96cc76ec49c7afe012e9f8bc3effbf578e17d5c7e79d37f9be7f91ae60023",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-append-google-sheets-and-receive-form-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/n8n/provenance.json"
+}

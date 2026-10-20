@@ -1,0 +1,26 @@
+flowchart LR
+  n0["Error Trigger"]
+  n1["Insert Log"]
+  n2["Count for 5 minutes"]
+  n3["Principal E-Mail"]
+  n4["Fallback E-Mail"]
+  n5["Push mobile notification"]
+  n6["Truncate Log Database"]
+  n7["Sometimes... just cleanup"]
+  n8["Call this Sample - Prepend to your error catcher"]
+  n9["See below to prepend this at your error handling"]
+  n10["If there is no logs in 5 minutes"]
+  n11["CleanUp execution. See below if you will prepend this workflow"]
+  n12["Insert your error handling logic after this"]
+  n1 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 0"| n1
+  n0 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 1 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n6
+  n10 -->|"main out 0 to in 0"| n12
+  n10 -->|"main out 1 to in 0"| n11
+  n8 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n5
+  n9 -->|"main out 0 to in 0"| n1
+  n9 -->|"main out 0 to in 0"| n2

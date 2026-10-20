@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "slug": "prospectlens-company-research",
+  "title": "ProspectLens company research",
+  "purpose": "Adapt the published “ProspectLens company research” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Save company data into Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.4,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "ProspectLens API call",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get all rows from Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Filter",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "ProspectLens API call",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "ProspectLens API call",
+        "to": "Save company data into Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ProspectLens API call",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get all rows from Sheets",
+        "to": "Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save company data into Sheets",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get all rows from Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/prospectlens-company-research/implementations/n8n",
+      "files": [
+        "agents/prospectlens-company-research/implementations/n8n/prospectlens-company-research.json"
+      ],
+      "sha256": "9042dc0a903a08c013b57aa40033403e0edf48f7d56a1bcc07c719e3009fd798",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/prospectlens-company-research/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/prospectlens-company-research/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/prospectlens-company-research/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/prospectlens-company-research/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/prospectlens-company-research/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/prospectlens-company-research/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/prospectlens-company-research/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/prospectlens-company-research/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/prospectlens-company-research/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/prospectlens-company-research/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/prospectlens-company-research/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "slug": "sorting-and-posting-incident-details-to-slack",
+  "title": "Sorting and Posting Incident Details to Slack",
+  "purpose": "Adapt the published “Sorting and Posting Incident Details to Slack” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Run Every 5 Minutes"
+  ],
+  "terminal_nodes": [
+    "Post Error Message if Error with ServiceNow",
+    "Post Incident Details to Slack Channel",
+    "No Incidents, Do Nothing"
+  ],
+  "credential_types": [
+    "serviceNowBasicApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Run Every 5 Minutes",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get 5 Minute Ago Timestamp",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Incidents from ServiceNow",
+        "type": "n8n-nodes-base.serviceNow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check if New Incidents",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Post Error Message if Error with ServiceNow",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Sort Incidents in Ascending Order",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Post Incident Details to Slack Channel",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "No Incidents, Do Nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Run Every 5 Minutes",
+        "to": "Get 5 Minute Ago Timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if New Incidents",
+        "to": "Sort Incidents in Ascending Order",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if New Incidents",
+        "to": "No Incidents, Do Nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get 5 Minute Ago Timestamp",
+        "to": "Get Incidents from ServiceNow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Incidents from ServiceNow",
+        "to": "Check if New Incidents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Incidents from ServiceNow",
+        "to": "Post Error Message if Error with ServiceNow",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Sort Incidents in Ascending Order",
+        "to": "Post Incident Details to Slack Channel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get 5 Minute Ago Timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/implementations/n8n",
+      "files": [
+        "agents/sorting-and-posting-incident-details-to-slack/implementations/n8n/sorting-and-posting-incident-details-to-slack.json"
+      ],
+      "sha256": "2af9f7dcf1728f29306db6a09e74f517e67b1d2297f7923dd38b35bd994139ac",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/sorting-and-posting-incident-details-to-slack/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/sorting-and-posting-incident-details-to-slack/implementations/n8n/provenance.json"
+}

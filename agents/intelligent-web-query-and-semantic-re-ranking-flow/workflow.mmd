@@ -1,0 +1,31 @@
+flowchart LR
+  n0["Date #38; Time"]
+  n1["Webhook"]
+  n2["Auto-fixing Output Parser6"]
+  n3["Auto-fixing Output Parser"]
+  n4["Structured Output Parser1"]
+  n5["Query-1 Combined"]
+  n6["Respond to Webhook"]
+  n7["Semantic Search - Result Re-Ranker"]
+  n8["Query"]
+  n9["Webhook Call"]
+  n10["Semantic Search -Query Maker"]
+  n11["Anthropic Chat Model"]
+  n12["OpenAI Chat Model"]
+  n13["Structured Output Parser2"]
+  n14["Parser Model"]
+  n15["Agent Model"]
+  n8 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n0
+  n15 -->|"ai_languageModel out 0 to in 0"| n7
+  n15 -->|"ai_languageModel out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n10
+  n14 -->|"ai_languageModel out 0 to in 0"| n2
+  n14 -->|"ai_languageModel out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n7
+  n3 -->|"ai_outputParser out 0 to in 0"| n10
+  n4 -->|"ai_outputParser out 0 to in 0"| n3
+  n13 -->|"ai_outputParser out 0 to in 0"| n2
+  n2 -->|"ai_outputParser out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n6

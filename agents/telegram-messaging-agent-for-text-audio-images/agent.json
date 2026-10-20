@@ -1,0 +1,491 @@
+{
+  "schema_version": 1,
+  "slug": "telegram-messaging-agent-for-text-audio-images",
+  "title": "🤖 Telegram Messaging Agent for Text/Audio/Images",
+  "purpose": "Adapt the published “🤖 Telegram Messaging Agent for Text/Audio/Images” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 29 executable nodes and 28 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Listen for Telegram Events"
+  ],
+  "terminal_nodes": [
+    "Error message",
+    "gpt-4o-mini",
+    "gpt-4o-mini1",
+    "Test Webhook Status",
+    "Production Webhook Status",
+    "Audio Task Message",
+    "Audio Other Message",
+    "Text Task Message",
+    "Text Other Message",
+    "Image Message",
+    "Get Webhook Status"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Check User & Chat ID",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Error message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Listen for Telegram Events",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set Webhook Test URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Telegram Webhook Info",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Image Schema",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o-mini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Audio File",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Image",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Analyze Image",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Transcribe Recording",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o-mini1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Test Webhook Status",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Production Webhook Status",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Webhook Production URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Audio Task Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Audio Other Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Text Task Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Text Other Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Image Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Convert to Image File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File to Base64",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Text Classifier Audio",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Text Classifier",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Token & Webhooks",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Webhook Status",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Validation",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Message Router",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Image",
+        "to": "Extract from File to Base64",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validation",
+        "to": "Check User & Chat ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Text Classifier",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-4o-mini",
+        "to": "Text Classifier Audio",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Image Schema",
+        "to": "Get Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-4o-mini1",
+        "to": "Text Classifier",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyze Image",
+        "to": "Image Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Audio File",
+        "to": "Transcribe Recording",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message Router",
+        "to": "Get Audio File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message Router",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Message Router",
+        "to": "Image Schema",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Message Router",
+        "to": "Error message",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Text Task Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Text Other Message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check User & Chat ID",
+        "to": "Message Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check User & Chat ID",
+        "to": "Error message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set Webhook Test URL",
+        "to": "Test Webhook Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transcribe Recording",
+        "to": "Text Classifier Audio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert to Image File",
+        "to": "Analyze Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier Audio",
+        "to": "Audio Task Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier Audio",
+        "to": "Audio Other Message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Telegram Webhook Info",
+        "to": "Get Webhook Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Token & Webhooks",
+        "to": "Set Webhook Production URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Token & Webhooks",
+        "to": "Set Webhook Test URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Token & Webhooks",
+        "to": "Get Telegram Webhook Info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Listen for Telegram Events",
+        "to": "Validation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Webhook Production URL",
+        "to": "Production Webhook Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File to Base64",
+        "to": "Convert to Image File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/implementations/n8n",
+      "files": [
+        "agents/telegram-messaging-agent-for-text-audio-images/implementations/n8n/telegram-messaging-agent-for-text-audio-images.json"
+      ],
+      "sha256": "a6ed2468473f33fa2252df225c401ab67a510f3b962c0f9a8dd802b50994116d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/telegram-messaging-agent-for-text-audio-images/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/telegram-messaging-agent-for-text-audio-images/implementations/n8n/provenance.json"
+}

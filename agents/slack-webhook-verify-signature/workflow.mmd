@@ -1,0 +1,15 @@
+flowchart LR
+  n0["Make Slack Verif Token"]
+  n1["Encode Secret String"]
+  n2["IF"]
+  n3["Stop and Error"]
+  n4["Execute Workflow Trigger"]
+  n5["Set Verified to True"]
+  n6["Merge"]
+  n2 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 1 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 1"| n6
+  n0 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n6

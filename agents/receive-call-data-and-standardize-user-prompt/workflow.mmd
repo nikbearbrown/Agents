@@ -1,0 +1,44 @@
+flowchart LR
+  n0["Execute Workflow Trigger"]
+  n1["Structured Output Parser1"]
+  n2["Marketing AI Agent Processor"]
+  n3["Structured Output Parser2"]
+  n4["Product AI Agent Processor"]
+  n5["Sales Data Processor"]
+  n6["Marketing Data Processor"]
+  n7["Product AI Data Processor"]
+  n8["Data Recall Sales"]
+  n9["Data Recall Marketing"]
+  n10["Data Recall Product"]
+  n11["SF Sales Data Processor"]
+  n12["Azure OpenAI Chat Model"]
+  n13["Azure OpenAI Chat Model1"]
+  n14["Azure OpenAI Chat Model2"]
+  n15["Create User Prompt"]
+  n16["Success Status Generated"]
+  n17["AI Agent"]
+  n18["Structured Output Parser3"]
+  n19["Merge all processed data"]
+  n20["Bundle processed Data"]
+  n17 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n5
+  n8 -->|"main out 0 to in 0"| n11
+  n15 -->|"main out 0 to in 0"| n2
+  n15 -->|"main out 0 to in 0"| n4
+  n15 -->|"main out 0 to in 0"| n17
+  n10 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n19
+  n20 -->|"main out 0 to in 0"| n16
+  n9 -->|"main out 0 to in 0"| n6
+  n12 -->|"ai_languageModel out 0 to in 0"| n17
+  n13 -->|"ai_languageModel out 0 to in 0"| n2
+  n14 -->|"ai_languageModel out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n15
+  n6 -->|"main out 0 to in 1"| n19
+  n19 -->|"main out 0 to in 0"| n20
+  n7 -->|"main out 0 to in 2"| n19
+  n1 -->|"ai_outputParser out 0 to in 0"| n2
+  n3 -->|"ai_outputParser out 0 to in 0"| n4
+  n18 -->|"ai_outputParser out 0 to in 0"| n17
+  n4 -->|"main out 0 to in 0"| n10
+  n2 -->|"main out 0 to in 0"| n9

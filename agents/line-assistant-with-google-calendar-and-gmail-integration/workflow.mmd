@@ -1,0 +1,29 @@
+flowchart LR
+  n0["AI Agent"]
+  n1["Window Buffer Memory"]
+  n2["OpenAI Chat Model"]
+  n3["Wikipedia"]
+  n4["OpenAI"]
+  n5["Switch Between Text and Others"]
+  n6["Line Receiving"]
+  n7["Error Handling from AI Response"]
+  n8["Text Cleansing"]
+  n9["Line Answering #40;Error Case#41;"]
+  n10["Line Answering #40;Ordinary Case#41;"]
+  n11["Google Calendar Create"]
+  n12["Google Calendar Read"]
+  n13["Gmail Read"]
+  n4 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n4
+  n3 -->|"ai_tool out 0 to in 0"| n0
+  n13 -->|"ai_tool out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n5
+  n8 -->|"main out 0 to in 0"| n10
+  n2 -->|"ai_languageModel out 0 to in 0"| n0
+  n12 -->|"ai_tool out 0 to in 0"| n0
+  n1 -->|"ai_memory out 0 to in 0"| n0
+  n11 -->|"ai_tool out 0 to in 0"| n0
+  n5 -->|"main out 0 to in 0"| n0
+  n5 -->|"main out 1 to in 0"| n9
+  n7 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 1 to in 0"| n9

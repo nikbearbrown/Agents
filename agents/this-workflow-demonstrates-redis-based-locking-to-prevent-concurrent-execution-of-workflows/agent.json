@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "slug": "this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows",
+  "title": "🔒 This workflow demonstrates Redis-based locking to prevent concurrent execution of workflows.",
+  "purpose": "Adapt the published “🔒 This workflow demonstrates Redis-based locking to prevent concurrent execution of workflows.” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Incoming Webhook Data"
+  ],
+  "terminal_nodes": [
+    "END",
+    "Discard Redis Lock"
+  ],
+  "credential_types": [
+    "redis"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "END",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow 1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Workflow 2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Workflow 3",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Incoming Webhook Data",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Webhook Data & Declare lockValue",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check Redis Lock",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Acquire Redis Lock",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "redisLock existence boolean",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "redisLock acquired booleans",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Poll for lock",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "duplicateWebhook boolean",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Discard Redis Lock",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Workflow 1",
+        "to": "Discard Redis Lock",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow 2",
+        "to": "Discard Redis Lock",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow 3",
+        "to": "Discard Redis Lock",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Poll for lock",
+        "to": "duplicateWebhook boolean",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Switch",
+        "to": "Workflow 1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Switch",
+        "to": "Workflow 2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Workflow Switch",
+        "to": "Workflow 3",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Check Redis Lock",
+        "to": "redisLock existence boolean",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Acquire Redis Lock",
+        "to": "Workflow Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Incoming Webhook Data",
+        "to": "Fetch Webhook Data & Declare lockValue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "duplicateWebhook boolean",
+        "to": "END",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "duplicateWebhook boolean",
+        "to": "Check Redis Lock",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "redisLock acquired booleans",
+        "to": "Acquire Redis Lock",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "redisLock acquired booleans",
+        "to": "Poll for lock",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "redisLock existence boolean",
+        "to": "Acquire Redis Lock",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "redisLock existence boolean",
+        "to": "redisLock acquired booleans",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Fetch Webhook Data & Declare lockValue",
+        "to": "Check Redis Lock",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/n8n",
+      "files": [
+        "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/n8n/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows.json"
+      ],
+      "sha256": "fe6cc90f7444ce63ad913681fc4000319e1a480e4d0e79cae619bdf5cecc646a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/n8n/provenance.json"
+}

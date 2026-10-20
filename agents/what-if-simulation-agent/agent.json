@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "slug": "what-if-simulation-agent",
+  "title": "What-If Simulation Agent",
+  "purpose": "Adapt the published “What-If Simulation Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "🎯 Webhook — Receive Simulation Request"
+  ],
+  "terminal_nodes": [
+    "✅ Respond to Webhook"
+  ],
+  "credential_types": [
+    "groqApi",
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "🎯 Webhook — Receive Simulation Request",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🔍 Parse & Validate Input",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "📈 Sim 1 — Growth vs Sentiment Tradeoff",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "⚖️ Sim 2 — Risk Appetite Simulator",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🎯 Sim 3 — Threshold Break Simulator",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🧠 Aggregate & Score All Simulations",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🤖 Groq — Generate Investment Insights",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "🔄 Parse Groq Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "🗄️ Prepare DB Record",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "💾 Save to PostgreSQL",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "📊 Build Final Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "✅ Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "📝 Build AI Prompt",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "🎯 Webhook — Receive Simulation Request",
+        "to": "🔍 Parse & Validate Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🔍 Parse & Validate Input",
+        "to": "📈 Sim 1 — Growth vs Sentiment Tradeoff",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📈 Sim 1 — Growth vs Sentiment Tradeoff",
+        "to": "⚖️ Sim 2 — Risk Appetite Simulator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "⚖️ Sim 2 — Risk Appetite Simulator",
+        "to": "🎯 Sim 3 — Threshold Break Simulator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🎯 Sim 3 — Threshold Break Simulator",
+        "to": "🧠 Aggregate & Score All Simulations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🧠 Aggregate & Score All Simulations",
+        "to": "📝 Build AI Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🤖 Groq — Generate Investment Insights",
+        "to": "🔄 Parse Groq Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🔄 Parse Groq Response",
+        "to": "🗄️ Prepare DB Record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🗄️ Prepare DB Record",
+        "to": "💾 Save to PostgreSQL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "💾 Save to PostgreSQL",
+        "to": "📊 Build Final Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📊 Build Final Response",
+        "to": "✅ Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📝 Build AI Prompt",
+        "to": "🤖 Groq — Generate Investment Insights",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/what-if-simulation-agent/implementations/n8n",
+      "files": [
+        "agents/what-if-simulation-agent/implementations/n8n/what-if-simulation-agent.json"
+      ],
+      "sha256": "2a41769586c2540030f7b84fe8b6d766003061e1add9339e8a868db3d1d631a3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/what-if-simulation-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/what-if-simulation-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/what-if-simulation-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/what-if-simulation-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/what-if-simulation-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/what-if-simulation-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/what-if-simulation-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/what-if-simulation-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/what-if-simulation-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/what-if-simulation-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/what-if-simulation-agent/implementations/n8n/provenance.json"
+}

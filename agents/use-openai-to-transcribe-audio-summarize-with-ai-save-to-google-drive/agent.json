@@ -1,0 +1,447 @@
+{
+  "schema_version": 1,
+  "slug": "use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive",
+  "title": "🦜✨Use OpenAI to Transcribe Audio + Summarize with AI + Save to Google Drive",
+  "purpose": "Adapt the published “🦜✨Use OpenAI to Transcribe Audio + Summarize with AI + Save to Google Drive” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 25 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Start Workflow",
+    "On File Created Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Telegram Message",
+    "Send Gmail Message"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDriveOAuth2Api",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Gmail User for Approval",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": true
+      },
+      {
+        "name": "Set Config",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Transcribe with OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter by .m4a extension",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Limit to last file",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download audio file",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Search Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Send Telegram Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Gmail Message",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Email Content Formatter",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarize to Structured JSON",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarize to JSON",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert JSON to Markdown",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Filename for JSON",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Filename for Markdown",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Save JSON file to Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Save Markdown file to Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get JSON File Meta",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get Markdown File Meta",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Response JSON",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Response Markdown",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge All Paths",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Save Raw Transcript to Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Start Workflow",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "On File Created Trigger",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": true
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set Config",
+        "to": "Summarize to JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Config",
+        "to": "Summarize to Structured JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Config",
+        "to": "Save Raw Transcript to Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start Workflow",
+        "to": "Search Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge All Paths",
+        "to": "Send Telegram Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge All Paths",
+        "to": "Email Content Formatter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize to JSON",
+        "to": "Convert JSON to Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get JSON File Meta",
+        "to": "Prepare Response JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit to last file",
+        "to": "Download audio file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download audio file",
+        "to": "Transcribe with OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Google Drive",
+        "to": "Filter by .m4a extension",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Filename for JSON",
+        "to": "Save JSON file to Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Response JSON",
+        "to": "Merge All Paths",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Markdown File Meta",
+        "to": "Prepare Response Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transcribe with OpenAI",
+        "to": "Set Config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email Content Formatter",
+        "to": "Send Gmail Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail User for Approval",
+        "to": "Search Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On File Created Trigger",
+        "to": "Gmail User for Approval",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert JSON to Markdown",
+        "to": "Get Filename for Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter by .m4a extension",
+        "to": "Limit to last file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Filename for Markdown",
+        "to": "Save Markdown file to Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Response Markdown",
+        "to": "Merge All Paths",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Summarize to Structured JSON",
+        "to": "Get Filename for JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save JSON file to Google Drive",
+        "to": "Get JSON File Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Markdown file to Google Drive",
+        "to": "Get Markdown File Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Raw Transcript to Google Drive",
+        "to": "Merge All Paths",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/n8n",
+      "files": [
+        "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/n8n/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive.json"
+      ],
+      "sha256": "dcd7550fda1d00390191702fc29c726d96e5c059a26f03ab1fdc0d9a735c2506",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/n8n/provenance.json"
+}

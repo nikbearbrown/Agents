@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "slug": "langchain-example-workflow-retriever",
+  "title": "LangChain - Example - Workflow Retriever",
+  "purpose": "Adapt the published “LangChain - Example - Workflow Retriever” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\""
+  ],
+  "terminal_nodes": [
+    "Workflow Retriever",
+    "Retrieval QA Chain2",
+    "OpenAI Chat Model"
+  ],
+  "credential_types": [
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Retriever",
+        "type": "@n8n/n8n-nodes-langchain.retrieverWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieval QA Chain2",
+        "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Example Prompt",
+        "type": "n8n-nodes-base.set",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Example Prompt",
+        "to": "Retrieval QA Chain2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Retrieval QA Chain2",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Retriever",
+        "to": "Retrieval QA Chain2",
+        "kind": "ai_retriever",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Example Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/langchain-example-workflow-retriever/implementations/n8n",
+      "files": [
+        "agents/langchain-example-workflow-retriever/implementations/n8n/langchain-example-workflow-retriever.json"
+      ],
+      "sha256": "7a1717212f7f710ba713775ef8135083a2b9d5f70dd5354569677a205aba3c52",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/langchain-example-workflow-retriever/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/langchain-example-workflow-retriever/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/langchain-example-workflow-retriever/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/langchain-example-workflow-retriever/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/langchain-example-workflow-retriever/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/langchain-example-workflow-retriever/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/langchain-example-workflow-retriever/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/langchain-example-workflow-retriever/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/langchain-example-workflow-retriever/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/langchain-example-workflow-retriever/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/langchain-example-workflow-retriever/implementations/n8n/provenance.json"
+}

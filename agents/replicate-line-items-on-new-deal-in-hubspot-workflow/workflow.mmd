@@ -1,0 +1,14 @@
+flowchart LR
+  n0["Retrieve deals Ids"]
+  n1["Get deal won line items"]
+  n2["Slack"]
+  n3["Get batch SKUs from line items"]
+  n4["Get Batch Product IDs by SKUs"]
+  n5["Create Batch line items based on productId and associate to deals"]
+  n6["Webhook"]
+  n6 -->|"main out 0 to in 0"| n0
+  n0 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n2

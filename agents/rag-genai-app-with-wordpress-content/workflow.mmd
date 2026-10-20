@@ -1,0 +1,91 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Embeddings OpenAI"]
+  n2["Default Data Loader"]
+  n3["Token Splitter"]
+  n4["Embeddings OpenAI1"]
+  n5["OpenAI Chat Model"]
+  n6["Postgres Chat Memory"]
+  n7["Respond to Webhook"]
+  n8["Set fields"]
+  n9["Embeddings OpenAI2"]
+  n10["Default Data Loader1"]
+  n11["Token Splitter1"]
+  n12["Markdown1"]
+  n13["Postgres"]
+  n14["Aggregate"]
+  n15["Aggregate1"]
+  n16["Aggregate2"]
+  n17["Wordpress - Get all posts"]
+  n18["Wordpress - Get all pages"]
+  n19["Set fields1"]
+  n20["Filter - Only published #38; unprotected content"]
+  n21["HTML To Markdown"]
+  n22["Supabase - Store workflow execution"]
+  n23["Every 30 seconds"]
+  n24["Wordpress - Get posts modified after last workflow execution"]
+  n25["Wordpress - Get posts modified after last workflow execution1"]
+  n26["Set fields2"]
+  n27["Filter - Only published and unprotected content"]
+  n28["Loop Over Items"]
+  n29["Set fields3"]
+  n30["Set fields4"]
+  n31["Store documents on Supabase"]
+  n32["Store workflow execution id and timestamptz"]
+  n33["Aggregate documents"]
+  n34["Postgres - Create documents table"]
+  n35["Postgres - Create workflow execution history table"]
+  n36["Merge Wordpress Posts and Pages"]
+  n37["Merge retrieved WordPress posts and pages"]
+  n38["Postgres - Filter on existing documents"]
+  n39["Supabase - Delete row if documents exists"]
+  n40["Switch"]
+  n41["When chat message received"]
+  n42["Supabase - Retrieve documents from chatinput"]
+  n43["AI Agent"]
+  n44["Supabase Vector Store"]
+  n40 -->|"main out 0 to in 0"| n39
+  n40 -->|"main out 1 to in 0"| n30
+  n43 -->|"main out 0 to in 0"| n7
+  n13 -->|"main out 0 to in 0"| n24
+  n13 -->|"main out 0 to in 0"| n25
+  n14 -->|"main out 0 to in 0"| n22
+  n12 -->|"main out 0 to in 0"| n31
+  n15 -->|"main out 0 to in 0"| n32
+  n16 -->|"main out 0 to in 0"| n29
+  n8 -->|"main out 0 to in 0"| n43
+  n19 -->|"main out 0 to in 0"| n20
+  n26 -->|"main out 0 to in 0"| n27
+  n29 -->|"main out 0 to in 0"| n28
+  n30 -->|"main out 0 to in 0"| n28
+  n3 -->|"ai_textSplitter out 0 to in 0"| n2
+  n28 -->|"main out 0 to in 0"| n12
+  n28 -->|"main out 1 to in 0"| n38
+  n11 -->|"ai_textSplitter out 0 to in 0"| n10
+  n23 -->|"main out 0 to in 0"| n13
+  n21 -->|"main out 0 to in 0"| n44
+  n1 -->|"ai_embedding out 0 to in 0"| n44
+  n5 -->|"ai_languageModel out 0 to in 0"| n43
+  n4 -->|"ai_embedding out 0 to in 0"| n42
+  n9 -->|"ai_embedding out 0 to in 0"| n31
+  n33 -->|"main out 0 to in 0"| n8
+  n2 -->|"ai_document out 0 to in 0"| n44
+  n10 -->|"ai_document out 0 to in 0"| n31
+  n6 -->|"ai_memory out 0 to in 0"| n43
+  n44 -->|"main out 0 to in 0"| n14
+  n18 -->|"main out 0 to in 1"| n36
+  n17 -->|"main out 0 to in 0"| n36
+  n41 -->|"main out 0 to in 0"| n42
+  n31 -->|"main out 0 to in 0"| n15
+  n36 -->|"main out 0 to in 0"| n19
+  n34 -->|"main out 0 to in 0"| n35
+  n0 -->|"main out 0 to in 0"| n17
+  n0 -->|"main out 0 to in 0"| n18
+  n38 -->|"main out 0 to in 0"| n40
+  n37 -->|"main out 0 to in 0"| n26
+  n39 -->|"main out 0 to in 0"| n16
+  n42 -->|"main out 0 to in 0"| n33
+  n20 -->|"main out 0 to in 0"| n21
+  n27 -->|"main out 0 to in 0"| n28
+  n24 -->|"main out 0 to in 0"| n37
+  n25 -->|"main out 0 to in 1"| n37

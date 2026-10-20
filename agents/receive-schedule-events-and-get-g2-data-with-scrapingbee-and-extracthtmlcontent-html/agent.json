@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "slug": "receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html",
+  "title": "receive schedule events and get g2 data with scrapingbee and extracthtmlcontent html",
+  "purpose": "Adapt the published “receive schedule events and get g2 data with scrapingbee and extracthtmlcontent html” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute workflow every day"
+  ],
+  "terminal_nodes": [
+    "Send new review to Slack",
+    "Add new review to Google Sheets"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Add your competitors here",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute workflow every day",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get G2 data with ScrapingBee",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Get review section HTML",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Iterate on reviews",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Extract structured data",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Review HTML to Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all past reviews",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4,
+        "disabled": false
+      },
+      {
+        "name": "Continue only if review is new",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Send new review to Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Add new review to Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Iterate on reviews",
+        "to": "Extract structured data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all past reviews",
+        "to": "Continue only if review is new",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract structured data",
+        "to": "Convert Review HTML to Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get review section HTML",
+        "to": "Iterate on reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add your competitors here",
+        "to": "Get G2 data with ScrapingBee",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute workflow every day",
+        "to": "Get all past reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute workflow every day",
+        "to": "Add your competitors here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get G2 data with ScrapingBee",
+        "to": "Get review section HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Continue only if review is new",
+        "to": "Add new review to Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Continue only if review is new",
+        "to": "Send new review to Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Review HTML to Markdown",
+        "to": "Continue only if review is new",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/n8n",
+      "files": [
+        "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/n8n/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html.json"
+      ],
+      "sha256": "e51438c980f21ad1196097ba8915e6b3be4f2a4ae9ebb36fefb99f4e1103b7bb",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/n8n/provenance.json"
+}

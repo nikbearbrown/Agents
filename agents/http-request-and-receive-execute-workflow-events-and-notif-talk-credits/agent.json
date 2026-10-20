@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-receive-execute-workflow-events-and-notif-talk-credits",
+  "title": "http request and receive execute workflow events and notif talk credits",
+  "purpose": "Adapt the published “http request and receive execute workflow events and notif talk credits” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Tally Forms Trigger"
+  ],
+  "terminal_nodes": [
+    "Notif Talk bad email",
+    "Notif Talk Lead created"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Token SuiteCRM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CaptainMail",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "If mail ok",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If Credits OK",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Tally Forms Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Notif Talk credits",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Notif Talk bad email",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Lead SuiteCRM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Notif Talk Lead created",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Brevo Create Contact",
+        "type": "n8n-nodes-base.sendInBlue",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If mail ok",
+        "to": "Notif Talk bad email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If mail ok",
+        "to": "Token SuiteCRM",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "CaptainMail",
+        "to": "If Credits OK",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Credits OK",
+        "to": "Notif Talk credits",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Credits OK",
+        "to": "If mail ok",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Token SuiteCRM",
+        "to": "Create Lead SuiteCRM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notif Talk credits",
+        "to": "If mail ok",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tally Forms Trigger",
+        "to": "CaptainMail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Brevo Create Contact",
+        "to": "Notif Talk Lead created",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Lead SuiteCRM",
+        "to": "Brevo Create Contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/n8n",
+      "files": [
+        "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/n8n/http-request-and-receive-execute-workflow-events-and-notif-talk-credits.json"
+      ],
+      "sha256": "c9c3971443d43f6eca5e247bcb4434655d8cb379314de6762e0228f1558ce65a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/n8n/provenance.json"
+}

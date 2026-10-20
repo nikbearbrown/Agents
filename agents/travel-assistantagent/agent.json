@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "slug": "travel-assistantagent",
+  "title": "Travel AssistantAgent",
+  "purpose": "Adapt the published “Travel AssistantAgent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received",
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "MongoDB Chat Memory",
+    "Google Gemini Chat Model",
+    "MongoDB Atlas Vector Store",
+    "Embeddings OpenAI",
+    "AI Traveling Planner Agent",
+    "Default Data Loader",
+    "Recursive Character Text Splitter",
+    "MongoDB Atlas Vector Store1",
+    "Embeddings OpenAI1"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "mongoDb",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "MongoDB Chat Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MongoDB Atlas Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "AI Traveling Planner Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MongoDB Atlas Vector Store1",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI1",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "MongoDB Atlas Vector Store1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI",
+        "to": "MongoDB Atlas Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI1",
+        "to": "MongoDB Atlas Vector Store1",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "MongoDB Atlas Vector Store1",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MongoDB Chat Memory",
+        "to": "AI Traveling Planner Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "AI Traveling Planner Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MongoDB Atlas Vector Store",
+        "to": "AI Traveling Planner Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "AI Traveling Planner Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/travel-assistantagent/implementations/n8n",
+      "files": [
+        "agents/travel-assistantagent/implementations/n8n/travel-assistantagent.json"
+      ],
+      "sha256": "b19b9d518331aef1d1d84176c2f0f42eed024d662836fc63494aaa5e29fcaf6c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/travel-assistantagent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/travel-assistantagent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/travel-assistantagent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/travel-assistantagent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/travel-assistantagent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/travel-assistantagent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/travel-assistantagent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/travel-assistantagent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/travel-assistantagent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/travel-assistantagent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/travel-assistantagent/implementations/n8n/provenance.json"
+}

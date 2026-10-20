@@ -1,0 +1,25 @@
+flowchart LR
+  n0["Snapshot Progress"]
+  n1["On form submission - Discover Jobs"]
+  n2["HTTP Request- Post API call to Bright Data"]
+  n3["Wait - Polling Bright Data"]
+  n4["If - Checking status of Snapshot - if data is ready or not"]
+  n5["HTTP Request - Getting data from Bright Data"]
+  n6["Basic LLM Chain"]
+  n7["OpenAI Chat Model"]
+  n8["Send Summary To Marketers"]
+  n9["Filtering only bad reviews"]
+  n10["Aggregating all filtered reviews"]
+  n11["Google Sheets - Adding All Reviews"]
+  n6 -->|"main out 0 to in 0"| n8
+  n7 -->|"ai_languageModel out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n10
+  n3 -->|"main out 0 to in 0"| n0
+  n10 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 0 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n11
+  n4 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 1 to in 0"| n5

@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "slug": "html-to-pdf-and-webhook-and-respond-to-webhook",
+  "title": "html to pdf and webhook and respond to webhook",
+  "purpose": "Adapt the published “html to pdf and webhook and respond to webhook” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Respond to Webhook"
+  ],
+  "credential_types": [
+    "customJsApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "HTML to PDF",
+        "type": "@custom-js/n8n-nodes-pdf-toolkit.html2Pdf",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Preprocess",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Set data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set data",
+        "to": "Preprocess",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Preprocess",
+        "to": "HTML to PDF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTML to PDF",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/n8n",
+      "files": [
+        "agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/n8n/html-to-pdf-and-webhook-and-respond-to-webhook.json"
+      ],
+      "sha256": "d14d3782c003ed609882a0c71c0b4df89c812a4824fad230752fc7d963038f13",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/n8n/provenance.json"
+}

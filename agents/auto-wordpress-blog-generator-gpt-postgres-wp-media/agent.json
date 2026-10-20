@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "slug": "auto-wordpress-blog-generator-gpt-postgres-wp-media",
+  "title": "Auto WordPress Blog Generator (GPT + Postgres + WP Media)",
+  "purpose": "Adapt the published “Auto WordPress Blog Generator (GPT + Postgres + WP Media)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 23 executable nodes and 25 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "OpenAI Chat Model1",
+    "No Operation, do nothing"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "postgres",
+    "wordpressApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Download Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Post JSON",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Load Categories",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Category Filter",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Selecting recent",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Picks Less Used",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "10 latest headlines",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "New article title",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent SEO Headings",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.9,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent SEO writer",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.9,
+        "disabled": false
+      },
+      {
+        "name": "Merge heading",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "Combines full post meta",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Updating posts DB",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Extracting output",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Placeholder creator",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Media Upload to WP",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to WP",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Config",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Prepare Post JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Config",
+        "to": "Load Categories",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Post to WP",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge heading",
+        "to": "Combines full post meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Image",
+        "to": "Media Upload to WP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Category Filter",
+        "to": "Selecting recent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load Categories",
+        "to": "Category Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Picks Less Used",
+        "to": "10 latest headlines",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Picks Less Used",
+        "to": "Merge heading",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Selecting recent",
+        "to": "Picks Less Used",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extracting output",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "New article title",
+        "to": "Merge heading",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent SEO writer",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Post JSON",
+        "to": "Post to WP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Updating posts DB",
+        "to": "AI Agent SEO writer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Updating posts DB",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Media Upload to WP",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "AI Agent SEO Headings",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "10 latest headlines",
+        "to": "AI Agent SEO Headings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent SEO writer",
+        "to": "Placeholder creator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent SEO writer",
+        "to": "Extracting output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Placeholder creator",
+        "to": "Download Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent SEO Headings",
+        "to": "New article title",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combines full post meta",
+        "to": "Updating posts DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/n8n",
+      "files": [
+        "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/n8n/auto-wordpress-blog-generator-gpt-postgres-wp-media.json"
+      ],
+      "sha256": "c1762f809dfd1bf695b0312866b9be4f97ee3573705a81cc7e5a8f464af68249",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/n8n/provenance.json"
+}

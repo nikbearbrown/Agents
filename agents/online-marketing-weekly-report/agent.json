@@ -1,0 +1,702 @@
+{
+  "schema_version": 1,
+  "slug": "online-marketing-weekly-report",
+  "title": "Online Marketing Weekly Report",
+  "purpose": "Adapt the published “Online Marketing Weekly Report” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 46 executable nodes and 42 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Google_Ads",
+    "Meta_Ads",
+    "Analytics_Domain_1",
+    "Analytics_Domain_3",
+    "Analytics_Domain_2",
+    "Analytics_Domain_4",
+    "Analytics_Domain_5",
+    "Calculator",
+    "Calculator1",
+    "Calculator3",
+    "Processing for Google Ads report",
+    "Send mail report",
+    "Processing for Meta Ads Report",
+    "Processing for Google Analytics Report",
+    "Send Telegram report"
+  ],
+  "credential_types": [
+    "facebookGraphApi",
+    "googleAdsOAuth2Api",
+    "googleAnalyticsOAuth2",
+    "googleOAuth2Api",
+    "openAiApi",
+    "smtp",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google_Ads",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Meta_Ads",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Analytics_Domain_1",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Analytics_Domain_3",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Analytics_Domain_2",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Analytics_Domain_4",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Analytics_Domain_5",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator1",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator3",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Call Google Analytics data: Last 7 days",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Call Google Analytics data: Last 7 days (previous year)",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Calculation same period previous year",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format data input (previous year)",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format data input (current year)",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Assign data from input (current year)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Summarize input (current year)",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Assign input (previous year)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Summarize input (previous year)",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculate date format for Google Ads request (last 7 days)",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Call Google Ads Data: Last 7 days",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Call Google Ads Data: Last 7 days (previous year)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Call Meta Ads Data: Last 7 days",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Call Meta Ads Data: Last 7 days (previous year)",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Meta input (current year)",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Assign Meta data from input (current year)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Assign Meta data input (previous year)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Meta data input (previous year)",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format all Meta data for LLM",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Processing for Google Ads report",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Format all Google data for LLM",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Assign Google Analytics data input (current year)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Google Analytics input (current year)",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculate date format for meta ads request s",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Calculation same period previous year1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Assign Google Analytics data input (previous year)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Google Analytics input (previous year)",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send mail report",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Processing for Meta Ads Report",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Processing for Google Analytics Report",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Processing for Telegram Report",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Weekly Report Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Send Telegram report",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Meta_Ads",
+        "to": "Weekly Report Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator",
+        "to": "Processing for Google Analytics Report",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google_Ads",
+        "to": "Weekly Report Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator1",
+        "to": "Processing for Google Ads report",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator3",
+        "to": "Processing for Meta Ads Report",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Weekly Report Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Weekly Report Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analytics_Domain_1",
+        "to": "Weekly Report Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analytics_Domain_2",
+        "to": "Weekly Report Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analytics_Domain_3",
+        "to": "Weekly Report Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analytics_Domain_4",
+        "to": "Weekly Report Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analytics_Domain_5",
+        "to": "Weekly Report Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Weekly Report Agent",
+        "to": "Processing for Telegram Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Weekly Report Agent",
+        "to": "Send mail report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Call Google Analytics data: Last 7 days",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign input (previous year)",
+        "to": "Summarize input (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format all Meta data for LLM",
+        "to": "Processing for Meta Ads Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format all Google data for LLM",
+        "to": "Processing for Google Ads report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Processing for Telegram Report",
+        "to": "Send Telegram report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize input (current year)",
+        "to": "Calculation same period previous year",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Meta Ads Data: Last 7 days",
+        "to": "Assign Meta data from input (current year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize input (previous year)",
+        "to": "Format all Google data for LLM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format data input (current year)",
+        "to": "Assign data from input (current year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Google Ads Data: Last 7 days",
+        "to": "Format data input (current year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format data input (previous year)",
+        "to": "Assign input (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Meta input (current year)",
+        "to": "Call Meta Ads Data: Last 7 days (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign data from input (current year)",
+        "to": "Summarize input (current year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculation same period previous year",
+        "to": "Call Google Ads Data: Last 7 days (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign Meta data input (previous year)",
+        "to": "Summarize Meta data input (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculation same period previous year1",
+        "to": "Call Google Analytics data: Last 7 days (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Google Analytics data: Last 7 days",
+        "to": "Assign Google Analytics data input (current year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Meta data input (previous year)",
+        "to": "Format all Meta data for LLM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign Meta data from input (current year)",
+        "to": "Summarize Meta input (current year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate date format for meta ads request s",
+        "to": "Call Meta Ads Data: Last 7 days",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Meta Ads Data: Last 7 days (previous year)",
+        "to": "Assign Meta data input (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Google Analytics input (current year)",
+        "to": "Calculation same period previous year1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Google Analytics input (previous year)",
+        "to": "Processing for Google Analytics Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign Google Analytics data input (current year)",
+        "to": "Summarize Google Analytics input (current year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Google Ads Data: Last 7 days (previous year)",
+        "to": "Format data input (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign Google Analytics data input (previous year)",
+        "to": "Summarize Google Analytics input (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Google Analytics data: Last 7 days (previous year)",
+        "to": "Assign Google Analytics data input (previous year)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate date format for Google Ads request (last 7 days)",
+        "to": "Call Google Ads Data: Last 7 days",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/online-marketing-weekly-report/implementations/n8n",
+      "files": [
+        "agents/online-marketing-weekly-report/implementations/n8n/online-marketing-weekly-report.json"
+      ],
+      "sha256": "956b700832073532dc406938f3f895d5e5a1936b2416a7b45ddf8564753230f3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/online-marketing-weekly-report/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/online-marketing-weekly-report/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/online-marketing-weekly-report/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/online-marketing-weekly-report/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/online-marketing-weekly-report/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/online-marketing-weekly-report/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/online-marketing-weekly-report/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/online-marketing-weekly-report/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/online-marketing-weekly-report/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/online-marketing-weekly-report/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/online-marketing-weekly-report/implementations/n8n/provenance.json"
+}

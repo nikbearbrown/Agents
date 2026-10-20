@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "slug": "get-gong-transcript-and-call-details",
+  "title": "Get Gong Transcript and Call Details",
+  "purpose": "Adapt the published “Get Gong Transcript and Call Details” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Run Hourly"
+  ],
+  "terminal_nodes": [
+    "Pass to Gong Call Preprocessor"
+  ],
+  "credential_types": [
+    "gongApi",
+    "salesforceOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check if Primary Opportunity Contains Value",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if Opportunity Stage is Meeting Booked or Discovery",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Format call into correct JSON Object",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Pass to Gong Call Preprocessor",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Gong Call",
+        "type": "n8n-nodes-base.gong",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sort by date",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all custom Salesforce Gong Objects",
+        "type": "n8n-nodes-base.salesforce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Run Hourly",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Run Hourly",
+        "to": "Get all custom Salesforce Gong Objects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort by date",
+        "to": "Check if Opportunity Stage is Meeting Booked or Discovery",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Gong Call",
+        "to": "Format call into correct JSON Object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get all custom Salesforce Gong Objects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format call into correct JSON Object",
+        "to": "Pass to Gong Call Preprocessor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all custom Salesforce Gong Objects",
+        "to": "Sort by date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Primary Opportunity Contains Value",
+        "to": "Get Gong Call",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Opportunity Stage is Meeting Booked or Discovery",
+        "to": "Check if Primary Opportunity Contains Value",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-gong-transcript-and-call-details/implementations/n8n",
+      "files": [
+        "agents/get-gong-transcript-and-call-details/implementations/n8n/get-gong-transcript-and-call-details.json"
+      ],
+      "sha256": "6d4b3f663d34a72bbc2034cb156fff2114054fa5315b4fb2979c2e645c9002ae",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-gong-transcript-and-call-details/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-gong-transcript-and-call-details/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-gong-transcript-and-call-details/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-gong-transcript-and-call-details/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-gong-transcript-and-call-details/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-gong-transcript-and-call-details/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-gong-transcript-and-call-details/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-gong-transcript-and-call-details/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-gong-transcript-and-call-details/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-gong-transcript-and-call-details/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-gong-transcript-and-call-details/implementations/n8n/provenance.json"
+}

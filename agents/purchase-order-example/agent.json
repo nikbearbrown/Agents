@@ -1,0 +1,317 @@
+{
+  "schema_version": 1,
+  "slug": "purchase-order-example",
+  "title": "PURCHASE ORDER EXAMPLE",
+  "purpose": "Adapt the published “PURCHASE ORDER EXAMPLE” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Outlook Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Reply Invalid Format",
+    "Reply Rejection",
+    "Do Something with Purchase Order",
+    "Do Nothing",
+    "OpenAI Chat Model1"
+  ],
+  "credential_types": [
+    "microsoftOutlookOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Extract Purchase Order Details",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is Excel Document?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Run Checks",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Is Valid Purchase Order?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "XLSX to Markdown Table",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Reply Invalid Format",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Outlook Trigger",
+        "type": "n8n-nodes-base.microsoftOutlookTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Reply Rejection",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Reply Accepted",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Do Something with Purchase Order",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fix Excel Dates",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Is Submitting a Purchase Order?",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Do Nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Run Checks",
+        "to": "Is Valid Purchase Order?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Reply Accepted",
+        "to": "Do Something with Purchase Order",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fix Excel Dates",
+        "to": "Run Checks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Outlook Trigger",
+        "to": "Is Submitting a Purchase Order?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "XLSX to Markdown Table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Extract Purchase Order Details",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Excel Document?",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Excel Document?",
+        "to": "Reply Invalid Format",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Is Submitting a Purchase Order?",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "XLSX to Markdown Table",
+        "to": "Extract Purchase Order Details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Valid Purchase Order?",
+        "to": "Reply Accepted",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Valid Purchase Order?",
+        "to": "Reply Rejection",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Extract Purchase Order Details",
+        "to": "Fix Excel Dates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Submitting a Purchase Order?",
+        "to": "Is Excel Document?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Submitting a Purchase Order?",
+        "to": "Do Nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/purchase-order-example/implementations/n8n",
+      "files": [
+        "agents/purchase-order-example/implementations/n8n/purchase-order-example.json"
+      ],
+      "sha256": "78ac3fa11fc9bc42da38188fc83527514c98f553f91e7082a4aada3b8301b619",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/purchase-order-example/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/purchase-order-example/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/purchase-order-example/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/purchase-order-example/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/purchase-order-example/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/purchase-order-example/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/purchase-order-example/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/purchase-order-example/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/purchase-order-example/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/purchase-order-example/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/purchase-order-example/implementations/n8n/provenance.json"
+}

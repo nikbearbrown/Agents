@@ -1,0 +1,21 @@
+flowchart LR
+  n0["Save Markdown file"]
+  n1["Receive results from any workflow"]
+  n2["If the input has binary attachment"]
+  n3["Write Zettlekasten note from input1"]
+  n4["Structured Output Parser"]
+  n5["OpenAI Chat Model"]
+  n6["Restructure JSON"]
+  n7["Structured Output Parser1"]
+  n8["OpenAI Chat Model1"]
+  n9["Write YAML Frontmatter"]
+  n10["Save attachment"]
+  n5 -->|"ai_languageModel out 0 to in 0"| n3
+  n8 -->|"ai_languageModel out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n6
+  n4 -->|"ai_outputParser out 0 to in 0"| n3
+  n7 -->|"ai_outputParser out 0 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n10
+  n3 -->|"main out 0 to in 0"| n9

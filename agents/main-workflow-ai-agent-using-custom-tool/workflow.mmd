@@ -1,0 +1,31 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["OpenAI Chat Model1"]
+  n2["Simple Memory"]
+  n3["When Executed by Another Workflow"]
+  n4["AI Agent"]
+  n5["List columns tool"]
+  n6["Get column values tool"]
+  n7["Get customer tool"]
+  n8["Set Google Sheet URL"]
+  n9["Get Google sheet contents"]
+  n10["Check operation"]
+  n11["Get column names"]
+  n12["Prepare column data"]
+  n13["Filter"]
+  n14["Prepare output"]
+  n13 -->|"main out 0 to in 0"| n14
+  n2 -->|"ai_memory out 0 to in 0"| n4
+  n10 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 1 to in 0"| n12
+  n10 -->|"main out 2 to in 0"| n13
+  n11 -->|"main out 0 to in 0"| n14
+  n7 -->|"ai_tool out 0 to in 0"| n4
+  n5 -->|"ai_tool out 0 to in 0"| n4
+  n1 -->|"ai_languageModel out 0 to in 0"| n4
+  n12 -->|"main out 0 to in 0"| n14
+  n8 -->|"main out 0 to in 0"| n9
+  n6 -->|"ai_tool out 0 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n8

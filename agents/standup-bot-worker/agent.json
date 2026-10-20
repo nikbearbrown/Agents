@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "slug": "standup-bot-worker",
+  "title": "Standup Bot - Worker",
+  "purpose": "Adapt the published “Standup Bot - Worker” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 29 executable nodes and 25 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Action from MM",
+    "Slash Cmd from MM",
+    "Every hour"
+  ],
+  "terminal_nodes": [
+    "open config dialog",
+    "confirm success",
+    "Remind Users",
+    "open standup dialog",
+    "Delete ReminderPost",
+    "Update Post"
+  ],
+  "credential_types": [
+    "mattermostApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "publish report",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "get user data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "open-standup-dialog?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Action from MM",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slash Cmd from MM",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "config?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "open config dialog",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prep Config Dialog",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "callback ID?",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "standup-config",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "standup-answers",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prep Config Override",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Override Config",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Config 1",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Config 2",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "confirm success",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Config 3",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Due Standups",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prep Request Standup",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Channel",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remind Users",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get User",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prep Reminder",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prep Standup Dialog",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "open standup dialog",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prep Report",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Delete ReminderPost",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Post",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Every hour",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "config?",
+        "to": "Read Config 1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get User",
+        "to": "Create Channel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every hour",
+        "to": "Read Config 3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Report",
+        "to": "publish report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "callback ID?",
+        "to": "standup-config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "callback ID?",
+        "to": "standup-answers",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "callback ID?",
+        "to": "open-standup-dialog?",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Prep Reminder",
+        "to": "Remind Users",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Config 1",
+        "to": "Prep Config Dialog",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Config 2",
+        "to": "callback ID?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Config 3",
+        "to": "Filter Due Standups",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get user data",
+        "to": "Prep Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Action from MM",
+        "to": "Read Config 2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Channel",
+        "to": "Prep Reminder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "publish report",
+        "to": "Update Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "standup-config",
+        "to": "Prep Config Override",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Override Config",
+        "to": "confirm success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "standup-answers",
+        "to": "get user data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Slash Cmd from MM",
+        "to": "config?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Config Dialog",
+        "to": "open config dialog",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Due Standups",
+        "to": "Prep Request Standup",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Standup Dialog",
+        "to": "open standup dialog",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Config Override",
+        "to": "Override Config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Request Standup",
+        "to": "Get User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "open-standup-dialog?",
+        "to": "Prep Standup Dialog",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/standup-bot-worker/implementations/n8n",
+      "files": [
+        "agents/standup-bot-worker/implementations/n8n/standup-bot-worker.json"
+      ],
+      "sha256": "c8f76a3ce04dc5b6f03bf0457e54a5884e81d1bbf3959952a57d9fe20ba2b54d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/standup-bot-worker/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/standup-bot-worker/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/standup-bot-worker/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/standup-bot-worker/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/standup-bot-worker/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/standup-bot-worker/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/standup-bot-worker/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/standup-bot-worker/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/standup-bot-worker/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/standup-bot-worker/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/standup-bot-worker/implementations/n8n/provenance.json"
+}

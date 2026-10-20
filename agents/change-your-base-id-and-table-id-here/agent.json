@@ -1,0 +1,437 @@
+{
+  "schema_version": 1,
+  "slug": "change-your-base-id-and-table-id-here",
+  "title": "🚨 Change your Base ID and Table ID here!",
+  "purpose": "Adapt the published “🚨 Change your Base ID and Table ID here!” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 24 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission",
+    "On form submission1"
+  ],
+  "terminal_nodes": [
+    "Show Completion!",
+    "Show Completion!1"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get Base Schema",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Unsupported FieldTypes",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Combine Fields",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Render Form",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Files To List",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fields to List",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Covert to n8n Form Fields",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Table",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Baserow List Fields",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Covert to n8n Form Fields1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Combine Fields1",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Unsupported FieldTypes1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Render Form1",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Baserow Create Row",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "On form submission1",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Files To List1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Baserow Upload File",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Baserow Update Row",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Group By FieldName",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Update Airtable Row",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Prep Data for Insert1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Prep Data for Insert",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Airtable Create Record",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Show Completion!",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Show Completion!1",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Render Form",
+        "to": "Prep Data for Insert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Table",
+        "to": "Fields to List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Render Form1",
+        "to": "Prep Data for Insert1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Files To List",
+        "to": "Update Airtable Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Fields",
+        "to": "Render Form",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fields to List",
+        "to": "Covert to n8n Form Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Files To List1",
+        "to": "Baserow Upload File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Fields1",
+        "to": "Render Form1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Base Schema",
+        "to": "Filter Table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Baserow Create Row",
+        "to": "Files To List1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Baserow Update Row",
+        "to": "Show Completion!",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Group By FieldName",
+        "to": "Baserow Update Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "Get Base Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Baserow List Fields",
+        "to": "Covert to n8n Form Fields1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Baserow Upload File",
+        "to": "Group By FieldName",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission1",
+        "to": "Baserow List Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Airtable Row",
+        "to": "Show Completion!1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Data for Insert",
+        "to": "Airtable Create Record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Data for Insert1",
+        "to": "Baserow Create Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable Create Record",
+        "to": "Files To List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Covert to n8n Form Fields",
+        "to": "Filter Unsupported FieldTypes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Covert to n8n Form Fields1",
+        "to": "Filter Unsupported FieldTypes1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Unsupported FieldTypes",
+        "to": "Combine Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Unsupported FieldTypes1",
+        "to": "Combine Fields1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/change-your-base-id-and-table-id-here/implementations/n8n",
+      "files": [
+        "agents/change-your-base-id-and-table-id-here/implementations/n8n/change-your-base-id-and-table-id-here.json"
+      ],
+      "sha256": "936d621130c4cb1e3fce96ae40e5b8ea18036fbc77e2d0a633d9332573bf33e3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/change-your-base-id-and-table-id-here/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/change-your-base-id-and-table-id-here/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/change-your-base-id-and-table-id-here/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/change-your-base-id-and-table-id-here/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/change-your-base-id-and-table-id-here/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/change-your-base-id-and-table-id-here/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/change-your-base-id-and-table-id-here/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/change-your-base-id-and-table-id-here/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/change-your-base-id-and-table-id-here/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/change-your-base-id-and-table-id-here/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/change-your-base-id-and-table-id-here/implementations/n8n/provenance.json"
+}

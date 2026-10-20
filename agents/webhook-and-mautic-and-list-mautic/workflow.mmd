@@ -1,0 +1,37 @@
+flowchart LR
+  n0["Webhook"]
+  n1["Mautic"]
+  n2["Find User"]
+  n3["Update User"]
+  n4["Tag User"]
+  n5["Unsubscribe User"]
+  n6["Split Full Name"]
+  n7["If not found return -1"]
+  n8["#64;MAIN STUDENT DATA"]
+  n9["Remove unsubscribe"]
+  n10["Find User To Tag Sale"]
+  n11["Set userFound"]
+  n12["Switch Webhook Types"]
+  n13["Set Webhook Request"]
+  n14["IF NOT userFound"]
+  n15["Switch User.type"]
+  n16["IF unsubscribe_from_marketing_emails"]
+  n0 -->|"main out 0 to in 0"| n13
+  n2 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n16
+  n11 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 1"| n8
+  n14 -->|"main out 0 to in 0"| n1
+  n14 -->|"main out 1 to in 0"| n15
+  n15 -->|"main out 0 to in 0"| n3
+  n15 -->|"main out 1 to in 0"| n5
+  n15 -->|"main out 2 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n14
+  n13 -->|"main out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n2
+  n12 -->|"main out 0 to in 0"| n6
+  n12 -->|"main out 1 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 0 to in 0"| n11
+  n16 -->|"main out 0 to in 0"| n5
+  n16 -->|"main out 1 to in 0"| n9

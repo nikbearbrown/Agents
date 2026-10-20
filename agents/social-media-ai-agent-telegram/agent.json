@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "slug": "social-media-ai-agent-telegram",
+  "title": "Social Media AI Agent - Telegram",
+  "purpose": "Adapt the published “Social Media AI Agent - Telegram” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "No Operation, do nothing"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "linkedInOAuth2Api",
+    "openAiApi",
+    "telegramApi",
+    "twitterOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Crawl HN Home",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Meta",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Unposted Items",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Visit GH Page",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Convert HTML To Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Errored",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update X Status",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "LinkedIn",
+        "type": "n8n-nodes-base.linkedIn",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update L Status",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Search Item",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Create Item",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "X",
+        "type": "n8n-nodes-base.twitter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Validate Generate Content",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Generate Content",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Ping Me",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for 5 mins before posting",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "X",
+        "to": "Update X Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Filter Unposted Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ping Me",
+        "to": "Wait for 5 mins before posting",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LinkedIn",
+        "to": "Update L Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Item",
+        "to": "Ping Me",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Item",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Meta",
+        "to": "Search Item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Meta",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Crawl HN Home",
+        "to": "Extract Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Visit GH Page",
+        "to": "Convert HTML To Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Errored",
+        "to": "Create Item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update L Status",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update X Status",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Content",
+        "to": "Validate Generate Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Crawl HN Home",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Unposted Items",
+        "to": "Visit GH Page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert HTML To Markdown",
+        "to": "Generate Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate Generate Content",
+        "to": "Filter Errored",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for 5 mins before posting",
+        "to": "X",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for 5 mins before posting",
+        "to": "LinkedIn",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/social-media-ai-agent-telegram/implementations/n8n",
+      "files": [
+        "agents/social-media-ai-agent-telegram/implementations/n8n/social-media-ai-agent-telegram.json"
+      ],
+      "sha256": "871002ae55f21ae33d684c71372033e253fe39968778f46ff0de60e51a55b824",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/social-media-ai-agent-telegram/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/social-media-ai-agent-telegram/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/social-media-ai-agent-telegram/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/social-media-ai-agent-telegram/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/social-media-ai-agent-telegram/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/social-media-ai-agent-telegram/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/social-media-ai-agent-telegram/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/social-media-ai-agent-telegram/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/social-media-ai-agent-telegram/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/social-media-ai-agent-telegram/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/social-media-ai-agent-telegram/implementations/n8n/provenance.json"
+}

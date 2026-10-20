@@ -1,0 +1,527 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-split-out-and-filter-owned-projects",
+  "title": "http request and split out and filter owned projects",
+  "purpose": "Adapt the published “http request and split out and filter owned projects” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 31 executable nodes and 33 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission"
+  ],
+  "terminal_nodes": [
+    "end import"
+  ],
+  "credential_types": [
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "set credentials",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "login n8n",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "get tags",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "my-projects",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "filter owned projects",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get folders",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out2",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remove Duplicates",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "get workflows",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Move workflow to folder",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Normalize names",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Limit1",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create folders",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "set folder name + id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "set folder name + id1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "set global",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Code",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If no folder",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "If folder exists",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "set name",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "end import",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "pass all items",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "select tags to move",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "extract name from form",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Split Out the tags",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "tags to string",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Code",
+        "to": "select tags to move",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter",
+        "to": "Limit1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit1",
+        "to": "If folder exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get tags",
+        "to": "tags to string",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set name",
+        "to": "Create folders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "filter owned projects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "login n8n",
+        "to": "my-projects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out2",
+        "to": "Normalize names",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set global",
+        "to": "get workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "set name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get folders",
+        "to": "If no folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "my-projects",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no folder",
+        "to": "Split Out2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no folder",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "get workflows",
+        "to": "Move workflow to folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create folders",
+        "to": "set folder name + id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "pass all items",
+        "to": "end import",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "tags to string",
+        "to": "Code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "pass all items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Get folders",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Normalize names",
+        "to": "Remove Duplicates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set credentials",
+        "to": "login n8n",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If folder exists",
+        "to": "set folder name + id1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If folder exists",
+        "to": "set name",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Remove Duplicates",
+        "to": "Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "set credentials",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out the tags",
+        "to": "extract name from form",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "select tags to move",
+        "to": "Split Out the tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set folder name + id",
+        "to": "set global",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "filter owned projects",
+        "to": "get tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set folder name + id1",
+        "to": "set global",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "extract name from form",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Move workflow to folder",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/implementations/n8n",
+      "files": [
+        "agents/http-request-and-split-out-and-filter-owned-projects/implementations/n8n/http-request-and-split-out-and-filter-owned-projects.json"
+      ],
+      "sha256": "38ee2682bc3ed53760800c91561b9eef46ebc168e7f2d2795ce5028c8d868338",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-split-out-and-filter-owned-projects/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-split-out-and-filter-owned-projects/implementations/n8n/provenance.json"
+}

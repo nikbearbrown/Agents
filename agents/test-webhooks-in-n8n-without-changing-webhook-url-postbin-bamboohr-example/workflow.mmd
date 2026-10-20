@@ -1,0 +1,66 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Merge"]
+  n2["Create Bin"]
+  n3["GET Bin"]
+  n4["Format url for webhook"]
+  n5["GET most recent request"]
+  n6["MOCK request"]
+  n7["Create Bin1"]
+  n8["GET Bin1"]
+  n9["Format url for webhook1"]
+  n10["SET BambooHR subdomain"]
+  n11["Split out fields"]
+  n12["Combine fields to monitor"]
+  n13["Format payload for BambooHR webhook"]
+  n14["Create webhook in BambooHR"]
+  n15["Create dummy data for employees"]
+  n16["Keep only new employee fields"]
+  n17["GET all possible fields to monitor in BambooHR"]
+  n18["Register and test webhook"]
+  n19["Check BambooHR for calls to webhook"]
+  n20["Create employee records with dummy data"]
+  n21["Split out employees"]
+  n22["Format displayName"]
+  n23["OpenAI Chat Model"]
+  n24["Auto-fixing Output Parser"]
+  n25["OpenAI Chat Model1"]
+  n26["Structured Output Parser"]
+  n27["Basic LLM Chain"]
+  n28["Combine employees into list"]
+  n29["Pluralize key"]
+  n30["Welcome employees on Slack"]
+  n31["DELETE BambooHR webhook"]
+  n32["GET most recent request1"]
+  n33["Wait 60 #43; 1 seconds for webhook to fire"]
+  n1 -->|"main out 0 to in 0"| n13
+  n3 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n8
+  n29 -->|"main out 0 to in 0"| n27
+  n27 -->|"main out 0 to in 0"| n30
+  n11 -->|"main out 0 to in 0"| n16
+  n23 -->|"ai_languageModel out 0 to in 0"| n27
+  n22 -->|"main out 0 to in 0"| n28
+  n25 -->|"ai_languageModel out 0 to in 0"| n24
+  n21 -->|"main out 0 to in 0"| n22
+  n4 -->|"main out 0 to in 0"| n18
+  n10 -->|"main out 0 to in 0"| n17
+  n9 -->|"main out 0 to in 0"| n1
+  n32 -->|"main out 0 to in 0"| n21
+  n26 -->|"ai_outputParser out 0 to in 0"| n24
+  n24 -->|"ai_outputParser out 0 to in 0"| n27
+  n12 -->|"main out 0 to in 1"| n1
+  n18 -->|"main out 0 to in 0"| n5
+  n14 -->|"main out 0 to in 0"| n15
+  n28 -->|"main out 0 to in 0"| n29
+  n16 -->|"main out 0 to in 0"| n12
+  n15 -->|"main out 0 to in 0"| n20
+  n0 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n10
+  n13 -->|"main out 0 to in 0"| n14
+  n20 -->|"main out 0 to in 0"| n33
+  n33 -->|"main out 0 to in 0"| n19
+  n33 -->|"main out 0 to in 0"| n32
+  n17 -->|"main out 0 to in 0"| n11

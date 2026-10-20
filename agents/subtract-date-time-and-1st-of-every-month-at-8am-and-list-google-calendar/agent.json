@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "slug": "subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar",
+  "title": "subtract date time and 1st of every month at 8am and list google calendar",
+  "purpose": "Adapt the published “subtract date time and 1st of every month at 8am and list google calendar” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "1st of Every month at 8am"
+  ],
+  "terminal_nodes": [
+    "Send email to payroll"
+  ],
+  "credential_types": [
+    "googleCalendarOAuth2Api",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Previous Month",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "1st of Every month at 8am",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Summary for Illness or Holiday",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Holiday",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Illness",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Holiday Days",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Illness Days",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get previous months events",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send email to payroll",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine Holiday Counts",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine Illness Counts",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Build the message to send",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Build the message to send",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Holiday",
+        "to": "Filter Holiday Days",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Illness",
+        "to": "Filter Illness Days",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Previous Month",
+        "to": "Get previous months events",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Holiday Days",
+        "to": "Combine Holiday Counts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Illness Days",
+        "to": "Combine Illness Counts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Holiday Counts",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Illness Counts",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "1st of Every month at 8am",
+        "to": "Previous Month",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build the message to send",
+        "to": "Send email to payroll",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get previous months events",
+        "to": "Check Summary for Illness or Holiday",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Summary for Illness or Holiday",
+        "to": "Holiday",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Summary for Illness or Holiday",
+        "to": "Illness",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/n8n",
+      "files": [
+        "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/n8n/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar.json"
+      ],
+      "sha256": "0ff5211bf487c6d4010c76d84a37d37570be42b4e8057bcf48a8291521143dcc",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/n8n/provenance.json"
+}

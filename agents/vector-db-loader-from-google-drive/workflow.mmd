@@ -1,0 +1,31 @@
+flowchart LR
+  n0["Default Data Loader"]
+  n1["Recursive Character Text Splitter"]
+  n2["Embeddings OpenAI"]
+  n3["Postgres PGVector Store"]
+  n4["When clicking #8216;Test workflow#8217;"]
+  n5["Loop Over Items"]
+  n6["Move File"]
+  n7["Download File"]
+  n8["Search Folder"]
+  n9["Schedule Trigger"]
+  n10["Switch"]
+  n11["Extract from PDF"]
+  n12["Extract from Text"]
+  n13["Extract from JSON"]
+  n10 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 1 to in 0"| n12
+  n10 -->|"main out 2 to in 0"| n13
+  n6 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 1 to in 0"| n7
+  n11 -->|"main out 0 to in 0"| n3
+  n9 -->|"main out 0 to in 0"| n8
+  n2 -->|"ai_embedding out 0 to in 0"| n3
+  n13 -->|"main out 0 to in 0"| n3
+  n12 -->|"main out 0 to in 0"| n3
+  n0 -->|"ai_document out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n6
+  n1 -->|"ai_textSplitter out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n8

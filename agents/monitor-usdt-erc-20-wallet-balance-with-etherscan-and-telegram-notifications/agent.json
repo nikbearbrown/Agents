@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "slug": "monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications",
+  "title": "Monitor USDT ERC-20 Wallet Balance with Etherscan and Telegram Notifications",
+  "purpose": "Adapt the published “Monitor USDT ERC-20 Wallet Balance with Etherscan and Telegram Notifications” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Check Balance Every 5 Minutes"
+  ],
+  "terminal_nodes": [
+    "Balance Changed.",
+    "Balance Not Changed."
+  ],
+  "credential_types": [
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Balance Changed?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Balance Changed.",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Balance Not Changed.",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "userData",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "balanceChecker",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check Balance Every 5 Minutes",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fetch USDT Balance from Etherscan",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "userData",
+        "to": "Fetch USDT Balance from Etherscan",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "balanceChecker",
+        "to": "Balance Changed?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Balance Changed?",
+        "to": "Balance Changed.",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Balance Changed?",
+        "to": "Balance Not Changed.",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check Balance Every 5 Minutes",
+        "to": "userData",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch USDT Balance from Etherscan",
+        "to": "balanceChecker",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/n8n",
+      "files": [
+        "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/n8n/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications.json"
+      ],
+      "sha256": "d20b81cae4677711019d774c91804398c2478a6f390b6a98c3f77f116e525f3c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/n8n/provenance.json"
+}

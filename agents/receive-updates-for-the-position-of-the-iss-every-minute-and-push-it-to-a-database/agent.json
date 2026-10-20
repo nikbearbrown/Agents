@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database",
+  "title": "Receive updates for the position of the ISS every minute and push it to a database",
+  "purpose": "Adapt the published “Receive updates for the position of the ISS every minute and push it to a database” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "Google Cloud Realtime Database"
+  ],
+  "credential_types": [
+    "googleFirebaseRealtimeDatabaseOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Cloud Realtime Database",
+        "type": "n8n-nodes-base.googleFirebaseRealtimeDatabase",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set",
+        "to": "Google Cloud Realtime Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cron",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/n8n",
+      "files": [
+        "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/n8n/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database.json"
+      ],
+      "sha256": "419342dc0a59060ee2aed862692079173c99d42635551c005726e0dbd7b1a375",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/n8n/provenance.json"
+}

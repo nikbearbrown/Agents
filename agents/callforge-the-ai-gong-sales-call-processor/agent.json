@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "slug": "callforge-the-ai-gong-sales-call-processor",
+  "title": "CallForge - The AI Gong Sales Call Processor",
+  "purpose": "Adapt the published “CallForge - The AI Gong Sales Call Processor” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Isolate Notion Data"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "salesforceOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve detailed call data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get transcript",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Join Transcript to String",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Isolate Notion Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Join Affiliation",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Join conversation",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract SF Opp Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract SF Opp Data1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Opp Data",
+        "type": "n8n-nodes-base.salesforce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get account data",
+        "type": "n8n-nodes-base.salesforce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Call Data",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge call and transcript Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Gong Call Transcript",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get External Attendees Emails",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Combine Salesforce Opp Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Salesforce data",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Enriched Transcript Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Opp Data",
+        "to": "Extract SF Opp Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Opp Data",
+        "to": "Get account data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get transcript",
+        "to": "Join Transcript to String",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get account data",
+        "to": "Extract SF Opp Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Join Affiliation",
+        "to": "Join conversation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Call Data",
+        "to": "Merge call and transcript Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Join conversation",
+        "to": "Get External Attendees Emails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Join conversation",
+        "to": "Aggregate Gong Call Transcript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract SF Opp Data",
+        "to": "Combine Salesforce Opp Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract SF Opp Data1",
+        "to": "Combine Salesforce Opp Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Get transcript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Retrieve detailed call data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Salesforce data",
+        "to": "Merge Enriched Transcript Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Join Transcript to String",
+        "to": "Merge call and transcript Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Salesforce Opp Data",
+        "to": "Aggregate Salesforce data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve detailed call data",
+        "to": "Extract Call Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get External Attendees Emails",
+        "to": "Get Opp Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Gong Call Transcript",
+        "to": "Merge Enriched Transcript Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Enriched Transcript Data",
+        "to": "Isolate Notion Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge call and transcript Data",
+        "to": "Join Affiliation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/implementations/n8n",
+      "files": [
+        "agents/callforge-the-ai-gong-sales-call-processor/implementations/n8n/callforge-the-ai-gong-sales-call-processor.json"
+      ],
+      "sha256": "e802d80ee61f41d4de36ae2635db2332746d514ad04a9e52bed49de73601f71d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/callforge-the-ai-gong-sales-call-processor/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/callforge-the-ai-gong-sales-call-processor/implementations/n8n/provenance.json"
+}

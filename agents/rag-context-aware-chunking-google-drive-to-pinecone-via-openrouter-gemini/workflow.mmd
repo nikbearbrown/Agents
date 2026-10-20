@@ -1,0 +1,27 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Loop Over Items"]
+  n2["OpenRouter Chat Model"]
+  n3["Pinecone Vector Store"]
+  n4["Embeddings Google Gemini"]
+  n5["Default Data Loader"]
+  n6["Recursive Character Text Splitter"]
+  n7["Get Document From Google Drive"]
+  n8["Extract Text Data From Google Document"]
+  n9["Split Document Text Into Sections"]
+  n10["Prepare Sections For Looping"]
+  n11["AI Agent - Prepare Context"]
+  n12["Concatenate the context and section text"]
+  n1 -->|"main out 1 to in 0"| n11
+  n5 -->|"ai_document out 0 to in 0"| n3
+  n2 -->|"ai_languageModel out 0 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n1
+  n4 -->|"ai_embedding out 0 to in 0"| n3
+  n11 -->|"main out 0 to in 0"| n12
+  n10 -->|"main out 0 to in 0"| n1
+  n7 -->|"main out 0 to in 0"| n8
+  n6 -->|"ai_textSplitter out 0 to in 0"| n5
+  n9 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n9
+  n12 -->|"main out 0 to in 0"| n3

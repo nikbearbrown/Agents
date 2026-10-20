@@ -1,0 +1,21 @@
+flowchart LR
+  n0["On clicking #39;execute#39;"]
+  n1["Create approval URL"]
+  n2["Wait for external approval"]
+  n3["Rest of the workflow placeholder"]
+  n4["Customer Datastore"]
+  n5["SplitInBatches"]
+  n6["Wait for time interval"]
+  n7["If - Are we Finished#63;"]
+  n8["Customer Messenger - Send URL to merchant"]
+  n9["Customer Messenger - Send message to client"]
+  n5 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n1
+  n7 -->|"main out 1 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 0 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n7

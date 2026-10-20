@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "slug": "webhook-and-get-new-accesstoken-and-receive-schedule-events",
+  "title": "webhook and get new accesstoken and receive schedule events",
+  "purpose": "Adapt the published “webhook and get new accesstoken and receive schedule events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "continue with valid token"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "continue with valid token",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "get new accessToken",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "2. set token in static data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "if token is valid",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "1. initiate static data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "1. initiate static data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "1. initiate static data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if token is valid",
+        "to": "continue with valid token",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if token is valid",
+        "to": "get new accessToken",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "get new accessToken",
+        "to": "2. set token in static data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "1. initiate static data",
+        "to": "if token is valid",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "2. set token in static data",
+        "to": "continue with valid token",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/n8n",
+      "files": [
+        "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/n8n/webhook-and-get-new-accesstoken-and-receive-schedule-events.json"
+      ],
+      "sha256": "dc44008022b9bea3bd20b10f72e27e50bea0492a0a9bc85f57200f7b7fae127c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "slug": "weekly-failures-report",
+  "title": "Weekly failures report",
+  "purpose": "Adapt the published “Weekly failures report” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Telegram"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Filter for executions of the week",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get all previous executions",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set a message for each failed execution",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate all messages",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Schedule Trigger",
+        "to": "Get all previous executions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate all messages",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all previous executions",
+        "to": "Filter for executions of the week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter for executions of the week",
+        "to": "Set a message for each failed execution",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set a message for each failed execution",
+        "to": "Aggregate all messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/weekly-failures-report/implementations/n8n",
+      "files": [
+        "agents/weekly-failures-report/implementations/n8n/weekly-failures-report.json"
+      ],
+      "sha256": "ab68b1271ef869d53f844a1f6d9998d54a336151a40b22780b3b6e778b7f5b7c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/weekly-failures-report/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/weekly-failures-report/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/weekly-failures-report/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/weekly-failures-report/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/weekly-failures-report/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/weekly-failures-report/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/weekly-failures-report/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/weekly-failures-report/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/weekly-failures-report/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/weekly-failures-report/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/weekly-failures-report/implementations/n8n/provenance.json"
+}

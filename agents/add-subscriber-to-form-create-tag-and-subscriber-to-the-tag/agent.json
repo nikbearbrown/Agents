@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "add-subscriber-to-form-create-tag-and-subscriber-to-the-tag",
+  "title": "Add subscriber to form, create tag and subscriber to the tag",
+  "purpose": "Adapt the published “Add subscriber to form, create tag and subscriber to the tag” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "ConvertKit2"
+  ],
+  "credential_types": [
+    "convertKitApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ConvertKit",
+        "type": "n8n-nodes-base.convertKit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ConvertKit1",
+        "type": "n8n-nodes-base.convertKit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ConvertKit2",
+        "type": "n8n-nodes-base.convertKit",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "ConvertKit",
+        "to": "ConvertKit1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ConvertKit1",
+        "to": "ConvertKit2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "ConvertKit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/n8n",
+      "files": [
+        "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/n8n/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag.json"
+      ],
+      "sha256": "45f962a0e8e123890a87b60c1b9bfdb52fd0f6e3b652a6b4ae2860bb5a517e62",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/n8n/provenance.json"
+}

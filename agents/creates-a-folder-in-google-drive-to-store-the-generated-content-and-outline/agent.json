@@ -1,0 +1,470 @@
+{
+  "schema_version": 1,
+  "slug": "creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline",
+  "title": "Creates a folder in Google Drive to store the generated content and outline",
+  "purpose": "Adapt the published “Creates a folder in Google Drive to store the generated content and outline” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 27 executable nodes and 28 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "receive_topic"
+  ],
+  "terminal_nodes": [
+    "update_article_link"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "create_folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "input_brief",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "new_lines",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "input_sections",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "section_text",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Sort",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "final_article",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "set_introduction",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "receive_topic",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "add_row",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "topic_variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "markdown_to_file",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "split_out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "section_starts_with_#",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "25_percent_chance",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "set_section_content",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "add_2_new_lines",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "final_article_file",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "upload_fiinalArticle",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "update_article_link",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "upload_outline_file",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "section_paragraphs",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "change_section_format",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "create_outline",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.5,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Sort",
+        "to": "add_2_new_lines",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Sort",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge1",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "add_row",
+        "to": "topic_variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "final_article",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "new_lines",
+        "to": "split_out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "split_out",
+        "to": "section_starts_with_#",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "input_brief",
+        "to": "new_lines",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "section_text",
+        "to": "25_percent_chance",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "create_folder",
+        "to": "create_outline",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "final_article",
+        "to": "final_article_file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "receive_topic",
+        "to": "add_row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "create_outline",
+        "to": "markdown_to_file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "input_sections",
+        "to": "section_paragraphs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "add_2_new_lines",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "topic_variables",
+        "to": "create_folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "markdown_to_file",
+        "to": "upload_outline_file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set_introduction",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "25_percent_chance",
+        "to": "change_section_format",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "25_percent_chance",
+        "to": "Merge",
+        "kind": "main",
+        "output": 1,
+        "input": 1
+      },
+      {
+        "from": "final_article_file",
+        "to": "upload_fiinalArticle",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "section_paragraphs",
+        "to": "section_text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set_section_content",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "upload_outline_file",
+        "to": "input_brief",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "upload_fiinalArticle",
+        "to": "update_article_link",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "change_section_format",
+        "to": "set_section_content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "section_starts_with_#",
+        "to": "set_introduction",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "section_starts_with_#",
+        "to": "input_sections",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/n8n",
+      "files": [
+        "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/n8n/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline.json"
+      ],
+      "sha256": "64c13584a31796fc3cfbc5746339ca57a06a602e2e538ed4869c438421d00bb7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/n8n/provenance.json"
+}

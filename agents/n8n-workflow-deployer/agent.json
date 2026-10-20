@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "slug": "n8n-workflow-deployer",
+  "title": "n8n workflow deployer",
+  "purpose": "Adapt the published “n8n workflow deployer” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Google Drive Trigger -ToDeploy folder"
+  ],
+  "terminal_nodes": [
+    "Get Existing Workflow Tags",
+    "Capture Name If Fails To Create Workflow",
+    "Move JSON file to Deployed folder"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get Existing Workflow Tags",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract JSON object from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Clean JSON file ready for import",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set n8n API URL & Tag ID variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Create n8n Workflow",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow Tag",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Capture Name If Fails To Create Workflow",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Move JSON file to Deployed folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Download n8n JSON File",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Set n8n URL variable",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive Trigger -ToDeploy folder",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set Workflow Tag",
+        "to": "Move JSON file to Deployed folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create n8n Workflow",
+        "to": "Set Workflow Tag",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create n8n Workflow",
+        "to": "Capture Name If Fails To Create Workflow",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set n8n URL variable",
+        "to": "Get Existing Workflow Tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download n8n JSON File",
+        "to": "Extract JSON object from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract JSON object from File",
+        "to": "Clean JSON file ready for import",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean JSON file ready for import",
+        "to": "Create n8n Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Set n8n URL variable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set n8n API URL & Tag ID variables",
+        "to": "Download n8n JSON File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive Trigger -ToDeploy folder",
+        "to": "Set n8n API URL & Tag ID variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/n8n-workflow-deployer/implementations/n8n",
+      "files": [
+        "agents/n8n-workflow-deployer/implementations/n8n/n8n-workflow-deployer.json"
+      ],
+      "sha256": "a29a92a7cd3e373b75cda93fa8af299080a06478230baca947a37c8ddabd053e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/n8n-workflow-deployer/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/n8n-workflow-deployer/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/n8n-workflow-deployer/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/n8n-workflow-deployer/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/n8n-workflow-deployer/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/n8n-workflow-deployer/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/n8n-workflow-deployer/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/n8n-workflow-deployer/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/n8n-workflow-deployer/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/n8n-workflow-deployer/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/n8n-workflow-deployer/implementations/n8n/provenance.json"
+}

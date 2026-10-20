@@ -1,0 +1,20 @@
+flowchart LR
+  n0["Check Authorization Header"]
+  n1["401 Unauthorized"]
+  n2["200 OK"]
+  n3["Configuration"]
+  n4["Webhook"]
+  n5["Has required fields#63;"]
+  n6["Check Valid Request"]
+  n7["400 Bad Request"]
+  n8["Create Response"]
+  n9["Add workflow nodes here"]
+  n4 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n0
+  n8 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n9
+  n6 -->|"main out 1 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 1 to in 0"| n1

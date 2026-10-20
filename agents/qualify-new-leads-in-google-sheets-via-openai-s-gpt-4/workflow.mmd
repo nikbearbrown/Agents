@@ -1,0 +1,11 @@
+flowchart LR
+  n0["Merge"]
+  n1["Update lead status"]
+  n2["Extract JSON reply"]
+  n3["Qualify leads with GPT"]
+  n4["Check for new entries"]
+  n0 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 0 to in 1"| n0
+  n4 -->|"main out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n2

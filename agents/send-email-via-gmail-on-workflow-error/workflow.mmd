@@ -1,0 +1,17 @@
+flowchart LR
+  n0["CRON"]
+  n1["Get User#39;s Playlists"]
+  n2["Switch"]
+  n3["Get Discover Tracks"]
+  n4["Get Archive Tracks"]
+  n5["Merge"]
+  n6["Check if tracks to add is NOT empty"]
+  n7["Add tracks to Archive playlist"]
+  n0 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 1 to in 0"| n4
+  n4 -->|"main out 0 to in 1"| n5
+  n3 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n7

@@ -1,0 +1,22 @@
+flowchart LR
+  n0["GDocs - Get Job Desc"]
+  n1["Google Drive - Resume CV File Created"]
+  n2["Download Resume File From Gdrive"]
+  n3["AI Agent"]
+  n4["Extract from File"]
+  n5["Gmail:Notification"]
+  n6["Gdrive:Move-To-Reject-Folder"]
+  n7["Gdrive:Move-To-KIV-Folder"]
+  n8["Gdrive:Move-To-Shortlisted-Folder"]
+  n9["Gsheet: Update Candidate Tracker"]
+  n10["Groq - llama 4 AI MODEL"]
+  n4 -->|"main out 0 to in 0"| n0
+  n5 -->|"ai_tool out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n3
+  n10 -->|"ai_languageModel out 0 to in 0"| n3
+  n7 -->|"ai_tool out 0 to in 0"| n3
+  n6 -->|"ai_tool out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n4
+  n9 -->|"ai_tool out 0 to in 0"| n3
+  n8 -->|"ai_tool out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n2

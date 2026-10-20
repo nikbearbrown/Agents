@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "slug": "receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates",
+  "title": "receive schedule events and markdown and removeitemsseeninpreviousexecutions remove duplicates",
+  "purpose": "Adapt the published “receive schedule events and markdown and removeitemsseeninpreviousexecutions remove duplicates” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Structured Output Parser",
+    "Create Issue in Linear.App"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "linearApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Seen",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Issue From Support Request",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Get Recent Messages",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Create Issue in Linear.App",
+        "type": "n8n-nodes-base.linear",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Markdown",
+        "to": "Generate Issue From Support Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Seen",
+        "to": "Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get Recent Messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Generate Issue From Support Request",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Recent Messages",
+        "to": "Mark as Seen",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Generate Issue From Support Request",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Issue From Support Request",
+        "to": "Create Issue in Linear.App",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/n8n",
+      "files": [
+        "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/n8n/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates.json"
+      ],
+      "sha256": "e9e23c03a3f9caa143a9f50b52eab503107eb21b8bb593a490f3c13f4191742f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/n8n/provenance.json"
+}

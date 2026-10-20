@@ -1,0 +1,28 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Kling Virtual Try-On Task"]
+  n2["Switch"]
+  n3["Get Kling Video Task"]
+  n4["Generate kling video"]
+  n5["Preset Parameters"]
+  n6["Get Kling Virtual Try-On Task"]
+  n7["Check Data Status"]
+  n8["Wait for Image Generation"]
+  n9["Wait for Video Generation"]
+  n10["Check Video Data Status"]
+  n11["Get Video Data Status"]
+  n12["Get Final Video URL"]
+  n2 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 1 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 1 to in 0"| n9
+  n10 -->|"main out 0 to in 0"| n12
+  n1 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n3
+  n6 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n5

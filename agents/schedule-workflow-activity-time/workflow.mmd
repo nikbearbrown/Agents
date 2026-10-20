@@ -1,0 +1,16 @@
+flowchart LR
+  n0["n8n Activate"]
+  n1["n8n Deactivate"]
+  n2["Workflow ID"]
+  n3["Merge in Workflow ID for deactivation"]
+  n4["Merge in Workflow ID for activation"]
+  n5["Activate at 08:00 daily"]
+  n6["Deactivate at 20:00 daily"]
+  n2 -->|"main out 0 to in 1"| n4
+  n2 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 1"| n3
+  n4 -->|"main out 0 to in 0"| n0
+  n3 -->|"main out 0 to in 0"| n1

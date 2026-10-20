@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "slug": "create-update-and-get-records-in-quick-base",
+  "title": "Create, update and get records in Quick Base",
+  "purpose": "Adapt the published “Create, update and get records in Quick Base” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Quick Base2"
+  ],
+  "credential_types": [
+    "quickbaseApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Quick Base",
+        "type": "n8n-nodes-base.quickbase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set1",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Quick Base1",
+        "type": "n8n-nodes-base.quickbase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Quick Base2",
+        "type": "n8n-nodes-base.quickbase",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set",
+        "to": "Quick Base",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set1",
+        "to": "Quick Base1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Quick Base",
+        "to": "Set1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Quick Base1",
+        "to": "Quick Base2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-update-and-get-records-in-quick-base/implementations/n8n",
+      "files": [
+        "agents/create-update-and-get-records-in-quick-base/implementations/n8n/create-update-and-get-records-in-quick-base.json"
+      ],
+      "sha256": "711e01301c64f29ae9125ddf238e2731b2a1a551d39dab52c445fdc4bb967bf4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-update-and-get-records-in-quick-base/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-update-and-get-records-in-quick-base/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-update-and-get-records-in-quick-base/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-update-and-get-records-in-quick-base/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-update-and-get-records-in-quick-base/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-update-and-get-records-in-quick-base/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-update-and-get-records-in-quick-base/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-update-and-get-records-in-quick-base/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-update-and-get-records-in-quick-base/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-update-and-get-records-in-quick-base/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-update-and-get-records-in-quick-base/implementations/n8n/provenance.json"
+}

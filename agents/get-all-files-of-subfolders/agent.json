@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "slug": "get-all-files-of-subfolders",
+  "title": "Get all files of subfolders",
+  "purpose": "Adapt the published “Get all files of subfolders” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 23 executable nodes and 25 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\"",
+    "Webhook",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Delete from-folder",
+    "Stop and Error: request not valid",
+    "Stop and Error: request not valid1"
+  ],
+  "credential_types": [
+    "nextCloudApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Whether type is file",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set new path for subfolder",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Set new path for file",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Set folder-paths for from and to",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Create to folder if necessary",
+        "type": "n8n-nodes-base.nextCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all folders/files in from-folder",
+        "type": "n8n-nodes-base.nextCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop over files and folders",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Consolidate all files and folders found",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create subfolder in to-folder",
+        "type": "n8n-nodes-base.nextCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all folders/files in found subfolder",
+        "type": "n8n-nodes-base.nextCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Whether there is are more files or subfolders found",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Consolidate all found files",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over all files",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Move file to destination",
+        "type": "n8n-nodes-base.nextCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Delete from-folder",
+        "type": "n8n-nodes-base.nextCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set paths",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Whether the request is valid",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error: request not valid",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Whether the request is valid1",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error: request not valid1",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Whether the request is valid",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set paths",
+        "to": "Set folder-paths for from and to",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over all files",
+        "to": "Delete from-folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over all files",
+        "to": "Move file to destination",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Whether type is file",
+        "to": "Consolidate all files and folders found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Whether type is file",
+        "to": "Set new path for subfolder",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set new path for file",
+        "to": "Loop Over all files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Whether the request is valid1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Move file to destination",
+        "to": "Loop Over all files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set new path for subfolder",
+        "to": "Create subfolder in to-folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Consolidate all found files",
+        "to": "Set new path for file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop over files and folders",
+        "to": "Whether type is file",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Whether the request is valid",
+        "to": "Set folder-paths for from and to",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Whether the request is valid",
+        "to": "Stop and Error: request not valid",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create subfolder in to-folder",
+        "to": "Get all folders/files in found subfolder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create to folder if necessary",
+        "to": "Get all folders/files in from-folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Whether the request is valid1",
+        "to": "Set folder-paths for from and to",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Whether the request is valid1",
+        "to": "Stop and Error: request not valid1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set folder-paths for from and to",
+        "to": "Create to folder if necessary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Set paths",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all folders/files in from-folder",
+        "to": "Loop over files and folders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Consolidate all files and folders found",
+        "to": "Whether there is are more files or subfolders found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all folders/files in found subfolder",
+        "to": "Consolidate all files and folders found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Whether there is are more files or subfolders found",
+        "to": "Consolidate all found files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Whether there is are more files or subfolders found",
+        "to": "Loop over files and folders",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-all-files-of-subfolders/implementations/n8n",
+      "files": [
+        "agents/get-all-files-of-subfolders/implementations/n8n/get-all-files-of-subfolders.json"
+      ],
+      "sha256": "dc19e6902474bfdb614c73706a8eba396efd4e9ebcdaa1f0472fd1768e06538a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-all-files-of-subfolders/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-all-files-of-subfolders/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-all-files-of-subfolders/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-all-files-of-subfolders/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-all-files-of-subfolders/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-all-files-of-subfolders/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-all-files-of-subfolders/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-all-files-of-subfolders/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-all-files-of-subfolders/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-all-files-of-subfolders/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-all-files-of-subfolders/implementations/n8n/provenance.json"
+}

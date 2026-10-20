@@ -1,0 +1,26 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["gpt-4o-mini"]
+  n2["Chat Response"]
+  n3["Window Buffer Memory"]
+  n4["Save Long Term Memories"]
+  n5["Retrieve Long Term Memories"]
+  n6["Telegram Response"]
+  n7["DeepSeek-V3 Chat"]
+  n8["AI Tools Agent"]
+  n9["Save Notes"]
+  n10["Retrieve Notes"]
+  n11["Aggregate"]
+  n12["Merge"]
+  n12 -->|"main out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n8
+  n9 -->|"ai_tool out 0 to in 0"| n8
+  n1 -->|"ai_languageModel out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n2
+  n10 -->|"main out 0 to in 1"| n12
+  n3 -->|"ai_memory out 0 to in 0"| n8
+  n4 -->|"ai_tool out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n12

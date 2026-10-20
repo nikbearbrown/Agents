@@ -1,0 +1,738 @@
+{
+  "schema_version": 1,
+  "slug": "match-spotify-tracks-to-youtube-videos",
+  "title": "Match Spotify Tracks to YouTube Videos",
+  "purpose": "Adapt the published “Match Spotify Tracks to YouTube Videos” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 45 executable nodes and 50 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Every day at noon",
+    "Every day at noon + 1mn",
+    "Every hour",
+    "Every day at midnight",
+    "Every month"
+  ],
+  "terminal_nodes": [
+    "Update to_delete to true",
+    "No Operation, do nothing",
+    "Discord",
+    "Discord1",
+    "Set youtube_video_id to null",
+    "Delete music",
+    "Reset NOTFOUND id to NULL"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get playlist snapshot",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get playlist snapshot1",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If different snapshot",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get all musics",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update to_delete to true",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add music",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Spotify",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all musics not in youtube playlist",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Every day at noon",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Every day at noon + 1mn",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Every hour",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait 1 hour",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Search video",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get video duration",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "If video duration ~= music duration",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Add music to playlist",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add youtube id to row",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Discord",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Discord1",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set youtube id to NOTFOUND if no matching",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If no result",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "variables2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "variables1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items1",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "data1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get playlist items",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Playlist items to be deleted",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Get all musics that should be in playlist",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remove Duplicates",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Remove video from playlist",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check for deleted videos",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Set youtube_video_id to null",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all musics to be deleted",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Delete music",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Every day at midnight",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "variables3",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Reset NOTFOUND id to NULL",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "variables4",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Every month",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "data",
+        "to": "Loop Over Items1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "data1",
+        "to": "Search video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Spotify",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add music",
+        "to": "data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "Set youtube id to NOTFOUND if no matching",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "variables",
+        "to": "Get playlist snapshot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every hour",
+        "to": "variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "variables1",
+        "to": "Get all musics not in youtube playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "variables2",
+        "to": "Spotify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "variables2",
+        "to": "Get all musics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "variables3",
+        "to": "Get all musics that should be in playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "variables3",
+        "to": "Get playlist items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "variables3",
+        "to": "Get all musics to be deleted",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "variables4",
+        "to": "Reset NOTFOUND id to NULL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every month",
+        "to": "variables4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait 1 hour",
+        "to": "Get playlist snapshot1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no result",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no result",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Search video",
+        "to": "If no result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all musics",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Get video duration",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Add music",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Update to_delete to true",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items1",
+        "to": "data1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Every day at noon",
+        "to": "variables2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Duplicates",
+        "to": "Remove video from playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get playlist items",
+        "to": "Playlist items to be deleted",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get playlist items",
+        "to": "Check for deleted videos",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Get video duration",
+        "to": "If video duration ~= music duration",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add music to playlist",
+        "to": "Add youtube id to row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add youtube id to row",
+        "to": "Loop Over Items1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add youtube id to row",
+        "to": "Discord",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every day at midnight",
+        "to": "variables3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get playlist snapshot",
+        "to": "Wait 1 hour",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If different snapshot",
+        "to": "Spotify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If different snapshot",
+        "to": "Get all musics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If different snapshot",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get playlist snapshot1",
+        "to": "If different snapshot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every day at noon + 1mn",
+        "to": "variables1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for deleted videos",
+        "to": "Set youtube_video_id to null",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove video from playlist",
+        "to": "Delete music",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all musics to be deleted",
+        "to": "Playlist items to be deleted",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Playlist items to be deleted",
+        "to": "Remove Duplicates",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "If video duration ~= music duration",
+        "to": "Add music to playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If video duration ~= music duration",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get all musics not in youtube playlist",
+        "to": "data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all musics that should be in playlist",
+        "to": "Check for deleted videos",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set youtube id to NOTFOUND if no matching",
+        "to": "Loop Over Items1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set youtube id to NOTFOUND if no matching",
+        "to": "Discord1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/implementations/n8n",
+      "files": [
+        "agents/match-spotify-tracks-to-youtube-videos/implementations/n8n/match-spotify-tracks-to-youtube-videos.json"
+      ],
+      "sha256": "2d7b599e1775b8207e5fba891f9d67d30f2c372de0b3bea395346522b9198326",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/match-spotify-tracks-to-youtube-videos/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/match-spotify-tracks-to-youtube-videos/implementations/n8n/provenance.json"
+}

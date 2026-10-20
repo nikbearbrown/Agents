@@ -1,0 +1,61 @@
+flowchart LR
+  n0["No email provided"]
+  n1["If email provided"]
+  n2["If user found"]
+  n3["No customer found"]
+  n4["If contains DHL data"]
+  n5["Extract Tracking Data"]
+  n6["Merge Orders"]
+  n7["Merge Order and Tracking Data"]
+  n8["Split Out"]
+  n9["Aggregate"]
+  n10["Merge Tracking Data"]
+  n11["Window Buffer Memory"]
+  n12["Execute Workflow Trigger"]
+  n13["WooCommerce - Get User"]
+  n14["If order found"]
+  n15["WooCommerce Get Orders"]
+  n16["No order found"]
+  n17["Add Error Information"]
+  n18["DHL"]
+  n19["Send Response"]
+  n20["OpenAI Chat Model"]
+  n21["WooCommerce_Tool"]
+  n22["Chat Trigger"]
+  n23["Respond to Webhook"]
+  n24["Webhook Example Page"]
+  n25["Decrypt email"]
+  n26["Encrypt email"]
+  n27["Example encrypted email"]
+  n28["Decrypt email address"]
+  n29["AI Agent"]
+  n30["Mock Data"]
+  n18 -->|"main out 0 to in 0"| n10
+  n18 -->|"main out 1 to in 0"| n17
+  n9 -->|"main out 0 to in 0"| n6
+  n30 -->|"main out 0 to in 0"| n29
+  n8 -->|"main out 0 to in 0"| n18
+  n22 -->|"main out 0 to in 0"| n28
+  n6 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n15
+  n2 -->|"main out 1 to in 0"| n3
+  n14 -->|"main out 0 to in 0"| n5
+  n14 -->|"main out 0 to in 1"| n7
+  n14 -->|"main out 1 to in 0"| n16
+  n21 -->|"ai_tool out 0 to in 0"| n29
+  n1 -->|"main out 0 to in 0"| n13
+  n1 -->|"main out 1 to in 0"| n0
+  n20 -->|"ai_languageModel out 0 to in 0"| n29
+  n10 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n8
+  n4 -->|"main out 1 to in 1"| n6
+  n24 -->|"main out 0 to in 0"| n23
+  n11 -->|"ai_memory out 0 to in 0"| n29
+  n17 -->|"main out 0 to in 1"| n10
+  n28 -->|"main out 0 to in 0"| n30
+  n5 -->|"main out 0 to in 0"| n4
+  n13 -->|"main out 0 to in 0"| n2
+  n15 -->|"main out 0 to in 0"| n14
+  n27 -->|"main out 0 to in 0"| n25
+  n12 -->|"main out 0 to in 0"| n1
+  n7 -->|"main out 0 to in 0"| n19

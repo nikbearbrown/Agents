@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "slug": "schedule-mon-friday-09-00am",
+  "title": "Schedule Mon - Friday @ 09:00am",
+  "purpose": "Adapt the published “Schedule Mon - Friday @ 09:00am” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Mon - Friday @ 09:00am"
+  ],
+  "terminal_nodes": [
+    "Send a Direct Message to User 1",
+    "Send a Direct Message to User 2"
+  ],
+  "credential_types": [
+    "notionApi",
+    "slackOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Filter incomplete tasks only",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get All Slack Users (Darryn)",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get To Dos from Tasks Database",
+        "type": "n8n-nodes-base.notion",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Mon - Friday @ 09:00am",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Notion User Emails",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Set Slack User Full Name",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send a Direct Message to User 1",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send a Direct Message to User 2",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Switch for Notion Users Emails",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Slack User 1 Full Name",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Slack User 2 Full Name",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set Notion User Emails",
+        "to": "Set Slack User Full Name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Slack User Full Name",
+        "to": "Get To Dos from Tasks Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter incomplete tasks only",
+        "to": "Get All Slack Users (Darryn)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get All Slack Users (Darryn)",
+        "to": "Switch for Notion Users Emails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Slack User 1 Full Name",
+        "to": "Send a Direct Message to User 1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Slack User 2 Full Name",
+        "to": "Send a Direct Message to User 2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get To Dos from Tasks Database",
+        "to": "Filter incomplete tasks only",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch for Notion Users Emails",
+        "to": "Filter Slack User 1 Full Name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch for Notion Users Emails",
+        "to": "Filter Slack User 2 Full Name",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Mon - Friday @ 09:00am",
+        "to": "Set Notion User Emails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/schedule-mon-friday-09-00am/implementations/n8n",
+      "files": [
+        "agents/schedule-mon-friday-09-00am/implementations/n8n/schedule-mon-friday-09-00am.json"
+      ],
+      "sha256": "949dbacc905465fdceb359de65a0d9b72195176153d5e677ae8ef69eb78cd831",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/schedule-mon-friday-09-00am/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/schedule-mon-friday-09-00am/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/schedule-mon-friday-09-00am/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/schedule-mon-friday-09-00am/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/schedule-mon-friday-09-00am/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/schedule-mon-friday-09-00am/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/schedule-mon-friday-09-00am/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/schedule-mon-friday-09-00am/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/schedule-mon-friday-09-00am/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/schedule-mon-friday-09-00am/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/schedule-mon-friday-09-00am/implementations/n8n/provenance.json"
+}

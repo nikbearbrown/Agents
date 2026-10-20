@@ -1,0 +1,20 @@
+flowchart LR
+  n0["Webhook"]
+  n1["Code"]
+  n2["Split Out1"]
+  n3["OpenAI Chat Model1"]
+  n4["Get Changes1"]
+  n5["Skip File Change1"]
+  n6["Parse Last Diff Line1"]
+  n7["Post Discussions1"]
+  n8["Need Review1"]
+  n9["Basic LLM Chain1"]
+  n1 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n6
+  n3 -->|"ai_languageModel out 0 to in 0"| n9
+  n6 -->|"main out 0 to in 0"| n1

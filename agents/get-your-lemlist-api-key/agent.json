@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "slug": "get-your-lemlist-api-key",
+  "title": "Get your lemlist API key",
+  "purpose": "Adapt the published “Get your lemlist API key” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Lemlist Trigger - On new reply"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Structured Output Parser",
+    "Send alert to Slack",
+    "Lemlist - Unsubscribe",
+    "lemlist - Mark as interested"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Format text with Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Lemlist Trigger - On new reply",
+        "type": "n8n-nodes-base.lemlistTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send alert to Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Lemlist - Unsubscribe",
+        "type": "n8n-nodes-base.lemlist",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "lemlist - Mark as interested",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Categorize lemlist reply",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge data",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Route reply to the right branch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge data",
+        "to": "Route reply to the right branch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Categorize lemlist reply",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Categorize lemlist reply",
+        "to": "Merge data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Categorize lemlist reply",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format text with Markdown",
+        "to": "Merge data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format text with Markdown",
+        "to": "Categorize lemlist reply",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Lemlist Trigger - On new reply",
+        "to": "Format text with Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route reply to the right branch",
+        "to": "Send alert to Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route reply to the right branch",
+        "to": "Lemlist - Unsubscribe",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Route reply to the right branch",
+        "to": "lemlist - Mark as interested",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-your-lemlist-api-key/implementations/n8n",
+      "files": [
+        "agents/get-your-lemlist-api-key/implementations/n8n/get-your-lemlist-api-key.json"
+      ],
+      "sha256": "6f87c807bd319de03c7fd31588c18eed6ab3a471dd38e1b3bb2970390a5fd031",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-your-lemlist-api-key/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-your-lemlist-api-key/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-your-lemlist-api-key/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-your-lemlist-api-key/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-your-lemlist-api-key/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-your-lemlist-api-key/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-your-lemlist-api-key/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-your-lemlist-api-key/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-your-lemlist-api-key/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-your-lemlist-api-key/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-your-lemlist-api-key/implementations/n8n/provenance.json"
+}

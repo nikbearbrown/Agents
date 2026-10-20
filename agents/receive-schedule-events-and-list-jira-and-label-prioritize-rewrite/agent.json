@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "slug": "receive-schedule-events-and-list-jira-and-label-prioritize-rewrite",
+  "title": "receive schedule events and list jira and label prioritize rewrite",
+  "purpose": "Adapt the published “receive schedule events and list jira and label prioritize rewrite” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 22 executable nodes and 22 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Structured Output Parser",
+    "OpenAI Chat Model1",
+    "OpenAI Chat Model2",
+    "Add Comment to Issue"
+  ],
+  "credential_types": [
+    "jiraSoftwareCloudApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Open Tickets",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Simplify Ticket",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Label, Prioritize & Rewrite",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Update Labels, Priority and Description",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Recent Similar Issues Resolved",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Issue Ref",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Comments",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Simplify Comments",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Summarise Resolution",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Simplify Issue",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Return Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Attempt to Resolve Issue",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate1",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Add Comment to Issue",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Seen",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Aggregate",
+        "to": "Summarise Resolution",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Issue Ref",
+        "to": "Simplify Issue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate1",
+        "to": "Attempt to Resolve Issue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Comments",
+        "to": "Simplify Comments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Seen",
+        "to": "Simplify Ticket",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Return Fields",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simplify Issue",
+        "to": "Get Comments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Aggregate1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Issue Ref",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Simplify Ticket",
+        "to": "Label, Prioritize & Rewrite",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Open Tickets",
+        "to": "Mark as Seen",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get Open Tickets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Label, Prioritize & Rewrite",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simplify Comments",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Summarise Resolution",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Attempt to Resolve Issue",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarise Resolution",
+        "to": "Return Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Attempt to Resolve Issue",
+        "to": "Add Comment to Issue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Label, Prioritize & Rewrite",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Label, Prioritize & Rewrite",
+        "to": "Update Labels, Priority and Description",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Recent Similar Issues Resolved",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Labels, Priority and Description",
+        "to": "Get Recent Similar Issues Resolved",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/n8n",
+      "files": [
+        "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/n8n/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite.json"
+      ],
+      "sha256": "424155730e803efc3c0529c689cc6b84994e276254592609f1393f33576de6ac",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/n8n/provenance.json"
+}

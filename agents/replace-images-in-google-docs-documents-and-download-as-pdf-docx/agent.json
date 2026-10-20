@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "slug": "replace-images-in-google-docs-documents-and-download-as-pdf-docx",
+  "title": "Replace Images in Google Docs Documents and Download as PDF/Docx",
+  "purpose": "Adapt the published “Replace Images in Google Docs Documents and Download as PDF/Docx” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Download File - PDF"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find Image ID in Docx",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Make file shareable publically (optional)",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Image URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Find & Copy Docx Template",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Own datasource",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Replace Image in Docx",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Download File - Docx",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Download File - PDF",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Image URL",
+        "to": "Find & Copy Docx Template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Own datasource",
+        "to": "Image URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download File - Docx",
+        "to": "Download File - PDF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Image ID in Docx",
+        "to": "Replace Image in Docx",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Replace Image in Docx",
+        "to": "Make file shareable publically (optional)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find & Copy Docx Template",
+        "to": "Find Image ID in Docx",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Own datasource",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Make file shareable publically (optional)",
+        "to": "Download File - Docx",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/n8n",
+      "files": [
+        "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/n8n/replace-images-in-google-docs-documents-and-download-as-pdf-docx.json"
+      ],
+      "sha256": "a662482f10cc796f9513830bc2100679662ba25fa763199cd7a421a5ee9a6551",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/n8n/provenance.json"
+}

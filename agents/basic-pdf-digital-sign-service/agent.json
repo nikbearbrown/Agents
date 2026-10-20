@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "slug": "basic-pdf-digital-sign-service",
+  "title": "Basic PDF Digital Sign Service",
+  "purpose": "Adapt the published “Basic PDF Digital Sign Service” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 27 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "API POST Endpoint",
+    "API GET Endpoint"
+  ],
+  "terminal_nodes": [
+    "POST Success Response",
+    "POST Error Response",
+    "GET Respond to Webhook"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Validate Key Gen Params",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Validate PDF Sign Params",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Validate PDF Upload",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Validate Key Upload",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Keys",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sign PDF",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Success Response",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Switch Operation",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Switch Upload Type",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Prepare input params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "set file path",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Convert PDF to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Write PDF File to Disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read PDF File from Disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert PFX to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Write PFX File to Disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read PFX File from Disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check PDF file is OK",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Check PFX file is OK",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "check success",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "set downlowd file info",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Read download file from Disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "API POST Endpoint",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "API GET Endpoint",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "POST Success Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "POST Error Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Sign PDF",
+        "to": "check success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Keys",
+        "to": "check success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check success",
+        "to": "Prepare Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check success",
+        "to": "POST Error Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "set file path",
+        "to": "Switch Operation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "API GET Endpoint",
+        "to": "set file path",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch Operation",
+        "to": "Prepare input params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch Operation",
+        "to": "Validate Key Gen Params",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch Operation",
+        "to": "Validate PDF Sign Params",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch Operation",
+        "to": "set downlowd file info",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "API POST Endpoint",
+        "to": "set file path",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch Upload Type",
+        "to": "Validate PDF Upload",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch Upload Type",
+        "to": "Validate Key Upload",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Convert PDF to File",
+        "to": "Write PDF File to Disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert PFX to File",
+        "to": "Write PFX File to Disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate Key Upload",
+        "to": "Convert PFX to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate PDF Upload",
+        "to": "Convert PDF to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check PDF file is OK",
+        "to": "check success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check PFX file is OK",
+        "to": "check success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare input params",
+        "to": "Switch Upload Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write PDF File to Disk",
+        "to": "Read PDF File from Disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write PFX File to Disk",
+        "to": "Read PFX File from Disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set downlowd file info",
+        "to": "Read download file from Disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read PDF File from Disk",
+        "to": "Check PDF file is OK",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read PFX File from Disk",
+        "to": "Check PFX file is OK",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate Key Gen Params",
+        "to": "Generate Keys",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Success Response",
+        "to": "POST Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate PDF Sign Params",
+        "to": "Sign PDF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read download file from Disk",
+        "to": "GET Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/basic-pdf-digital-sign-service/implementations/n8n",
+      "files": [
+        "agents/basic-pdf-digital-sign-service/implementations/n8n/basic-pdf-digital-sign-service.json"
+      ],
+      "sha256": "457bfa1bfa92534b95b561f2f99c159689220fec1ae4a41a8b830594d7419d2b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/basic-pdf-digital-sign-service/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/basic-pdf-digital-sign-service/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/basic-pdf-digital-sign-service/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/basic-pdf-digital-sign-service/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/basic-pdf-digital-sign-service/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/basic-pdf-digital-sign-service/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/basic-pdf-digital-sign-service/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/basic-pdf-digital-sign-service/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/basic-pdf-digital-sign-service/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/basic-pdf-digital-sign-service/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/basic-pdf-digital-sign-service/implementations/n8n/provenance.json"
+}

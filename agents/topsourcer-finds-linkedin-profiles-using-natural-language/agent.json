@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "slug": "topsourcer-finds-linkedin-profiles-using-natural-language",
+  "title": "TopSourcer - Finds LinkedIn Profiles using natural language",
+  "purpose": "Adapt the published “TopSourcer - Finds LinkedIn Profiles using natural language” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received"
+  ],
+  "terminal_nodes": [],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "httpHeaderAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Create a new sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Add columns to new sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "set page number for google search",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extracts all linkedin urls from the google http response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Boolean Search",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate a Boolean Search String",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "If desired results not reached",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Appends the results to the sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Adds 10 to start - Go to next page",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Columns to add",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "Google Boolean Search",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Columns to add",
+        "to": "Add columns to new sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create a new sheet",
+        "to": "Columns to add",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Boolean Search",
+        "to": "Extracts all linkedin urls from the google http response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add columns to new sheet",
+        "to": "set page number for google search",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Generate a Boolean Search String",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If desired results not reached",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Appends the results to the sheet",
+        "to": "Adds 10 to start - Go to next page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate a Boolean Search String",
+        "to": "Create a new sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set page number for google search",
+        "to": "If desired results not reached",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Adds 10 to start - Go to next page",
+        "to": "If desired results not reached",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extracts all linkedin urls from the google http response",
+        "to": "Appends the results to the sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/n8n",
+      "files": [
+        "agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/n8n/topsourcer-finds-linkedin-profiles-using-natural-language.json"
+      ],
+      "sha256": "4f5a654b08bc5be9c4ce19368c8e130f7848968449dc24a6e5e07720711affc4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/n8n/provenance.json"
+}

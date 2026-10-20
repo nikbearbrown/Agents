@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "slug": "1-add-your-credentials-7a93229f",
+  "title": "1/ Add Your credentials",
+  "purpose": "Adapt the published “1/ Add Your credentials” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger Workflow"
+  ],
+  "terminal_nodes": [
+    "Update Description"
+  ],
+  "credential_types": [
+    "youTubeOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Config",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Generate Description",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Check if has changed",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Update Description",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Trigger Workflow",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "List all videos",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Config",
+        "to": "List all videos",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List all videos",
+        "to": "Generate Description",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger Workflow",
+        "to": "Config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if has changed",
+        "to": "Update Description",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Description",
+        "to": "Check if has changed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/1-add-your-credentials-7a93229f/implementations/n8n",
+      "files": [
+        "agents/1-add-your-credentials-7a93229f/implementations/n8n/1-add-your-credentials-7a93229f.json"
+      ],
+      "sha256": "bdb4ef9276f2e1e7cf1560e7f03e0c7ed6507380f9435a1d6080c63302f6cc15",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/1-add-your-credentials-7a93229f/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/1-add-your-credentials-7a93229f/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/1-add-your-credentials-7a93229f/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/1-add-your-credentials-7a93229f/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/1-add-your-credentials-7a93229f/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/1-add-your-credentials-7a93229f/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/1-add-your-credentials-7a93229f/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/1-add-your-credentials-7a93229f/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/1-add-your-credentials-7a93229f/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/1-add-your-credentials-7a93229f/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/1-add-your-credentials-7a93229f/implementations/n8n/provenance.json"
+}

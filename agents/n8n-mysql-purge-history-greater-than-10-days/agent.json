@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "slug": "n8n-mysql-purge-history-greater-than-10-days",
+  "title": "n8n_mysql_purge_history_greater_than_10_days",
+  "purpose": "Adapt the published “n8n_mysql_purge_history_greater_than_10_days” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'",
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "MySQL"
+  ],
+  "credential_types": [
+    "mySql"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MySQL",
+        "type": "n8n-nodes-base.mySql",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron",
+        "to": "MySQL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "MySQL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/implementations/n8n",
+      "files": [
+        "agents/n8n-mysql-purge-history-greater-than-10-days/implementations/n8n/n8n-mysql-purge-history-greater-than-10-days.json"
+      ],
+      "sha256": "eb11f2882cc5e17c191b05e4d5c210c518c0429cf7f6410bf90868a8c366c2d8",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/n8n-mysql-purge-history-greater-than-10-days/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/n8n-mysql-purge-history-greater-than-10-days/implementations/n8n/provenance.json"
+}

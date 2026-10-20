@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "slug": "sync-new-shopify-customers-to-odoo-contacts",
+  "title": "Sync New Shopify Customers to Odoo Contacts",
+  "purpose": "Adapt the published “Sync New Shopify Customers to Odoo Contacts” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Shopify Trigger"
+  ],
+  "terminal_nodes": [
+    "Create Contact"
+  ],
+  "credential_types": [
+    "odooApi",
+    "shopifyAccessTokenApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search Odoo Contact",
+        "type": "n8n-nodes-base.odoo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Shopify Trigger",
+        "type": "n8n-nodes-base.shopifyTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Contact",
+        "type": "n8n-nodes-base.odoo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Code",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Code",
+        "to": "Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter",
+        "to": "Create Contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Shopify Trigger",
+        "to": "Search Odoo Contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Odoo Contact",
+        "to": "Code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/implementations/n8n",
+      "files": [
+        "agents/sync-new-shopify-customers-to-odoo-contacts/implementations/n8n/sync-new-shopify-customers-to-odoo-contacts.json"
+      ],
+      "sha256": "50d9023e92a50e44d702323b761c68c48025691c9d2a50123d07b5ac2d6615c5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/sync-new-shopify-customers-to-odoo-contacts/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/sync-new-shopify-customers-to-odoo-contacts/implementations/n8n/provenance.json"
+}

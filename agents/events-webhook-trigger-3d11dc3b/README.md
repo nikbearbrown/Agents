@@ -1,0 +1,131 @@
+# Events Webhook Trigger
+
+Adapt the published “Events Webhook Trigger” workflow to other implementations while preserving its documented behavior.
+
+**Specification: source-derived draft.** The source contains 45 executable nodes and 48 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.
+
+[Specification](specification.md) · [Machine-readable record](agent.json) · [Schemas](schemas/README.md) · [Fixtures](fixtures/README.md) · [Evidence](evaluations/README.md)
+
+## Workflow
+
+This initial Mermaid map preserves the source graph, including non-main connections and port numbers. It is an implementation-derived starting point for the shared design; it does not execute the workflow or prove its behavior. Disabled-node details and exact expressions remain in the source.
+
+```mermaid
+flowchart LR
+  n0["TheHive Trigger"]
+  n1["Edit Fields"]
+  n2["Task Modal"]
+  n3["HTTP Request"]
+  n4["Formatting Dictionaries"]
+  n5["Prep Fields For Slack"]
+  n6["Update Message with new Assignee"]
+  n7["Check if Case Options"]
+  n8["Case Slack Block Rebuild"]
+  n9["Close Case Block Rebuild"]
+  n10["Severity Case Block Rebuild1"]
+  n11["PAP Case Block Rebuild"]
+  n12["Prep Fields For PAP Slack"]
+  n13["Map Actions"]
+  n14["Build Final Block"]
+  n15["Prep Fields For TLP Slack"]
+  n16["Prep Fields For Status Slack"]
+  n17["Update Status in TheHive"]
+  n18["Close Case as False Positive"]
+  n19["Status Case Block Rebuild"]
+  n20["TLP Case Block Rebuild"]
+  n21["No Action Needed"]
+  n22["Post New Case To Slack"]
+  n23["Prep Fields For Slack - Close"]
+  n24["Prep Fields For Slack - Assign"]
+  n25["Prep Fields For Slack - Severity"]
+  n26["Update Case Severity"]
+  n27["Update Case PAP"]
+  n28["Update Case TLP"]
+  n29["Acknowledge Close Case to Slack"]
+  n30["Acknowledge Severity Update to Slack"]
+  n31["Acknowledge PAP Update to Slack"]
+  n32["Acknowledge TLP Update to Slack"]
+  n33["Acknowledge Status Update to Slack"]
+  n34["Acknowledge Modal Request to Slack"]
+  n35["Parse Message Type"]
+  n36["Respond positive to Slack when someone clicks a link"]
+  n37["Respond 204 to Slack"]
+  n38["Close Modal with 204 response"]
+  n39["Get Slack User#39;s Email From Slack"]
+  n40["Update TheHive Case with new Assignee"]
+  n41["Respond to Slack with 200 response"]
+  n42["Get Email From Slack to assign the task to in TheHive"]
+  n43["Add a task to TheHive"]
+  n44["Receive Button Press"]
+  n1 -->|"main out 0 to in 0"| n35
+  n13 -->|"main out 0 to in 0"| n14
+  n3 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n4
+  n27 -->|"main out 0 to in 0"| n11
+  n28 -->|"main out 0 to in 0"| n20
+  n14 -->|"main out 0 to in 0"| n6
+  n35 -->|"main out 0 to in 0"| n41
+  n35 -->|"main out 1 to in 0"| n29
+  n35 -->|"main out 2 to in 0"| n30
+  n35 -->|"main out 3 to in 0"| n34
+  n35 -->|"main out 4 to in 0"| n7
+  n35 -->|"main out 5 to in 0"| n31
+  n35 -->|"main out 6 to in 0"| n33
+  n35 -->|"main out 7 to in 0"| n32
+  n35 -->|"main out 8 to in 0"| n36
+  n44 -->|"main out 0 to in 0"| n1
+  n26 -->|"main out 0 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n38
+  n7 -->|"main out 1 to in 0"| n37
+  n5 -->|"main out 0 to in 0"| n22
+  n11 -->|"main out 0 to in 0"| n13
+  n20 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n13
+  n17 -->|"main out 0 to in 0"| n19
+  n12 -->|"main out 0 to in 0"| n27
+  n15 -->|"main out 0 to in 0"| n28
+  n19 -->|"main out 0 to in 0"| n13
+  n18 -->|"main out 0 to in 0"| n9
+  n16 -->|"main out 0 to in 0"| n17
+  n10 -->|"main out 0 to in 0"| n13
+  n38 -->|"main out 0 to in 0"| n42
+  n23 -->|"main out 0 to in 0"| n18
+  n24 -->|"main out 0 to in 0"| n39
+  n29 -->|"main out 0 to in 0"| n23
+  n31 -->|"main out 0 to in 0"| n12
+  n32 -->|"main out 0 to in 0"| n15
+  n25 -->|"main out 0 to in 0"| n26
+  n39 -->|"main out 0 to in 0"| n40
+  n34 -->|"main out 0 to in 0"| n2
+  n33 -->|"main out 0 to in 0"| n16
+  n41 -->|"main out 0 to in 0"| n24
+  n30 -->|"main out 0 to in 0"| n25
+  n40 -->|"main out 0 to in 0"| n8
+  n36 -->|"main out 0 to in 0"| n21
+  n42 -->|"main out 0 to in 0"| n43
+```
+
+[Diagram source](workflow.mmd)
+
+## Implementations
+
+| Implementation | Status |
+|---|---|
+| [n8n](implementations/n8n/README.md) | Sanitized source available; not runtime-tested |
+| [Plain Python](implementations/python/README.md) | Planned |
+| [Pydantic AI](implementations/pydantic-ai/README.md) | Planned |
+| [CrewAI Flow](implementations/crewai-flow/README.md) | Planned |
+| [CrewAI Crew](implementations/crewai-crew/README.md) | Planned |
+| [LangGraph](implementations/langgraph/README.md) | Planned |
+
+## Build or operate with an assistant
+
+[Claude](prompts/claude.md) · [Codex](prompts/codex.md) · [Grok Bot](prompts/grok-bot.md) · [Muse](prompts/muse.md) · [Dots](prompts/dots.md)
+
+Build instructions and operating instructions are separate. These are untested prompts, not additional working implementations.
+
+## Attribution
+
+Curated by Nik Bear Brown. Preserve the [n8n source provenance](implementations/n8n/provenance.json), [configuration record](implementations/n8n/configuration.json), and [license notice](../../licenses/zie619-mit.txt). Ported implementations must retain applicable upstream attribution; the repository has no blanket license replacing source licenses.

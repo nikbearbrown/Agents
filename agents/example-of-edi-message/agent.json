@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "slug": "example-of-edi-message",
+  "title": "Example of EDI Message",
+  "purpose": "Adapt the published “Example of EDI Message” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Email Trigger"
+  ],
+  "terminal_nodes": [
+    "Return Orders",
+    "Outbound Orders"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Order Information",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Return Orders",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Outbound Orders",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Order Type",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Email Trigger",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Subject includes EDI",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Body",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Email",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Parse EDI Message",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Order Info + Orderlines",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Flatten Data to Orderlines",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out by Line",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Email",
+        "to": "Extract Body",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Order Type",
+        "to": "Return Orders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Order Type",
+        "to": "Outbound Orders",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Extract Body",
+        "to": "Parse EDI Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email Trigger",
+        "to": "Subject includes EDI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Order Information",
+        "to": "Order Info + Orderlines",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse EDI Message",
+        "to": "Order Information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse EDI Message",
+        "to": "Flatten Data to Orderlines",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out by Line",
+        "to": "Order Info + Orderlines",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Subject includes EDI",
+        "to": "Get Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Order Info + Orderlines",
+        "to": "Order Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Flatten Data to Orderlines",
+        "to": "Split Out by Line",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/example-of-edi-message/implementations/n8n",
+      "files": [
+        "agents/example-of-edi-message/implementations/n8n/example-of-edi-message.json"
+      ],
+      "sha256": "f8deaff16a5529cf80533407388f6135ab13241bb96aaa42974ec82ae98d281d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/example-of-edi-message/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/example-of-edi-message/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/example-of-edi-message/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/example-of-edi-message/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/example-of-edi-message/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/example-of-edi-message/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/example-of-edi-message/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/example-of-edi-message/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/example-of-edi-message/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/example-of-edi-message/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/example-of-edi-message/implementations/n8n/provenance.json"
+}

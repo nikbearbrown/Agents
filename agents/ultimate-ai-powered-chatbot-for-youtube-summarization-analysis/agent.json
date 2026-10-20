@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "slug": "ultimate-ai-powered-chatbot-for-youtube-summarization-analysis",
+  "title": "⚡📽️ Ultimate AI-Powered Chatbot for YouTube Summarization & Analysis",
+  "purpose": "Adapt the published “⚡📽️ Ultimate AI-Powered Chatbot for YouTube Summarization & Analysis” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "Window Buffer Memory",
+    "gpt-4o-mini1",
+    "YouTube Video Agent",
+    "Respond with YouTube Details & Transcript",
+    "YouTube Processing Tool",
+    "DeepSeek-V3   Chat"
+  ],
+  "credential_types": [
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get YouTube Transcript",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o-mini1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "YouTube Video Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Create YouTube API URL",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Transcript Segments",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine Transcript Segments",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get YouTube Video Details",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge YouTube Details & Transcript",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Create One JSON Object",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond with YouTube Details & Transcript",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "YouTube Processing Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "DeepSeek-V3   Chat",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "gpt-4o-mini1",
+        "to": "YouTube Video Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Variables",
+        "to": "Create YouTube API URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Variables",
+        "to": "Get YouTube Transcript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "YouTube Video Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create One JSON Object",
+        "to": "Respond with YouTube Details & Transcript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create YouTube API URL",
+        "to": "Get YouTube Video Details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get YouTube Transcript",
+        "to": "Split Out Transcript Segments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "YouTube Processing Tool",
+        "to": "YouTube Video Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get YouTube Video Details",
+        "to": "Merge YouTube Details & Transcript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "YouTube Video Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Transcript Segments",
+        "to": "Merge YouTube Details & Transcript",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Split Out Transcript Segments",
+        "to": "Combine Transcript Segments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Workflow Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge YouTube Details & Transcript",
+        "to": "Create One JSON Object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/n8n",
+      "files": [
+        "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/n8n/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis.json"
+      ],
+      "sha256": "412985dcaa00879d350c1d563bad8bf3ec28721b21d6bd214a438b5f34e5718f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/n8n/provenance.json"
+}

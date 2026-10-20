@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "slug": "sort-item-lists-and-markdown-and-email-send",
+  "title": "sort item lists and markdown and email send",
+  "purpose": "Adapt the published “sort item lists and markdown and email send” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Send Email"
+  ],
+  "credential_types": [
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SortElements",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CreateMDReport",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "GetImg",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ImgBinary",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge2",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Move Binary Data1",
+        "type": "n8n-nodes-base.moveBinaryData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GetTimesheetRecords",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "GetImg",
+        "to": "ImgBinary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge2",
+        "to": "CreateMDReport",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Markdown",
+        "to": "Move Binary Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ImgBinary",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "SortElements",
+        "to": "GetImg",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SortElements",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CreateMDReport",
+        "to": "Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Move Binary Data1",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GetTimesheetRecords",
+        "to": "SortElements",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "GetTimesheetRecords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/implementations/n8n",
+      "files": [
+        "agents/sort-item-lists-and-markdown-and-email-send/implementations/n8n/sort-item-lists-and-markdown-and-email-send.json"
+      ],
+      "sha256": "8fe1a87860791180d0ea02a28df673166166b86fc1ebf36a0a0408468376a802",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/sort-item-lists-and-markdown-and-email-send/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/sort-item-lists-and-markdown-and-email-send/implementations/n8n/provenance.json"
+}

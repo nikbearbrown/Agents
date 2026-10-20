@@ -1,0 +1,475 @@
+{
+  "schema_version": 1,
+  "slug": "prevent-concurrent-workflow-runs-using-redis",
+  "title": "Prevent concurrent workflow runs using Redis",
+  "purpose": "Adapt the published “Prevent concurrent workflow runs using Redis” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 31 executable nodes and 24 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "When clicking ‘Test workflow’",
+    "If2",
+    "Set Workflow Active",
+    "Set Workflow Finished",
+    "Get Key",
+    "set continue",
+    "Stop and Error",
+    "Set Workflow Finished1",
+    "Stop and Error1",
+    "Set Workflow Finished2",
+    "Switch1"
+  ],
+  "credential_types": [
+    "redis"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If2",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Workflow Active",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow Active",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow Finished",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Key",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Key",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "UnSet Key",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Timeout",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "set continue",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Workflow Active1",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow Active1",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow Finished1",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "If1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Workflow Active2",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error1",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow Finished2",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait2",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait3",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow \"started\"",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow \"finishing\"",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Workflow \"loading\"",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Workflow Active3",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Switch1",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "Set Workflow Active1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Stop and Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "Set Workflow \"started\"",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "Stop and Error1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Wait",
+        "to": "Set Workflow Finished1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait1",
+        "to": "Set Workflow \"loading\"",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait2",
+        "to": "Set Workflow \"finishing\"",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait3",
+        "to": "Set Workflow Finished2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Get Key",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Set Key",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "UnSet Key",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Set Key",
+        "to": "set continue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "UnSet Key",
+        "to": "set continue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Timeout",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Workflow Active",
+        "to": "If2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Workflow Active1",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Workflow Active2",
+        "to": "If1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Workflow Active3",
+        "to": "Switch1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Workflow Active1",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Workflow \"loading\"",
+        "to": "Wait2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Workflow \"started\"",
+        "to": "Wait1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation, do nothing",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Workflow \"finishing\"",
+        "to": "Wait3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Set Timeout",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/implementations/n8n",
+      "files": [
+        "agents/prevent-concurrent-workflow-runs-using-redis/implementations/n8n/prevent-concurrent-workflow-runs-using-redis.json"
+      ],
+      "sha256": "d029f077f8735f6d826b4e99de2038ec50c118f0a4e8fe3f5fd8ef01e13b62d6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/prevent-concurrent-workflow-runs-using-redis/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/prevent-concurrent-workflow-runs-using-redis/implementations/n8n/provenance.json"
+}

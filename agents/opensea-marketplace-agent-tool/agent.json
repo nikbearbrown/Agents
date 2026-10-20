@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "slug": "opensea-marketplace-agent-tool",
+  "title": "OpenSea Marketplace Agent Tool",
+  "purpose": "Adapt the published “OpenSea Marketplace Agent Tool” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Workflow Input Trigger"
+  ],
+  "terminal_nodes": [
+    "Marketplace Agent Brain",
+    "Marketplace Agent Memory",
+    "OpenSea Marketplace Agent",
+    "OpenSea Get All Listings by Collection",
+    "OpenSea Get All Offers by Collection",
+    "OpenSea Get Best Listing by NFT",
+    "OpenSea Get Best Listings by Collection",
+    "OpenSea Get Best Offer by NFT",
+    "OpenSea Get Collection Offers",
+    "OpenSea Get Item Offers",
+    "OpenSea Get Listings",
+    "OpenSea Get Trait Offers",
+    "OpenSea Get Order"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Marketplace Agent Brain",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Marketplace Agent Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Marketplace Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Input Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get All Listings by Collection",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get All Offers by Collection",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get Best Listing by NFT",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get Best Listings by Collection",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get Best Offer by NFT",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get Collection Offers",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get Item Offers",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get Listings",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get Trait Offers",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenSea Get Order",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "OpenSea Get Order",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get Listings",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Input Trigger",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Marketplace Agent Brain",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get Item Offers",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Marketplace Agent Memory",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get Trait Offers",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get Best Offer by NFT",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get Collection Offers",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get Best Listing by NFT",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get All Offers by Collection",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get All Listings by Collection",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenSea Get Best Listings by Collection",
+        "to": "OpenSea Marketplace Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/opensea-marketplace-agent-tool/implementations/n8n",
+      "files": [
+        "agents/opensea-marketplace-agent-tool/implementations/n8n/opensea-marketplace-agent-tool.json"
+      ],
+      "sha256": "c2245ceadda78e253a2c2e8aa3b1cb092472f6cd756a3929cffe333e8d06bbd5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/opensea-marketplace-agent-tool/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/opensea-marketplace-agent-tool/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/opensea-marketplace-agent-tool/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/opensea-marketplace-agent-tool/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/opensea-marketplace-agent-tool/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/opensea-marketplace-agent-tool/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/opensea-marketplace-agent-tool/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/opensea-marketplace-agent-tool/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/opensea-marketplace-agent-tool/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/opensea-marketplace-agent-tool/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/opensea-marketplace-agent-tool/implementations/n8n/provenance.json"
+}

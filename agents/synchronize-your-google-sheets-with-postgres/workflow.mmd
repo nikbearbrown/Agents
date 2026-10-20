@@ -1,0 +1,15 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Compare Datasets"]
+  n2["Split Out Relevant Fields"]
+  n3["Retrieve Sheets Data"]
+  n4["Select Rows in Postgres"]
+  n5["Insert Rows"]
+  n6["Update Rows"]
+  n1 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 2 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 1"| n1
+  n2 -->|"main out 0 to in 0"| n1

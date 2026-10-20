@@ -1,0 +1,452 @@
+{
+  "schema_version": 1,
+  "slug": "2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset",
+  "title": "[2/3] Set up medoids (2 types) for anomaly detection (crops dataset)",
+  "purpose": "Adapt the published “[2/3] Set up medoids (2 types) for anomaly detection (crops dataset)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Set medoid id",
+    "Set medoid threshold score",
+    "Set text medoid id",
+    "Set text medoid threshold score"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "qdrantApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Total Points in Collection",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Cluster Distance Matrix",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scipy Sparse Matrix",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set medoid id",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Medoid Vector",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Prepare for Searching Threshold",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Searching Score",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Threshold Score",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Set medoid threshold score",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out1",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Textual (visual) crop descriptions",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Embed text",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Medoid by Text",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set text medoid id",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Prepare for Searching Threshold1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Threshold Score1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Searching Text Medoid Score",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Medoids Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Text Medoids Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Qdrant cluster variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Info About Crop Clusters",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Crop Counts",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set text medoid threshold score",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Embed text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Cluster Distance Matrix",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embed text",
+        "to": "Get Medoid by Text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out1",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Crop Counts",
+        "to": "Info About Crop Clusters",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Searching Score",
+        "to": "Threshold Score",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Threshold Score",
+        "to": "Set medoid threshold score",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Threshold Score1",
+        "to": "Set text medoid threshold score",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Medoid Vector",
+        "to": "Prepare for Searching Threshold",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Medoids Variables",
+        "to": "Total Points in Collection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Medoid by Text",
+        "to": "Set text medoid id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Medoid by Text",
+        "to": "Prepare for Searching Threshold1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scipy Sparse Matrix",
+        "to": "Set medoid id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scipy Sparse Matrix",
+        "to": "Get Medoid Vector",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Medoids Variables",
+        "to": "Textual (visual) crop descriptions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cluster Distance Matrix",
+        "to": "Scipy Sparse Matrix",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Info About Crop Clusters",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Qdrant cluster variables",
+        "to": "Medoids Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Qdrant cluster variables",
+        "to": "Text Medoids Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Total Points in Collection",
+        "to": "Crop Counts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Searching Text Medoid Score",
+        "to": "Threshold Score1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare for Searching Threshold",
+        "to": "Searching Score",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare for Searching Threshold1",
+        "to": "Searching Text Medoid Score",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Qdrant cluster variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Textual (visual) crop descriptions",
+        "to": "Split Out1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/n8n",
+      "files": [
+        "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/n8n/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset.json"
+      ],
+      "sha256": "7fa7b822e481c63d9f21c5c271bac88966e7f9d1ff8e7cc2d7508242955f8120",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/n8n/provenance.json"
+}

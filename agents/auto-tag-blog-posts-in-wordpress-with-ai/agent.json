@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "slug": "auto-tag-blog-posts-in-wordpress-with-ai",
+  "title": "Auto-Tag Blog Posts in WordPress with AI",
+  "purpose": "Adapt the published “Auto-Tag Blog Posts in WordPress with AI” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 22 executable nodes and 22 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "RSS Feed Trigger",
+    "Demo Usage in Another Workflow"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Auto-fixing Output Parser",
+    "OpenAI Chat Model1",
+    "Structured Output Parser",
+    "Wordpress"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "wordpressApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Auto-fixing Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "RSS Feed Trigger",
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Return article details",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop over articles",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "SET initial record",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "GET WP tags",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "POST WP tags",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "GET updated WP tags",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Keep matches",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Combine tag_ids",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine slugs",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "MOCK article",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Return missing tags",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Wordpress",
+        "type": "n8n-nodes-base.wordpress",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Demo Usage in Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Auto-Tag Posts in WordPress",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate tags for article",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "GET updated WP tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "POST WP tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET WP tags",
+        "to": "Combine slugs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep matches",
+        "to": "Combine tag_ids",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MOCK article",
+        "to": "Auto-Tag Posts in WordPress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "POST WP tags",
+        "to": "GET updated WP tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine slugs",
+        "to": "Return missing tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine tag_ids",
+        "to": "Loop over articles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RSS Feed Trigger",
+        "to": "Generate tags for article",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Generate tags for article",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop over articles",
+        "to": "SET initial record",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SET initial record",
+        "to": "GET WP tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET updated WP tags",
+        "to": "Keep matches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Return missing tags",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Return article details",
+        "to": "Wordpress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto-fixing Output Parser",
+        "to": "Generate tags for article",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate tags for article",
+        "to": "MOCK article",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto-Tag Posts in WordPress",
+        "to": "Return article details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Demo Usage in Another Workflow",
+        "to": "Loop over articles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/n8n",
+      "files": [
+        "agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/n8n/auto-tag-blog-posts-in-wordpress-with-ai.json"
+      ],
+      "sha256": "f434013838955439b6392d0bbc8691baef500bd20254be48199833c58a051ed7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/auto-tag-blog-posts-in-wordpress-with-ai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/n8n/provenance.json"
+}

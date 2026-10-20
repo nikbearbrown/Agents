@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-update-google-sheets-and-append-google-sheets",
+  "title": "http request and update google sheets and append google sheets",
+  "purpose": "Adapt the published “http request and update google sheets and append google sheets” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger - 08:00 am"
+  ],
+  "terminal_nodes": [
+    "Update Rate Sheet",
+    "Archive Rates"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Filter Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Final Outputs",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "USD Query",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Rate Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Archive Rates",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Format Output to JSON",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Trigger - 08:00 am",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "USD Query",
+        "to": "Format Output to JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "USD Query",
+        "to": "Filter Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Fields",
+        "to": "Final Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Outputs",
+        "to": "Update Rate Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Outputs",
+        "to": "Archive Rates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger - 08:00 am",
+        "to": "USD Query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Output to JSON",
+        "to": "Final Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/n8n",
+      "files": [
+        "agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/n8n/http-request-and-update-google-sheets-and-append-google-sheets.json"
+      ],
+      "sha256": "1a5cdf7c4eb2b6b75241e72ada98a5ad4ecda03e1c6ae3689de09139a546c3a3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-update-google-sheets-and-append-google-sheets/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/n8n/provenance.json"
+}

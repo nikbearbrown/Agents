@@ -1,0 +1,1254 @@
+{
+  "schema_version": 1,
+  "slug": "stage-1-research-for-api-documentation",
+  "title": "Stage 1 - Research for API Documentation",
+  "purpose": "Adapt the published “Stage 1 - Research for API Documentation” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 82 executable nodes and 91 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Recursive Character Text Splitter1",
+    "Default Data Loader",
+    "Google Gemini Chat Model",
+    "Embeddings Google Gemini",
+    "Embeddings Google Gemini1",
+    "Google Gemini Chat Model1",
+    "Response Empty",
+    "Response OK",
+    "Google Gemini Chat Model2",
+    "Embeddings Google Gemini2",
+    "Response OK1",
+    "Response Empty1",
+    "Response OK2",
+    "Response Scrape Error",
+    "Response No API Docs"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Web Search For API Schema",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scrape Webpage Contents",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Results to List",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter1",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Content Chunking @ 50k Chars",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Chunks",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Embedding Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "EventRouter",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Successful Runs",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "For Each Document...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Google Gemini",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Has API Documentation?",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store Document Embeddings",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Google Gemini1",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract API Operations",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search in Relevant Docs",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Remove Dupes",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Results",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Research",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Has Results?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Response Empty",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Response OK",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Combine Docs",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Template to List",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Query Templates",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "For Each Template...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Query & Docs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Identify Service Products",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract API Templates",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Google Gemini2",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search in Relevant Docs1",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine Docs1",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Query & Docs1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "For Each Template...1",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Merge Lists",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Remove Duplicates",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Append Row",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Response OK1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Has Operations?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Response Empty1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Research Pending",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Research Result",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Research Error",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Extract Pending",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Research Event",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract Event",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Result",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Extract Error",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get API Operations",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Contruct JSON Schema",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Upload to Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Set Upload Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Response OK2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Generate Event",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Generate Pending",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Generate",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Error",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Generate Result",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get All Extract",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get All Research",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "For Each Research...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "For Each Extract...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Wait1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "All Research Done?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "All Extract Done?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get All Generate",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "All Generate Done?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "For Each Generate...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Wait2",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Has Results?1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Response Scrape Error",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Has Results?3",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Response No API Docs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "For Each Research...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait1",
+        "to": "For Each Extract...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait2",
+        "to": "For Each Generate...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract",
+        "to": "Extract Result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract",
+        "to": "Extract Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Generate",
+        "to": "Generate Result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate",
+        "to": "Generate Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Research",
+        "to": "Research Result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Research",
+        "to": "Research Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Append Row",
+        "to": "Response OK1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "EventRouter",
+        "to": "Web Search For API Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "EventRouter",
+        "to": "Query Templates",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "EventRouter",
+        "to": "Get API Operations",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Merge Lists",
+        "to": "Has Operations?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Docs",
+        "to": "Query & Docs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Results?",
+        "to": "Results to List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Results?",
+        "to": "Response Empty",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Query & Docs",
+        "to": "For Each Template...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Dupes",
+        "to": "Scrape Webpage Contents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Docs1",
+        "to": "Query & Docs1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Error",
+        "to": "Wait1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Event",
+        "to": "Extract",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Results?1",
+        "to": "Has API Documentation?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Results?1",
+        "to": "Response Scrape Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Has Results?3",
+        "to": "Set Embedding Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Results?3",
+        "to": "Response No API Docs",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Query & Docs1",
+        "to": "For Each Template...1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data",
+        "to": "EventRouter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Result",
+        "to": "Wait1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Results",
+        "to": "Remove Dupes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Error",
+        "to": "Wait2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Event",
+        "to": "Generate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Research Error",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Research Event",
+        "to": "Research",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Pending",
+        "to": "Extract Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Result",
+        "to": "Wait2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get All Extract",
+        "to": "All Extract Done?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Operations?",
+        "to": "Remove Duplicates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Operations?",
+        "to": "Response Empty1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Query Templates",
+        "to": "Template to List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Research Result",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Results to List",
+        "to": "Filter Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Successful Runs",
+        "to": "Has Results?1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload to Drive",
+        "to": "Response OK2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Pending",
+        "to": "Generate Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get All Generate",
+        "to": "All Generate Done?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get All Research",
+        "to": "All Research Done?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Research Pending",
+        "to": "Research Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Chunks",
+        "to": "Store Document Embeddings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Template to List",
+        "to": "For Each Template...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "All Extract Done?",
+        "to": "Get All Generate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "All Extract Done?",
+        "to": "For Each Extract...",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Remove Duplicates",
+        "to": "Append Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Upload Fields",
+        "to": "Upload to Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "All Generate Done?",
+        "to": "For Each Generate...",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "All Research Done?",
+        "to": "Get All Extract",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "All Research Done?",
+        "to": "For Each Research...",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get API Operations",
+        "to": "Contruct JSON Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Store Document Embeddings",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Extract...",
+        "to": "Get All Generate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Extract...",
+        "to": "Extract Pending",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Contruct JSON Schema",
+        "to": "Set Upload Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Document...",
+        "to": "Response OK",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Document...",
+        "to": "Content Chunking @ 50k Chars",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "For Each Generate...",
+        "to": "Generate Pending",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "For Each Research...",
+        "to": "Get All Extract",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Research...",
+        "to": "Research Pending",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "For Each Template...",
+        "to": "Identify Service Products",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Template...",
+        "to": "Search in Relevant Docs",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Extract API Templates",
+        "to": "For Each Template...1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Template...1",
+        "to": "Extract API Operations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Template...1",
+        "to": "Search in Relevant Docs1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Extract API Operations",
+        "to": "Merge Lists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has API Documentation?",
+        "to": "Has Results?3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scrape Webpage Contents",
+        "to": "Successful Runs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search in Relevant Docs",
+        "to": "Combine Docs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Embedding Variables",
+        "to": "For Each Document...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Google Gemini",
+        "to": "Store Document Embeddings",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Execution Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Has API Documentation?",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search in Relevant Docs1",
+        "to": "Combine Docs1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Google Gemini1",
+        "to": "Search in Relevant Docs",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Google Gemini2",
+        "to": "Search in Relevant Docs1",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model1",
+        "to": "Extract API Operations",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model2",
+        "to": "Identify Service Products",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Identify Service Products",
+        "to": "Extract API Templates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Document Embeddings",
+        "to": "For Each Document...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Web Search For API Schema",
+        "to": "Has Results?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Content Chunking @ 50k Chars",
+        "to": "Split Out Chunks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get All Research",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter1",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/stage-1-research-for-api-documentation/implementations/n8n",
+      "files": [
+        "agents/stage-1-research-for-api-documentation/implementations/n8n/stage-1-research-for-api-documentation.json"
+      ],
+      "sha256": "b772bb43729dba253c856b19af7751e9ecfc215458d6f69e5f05e03516ffa72f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/stage-1-research-for-api-documentation/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/stage-1-research-for-api-documentation/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/stage-1-research-for-api-documentation/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/stage-1-research-for-api-documentation/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/stage-1-research-for-api-documentation/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/stage-1-research-for-api-documentation/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/stage-1-research-for-api-documentation/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/stage-1-research-for-api-documentation/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/stage-1-research-for-api-documentation/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/stage-1-research-for-api-documentation/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/stage-1-research-for-api-documentation/implementations/n8n/provenance.json"
+}

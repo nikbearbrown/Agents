@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "slug": "easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval",
+  "title": "📄✨ Easy Wordpress Content Creation from PDF Document + Human In The Loop with Gmail Approval",
+  "purpose": "Adapt the published “📄✨ Easy Wordpress Content Creation from PDF Document + Human In The Loop with Gmail Approval” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Upload PDF"
+  ],
+  "terminal_nodes": [
+    "gpt-4o-mini",
+    "Send Error Message",
+    "Gmail Final Blog",
+    "Telegram Partial Blog",
+    "Save Image to imgbb.com"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "openAiApi",
+    "telegramApi",
+    "wordpressApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Upload PDF",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Text",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o-mini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "pollinations.ai",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Wordpress Post",
+        "type": "n8n-nodes-base.wordpress",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload Image to Wordpress",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Image on Wordpress Post",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Error Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Is there Title & Content?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Human In The Loop Approve Blog Post",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Is Approved?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail Final Blog",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Partial Blog",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Blog Post",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Write Blog Post",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Get Base64",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Save Image to imgbb.com",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Telegram Partial Blog",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Gmail Final Blog",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Markdown",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Base64",
+        "to": "Save Image to imgbb.com",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload PDF",
+        "to": "Extract Text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-4o-mini",
+        "to": "Write Blog Post",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Text",
+        "to": "Write Blog Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Approved?",
+        "to": "Create Wordpress Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Blog Post",
+        "to": "Is there Title & Content?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write Blog Post",
+        "to": "Get Blog Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "pollinations.ai",
+        "to": "Upload Image to Wordpress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "pollinations.ai",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "pollinations.ai",
+        "to": "Get Base64",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Wordpress Post",
+        "to": "pollinations.ai",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is there Title & Content?",
+        "to": "Human In The Loop Approve Blog Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is there Title & Content?",
+        "to": "Send Error Message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Upload Image to Wordpress",
+        "to": "Set Image on Wordpress Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Image on Wordpress Post",
+        "to": "Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Human In The Loop Approve Blog Post",
+        "to": "Is Approved?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/n8n",
+      "files": [
+        "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/n8n/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval.json"
+      ],
+      "sha256": "eab82abe5caef3a2af5912a387a41c9e7895c3c32e635647e9c8d03c79d977b7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/n8n/provenance.json"
+}

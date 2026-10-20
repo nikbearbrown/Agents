@@ -1,0 +1,27 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Split out detections"]
+  n2["Get recent detections from Crowdstrike"]
+  n3["Get detection details"]
+  n4["Split out behaviours"]
+  n5["Look up SHA in Virustotal"]
+  n6["Look up IOC in Virustotal"]
+  n7["Split In Batches"]
+  n8["Merge behaviour descriptions"]
+  n9["Set behaviour descriptions"]
+  n10["Create Jira issue"]
+  n11["Post notification on Slack"]
+  n12["Pause 1 second"]
+  n12 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n4
+  n10 -->|"main out 0 to in 0"| n11
+  n4 -->|"main out 0 to in 0"| n12
+  n1 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n10
+  n2 -->|"main out 0 to in 0"| n1

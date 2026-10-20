@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "slug": "statsinstagram",
+  "title": "StatsInstagram",
+  "purpose": "Adapt the published “StatsInstagram” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "Mattermost"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "mattermostApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Mattermost",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Date & Time",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get the date today",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read data on Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron",
+        "to": "Get the date today",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Date & Time",
+        "to": "Read data on Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the date today",
+        "to": "Date & Time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read data on Google Sheets",
+        "to": "Mattermost",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/statsinstagram/implementations/n8n",
+      "files": [
+        "agents/statsinstagram/implementations/n8n/statsinstagram.json"
+      ],
+      "sha256": "c2ab786a4edd1a0b44e01bf45d7854cda7a8ddeaa898dba75a17cb86f9725240",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/statsinstagram/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/statsinstagram/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/statsinstagram/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/statsinstagram/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/statsinstagram/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/statsinstagram/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/statsinstagram/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/statsinstagram/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/statsinstagram/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/statsinstagram/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/statsinstagram/implementations/n8n/provenance.json"
+}

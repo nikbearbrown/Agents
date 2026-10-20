@@ -1,0 +1,381 @@
+{
+  "schema_version": 1,
+  "slug": "trigger-scan-on-qualys-agent",
+  "title": "Trigger scan on Qualys agent",
+  "purpose": "Adapt the published “Trigger scan on Qualys agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 22 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger",
+    "When clicking \"Test workflow\""
+  ],
+  "terminal_nodes": [
+    "Delete Receipt",
+    "Post Vulnerability Scan Summary to Slack"
+  ],
+  "credential_types": [
+    "qualysApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Start VM Scan in Qualys",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Convert XML to JSON",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Scan Results",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Wait 5 Min",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Convert XML to JSON1",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check if Scan Finished",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Post Receipt",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Confirm Waiting",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Delete Receipt",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Demo Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Post Vulnerability Scan Summary to Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Begin Wait Loop",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Save receipt message timestamp",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Global Variables & Slack Channel",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Start VM Scan in Qualys",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge1",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Demo Data",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Wait 5 Min",
+        "to": "Fetch Scan Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Post Receipt",
+        "to": "Save receipt message timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Begin Wait Loop",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Confirm Waiting",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Wait 5 Min",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Fetch Scan Results",
+        "to": "Convert XML to JSON1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert XML to JSON",
+        "to": "Confirm Waiting",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert XML to JSON",
+        "to": "Begin Wait Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert XML to JSON1",
+        "to": "Check if Scan Finished",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Scan Finished",
+        "to": "Delete Receipt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Scan Finished",
+        "to": "Post Vulnerability Scan Summary to Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Scan Finished",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Start VM Scan in Qualys",
+        "to": "Convert XML to JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Demo Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Global Variables & Slack Channel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Demo Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Global Variables & Slack Channel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save receipt message timestamp",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Global Variables & Slack Channel",
+        "to": "Post Receipt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/trigger-scan-on-qualys-agent/implementations/n8n",
+      "files": [
+        "agents/trigger-scan-on-qualys-agent/implementations/n8n/trigger-scan-on-qualys-agent.json"
+      ],
+      "sha256": "ce87328c0b8a4e0d4e5419ccb87fe6d6093b6ede7cf2289e2d5182d8bbcb3e5e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/trigger-scan-on-qualys-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/trigger-scan-on-qualys-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/trigger-scan-on-qualys-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/trigger-scan-on-qualys-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/trigger-scan-on-qualys-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/trigger-scan-on-qualys-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/trigger-scan-on-qualys-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/trigger-scan-on-qualys-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/trigger-scan-on-qualys-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/trigger-scan-on-qualys-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/trigger-scan-on-qualys-agent/implementations/n8n/provenance.json"
+}

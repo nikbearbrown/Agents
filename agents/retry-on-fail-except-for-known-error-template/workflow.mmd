@@ -1,0 +1,21 @@
+flowchart LR
+  n0["Retry limit reached"]
+  n1["Set tries"]
+  n2["Update tries"]
+  n3["Wait"]
+  n4["Catch known error"]
+  n5["Replace Me"]
+  n6["Success"]
+  n7["Known Error"]
+  n8["Manual Trigger"]
+  n9["If tries left"]
+  n3 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 1 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n1
+  n9 -->|"main out 1 to in 0"| n0
+  n8 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 1 to in 0"| n3

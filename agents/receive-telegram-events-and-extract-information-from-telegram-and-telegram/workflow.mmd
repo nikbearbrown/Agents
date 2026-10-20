@@ -1,0 +1,23 @@
+flowchart LR
+  n0["Telegram Trigger"]
+  n1["Extract information from Telegram"]
+  n2["Telegram1"]
+  n3["Scrape user reels"]
+  n4["Split Videos"]
+  n5["Loop Over Items"]
+  n6["Download each reel"]
+  n7["Strip metadata"]
+  n8["Transcribe the video"]
+  n9["Telegram"]
+  n10["Upload to aws"]
+  n0 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 1 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n5

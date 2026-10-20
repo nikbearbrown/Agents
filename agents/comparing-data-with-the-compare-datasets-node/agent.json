@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "slug": "comparing-data-with-the-compare-datasets-node",
+  "title": "Comparing data with the Compare Datasets node",
+  "purpose": "Adapt the published “Comparing data with the Compare Datasets node” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\""
+  ],
+  "terminal_nodes": [
+    "Compare Datasets"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Dataset 1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Dataset 2",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Dataset 1",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dataset 2",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Dataset 1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Dataset 2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/implementations/n8n",
+      "files": [
+        "agents/comparing-data-with-the-compare-datasets-node/implementations/n8n/comparing-data-with-the-compare-datasets-node.json"
+      ],
+      "sha256": "bb4cb0183e6afa2b2aef8c814c67cfc8d23123e95ffb2d8d9bd66a636ee6c03d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/comparing-data-with-the-compare-datasets-node/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/comparing-data-with-the-compare-datasets-node/implementations/n8n/provenance.json"
+}

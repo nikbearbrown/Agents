@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "slug": "ensure-qdrant-collection-exists",
+  "title": "🚨Ensure Qdrant collection exists!",
+  "purpose": "Adapt the published “🚨Ensure Qdrant collection exists!” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 24 executable nodes and 22 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test workflow\"",
+    "Chat Trigger",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Embeddings Mistral Cloud",
+    "Default Data Loader",
+    "Recursive Character Text Splitter",
+    "Qdrant Recommend API",
+    "Mistral Cloud Chat Model",
+    "Get Tool Response",
+    "Save Recipes to DB",
+    "AI Agent",
+    "Qdrant Vector Store"
+  ],
+  "credential_types": [
+    "mistralCloudApi",
+    "qdrantApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get This Week's Menu",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Available Courses",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Server Data",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Course Metadata",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Get Recipe",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Mistral Cloud",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsMistralCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Course & Recipe",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Documents",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Trigger",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Recipe Details",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Qdrant Recommend API",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Mistral Cloud Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Tool Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Rate Limits",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Mistral Embeddings",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Use Qdrant Recommend API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Recipes From DB",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Save Recipes to DB",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Qdrant Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Recipe",
+        "to": "Extract Recipe Details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Trigger",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Documents",
+        "to": "Qdrant Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Documents",
+        "to": "Save Recipes to DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Qdrant Vector Store",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Server Data",
+        "to": "Extract Available Courses",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Course Metadata",
+        "to": "Merge Course & Recipe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Recipes From DB",
+        "to": "Get Tool Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get This Week's Menu",
+        "to": "Extract Server Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Qdrant Recommend API",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Rate Limits",
+        "to": "Get Mistral Embeddings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Course & Recipe",
+        "to": "Prepare Documents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Recipe Details",
+        "to": "Merge Course & Recipe",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Get Mistral Embeddings",
+        "to": "Use Qdrant Recommend API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Mistral Cloud",
+        "to": "Qdrant Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Wait for Rate Limits",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mistral Cloud Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Use Qdrant Recommend API",
+        "to": "Get Recipes From DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Available Courses",
+        "to": "Get Course Metadata",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Available Courses",
+        "to": "Get Recipe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Get This Week's Menu",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ensure-qdrant-collection-exists/implementations/n8n",
+      "files": [
+        "agents/ensure-qdrant-collection-exists/implementations/n8n/ensure-qdrant-collection-exists.json"
+      ],
+      "sha256": "9b9b7d32f2c3ba9c7290f282810d45108ebb163fdc034e4a83def68648571d72",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ensure-qdrant-collection-exists/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ensure-qdrant-collection-exists/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ensure-qdrant-collection-exists/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ensure-qdrant-collection-exists/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ensure-qdrant-collection-exists/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ensure-qdrant-collection-exists/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ensure-qdrant-collection-exists/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ensure-qdrant-collection-exists/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ensure-qdrant-collection-exists/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ensure-qdrant-collection-exists/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ensure-qdrant-collection-exists/implementations/n8n/provenance.json"
+}

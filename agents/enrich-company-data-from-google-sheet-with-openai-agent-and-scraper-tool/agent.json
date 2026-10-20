@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "slug": "enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool",
+  "title": "Enrich Company Data from Google Sheet with OpenAI Agent and Scraper Tool",
+  "purpose": "Adapt the published “Enrich Company Data from Google Sheet with OpenAI Agent and Scraper Tool” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Tool called from Agent",
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Structured Output Parser",
+    "OpenAI Chat Model",
+    "Call n8n workflow  : Scrape companies homepage content",
+    "Update Company's Row on Google Sheet",
+    "HTML to Markdown"
+  ],
+  "credential_types": [
+    "googleApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get rows from Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Call n8n workflow  : Scrape companies homepage content",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Company's Row on Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "ScrapingBee : Scrape company's homepage data ",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Tool called from Agent",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Set company url",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "HTML to Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Get rows from Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Update Company's Row on Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set company url",
+        "to": "ScrapingBee : Scrape company's homepage data ",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tool called from Agent",
+        "to": "Set company url",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "AI Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get rows from Google Sheet",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ScrapingBee : Scrape company's homepage data ",
+        "to": "HTML to Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call n8n workflow  : Scrape companies homepage content",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/n8n",
+      "files": [
+        "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/n8n/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool.json"
+      ],
+      "sha256": "b2271abe21b31217247905b3cdf91245566e3b7b3ae0a42ae6f392afbae8109c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/n8n/provenance.json"
+}

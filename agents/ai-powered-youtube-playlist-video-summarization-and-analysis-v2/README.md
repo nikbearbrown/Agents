@@ -1,0 +1,162 @@
+# ⚡AI-Powered YouTube Playlist &amp; Video Summarization and Analysis v2
+
+Adapt the published “⚡AI-Powered YouTube Playlist &amp; Video Summarization and Analysis v2” workflow to other implementations while preserving its documented behavior.
+
+**Specification: source-derived draft.** The source contains 60 executable nodes and 64 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.
+
+[Specification](specification.md) · [Machine-readable record](agent.json) · [Schemas](schemas/README.md) · [Fixtures](fixtures/README.md) · [Evidence](evaluations/README.md)
+
+## Workflow
+
+This initial Mermaid map preserves the source graph, including non-main connections and port numbers. It is an implementation-derived starting point for the shared design; it does not execute the workflow or prove its behavior. Disabled-node details and exact expressions remain in the source.
+
+```mermaid
+flowchart LR
+  n0["Google Gemini Chat Model1"]
+  n1["Handle Queries"]
+  n2["Split Out"]
+  n3["Summarize #38; Analyze Transcript"]
+  n4["Concatenate"]
+  n5["Split Out1"]
+  n6["Limit"]
+  n7["Qdrant Vector Store"]
+  n8["Recursive Character Text Splitter"]
+  n9["Embeddings Google Gemini"]
+  n10["Google Gemini Chat Model2"]
+  n11["Embeddings Google Gemini1"]
+  n12["Chat"]
+  n13["Video Titles"]
+  n14["Merge"]
+  n15["Edit Fields"]
+  n16["AI Agent"]
+  n17["Google Gemini Chat Model4"]
+  n18["Delete Collection"]
+  n19["Default Data Loader"]
+  n20["Chat Buffer Memory"]
+  n21["Full Summary"]
+  n22["Chat Buffer Memory1"]
+  n23["YouTube Transcript"]
+  n24["Message Intent"]
+  n25["Structured Output Parser1"]
+  n26["Update Context Intent"]
+  n27["Get Previous Context Intent"]
+  n28["Route Message Intent"]
+  n29["Process Status"]
+  n30["Simple Memory"]
+  n31["Simple Memory3"]
+  n32["Google Gemini Chat Model6"]
+  n33["Numb of Videos"]
+  n34["Default Intent"]
+  n35["Playlist Limit"]
+  n36["Playlist or Video"]
+  n37["Get Fields for Summary"]
+  n38["Update Context Process Done1"]
+  n39["Google Gemini Chat Model8"]
+  n40["Playlist HTTP Request"]
+  n41["YouTube Transcript1"]
+  n42["Video HTTP Request"]
+  n43["Get Title and Desc"]
+  n44["Split Out2"]
+  n45["Concatenate1"]
+  n46["Get Videos"]
+  n47["Get Playlist Videos Data"]
+  n48["Embeddings Google Gemini2"]
+  n49["Qdrant Vector Store3"]
+  n50["Answer questions with a vector store"]
+  n51["Qdrant Vector Store4"]
+  n52["Answer questions with a vector store1"]
+  n53["Google Gemini Chat Model"]
+  n54["Google Gemini Chat Model3"]
+  n55["Qdrant Vector Store2"]
+  n56["Embeddings Google Gemini4"]
+  n57["If"]
+  n58["Count Content"]
+  n59["Update Context Intent1"]
+  n57 -->|"main out 0 to in 0"| n59
+  n57 -->|"main out 1 to in 0"| n35
+  n12 -->|"main out 0 to in 0"| n27
+  n6 -->|"main out 0 to in 0"| n23
+  n6 -->|"main out 0 to in 0"| n13
+  n14 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n4
+  n46 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n6
+  n44 -->|"main out 0 to in 0"| n45
+  n4 -->|"main out 0 to in 0"| n14
+  n15 -->|"main out 0 to in 0"| n18
+  n45 -->|"main out 0 to in 0"| n14
+  n21 -->|"main out 0 to in 0"| n16
+  n13 -->|"main out 0 to in 1"| n14
+  n58 -->|"main out 0 to in 0"| n57
+  n30 -->|"ai_memory out 0 to in 0"| n24
+  n34 -->|"main out 0 to in 0"| n28
+  n24 -->|"main out 0 to in 0"| n34
+  n35 -->|"main out 0 to in 0"| n33
+  n35 -->|"main out 1 to in 0"| n36
+  n29 -->|"main out 0 to in 0"| n26
+  n31 -->|"ai_memory out 0 to in 0"| n33
+  n18 -->|"main out 0 to in 0"| n46
+  n36 -->|"main out 0 to in 0"| n42
+  n36 -->|"main out 1 to in 0"| n40
+  n20 -->|"ai_memory out 0 to in 0"| n1
+  n43 -->|"main out 0 to in 1"| n14
+  n42 -->|"main out 0 to in 0"| n41
+  n42 -->|"main out 0 to in 0"| n43
+  n23 -->|"main out 0 to in 0"| n2
+  n22 -->|"ai_memory out 0 to in 0"| n16
+  n19 -->|"ai_document out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n38
+  n41 -->|"main out 0 to in 0"| n44
+  n55 -->|"main out 0 to in 0"| n58
+  n49 -->|"ai_vectorStore out 0 to in 0"| n50
+  n51 -->|"ai_vectorStore out 0 to in 0"| n52
+  n28 -->|"main out 0 to in 0"| n29
+  n28 -->|"main out 1 to in 0"| n1
+  n28 -->|"main out 2 to in 0"| n1
+  n40 -->|"main out 0 to in 0"| n47
+  n26 -->|"main out 0 to in 0"| n55
+  n37 -->|"main out 0 to in 0"| n21
+  n59 -->|"main out 0 to in 0"| n1
+  n9 -->|"ai_embedding out 0 to in 0"| n7
+  n47 -->|"main out 0 to in 0"| n5
+  n53 -->|"ai_languageModel out 0 to in 0"| n52
+  n11 -->|"ai_embedding out 0 to in 0"| n49
+  n48 -->|"ai_embedding out 0 to in 0"| n51
+  n56 -->|"ai_embedding out 0 to in 0"| n55
+  n0 -->|"ai_languageModel out 0 to in 0"| n1
+  n10 -->|"ai_languageModel out 0 to in 0"| n3
+  n54 -->|"ai_languageModel out 0 to in 0"| n50
+  n17 -->|"ai_languageModel out 0 to in 0"| n16
+  n32 -->|"ai_languageModel out 0 to in 0"| n24
+  n39 -->|"ai_languageModel out 0 to in 0"| n33
+  n25 -->|"ai_outputParser out 0 to in 0"| n24
+  n27 -->|"main out 0 to in 0"| n24
+  n38 -->|"main out 0 to in 0"| n37
+  n3 -->|"main out 0 to in 0"| n15
+  n8 -->|"ai_textSplitter out 0 to in 0"| n19
+  n50 -->|"ai_tool out 0 to in 0"| n1
+  n52 -->|"ai_tool out 0 to in 0"| n16
+```
+
+[Diagram source](workflow.mmd)
+
+## Implementations
+
+| Implementation | Status |
+|---|---|
+| [n8n](implementations/n8n/README.md) | Sanitized source available; not runtime-tested |
+| [Plain Python](implementations/python/README.md) | Planned |
+| [Pydantic AI](implementations/pydantic-ai/README.md) | Planned |
+| [CrewAI Flow](implementations/crewai-flow/README.md) | Planned |
+| [CrewAI Crew](implementations/crewai-crew/README.md) | Planned |
+| [LangGraph](implementations/langgraph/README.md) | Planned |
+
+## Build or operate with an assistant
+
+[Claude](prompts/claude.md) · [Codex](prompts/codex.md) · [Grok Bot](prompts/grok-bot.md) · [Muse](prompts/muse.md) · [Dots](prompts/dots.md)
+
+Build instructions and operating instructions are separate. These are untested prompts, not additional working implementations.
+
+## Attribution
+
+Curated by Nik Bear Brown. Preserve the [n8n source provenance](implementations/n8n/provenance.json), [configuration record](implementations/n8n/configuration.json), and [license notice](../../licenses/zie619-mit.txt). Ported implementations must retain applicable upstream attribution; the repository has no blanket license replacing source licenses.

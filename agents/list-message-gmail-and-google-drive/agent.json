@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "slug": "list-message-gmail-and-google-drive",
+  "title": "list message gmail and google drive",
+  "purpose": "Adapt the published “list message gmail and google drive” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Get attachment Link"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDriveOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Gmail1",
+        "type": "n8n-nodes-base.gmail",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload File1",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get attachment Link",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Gmail1",
+        "to": "Upload File1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload File1",
+        "to": "Get attachment Link",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/list-message-gmail-and-google-drive/implementations/n8n",
+      "files": [
+        "agents/list-message-gmail-and-google-drive/implementations/n8n/list-message-gmail-and-google-drive.json"
+      ],
+      "sha256": "5534b34e650953cb4284ba86a3d94688b3cefded0e2fb8df081fd960871adaa7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-google-drive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-google-drive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-google-drive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-google-drive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-google-drive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/list-message-gmail-and-google-drive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/list-message-gmail-and-google-drive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/list-message-gmail-and-google-drive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/list-message-gmail-and-google-drive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/list-message-gmail-and-google-drive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/list-message-gmail-and-google-drive/implementations/n8n/provenance.json"
+}

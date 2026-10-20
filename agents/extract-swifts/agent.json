@@ -1,0 +1,417 @@
+{
+  "schema_version": 1,
+  "slug": "extract-swifts",
+  "title": "extract_swifts",
+  "purpose": "Adapt the published “extract_swifts” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 23 executable nodes and 24 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "MongoDB"
+  ],
+  "credential_types": [
+    "mongoDb",
+    "uprocApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTML Extract",
+        "type": "n8n-nodes-base.htmlExtract",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SplitInBatches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTML Extract1",
+        "type": "n8n-nodes-base.htmlExtract",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MongoDB1",
+        "type": "n8n-nodes-base.mongoDb",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "uProc",
+        "type": "n8n-nodes-base.uproc",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Documents",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "More Countries",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Page to Scrape",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "More Pages",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set More Pages",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate filename",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Binary File",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "File exists?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Write Binary File",
+        "type": "n8n-nodes-base.writeBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Binary File1",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare countries",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Directory",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MongoDB",
+        "type": "n8n-nodes-base.mongoDb",
+        "version": 1,
+        "disabled": true
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set",
+        "to": "Generate filename",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait",
+        "to": "HTTP Request1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "uProc",
+        "to": "Set Page to Scrape",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MongoDB1",
+        "to": "Set More Pages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "More Pages",
+        "to": "Set Page to Scrape",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "More Pages",
+        "to": "More Countries",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "File exists?",
+        "to": "Read Binary File1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File exists?",
+        "to": "Wait",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "HTML Extract",
+        "to": "Prepare countries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "HTML Extract",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTML Extract1",
+        "to": "Prepare Documents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request1",
+        "to": "Write Binary File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "More Countries",
+        "to": "SplitInBatches",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set More Pages",
+        "to": "More Pages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SplitInBatches",
+        "to": "uProc",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Directory",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Binary File",
+        "to": "File exists?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate filename",
+        "to": "Read Binary File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Documents",
+        "to": "MongoDB1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare countries",
+        "to": "SplitInBatches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Binary File1",
+        "to": "HTML Extract1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write Binary File",
+        "to": "Read Binary File1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Page to Scrape",
+        "to": "Set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Create Directory",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/extract-swifts/implementations/n8n",
+      "files": [
+        "agents/extract-swifts/implementations/n8n/extract-swifts.json"
+      ],
+      "sha256": "8a96bf94daf96e3f67c34f6addbbcfd7725562bac41b4010dea7bcd4066b8694",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/extract-swifts/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/extract-swifts/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/extract-swifts/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/extract-swifts/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/extract-swifts/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/extract-swifts/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/extract-swifts/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/extract-swifts/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/extract-swifts/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/extract-swifts/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/extract-swifts/implementations/n8n/provenance.json"
+}

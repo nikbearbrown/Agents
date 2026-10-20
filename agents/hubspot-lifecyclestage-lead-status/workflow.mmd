@@ -1,0 +1,41 @@
+flowchart LR
+  n0["EXTRACT CAMPAIGN DATA"]
+  n1["FETCH ALL CAMPAIGNS"]
+  n2["Loop Over Items"]
+  n3["UPDATE CAMPAIGN"]
+  n4["Merge"]
+  n5["Code"]
+  n6["Loop Over Items1"]
+  n7["HubSpot"]
+  n8["If"]
+  n9["Schedule Trigger"]
+  n10["UPSERT CAMPAIGN ACTIVITY"]
+  n11["HUBSPOT TABLE"]
+  n12["SEARCH"]
+  n13["Postgres1"]
+  n14["UPDATE HUBSPOT ACTIVITY TABLE"]
+  n15["SET SMARTLEAD API KEY"]
+  n16["Postgres"]
+  n17["Google Sheets"]
+  n8 -->|"main out 0 to in 0"| n11
+  n8 -->|"main out 1 to in 0"| n13
+  n5 -->|"main out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n2
+  n12 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n8
+  n16 -->|"main out 0 to in 0"| n17
+  n13 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 0 to in 0"| n14
+  n2 -->|"main out 1 to in 0"| n0
+  n2 -->|"main out 1 to in 0"| n3
+  n3 -->|"main out 0 to in 1"| n4
+  n6 -->|"main out 1 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n15
+  n1 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n5
+  n15 -->|"main out 0 to in 0"| n1
+  n15 -->|"main out 0 to in 0"| n16
+  n15 -->|"main out 0 to in 0"| n12
+  n10 -->|"main out 0 to in 0"| n4
+  n10 -->|"main out 1 to in 0"| n4
+  n14 -->|"main out 0 to in 0"| n6

@@ -1,0 +1,550 @@
+{
+  "schema_version": 1,
+  "slug": "investor-sentiment-dashboard",
+  "title": "Retail Investor Anxiety Index",
+  "purpose": "Adapt the published “Retail Investor Anxiety Index” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 30 executable nodes and 36 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger",
+    "Manual Run Trigger",
+    "Dashboard Webhook"
+  ],
+  "terminal_nodes": [
+    "Anthropic Model 1",
+    "Anthropic Model 2",
+    "Anthropic Model 3",
+    "Anthropic Model 4",
+    "Anthropic Model 5",
+    "Pipeline Response",
+    "Serve Dashboard HTML"
+  ],
+  "credential_types": [
+    "anthropicApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Manual Run Trigger",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch WSB",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Investing",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Stocks",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Reddit Feeds",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "1A: Raw Merge & Structural Clean",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "1B: Linguistic & Relevance Filter",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Keyword Pre-Scorer",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate for Claude",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Claude 1: Anxiety Score",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Claude 2: Narrative Velocity",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Claude 3: Herd Detection",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Claude 4: Conviction vs Uncertainty",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Claude 5: Crowd Cycle Stage",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 3",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 4",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 5",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Merge Claude Outputs",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Signal Aggregator",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Persist to File",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Quickchart URLs",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Write output.json",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Insert to Supabase",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Pipeline Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Dashboard Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Build Dashboard Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Serve Dashboard HTML",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch WSB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch Investing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch Stocks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Run Trigger",
+        "to": "Fetch WSB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Run Trigger",
+        "to": "Fetch Investing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Run Trigger",
+        "to": "Fetch Stocks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch WSB",
+        "to": "Merge Reddit Feeds",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Investing",
+        "to": "Merge Reddit Feeds",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Fetch Stocks",
+        "to": "Merge Reddit Feeds",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Merge Reddit Feeds",
+        "to": "1A: Raw Merge & Structural Clean",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "1A: Raw Merge & Structural Clean",
+        "to": "1B: Linguistic & Relevance Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "1B: Linguistic & Relevance Filter",
+        "to": "Keyword Pre-Scorer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keyword Pre-Scorer",
+        "to": "Aggregate for Claude",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 1: Anxiety Score",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 2: Narrative Velocity",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 3: Herd Detection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 4: Conviction vs Uncertainty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 5: Crowd Cycle Stage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude 1: Anxiety Score",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude 2: Narrative Velocity",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Claude 3: Herd Detection",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Claude 4: Conviction vs Uncertainty",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Claude 5: Crowd Cycle Stage",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Merge Claude Outputs",
+        "to": "Signal Aggregator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Signal Aggregator",
+        "to": "Persist to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Persist to File",
+        "to": "Generate Quickchart URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Quickchart URLs",
+        "to": "Write output.json",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write output.json",
+        "to": "Insert to Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Insert to Supabase",
+        "to": "Pipeline Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 1",
+        "to": "Claude 1: Anxiety Score",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 2",
+        "to": "Claude 2: Narrative Velocity",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 3",
+        "to": "Claude 3: Herd Detection",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 4",
+        "to": "Claude 4: Conviction vs Uncertainty",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 5",
+        "to": "Claude 5: Crowd Cycle Stage",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dashboard Webhook",
+        "to": "Build Dashboard Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Dashboard Response",
+        "to": "Serve Dashboard HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/investor-sentiment-dashboard/implementations/n8n",
+      "files": [
+        "agents/investor-sentiment-dashboard/implementations/n8n/investor-sentiment-dashboard.json"
+      ],
+      "sha256": "cf30119c50e75b1e22f564341874f11457830b89b94cd5c821eb19babafe2895",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/investor-sentiment-dashboard/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/investor-sentiment-dashboard/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/investor-sentiment-dashboard/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/investor-sentiment-dashboard/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/investor-sentiment-dashboard/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/investor-sentiment-dashboard/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/investor-sentiment-dashboard/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/investor-sentiment-dashboard/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/investor-sentiment-dashboard/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/investor-sentiment-dashboard/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/investor-sentiment-dashboard/implementations/n8n/provenance.json"
+}

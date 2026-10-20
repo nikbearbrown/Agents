@@ -1,0 +1,604 @@
+{
+  "schema_version": 1,
+  "slug": "auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato",
+  "title": "Auto-create and publish AI social videos with Telegram, GPT-4 and Blotato",
+  "purpose": "Adapt the published “Auto-create and publish AI social videos with Telegram, GPT-4 and Blotato” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 37 executable nodes and 37 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger Telegram Prompt or Image"
+  ],
+  "terminal_nodes": [
+    "Post to Instagram",
+    "Post to YouTube",
+    "Post to TikTok",
+    "Post to Facebook Page",
+    "Post to Threads",
+    "Post to Twitter (X)",
+    "Post to LinkedIn",
+    "Post to Bluesky",
+    "Post to Pinterest"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "httpBasicAuth",
+    "httpCustomAuth",
+    "httpHeaderAuth",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Upload Video to Blotato",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Instagram",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to YouTube",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to TikTok",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Facebook Page",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Threads",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Twitter (X)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to LinkedIn",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Bluesky",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Pinterest",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Trigger Telegram Prompt or Image",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Prompt or Image Input",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Condition Input Type (Image or Text)",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Download Image from Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Image File URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Image to Cloudinary",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Convert Image to Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Image-to-Video Rendering",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Image-Based Video URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Video with blotato",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for blotato Video Rendering",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get blotato Video URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Video Data (Image or Prompt)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Generate Music with Piapi",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Music Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Music File URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Script (GPT-4o-mini)",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Split Script",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Video + Music",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Fusion Completion",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Final Video URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Social Caption (GPT-4)",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Generate SEO Title (GPT-4)",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Append Video Data to Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Send Final Video to Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Caption to Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Assign Platform IDs for Blotato",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split Script",
+        "to": "Merge Video + Music",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Music File URL",
+        "to": "Generate Script (GPT-4o-mini)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Final Video URL",
+        "to": "Generate Social Caption (GPT-4)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Video + Music",
+        "to": "Wait for Fusion Completion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get blotato Video URL",
+        "to": "Merge Video Data (Image or Prompt)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Image to Video",
+        "to": "Wait for Image-to-Video Rendering",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Image File URL",
+        "to": "Upload Image to Cloudinary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Instagram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to YouTube",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to TikTok",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Facebook Page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Threads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Twitter (X)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to LinkedIn",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Bluesky",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Pinterest",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Caption to Telegram",
+        "to": "Assign Platform IDs for Blotato",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Music with Piapi",
+        "to": "Wait for Music Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image-Based Video URL",
+        "to": "Merge Video Data (Image or Prompt)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Music Generation",
+        "to": "Get Music File URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate SEO Title (GPT-4)",
+        "to": "Append Video Data to Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Image to Cloudinary",
+        "to": "Convert Image to Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Fusion Completion",
+        "to": "Get Final Video URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Video with blotato",
+        "to": "Wait for blotato Video Rendering",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Prompt or Image Input",
+        "to": "Condition Input Type (Image or Text)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Image from Telegram",
+        "to": "Extract Image File URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Final Video to Telegram",
+        "to": "Send Caption to Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Script (GPT-4o-mini)",
+        "to": "Split Script",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign Platform IDs for Blotato",
+        "to": "Upload Video to Blotato",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Social Caption (GPT-4)",
+        "to": "Generate SEO Title (GPT-4)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger Telegram Prompt or Image",
+        "to": "Split Prompt or Image Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for blotato Video Rendering",
+        "to": "Get blotato Video URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Append Video Data to Google Sheet",
+        "to": "Send Final Video to Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Image-to-Video Rendering",
+        "to": "Get Image-Based Video URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Video Data (Image or Prompt)",
+        "to": "Generate Music with Piapi",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Condition Input Type (Image or Text)",
+        "to": "Generate Video with blotato",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Condition Input Type (Image or Text)",
+        "to": "Download Image from Telegram",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/n8n",
+      "files": [
+        "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/n8n/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato.json"
+      ],
+      "sha256": "9963f6b388ea5be618f6e1b85d34be2b30dc67ad2b3a7564658eb0890100aec6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "slug": "parse-dmarc-reports",
+  "title": "Parse DMARC reports",
+  "purpose": "Adapt the published “Parse DMARC reports” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Input into database",
+    "Slack Post Message On Channel",
+    "Send Error Notification Email"
+  ],
+  "credential_types": [
+    "imap",
+    "mySql",
+    "slackOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Email Trigger (IMAP)",
+        "type": "n8n-nodes-base.emailReadImap",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "End date format",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If multiple records to parse",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Map fields for DB input and parse",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Begin format date",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Input into database",
+        "type": "n8n-nodes-base.mySql",
+        "version": 2.4,
+        "disabled": false
+      },
+      {
+        "name": "If issue with DKIM or SPF",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Rename Keys",
+        "type": "n8n-nodes-base.renameKeys",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Rename column for consistency",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Unzip File",
+        "type": "n8n-nodes-base.compression",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract XML data",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse XML data to JSON",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out For Separate Entries",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack Post Message On Channel",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": true
+      },
+      {
+        "name": "Send Error Notification Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": true
+      }
+    ],
+    "edges": [
+      {
+        "from": "Unzip File",
+        "to": "Extract XML data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename Keys",
+        "to": "Map fields for DB input and parse",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "End date format",
+        "to": "Input into database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "End date format",
+        "to": "If issue with DKIM or SPF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract XML data",
+        "to": "Parse XML data to JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Begin format date",
+        "to": "End date format",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email Trigger (IMAP)",
+        "to": "Unzip File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse XML data to JSON",
+        "to": "If multiple records to parse",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If issue with DKIM or SPF",
+        "to": "Slack Post Message On Channel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If issue with DKIM or SPF",
+        "to": "Send Error Notification Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If multiple records to parse",
+        "to": "Split Out For Separate Entries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If multiple records to parse",
+        "to": "Rename column for consistency",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Rename column for consistency",
+        "to": "Map fields for DB input and parse",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out For Separate Entries",
+        "to": "Rename Keys",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map fields for DB input and parse",
+        "to": "Begin format date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/parse-dmarc-reports/implementations/n8n",
+      "files": [
+        "agents/parse-dmarc-reports/implementations/n8n/parse-dmarc-reports.json"
+      ],
+      "sha256": "52e2e9eb932336c72dd36f568b991c7c43d7f438567c2c1adf9306675b78c8af",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/parse-dmarc-reports/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/parse-dmarc-reports/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/parse-dmarc-reports/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/parse-dmarc-reports/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/parse-dmarc-reports/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/parse-dmarc-reports/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/parse-dmarc-reports/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/parse-dmarc-reports/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/parse-dmarc-reports/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/parse-dmarc-reports/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/parse-dmarc-reports/implementations/n8n/provenance.json"
+}

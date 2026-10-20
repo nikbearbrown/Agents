@@ -1,0 +1,31 @@
+flowchart LR
+  n0["Extract from File"]
+  n1["OpenAI Chat Model1"]
+  n2["Structured Output Parser"]
+  n3["OpenAI Chat Model2"]
+  n4["Step 1 of 2 - Upload CV"]
+  n5["Save to Airtable"]
+  n6["Classify Document"]
+  n7["Upload File to Record"]
+  n8["Form Success"]
+  n9["Save to Airtable1"]
+  n10["Step 2 of 2 - Application Form"]
+  n11["Application Suitability Agent"]
+  n12["File Upload Retry"]
+  n13["Redirect To Step 2 of 2"]
+  n14["Submission Success"]
+  n5 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 1 to in 0"| n12
+  n0 -->|"main out 0 to in 0"| n6
+  n12 -->|"main out 0 to in 0"| n0
+  n9 -->|"main out 0 to in 0"| n8
+  n9 -->|"main out 1 to in 0"| n8
+  n1 -->|"ai_languageModel out 0 to in 0"| n11
+  n3 -->|"ai_languageModel out 0 to in 0"| n6
+  n14 -->|"main out 0 to in 0"| n13
+  n7 -->|"main out 0 to in 0"| n14
+  n4 -->|"main out 0 to in 0"| n0
+  n2 -->|"ai_outputParser out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n5
+  n10 -->|"main out 0 to in 0"| n9

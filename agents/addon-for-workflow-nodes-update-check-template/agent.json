@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "slug": "addon-for-workflow-nodes-update-check-template",
+  "title": "Addon for Workflow Nodes Update Check Template",
+  "purpose": "Adapt the published “Addon for Workflow Nodes Update Check Template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Summary"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send Summary",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Workflow",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Workflow",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Modify Workflow (if required)",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Start Reference",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Settings",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Settings",
+        "to": "Get Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Workflow",
+        "to": "Modify Workflow (if required)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Output",
+        "to": "Send Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start Reference",
+        "to": "Settings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Workflow",
+        "to": "Prepare Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Start Reference",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Modify Workflow (if required)",
+        "to": "Update Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/implementations/n8n",
+      "files": [
+        "agents/addon-for-workflow-nodes-update-check-template/implementations/n8n/addon-for-workflow-nodes-update-check-template.json"
+      ],
+      "sha256": "b7da72e24bfbef53d7d764141e173bbe23c0161ed2931b33319450a45e60ea43",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/addon-for-workflow-nodes-update-check-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/addon-for-workflow-nodes-update-check-template/implementations/n8n/provenance.json"
+}

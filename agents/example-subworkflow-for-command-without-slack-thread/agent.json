@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "slug": "example-subworkflow-for-command-without-slack-thread",
+  "title": "Example subworkflow for command WITHOUT Slack thread..",
+  "purpose": "Adapt the published “Example subworkflow for command WITHOUT Slack thread..” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 30 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook to call for Slack command",
+    "Command workflow trigger"
+  ],
+  "terminal_nodes": [
+    "send help",
+    "Reply to user that command was received",
+    "Send debug url",
+    "Alert user that thread was created",
+    "Add debug info",
+    "Execute target workflow",
+    "Unknown command",
+    "Reply to user directly",
+    "Found user",
+    "Confirm user was deleted",
+    "Replying to thread"
+  ],
+  "credential_types": [
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Start thread",
+        "type": "n8n-nodes-base.slack",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "send help",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Validate Slack token",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Reply to user that command was received",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "if has workflow",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set config",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Send debug url",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "if create thread",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Alert user that thread was created",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Add debug info",
+        "type": "n8n-nodes-base.slack",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute target workflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add thread info",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Handle other commands",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Set thread info",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Unknown command",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set vars",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Webhook to call for Slack command",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Reply to user directly",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Command workflow trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "if has flag",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If matches env variable",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Found user",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format data into nice structure",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "REPLACE ME WITH TRIGGER",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Delete user here for example",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": true
+      },
+      {
+        "name": "Get user here for example",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": true
+      },
+      {
+        "name": "Confirm user was deleted",
+        "type": "n8n-nodes-base.slack",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Replying to thread",
+        "type": "n8n-nodes-base.slack",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "parse command",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Validate webhook signature",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set vars",
+        "to": "Set config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set config",
+        "to": "Validate webhook signature",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if has flag",
+        "to": "If matches env variable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start thread",
+        "to": "Add debug info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start thread",
+        "to": "Set thread info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "parse command",
+        "to": "if has workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add thread info",
+        "to": "Execute target workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set thread info",
+        "to": "Add thread info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if has workflow",
+        "to": "if create thread",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if has workflow",
+        "to": "Handle other commands",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "if create thread",
+        "to": "Start thread",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if create thread",
+        "to": "Alert user that thread was created",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if create thread",
+        "to": "Add thread info",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "if create thread",
+        "to": "Send debug url",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "if create thread",
+        "to": "Execute target workflow",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Validate Slack token",
+        "to": "Reply to user that command was received",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate Slack token",
+        "to": "parse command",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Handle other commands",
+        "to": "send help",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Handle other commands",
+        "to": "Unknown command",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If matches env variable",
+        "to": "Get user here for example",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "REPLACE ME WITH TRIGGER",
+        "to": "Replying to thread",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "REPLACE ME WITH TRIGGER",
+        "to": "Delete user here for example",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Command workflow trigger",
+        "to": "Reply to user directly",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Command workflow trigger",
+        "to": "if has flag",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get user here for example",
+        "to": "Format data into nice structure",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate webhook signature",
+        "to": "Validate Slack token",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete user here for example",
+        "to": "Confirm user was deleted",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format data into nice structure",
+        "to": "Found user",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook to call for Slack command",
+        "to": "Set vars",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/implementations/n8n",
+      "files": [
+        "agents/example-subworkflow-for-command-without-slack-thread/implementations/n8n/example-subworkflow-for-command-without-slack-thread.json"
+      ],
+      "sha256": "c0363d50fc3844792bf10956a93a232666faf6cd90f2d88acb7e814bcb66a853",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/example-subworkflow-for-command-without-slack-thread/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/example-subworkflow-for-command-without-slack-thread/implementations/n8n/provenance.json"
+}

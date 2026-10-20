@@ -1,0 +1,29 @@
+flowchart LR
+  n0["Google Gemini Chat Model"]
+  n1["Basic LLM Chain"]
+  n2["Schedule Trigger #124; for send chart report"]
+  n3["Get Recent Data from Notions"]
+  n4["Summarize Transaction Data"]
+  n5["Generate Chart"]
+  n6["Send Chart Image to Group or Private Chat"]
+  n7["Convert Data to JSON chart payload"]
+  n8["Telegram Trigger #124; When recive photo"]
+  n9["Get Image Info"]
+  n10["Parse To your object #124; Table"]
+  n11["Split Out #124; data transaction"]
+  n12["Sendback to chat and give summarize text"]
+  n13["Record To Notion Database"]
+  n14["Telegram"]
+  n14 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n11
+  n1 -->|"main out 0 to in 0"| n12
+  n0 -->|"ai_languageModel out 0 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n4
+  n10 -->|"ai_outputParser out 0 to in 0"| n1
+  n11 -->|"main out 0 to in 0"| n13
+  n7 -->|"main out 0 to in 0"| n5
+  n8 -->|"main out 0 to in 0"| n14
+  n2 -->|"main out 0 to in 0"| n3

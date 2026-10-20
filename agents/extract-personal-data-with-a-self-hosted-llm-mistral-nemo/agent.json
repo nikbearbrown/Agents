@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "slug": "extract-personal-data-with-a-self-hosted-llm-mistral-nemo",
+  "title": "Extract personal data with a self-hosted LLM Mistral NeMo",
+  "purpose": "Adapt the published “Extract personal data with a self-hosted LLM Mistral NeMo” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "Ollama Chat Model",
+    "Auto-fixing Output Parser",
+    "Structured Output Parser",
+    "On Error",
+    "Extract JSON Output"
+  ],
+  "credential_types": [
+    "ollamaApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Ollama Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Auto-fixing Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "On Error",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract JSON Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Basic LLM Chain",
+        "to": "Extract JSON Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain",
+        "to": "On Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Ollama Chat Model",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ollama Chat Model",
+        "to": "Basic LLM Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto-fixing Output Parser",
+        "to": "Basic LLM Chain",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Basic LLM Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/n8n",
+      "files": [
+        "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/n8n/extract-personal-data-with-a-self-hosted-llm-mistral-nemo.json"
+      ],
+      "sha256": "410a4e51145c38d88f28c56174111f2c72aa7316b7db19cab000cb61b3d76824",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/n8n/provenance.json"
+}

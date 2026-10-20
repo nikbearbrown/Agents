@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "slug": "create-custom-presentations-per-lead",
+  "title": "Create Custom Presentations per Lead",
+  "purpose": "Adapt the published “Create Custom Presentations per Lead” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "New Leads Arrived"
+  ],
+  "terminal_nodes": [
+    "Add Presentation ID to Lead List"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "googleSlidesOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Download by ID",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "MoveToLeadListFolder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Add Presentation ID to Lead List",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get all Leads",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Create new Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Merge Data for new Lead Document",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "New Leads Arrived",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "File Type?",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Combine Empty New Document with CSV Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Create Custom Presentation",
+        "type": "n8n-nodes-base.googleSlides",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Information from CSV file",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Copy Presentation Template",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "File Type?",
+        "to": "Download by ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all Leads",
+        "to": "MoveToLeadListFolder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download by ID",
+        "to": "Extract Information from CSV file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download by ID",
+        "to": "Create new Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create new Sheet",
+        "to": "Combine Empty New Document with CSV Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Leads Arrived",
+        "to": "File Type?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MoveToLeadListFolder",
+        "to": "Copy Presentation Template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Copy Presentation Template",
+        "to": "Create Custom Presentation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Custom Presentation",
+        "to": "Add Presentation ID to Lead List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Data for new Lead Document",
+        "to": "Get all Leads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Information from CSV file",
+        "to": "Combine Empty New Document with CSV Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Combine Empty New Document with CSV Data",
+        "to": "Merge Data for new Lead Document",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-custom-presentations-per-lead/implementations/n8n",
+      "files": [
+        "agents/create-custom-presentations-per-lead/implementations/n8n/create-custom-presentations-per-lead.json"
+      ],
+      "sha256": "00697697b327f3c06885f729191e19f8f62815ee4fadc6f6d73bc18410948c6c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-custom-presentations-per-lead/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-custom-presentations-per-lead/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-custom-presentations-per-lead/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-custom-presentations-per-lead/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-custom-presentations-per-lead/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-custom-presentations-per-lead/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-custom-presentations-per-lead/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-custom-presentations-per-lead/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-custom-presentations-per-lead/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-custom-presentations-per-lead/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-custom-presentations-per-lead/implementations/n8n/provenance.json"
+}

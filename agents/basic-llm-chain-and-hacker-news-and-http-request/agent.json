@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "slug": "basic-llm-chain-and-hacker-news-and-http-request",
+  "title": "basic llm chain and hacker news and http request",
+  "purpose": "Adapt the published “basic llm chain and hacker news and http request” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "GetTopicFromToLearn"
+  ],
+  "terminal_nodes": [
+    "Google Gemini Chat Model",
+    "Finished"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "SearchAskHN",
+        "type": "n8n-nodes-base.hackerNews",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "FindHNComments",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "CombineIntoSingleText",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SplitOutChildrenIDs",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GetTopicFromToLearn",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "SendEmailWithTopResources",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Convert2HTML",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Finished",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "SearchAskHN",
+        "to": "SplitOutChildrenIDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert2HTML",
+        "to": "SendEmailWithTopResources",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "FindHNComments",
+        "to": "CombineIntoSingleText",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain",
+        "to": "Convert2HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GetTopicFromToLearn",
+        "to": "SearchAskHN",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SplitOutChildrenIDs",
+        "to": "FindHNComments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CombineIntoSingleText",
+        "to": "Basic LLM Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Basic LLM Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SendEmailWithTopResources",
+        "to": "Finished",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/n8n",
+      "files": [
+        "agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/n8n/basic-llm-chain-and-hacker-news-and-http-request.json"
+      ],
+      "sha256": "755bdec1c99dba3d9e43e38dc402f6b787186e139e33c293b53c3160a46f0af4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/basic-llm-chain-and-hacker-news-and-http-request/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/n8n/provenance.json"
+}

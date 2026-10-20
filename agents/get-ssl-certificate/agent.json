@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "slug": "get-ssl-certificate",
+  "title": "Get SSL Certificate",
+  "purpose": "Adapt the published “Get SSL Certificate” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Send Expired Alarm"
+  ],
+  "credential_types": [
+    "telegramApi",
+    "uprocApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Domain Item",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get SSL Certificate",
+        "type": "n8n-nodes-base.uproc",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Expired Alarm",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Certificate  has  expired?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Create Domain Item",
+        "to": "Get SSL Certificate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get SSL Certificate",
+        "to": "Certificate  has  expired?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Create Domain Item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Certificate  has  expired?",
+        "to": "Send Expired Alarm",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-ssl-certificate/implementations/n8n",
+      "files": [
+        "agents/get-ssl-certificate/implementations/n8n/get-ssl-certificate.json"
+      ],
+      "sha256": "92182db195678d64787de11b7853cffd5d8baee65fe3c772c7774d553394addb",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-ssl-certificate/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-ssl-certificate/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-ssl-certificate/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-ssl-certificate/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-ssl-certificate/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-ssl-certificate/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-ssl-certificate/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-ssl-certificate/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-ssl-certificate/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-ssl-certificate/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-ssl-certificate/implementations/n8n/provenance.json"
+}

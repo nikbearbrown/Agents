@@ -1,0 +1,33 @@
+flowchart LR
+  n0["If charge has customer"]
+  n1["Get customer"]
+  n2["On schedule"]
+  n3["Remove duplicate customers"]
+  n4["Aggregate #96;amount_captured#96;"]
+  n5["Aggregate totals"]
+  n6["Create or update customer"]
+  n7["Merge data"]
+  n8["Get all charges"]
+  n9["Get HubSpot field"]
+  n10["Create field in HubSpot"]
+  n11["Configure"]
+  n12["Skip field checking"]
+  n13["Do nothing"]
+  n14["If field exists"]
+  n11 -->|"main out 0 to in 0"| n12
+  n7 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n11
+  n1 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n0
+  n8 -->|"main out 0 to in 1"| n7
+  n14 -->|"main out 0 to in 0"| n8
+  n14 -->|"main out 1 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n14
+  n12 -->|"main out 0 to in 0"| n8
+  n12 -->|"main out 1 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 1 to in 0"| n13
+  n10 -->|"main out 0 to in 0"| n8
+  n3 -->|"main out 0 to in 0"| n1

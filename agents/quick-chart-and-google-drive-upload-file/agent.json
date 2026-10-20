@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "quick-chart-and-google-drive-upload-file",
+  "title": "quick chart and google drive upload file",
+  "purpose": "Adapt the published “quick chart and google drive upload file” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Google Drive: Upload File"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "QuickChart",
+        "type": "n8n-nodes-base.quickChart",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields: Set JSON data to test",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive: Upload File",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "QuickChart",
+        "to": "Google Drive: Upload File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Edit Fields: Set JSON data to test",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields: Set JSON data to test",
+        "to": "QuickChart",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/quick-chart-and-google-drive-upload-file/implementations/n8n",
+      "files": [
+        "agents/quick-chart-and-google-drive-upload-file/implementations/n8n/quick-chart-and-google-drive-upload-file.json"
+      ],
+      "sha256": "ad4c6a5b19f48a614b02007d2ba19236e3b8f45d94fdb10fcf71be362fedd7be",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/quick-chart-and-google-drive-upload-file/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/quick-chart-and-google-drive-upload-file/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/quick-chart-and-google-drive-upload-file/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/quick-chart-and-google-drive-upload-file/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/quick-chart-and-google-drive-upload-file/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/quick-chart-and-google-drive-upload-file/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/quick-chart-and-google-drive-upload-file/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/quick-chart-and-google-drive-upload-file/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/quick-chart-and-google-drive-upload-file/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/quick-chart-and-google-drive-upload-file/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/quick-chart-and-google-drive-upload-file/implementations/n8n/provenance.json"
+}

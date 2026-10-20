@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "slug": "very-simple-human-in-the-loop-system-email-with-ai-e-imap",
+  "title": "Very simple Human in the loop system email with AI e IMAP",
+  "purpose": "Adapt the published “Very simple Human in the loop system email with AI e IMAP” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Send Email",
+    "OpenAI",
+    "OpenAI Chat Model"
+  ],
+  "credential_types": [
+    "imap",
+    "openAiApi",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Email Trigger (IMAP)",
+        "type": "n8n-nodes-base.emailReadImap",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Email Summarization Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Write email",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Approve Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Email text",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Approved?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "OpenAI",
+        "to": "Write email",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Markdown",
+        "to": "Email Summarization Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Approved?",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write email",
+        "to": "Set Email text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Approve Email",
+        "to": "Approved?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Email text",
+        "to": "Approve Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Email Summarization Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email Trigger (IMAP)",
+        "to": "Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email Summarization Chain",
+        "to": "Write email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/n8n",
+      "files": [
+        "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/n8n/very-simple-human-in-the-loop-system-email-with-ai-e-imap.json"
+      ],
+      "sha256": "e71c96c8c4d8311b716425a52475fb1e9d20593db2282a32e4202fbc8229b06e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/n8n/provenance.json"
+}

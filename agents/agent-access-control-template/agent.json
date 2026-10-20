@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "slug": "agent-access-control-template",
+  "title": "Agent Access Control Template",
+  "purpose": "Adapt the published “Agent Access Control Template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 23 executable nodes and 21 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Telegram Trigger",
+    "When Executed by Another Workflow"
+  ],
+  "terminal_nodes": [
+    "Simple Memory",
+    "OpenAI Chat Model",
+    "Check permissions",
+    "OpenAI Chat Model1",
+    "Simple Memory1",
+    "Check permissions1",
+    "list_granted_roles",
+    "list_allowed_tools",
+    "calculator",
+    "Wikipedia",
+    "get_coordinates",
+    "get_weather",
+    "weather_agent",
+    "Weather Agent",
+    "Reply: unknown user",
+    "Reply with results"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Simple Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Check permissions",
+        "type": "@n8n/n8n-nodes-langchain.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set input",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get user permissions",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Settings",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory1",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Check permissions1",
+        "type": "@n8n/n8n-nodes-langchain.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "list_granted_roles",
+        "type": "@n8n/n8n-nodes-langchain.toolCode",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "list_allowed_tools",
+        "type": "@n8n/n8n-nodes-langchain.toolCode",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "get_coordinates",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "get_weather",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "weather_agent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Weather Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Unknown user",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Reply: unknown user",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Reply with results",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Main Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Settings",
+        "to": "Weather Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set input",
+        "to": "Main Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wikipedia",
+        "to": "Main Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Main Agent",
+        "to": "Reply with results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "calculator",
+        "to": "Check permissions",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_weather",
+        "to": "Check permissions1",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unknown user",
+        "to": "Reply: unknown user",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unknown user",
+        "to": "Set input",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory",
+        "to": "Main Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "weather_agent",
+        "to": "Check permissions",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory1",
+        "to": "Weather Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_coordinates",
+        "to": "Check permissions1",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger",
+        "to": "Get user permissions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check permissions",
+        "to": "Main Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Main Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check permissions1",
+        "to": "Weather Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Weather Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "list_allowed_tools",
+        "to": "Check permissions",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "list_granted_roles",
+        "to": "Check permissions",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get user permissions",
+        "to": "Unknown user",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Settings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/agent-access-control-template/implementations/n8n",
+      "files": [
+        "agents/agent-access-control-template/implementations/n8n/agent-access-control-template.json"
+      ],
+      "sha256": "d052a47024333dd966da89b732c99cd8ee093455ebd599ff0f5eaff5682c72f4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/agent-access-control-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/agent-access-control-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/agent-access-control-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/agent-access-control-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/agent-access-control-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/agent-access-control-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/agent-access-control-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/agent-access-control-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/agent-access-control-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/agent-access-control-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/agent-access-control-template/implementations/n8n/provenance.json"
+}

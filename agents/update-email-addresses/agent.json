@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "slug": "update-email-addresses",
+  "title": "Update email addresses",
+  "purpose": "Adapt the published “Update email addresses” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Run workflow every day"
+  ],
+  "terminal_nodes": [
+    "Send Email through SMTP"
+  ],
+  "credential_types": [
+    "smtp",
+    "sshPassword"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "List upgradable packages",
+        "type": "n8n-nodes-base.ssh",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email through SMTP",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Run workflow every day",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Format as HTML list",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check if there are updates",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Format as HTML list",
+        "to": "Check if there are updates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run workflow every day",
+        "to": "List upgradable packages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List upgradable packages",
+        "to": "Format as HTML list",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if there are updates",
+        "to": "Send Email through SMTP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/update-email-addresses/implementations/n8n",
+      "files": [
+        "agents/update-email-addresses/implementations/n8n/update-email-addresses.json"
+      ],
+      "sha256": "66b991b9a3fba4fe78e237869e63b1385b85bf8b2cb7c50a47e3dff92ac17746",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/update-email-addresses/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/update-email-addresses/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/update-email-addresses/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/update-email-addresses/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/update-email-addresses/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/update-email-addresses/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/update-email-addresses/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/update-email-addresses/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/update-email-addresses/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/update-email-addresses/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/update-email-addresses/implementations/n8n/provenance.json"
+}

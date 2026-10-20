@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "slug": "reschedule-overdue-asana-tasks-and-clean-up-completed-tasks",
+  "title": "Reschedule overdue Asana tasks and clean up completed tasks",
+  "purpose": "Adapt the published “Reschedule overdue Asana tasks and clean up completed tasks” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Everyday at 7am"
+  ],
+  "terminal_nodes": [
+    "Set due date to Today",
+    "Clean up task"
+  ],
+  "credential_types": [
+    "asanaApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Everyday at 7am",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get user tasks",
+        "type": "n8n-nodes-base.asana",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get task infos",
+        "type": "n8n-nodes-base.asana",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Task is open?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Due date in the past?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set due date to Today",
+        "type": "n8n-nodes-base.asana",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Clean up task",
+        "type": "n8n-nodes-base.asana",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Task is open?",
+        "to": "Due date in the past?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Task is open?",
+        "to": "Clean up task",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get task infos",
+        "to": "Task is open?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get user tasks",
+        "to": "Get task infos",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Everyday at 7am",
+        "to": "Get user tasks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Due date in the past?",
+        "to": "Set due date to Today",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/n8n",
+      "files": [
+        "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/n8n/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks.json"
+      ],
+      "sha256": "35f3254004b358b87735e31553906ee4f9042a4b685c51f15793842c4f8795c3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,46 @@
+flowchart LR
+  n0["Manual Trigger"]
+  n1["Schedule Trigger"]
+  n2["Read Holdings File"]
+  n3["Parse JSON Holdings"]
+  n4["Calculate Portfolio Metrics"]
+  n5["Read Previous Summaries"]
+  n6["Fetch #38; Extract Stock Prices"]
+  n7["Parse Summaries CSV"]
+  n8["Calculate Daily Return"]
+  n9["Read Knowledge Base1"]
+  n10["Parse Knowledge Base CSV"]
+  n11["Read Portfolio History CSV"]
+  n12["Parse Portfolio History Data"]
+  n13["Build Portfolio Analysis"]
+  n14["RAG-Retrieve Context"]
+  n15["Extract AI Summary"]
+  n16["Split Out"]
+  n17["Generate AI Summary #40;Groq#41;"]
+  n18["Send a message"]
+  n19["Append Portfolio History1"]
+  n20["Convert Holdings to CSV"]
+  n21["Convert Summary to CSV"]
+  n22["Append Daily Summary"]
+  n0 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n11
+  n5 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n13
+  n13 -->|"main out 0 to in 0"| n5
+  n10 -->|"main out 0 to in 0"| n14
+  n14 -->|"main out 0 to in 0"| n17
+  n15 -->|"main out 0 to in 0"| n16
+  n15 -->|"main out 0 to in 0"| n21
+  n15 -->|"main out 0 to in 0"| n18
+  n17 -->|"main out 0 to in 0"| n15
+  n16 -->|"main out 0 to in 0"| n20
+  n20 -->|"main out 0 to in 0"| n19
+  n21 -->|"main out 0 to in 0"| n22

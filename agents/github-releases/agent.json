@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "slug": "github-releases",
+  "title": "Github Releases",
+  "purpose": "Adapt the published “Github Releases” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Error",
+    "Gemini",
+    "Redis Set Id"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "redis",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Limit",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Cron Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "GitHub Config",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If No Error",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "If New",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Null",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send Error",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "If Not Empty",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Date Format",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Information Extractor",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Message",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Gemini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Redis Set Id",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Code for Slack Tpl",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "RSS for Release",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Redis Get",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Loop",
+        "to": "If Not Empty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop",
+        "to": "RSS for Release",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Null",
+        "to": "Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit",
+        "to": "Redis Get",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini",
+        "to": "Information Extractor",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If New",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If New",
+        "to": "Null",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Redis Get",
+        "to": "If New",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Date Format",
+        "to": "Code for Slack Tpl",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If No Error",
+        "to": "Limit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If No Error",
+        "to": "Send Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If No Error",
+        "to": "Null",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Cron Trigger",
+        "to": "GitHub Config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Not Empty",
+        "to": "Information Extractor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Message",
+        "to": "Redis Set Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GitHub Config",
+        "to": "Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RSS for Release",
+        "to": "If No Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code for Slack Tpl",
+        "to": "Send Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Information Extractor",
+        "to": "Date Format",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/github-releases/implementations/n8n",
+      "files": [
+        "agents/github-releases/implementations/n8n/github-releases.json"
+      ],
+      "sha256": "ac44e668a9d3d8ce000117c3379815a3d23eea62d298a5b2cae4691473e4c68c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/github-releases/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/github-releases/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/github-releases/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/github-releases/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/github-releases/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/github-releases/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/github-releases/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/github-releases/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/github-releases/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/github-releases/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/github-releases/implementations/n8n/provenance.json"
+}

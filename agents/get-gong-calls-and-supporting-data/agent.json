@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "slug": "get-gong-calls-and-supporting-data",
+  "title": "Get Gong Calls and Supporting Data",
+  "purpose": "Adapt the published “Get Gong Calls and Supporting Data” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 20 executable nodes and 25 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Process All Call Transcripts"
+  ],
+  "credential_types": [
+    "gongApi",
+    "googleSheetsOAuth2Api",
+    "notionApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Gong",
+        "type": "n8n-nodes-base.gong",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Transcript Processor",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Call Aggregator",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Integration Aggregator",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Integrations",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Comma Separate Integrations",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Comma separate competitors",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get list of Competitors",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge 3 objects into one",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Call Data",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Call Data and Competitors",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Reduce down to 1 object",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Previous Phone Calls",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Isolate Only Call IDs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Only Process New Calls",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Calls",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Process All Call Transcripts",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Receive all Transcripts",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Gong",
+        "to": "Call Aggregator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Aggregator",
+        "to": "Merge 3 objects into one",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Calls",
+        "to": "Receive all Transcripts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Calls",
+        "to": "Transcript Processor",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Integrations",
+        "to": "Integration Aggregator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Call Data",
+        "to": "Split Out Call Data and Competitors",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transcript Processor",
+        "to": "Loop Over Calls",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Isolate Only Call IDs",
+        "to": "Only Process New Calls",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Integration Aggregator",
+        "to": "Comma Separate Integrations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only Process New Calls",
+        "to": "Loop Over Calls",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get list of Competitors",
+        "to": "Comma separate competitors",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive all Transcripts",
+        "to": "Process All Call Transcripts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Reduce down to 1 object",
+        "to": "Get Previous Phone Calls",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Gong",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Get list of Competitors",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Get Integrations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Previous Phone Calls",
+        "to": "Isolate Only Call IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge 3 objects into one",
+        "to": "Aggregate Call Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge 3 objects into one",
+        "to": "Reduce down to 1 object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Comma separate competitors",
+        "to": "Merge 3 objects into one",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Comma Separate Integrations",
+        "to": "Merge 3 objects into one",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Gong",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get Integrations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get list of Competitors",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Call Data and Competitors",
+        "to": "Only Process New Calls",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-gong-calls-and-supporting-data/implementations/n8n",
+      "files": [
+        "agents/get-gong-calls-and-supporting-data/implementations/n8n/get-gong-calls-and-supporting-data.json"
+      ],
+      "sha256": "9933d12203a91e6409b7e21170fe368d2e36d8c07a8a33308a1ff3e92e362412",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-gong-calls-and-supporting-data/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-gong-calls-and-supporting-data/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-gong-calls-and-supporting-data/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-gong-calls-and-supporting-data/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-gong-calls-and-supporting-data/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-gong-calls-and-supporting-data/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-gong-calls-and-supporting-data/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-gong-calls-and-supporting-data/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-gong-calls-and-supporting-data/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-gong-calls-and-supporting-data/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-gong-calls-and-supporting-data/implementations/n8n/provenance.json"
+}

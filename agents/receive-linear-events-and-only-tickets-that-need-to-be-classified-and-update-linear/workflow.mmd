@@ -1,0 +1,21 @@
+flowchart LR
+  n0["Linear Trigger"]
+  n1["Only tickets that need to be classified"]
+  n2["Update team"]
+  n3["Get all linear teams"]
+  n4["Set team ID"]
+  n5["Set me up"]
+  n6["Check if AI was able to find a team"]
+  n7["Notify in Slack"]
+  n8["Merge data"]
+  n9["OpenAI"]
+  n9 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 1"| n8
+  n6 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 1 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n3

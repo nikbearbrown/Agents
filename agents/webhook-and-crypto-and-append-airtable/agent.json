@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "slug": "webhook-and-crypto-and-append-airtable",
+  "title": "webhook and crypto and append airtable",
+  "purpose": "Adapt the published “webhook and crypto and append airtable” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 23 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook",
+    "Webhook1",
+    "Webhook2"
+  ],
+  "terminal_nodes": [
+    "Set Output",
+    "Set Error output",
+    "Set Output1",
+    "Set Error output1",
+    "Set Output2",
+    "404 Error",
+    "Set dashboard"
+  ],
+  "credential_types": [
+    "airtableApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract URL",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check URL",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Crypto",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set ID,shortUrl,longUrl",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find by ID",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Already exists ?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Output",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Error output",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Output1",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set input",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook1",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Error output1",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Id",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find by ID1",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Already exists ?1",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Output2",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Id",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "404 Error",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update clicks",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare clicks count",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook2",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find by ID2",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract stats",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set dashboard",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Crypto",
+        "to": "Set ID,shortUrl,longUrl",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Check URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable",
+        "to": "Set Output1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Id",
+        "to": "Extract Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Id",
+        "to": "Set Error output1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Webhook1",
+        "to": "Check Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook2",
+        "to": "Find by ID2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check URL",
+        "to": "Extract URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check URL",
+        "to": "Set Error output",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set input",
+        "to": "Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Id",
+        "to": "Find by ID1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find by ID",
+        "to": "Already exists ?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract URL",
+        "to": "Crypto",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find by ID1",
+        "to": "Already exists ?1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find by ID2",
+        "to": "Extract stats",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract stats",
+        "to": "Set dashboard",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update clicks",
+        "to": "Set Output2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Already exists ?",
+        "to": "Set Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Already exists ?",
+        "to": "Set input",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Already exists ?1",
+        "to": "Prepare clicks count",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Already exists ?1",
+        "to": "404 Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Prepare clicks count",
+        "to": "Update clicks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set ID,shortUrl,longUrl",
+        "to": "Find by ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/webhook-and-crypto-and-append-airtable/implementations/n8n",
+      "files": [
+        "agents/webhook-and-crypto-and-append-airtable/implementations/n8n/webhook-and-crypto-and-append-airtable.json"
+      ],
+      "sha256": "89af72b5443541dcb4ec32fe8b8b21edf07ead7926108245e0102641d381c878",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/webhook-and-crypto-and-append-airtable/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/webhook-and-crypto-and-append-airtable/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/webhook-and-crypto-and-append-airtable/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/webhook-and-crypto-and-append-airtable/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/webhook-and-crypto-and-append-airtable/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/webhook-and-crypto-and-append-airtable/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/webhook-and-crypto-and-append-airtable/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/webhook-and-crypto-and-append-airtable/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/webhook-and-crypto-and-append-airtable/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/webhook-and-crypto-and-append-airtable/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/webhook-and-crypto-and-append-airtable/implementations/n8n/provenance.json"
+}

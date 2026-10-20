@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "slug": "linkedin-content-automation-rss-gemini",
+  "title": "LinkedIn Content Automation (RSS + Gemini)",
+  "purpose": "Adapt the published “LinkedIn Content Automation (RSS + Gemini)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Add to Content Calendar"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "queryAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "RSS Feed - TechCrunch",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "RSS Feed - The Verge",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge RSS Feeds",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Last 24hrs",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Article Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gemini - Analyze Article",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Analysis",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Recommended Only",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Gemini - Create LinkedIn Post",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Gemini - Suggest Schedule",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Calendar Entry",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Add to Content Calendar",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Schedule Trigger",
+        "to": "RSS Feed - TechCrunch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "RSS Feed - The Verge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RSS Feed - TechCrunch",
+        "to": "Merge RSS Feeds",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RSS Feed - The Verge",
+        "to": "Merge RSS Feeds",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge RSS Feeds",
+        "to": "Filter Last 24hrs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Last 24hrs",
+        "to": "Extract Article Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Article Data",
+        "to": "Gemini - Analyze Article",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini - Analyze Article",
+        "to": "Parse Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Analysis",
+        "to": "Filter Recommended Only",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Recommended Only",
+        "to": "Gemini - Create LinkedIn Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Recommended Only",
+        "to": "Gemini - Suggest Schedule",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini - Create LinkedIn Post",
+        "to": "Prepare Calendar Entry",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini - Suggest Schedule",
+        "to": "Prepare Calendar Entry",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Calendar Entry",
+        "to": "Add to Content Calendar",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/linkedin-content-automation-rss-gemini/implementations/n8n",
+      "files": [
+        "agents/linkedin-content-automation-rss-gemini/implementations/n8n/linkedin-content-automation-rss-gemini.json"
+      ],
+      "sha256": "33914d8f9f0c3aaf62cca6ebe5463fe873b615b424ff102b23f1c881b1777784",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/linkedin-content-automation-rss-gemini/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/linkedin-content-automation-rss-gemini/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/linkedin-content-automation-rss-gemini/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/linkedin-content-automation-rss-gemini/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/linkedin-content-automation-rss-gemini/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/linkedin-content-automation-rss-gemini/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/linkedin-content-automation-rss-gemini/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/linkedin-content-automation-rss-gemini/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/linkedin-content-automation-rss-gemini/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/linkedin-content-automation-rss-gemini/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/linkedin-content-automation-rss-gemini/implementations/n8n/provenance.json"
+}

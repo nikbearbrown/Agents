@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "slug": "contact-form-text-classifier-for-ecommerce",
+  "title": "Contact Form Text Classifier for eCommerce",
+  "purpose": "Adapt the published “Contact Form Text Classifier for eCommerce” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission"
+  ],
+  "terminal_nodes": [
+    "OpenAI",
+    "Quote DB",
+    "Prod DB",
+    "General DB",
+    "Order DB",
+    "Other DB"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openAiApi",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Text Classifier",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Prod. Dep.",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Quote Dep.",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Gen. Dep.",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Order Dep.",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Other Dep.",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Quote DB",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Prod DB",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "General DB",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Order DB",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Other DB",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "OpenAI",
+        "to": "Text Classifier",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gen. Dep.",
+        "to": "General DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Order Dep.",
+        "to": "Order DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Other Dep.",
+        "to": "Other DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prod. Dep.",
+        "to": "Prod DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Quote Dep.",
+        "to": "Quote DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Quote Dep.",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Prod. Dep.",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Gen. Dep.",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Order Dep.",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Other Dep.",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "Text Classifier",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/implementations/n8n",
+      "files": [
+        "agents/contact-form-text-classifier-for-ecommerce/implementations/n8n/contact-form-text-classifier-for-ecommerce.json"
+      ],
+      "sha256": "543d55954a385d193e8e36fd939a2e45b70e68e52d1fd5000e2ae060801aa251",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/contact-form-text-classifier-for-ecommerce/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/contact-form-text-classifier-for-ecommerce/implementations/n8n/provenance.json"
+}

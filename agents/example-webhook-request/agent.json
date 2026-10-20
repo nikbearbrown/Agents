@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "slug": "example-webhook-request",
+  "title": "Example Webhook Request",
+  "purpose": "Adapt the published “Example Webhook Request” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Wait for Request"
+  ],
+  "terminal_nodes": [
+    "Item List Output Parser",
+    "OpenAI Chat Model",
+    "Send Chat Notification"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDocsOAuth2Api",
+    "openAiApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get RFP Data",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Item List Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserItemList",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "For Each Question...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Set Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Create new RFP Response Document",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Chat Notification",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email Notification",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Add Metadata to Response Doc",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Record Question & Answer in Response Doc",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Answer Question with Context",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Request",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Questions From RFP",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get RFP Data",
+        "to": "Set Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Variables",
+        "to": "Create new RFP Response Document",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Request",
+        "to": "Get RFP Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Extract Questions From RFP",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Question...",
+        "to": "Send Email Notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Question...",
+        "to": "Answer Question with Context",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Item List Output Parser",
+        "to": "Extract Questions From RFP",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Email Notification",
+        "to": "Send Chat Notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Questions From RFP",
+        "to": "For Each Question...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Metadata to Response Doc",
+        "to": "Extract Questions From RFP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Answer Question with Context",
+        "to": "Record Question & Answer in Response Doc",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create new RFP Response Document",
+        "to": "Add Metadata to Response Doc",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Record Question & Answer in Response Doc",
+        "to": "For Each Question...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/example-webhook-request/implementations/n8n",
+      "files": [
+        "agents/example-webhook-request/implementations/n8n/example-webhook-request.json"
+      ],
+      "sha256": "5d3a4460f2a14a31a3b26e877cc678e8d4966a229c49ac1295d173331e4c1cc2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/example-webhook-request/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/example-webhook-request/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/example-webhook-request/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/example-webhook-request/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/example-webhook-request/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/example-webhook-request/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/example-webhook-request/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/example-webhook-request/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/example-webhook-request/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/example-webhook-request/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/example-webhook-request/implementations/n8n/provenance.json"
+}

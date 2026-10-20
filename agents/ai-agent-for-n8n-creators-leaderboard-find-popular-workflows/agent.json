@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "slug": "ai-agent-for-n8n-creators-leaderboard-find-popular-workflows",
+  "title": "🔥📈🤖 AI Agent for n8n Creators Leaderboard - Find Popular Workflows",
+  "purpose": "Adapt the published “🔥📈🤖 AI Agent for n8n Creators Leaderboard - Find Popular Workflows” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 27 executable nodes and 25 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "gpt-4o-mini",
+    "Workflow Tool",
+    "Workflow Response",
+    "Save creator-summary.md",
+    "Summary Report",
+    "Ollama Chat Model",
+    "Window Buffer Memory"
+  ],
+  "credential_types": [
+    "ollamaApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "stats_aggregate_creators",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "stats_aggregate_workflows",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Global Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Parse Workflow Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Parse Creators Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Take Top 25 Creators",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter By Creator Username",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o-mini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "creator-summary",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "n8n Creator Stats Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Save creator-summary.md",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summary Report",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Ollama Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Creators Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Workflows Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge Creators & Workflows",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Creators",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Workflows",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sort By Top Weekly Creator Inserts",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sort By Top Weekly Workflow Inserts",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Take Top 300 Workflows",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Aggregate",
+        "to": "Workflow Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-4o-mini",
+        "to": "n8n Creator Stats Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Creators Data",
+        "to": "Merge Creators & Workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Tool",
+        "to": "n8n Creator Stats Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflows Data",
+        "to": "Merge Creators & Workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "creator-summary",
+        "to": "Save creator-summary.md",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Global Variables",
+        "to": "stats_aggregate_creators",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Global Variables",
+        "to": "stats_aggregate_workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Creators",
+        "to": "Sort By Top Weekly Creator Inserts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Creators Data",
+        "to": "Split Out Creators",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Workflow Data",
+        "to": "Split Out Workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Workflows",
+        "to": "Sort By Top Weekly Workflow Inserts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Take Top 25 Creators",
+        "to": "Creators Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "n8n Creator Stats Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Take Top 300 Workflows",
+        "to": "Workflows Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "n8n Creator Stats Agent",
+        "to": "Summary Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "n8n Creator Stats Agent",
+        "to": "creator-summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "stats_aggregate_creators",
+        "to": "Parse Creators Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "stats_aggregate_workflows",
+        "to": "Parse Workflow Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter By Creator Username",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Creators & Workflows",
+        "to": "Filter By Creator Username",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "n8n Creator Stats Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Global Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort By Top Weekly Creator Inserts",
+        "to": "Take Top 25 Creators",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort By Top Weekly Workflow Inserts",
+        "to": "Take Top 300 Workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/n8n",
+      "files": [
+        "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/n8n/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows.json"
+      ],
+      "sha256": "320fa519ef9d41b8f5c593d5dab89603bf7d7a772e0afb7ce8b385e74a51a86b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/n8n/provenance.json"
+}

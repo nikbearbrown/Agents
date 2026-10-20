@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "slug": "build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide",
+  "title": "Build a Phone Agent to qualify outbound leads and inbound calls with RetellAI -vide",
+  "purpose": "Adapt the published “Build a Phone Agent to qualify outbound leads and inbound calls with RetellAI -vide” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Detect new lead in Google Sheets",
+    "Receive inbound call from RetellAI (webhook)",
+    "Receive post-call data from RetellAI (webhook)"
+  ],
+  "terminal_nodes": [
+    "Call new lead using RetellAI",
+    "Send response to inbound webhook call",
+    "Send call summary email",
+    "Send confirmation email to lead"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleSheetsOAuth2Api",
+    "googleSheetsTriggerOAuth2Api",
+    "openAiApi",
+    "twilioApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Detect new lead in Google Sheets",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send SMS reminder to call lead in 5 minutes",
+        "type": "n8n-nodes-base.twilio",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 5 minutes before making call",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Call new lead using RetellAI",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Receive inbound call from RetellAI (webhook)",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check if phone number exists in Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Send response to inbound webhook call",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Receive post-call data from RetellAI (webhook)",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter for analyzed calls only",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if call was outbound",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update lead record in Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Send call summary email",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate call summary with OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Send confirmation email to lead",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Check if call was outbound",
+        "to": "Update lead record in Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if call was outbound",
+        "to": "Generate call summary with OpenAI",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Filter for analyzed calls only",
+        "to": "Check if call was outbound",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Detect new lead in Google Sheets",
+        "to": "Send SMS reminder to call lead in 5 minutes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate call summary with OpenAI",
+        "to": "Send confirmation email to lead",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait 5 minutes before making call",
+        "to": "Call new lead using RetellAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update lead record in Google Sheets",
+        "to": "Send call summary email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send SMS reminder to call lead in 5 minutes",
+        "to": "Wait 5 minutes before making call",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive inbound call from RetellAI (webhook)",
+        "to": "Check if phone number exists in Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if phone number exists in Google Sheets",
+        "to": "Send response to inbound webhook call",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive post-call data from RetellAI (webhook)",
+        "to": "Filter for analyzed calls only",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/n8n",
+      "files": [
+        "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/n8n/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide.json"
+      ],
+      "sha256": "69a6fa0a9e2510daf17c51604f0918b2141aee18f7a25a100e56c15de4f3c9d2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/n8n/provenance.json"
+}

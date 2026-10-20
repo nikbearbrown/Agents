@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "slug": "respond-to-webhook-and-respond-with-error-and-upload-s3",
+  "title": "respond to webhook and respond with error and upload s3",
+  "purpose": "Adapt the published “respond to webhook and respond with error and upload s3” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "n8n Form Trigger"
+  ],
+  "terminal_nodes": [
+    "Serve webpage",
+    "Respond with error"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "s3"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Vivid Pop Explosion",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "AI Dystopia",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Post-Analog Glitchscape",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Neon Fauvism",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "None",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Serve webpage",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Respond with error",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Upload image to S3",
+        "type": "n8n-nodes-base.s3",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Hyper-Surreal Escape",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "n8n Form Trigger",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Call hugginface inference api",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Route by style",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "None",
+        "to": "Call hugginface inference api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Dystopia",
+        "to": "Call hugginface inference api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Neon Fauvism",
+        "to": "Call hugginface inference api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route by style",
+        "to": "Hyper-Surreal Escape",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route by style",
+        "to": "Post-Analog Glitchscape",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Route by style",
+        "to": "AI Dystopia",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Route by style",
+        "to": "Neon Fauvism",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Route by style",
+        "to": "Vivid Pop Explosion",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Route by style",
+        "to": "None",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "n8n Form Trigger",
+        "to": "Route by style",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload image to S3",
+        "to": "Serve webpage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload image to S3",
+        "to": "Respond with error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Vivid Pop Explosion",
+        "to": "Call hugginface inference api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Hyper-Surreal Escape",
+        "to": "Call hugginface inference api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Post-Analog Glitchscape",
+        "to": "Call hugginface inference api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call hugginface inference api",
+        "to": "Upload image to S3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call hugginface inference api",
+        "to": "Respond with error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/n8n",
+      "files": [
+        "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/n8n/respond-to-webhook-and-respond-with-error-and-upload-s3.json"
+      ],
+      "sha256": "ee067d03bb38dcb528b0b2ad53c076b2817596ba603f43a28ef8fd264643cc76",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/n8n/provenance.json"
+}

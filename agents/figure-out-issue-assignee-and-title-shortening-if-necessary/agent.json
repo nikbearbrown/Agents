@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "slug": "figure-out-issue-assignee-and-title-shortening-if-necessary",
+  "title": "Figure out issue assignee and title (shortening if necessary)",
+  "purpose": "Adapt the published “Figure out issue assignee and title (shortening if necessary)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "n8n Form Trigger"
+  ],
+  "terminal_nodes": [
+    "Respond with error",
+    "Respond with error1"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "linearApi",
+    "notionApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Linear team details",
+        "type": "n8n-nodes-base.graphql",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get issue contents",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare issue data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Create linear issue",
+        "type": "n8n-nodes-base.linear",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set assignee and title",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Team missing?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set page URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Set team ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Add link to Notion block",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Get issue URL",
+        "type": "n8n-nodes-base.graphql",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Shorten title",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Unimported, unchecked to_do blocks only",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "n8n Form Trigger",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get issues",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Convert contents to Markdown",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Respond with error",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond with error1",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Aggregate",
+        "to": "Prepare issue data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get issues",
+        "to": "Unimported, unchecked to_do blocks only",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get issues",
+        "to": "Respond with error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set team ID",
+        "to": "Get issues",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set page URL",
+        "to": "Convert contents to Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get issue URL",
+        "to": "Add link to Notion block",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Shorten title",
+        "to": "Get issue contents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Team missing?",
+        "to": "Respond with error1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Team missing?",
+        "to": "Set team ID",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Set assignee and title",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "n8n Form Trigger",
+        "to": "Fetch Linear team details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get issue contents",
+        "to": "Set page URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare issue data",
+        "to": "Create linear issue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create linear issue",
+        "to": "Get issue URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set assignee and title",
+        "to": "Shorten title",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add link to Notion block",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Linear team details",
+        "to": "Team missing?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert contents to Markdown",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unimported, unchecked to_do blocks only",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/n8n",
+      "files": [
+        "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/n8n/figure-out-issue-assignee-and-title-shortening-if-necessary.json"
+      ],
+      "sha256": "e601bca907895e87a20fa659a5a1a3dcbf55580a1af607f4b244ba0b3485b427",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/n8n/provenance.json"
+}

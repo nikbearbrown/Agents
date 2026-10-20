@@ -1,0 +1,27 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["If"]
+  n2["Set Snapshot Id"]
+  n3["Download Snapshot"]
+  n4["Wait"]
+  n5["Check on the errors"]
+  n6["Check Snapshot Status"]
+  n7["Initiate a Webhook Notification"]
+  n8["Aggregate JSON Response"]
+  n9["Set Dataset Id, Request URL"]
+  n10["Create a binary data"]
+  n11["Write the file to disk"]
+  n12["HTTP Request to the specified URL"]
+  n1 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 1 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n9

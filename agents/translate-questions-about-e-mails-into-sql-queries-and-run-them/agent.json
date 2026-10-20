@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "slug": "translate-questions-about-e-mails-into-sql-queries-and-run-them",
+  "title": "Translate questions about e-mails into SQL queries and run them",
+  "purpose": "Adapt the published “Translate questions about e-mails into SQL queries and run them” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 23 executable nodes and 25 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Chat Trigger",
+    "When clicking \"Test workflow\"",
+    "WorkflowTrigger"
+  ],
+  "terminal_nodes": [
+    "Combine query result and chat answer",
+    "Ollama Chat Model",
+    "Format empty output"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Add table name to output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Convert data to binary",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Save file locally",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract data from file",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Trigger",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine schema data and chat input",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Load the schema from the local file",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract SQL query",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Check if query exists",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Format query results",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Combine query result and chat answer",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "List all columns in a table",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "List all tables in a database",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Ollama Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Postgres",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Add trailing semicolon",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Check for trailing semicolon",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "WorkflowTrigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "If ran manually",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "If file exists or already retried generating it",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Format empty output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "AI Agent",
+        "to": "Extract SQL query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Postgres",
+        "to": "Format query results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Trigger",
+        "to": "Load the schema from the local file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If ran manually",
+        "to": "Load the schema from the local file",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "WorkflowTrigger",
+        "to": "Load the schema from the local file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract SQL query",
+        "to": "Check for trailing semicolon",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ollama Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save file locally",
+        "to": "If ran manually",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format query results",
+        "to": "Combine query result and chat answer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if query exists",
+        "to": "Combine query result and chat answer",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Check if query exists",
+        "to": "Postgres",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if query exists",
+        "to": "Format empty output",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Add trailing semicolon",
+        "to": "Check if query exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert data to binary",
+        "to": "Save file locally",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract data from file",
+        "to": "Combine schema data and chat input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add table name to output",
+        "to": "Convert data to binary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List all columns in a table",
+        "to": "Add table name to output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for trailing semicolon",
+        "to": "Add trailing semicolon",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for trailing semicolon",
+        "to": "Check if query exists",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "List all tables in a database",
+        "to": "List all columns in a table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "List all tables in a database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine schema data and chat input",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load the schema from the local file",
+        "to": "If file exists or already retried generating it",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If file exists or already retried generating it",
+        "to": "Extract data from file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If file exists or already retried generating it",
+        "to": "List all tables in a database",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/n8n",
+      "files": [
+        "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/n8n/translate-questions-about-e-mails-into-sql-queries-and-run-them.json"
+      ],
+      "sha256": "5b54df37b75e3536d97a007df89e3d40990e31ff575c11de2a1ae0444a7d5ed6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/n8n/provenance.json"
+}

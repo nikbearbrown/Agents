@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "slug": "workflow-a-extract-store-raw-data",
+  "title": "Workflow A — Extract & Store Raw Data",
+  "purpose": "Adapt the published “Workflow A — Extract & Store Raw Data” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 20 executable nodes and 23 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Trigger — Start Workflow B",
+    "Log — Skip"
+  ],
+  "credential_types": [
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Fetch TechCrunch",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch VentureBeat",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch HackerNews",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch ArXiv",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Reddit",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Parse TechCrunch",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse VentureBeat",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse HackerNews",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse ArXiv",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Reddit",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Store TechCrunch",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Store VentureBeat",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Store HackerNews",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Store ArXiv",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Store Reddit",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Verify — Count Stored Items",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Check — New Items Exist?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Trigger — Start Workflow B",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Log — Skip",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch TechCrunch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch VentureBeat",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch HackerNews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch ArXiv",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch Reddit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch TechCrunch",
+        "to": "Parse TechCrunch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch VentureBeat",
+        "to": "Parse VentureBeat",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch HackerNews",
+        "to": "Parse HackerNews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch ArXiv",
+        "to": "Parse ArXiv",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Reddit",
+        "to": "Parse Reddit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse TechCrunch",
+        "to": "Store TechCrunch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse VentureBeat",
+        "to": "Store VentureBeat",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse HackerNews",
+        "to": "Store HackerNews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse ArXiv",
+        "to": "Store ArXiv",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Reddit",
+        "to": "Store Reddit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store TechCrunch",
+        "to": "Verify — Count Stored Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store VentureBeat",
+        "to": "Verify — Count Stored Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store HackerNews",
+        "to": "Verify — Count Stored Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store ArXiv",
+        "to": "Verify — Count Stored Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Reddit",
+        "to": "Verify — Count Stored Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify — Count Stored Items",
+        "to": "Check — New Items Exist?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check — New Items Exist?",
+        "to": "Trigger — Start Workflow B",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check — New Items Exist?",
+        "to": "Log — Skip",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/workflow-a-extract-store-raw-data/implementations/n8n",
+      "files": [
+        "agents/workflow-a-extract-store-raw-data/implementations/n8n/workflow-a-extract-store-raw-data.json"
+      ],
+      "sha256": "e42c459e57673e0fe5ebcfdc9930304d6134a962c3f82a54da5071fa0d62e2e6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/workflow-a-extract-store-raw-data/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/workflow-a-extract-store-raw-data/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/workflow-a-extract-store-raw-data/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/workflow-a-extract-store-raw-data/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/workflow-a-extract-store-raw-data/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/workflow-a-extract-store-raw-data/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/workflow-a-extract-store-raw-data/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/workflow-a-extract-store-raw-data/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/workflow-a-extract-store-raw-data/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/workflow-a-extract-store-raw-data/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/workflow-a-extract-store-raw-data/implementations/n8n/provenance.json"
+}

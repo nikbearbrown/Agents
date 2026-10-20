@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "slug": "get-node-types-and-split-out-and-aggregate",
+  "title": "get node types and split out and aggregate",
+  "purpose": "Adapt the published “get node types and split out and aggregate” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "prettify output"
+  ],
+  "credential_types": [
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "get node types",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "extract name and latest version",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Summarize",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "get all workflows",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "prettify output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "instance base url",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "get single workflow",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "node names that needs update",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "node names that needs update",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "get all workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize",
+        "to": "prettify output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get node types",
+        "to": "extract name and latest version",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get all workflows",
+        "to": "get single workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "instance base url",
+        "to": "get node types",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get single workflow",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "node names that needs update",
+        "to": "Summarize",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "extract name and latest version",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "instance base url",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/implementations/n8n",
+      "files": [
+        "agents/get-node-types-and-split-out-and-aggregate/implementations/n8n/get-node-types-and-split-out-and-aggregate.json"
+      ],
+      "sha256": "23ebecb83d86eeec1ca528a59b3571dd92a341f4ea2e0cae7ee0da4c80593d03",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-node-types-and-split-out-and-aggregate/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-node-types-and-split-out-and-aggregate/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,27 @@
+flowchart LR
+  n0["AI Agent"]
+  n1["Monitor Google Drive for New Files"]
+  n2["Download File from Google Drive"]
+  n3["Extract PDF Content"]
+  n4["Insert Document into Pinecone Vector Store"]
+  n5["Generate Document Embeddings #40;Google Gemini#41;"]
+  n6["Clean and Normalize PDF Text"]
+  n7["Load Document Data for Processing"]
+  n8["Split Document Text into Chunks"]
+  n9["Chat Message Trigger"]
+  n10["Retrieve Relevant Documents from Pinecone"]
+  n11["Generate Query Embeddings #40;Google Gemini#41;"]
+  n12["Generate Chat Prompt with Context"]
+  n13["OpenRouter Chat Model Interface"]
+  n3 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n3
+  n13 -->|"ai_languageModel out 0 to in 0"| n0
+  n8 -->|"ai_textSplitter out 0 to in 0"| n7
+  n12 -->|"main out 0 to in 0"| n0
+  n7 -->|"ai_document out 0 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n2
+  n11 -->|"ai_embedding out 0 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n12
+  n5 -->|"ai_embedding out 0 to in 0"| n4

@@ -1,0 +1,20 @@
+flowchart LR
+  n0["When clicking #34;Test workflow#34;"]
+  n1["Fetch Source Image"]
+  n2["Split Out Results Only"]
+  n3["Filter Score #62;#61; 0.9"]
+  n4["Crop Object From Image"]
+  n5["Set Variables"]
+  n6["Use Detr-Resnet-50 Object Classification"]
+  n7["Upload to Cloudinary"]
+  n8["Create Docs In Elasticsearch"]
+  n9["Fetch Source Image Again"]
+  n5 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n9
+  n7 -->|"main out 0 to in 0"| n8
+  n4 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n3
+  n9 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 0 to in 0"| n2

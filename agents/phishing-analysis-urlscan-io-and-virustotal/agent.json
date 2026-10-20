@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "slug": "phishing-analysis-urlscan-io-and-virustotal",
+  "title": "Phishing_analysis__URLScan_io_and_Virustotal_",
+  "purpose": "Adapt the published “Phishing_analysis__URLScan_io_and_Virustotal_” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\"",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "sends slack message"
+  ],
+  "credential_types": [
+    "microsoftOutlookOAuth2Api",
+    "slackApi",
+    "urlScanIoApi",
+    "virusTotalApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "sends slack message",
+        "type": "n8n-nodes-base.slack",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split In Batches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Mark as read",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "VirusTotal: Scan URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "VirusTotal: Get report",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Find indicators of compromise",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "URLScan: Get report",
+        "type": "n8n-nodes-base.urlScanIo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "URLScan: Scan URL",
+        "type": "n8n-nodes-base.urlScanIo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Has URL?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No error?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Not empty?",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 1 Minute",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all unread messages",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Reports",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Has URL?",
+        "to": "URLScan: Scan URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has URL?",
+        "to": "VirusTotal: Scan URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has URL?",
+        "to": "Split In Batches",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "No error?",
+        "to": "Merge Reports",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No error?",
+        "to": "Wait 1 Minute",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Not empty?",
+        "to": "sends slack message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as read",
+        "to": "Split In Batches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Reports",
+        "to": "Split In Batches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait 1 Minute",
+        "to": "URLScan: Get report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get all unread messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split In Batches",
+        "to": "Find indicators of compromise",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split In Batches",
+        "to": "Not empty?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "URLScan: Scan URL",
+        "to": "No error?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "URLScan: Get report",
+        "to": "Merge Reports",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "VirusTotal: Scan URL",
+        "to": "VirusTotal: Get report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "VirusTotal: Get report",
+        "to": "Merge Reports",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Get all unread messages",
+        "to": "Mark as read",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find indicators of compromise",
+        "to": "Has URL?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Get all unread messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/implementations/n8n",
+      "files": [
+        "agents/phishing-analysis-urlscan-io-and-virustotal/implementations/n8n/phishing-analysis-urlscan-io-and-virustotal.json"
+      ],
+      "sha256": "2e26063202b3cab8be33afc6be639fc9b34d71d66cb344d62f2bca02bbdf1868",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/phishing-analysis-urlscan-io-and-virustotal/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/phishing-analysis-urlscan-io-and-virustotal/implementations/n8n/provenance.json"
+}

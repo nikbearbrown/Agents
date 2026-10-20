@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "slug": "mycroft-patent-intelligence-system",
+  "title": "Mycroft - Patent Intelligence System",
+  "purpose": "Adapt the published “Mycroft - Patent Intelligence System” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Manual Trigger"
+  ],
+  "terminal_nodes": [
+    "Setup Environment and Output Directories",
+    "Cleanup Repository",
+    "Cleanup Repository Error"
+  ],
+  "credential_types": [
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Setup Github Repo",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Path Variables",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Setup Environment and Output Directories",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Patents",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Extraction Success",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Process Patents",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Processed Data",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Metrics",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Report Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Error Notification",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Cleanup Repository",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cleanup Repository Error",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Manual Trigger",
+        "to": "Set Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Variables",
+        "to": "Setup Github Repo",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Setup Github Repo",
+        "to": "Set Path Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Path Variables",
+        "to": "Setup Environment and Output Directories",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Path Variables",
+        "to": "Extract Patents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Patents",
+        "to": "Check Extraction Success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Extraction Success",
+        "to": "Process Patents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Extraction Success",
+        "to": "Error Notification",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Process Patents",
+        "to": "Read Metrics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Processed Data",
+        "to": "Send Report Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Metrics",
+        "to": "Read Processed Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Report Email",
+        "to": "Cleanup Repository",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Error Notification",
+        "to": "Cleanup Repository Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/mycroft-patent-intelligence-system/implementations/n8n",
+      "files": [
+        "agents/mycroft-patent-intelligence-system/implementations/n8n/mycroft-patent-intelligence-system.json"
+      ],
+      "sha256": "da1694d1a746bf5e14f072fa512fe5ec27b1d75d78a4b14838d464986a046382",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-system/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-system/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-system/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-system/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-system/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/mycroft-patent-intelligence-system/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/mycroft-patent-intelligence-system/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/mycroft-patent-intelligence-system/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/mycroft-patent-intelligence-system/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/mycroft-patent-intelligence-system/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/mycroft-patent-intelligence-system/implementations/n8n/provenance.json"
+}

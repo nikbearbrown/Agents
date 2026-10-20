@@ -1,0 +1,454 @@
+{
+  "schema_version": 1,
+  "slug": "receive-mqtt-message-from-ikea-5-button-switch-and-route-actions",
+  "title": "Receive MQTT message from IKEA 5-button Switch, and route actions.",
+  "purpose": "Adapt the published “Receive MQTT message from IKEA 5-button Switch, and route actions.” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 24 executable nodes and 27 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "MQTT Trigger - Remote Switch"
+  ],
+  "terminal_nodes": [
+    "Spotify Next",
+    "Spotify Resume",
+    "Spotify Pause",
+    "Spotify API - Volume up 5pct",
+    "Spotify API - Volume down 5pct",
+    "Custom Function 1 - P3",
+    "Custom Function 2 - P3",
+    "Oops. How was this reached?",
+    "Spotify Prev",
+    "MQTT Trigger - Remote Switch"
+  ],
+  "credential_types": [
+    "mqtt",
+    "spotifyOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Spotify Next",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Spotify Resume",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Spotify Pause",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Spotify API - Volume up 5pct",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Spotify API - Volume down 5pct",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Spotify API - Get Available Devices",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Individual Devices",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Select Device by Name to get device_id",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Custom Function 1 - P1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Custom Function 2 - P2",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Custom Function 1 - P3",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Spotify API - Activate Target Playback Device",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Route to Requested Function",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Custom Function 2 - P1",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Custom Function 2 - P3",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Oops. How was this reached?",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Spotify API - Get Device Status",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Already playing on Target Device?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Is Playing?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Spotify Prev",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MQTT Trigger - Remote Switch",
+        "type": "n8n-nodes-base.mqttTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remote Action -> Function Router",
+        "type": "n8n-nodes-base.switch",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Filter",
+        "to": "Custom Function 2 - P3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Globals",
+        "to": "Remote Action -> Function Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Playing?",
+        "to": "Spotify Pause",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Playing?",
+        "to": "Spotify Resume",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Custom Function 1 - P1",
+        "to": "Custom Function 2 - P2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Custom Function 2 - P1",
+        "to": "Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Custom Function 2 - P2",
+        "to": "Custom Function 1 - P3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Individual Devices",
+        "to": "Select Device by Name to get device_id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route to Requested Function",
+        "to": "Spotify API - Volume up 5pct",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route to Requested Function",
+        "to": "Spotify API - Volume down 5pct",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Route to Requested Function",
+        "to": "Is Playing?",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Route to Requested Function",
+        "to": "Custom Function 1 - P1",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Route to Requested Function",
+        "to": "Custom Function 2 - P1",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Route to Requested Function",
+        "to": "Oops. How was this reached?",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Spotify API - Get Device Status",
+        "to": "Already playing on Target Device?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remote Action -> Function Router",
+        "to": "Spotify Prev",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remote Action -> Function Router",
+        "to": "Spotify Next",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Remote Action -> Function Router",
+        "to": "Spotify API - Get Device Status",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Remote Action -> Function Router",
+        "to": "Spotify API - Get Device Status",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Remote Action -> Function Router",
+        "to": "Spotify API - Get Device Status",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Remote Action -> Function Router",
+        "to": "Spotify API - Get Device Status",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Remote Action -> Function Router",
+        "to": "Spotify API - Get Device Status",
+        "kind": "main",
+        "output": 6,
+        "input": 0
+      },
+      {
+        "from": "Already playing on Target Device?",
+        "to": "Route to Requested Function",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Already playing on Target Device?",
+        "to": "Spotify API - Get Available Devices",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Spotify API - Get Available Devices",
+        "to": "Extract Individual Devices",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Select Device by Name to get device_id",
+        "to": "Spotify API - Activate Target Playback Device",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Spotify API - Activate Target Playback Device",
+        "to": "Route to Requested Function",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Unresolved connection: MQTT Trigger - Ikea Remote Switch -> Globals",
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/n8n",
+      "files": [
+        "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/n8n/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions.json"
+      ],
+      "sha256": "1031af5f3646e1a2fba3c2e8e60424e12769a720e608d4d523cca99c375a9554",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/n8n/provenance.json"
+}

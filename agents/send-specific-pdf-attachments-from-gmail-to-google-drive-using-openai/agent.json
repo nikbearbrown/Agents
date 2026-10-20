@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "slug": "send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai",
+  "title": "Send specific PDF attachments from Gmail to Google Drive using OpenAI",
+  "purpose": "Adapt the published “Send specific PDF attachments from Gmail to Google Drive using OpenAI” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 16 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On email received"
+  ],
+  "terminal_nodes": [
+    "Not a PDF",
+    "This is not a matched PDF",
+    "Upload file to folder",
+    "Ignore large PDFs",
+    "There are no attachments"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDriveOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Read PDF",
+        "type": "n8n-nodes-base.readPDF",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Configure",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is PDF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Not a PDF",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is matched",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "This is a matched PDF",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "This is not a matched PDF",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Iterate over email attachments",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI matches PDF textual content",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Upload file to folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "On email received",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Ignore large PDFs",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is text within token limit?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Has attachments?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "There are no attachments",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Is matched",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is PDF",
+        "to": "Read PDF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is PDF",
+        "to": "Not a PDF",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Read PDF",
+        "to": "Is text within token limit?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Configure",
+        "to": "Has attachments?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is matched",
+        "to": "This is a matched PDF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is matched",
+        "to": "This is not a matched PDF",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Has attachments?",
+        "to": "Iterate over email attachments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has attachments?",
+        "to": "There are no attachments",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "On email received",
+        "to": "Configure",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "This is a matched PDF",
+        "to": "Upload file to folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is text within token limit?",
+        "to": "OpenAI matches PDF textual content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is text within token limit?",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Is text within token limit?",
+        "to": "Ignore large PDFs",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Iterate over email attachments",
+        "to": "Is PDF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI matches PDF textual content",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/n8n",
+      "files": [
+        "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/n8n/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai.json"
+      ],
+      "sha256": "95cff7c0ec42e3d1f8734fb3e6a4e63a466d86ec0faa263b6daacc71df65aa33",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/n8n/provenance.json"
+}

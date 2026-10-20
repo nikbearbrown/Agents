@@ -1,0 +1,582 @@
+{
+  "schema_version": 1,
+  "slug": "testing-email-header-analysis-workflow-a45bd7ae",
+  "title": "Testing Email Header Analysis Workflow",
+  "purpose": "Adapt the published “Testing Email Header Analysis Workflow” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 33 executable nodes and 39 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Gmail Trigger",
+    "Gmail - Webhook"
+  ],
+  "terminal_nodes": [
+    "Gmail - Respond to Webhook"
+  ],
+  "credential_types": [
+    "gmailOAuth2"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Gmail Trigger",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1.2,
+        "disabled": true
+      },
+      {
+        "name": "Gmail - Extract Received Headers",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Extract Original From IP",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Original IP Found?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Query IP Quality Score API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Query IP API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Authentication-Results Header?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Received-SPF Header?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Extract Authentication-Results Header",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Extract Received-SPF Header",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Determine Auth Values",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Set SPF Value",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - No SPF Found",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Format Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - DKIM Signature Found",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - DKIM-Signature Header?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - No DKIM Signature Found",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Set DMARC Value",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Extract DMARC Header",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - DMARC Header?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - No DMARC Header",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Set Gmail Headers Here",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format Individual Auth Outputs1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format Combined Auth Output1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Remove Extra Received Headers",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Set Headers",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail - Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Received-SPF Headers1",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Gmail Webhook Headers Here",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Skip IP Check",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Gmail - Merge",
+        "to": "Gmail - Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail Trigger",
+        "to": "Set Gmail Headers Here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Skip IP Check",
+        "to": "Gmail - Authentication-Results Header?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Webhook",
+        "to": "Set Gmail Webhook Headers Here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Aggregate",
+        "to": "Format Individual Auth Outputs1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Set Headers",
+        "to": "Gmail - Extract Received Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - No SPF Found",
+        "to": "Gmail - Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Query IP API",
+        "to": "Gmail - Authentication-Results Header?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - DMARC Header?",
+        "to": "Gmail - Extract DMARC Header",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - DMARC Header?",
+        "to": "Gmail - No DMARC Header",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Format Output",
+        "to": "Gmail - Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Set SPF Value",
+        "to": "Gmail - Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Gmail Headers Here",
+        "to": "Gmail - Set Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - No DMARC Header",
+        "to": "Gmail - Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Gmail - Set DMARC Value",
+        "to": "Gmail - Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Gmail - Original IP Found?",
+        "to": "Gmail - Query IP Quality Score API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Original IP Found?",
+        "to": "Skip IP Check",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Format Combined Auth Output1",
+        "to": "Gmail - Format Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - DKIM Signature Found",
+        "to": "Gmail - Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Gmail - Extract DMARC Header",
+        "to": "Gmail - Set DMARC Value",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Received-SPF Header?",
+        "to": "Gmail - Extract Received-SPF Header",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Received-SPF Header?",
+        "to": "Gmail - No SPF Found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Determine Auth Values",
+        "to": "Format Combined Auth Output1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - DKIM-Signature Header?",
+        "to": "Gmail - DKIM Signature Found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - DKIM-Signature Header?",
+        "to": "Gmail - No DKIM Signature Found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set Gmail Webhook Headers Here",
+        "to": "Gmail - Set Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Received-SPF Headers1",
+        "to": "Gmail - Set SPF Value",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Individual Auth Outputs1",
+        "to": "Gmail - Format Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - No DKIM Signature Found",
+        "to": "Gmail - Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Gmail - Extract Original From IP",
+        "to": "Gmail - Original IP Found?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Extract Received Headers",
+        "to": "Gmail - Remove Extra Received Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Query IP Quality Score API",
+        "to": "Gmail - Query IP API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Extract Received-SPF Header",
+        "to": "Aggregate Received-SPF Headers1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Remove Extra Received Headers",
+        "to": "Gmail - Extract Original From IP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Authentication-Results Header?",
+        "to": "Gmail - Extract Authentication-Results Header",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Authentication-Results Header?",
+        "to": "Gmail - Received-SPF Header?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Authentication-Results Header?",
+        "to": "Gmail - DKIM-Signature Header?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Authentication-Results Header?",
+        "to": "Gmail - DMARC Header?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Gmail - Extract Authentication-Results Header",
+        "to": "Gmail - Determine Auth Values",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/n8n",
+      "files": [
+        "agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/n8n/testing-email-header-analysis-workflow-a45bd7ae.json"
+      ],
+      "sha256": "dd3e4603dc90a142a8deb405ee034bb2d202cca28e9d90d38b96f207cfd6794f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/testing-email-header-analysis-workflow-a45bd7ae/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/n8n/provenance.json"
+}

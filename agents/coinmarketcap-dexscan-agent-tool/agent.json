@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "slug": "coinmarketcap-dexscan-agent-tool",
+  "title": "CoinMarketCap_DEXScan_Agent_Tool",
+  "purpose": "Adapt the published “CoinMarketCap_DEXScan_Agent_Tool” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow"
+  ],
+  "terminal_nodes": [
+    "CoinMarketCap DEXScan Agent",
+    "DEXScan Agent Brain",
+    "DEXScan Agent Memory",
+    "DEX Metadata",
+    "DEX Networks List",
+    "DEX Listings Quotes",
+    "DEX Pair Quotes Latest",
+    "DEX OHLCV Historical",
+    "DEX OHLCV Latest",
+    "DEX Trades Latest",
+    "DEX Spot Pairs Latest"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "CoinMarketCap DEXScan Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "DEXScan Agent Brain",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "DEXScan Agent Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "DEX Metadata",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DEX Networks List",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DEX Listings Quotes",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DEX Pair Quotes Latest",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DEX OHLCV Historical",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DEX OHLCV Latest",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DEX Trades Latest",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DEX Spot Pairs Latest",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "DEX Metadata",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEX OHLCV Latest",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEX Networks List",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEX Trades Latest",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEX Listings Quotes",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEXScan Agent Brain",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEX OHLCV Historical",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEXScan Agent Memory",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEX Spot Pairs Latest",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DEX Pair Quotes Latest",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "CoinMarketCap DEXScan Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/implementations/n8n",
+      "files": [
+        "agents/coinmarketcap-dexscan-agent-tool/implementations/n8n/coinmarketcap-dexscan-agent-tool.json"
+      ],
+      "sha256": "3eaa7e7453793a39600989136294c5dd96453d3d628aa7616874820025f02e0f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/coinmarketcap-dexscan-agent-tool/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/coinmarketcap-dexscan-agent-tool/implementations/n8n/provenance.json"
+}

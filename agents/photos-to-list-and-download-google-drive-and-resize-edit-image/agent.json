@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "slug": "photos-to-list-and-download-google-drive-and-resize-edit-image",
+  "title": "photos to list and download google drive and resize edit image",
+  "purpose": "Adapt the published “photos to list and download google drive and resize edit image” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Structured Output Parser",
+    "Passport Photo Validator",
+    "Google Gemini Chat Model"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googlePalmApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Photo URLs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Photos To List",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download Photos",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Resize For AI",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Passport Photo Validator",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Photo URLs",
+        "to": "Photos To List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Resize For AI",
+        "to": "Passport Photo Validator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Photos To List",
+        "to": "Download Photos",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Photos",
+        "to": "Resize For AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Passport Photo Validator",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Passport Photo Validator",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Photo URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/n8n",
+      "files": [
+        "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/n8n/photos-to-list-and-download-google-drive-and-resize-edit-image.json"
+      ],
+      "sha256": "6659c59179a588b615b0583d2cf9cc52d3d60a33d7a1f1753bfbb599a7b146cf",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/n8n/provenance.json"
+}

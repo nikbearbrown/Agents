@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "slug": "ai-agent-to-chat-with-supabase-postgresql-db",
+  "title": "AI Agent to chat with Supabase/PostgreSQL DB",
+  "purpose": "Adapt the published “AI Agent to chat with Supabase/PostgreSQL DB” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "DB Schema",
+    "Get table definition",
+    "AI Agent",
+    "Run SQL Query"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "DB Schema",
+        "type": "n8n-nodes-base.postgresTool",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Get table definition",
+        "type": "n8n-nodes-base.postgresTool",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Run SQL Query",
+        "type": "n8n-nodes-base.postgresTool",
+        "version": 2.5,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "DB Schema",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run SQL Query",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get table definition",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/n8n",
+      "files": [
+        "agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/n8n/ai-agent-to-chat-with-supabase-postgresql-db.json"
+      ],
+      "sha256": "b5954d05e3484a2ec79267746d585c7be79e4fb2cd0c016893f08bce8304742d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-agent-to-chat-with-supabase-postgresql-db/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/n8n/provenance.json"
+}

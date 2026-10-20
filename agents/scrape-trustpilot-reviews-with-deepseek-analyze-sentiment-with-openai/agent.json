@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "slug": "scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai",
+  "title": "Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI",
+  "purpose": "Adapt the published “Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Update sheet",
+    "DeepSeek Chat Model",
+    "OpenAI Chat Model"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Information Extractor",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Limit1",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Parameters",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get reviews",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get Single review",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract review",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Update sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Sentiment Analysis",
+        "type": "@n8n/n8n-nodes-langchain.sentimentAnalysis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "DeepSeek Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "Get Single review",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit1",
+        "to": "Get Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get rows",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Limit1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get reviews",
+        "to": "Extract",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract review",
+        "to": "Information Extractor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Parameters",
+        "to": "Get reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Google Sheets",
+        "to": "Get rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Single review",
+        "to": "Extract review",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Sentiment Analysis",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sentiment Analysis",
+        "to": "Update sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sentiment Analysis",
+        "to": "Update sheet",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Sentiment Analysis",
+        "to": "Update sheet",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "DeepSeek Chat Model",
+        "to": "Information Extractor",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Information Extractor",
+        "to": "Sentiment Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Set Parameters",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/n8n",
+      "files": [
+        "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/n8n/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai.json"
+      ],
+      "sha256": "52b9a137c26d36252e8045fb09bb93d2ca1a35a272ebfc3539a1e98390d8de68",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "slug": "split-out-and-get-boarditem-monday-com-and-http-request",
+  "title": "TEMPLATES",
+  "purpose": "Adapt the published “TEMPLATES” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test workflow\""
+  ],
+  "terminal_nodes": [
+    "GET EACH SUBITEM",
+    "MONDAY UPLOAD",
+    "PULL LINKEDPULSE",
+    "COLUMN BY NAME",
+    "COLUMN BY ID"
+  ],
+  "credential_types": [
+    "mondayComApi",
+    "mondayComOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "PULL SUBITEMS",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "SPLIT SUBITEMS",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET EACH SUBITEM",
+        "type": "n8n-nodes-base.mondayCom",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MONDAY UPLOAD",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": true
+      },
+      {
+        "name": "Convert to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "PULL LINKEDPULSE",
+        "type": "n8n-nodes-base.mondayCom",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET ITEM",
+        "type": "n8n-nodes-base.mondayCom",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET LINKEDPULSES",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "GET BOARD RELATION",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "COLUMN BY NAME",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "COLUMN BY ID",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "SPLIT LINKED PULSES",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "MONDAY UPLOAD",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "GET BOARD RELATION",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "PULL SUBITEMS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "Convert to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "COLUMN BY NAME",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ITEM",
+        "to": "COLUMN BY ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "PULL SUBITEMS",
+        "to": "SPLIT SUBITEMS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SPLIT SUBITEMS",
+        "to": "GET EACH SUBITEM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert to File",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "GET LINKEDPULSES",
+        "to": "SPLIT LINKED PULSES",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET BOARD RELATION",
+        "to": "GET LINKEDPULSES",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SPLIT LINKED PULSES",
+        "to": "PULL LINKEDPULSE",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "GET ITEM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/n8n",
+      "files": [
+        "agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/n8n/split-out-and-get-boarditem-monday-com-and-http-request.json"
+      ],
+      "sha256": "bea8fc3a17eca05bcca04c4e2ef745c6999b5a5c4ab1607ebb580c0b00473161",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/split-out-and-get-boarditem-monday-com-and-http-request/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/n8n/provenance.json"
+}

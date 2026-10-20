@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "slug": "restaurant-agent",
+  "title": "Restaurant Agent",
+  "purpose": "Adapt the published “Restaurant Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Menu",
+    "Get Reservations Availability",
+    "Update Confirmed Reservation",
+    "Update Reservation Availability",
+    "Get Confirmed Reservation",
+    "Get Orders",
+    "Update Orders",
+    "Respond to Webhook",
+    "OpenAI Chat Model",
+    "Simple Memory"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Restaurant AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Menu",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Reservations Availability",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Update Confirmed Reservation",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Update Reservation Availability",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get Confirmed Reservation",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get Orders",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Update Orders",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Restaurant AI Agent",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Menu",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Reservations Availability",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Confirmed Reservation",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Reservation Availability",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Confirmed Reservation",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Orders",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Orders",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Restaurant AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory",
+        "to": "Restaurant AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/restaurant-agent/implementations/n8n",
+      "files": [
+        "agents/restaurant-agent/implementations/n8n/restaurant-agent.json"
+      ],
+      "sha256": "d766a6293b2b8e5c6e1319a1215a9a1cd4f71bdb3ea115ffcb45334441ebc621",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/restaurant-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/restaurant-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/restaurant-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/restaurant-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/restaurant-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/restaurant-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/restaurant-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/restaurant-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/restaurant-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/restaurant-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/restaurant-agent/implementations/n8n/provenance.json"
+}

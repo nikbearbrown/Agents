@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "slug": "techcrunch-venturebeat",
+  "title": "TechCrunch & VentureBeat",
+  "purpose": "Adapt the published “TechCrunch & VentureBeat” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 35 executable nodes and 34 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "When Executed by Another Workflow"
+  ],
+  "terminal_nodes": [
+    "Structured Output Parser",
+    "Perplexity",
+    "Claude 3.5 Sonnet",
+    "Claude 3.5 Haiku",
+    "Airtable",
+    "Auto-fixing Output Parser",
+    "Extract Structured JSON ",
+    "Pick data (jina)",
+    "Write Results to Airtable",
+    "Route to Deep Research",
+    "Claude  3.5 Sonnet"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "anthropicApi",
+    "httpHeaderAuth",
+    "openRouterApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Perplexity",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Structured Data ",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Research URL",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Extract URL",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Merge Extracted Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Split TC Articles",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "TC HTML Parser",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Split VB Articles",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "VB HTML Parser",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Venturebeat (VB)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Techcrunch (TC)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Claude 3.5 Sonnet",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Claude 3.5 Haiku",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Collect Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Auto-fixing Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Structured JSON ",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Prompts",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Deep Research",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Pick data (Perplexity)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Pick data (jina)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "JINA Deep Search",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Write Results to Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Structured Data",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Route to Deep Research",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Parse TC XML",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse VB XML",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Claude  3.5 Sonnet",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Funding Article HTML for scraping (TC)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Funding Article HTML for scraping (VB)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Filter",
+        "to": "Get Funding Article HTML for scraping (TC)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter1",
+        "to": "Get Funding Article HTML for scraping (VB)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prompts",
+        "to": "Deep Research",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Perplexity",
+        "to": "Research URL",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract URL",
+        "to": "Collect Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Collect Data",
+        "to": "Route to Deep Research",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Collect Data",
+        "to": "Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse TC XML",
+        "to": "Split TC Articles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse VB XML",
+        "to": "Split VB Articles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Research URL",
+        "to": "Extract URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Deep Research",
+        "to": "Pick data (Perplexity)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "TC HTML Parser",
+        "to": "Merge Extracted Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "VB HTML Parser",
+        "to": "Merge Extracted Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Techcrunch (TC)",
+        "to": "Parse TC XML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude 3.5 Haiku",
+        "to": "Extract URL",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "JINA Deep Search",
+        "to": "Pick data (jina)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Venturebeat (VB)",
+        "to": "Parse VB XML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude 3.5 Sonnet",
+        "to": "Extract Structured Data ",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split TC Articles",
+        "to": "Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split VB Articles",
+        "to": "Filter1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude  3.5 Sonnet",
+        "to": "Extract Structured Data",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude  3.5 Sonnet",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Extracted Data",
+        "to": "Extract Structured Data ",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Pick data (Perplexity)",
+        "to": "Extract Structured Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Structured Data",
+        "to": "Write Results to Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Structured Data ",
+        "to": "Research URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Structured JSON ",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Extract URL",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto-fixing Output Parser",
+        "to": "Extract Structured Data",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Prompts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Techcrunch (TC)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Venturebeat (VB)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Funding Article HTML for scraping (TC)",
+        "to": "TC HTML Parser",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Funding Article HTML for scraping (VB)",
+        "to": "VB HTML Parser",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/techcrunch-venturebeat/implementations/n8n",
+      "files": [
+        "agents/techcrunch-venturebeat/implementations/n8n/techcrunch-venturebeat.json"
+      ],
+      "sha256": "e92c370c3b3d4f7b83c177d1e6c4a3534d4e6e75207d43686fc88041a8e3d79b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/techcrunch-venturebeat/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/techcrunch-venturebeat/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/techcrunch-venturebeat/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/techcrunch-venturebeat/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/techcrunch-venturebeat/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/techcrunch-venturebeat/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/techcrunch-venturebeat/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/techcrunch-venturebeat/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/techcrunch-venturebeat/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/techcrunch-venturebeat/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/techcrunch-venturebeat/implementations/n8n/provenance.json"
+}

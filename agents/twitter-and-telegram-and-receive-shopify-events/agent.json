@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "slug": "twitter-and-telegram-and-receive-shopify-events",
+  "title": "twitter and telegram and receive shopify events",
+  "purpose": "Adapt the published “twitter and telegram and receive shopify events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "product created"
+  ],
+  "terminal_nodes": [
+    "Twitter",
+    "Telegram"
+  ],
+  "credential_types": [
+    "shopifyApi",
+    "telegramApi",
+    "twitterOAuth1Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Twitter",
+        "type": "n8n-nodes-base.twitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "product created",
+        "type": "n8n-nodes-base.shopifyTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "product created",
+        "to": "Twitter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "product created",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/implementations/n8n",
+      "files": [
+        "agents/twitter-and-telegram-and-receive-shopify-events/implementations/n8n/twitter-and-telegram-and-receive-shopify-events.json"
+      ],
+      "sha256": "09674c52505c4fe4d3cf89e1a3438e87fb30f9ae3cdda37fc5a167bd7cf11825",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/twitter-and-telegram-and-receive-shopify-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/twitter-and-telegram-and-receive-shopify-events/implementations/n8n/provenance.json"
+}

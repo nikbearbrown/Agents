@@ -1,0 +1,187 @@
+# News Monitoring Agent
+
+Adapt the published “News Monitoring Agent” workflow to other implementations while preserving its documented behavior.
+
+**Specification: source-derived draft.** The source contains 74 executable nodes and 75 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.
+
+[Specification](specification.md) · [Machine-readable record](agent.json) · [Schemas](schemas/README.md) · [Fixtures](fixtures/README.md) · [Evidence](evaluations/README.md)
+
+## Workflow
+
+This initial Mermaid map preserves the source graph, including non-main connections and port numbers. It is an implementation-derived starting point for the shared design; it does not execute the workflow or prove its behavior. Disabled-node details and exact expressions remain in the source.
+
+```mermaid
+flowchart LR
+  n0["feedparser fetch"]
+  n1["Schedule Trigger"]
+  n2["Healthcheck"]
+  n3["Merge1"]
+  n4["Embeddings HuggingFace Inference"]
+  n5["Postgres Chat Memory"]
+  n6["When chat message received"]
+  n7["Parse"]
+  n8["not null"]
+  n9["Remove Duplicates"]
+  n10["Merge2"]
+  n11["FinBert"]
+  n12["Embeddings HuggingFace Inference4"]
+  n13["View daily KPIs"]
+  n14["Create Qdrant Collection"]
+  n15["Write metrics"]
+  n16["Create METRICS table"]
+  n17["Get row#40;s#41;"]
+  n18["Upsert row#40;s#41;"]
+  n19["Split Out"]
+  n20["Default Data Loader2"]
+  n21["Recursive Character Text Splitter2"]
+  n22["Merge"]
+  n23["Google Gemini Chat Model3"]
+  n24["Google Gemini Chat Model4"]
+  n25["Google Gemini Chat Model"]
+  n26["Google Gemini Chat Model5"]
+  n27["Google Gemini Chat Model6"]
+  n28["Metaprompt Agentv2"]
+  n29["Metadata Agentv2"]
+  n30["Default Data Loader3"]
+  n31["Recursive Character Text Splitter3"]
+  n32["Embeddings Google Gemini1"]
+  n33["Postgres Chat Memory1"]
+  n34["Google Gemini Chat Model7"]
+  n35["Qdrant Vector Store A"]
+  n36["Qdrant Vector Store B"]
+  n37["News Articles RAG A"]
+  n38["News Articles RAG B"]
+  n39["Embeddings Google Gemini2"]
+  n40["Merge3"]
+  n41["Structured Output Parser test1"]
+  n42["Structured Output Parser2"]
+  n43["Metaprompt Agentv"]
+  n44["Metadata Agentv"]
+  n45["Extract from File"]
+  n46["Merge5"]
+  n47["Convert to File1"]
+  n48["HTTP Request"]
+  n49["Read/Write Files from Disk"]
+  n50["When clicking #8216;Execute workflow#8217;"]
+  n51["OpenRouter Chat Model3"]
+  n52["OpenRouter Chat Model4"]
+  n53["OpenRouter Chat Model5"]
+  n54["OpenRouter Chat Model6"]
+  n55["RAG Agent3"]
+  n56["Google Gemini Chat Model8"]
+  n57["News Articles RAG A2"]
+  n58["Embeddings HuggingFace Inference6"]
+  n59["News Articles RAG A3"]
+  n60["Embeddings HuggingFace Inference7"]
+  n61["Call rag grader"]
+  n62["Merge6"]
+  n63["Call rag grader1"]
+  n64["Merge4"]
+  n65["Qdrant Vector Store"]
+  n66["Embeddings HuggingFace Inference8"]
+  n67["AI Agent"]
+  n68["OpenRouter Chat Model"]
+  n69["Metadata structured output"]
+  n70["Metaprompt structured output"]
+  n71["Switch - A/B testing"]
+  n72["RAG Agent A"]
+  n73["RAG Agent B"]
+  n0 -->|"main out 0 to in 0"| n18
+  n0 -->|"main out 0 to in 0"| n19
+  n1 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 3"| n10
+  n2 -->|"main out 0 to in 0"| n17
+  n3 -->|"main out 0 to in 0"| n10
+  n3 -->|"main out 0 to in 0"| n35
+  n3 -->|"main out 0 to in 0"| n36
+  n4 -->|"ai_embedding out 0 to in 0"| n35
+  n5 -->|"ai_memory out 0 to in 0"| n72
+  n6 -->|"main out 0 to in 0"| n29
+  n6 -->|"main out 0 to in 0"| n28
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n11
+  n8 -->|"main out 0 to in 1"| n3
+  n9 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 1"| n10
+  n10 -->|"main out 0 to in 0"| n15
+  n11 -->|"main out 0 to in 0"| n3
+  n12 -->|"ai_embedding out 0 to in 0"| n37
+  n17 -->|"main out 0 to in 0"| n0
+  n19 -->|"main out 0 to in 0"| n9
+  n19 -->|"main out 0 to in 2"| n10
+  n21 -->|"ai_textSplitter out 0 to in 0"| n20
+  n20 -->|"ai_document out 0 to in 0"| n35
+  n22 -->|"main out 0 to in 0"| n71
+  n23 -->|"ai_languageModel out 0 to in 0"| n72
+  n24 -->|"ai_languageModel out 0 to in 0"| n69
+  n25 -->|"ai_languageModel out 0 to in 0"| n29
+  n26 -->|"ai_languageModel out 0 to in 0"| n28
+  n27 -->|"ai_languageModel out 0 to in 0"| n70
+  n28 -->|"main out 0 to in 0"| n22
+  n29 -->|"main out 0 to in 1"| n22
+  n30 -->|"ai_document out 0 to in 0"| n36
+  n31 -->|"ai_textSplitter out 0 to in 0"| n30
+  n32 -->|"ai_embedding out 0 to in 0"| n36
+  n33 -->|"ai_memory out 0 to in 0"| n73
+  n34 -->|"ai_languageModel out 0 to in 0"| n73
+  n37 -->|"ai_tool out 0 to in 0"| n72
+  n38 -->|"ai_tool out 0 to in 0"| n73
+  n39 -->|"ai_embedding out 0 to in 0"| n38
+  n40 -->|"main out 0 to in 0"| n67
+  n41 -->|"ai_outputParser out 0 to in 0"| n44
+  n42 -->|"ai_outputParser out 0 to in 0"| n43
+  n43 -->|"main out 0 to in 0"| n40
+  n44 -->|"main out 0 to in 1"| n40
+  n45 -->|"main out 0 to in 0"| n55
+  n45 -->|"main out 0 to in 0"| n43
+  n45 -->|"main out 0 to in 0"| n44
+  n45 -->|"main out 0 to in 1"| n46
+  n45 -->|"main out 0 to in 0"| n62
+  n46 -->|"main out 0 to in 0"| n61
+  n49 -->|"main out 0 to in 0"| n45
+  n50 -->|"main out 0 to in 0"| n49
+  n52 -->|"ai_languageModel out 0 to in 0"| n43
+  n52 -->|"ai_languageModel out 0 to in 0"| n42
+  n53 -->|"ai_languageModel out 0 to in 0"| n44
+  n54 -->|"ai_languageModel out 0 to in 0"| n41
+  n56 -->|"ai_languageModel out 0 to in 0"| n55
+  n55 -->|"main out 0 to in 1"| n62
+  n57 -->|"ai_tool out 0 to in 0"| n55
+  n58 -->|"ai_embedding out 0 to in 0"| n57
+  n60 -->|"ai_embedding out 0 to in 0"| n59
+  n61 -->|"main out 0 to in 0"| n64
+  n62 -->|"main out 0 to in 0"| n63
+  n63 -->|"main out 0 to in 1"| n64
+  n64 -->|"main out 0 to in 0"| n47
+  n65 -->|"ai_tool out 0 to in 0"| n67
+  n66 -->|"ai_embedding out 0 to in 0"| n65
+  n67 -->|"main out 0 to in 0"| n46
+  n68 -->|"ai_languageModel out 0 to in 0"| n67
+  n69 -->|"ai_outputParser out 0 to in 0"| n29
+  n70 -->|"ai_outputParser out 0 to in 0"| n28
+  n71 -->|"main out 0 to in 0"| n72
+  n71 -->|"main out 1 to in 0"| n73
+```
+
+[Diagram source](workflow.mmd)
+
+## Implementations
+
+| Implementation | Status |
+|---|---|
+| [n8n](implementations/n8n/README.md) | Sanitized source available; not runtime-tested |
+| [Plain Python](implementations/python/README.md) | Planned |
+| [Pydantic AI](implementations/pydantic-ai/README.md) | Planned |
+| [CrewAI Flow](implementations/crewai-flow/README.md) | Planned |
+| [CrewAI Crew](implementations/crewai-crew/README.md) | Planned |
+| [LangGraph](implementations/langgraph/README.md) | Planned |
+
+## Build or operate with an assistant
+
+[Claude](prompts/claude.md) · [Codex](prompts/codex.md) · [Grok Bot](prompts/grok-bot.md) · [Muse](prompts/muse.md) · [Dots](prompts/dots.md)
+
+Build instructions and operating instructions are separate. These are untested prompts, not additional working implementations.
+
+## Attribution
+
+Curated by Nik Bear Brown. Preserve the [n8n source provenance](implementations/n8n/provenance.json), [configuration record](implementations/n8n/configuration.json), and [license notice](../../licenses/nikbearbrown-mit.txt). Ported implementations must retain applicable upstream attribution; the repository has no blanket license replacing source licenses.

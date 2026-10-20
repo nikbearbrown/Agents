@@ -1,0 +1,26 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Calculate Status"]
+  n2["Get Sites"]
+  n3["Send Chat Alert"]
+  n4["Send Email Alert"]
+  n5["Log Uptime Event"]
+  n6["Update Site Status"]
+  n7["Perform Site Test"]
+  n8["For Each Site..."]
+  n9["Status Router"]
+  n2 -->|"main out 0 to in 0"| n8
+  n9 -->|"main out 0 to in 0"| n5
+  n9 -->|"main out 1 to in 0"| n4
+  n9 -->|"main out 1 to in 0"| n5
+  n9 -->|"main out 2 to in 0"| n5
+  n9 -->|"main out 2 to in 0"| n4
+  n9 -->|"main out 3 to in 0"| n4
+  n9 -->|"main out 3 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 1 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n8

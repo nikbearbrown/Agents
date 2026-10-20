@@ -1,0 +1,491 @@
+{
+  "schema_version": 1,
+  "slug": "receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter",
+  "title": "receive schedule events and default data loader and recursive character text splitter",
+  "purpose": "Adapt the published “receive schedule events and default data loader and recursive character text splitter” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 28 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger",
+    "Schedule Trigger1"
+  ],
+  "terminal_nodes": [
+    "Embeddings OpenAI",
+    "Default Data Loader",
+    "Recursive Character Text Splitter",
+    "Issues Similarity Database",
+    "Supabase Vector Store",
+    "Embeddings OpenAI1",
+    "OpenAI Chat Model",
+    "OpenAI Chat Model1"
+  ],
+  "credential_types": [
+    "jiraSoftwareCloudApi",
+    "openAiApi",
+    "supabaseApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Issues Similarity Database",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Supabase Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI1",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Find Similar Issues + Assignees",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Check User Workflow",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "For Each User",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Assign User to Ticket",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger1",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Remove Duplicates",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Collect Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Unassigned Tickets more than 5 days",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "For Each Issue",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Issue Ref",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Comment to Issue",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Last 50 Resolved",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Issues to Items",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "To Structured Output",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Count Assigned Open Issues per User",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Tally In-Progress Issues per User",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Sort By Most Capacity",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If has Items?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Skip",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Skip",
+        "to": "For Each Issue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Issue Ref",
+        "to": "Find Similar Issues + Assignees",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each User",
+        "to": "Count Assigned Open Issues per User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each User",
+        "to": "Check User Workflow",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If has Items?",
+        "to": "For Each User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If has Items?",
+        "to": "Skip",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Collect Fields",
+        "to": "Issues Similarity Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Issue",
+        "to": "Issue Ref",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Issues to Items",
+        "to": "If has Items?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Last 50 Resolved",
+        "to": "Remove Duplicates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Last 50 Resolved",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI",
+        "to": "Issues Similarity Database",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Find Similar Issues + Assignees",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Duplicates",
+        "to": "Collect Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger1",
+        "to": "Get Unassigned Tickets more than 5 days",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI1",
+        "to": "Supabase Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "To Structured Output",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check User Workflow",
+        "to": "Tally In-Progress Issues per User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Issues Similarity Database",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Comment to Issue",
+        "to": "For Each Issue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "To Structured Output",
+        "to": "Issues to Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign User to Ticket",
+        "to": "Add Comment to Issue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort By Most Capacity",
+        "to": "Assign User to Ticket",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Supabase Vector Store",
+        "to": "Find Similar Issues + Assignees",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Similar Issues + Assignees",
+        "to": "To Structured Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tally In-Progress Issues per User",
+        "to": "For Each User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Count Assigned Open Issues per User",
+        "to": "Sort By Most Capacity",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Unassigned Tickets more than 5 days",
+        "to": "For Each Issue",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/n8n",
+      "files": [
+        "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/n8n/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter.json"
+      ],
+      "sha256": "d51bc1f60814994bcc3003f1a20fb82e708a5b87f9ffba2c7e90c7ac576ac0da",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/n8n/provenance.json"
+}

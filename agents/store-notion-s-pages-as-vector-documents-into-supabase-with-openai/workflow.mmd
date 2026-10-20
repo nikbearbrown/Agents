@@ -1,0 +1,16 @@
+flowchart LR
+  n0["Embeddings OpenAI"]
+  n1["Token Splitter"]
+  n2["Notion - Page Added Trigger"]
+  n3["Notion - Retrieve Page Content"]
+  n4["Filter Non-Text Content"]
+  n5["Summarize - Concatenate Notion#39;s blocks content"]
+  n6["Create metadata and load content"]
+  n7["Supabase Vector Store"]
+  n1 -->|"ai_textSplitter out 0 to in 0"| n6
+  n0 -->|"ai_embedding out 0 to in 0"| n7
+  n4 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n6 -->|"ai_document out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n7

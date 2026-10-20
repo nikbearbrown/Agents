@@ -1,0 +1,38 @@
+flowchart LR
+  n0["Wordpress"]
+  n1["OpenAI Chat Model"]
+  n2["Structured Output Parser"]
+  n3["Create Title, Slug, Meta"]
+  n4["Create HTML"]
+  n5["Merge"]
+  n6["Upload Image to Wordpress"]
+  n7["Set Image on Wordpress Post"]
+  n8["On form submission"]
+  n9["Perplexity Research"]
+  n10["Cleanup Links"]
+  n11["Copywriter AI Agent"]
+  n12["Cleanup HTML"]
+  n13["GET Image"]
+  n14["Set Image URL"]
+  n15["Send Success Message to Telegram"]
+  n16["gpt-4o-mini"]
+  n17["Combine Blog Details"]
+  n5 -->|"main out 0 to in 0"| n17
+  n13 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n14
+  n4 -->|"main out 0 to in 0"| n5
+  n16 -->|"ai_languageModel out 0 to in 0"| n11
+  n12 -->|"main out 0 to in 0"| n0
+  n10 -->|"main out 0 to in 0"| n11
+  n14 -->|"main out 0 to in 0"| n13
+  n1 -->|"ai_languageModel out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n9
+  n11 -->|"main out 0 to in 0"| n4
+  n11 -->|"main out 0 to in 0"| n3
+  n11 -->|"main out 0 to in 1"| n5
+  n9 -->|"main out 0 to in 0"| n10
+  n17 -->|"main out 0 to in 0"| n12
+  n3 -->|"main out 0 to in 2"| n5
+  n2 -->|"ai_outputParser out 0 to in 0"| n3
+  n6 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n15

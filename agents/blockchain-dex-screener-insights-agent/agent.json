@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "slug": "blockchain-dex-screener-insights-agent",
+  "title": "Blockchain DEX Screener Insights Agent",
+  "purpose": "Adapt the published “Blockchain DEX Screener Insights Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received",
+    "Telegram Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Window Buffer Memory",
+    "Telegram",
+    "DexScreener Latest Token Profiles",
+    "DexScreener Latest Boosted Tokens",
+    "DexScreener Top Token Boosts",
+    "DexScreener Search Pairs",
+    "DexScreener Check Orders Paid for Token",
+    "DexScreener Get Pairs by Chain and Pair Address",
+    "DexScreener Token Pools",
+    "DexScreener Pairs by Token Address"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Blockchain DEX Screener Insights Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Adds SessionId",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "DexScreener Latest Token Profiles",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DexScreener Latest Boosted Tokens",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DexScreener Top Token Boosts",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DexScreener Search Pairs",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DexScreener Check Orders Paid for Token",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DexScreener Get Pairs by Chain and Pair Address",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DexScreener Token Pools",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DexScreener Pairs by Token Address",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Adds SessionId",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger",
+        "to": "Adds SessionId",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DexScreener Token Pools",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DexScreener Search Pairs",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Adds SessionId",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DexScreener Top Token Boosts",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DexScreener Latest Boosted Tokens",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DexScreener Latest Token Profiles",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DexScreener Pairs by Token Address",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Blockchain DEX Screener Insights Agent",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DexScreener Check Orders Paid for Token",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DexScreener Get Pairs by Chain and Pair Address",
+        "to": "Blockchain DEX Screener Insights Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/blockchain-dex-screener-insights-agent/implementations/n8n",
+      "files": [
+        "agents/blockchain-dex-screener-insights-agent/implementations/n8n/blockchain-dex-screener-insights-agent.json"
+      ],
+      "sha256": "d63368660b8abbc3957246d93b9e0cc67f10d7849cd81efe5d197c22bc0ec719",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/blockchain-dex-screener-insights-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/blockchain-dex-screener-insights-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/blockchain-dex-screener-insights-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/blockchain-dex-screener-insights-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/blockchain-dex-screener-insights-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/blockchain-dex-screener-insights-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/blockchain-dex-screener-insights-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/blockchain-dex-screener-insights-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/blockchain-dex-screener-insights-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/blockchain-dex-screener-insights-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/blockchain-dex-screener-insights-agent/implementations/n8n/provenance.json"
+}

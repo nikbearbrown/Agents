@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "slug": "ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack",
+  "title": "AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack",
+  "purpose": "Adapt the published “AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 21 executable nodes and 21 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Webhook",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "No Operation, do nothing",
+    "WordPress - Get Last Posts",
+    "WordPress - Get Post1"
+  ],
+  "credential_types": [
+    "googleApi",
+    "httpHeaderAuth",
+    "openAiApi",
+    "slackOAuth2Api",
+    "wordpressApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Text Classifier",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": true
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": true
+      },
+      {
+        "name": "Wordpress - Update Post",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets - Get rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "HTML to Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets - Add Row",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Slack - Notify Channel",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Set fields - From Webhook input",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Date & Time - Substract",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set fields - Prepare data for Gsheets & Slack",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "WordPress - Get Post2",
+        "type": "n8n-nodes-base.wordpress",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WordPress - Get Last Posts",
+        "type": "n8n-nodes-base.wordpress",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WordPress - Get Post1",
+        "type": "n8n-nodes-base.wordpress",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WordPress - Get All Posts",
+        "type": "n8n-nodes-base.wordpress",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "WordPress - Get Post2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI",
+        "to": "Wordpress - Update Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Set fields - From Webhook input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Google Sheets - Get rows",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "HTML to Markdown",
+        "to": "Text Classifier",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Date & Time - Substract",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Text Classifier",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "WordPress - Get Post2",
+        "to": "HTML to Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Slack - Notify Channel",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Date & Time - Substract",
+        "to": "WordPress - Get Last Posts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets - Add Row",
+        "to": "Slack - Notify Channel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wordpress - Update Post",
+        "to": "Set fields - Prepare data for Gsheets & Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets - Get rows",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "WordPress - Get All Posts",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set fields - From Webhook input",
+        "to": "WordPress - Get Post1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "WordPress - Get All Posts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set fields - Prepare data for Gsheets & Slack",
+        "to": "Google Sheets - Add Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/n8n",
+      "files": [
+        "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/n8n/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack.json"
+      ],
+      "sha256": "966e39b6f2dcc2f4f91fea992bcea62ccf426549029daf44ad8daad086866293",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/n8n/provenance.json"
+}

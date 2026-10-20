@@ -1,0 +1,42 @@
+flowchart LR
+  n0["Gmail Get Email"]
+  n1["When clicking #8216;Test workflow#8217;"]
+  n2["Google Gemini Chat Model"]
+  n3["GmailDeleteEmail"]
+  n4["AI Check Email"]
+  n5["Unwanted Email Output Parser"]
+  n6["If Unwanted Marketing or Spam"]
+  n7["Telegram Sent Email Deleted Notification"]
+  n8["Telegram Sent Email Not Deleted Notification"]
+  n9["Telegram Sent AI Error Notification"]
+  n10["Telegram Sent Delete Email Failed Notification"]
+  n11["Success"]
+  n12["Increment Loop Var"]
+  n13["Forward Prev Page Num"]
+  n14["Initialize Loop Vars"]
+  n15["Aggregate"]
+  n16["Gmail"]
+  n16 -->|"main out 0 to in 0"| n8
+  n11 -->|"main out 0 to in 0"| n15
+  n15 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 1 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 1 to in 0"| n10
+  n12 -->|"main out 0 to in 0"| n0
+  n14 -->|"main out 0 to in 0"| n12
+  n13 -->|"main out 0 to in 0"| n14
+  n2 -->|"ai_languageModel out 0 to in 0"| n4
+  n5 -->|"ai_outputParser out 0 to in 0"| n4
+  n6 -->|"main out 0 to in 0"| n3
+  n6 -->|"main out 1 to in 0"| n16
+  n1 -->|"main out 0 to in 0"| n14
+  n9 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 1 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n11
+  n7 -->|"main out 1 to in 0"| n11
+  n8 -->|"main out 0 to in 0"| n11
+  n8 -->|"main out 1 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 1 to in 0"| n11

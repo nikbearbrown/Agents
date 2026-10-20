@@ -1,0 +1,356 @@
+{
+  "schema_version": 1,
+  "slug": "import-odoo-product-images-from-google-drive",
+  "title": "Import Odoo Product Images from Google Drive",
+  "purpose": "Adapt the published “Import Odoo Product Images from Google Drive” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger",
+    "Click Manual"
+  ],
+  "terminal_nodes": [
+    "Announce",
+    "Update Images Templates",
+    "Update Images Products",
+    "Drop Old Images"
+  ],
+  "credential_types": [
+    "googleChatOAuth2Api",
+    "googleDriveOAuth2Api",
+    "odooApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Filter Images",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Find Files",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Decorate Images",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Move Images",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Sum Images",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Announce",
+        "type": "n8n-nodes-base.googleChat",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find Templates",
+        "type": "n8n-nodes-base.odoo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download Images Templates",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Update Images Templates",
+        "type": "n8n-nodes-base.odoo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find Products",
+        "type": "n8n-nodes-base.odoo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download Images Products",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Update Images Products",
+        "type": "n8n-nodes-base.odoo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Base64 Images Templates",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Base64 Images Products",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search Old Images",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Drop Old Images",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Click Manual",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Switch",
+        "to": "Find Templates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Find Products",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Find Files",
+        "to": "Filter Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sum Images",
+        "to": "Announce",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Move Images",
+        "to": "Sum Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Click Manual",
+        "to": "Find Files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Images",
+        "to": "Decorate Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Products",
+        "to": "Download Images Products",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Templates",
+        "to": "Download Images Templates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Decorate Images",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Decorate Images",
+        "to": "Move Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Decorate Images",
+        "to": "Search Old Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Find Files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Old Images",
+        "to": "Drop Old Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Images Products",
+        "to": "Convert Base64 Images Products",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Images Templates",
+        "to": "Convert Base64 Images Templates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Base64 Images Products",
+        "to": "Update Images Products",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Base64 Images Templates",
+        "to": "Update Images Templates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/import-odoo-product-images-from-google-drive/implementations/n8n",
+      "files": [
+        "agents/import-odoo-product-images-from-google-drive/implementations/n8n/import-odoo-product-images-from-google-drive.json"
+      ],
+      "sha256": "6737b80f544f7ca9e2a04274f39e838d39a33c5c315e4e31ce6a8318cecc7c61",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/import-odoo-product-images-from-google-drive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/import-odoo-product-images-from-google-drive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/import-odoo-product-images-from-google-drive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/import-odoo-product-images-from-google-drive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/import-odoo-product-images-from-google-drive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/import-odoo-product-images-from-google-drive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/import-odoo-product-images-from-google-drive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/import-odoo-product-images-from-google-drive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/import-odoo-product-images-from-google-drive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/import-odoo-product-images-from-google-drive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/import-odoo-product-images-from-google-drive/implementations/n8n/provenance.json"
+}

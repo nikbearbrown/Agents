@@ -1,61 +1,9 @@
 # item lists and html extract and http request
 
-This folder contains the **item lists and html extract and http request** workflow. Its executable nodes use `dateTime`, `function`, `functionItem`, `htmlExtract`, `httpRequest`, `itemLists`, `manualTrigger`, `respondToWebhook`, `set`, `webhook`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/item-lists-and-html-extract-and-http-request](../../agents/item-lists-and-html-extract-and-http-request/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/item-lists-and-html-extract-and-http-request/implementations/n8n/README.md)
+- [Importable JSON](../../agents/item-lists-and-html-extract-and-http-request/implementations/n8n/item-lists-and-html-extract-and-http-request.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/item-lists-and-html-extract-and-http-request)
 
-## Files
-
-- [`item-lists-and-html-extract-and-http-request.json`](item-lists-and-html-extract-and-http-request.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** None declared. HTTP requests or Code nodes may still require configuration.
-
-**Entry nodes:** On clicking 'execute', Webhook
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| On clicking 'execute' | `manualTrigger` | Inspect parameters |
-| Item Lists | `itemLists` | Inspect parameters |
-| Extract Posts | `htmlExtract` | Inspect parameters |
-| Fetch Website | `httpRequest` | Inspect parameters |
-| Set URL | `set` | Inspect parameters |
-| Complete Link | `set` | Inspect parameters |
-| Format Date | `dateTime` | Inspect parameters |
-| Create RSS Items | `functionItem` | Inspect parameters |
-| Webhook | `webhook` | Inspect parameters |
-| Respond to Webhook | `respondToWebhook` | Inspect parameters |
-| Prepare Response | `function` | Inspect parameters |
-| Extract Fields | `htmlExtract` | Inspect parameters |
-
-## Connection map
-
-- Set URL → Fetch Website (`main`, output 0, input 0)
-- Webhook → Set URL (`main`, output 0, input 0)
-- Item Lists → Extract Fields (`main`, output 0, input 0)
-- Format Date → Create RSS Items (`main`, output 0, input 0)
-- Complete Link → Format Date (`main`, output 0, input 0)
-- Extract Posts → Item Lists (`main`, output 0, input 0)
-- Fetch Website → Extract Posts (`main`, output 0, input 0)
-- Extract Fields → Complete Link (`main`, output 0, input 0)
-- Create RSS Items → Prepare Response (`main`, output 0, input 0)
-- Prepare Response → Respond to Webhook (`main`, output 0, input 0)
-- On clicking 'execute' → Set URL (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Datetime/0159_Datetime_Functionitem_Create_Webhook.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Datetime/0159_Datetime_Functionitem_Create_Webhook.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

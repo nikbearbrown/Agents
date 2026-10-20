@@ -1,0 +1,28 @@
+flowchart LR
+  n0["Ticket Exists"]
+  n1["Get user data of Ticket requester"]
+  n2["Only keep needed data"]
+  n3["Add user data"]
+  n4["Update existing ticket"]
+  n5["Update Zendesk ticket with External Id"]
+  n6["Get last execution timestamp"]
+  n7["Get tickets updated after last execution"]
+  n8["Set new last execution timestamp"]
+  n9["Every 5 minutes"]
+  n10["Create new Ticket"]
+  n11["Update External Id in Zendesk for contact"]
+  n12["Create or update contact"]
+  n3 -->|"main out 0 to in 0"| n0
+  n0 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 1 to in 0"| n12
+  n9 -->|"main out 0 to in 0"| n6
+  n10 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 1"| n3
+  n4 -->|"main out 0 to in 0"| n8
+  n12 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n1
+  n7 -->|"main out 0 to in 0"| n3
+  n11 -->|"main out 0 to in 0"| n10

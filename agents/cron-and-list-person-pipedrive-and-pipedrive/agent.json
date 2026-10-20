@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "slug": "cron-and-list-person-pipedrive-and-pipedrive",
+  "title": "cron and list person pipedrive and pipedrive",
+  "purpose": "Adapt the published “cron and list person pipedrive and pipedrive” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "Update Pipedrive",
+    "Update HubSpot"
+  ],
+  "credential_types": [
+    "hubspotApi",
+    "pipedriveApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Pipedrive",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Pipedrive",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update HubSpot",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge2",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron",
+        "to": "Pipedrive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cron",
+        "to": "HubSpot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge1",
+        "to": "Update Pipedrive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge2",
+        "to": "Update HubSpot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Pipedrive",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Pipedrive",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/n8n",
+      "files": [
+        "agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/n8n/cron-and-list-person-pipedrive-and-pipedrive.json"
+      ],
+      "sha256": "6ee9ad7113ccf900703909d3dd5932e1a5aacf63a02c9007fc4f3ea319c90d42",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/cron-and-list-person-pipedrive-and-pipedrive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/n8n/provenance.json"
+}

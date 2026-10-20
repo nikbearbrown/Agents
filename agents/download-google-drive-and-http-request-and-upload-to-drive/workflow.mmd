@@ -1,0 +1,51 @@
+flowchart LR
+  n0["Base Image"]
+  n1["Google Gemini Chat Model"]
+  n2["Structured Output Parser"]
+  n3["Loop Over Items"]
+  n4["Wait"]
+  n5["Download Screenshot"]
+  n6["Upload to Drive"]
+  n7["Update Base Image"]
+  n8["Merge"]
+  n9["Schedule Trigger"]
+  n10["Get URLs with Missing Base Images"]
+  n11["Run Webpage Screenshot"]
+  n12["Run Webpage Screenshot1"]
+  n13["Has Changes"]
+  n14["Combine Row and Result"]
+  n15["Wait1"]
+  n16["Aggregate"]
+  n17["Create Report"]
+  n18["When clicking #8216;Test workflow#8217;"]
+  n19["Get Webpages List"]
+  n20["For Each Webpage..."]
+  n21["Download New Screenshot"]
+  n22["Combine Screenshots"]
+  n23["Visual Regression Agent"]
+  n4 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n5
+  n15 -->|"main out 0 to in 0"| n20
+  n16 -->|"main out 0 to in 0"| n17
+  n0 -->|"main out 0 to in 0"| n22
+  n13 -->|"main out 0 to in 0"| n16
+  n3 -->|"main out 0 to in 1"| n8
+  n3 -->|"main out 1 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n19
+  n19 -->|"main out 0 to in 0"| n20
+  n22 -->|"main out 0 to in 0"| n23
+  n5 -->|"main out 0 to in 0"| n6
+  n20 -->|"main out 0 to in 0"| n14
+  n20 -->|"main out 1 to in 0"| n0
+  n20 -->|"main out 1 to in 0"| n12
+  n14 -->|"main out 0 to in 0"| n13
+  n11 -->|"main out 0 to in 0"| n4
+  n21 -->|"main out 0 to in 1"| n22
+  n12 -->|"main out 0 to in 0"| n21
+  n23 -->|"main out 0 to in 0"| n15
+  n1 -->|"ai_languageModel out 0 to in 0"| n23
+  n2 -->|"ai_outputParser out 0 to in 0"| n23
+  n10 -->|"main out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n8
+  n18 -->|"main out 0 to in 0"| n10

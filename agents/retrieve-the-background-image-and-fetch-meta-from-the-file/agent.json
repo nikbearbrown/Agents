@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "slug": "retrieve-the-background-image-and-fetch-meta-from-the-file",
+  "title": "Retrieve the Background Image and fetch Meta from the File",
+  "purpose": "Adapt the published “Retrieve the Background Image and fetch Meta from the File” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test workflow\""
+  ],
+  "terminal_nodes": [
+    "Let \"top\" overlay \"bg\""
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Meta BG",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Nest Top Meta",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Nest Bg Meta",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Center",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Logo for the Watermark",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Image for Background",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for both Images and merge Binary in one Item",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Rename Image Binary Top Image",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Rename Image Binary Background Image",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Meta Top",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Let \"top\" overlay \"bg\"",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Meta BG",
+        "to": "Nest Bg Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Meta Top",
+        "to": "Nest Top Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Nest Bg Meta",
+        "to": "Rename Image Binary Background Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Nest Top Meta",
+        "to": "Rename Image Binary Top Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Center",
+        "to": "Let \"top\" overlay \"bg\"",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Logo for the Watermark",
+        "to": "Get Meta Top",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Image for Background",
+        "to": "Get Meta BG",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename Image Binary Top Image",
+        "to": "Wait for both Images and merge Binary in one Item",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Get the Image for Background",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Get Logo for the Watermark",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename Image Binary Background Image",
+        "to": "Wait for both Images and merge Binary in one Item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for both Images and merge Binary in one Item",
+        "to": "Calculate Center",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/n8n",
+      "files": [
+        "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/n8n/retrieve-the-background-image-and-fetch-meta-from-the-file.json"
+      ],
+      "sha256": "be8fe1330989f9456c1f7808decb22cfdd7b121b1f71c592d95fb62f31dcb7ab",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/n8n/provenance.json"
+}

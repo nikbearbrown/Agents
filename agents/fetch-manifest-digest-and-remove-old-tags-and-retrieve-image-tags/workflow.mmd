@@ -1,0 +1,32 @@
+flowchart LR
+  n0["Fetch Manifest Digest"]
+  n1["Remove Old Tags"]
+  n2["Retrieve Image Tags"]
+  n3["List Images"]
+  n4["Extract Image Names"]
+  n5["Identify Tags to Remove"]
+  n6["Scheduled Trigger"]
+  n7["Send Notification Email"]
+  n8["Split Tags"]
+  n9["Filter Valid Tags"]
+  n10["Fetch Manifest Digest for Blob"]
+  n11["Update Fields"]
+  n12["Group Tags by Image"]
+  n13["Sort by Creation Date"]
+  n14["Send Failure Notification Email"]
+  n15["Execute Garbage Collection"]
+  n8 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n4
+  n11 -->|"main out 0 to in 0"| n13
+  n1 -->|"main out 0 to in 0"| n15
+  n1 -->|"main out 1 to in 0"| n14
+  n9 -->|"main out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 0 to in 0"| n2
+  n12 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n10
+  n13 -->|"main out 0 to in 0"| n12
+  n5 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 0"| n11

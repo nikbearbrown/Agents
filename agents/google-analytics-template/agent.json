@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "slug": "google-analytics-template",
+  "title": "Google analytics template",
+  "purpose": "Adapt the published “Google analytics template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger",
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Save A.I. output to Baserow"
+  ],
+  "credential_types": [
+    "googleAnalyticsOAuth2"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Page Engagement Stats for this week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Page Engagement Stats for prior week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse data from Google Analytics",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse GA data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Google Search Results for this week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Google Search Results for last week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Google Analytics Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Google Analytics Data1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Country views data for this week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Country views data for last week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Google analytics data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Google analytics data1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send page data to A.I.",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Send page Search data to A.I.",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Send country view data to A.I.",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Save A.I. output to Baserow",
+        "type": "n8n-nodes-base.baserow",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Parse GA data",
+        "to": "Get Google Search Results for this week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get Page Engagement Stats for this week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send page data to A.I.",
+        "to": "Send page Search data to A.I.",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Google Analytics Data",
+        "to": "Get Google Search Results for last week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Google analytics data",
+        "to": "Get Country views data for last week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Google Analytics Data1",
+        "to": "Get Country views data for this week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Google analytics data1",
+        "to": "Send page data to A.I.",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send page Search data to A.I.",
+        "to": "Send country view data to A.I.",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send country view data to A.I.",
+        "to": "Save A.I. output to Baserow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse data from Google Analytics",
+        "to": "Get Page Engagement Stats for prior week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get Page Engagement Stats for this week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Country views data for last week",
+        "to": "Parse Google analytics data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Country views data for this week",
+        "to": "Parse Google analytics data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Google Search Results for last week",
+        "to": "Parse Google Analytics Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Google Search Results for this week",
+        "to": "Parse Google Analytics Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Page Engagement Stats for this week",
+        "to": "Parse data from Google Analytics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Page Engagement Stats for prior week",
+        "to": "Parse GA data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/google-analytics-template/implementations/n8n",
+      "files": [
+        "agents/google-analytics-template/implementations/n8n/google-analytics-template.json"
+      ],
+      "sha256": "2751d554daa70f3d43f1b5a740f700afcbea500ec865cc5d859a10aeb2dbcd38",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/google-analytics-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/google-analytics-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/google-analytics-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/google-analytics-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/google-analytics-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/google-analytics-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/google-analytics-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/google-analytics-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/google-analytics-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/google-analytics-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/google-analytics-template/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,24 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Get Term Dates Excel"]
+  n2["Extract Key Events and Dates"]
+  n3["Extract Target Sheet"]
+  n4["Fix Dates"]
+  n5["Google Gemini Chat Model"]
+  n6["Create ICS File"]
+  n7["Events to ICS Document"]
+  n8["Sort Events by Date"]
+  n9["Markdown Conversion Service"]
+  n10["Events to Items"]
+  n11["Send Email with Attachment"]
+  n4 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n9
+  n7 -->|"main out 0 to in 0"| n6
+  n5 -->|"ai_languageModel out 0 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n1

@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "slug": "airtop-web-agent",
+  "title": "Airtop Web Agent",
+  "purpose": "Adapt the published “Airtop Web Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission",
+    "When Executed by Another Workflow"
+  ],
+  "terminal_nodes": [
+    "Click",
+    "Query",
+    "Load URL",
+    "End session",
+    "Type",
+    "Start browser",
+    "Claude 3.5 Haiku",
+    "Structured Output Parser",
+    "Return IDs",
+    "Slack1"
+  ],
+  "credential_types": [
+    "airtopApi",
+    "anthropicApi",
+    "slackOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Click",
+        "type": "n8n-nodes-base.airtopTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Query",
+        "type": "n8n-nodes-base.airtopTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Load URL",
+        "type": "n8n-nodes-base.airtopTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "End session",
+        "type": "n8n-nodes-base.airtopTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Type",
+        "type": "n8n-nodes-base.airtopTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Start browser",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Claude 3.5 Haiku",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Session",
+        "type": "n8n-nodes-base.airtop",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window",
+        "type": "n8n-nodes-base.airtop",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Return IDs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Slack1",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Type",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Click",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Slack",
+        "to": "Return IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Output",
+        "to": "Slack1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window",
+        "to": "Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Session",
+        "to": "Window",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load URL",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "End session",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start browser",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude 3.5 Haiku",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "AI Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/airtop-web-agent/implementations/n8n",
+      "files": [
+        "agents/airtop-web-agent/implementations/n8n/airtop-web-agent.json"
+      ],
+      "sha256": "ac25a5e1864086f815f3e1f66e32423ce36ac41c580b37f8300e4e6f2e32f37a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/airtop-web-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/airtop-web-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/airtop-web-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/airtop-web-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/airtop-web-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/airtop-web-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/airtop-web-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/airtop-web-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/airtop-web-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/airtop-web-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/airtop-web-agent/implementations/n8n/provenance.json"
+}

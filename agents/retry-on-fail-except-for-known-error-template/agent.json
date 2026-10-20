@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "slug": "retry-on-fail-except-for-known-error-template",
+  "title": "Retry on fail except for known error Template",
+  "purpose": "Adapt the published “Retry on fail except for known error Template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Manual Trigger"
+  ],
+  "terminal_nodes": [
+    "Retry limit reached",
+    "Success",
+    "Known Error"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Retry limit reached",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set tries",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Update tries",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Catch known error",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Replace Me",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Success",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Known Error",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If tries left",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "Update tries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set tries",
+        "to": "Replace Me",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Replace Me",
+        "to": "Success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Replace Me",
+        "to": "Catch known error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Update tries",
+        "to": "If tries left",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If tries left",
+        "to": "Set tries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If tries left",
+        "to": "Retry limit reached",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Manual Trigger",
+        "to": "Set tries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Catch known error",
+        "to": "Known Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Catch known error",
+        "to": "Wait",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/retry-on-fail-except-for-known-error-template/implementations/n8n",
+      "files": [
+        "agents/retry-on-fail-except-for-known-error-template/implementations/n8n/retry-on-fail-except-for-known-error-template.json"
+      ],
+      "sha256": "cf61e159cc1a26a3c20d101ef9bde80201c659338a662f017baa83f1cf40f06e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/retry-on-fail-except-for-known-error-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/retry-on-fail-except-for-known-error-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/retry-on-fail-except-for-known-error-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/retry-on-fail-except-for-known-error-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/retry-on-fail-except-for-known-error-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/retry-on-fail-except-for-known-error-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/retry-on-fail-except-for-known-error-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/retry-on-fail-except-for-known-error-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/retry-on-fail-except-for-known-error-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/retry-on-fail-except-for-known-error-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/retry-on-fail-except-for-known-error-template/implementations/n8n/provenance.json"
+}

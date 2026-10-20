@@ -1,0 +1,26 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["GitHub"]
+  n2["Extract from File"]
+  n3["setVars"]
+  n4["replace variables"]
+  n5["If"]
+  n6["Check All Prompt Vars Present"]
+  n7["SetPrompt"]
+  n8["Stop and Error"]
+  n9["Set Completed Prompt"]
+  n10["AI Agent"]
+  n11["Prompt Output"]
+  n12["Ollama Chat Model"]
+  n5 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 1 to in 0"| n8
+  n1 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n1
+  n10 -->|"main out 0 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n7
+  n12 -->|"ai_languageModel out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n3

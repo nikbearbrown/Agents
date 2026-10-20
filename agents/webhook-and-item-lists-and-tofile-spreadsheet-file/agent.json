@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "slug": "webhook-and-item-lists-and-tofile-spreadsheet-file",
+  "title": "webhook and item lists and tofile spreadsheet file",
+  "purpose": "Adapt the published “webhook and item lists and tofile spreadsheet file” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Respond to Webhook"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Item Lists",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Spreadsheet File",
+        "type": "n8n-nodes-base.spreadsheetFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Item Lists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Item Lists",
+        "to": "Spreadsheet File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Spreadsheet File",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/n8n",
+      "files": [
+        "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/n8n/webhook-and-item-lists-and-tofile-spreadsheet-file.json"
+      ],
+      "sha256": "9d9830174d0fb54053666271bcb50c6f84857007697fbae29046484dc4e73602",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/n8n/provenance.json"
+}

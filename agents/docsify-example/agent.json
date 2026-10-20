@@ -1,0 +1,903 @@
+{
+  "schema_version": 1,
+  "slug": "docsify-example",
+  "title": "Docsify example",
+  "purpose": "Adapt the published “Docsify example” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 48 executable nodes and 71 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "single workflow",
+    "docsify"
+  ],
+  "terminal_nodes": [
+    "Respond with markdown",
+    "Respond with HTML",
+    "OpenAI Chat Model",
+    "Structured Output Parser",
+    "Auto-fixing Output Parser",
+    "Respond with main page HTML",
+    "Respond OK on Save"
+  ],
+  "credential_types": [
+    "n8nApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "CONFIG",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Convert to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "HasFile?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Main Page",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Instance overview",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Sort-workflows",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "doc action",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Empty Set",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Load Doc File",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond with markdown",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Respond with HTML",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Save New Doc File",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Blank Doc File",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Single Workflow1",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fill Workflow Table",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Auto-fixing Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond with main page HTML",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Tags",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Fallback file name",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "mkdir",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Edit Page",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Workflow md content",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Action Edit?1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Action Edit?2",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Mermaid Chart",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge2",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Generated Doc",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Passthrough",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge3",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Merge4",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Merge5",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Is Action Save?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge6",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Respond OK on Save",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "single workflow",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "file types",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get All Workflows",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "md files",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Workflow tags",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "docsify",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Is Action Edit?1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "mkdir",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "CONFIG",
+        "to": "Merge4",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "CONFIG",
+        "to": "Merge5",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge1",
+        "to": "HasFile?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge2",
+        "to": "Generated Doc",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge3",
+        "to": "Is Action Edit?2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge4",
+        "to": "Main Page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge5",
+        "to": "file types",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge6",
+        "to": "Is Action Save?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "docsify",
+        "to": "CONFIG",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "docsify",
+        "to": "Merge4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HasFile?",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HasFile?",
+        "to": "Fetch Single Workflow1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "md files",
+        "to": "Get All Workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "md files",
+        "to": "doc action",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "md files",
+        "to": "Get Workflow tags",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "md files",
+        "to": "Get All Workflows",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "md files",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Edit Page",
+        "to": "Respond with HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Empty Set",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Main Page",
+        "to": "Respond with main page HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "mkdir",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "Load Doc File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "Passthrough",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "mkdir",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "Load Doc File",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "Passthrough",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "mkdir",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "Empty Set",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "Passthrough",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "doc action",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "file types",
+        "to": "md files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Convert to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Merge6",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Passthrough",
+        "to": "Merge3",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Passthrough",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generated Doc",
+        "to": "Convert to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generated Doc",
+        "to": "Is Action Edit?2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load Doc File",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Tags",
+        "to": "Respond with markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Blank Doc File",
+        "to": "Is Action Edit?2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort-workflows",
+        "to": "Fill Workflow Table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Convert to File",
+        "to": "Save New Doc File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Action Save?",
+        "to": "Respond OK on Save",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "single workflow",
+        "to": "CONFIG",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "single workflow",
+        "to": "Merge5",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "single workflow",
+        "to": "CONFIG",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "single workflow",
+        "to": "Merge5",
+        "kind": "main",
+        "output": 1,
+        "input": 1
+      },
+      {
+        "from": "Is Action Edit?1",
+        "to": "Blank Doc File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Action Edit?1",
+        "to": "Basic LLM Chain",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Is Action Edit?1",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Is Action Edit?2",
+        "to": "Edit Page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Action Edit?2",
+        "to": "Workflow md content",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "Merge3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get All Workflows",
+        "to": "Sort-workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Workflow tags",
+        "to": "Workflow Tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Instance overview",
+        "to": "Respond with markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Basic LLM Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save New Doc File",
+        "to": "Merge6",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fallback file name",
+        "to": "Respond with markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fill Workflow Table",
+        "to": "Instance overview",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow md content",
+        "to": "Respond with markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Single Workflow1",
+        "to": "Generate Mermaid Chart",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Single Workflow1",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Generate Mermaid Chart",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "No Operation, do nothing",
+        "to": "Fallback file name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto-fixing Output Parser",
+        "to": "Basic LLM Chain",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/docsify-example/implementations/n8n",
+      "files": [
+        "agents/docsify-example/implementations/n8n/docsify-example.json"
+      ],
+      "sha256": "bc3654d6d4fd6498e169d404b3c3436381e57b9c45780a0c6be4adf3b151d2d5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/docsify-example/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/docsify-example/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/docsify-example/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/docsify-example/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/docsify-example/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/docsify-example/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/docsify-example/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/docsify-example/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/docsify-example/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/docsify-example/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/docsify-example/implementations/n8n/provenance.json"
+}

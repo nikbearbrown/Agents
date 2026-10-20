@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "slug": "age-and-number-of-the-news",
+  "title": "Age and number of the news",
+  "purpose": "Adapt the published “Age and number of the news” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Send revision email"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "trelloApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "RSS Read Testing Catalog",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Transform date",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Filter by date (more than 7 days)",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Sort by date",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Limit news to x",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Transform new to MD",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Publish comment",
+        "type": "n8n-nodes-base.trello",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send revision email",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "RSS Read marktechpost",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "RSS Read",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Transform date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RSS Read",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort by date",
+        "to": "Limit news to x",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transform date",
+        "to": "Filter by date (more than 7 days)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit news to x",
+        "to": "Transform new to MD",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Publish comment",
+        "to": "Send revision email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "RSS Read Testing Catalog",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "RSS Read marktechpost",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "RSS Read",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transform new to MD",
+        "to": "Publish comment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RSS Read marktechpost",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "RSS Read Testing Catalog",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Filter by date (more than 7 days)",
+        "to": "Sort by date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/age-and-number-of-the-news/implementations/n8n",
+      "files": [
+        "agents/age-and-number-of-the-news/implementations/n8n/age-and-number-of-the-news.json"
+      ],
+      "sha256": "6dfaa2173192fb95b7666b643be1501e5cffba51f3292426f2e29b237045e090",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/age-and-number-of-the-news/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/age-and-number-of-the-news/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/age-and-number-of-the-news/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/age-and-number-of-the-news/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/age-and-number-of-the-news/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/age-and-number-of-the-news/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/age-and-number-of-the-news/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/age-and-number-of-the-news/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/age-and-number-of-the-news/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/age-and-number-of-the-news/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/age-and-number-of-the-news/implementations/n8n/provenance.json"
+}

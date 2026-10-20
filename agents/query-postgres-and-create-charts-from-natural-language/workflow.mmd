@@ -1,0 +1,51 @@
+flowchart LR
+  n0["AI Agent"]
+  n1["DeepSeek Chat Model"]
+  n2["Return Final Response"]
+  n3["Webhook"]
+  n4["Format Success Result"]
+  n5["Chat Memory Manager"]
+  n6["Format History"]
+  n7["DeepSeek Chat Model1"]
+  n8["Format Charts"]
+  n9["Charts Agent"]
+  n10["Loop Entry"]
+  n11["If Can Retry"]
+  n12["Format Error Prompt"]
+  n13["If Error"]
+  n14["Search Memory"]
+  n15["Extract User Input"]
+  n16["Get DB Schema"]
+  n17["Format Schema"]
+  n18["Prepare Initial Prompt"]
+  n19["Execute Generated SQL"]
+  n20["Insert Memory"]
+  n21["If Charts"]
+  n22["If Ai Error"]
+  n23["Google Gemini Chat Model"]
+  n0 -->|"main out 0 to in 0"| n22
+  n3 -->|"main out 0 to in 0"| n15
+  n4 -->|"main out 0 to in 0"| n21
+  n5 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n16
+  n1 -->|"ai_languageModel out 0 to in 0"| n0
+  n7 -->|"ai_languageModel out 0 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n0
+  n11 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 1 to in 0"| n4
+  n12 -->|"main out 0 to in 0"| n11
+  n13 -->|"main out 0 to in 0"| n12
+  n13 -->|"main out 1 to in 0"| n4
+  n14 -->|"ai_memory out 0 to in 0"| n5
+  n15 -->|"main out 0 to in 0"| n5
+  n16 -->|"main out 0 to in 0"| n17
+  n17 -->|"main out 0 to in 0"| n18
+  n18 -->|"main out 0 to in 0"| n10
+  n19 -->|"main out 0 to in 0"| n13
+  n20 -->|"ai_memory out 0 to in 0"| n0
+  n21 -->|"main out 0 to in 0"| n8
+  n21 -->|"main out 1 to in 0"| n9
+  n22 -->|"main out 0 to in 0"| n19
+  n22 -->|"main out 1 to in 0"| n8

@@ -1,0 +1,45 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Mark As Read"]
+  n2["Star"]
+  n3["Get Starred From Inbox"]
+  n4["Get Unread From Inbox"]
+  n5["If Task Not Exist"]
+  n6["OpenAI Chat Model"]
+  n7["Structure Output Todoist Ready"]
+  n8["If AI responded properly"]
+  n9["Create Todoist Task"]
+  n10["Get Full Message"]
+  n11["Summarize Message"]
+  n12["Enrich Emails With Tasks"]
+  n13["Enrich Tasks with Emails"]
+  n14["If Email Unstarred #40;Not Exist#41;"]
+  n15["Close Task"]
+  n16["Email Trigger #40;IMAP#41;"]
+  n17["Schedule Trigger"]
+  n18["No Operation, do nothing"]
+  n19["Merge Starred and Unread Messages"]
+  n20["Get Open Tasks"]
+  n1 -->|"main out 0 to in 0"| n2
+  n20 -->|"main out 0 to in 1"| n12
+  n20 -->|"main out 0 to in 1"| n13
+  n10 -->|"main out 0 to in 0"| n11
+  n17 -->|"main out 0 to in 0"| n18
+  n5 -->|"main out 0 to in 0"| n10
+  n6 -->|"ai_languageModel out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n8
+  n16 -->|"main out 0 to in 0"| n18
+  n4 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n19
+  n3 -->|"main out 0 to in 1"| n19
+  n12 -->|"main out 0 to in 0"| n5
+  n13 -->|"main out 0 to in 0"| n14
+  n8 -->|"main out 0 to in 0"| n9
+  n18 -->|"main out 0 to in 0"| n4
+  n18 -->|"main out 0 to in 0"| n3
+  n18 -->|"main out 0 to in 0"| n20
+  n14 -->|"main out 0 to in 0"| n15
+  n7 -->|"ai_outputParser out 0 to in 0"| n11
+  n19 -->|"main out 0 to in 0"| n12
+  n19 -->|"main out 0 to in 0"| n13
+  n0 -->|"main out 0 to in 0"| n18

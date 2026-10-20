@@ -1,0 +1,316 @@
+{
+  "schema_version": 1,
+  "slug": "agent-with-custom-http-request",
+  "title": "Agent with custom HTTP Request",
+  "purpose": "Adapt the published “Agent with custom HTTP Request” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On new manual Chat Message",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Stringify error message",
+    "ReAct AI Agent",
+    "Send Page Content",
+    "HTTP_Request_Tool"
+  ],
+  "credential_types": [
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On new manual Chat Message",
+        "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Exctract HTML Body",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Is error?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Stringify error message",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remove extra tags",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Simplify output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Simplify?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "QUERY_PARAMS",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "CONFIG",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "ReAct AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert to Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Page Content",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "HTTP_Request_Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "CONFIG",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is error?",
+        "to": "Stringify error message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is error?",
+        "to": "Exctract HTML Body",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Simplify?",
+        "to": "Simplify output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simplify?",
+        "to": "Convert to Markdown",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Is error?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "QUERY_PARAMS",
+        "to": "CONFIG",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simplify output",
+        "to": "Convert to Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP_Request_Tool",
+        "to": "ReAct AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "ReAct AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove extra tags",
+        "to": "Simplify?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Exctract HTML Body",
+        "to": "Remove extra tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert to Markdown",
+        "to": "Send Page Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "QUERY_PARAMS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On new manual Chat Message",
+        "to": "ReAct AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/agent-with-custom-http-request/implementations/n8n",
+      "files": [
+        "agents/agent-with-custom-http-request/implementations/n8n/agent-with-custom-http-request.json"
+      ],
+      "sha256": "a4cb1cb63598dc17842ff24173c6635c9bf8a748522f9cd8384735b5a2fed2d2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/agent-with-custom-http-request/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/agent-with-custom-http-request/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/agent-with-custom-http-request/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/agent-with-custom-http-request/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/agent-with-custom-http-request/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/agent-with-custom-http-request/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/agent-with-custom-http-request/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/agent-with-custom-http-request/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/agent-with-custom-http-request/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/agent-with-custom-http-request/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/agent-with-custom-http-request/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "slug": "read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists",
+  "title": "read google sheet and search salesforce accounts and removeduplicates item lists",
+  "purpose": "Adapt the published “read google sheet and search salesforce accounts and removeduplicates item lists” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Create Salesforce contact"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "salesforceOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Search Salesforce accounts",
+        "type": "n8n-nodes-base.salesforce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Keep new companies",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge existing account data",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Account found?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remove duplicate companies",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Account ID for existing accounts",
+        "type": "n8n-nodes-base.renameKeys",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve new company contacts",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set new account name",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Salesforce account",
+        "type": "n8n-nodes-base.salesforce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Salesforce contact",
+        "type": "n8n-nodes-base.salesforce",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Account found?",
+        "to": "Set Account ID for existing accounts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Google Sheet",
+        "to": "Search Salesforce accounts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Google Sheet",
+        "to": "Keep new companies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Google Sheet",
+        "to": "Merge existing account data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep new companies",
+        "to": "Remove duplicate companies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep new companies",
+        "to": "Retrieve new company contacts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set new account name",
+        "to": "Retrieve new company contacts",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Read Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Salesforce account",
+        "to": "Set new account name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove duplicate companies",
+        "to": "Create Salesforce account",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Salesforce accounts",
+        "to": "Keep new companies",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Search Salesforce accounts",
+        "to": "Merge existing account data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge existing account data",
+        "to": "Account found?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve new company contacts",
+        "to": "Create Salesforce contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Account ID for existing accounts",
+        "to": "Create Salesforce contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/n8n",
+      "files": [
+        "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/n8n/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists.json"
+      ],
+      "sha256": "3a54f9feb626388b7f6c7d9c5be62b9cf826bc5beec1ac611be6dad72ac5b55a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/n8n/provenance.json"
+}

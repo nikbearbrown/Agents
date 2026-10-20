@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "slug": "personal-assistant-mcp-server",
+  "title": "Personal Assistant MCP server",
+  "purpose": "Adapt the published “Personal Assistant MCP server” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received",
+    "MCP Server Trigger"
+  ],
+  "terminal_nodes": [
+    "Google Gemini Chat Model",
+    "Simple Memory",
+    "MCP Server Trigger",
+    "MCP Client",
+    "Create event",
+    "Update event",
+    "Draft email",
+    "Personal Assistant",
+    "Add new row",
+    "Find row",
+    "Update row",
+    "Find emails",
+    "Find single event",
+    "Find multiple events"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleCalendarOAuth2Api",
+    "googlePalmApi",
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "MCP Server Trigger",
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MCP Client",
+        "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Update event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Draft email",
+        "type": "n8n-nodes-base.gmailTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Personal Assistant",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.9,
+        "disabled": false
+      },
+      {
+        "name": "Add new row",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Find row",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Update row",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Find emails",
+        "type": "n8n-nodes-base.gmailTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Find single event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Find multiple events",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Find row",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MCP Client",
+        "to": "Personal Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update row",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add new row",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Draft email",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find emails",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create event",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update event",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory",
+        "to": "Personal Assistant",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find single event",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find multiple events",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Personal Assistant",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Personal Assistant",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/personal-assistant-mcp-server/implementations/n8n",
+      "files": [
+        "agents/personal-assistant-mcp-server/implementations/n8n/personal-assistant-mcp-server.json"
+      ],
+      "sha256": "1666b10e43346dc4b5ab47b26bad8224198954973470e940143aea0d1619e09b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/personal-assistant-mcp-server/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/personal-assistant-mcp-server/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/personal-assistant-mcp-server/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/personal-assistant-mcp-server/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/personal-assistant-mcp-server/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/personal-assistant-mcp-server/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/personal-assistant-mcp-server/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/personal-assistant-mcp-server/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/personal-assistant-mcp-server/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/personal-assistant-mcp-server/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/personal-assistant-mcp-server/implementations/n8n/provenance.json"
+}

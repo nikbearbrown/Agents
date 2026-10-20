@@ -1,0 +1,21 @@
+flowchart LR
+  n0["Format text with Markdown"]
+  n1["Lemlist Trigger - On new reply"]
+  n2["OpenAI Chat Model"]
+  n3["Structured Output Parser"]
+  n4["Send alert to Slack"]
+  n5["Lemlist - Unsubscribe"]
+  n6["lemlist - Mark as interested"]
+  n7["Categorize lemlist reply"]
+  n8["Merge data"]
+  n9["Route reply to the right branch"]
+  n8 -->|"main out 0 to in 0"| n9
+  n2 -->|"ai_languageModel out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 1"| n8
+  n3 -->|"ai_outputParser out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n0
+  n9 -->|"main out 0 to in 0"| n4
+  n9 -->|"main out 1 to in 0"| n5
+  n9 -->|"main out 2 to in 0"| n6

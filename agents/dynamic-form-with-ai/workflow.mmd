@@ -1,0 +1,22 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["Clarification Questions"]
+  n2["Get Basic Information"]
+  n3["Get Business Overview"]
+  n4["End Form"]
+  n5["Structured Output Parser"]
+  n6["Remove Already Answered Questions"]
+  n7["Analyse Response"]
+  n8["Split Out Analysis"]
+  n9["Prepare For Form Generation"]
+  n10["Aggregate For Form Generation"]
+  n7 -->|"main out 0 to in 0"| n8
+  n0 -->|"ai_languageModel out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n4
+  n5 -->|"ai_outputParser out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n9

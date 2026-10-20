@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "slug": "receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail",
+  "title": "receive schedule events and get all emails in the last day and get thread gmail",
+  "purpose": "Adapt the published “receive schedule events and get all emails in the last day and get thread gmail” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "At midnight every work day"
+  ],
+  "terminal_nodes": [
+    "Archive message (remove from inbox)",
+    "Archive thread  (remove from inbox)"
+  ],
+  "credential_types": [
+    "gmailOAuth2"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "At midnight every work day",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all emails in the last day",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get the thread of each email",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Keep only starred emails in inbox",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "for each message in the thread",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Archive message (remove from inbox)",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Archive thread  (remove from inbox)",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "At midnight every work day",
+        "to": "Get all emails in the last day",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the thread of each email",
+        "to": "Keep only starred emails in inbox",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all emails in the last day",
+        "to": "Get the thread of each email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "for each message in the thread",
+        "to": "Archive message (remove from inbox)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep only starred emails in inbox",
+        "to": "Archive thread  (remove from inbox)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep only starred emails in inbox",
+        "to": "for each message in the thread",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/n8n",
+      "files": [
+        "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/n8n/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail.json"
+      ],
+      "sha256": "df6ef43a6e011127864a1a41062ea206765efb12466821f9054bb039442abbf9",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/n8n/provenance.json"
+}

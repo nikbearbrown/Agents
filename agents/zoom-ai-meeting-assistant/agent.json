@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "slug": "zoom-ai-meeting-assistant",
+  "title": "Zoom AI Meeting Assistant",
+  "purpose": "Adapt the published “Zoom AI Meeting Assistant” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 22 executable nodes and 21 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "No Recording/Transcript available",
+    "Send meeting summary",
+    "Create tasks",
+    "Create tasks and follow-up call",
+    "Create follow-up call",
+    "ClickUp"
+  ],
+  "credential_types": [
+    "clickUpOAuth2Api",
+    "microsoftOutlookOAuth2Api",
+    "openAiApi",
+    "smtp",
+    "zoomOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No Recording/Transcript available",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Zoom: Get data of last meeting",
+        "type": "n8n-nodes-base.zoom",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter transcript URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Filter: Only 1 item",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Zoom: Get transcript file",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract text from transcript file",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format transcript text",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Zoom: Get participants data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Create meeting summary",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Sort for mail delivery",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format to html",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send meeting summary",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Create tasks",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Create tasks and follow-up call",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Create follow-up call",
+        "type": "n8n-nodes-base.microsoftOutlookTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter: Last 24 hours",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ClickUp",
+        "type": "n8n-nodes-base.clickUp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Zoom: Get transcripts data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split Out",
+        "to": "ClickUp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create tasks",
+        "to": "Create tasks and follow-up call",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format to html",
+        "to": "Send meeting summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Create tasks and follow-up call",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter: Only 1 item",
+        "to": "Filter: Only 1 item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter: Only 1 item",
+        "to": "Zoom: Get transcript file",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create follow-up call",
+        "to": "Create tasks and follow-up call",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter transcript URL",
+        "to": "Filter: Only 1 item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter: Last 24 hours",
+        "to": "Zoom: Get transcripts data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create meeting summary",
+        "to": "Sort for mail delivery",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create meeting summary",
+        "to": "Create tasks and follow-up call",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format transcript text",
+        "to": "Zoom: Get participants data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort for mail delivery",
+        "to": "Format to html",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Zoom: Get transcript file",
+        "to": "Extract text from transcript file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Zoom: Get transcripts data",
+        "to": "Filter transcript URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Zoom: Get transcripts data",
+        "to": "No Recording/Transcript available",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Zoom: Get participants data",
+        "to": "Create meeting summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Zoom: Get data of last meeting",
+        "to": "Filter: Last 24 hours",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract text from transcript file",
+        "to": "Format transcript text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Zoom: Get data of last meeting",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/zoom-ai-meeting-assistant/implementations/n8n",
+      "files": [
+        "agents/zoom-ai-meeting-assistant/implementations/n8n/zoom-ai-meeting-assistant.json"
+      ],
+      "sha256": "18ef80422881f9b5398a85fc637f4428ecdc8f4b0255b8bee46d793927cd9237",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/zoom-ai-meeting-assistant/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/zoom-ai-meeting-assistant/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/zoom-ai-meeting-assistant/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/zoom-ai-meeting-assistant/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/zoom-ai-meeting-assistant/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/zoom-ai-meeting-assistant/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/zoom-ai-meeting-assistant/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/zoom-ai-meeting-assistant/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/zoom-ai-meeting-assistant/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/zoom-ai-meeting-assistant/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/zoom-ai-meeting-assistant/implementations/n8n/provenance.json"
+}

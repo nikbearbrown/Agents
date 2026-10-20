@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "slug": "get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency",
+  "title": "get meraki organizations and get network ids and get uplink loss and latency",
+  "purpose": "Adapt the published “get meraki organizations and get network ids and get uplink loss and latency” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\"",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Log the Alert"
+  ],
+  "credential_types": [
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Meraki Organizations",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Network IDs",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Org Name & ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Combine latency to its respective Network",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Makes Latency and Loss Filterable",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Filters Problematic sites",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Average Latency & Loss over 5m",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Uplink Loss and Latency",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Sets Network Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Check if Alert Exists",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Message Techs",
+        "type": "n8n-nodes-base.microsoftTeams",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Log the Alert",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Message Techs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message Techs",
+        "to": "Log the Alert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Response",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Network IDs",
+        "to": "Sets Network Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get Meraki Organizations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Org Name & ID",
+        "to": "Get Network IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Alert Exists",
+        "to": "Create Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sets Network Variables",
+        "to": "Combine latency to its respective Network",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Meraki Organizations",
+        "to": "Get Org Name & ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Meraki Organizations",
+        "to": "Get Uplink Loss and Latency",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filters Problematic sites",
+        "to": "Check if Alert Exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filters Problematic sites",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Get Uplink Loss and Latency",
+        "to": "Combine latency to its respective Network",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Average Latency & Loss over 5m",
+        "to": "Filters Problematic sites",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Get Meraki Organizations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Makes Latency and Loss Filterable",
+        "to": "Average Latency & Loss over 5m",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine latency to its respective Network",
+        "to": "Makes Latency and Loss Filterable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/n8n",
+      "files": [
+        "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/n8n/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency.json"
+      ],
+      "sha256": "01e558ed870eba27aef374d2c2ba458b64fa4c3d1b966fb1a122410c785d4795",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/n8n/provenance.json"
+}

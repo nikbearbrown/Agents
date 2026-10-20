@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "slug": "rag-workflow-for-company-documents-stored-in-google-drive",
+  "title": "RAG Workflow For Company Documents stored in Google Drive",
+  "purpose": "Adapt the published “RAG Workflow For Company Documents stored in Google Drive” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Google Drive File Updated",
+    "Google Drive File Created",
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "Pinecone Vector Store",
+    "Embeddings Google Gemini",
+    "Default Data Loader",
+    "Recursive Character Text Splitter",
+    "AI Agent",
+    "Vector Store Tool",
+    "Pinecone Vector Store (Retrieval)",
+    "Embeddings Google Gemini (retrieval)",
+    "Window Buffer Memory",
+    "Google Gemini Chat Model",
+    "Google Gemini Chat Model (retrieval)"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googlePalmApi",
+    "pineconeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Pinecone Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Google Gemini",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Vector Store Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Pinecone Vector Store (Retrieval)",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Google Gemini (retrieval)",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download File From Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive File Updated",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive File Created",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model (retrieval)",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Vector Store Tool",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Pinecone Vector Store",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Google Gemini",
+        "to": "Pinecone Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive File Created",
+        "to": "Download File From Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive File Updated",
+        "to": "Download File From Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download File From Google Drive",
+        "to": "Pinecone Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Pinecone Vector Store (Retrieval)",
+        "to": "Vector Store Tool",
+        "kind": "ai_vectorStore",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Google Gemini (retrieval)",
+        "to": "Pinecone Vector Store (Retrieval)",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model (retrieval)",
+        "to": "Vector Store Tool",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/n8n",
+      "files": [
+        "agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/n8n/rag-workflow-for-company-documents-stored-in-google-drive.json"
+      ],
+      "sha256": "cc641c1d65971e068fdc44144a928a9b5f80f6d2f8aecab56b22e8400e5e7ad5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/rag-workflow-for-company-documents-stored-in-google-drive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/n8n/provenance.json"
+}

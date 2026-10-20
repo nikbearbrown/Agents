@@ -1,0 +1,33 @@
+flowchart LR
+  n0["Split Out"]
+  n1["Normalize Fields"]
+  n2["Embeddings OpenAI"]
+  n3["Default Data Loader"]
+  n4["Recursive Character Text Splitter"]
+  n5["OpenAI Chat Model"]
+  n6["Get Articles Daily"]
+  n7["Send Weekly Summary"]
+  n8["News reader AI"]
+  n9["Send Newsletter"]
+  n10["Convert Response to an Email-Friendly Format"]
+  n11["Your topics of interest"]
+  n12["Store News Articles"]
+  n13["Set Tech News RSS Feeds"]
+  n14["Read RSS News Feeds"]
+  n15["Get News Articles"]
+  n16["Embeddings OpenAI2"]
+  n0 -->|"main out 0 to in 0"| n14
+  n8 -->|"main out 0 to in 0"| n10
+  n1 -->|"main out 0 to in 0"| n12
+  n2 -->|"ai_embedding out 0 to in 0"| n12
+  n15 -->|"ai_tool out 0 to in 0"| n8
+  n5 -->|"ai_languageModel out 0 to in 0"| n8
+  n16 -->|"ai_embedding out 0 to in 0"| n15
+  n6 -->|"main out 0 to in 0"| n13
+  n3 -->|"ai_document out 0 to in 0"| n12
+  n14 -->|"main out 0 to in 0"| n1
+  n7 -->|"main out 0 to in 0"| n11
+  n13 -->|"main out 0 to in 0"| n0
+  n11 -->|"main out 0 to in 0"| n8
+  n4 -->|"ai_textSplitter out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n9

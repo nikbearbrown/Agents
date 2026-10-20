@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "slug": "list-message-gmail-and-delete-message-gmail",
+  "title": "list message gmail and delete message gmail",
+  "purpose": "Adapt the published “list message gmail and delete message gmail” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [],
+  "credential_types": [
+    "gmailOAuth2"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail",
+        "type": "n8n-nodes-base.gmail",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Delete Old Gmail",
+        "type": "n8n-nodes-base.gmail",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SplitInBatches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Gmail",
+        "to": "SplitInBatches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SplitInBatches",
+        "to": "Delete Old Gmail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete Old Gmail",
+        "to": "SplitInBatches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Gmail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/implementations/n8n",
+      "files": [
+        "agents/list-message-gmail-and-delete-message-gmail/implementations/n8n/list-message-gmail-and-delete-message-gmail.json"
+      ],
+      "sha256": "b5953bcf8bdd27096da1d7d7b6e9cc65e97db40779c29ef3dc8537ed6c6c2821",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/list-message-gmail-and-delete-message-gmail/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/list-message-gmail-and-delete-message-gmail/implementations/n8n/provenance.json"
+}

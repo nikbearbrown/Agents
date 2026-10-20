@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "slug": "google-analytics-weekly-report",
+  "title": "Google Analytics: Weekly Report",
+  "purpose": "Adapt the published “Google Analytics: Weekly Report” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Email",
+    "Telegram",
+    "Calculator"
+  ],
+  "credential_types": [
+    "googleAnalyticsOAuth2",
+    "openAiApi",
+    "smtp",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Analytics Letzte 7 Tage",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Processing for Telegram",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Analytics: Past 7 days of the previous year",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Data",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Data1",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculation same period previous year",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Assign data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Assign data1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Processing for email",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Calculator",
+        "to": "Processing for email",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign data",
+        "to": "Summarize Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign data1",
+        "to": "Summarize Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Data",
+        "to": "Calculation same period previous year",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Data1",
+        "to": "Processing for email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Google Analytics Letzte 7 Tage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Processing for email",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Processing for email",
+        "to": "Processing for Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Processing for Telegram",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Analytics Letzte 7 Tage",
+        "to": "Assign data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculation same period previous year",
+        "to": "Google Analytics: Past 7 days of the previous year",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Analytics: Past 7 days of the previous year",
+        "to": "Assign data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/google-analytics-weekly-report/implementations/n8n",
+      "files": [
+        "agents/google-analytics-weekly-report/implementations/n8n/google-analytics-weekly-report.json"
+      ],
+      "sha256": "678df0d7807b5a47c84c63a68115bd433c4fb32d8c516c20251af20a649e539e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/google-analytics-weekly-report/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/google-analytics-weekly-report/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/google-analytics-weekly-report/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/google-analytics-weekly-report/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/google-analytics-weekly-report/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/google-analytics-weekly-report/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/google-analytics-weekly-report/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/google-analytics-weekly-report/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/google-analytics-weekly-report/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/google-analytics-weekly-report/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/google-analytics-weekly-report/implementations/n8n/provenance.json"
+}

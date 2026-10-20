@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "slug": "the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963",
+  "title": "The conversation history(last 20 messages) is stored in a buffer memory",
+  "purpose": "Adapt the published “The conversation history(last 20 messages) is stored in a buffer memory” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On new manual Chat Message"
+  ],
+  "terminal_nodes": [
+    "Wikipedia",
+    "Window Buffer Memory",
+    "AI Agent",
+    "Weather HTTP Request",
+    "Ollama Chat Model"
+  ],
+  "credential_types": [
+    "ollamaApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On new manual Chat Message",
+        "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Weather HTTP Request",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Ollama Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wikipedia",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ollama Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Weather HTTP Request",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On new manual Chat Message",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/n8n",
+      "files": [
+        "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/n8n/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963.json"
+      ],
+      "sha256": "ecdf70eb535b1241d3b967f01d33fbb06f913475234c0bdcfab940236391387e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/n8n/provenance.json"
+}

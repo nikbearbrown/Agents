@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "slug": "rag-ai-agent-with-milvus-and-cohere",
+  "title": "RAG AI Agent with Milvus and Cohere",
+  "purpose": "Adapt the published “RAG AI Agent with Milvus and Cohere” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received",
+    "Watch New Files"
+  ],
+  "terminal_nodes": [
+    "Default Data Loader",
+    "Embeddings Cohere",
+    "Insert into Milvus",
+    "RAG Agent",
+    "Retrieve from Milvus",
+    "OpenAI 4o",
+    "Memory",
+    "Cohere embeddings",
+    "Set Chunks"
+  ],
+  "credential_types": [
+    "cohereApi",
+    "googleDriveOAuth2Api",
+    "milvusApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Cohere",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Watch New Files",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download New",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Insert into Milvus",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "RAG Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve from Milvus",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI 4o",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Cohere embeddings",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Chunks",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Memory",
+        "to": "RAG Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI 4o",
+        "to": "RAG Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Chunks",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download New",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Watch New Files",
+        "to": "Download New",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cohere embeddings",
+        "to": "Retrieve from Milvus",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Cohere",
+        "to": "Insert into Milvus",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "Insert into Milvus",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Insert into Milvus",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve from Milvus",
+        "to": "RAG Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "RAG Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/implementations/n8n",
+      "files": [
+        "agents/rag-ai-agent-with-milvus-and-cohere/implementations/n8n/rag-ai-agent-with-milvus-and-cohere.json"
+      ],
+      "sha256": "00dde2cbacdc3afc2ffc5b44aba4e992168ac29adcf28ea01897f1eeda854bbe",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/rag-ai-agent-with-milvus-and-cohere/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/rag-ai-agent-with-milvus-and-cohere/implementations/n8n/provenance.json"
+}

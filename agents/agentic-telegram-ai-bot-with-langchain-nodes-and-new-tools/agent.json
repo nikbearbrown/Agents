@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "slug": "agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools",
+  "title": "Agentic Telegram AI bot with LangChain nodes and new tools",
+  "purpose": "Adapt the published “Agentic Telegram AI bot with LangChain nodes and new tools” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Listen for incoming events"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Window Buffer Memory",
+    "Send final reply",
+    "Send back an image",
+    "Generate image in Dalle"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Listen for incoming events",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send final reply",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Send back an image",
+        "type": "n8n-nodes-base.telegramTool",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate image in Dalle",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "AI Agent",
+        "to": "Send final reply",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send back an image",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate image in Dalle",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Listen for incoming events",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/n8n",
+      "files": [
+        "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/n8n/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools.json"
+      ],
+      "sha256": "be4a1560ec9991064917e37559f67ab537968fcaa031e2bb211c158a20e0f77a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/n8n/provenance.json"
+}

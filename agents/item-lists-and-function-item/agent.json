@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "slug": "item-lists-and-function-item",
+  "title": "item lists and function item",
+  "purpose": "Adapt the published “item lists and function item” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Return item.fieldData"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "FileMaker response.data",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Return item.fieldData",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "FileMaker Data API Contacts",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "FileMaker response.data",
+        "to": "Return item.fieldData",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "FileMaker Data API Contacts",
+        "to": "FileMaker response.data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/item-lists-and-function-item/implementations/n8n",
+      "files": [
+        "agents/item-lists-and-function-item/implementations/n8n/item-lists-and-function-item.json"
+      ],
+      "sha256": "686aa84bae891ec7294fef48df63c15db650d76a619841f15dec1a4cb7da2641",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/item-lists-and-function-item/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/item-lists-and-function-item/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/item-lists-and-function-item/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/item-lists-and-function-item/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/item-lists-and-function-item/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/item-lists-and-function-item/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/item-lists-and-function-item/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/item-lists-and-function-item/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/item-lists-and-function-item/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/item-lists-and-function-item/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/item-lists-and-function-item/implementations/n8n/provenance.json"
+}

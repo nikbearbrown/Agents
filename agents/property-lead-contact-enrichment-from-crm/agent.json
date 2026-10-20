@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "slug": "property-lead-contact-enrichment-from-crm",
+  "title": "Property Lead Contact Enrichment from CRM",
+  "purpose": "Adapt the published “Property Lead Contact Enrichment from CRM” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\"",
+    "Daily Schedule"
+  ],
+  "terminal_nodes": [
+    "Push to CRM",
+    "Email Notification"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Daily Schedule",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Search Properties API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Configure Search Parameters",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Property Results",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Owner Contact Info",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Format Lead Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create Excel Spreadsheet",
+        "type": "n8n-nodes-base.spreadsheetFile",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Push to CRM",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Email Notification",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Results",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Daily Schedule",
+        "to": "Configure Search Parameters",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Lead Data",
+        "to": "Create Excel Spreadsheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Lead Data",
+        "to": "Push to CRM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Lead Data",
+        "to": "Summarize Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Results",
+        "to": "Email Notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Properties API",
+        "to": "Filter Property Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Owner Contact Info",
+        "to": "Format Lead Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Property Results",
+        "to": "Get Owner Contact Info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Excel Spreadsheet",
+        "to": "Email Notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Configure Search Parameters",
+        "to": "Search Properties API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Configure Search Parameters",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/property-lead-contact-enrichment-from-crm/implementations/n8n",
+      "files": [
+        "agents/property-lead-contact-enrichment-from-crm/implementations/n8n/property-lead-contact-enrichment-from-crm.json"
+      ],
+      "sha256": "f322f59b5b97137ae69a6e53ab009657227ebcd4a6c8359a4177ae3082ef565a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/property-lead-contact-enrichment-from-crm/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/property-lead-contact-enrichment-from-crm/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/property-lead-contact-enrichment-from-crm/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/property-lead-contact-enrichment-from-crm/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/property-lead-contact-enrichment-from-crm/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/property-lead-contact-enrichment-from-crm/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/property-lead-contact-enrichment-from-crm/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/property-lead-contact-enrichment-from-crm/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/property-lead-contact-enrichment-from-crm/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/property-lead-contact-enrichment-from-crm/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/property-lead-contact-enrichment-from-crm/implementations/n8n/provenance.json"
+}

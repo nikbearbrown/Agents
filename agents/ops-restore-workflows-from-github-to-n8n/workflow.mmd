@@ -1,0 +1,26 @@
+flowchart LR
+  n0["On clicking #39;execute#39;"]
+  n1["Globals"]
+  n2["Workflow name already exists"]
+  n3["If workflow already exists"]
+  n4["Set n8n existing workflows names"]
+  n5["GitHub - get all files"]
+  n6["n8n - get all workflows"]
+  n7["GitHub - get each file"]
+  n8["Set name and content"]
+  n9["n8n - create workflow"]
+  n10["Merge globals and files"]
+  n11["Merge Github and n8n workflows - Keep only non existing workflows based on the name"]
+  n1 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 1"| n10
+  n8 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 0"| n1
+  n0 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 1 to in 0"| n2
+  n4 -->|"main out 0 to in 1"| n11
+  n11 -->|"main out 0 to in 0"| n3

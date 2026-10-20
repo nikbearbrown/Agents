@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "slug": "youtube-to-x-post-alexk1919",
+  "title": "YouTube to X Post- AlexK1919",
+  "purpose": "Adapt the published “YouTube to X Post- AlexK1919” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 20 executable nodes and 16 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Check Every 2 Hours",
+    "When clicking \"Test workflow\""
+  ],
+  "terminal_nodes": [
+    "Calculator",
+    "Wikipedia",
+    "Check Every 2 Hours",
+    "Calculator2",
+    "GS - Update Tweet",
+    "Discord",
+    "Wikipedia1",
+    "Slack",
+    "Gmail"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleSheetsOAuth2Api",
+    "openAiApi",
+    "twitterOAuth2Api",
+    "youTubeOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Post to X",
+        "type": "n8n-nodes-base.twitter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Latest Videos",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Every 2 Hours",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": true
+      },
+      {
+        "name": "Calculator2",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GS - Add Tweet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "GS - Update Tweet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Discord",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Remove Duplicates",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Generate X Post",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Set Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia1",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Rewrite X Post to 220 Characters",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Verify character limit constraints",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Final Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "If Array is empty?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Post to X",
+        "to": "GS - Update Tweet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wikipedia",
+        "to": "Generate X Post",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator",
+        "to": "Generate X Post",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Fields",
+        "to": "Remove Duplicates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wikipedia1",
+        "to": "Rewrite X Post to 220 Characters",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator2",
+        "to": "Rewrite X Post to 220 Characters",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GS - Add Tweet",
+        "to": "Post to X",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate X Post",
+        "to": "Verify character limit constraints",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Final Fields",
+        "to": "GS - Add Tweet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Duplicates",
+        "to": "If Array is empty?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Array is empty?",
+        "to": "Generate X Post",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Fetch Latest Videos",
+        "to": "Set Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Fetch Latest Videos",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rewrite X Post to 220 Characters",
+        "to": "Verify character limit constraints",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify character limit constraints",
+        "to": "Rewrite X Post to 220 Characters",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify character limit constraints",
+        "to": "Set Final Fields",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/youtube-to-x-post-alexk1919/implementations/n8n",
+      "files": [
+        "agents/youtube-to-x-post-alexk1919/implementations/n8n/youtube-to-x-post-alexk1919.json"
+      ],
+      "sha256": "ff4106c076a8eb3dfd83b57d6e2a15a82d9a091c97dee0b0652e0eca19b51141",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/youtube-to-x-post-alexk1919/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/youtube-to-x-post-alexk1919/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/youtube-to-x-post-alexk1919/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/youtube-to-x-post-alexk1919/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/youtube-to-x-post-alexk1919/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/youtube-to-x-post-alexk1919/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/youtube-to-x-post-alexk1919/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/youtube-to-x-post-alexk1919/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/youtube-to-x-post-alexk1919/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/youtube-to-x-post-alexk1919/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/youtube-to-x-post-alexk1919/implementations/n8n/provenance.json"
+}

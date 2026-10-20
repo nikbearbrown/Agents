@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "slug": "mycroft-news-intelligence-agent-6178eb47",
+  "title": "Mycroft - News Intelligence Agent",
+  "purpose": "Adapt the published “Mycroft - News Intelligence Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Respond to Webhook"
+  ],
+  "credential_types": [
+    "postgres",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Company List",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Build Query",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "normalizenewsapi",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "NewsApiKey",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "XML",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ProcessNewData",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "RiskCalculator",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Insert rows in a table",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Alert Generator Code Node",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "DailyGeneratorCode",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Set Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Company List",
+        "to": "Build Query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Query",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Query",
+        "to": "NewsApiKey",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "normalizenewsapi",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "NewsApiKey",
+        "to": "ProcessNewData",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "XML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "HTTP Request1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "XML",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ProcessNewData",
+        "to": "normalizenewsapi",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "HTTP Request1",
+        "to": "RiskCalculator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "RiskCalculator",
+        "to": "Insert rows in a table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Insert rows in a table",
+        "to": "Alert Generator Code Node",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Alert Generator Code Node",
+        "to": "Send email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send email",
+        "to": "DailyGeneratorCode",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Set Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DailyGeneratorCode",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Variables",
+        "to": "Company List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/implementations/n8n",
+      "files": [
+        "agents/mycroft-news-intelligence-agent-6178eb47/implementations/n8n/mycroft-news-intelligence-agent-6178eb47.json"
+      ],
+      "sha256": "44161e77e71540cb134fe0c44724729c56e19acf58d6915fdaae6eba72faeb63",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/mycroft-news-intelligence-agent-6178eb47/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/mycroft-news-intelligence-agent-6178eb47/implementations/n8n/provenance.json"
+}

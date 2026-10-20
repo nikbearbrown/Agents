@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "slug": "create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel",
+  "title": "Create a screenshot of a website and send it to a telegram channel",
+  "purpose": "Adapt the published “Create a screenshot of a website and send it to a telegram channel” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Telegram"
+  ],
+  "credential_types": [
+    "telegramApi",
+    "uprocApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "uProc",
+        "type": "n8n-nodes-base.uproc",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "uProc",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "uProc",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/n8n",
+      "files": [
+        "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/n8n/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel.json"
+      ],
+      "sha256": "86f095025d189c562451880488baa7d3634d5a7ef3acd4f04442ad76e387f181",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/n8n/provenance.json"
+}

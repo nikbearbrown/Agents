@@ -1,0 +1,14 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["Window Buffer Memory"]
+  n2["Listen for incoming events"]
+  n3["Send final reply"]
+  n4["Send back an image"]
+  n5["Generate image in Dalle"]
+  n6["AI Agent"]
+  n6 -->|"main out 0 to in 0"| n3
+  n0 -->|"ai_languageModel out 0 to in 0"| n6
+  n4 -->|"ai_tool out 0 to in 0"| n6
+  n1 -->|"ai_memory out 0 to in 0"| n6
+  n5 -->|"ai_tool out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n6

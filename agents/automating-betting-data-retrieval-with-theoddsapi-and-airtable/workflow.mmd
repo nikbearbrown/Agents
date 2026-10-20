@@ -1,0 +1,14 @@
+flowchart LR
+  n0["Morning Trigger To Pull Data At 7:00am"]
+  n1["Evening Trigger To Pull Data At 11:00pm"]
+  n2["Retrieve Data Of Upcoming Sport Events For The Day"]
+  n3["Create Records Of Upcoming Events For The Day"]
+  n4["Retrieve Sport Results Data At The End Of The Day"]
+  n5["Combine Sport Results With Upcoming Events Records By Matching ID"]
+  n6["Update Table Records With Scores And Results For Sport Events"]
+  n0 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 1"| n5
+  n2 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n6

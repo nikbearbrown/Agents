@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "slug": "automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook",
+  "title": "Automatically store Retell transcripts in Google Sheets/Airtable/Notion from webhook",
+  "purpose": "Adapt the published “Automatically store Retell transcripts in Google Sheets/Airtable/Notion from webhook” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Save to Airtable",
+    "Save to Excel",
+    "Save to Notion"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "googleSheetsOAuth2Api",
+    "notionApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set fields to export",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Save to Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Save to Excel",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Save to Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter - only call ended",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Filter - only call ended",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set fields to export",
+        "to": "Save to Excel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set fields to export",
+        "to": "Save to Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set fields to export",
+        "to": "Save to Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter - only call ended",
+        "to": "Set fields to export",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/n8n",
+      "files": [
+        "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/n8n/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook.json"
+      ],
+      "sha256": "f50ef1c126dcc834a7ca34229a0361bca3ae23bb28e6ef5a21a056625777315c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/n8n/provenance.json"
+}

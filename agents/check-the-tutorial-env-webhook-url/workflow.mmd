@@ -1,0 +1,34 @@
+flowchart LR
+  n0["If"]
+  n1["OpenAI Chat Model3"]
+  n2["Agent Classification"]
+  n3["Get Sustainability News"]
+  n4["Send to your mailing list"]
+  n5["Generate Email HTML"]
+  n6["Parse Article Blocks"]
+  n7["Extract Articles Blocks"]
+  n8["Trigger at 08:30 am"]
+  n9["Query EU News Website"]
+  n10["Split Out by Article Block"]
+  n11["Loop Over Articles"]
+  n12["Sustainability Flag"]
+  n13["Merge Article #43; Flag"]
+  n14["Record Results"]
+  n15["Structured Output Parser"]
+  n0 -->|"main out 0 to in 0"| n11
+  n14 -->|"main out 0 to in 0"| n11
+  n11 -->|"main out 1 to in 0"| n2
+  n11 -->|"main out 1 to in 1"| n13
+  n1 -->|"ai_languageModel out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 0"| n4
+  n12 -->|"main out 0 to in 0"| n13
+  n8 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n12
+  n13 -->|"main out 0 to in 0"| n14
+  n6 -->|"main out 0 to in 0"| n0
+  n9 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n10
+  n3 -->|"main out 0 to in 0"| n5
+  n15 -->|"ai_outputParser out 0 to in 0"| n2
+  n10 -->|"main out 0 to in 0"| n6

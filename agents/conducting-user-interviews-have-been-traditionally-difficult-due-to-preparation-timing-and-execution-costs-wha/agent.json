@@ -1,0 +1,507 @@
+{
+  "schema_version": 1,
+  "slug": "conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha",
+  "title": "Conducting user interviews have been traditionally difficult due to preparation, timing and execution costs. What if we let an AI/LLM do it instead?",
+  "purpose": "Adapt the published “Conducting user interviews have been traditionally difficult due to preparation, timing and execution costs. What if we let an AI/LLM do it instead?” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 30 executable nodes and 30 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Start Interview",
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Respond to Webhook",
+    "Window Buffer Memory2",
+    "Window Buffer Memory",
+    "Groq Chat Model",
+    "Save to Google Sheet"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "groqApi",
+    "redis"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Stop Interview?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Row",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Generate Row1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Clear For Next Interview",
+        "type": "@n8n/n8n-nodes-langchain.memoryManager",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Reply To Agent",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Start Interview",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Answer",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Interview Topic",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "UUID",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Row2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Create Session",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Session",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Session1",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Session2",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Valid Session?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory2",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Redirect to Completion Screen",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "404 Not Found",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "AI Researcher",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Parse Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Groq Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Show Transcript",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Save to Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Session to List",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Messages To JSON",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Query By Session",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Session",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "UUID",
+        "to": "Create Session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Query By Session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Answer",
+        "to": "Generate Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Session",
+        "to": "Session to List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Row",
+        "to": "Update Session1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "404 Not Found",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Researcher",
+        "to": "Parse Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Row1",
+        "to": "Update Session2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Row2",
+        "to": "Update Session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Session",
+        "to": "Generate Row2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Response",
+        "to": "Stop Interview?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Session",
+        "to": "Set Interview Topic",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Valid Session?",
+        "to": "Show Transcript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Valid Session?",
+        "to": "404 Not Found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Groq Chat Model",
+        "to": "AI Researcher",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Session to List",
+        "to": "Messages To JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Show Transcript",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start Interview",
+        "to": "UUID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Stop Interview?",
+        "to": "Generate Row1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Stop Interview?",
+        "to": "Get Answer",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Update Session1",
+        "to": "Send Reply To Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Session2",
+        "to": "Clear For Next Interview",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Messages To JSON",
+        "to": "Save to Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query By Session",
+        "to": "Valid Session?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Reply To Agent",
+        "to": "AI Researcher",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Interview Topic",
+        "to": "AI Researcher",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Clear For Next Interview",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory2",
+        "to": "AI Researcher",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clear For Next Interview",
+        "to": "Redirect to Completion Screen",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Redirect to Completion Screen",
+        "to": "Get Session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/n8n",
+      "files": [
+        "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/n8n/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha.json"
+      ],
+      "sha256": "356995f3ff71fd42b54ea713fbcbd872efaff6aaf4c4b4497e9f5a917e4435ab",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/n8n/provenance.json"
+}

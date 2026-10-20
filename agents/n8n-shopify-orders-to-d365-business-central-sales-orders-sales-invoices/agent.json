@@ -1,0 +1,525 @@
+{
+  "schema_version": 1,
+  "slug": "n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices",
+  "title": "[n8n] - Shopify Orders to D365 Business Central Sales Orders / Sales Invoices",
+  "purpose": "Adapt the published “[n8n] - Shopify Orders to D365 Business Central Sales Orders / Sales Invoices” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 31 executable nodes and 32 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "End",
+    "DELETE Sales Order",
+    "End1",
+    "DELETE Sales Invoice"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "oAuth2Api",
+    "shopifyAccessTokenApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "GetFufillmentOrders",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Shopify",
+        "type": "n8n-nodes-base.shopify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "New Customer?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Lookup Customers",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "SelectFields",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "orderPreprocessing",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create Customer",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Business Central Customer Id",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create Order Lines",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "End",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "DELETE Sales Order",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "D365 BC Environment Settings",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create Sales Order",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Lines Invoice",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set Lines SO",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Invoice",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Invoice Lines",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Sales Invoice",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "End1",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sales Invoice",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Lookup Sales Order",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Sales Order Mapping",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "New SO?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Lookup Sales Invoice",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "New Invoice?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "POS?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "DELETE Sales Invoice",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "POS?",
+        "to": "Lookup Sales Invoice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "POS?",
+        "to": "Lookup Sales Order",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Filter",
+        "to": "GetFufillmentOrders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New SO?",
+        "to": "Sales Order Mapping",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Shopify",
+        "to": "Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Create Order Lines",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Invoice?",
+        "to": "Sales Invoice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SelectFields",
+        "to": "orderPreprocessing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Lines SO",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Customer?",
+        "to": "Create Customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Customer?",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Sales Invoice",
+        "to": "Create Sales Invoice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Customer",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Set Business Central Customer Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Lookup Customers",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Lookup Customers",
+        "to": "New Customer?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "D365 BC Environment Settings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Lines Invoice",
+        "to": "Split Out Invoice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Invoice",
+        "to": "Create Invoice Lines",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Order Lines",
+        "to": "End",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Order Lines",
+        "to": "DELETE Sales Order",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create Sales Order",
+        "to": "Set Lines SO",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Lookup Sales Order",
+        "to": "New SO?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "orderPreprocessing",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GetFufillmentOrders",
+        "to": "SelectFields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sales Order Mapping",
+        "to": "Create Sales Order",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Invoice Lines",
+        "to": "End1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Invoice Lines",
+        "to": "DELETE Sales Invoice",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create Sales Invoice",
+        "to": "Set Lines Invoice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Lookup Sales Invoice",
+        "to": "New Invoice?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "D365 BC Environment Settings",
+        "to": "Shopify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Business Central Customer Id",
+        "to": "POS?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/n8n",
+      "files": [
+        "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/n8n/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices.json"
+      ],
+      "sha256": "f6d49f0ab144d8574c41dc58f66a2dc0ab07cd392513363946e1bd73388bdb72",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/n8n/provenance.json"
+}

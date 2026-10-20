@@ -1,0 +1,430 @@
+{
+  "schema_version": 1,
+  "slug": "github-activity-monitor",
+  "title": "GitHub Commit Velocity Tracker",
+  "purpose": "Adapt the published “GitHub Commit Velocity Tracker” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 22 executable nodes and 27 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron Trigger",
+    "Manual Pipeline Webhook"
+  ],
+  "terminal_nodes": [
+    "Pipeline Response"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Manual Pipeline Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Watchlist",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch NVIDIA GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch AMD GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Intel GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Google GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Apple GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Microsoft GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Meta GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge GitHub Results",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Parse & Calculate Velocity",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Load Previous Run from Supabase",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Week-over-Week Delta",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate for Groq",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Groq: Activity Classifier",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Groq Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Signal Assembler",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Upsert to Supabase",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Report",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Store Report in Supabase",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Pipeline Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron Trigger",
+        "to": "Fetch Watchlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Pipeline Webhook",
+        "to": "Fetch Watchlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch NVIDIA GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch AMD GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch Intel GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch Google GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch Apple GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch Microsoft GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Fetch Meta GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch NVIDIA GitHub",
+        "to": "Merge GitHub Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch AMD GitHub",
+        "to": "Merge GitHub Results",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Fetch Intel GitHub",
+        "to": "Merge GitHub Results",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Fetch Google GitHub",
+        "to": "Merge GitHub Results",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Fetch Apple GitHub",
+        "to": "Merge GitHub Results",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Fetch Microsoft GitHub",
+        "to": "Merge GitHub Results",
+        "kind": "main",
+        "output": 0,
+        "input": 5
+      },
+      {
+        "from": "Fetch Meta GitHub",
+        "to": "Merge GitHub Results",
+        "kind": "main",
+        "output": 0,
+        "input": 6
+      },
+      {
+        "from": "Merge GitHub Results",
+        "to": "Parse & Calculate Velocity",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse & Calculate Velocity",
+        "to": "Load Previous Run from Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load Previous Run from Supabase",
+        "to": "Calculate Week-over-Week Delta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Week-over-Week Delta",
+        "to": "Aggregate for Groq",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Groq",
+        "to": "Groq: Activity Classifier",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq: Activity Classifier",
+        "to": "Parse Groq Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Groq Response",
+        "to": "Signal Assembler",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Signal Assembler",
+        "to": "Upsert to Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upsert to Supabase",
+        "to": "Generate Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Report",
+        "to": "Store Report in Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Report in Supabase",
+        "to": "Pipeline Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/github-activity-monitor/implementations/n8n",
+      "files": [
+        "agents/github-activity-monitor/implementations/n8n/github-activity-monitor.json"
+      ],
+      "sha256": "64c8c307ddddbf6272f9414035c95d70f3f57ff6b1ccfa21f9d0770f7e5f553a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/github-activity-monitor/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/github-activity-monitor/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/github-activity-monitor/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/github-activity-monitor/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/github-activity-monitor/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/github-activity-monitor/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/github-activity-monitor/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/github-activity-monitor/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/github-activity-monitor/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/github-activity-monitor/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/github-activity-monitor/implementations/n8n/provenance.json"
+}

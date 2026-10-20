@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "slug": "generate-instagram-content-from-top-trends-with-ai-image-generation",
+  "title": "Generate Instagram Content from Top Trends with AI Image Generation",
+  "purpose": "Adapt the published “Generate Instagram Content from Top Trends with AI Image Generation” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 27 executable nodes and 28 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger1"
+  ],
+  "terminal_nodes": [
+    "Telegram",
+    "Telegram1",
+    "Telegram2",
+    "send error message to telegram"
+  ],
+  "credential_types": [
+    "facebookGraphApi",
+    "openAiApi",
+    "postgres",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "If media status is finished",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "If media status is finished1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram1",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram2",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger1",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Instagram params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Rapid Api params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "filter the image content",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "get  top trends on instagram #blender3d",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "get top trends on instagram #isometric",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "merge the array content",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Check Data on Database Is Exist",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "If Data is Exist",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "send error message to telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "insert data on db",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Analyze Image and give the content",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Analyze Content And Generate Instagram Caption",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Prepare data on Instagram",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Status Of Media Before Uploaded",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Publish Media on Instagram",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check status of post ",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "filter the image content-2",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Replicate params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Generate image on flux",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Loop Over Items",
+        "to": "Check Data on Database Is Exist",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Telegram Params",
+        "to": "Rapid Api params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Data is Exist",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Data is Exist",
+        "to": "insert data on db",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Instagram params",
+        "to": "Telegram Params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rapid Api params",
+        "to": "get top trends on instagram #isometric",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rapid Api params",
+        "to": "get  top trends on instagram #blender3d",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Replicate params",
+        "to": "Instagram params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger1",
+        "to": "Replicate params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "insert data on db",
+        "to": "Analyze Image and give the content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check status of post ",
+        "to": "If media status is finished1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate image on flux",
+        "to": "Prepare data on Instagram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "merge the array content",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "filter the image content",
+        "to": "merge the array content",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Prepare data on Instagram",
+        "to": "Check Status Of Media Before Uploaded",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Publish Media on Instagram",
+        "to": "Check status of post ",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "filter the image content-2",
+        "to": "merge the array content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If media status is finished",
+        "to": "Publish Media on Instagram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If media status is finished",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If media status is finished1",
+        "to": "Telegram1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If media status is finished1",
+        "to": "Telegram2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check Data on Database Is Exist",
+        "to": "If Data is Exist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Data on Database Is Exist",
+        "to": "send error message to telegram",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Analyze Image and give the content",
+        "to": "Analyze Content And Generate Instagram Caption",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Status Of Media Before Uploaded",
+        "to": "If media status is finished",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get top trends on instagram #isometric",
+        "to": "filter the image content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get  top trends on instagram #blender3d",
+        "to": "filter the image content-2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyze Content And Generate Instagram Caption",
+        "to": "Generate image on flux",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/n8n",
+      "files": [
+        "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/n8n/generate-instagram-content-from-top-trends-with-ai-image-generation.json"
+      ],
+      "sha256": "fc3e2c2c2ac596be0739d822eb0f52f4aba5df8bc4efe28b08755d8a00f6a555",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/n8n/provenance.json"
+}

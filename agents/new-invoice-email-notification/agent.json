@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "slug": "new-invoice-email-notification",
+  "title": "New invoice email notification",
+  "purpose": "Adapt the published “New invoice email notification” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Send new invoice notification"
+  ],
+  "credential_types": [
+    "imap",
+    "mindeeInvoiceApi",
+    "slackApi",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Check for new emails",
+        "type": "n8n-nodes-base.emailReadImap",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If email body contains invoice",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract the total amount",
+        "type": "n8n-nodes-base.mindee",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send new invoice notification",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send email to finance manager",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If Amount > 1000",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If Amount > 1000",
+        "to": "Send email to finance manager",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Amount > 1000",
+        "to": "Send new invoice notification",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check for new emails",
+        "to": "If email body contains invoice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract the total amount",
+        "to": "If Amount > 1000",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send email to finance manager",
+        "to": "Send new invoice notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If email body contains invoice",
+        "to": "Extract the total amount",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/new-invoice-email-notification/implementations/n8n",
+      "files": [
+        "agents/new-invoice-email-notification/implementations/n8n/new-invoice-email-notification.json"
+      ],
+      "sha256": "e989893ef7a0bbf3b7a286ebb68a68ebf6af45712acbdd11d7c76d941799236c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/new-invoice-email-notification/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/new-invoice-email-notification/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/new-invoice-email-notification/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/new-invoice-email-notification/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/new-invoice-email-notification/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/new-invoice-email-notification/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/new-invoice-email-notification/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/new-invoice-email-notification/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/new-invoice-email-notification/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/new-invoice-email-notification/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/new-invoice-email-notification/implementations/n8n/provenance.json"
+}

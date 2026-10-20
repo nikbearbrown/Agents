@@ -1,0 +1,61 @@
+flowchart LR
+  n0["Embeddings OpenAI"]
+  n1["Default Data Loader"]
+  n2["Convert to Question Answer Pairs"]
+  n3["Recursive Character Text Splitter"]
+  n4["Get Survey Results"]
+  n5["Get Survey Headers"]
+  n6["Extract Questions"]
+  n7["Questions to List"]
+  n8["Find All Answers"]
+  n9["Get Payload of Points"]
+  n10["Clusters To List"]
+  n11["Set Variables"]
+  n12["OpenAI Chat Model"]
+  n13["Prep Output For Export"]
+  n14["Export To Sheets"]
+  n15["Export To Sheets1"]
+  n16["For Each Question..."]
+  n17["Trigger Insights"]
+  n18["Prep Values For Trigger"]
+  n19["Execute Workflow Trigger"]
+  n20["Create Insights Sheet"]
+  n21["Prep Values For Export"]
+  n22["QA Pairs to List"]
+  n23["Has Clusters#63;"]
+  n24["When clicking #8216;Test workflow#8217;"]
+  n25["Get Sheet Details"]
+  n26["Only Clusters With 3#43; points"]
+  n27["Apply K-means Clustering Algorithm"]
+  n28["Qdrant Vector Store"]
+  n29["Survey Insights Agent"]
+  n23 -->|"main out 0 to in 0"| n10
+  n23 -->|"main out 1 to in 0"| n21
+  n11 -->|"main out 0 to in 0"| n20
+  n10 -->|"main out 0 to in 0"| n26
+  n14 -->|"main out 0 to in 0"| n16
+  n8 -->|"main out 0 to in 0"| n27
+  n22 -->|"main out 0 to in 0"| n28
+  n0 -->|"ai_embedding out 0 to in 0"| n28
+  n15 -->|"main out 0 to in 0"| n16
+  n6 -->|"main out 0 to in 0"| n7
+  n25 -->|"main out 0 to in 0"| n11
+  n12 -->|"ai_languageModel out 0 to in 0"| n29
+  n7 -->|"main out 0 to in 0"| n16
+  n5 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n2
+  n1 -->|"ai_document out 0 to in 0"| n28
+  n28 -->|"main out 0 to in 0"| n18
+  n16 -->|"main out 1 to in 0"| n8
+  n20 -->|"main out 0 to in 0"| n5
+  n9 -->|"main out 0 to in 0"| n29
+  n29 -->|"main out 0 to in 0"| n13
+  n13 -->|"main out 0 to in 0"| n14
+  n21 -->|"main out 0 to in 0"| n15
+  n18 -->|"main out 0 to in 0"| n17
+  n19 -->|"main out 0 to in 0"| n25
+  n26 -->|"main out 0 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n22
+  n3 -->|"ai_textSplitter out 0 to in 0"| n1
+  n24 -->|"main out 0 to in 0"| n4
+  n27 -->|"main out 0 to in 0"| n23

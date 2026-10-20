@@ -1,0 +1,20 @@
+flowchart LR
+  n0["Execute Workflow"]
+  n1["Schedule Trigger"]
+  n2["Get Status"]
+  n3["Set Running"]
+  n4["Set Idle"]
+  n5["Continue if Idle"]
+  n6["Redis Key exists"]
+  n7["No Operation"]
+  n8["When clicking #34;Test workflow#34;"]
+  n9["Reset to Idle"]
+  n2 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n0
+  n7 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 1 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n9

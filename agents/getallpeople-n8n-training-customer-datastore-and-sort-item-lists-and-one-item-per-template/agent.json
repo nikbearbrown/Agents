@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "slug": "getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template",
+  "title": "getallpeople n8n training customer datastore and sort item lists and one item per template",
+  "purpose": "Adapt the published “getallpeople n8n training customer datastore and sort item lists and one item per template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Send one TEXT email per item",
+    "Send one HTML Email per list"
+  ],
+  "credential_types": [
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Customer Datastore",
+        "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Item Lists",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "One item per template",
+        "type": "n8n-nodes-document-generator.DocumentGenerator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "All items, one template",
+        "type": "n8n-nodes-document-generator.DocumentGenerator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add lines",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send one TEXT email per item",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send one HTML Email per list",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Add lines",
+        "to": "One item per template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Item Lists",
+        "to": "All items, one template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Item Lists",
+        "to": "Add lines",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Customer Datastore",
+        "to": "Item Lists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Customer Datastore",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "One item per template",
+        "to": "Send one TEXT email per item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "All items, one template",
+        "to": "Send one HTML Email per list",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/n8n",
+      "files": [
+        "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/n8n/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template.json"
+      ],
+      "sha256": "70cbf6c510b7f28319f0f074c23cf8771efcce056fd3deb76b8a2b2bec512b9a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/n8n/provenance.json"
+}

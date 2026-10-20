@@ -1,0 +1,16 @@
+flowchart LR
+  n0["Respond All Items"]
+  n1["Respond Asked Item"]
+  n2["Incoming Webhook Trigger"]
+  n3["Get latest Euro exchange rates"]
+  n4["Convert XML to JSON"]
+  n5["Split Out Data"]
+  n6["If Webhook Trigger has URL query"]
+  n7["Filter the currency symbol"]
+  n5 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 1 to in 0"| n0

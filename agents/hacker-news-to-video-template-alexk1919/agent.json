@@ -1,0 +1,617 @@
+{
+  "schema_version": 1,
+  "slug": "hacker-news-to-video-template-alexk1919",
+  "title": "Hacker News to Video Template - AlexK1919",
+  "purpose": "Adapt the published “Hacker News to Video Template - AlexK1919” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 39 executable nodes and 38 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model3",
+    "HTTP Request1",
+    "Structured Output Parser",
+    "Upload to Minio",
+    "Instagram",
+    "Cre - Get Video"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "httpCustomAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Hacker News",
+        "type": "n8n-nodes-base.hackerNews",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model3",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request1",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload to Minio",
+        "type": "n8n-nodes-base.s3",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "News1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Leo - Improve Prompt",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Leo - Get imageId",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Runway - Create Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Runway - Get Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait2",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "If Topic",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Prompt Settings1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Leo - Generate Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Limit",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Image Analysis",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Wait3",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": true
+      },
+      {
+        "name": "Article Analysis",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Dropbox",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft OneDrive",
+        "type": "n8n-nodes-base.microsoftOneDrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "YouTube",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "X",
+        "type": "n8n-nodes-base.twitter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Instagram",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "LinkedIn",
+        "type": "n8n-nodes-base.linkedIn",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Leo - Improve Prompt2",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait4",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait6",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Leo - Generate Image2",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Leo - Get imageId2",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Runway - Create Video2",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Runway - Get Video2",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Cre - Generate Video1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Cre - Get Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Article Prep",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.6,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "X",
+        "to": "LinkedIn",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "News1",
+        "to": "Prompt Settings1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait1",
+        "to": "Leo - Get imageId",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait2",
+        "to": "Runway - Get Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait3",
+        "to": "Cre - Get Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait4",
+        "to": "Runway - Get Video2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait6",
+        "to": "Leo - Get imageId2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dropbox",
+        "to": "Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "YouTube",
+        "to": "X",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Topic",
+        "to": "Image Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Topic",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "LinkedIn",
+        "to": "Instagram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image",
+        "to": "Article Prep",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Hacker News",
+        "to": "Limit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Article Prep",
+        "to": "News1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive",
+        "to": "Microsoft OneDrive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request1",
+        "to": "Article Analysis",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Image Analysis",
+        "to": "Get Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Article Analysis",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Article Analysis",
+        "to": "If Topic",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Article Analysis",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Prompt Settings1",
+        "to": "Leo - Improve Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Leo - Get imageId",
+        "to": "Runway - Create Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Leo - Get imageId2",
+        "to": "Runway - Create Video2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Microsoft OneDrive",
+        "to": "Upload to Minio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model3",
+        "to": "Article Analysis",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Runway - Get Video",
+        "to": "Leo - Improve Prompt2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Runway - Get Video2",
+        "to": "Cre - Generate Video1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Leo - Generate Image",
+        "to": "Wait1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Leo - Improve Prompt",
+        "to": "Leo - Generate Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cre - Generate Video1",
+        "to": "Wait3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Leo - Generate Image2",
+        "to": "Wait6",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Leo - Improve Prompt2",
+        "to": "Leo - Generate Image2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Runway - Create Video",
+        "to": "Wait2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Runway - Create Video2",
+        "to": "Wait4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Article Analysis",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Hacker News",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/hacker-news-to-video-template-alexk1919/implementations/n8n",
+      "files": [
+        "agents/hacker-news-to-video-template-alexk1919/implementations/n8n/hacker-news-to-video-template-alexk1919.json"
+      ],
+      "sha256": "495cf8dbed60f0bb572ff204a6109c2985278521d4858e5d9ac8b1e27e97506c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/hacker-news-to-video-template-alexk1919/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/hacker-news-to-video-template-alexk1919/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/hacker-news-to-video-template-alexk1919/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/hacker-news-to-video-template-alexk1919/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/hacker-news-to-video-template-alexk1919/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/hacker-news-to-video-template-alexk1919/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/hacker-news-to-video-template-alexk1919/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/hacker-news-to-video-template-alexk1919/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/hacker-news-to-video-template-alexk1919/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/hacker-news-to-video-template-alexk1919/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/hacker-news-to-video-template-alexk1919/implementations/n8n/provenance.json"
+}

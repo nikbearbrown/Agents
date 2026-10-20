@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "slug": "structured-data-extract-data-mining-with-bright-data-google-gemini",
+  "title": "Structured Data Extract, Data Mining with Bright Data & Google Gemini",
+  "purpose": "Adapt the published “Structured Data Extract, Data Mining with Bright Data & Google Gemini” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Initiate a Webhook Notification for Markdown to Textual Data Extraction",
+    "Initiate a Webhook Notification for AI Sentiment Analyzer",
+    "Google Gemini Chat Model for Data Extract",
+    "Google Gemini Chat Model for Sentiment Analyzer",
+    "Google Gemini Chat Model",
+    "Initiate a Webhook Notification for trends by location and category",
+    "Write the topics file to disk",
+    "Write the trends file to disk"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Markdown to Textual Data Extractor",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Set URL and Bright Data Zone",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Initiate a Webhook Notification for Markdown to Textual Data Extraction",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Initiate a Webhook Notification for AI Sentiment Analyzer",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model for Data Extract",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model for Sentiment Analyzer",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Perform Bright Data Web Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Topic Extractor with the structured response",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Trends by location and category with the structured response",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Initiate a Webhook Notification for trends by location and category",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Create a binary file for topics",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Write the topics file to disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Write the trends file to disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create a binary data for tends",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Trends by location and category with the structured response",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set URL and Bright Data Zone",
+        "to": "Perform Bright Data Web Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create a binary data for tends",
+        "to": "Write the trends file to disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create a binary file for topics",
+        "to": "Write the topics file to disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Perform Bright Data Web Request",
+        "to": "Markdown to Textual Data Extractor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Set URL and Bright Data Zone",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Markdown to Textual Data Extractor",
+        "to": "Topic Extractor with the structured response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Markdown to Textual Data Extractor",
+        "to": "Initiate a Webhook Notification for Markdown to Textual Data Extraction",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Markdown to Textual Data Extractor",
+        "to": "Trends by location and category with the structured response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model for Data Extract",
+        "to": "Markdown to Textual Data Extractor",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Topic Extractor with the structured response",
+        "to": "Initiate a Webhook Notification for AI Sentiment Analyzer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Topic Extractor with the structured response",
+        "to": "Create a binary file for topics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model for Sentiment Analyzer",
+        "to": "Topic Extractor with the structured response",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trends by location and category with the structured response",
+        "to": "Initiate a Webhook Notification for trends by location and category",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trends by location and category with the structured response",
+        "to": "Create a binary data for tends",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/n8n",
+      "files": [
+        "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/n8n/structured-data-extract-data-mining-with-bright-data-google-gemini.json"
+      ],
+      "sha256": "f502ba076745862a70ef28e1e56740c55bca12acac1cdb043d9dccbfbf28ab98",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/n8n/provenance.json"
+}

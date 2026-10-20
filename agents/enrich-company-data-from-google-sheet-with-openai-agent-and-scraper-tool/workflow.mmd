@@ -1,0 +1,24 @@
+flowchart LR
+  n0["Structured Output Parser"]
+  n1["OpenAI Chat Model"]
+  n2["Get rows from Google Sheet"]
+  n3["Call n8n workflow : Scrape companies homepage content"]
+  n4["Update Company#39;s Row on Google Sheet"]
+  n5["ScrapingBee : Scrape company#39;s homepage data"]
+  n6["Tool called from Agent"]
+  n7["Loop Over Items"]
+  n8["AI Agent"]
+  n9["Set company url"]
+  n10["HTML to Markdown"]
+  n11["Webhook"]
+  n11 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 1 to in 0"| n8
+  n9 -->|"main out 0 to in 0"| n5
+  n1 -->|"ai_languageModel out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n9
+  n0 -->|"ai_outputParser out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n10
+  n3 -->|"ai_tool out 0 to in 0"| n8

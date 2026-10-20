@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "slug": "summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram",
+  "title": "Summarize YouTube Videos & Chat About Content with GPT-4o-mini via Telegram",
+  "purpose": "Adapt the published “Summarize YouTube Videos & Chat About Content with GPT-4o-mini via Telegram” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 16 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger on Telegram Message",
+    "Receive YouTube URL via Webhook",
+    "Telegram Trigger"
+  ],
+  "terminal_nodes": [
+    "gpt-4o-mini",
+    "Send Response to Webhook",
+    "Update Transcript in Google Docs",
+    "OpenAI Chat Model",
+    "Window Buffer Memory",
+    "Google Docs2",
+    "Send AI Response via Telegram"
+  ],
+  "credential_types": [
+    "googleDocsOAuth2Api",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Split Transcript into Segments",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract YouTube URL from Input",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract Video ID from URL",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o-mini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Summary with GPT-4o-mini",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Concatenate Transcript Segments",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Trigger on Telegram Message",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract YouTube Transcript",
+        "type": "n8n-nodes-youtube-transcription-kasha.youtubeTranscripter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Summary via Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Receive YouTube URL via Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send Response to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Transcript from Google Docs",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Update Transcript in Google Docs",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Handle User Questions via AI",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Google Docs2",
+        "type": "n8n-nodes-base.googleDocsTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send AI Response via Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "gpt-4o-mini",
+        "to": "Generate Summary with GPT-4o-mini",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Docs2",
+        "to": "Handle User Questions via AI",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger",
+        "to": "Handle User Questions via AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Handle User Questions via AI",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Video ID from URL",
+        "to": "Extract YouTube Transcript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Summary via Telegram",
+        "to": "Send Response to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract YouTube Transcript",
+        "to": "Split Transcript into Segments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger on Telegram Message",
+        "to": "Extract YouTube URL from Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Handle User Questions via AI",
+        "to": "Send AI Response via Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract YouTube URL from Input",
+        "to": "Extract Video ID from URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Transcript into Segments",
+        "to": "Concatenate Transcript Segments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Concatenate Transcript Segments",
+        "to": "Generate Summary with GPT-4o-mini",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Concatenate Transcript Segments",
+        "to": "Retrieve Transcript from Google Docs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive YouTube URL via Webhook",
+        "to": "Extract YouTube URL from Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Summary with GPT-4o-mini",
+        "to": "Send Summary via Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Transcript from Google Docs",
+        "to": "Update Transcript in Google Docs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/n8n",
+      "files": [
+        "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/n8n/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram.json"
+      ],
+      "sha256": "932463dc0fcc8707c416f323c9fe33ae3ab7f2d9a7e05bda9d27aa8b50f21410",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/n8n/provenance.json"
+}

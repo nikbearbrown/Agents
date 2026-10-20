@@ -1,0 +1,22 @@
+flowchart LR
+  n0["Watch For Bank Statements"]
+  n1["Get Tenant Details"]
+  n2["Structured Output Parser"]
+  n3["Get Bank Statement File"]
+  n4["Get CSV Data"]
+  n5["Alert Actions To List"]
+  n6["Get Property Details"]
+  n7["Set Variables"]
+  n8["Append To Spreadsheet"]
+  n9["OpenAI Chat Model"]
+  n10["Reconcile Rental Payments"]
+  n4 -->|"main out 0 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n3
+  n9 -->|"ai_languageModel out 0 to in 0"| n10
+  n1 -->|"ai_tool out 0 to in 0"| n10
+  n6 -->|"ai_tool out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n8
+  n3 -->|"main out 0 to in 0"| n4
+  n2 -->|"ai_outputParser out 0 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n7

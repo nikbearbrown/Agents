@@ -1,47 +1,9 @@
 # Orchestrator
 
-This folder contains the **Orchestrator** workflow. Its executable nodes use `chainLlm`, `chatTrigger`, `code`, `httpRequest`, `lmChatOllama`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/route-chat-requests-with-ollama](../../agents/route-chat-requests-with-ollama/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/route-chat-requests-with-ollama/implementations/n8n/README.md)
+- [Importable JSON](../../agents/route-chat-requests-with-ollama/implementations/n8n/route-chat-requests-with-ollama.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/route-chat-requests-with-ollama)
 
-## Files
-
-- [`route-chat-requests-with-ollama.json`](route-chat-requests-with-ollama.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** `ollamaApi`
-
-**Entry nodes:** When chat message received
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| When chat message received | `chatTrigger` | Inspect parameters |
-| Ollama Chat Model | `lmChatOllama` | Inspect parameters |
-| The Brain | `chainLlm` | Inspect parameters |
-| The  Processor | `code` | Inspect parameters |
-| The Router | `httpRequest` | Inspect parameters |
-
-## Connection map
-
-- Ollama Chat Model → The Brain (`ai_languageModel`, output 0, input 0)
-- When chat message received → The Brain (`main`, output 0, input 0)
-- The Brain → The  Processor (`main`, output 0, input 0)
-- The  Processor → The Router (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 2 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: Nik Bear Brown; permission confirmed by repository owner. License: **MIT**; preserve [the notice](../../licenses/nikbearbrown-mit.txt) and embedded attribution. Repository owner confirmed redistribution rights and authorized MIT licensing on 2026-10-19.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

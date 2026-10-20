@@ -1,0 +1,619 @@
+{
+  "schema_version": 1,
+  "slug": "bamboohr-ai-powered-company-policies-and-benefits-chatbot",
+  "title": "BambooHR AI-Powered Company Policies and Benefits Chatbot",
+  "purpose": "Adapt the published “BambooHR AI-Powered Company Policies and Benefits Chatbot” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 39 executable nodes and 36 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Employee initiates a conversation",
+    "AI-Powered HR Benefits and Company Policies Chatbot"
+  ],
+  "terminal_nodes": [
+    "Default Data Loader",
+    "Embeddings OpenAI",
+    "Recursive Character Text Splitter",
+    "Window Buffer Memory",
+    "OpenAI Chat Model",
+    "Vector Store Tool",
+    "OpenAI Chat Model1",
+    "Embeddings OpenAI1",
+    "Employee Lookup Tool",
+    "OpenAI Chat Model2",
+    "OpenAI Chat Model3",
+    "OpenAI Chat Model4",
+    "Auto-fixing Output Parser",
+    "OpenAI Chat Model5",
+    "Structured Output Parser",
+    "Supabase Vector Store",
+    "Supabase Vector Store Retrieval",
+    "Stringify employee record for response",
+    "Format name for response",
+    "HR AI Agent"
+  ],
+  "credential_types": [
+    "bambooHrApi",
+    "openAiApi",
+    "supabaseApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Vector Store Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI1",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Employee Lookup Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model3",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model4",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Auto-fixing Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model5",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "GET all files",
+        "type": "n8n-nodes-base.bambooHr",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter out files from undesired categories",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Split out individual files",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter out non-pdf files",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Download file from BambooHR",
+        "type": "n8n-nodes-base.bambooHr",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Supabase Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Employee initiates a conversation",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Supabase Vector Store Retrieval",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AI-Powered HR Benefits and Company Policies Chatbot",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Text Classifier",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET all employees",
+        "type": "n8n-nodes-base.bambooHr",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter out other employees",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Stringify employee record for response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "GET all employees (second path)",
+        "type": "n8n-nodes-base.bambooHr",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract departments",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Ensure uniqueness in department list",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract department",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve all employees",
+        "type": "n8n-nodes-base.bambooHr",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter out other departments",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract relevant employee fields",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Identify most senior employee",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Format name for response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "HR AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "GET all files",
+        "to": "Filter out files from undesired categories",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "GET all employees",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "GET all employees (second path)",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI",
+        "to": "Supabase Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET all employees",
+        "to": "Filter out other employees",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "HR AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Vector Store Tool",
+        "to": "HR AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI1",
+        "to": "Supabase Vector Store Retrieval",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract department",
+        "to": "Retrieve all employees",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Vector Store Tool",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Text Classifier",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model3",
+        "to": "Extract department",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model4",
+        "to": "Identify most senior employee",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model5",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Supabase Vector Store",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract departments",
+        "to": "Ensure uniqueness in department list",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Employee Lookup Tool",
+        "to": "HR AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "HR AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve all employees",
+        "to": "Filter out other departments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter out non-pdf files",
+        "to": "Download file from BambooHR",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto-fixing Output Parser",
+        "to": "Identify most senior employee",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter out other employees",
+        "to": "Stringify employee record for response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split out individual files",
+        "to": "Filter out non-pdf files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download file from BambooHR",
+        "to": "Supabase Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter out other departments",
+        "to": "Extract relevant employee fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Identify most senior employee",
+        "to": "Format name for response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET all employees (second path)",
+        "to": "Extract departments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Supabase Vector Store Retrieval",
+        "to": "Vector Store Tool",
+        "kind": "ai_vectorStore",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract relevant employee fields",
+        "to": "Identify most senior employee",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Employee initiates a conversation",
+        "to": "HR AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "GET all files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ensure uniqueness in department list",
+        "to": "Extract department",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter out files from undesired categories",
+        "to": "Split out individual files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI-Powered HR Benefits and Company Policies Chatbot",
+        "to": "Text Classifier",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/n8n",
+      "files": [
+        "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/n8n/bamboohr-ai-powered-company-policies-and-benefits-chatbot.json"
+      ],
+      "sha256": "d2820bdbc3e8e44e3381f762ec16dc17adaa1866a59fc8cb719a52bd7770139e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/n8n/provenance.json"
+}

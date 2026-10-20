@@ -1,0 +1,431 @@
+{
+  "schema_version": 1,
+  "slug": "rag-with-pdf-as-source",
+  "title": "RAG with PDF as source",
+  "purpose": "Adapt the published “RAG with PDF as source” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 21 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received",
+    "On new email to nathan's inbox",
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Send message",
+    "Execute JavaScript",
+    "Recursive Character Text Splitter",
+    "Embeddings OpenAI",
+    "Default Data Loader",
+    "OpenAI Chat Model",
+    "Embeddings OpenAI2",
+    "Vector Store Retriever",
+    "Read Pinecone Vector Store",
+    "Question and Answer Chain",
+    "Anthropic Chat Model",
+    "Get calendar availability",
+    "Appointment booking agent",
+    "Window Buffer Memory",
+    "Insert into Pinecone vector store",
+    "Book appointment",
+    "OpenAI Chat Model1",
+    "Add automation label",
+    "Add music label"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Send message",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Execute JavaScript",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI2",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Vector Store Retriever",
+        "type": "@n8n/n8n-nodes-langchain.retrieverVectorStore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download PDF",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "PDFs to download",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Pinecone Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Question and Answer Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get calendar availability",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Appointment booking agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Insert into Pinecone vector store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Book appointment",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add automation label",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "On new email to nathan's inbox",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1.1,
+        "disabled": true
+      },
+      {
+        "name": "Add music label",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Assign label with AI",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Whether email contains n8n",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Whether email contains n8n",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download PDF",
+        "to": "Insert into Pinecone vector store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Book appointment",
+        "to": "Appointment booking agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "PDFs to download",
+        "to": "Download PDF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI",
+        "to": "Insert into Pinecone vector store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Question and Answer Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI2",
+        "to": "Read Pinecone Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Assign label with AI",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Insert into Pinecone vector store",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Chat Model",
+        "to": "Appointment booking agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign label with AI",
+        "to": "Add automation label",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign label with AI",
+        "to": "Add music label",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "Appointment booking agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Vector Store Retriever",
+        "to": "Question and Answer Chain",
+        "kind": "ai_retriever",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get calendar availability",
+        "to": "Appointment booking agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Pinecone Vector Store",
+        "to": "Vector Store Retriever",
+        "kind": "ai_vectorStore",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Question and Answer Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Whether email contains n8n",
+        "to": "Execute JavaScript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Whether email contains n8n",
+        "to": "Send message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On new email to nathan's inbox",
+        "to": "Assign label with AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/rag-with-pdf-as-source/implementations/n8n",
+      "files": [
+        "agents/rag-with-pdf-as-source/implementations/n8n/rag-with-pdf-as-source.json"
+      ],
+      "sha256": "66f283d679a49d8812523ad08af61ff452729f410d13d0c35e47e5b19a21138f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/rag-with-pdf-as-source/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/rag-with-pdf-as-source/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/rag-with-pdf-as-source/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/rag-with-pdf-as-source/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/rag-with-pdf-as-source/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/rag-with-pdf-as-source/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/rag-with-pdf-as-source/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/rag-with-pdf-as-source/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/rag-with-pdf-as-source/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/rag-with-pdf-as-source/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/rag-with-pdf-as-source/implementations/n8n/provenance.json"
+}

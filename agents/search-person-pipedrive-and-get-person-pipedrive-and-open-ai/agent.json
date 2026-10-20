@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "slug": "search-person-pipedrive-and-get-person-pipedrive-and-open-ai",
+  "title": "search person pipedrive and get person pipedrive and open ai",
+  "purpose": "Adapt the published “search person pipedrive and get person pipedrive and open ai” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Email box 1",
+    "Email box 2"
+  ],
+  "terminal_nodes": [
+    "Create deal in CRM"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "pipedriveApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Search Person in CRM",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "In campaign?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get person from CRM",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is interested?",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get email",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Create deal in CRM",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF interested",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get response",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Email box 1",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Email box 2",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get email",
+        "to": "Search Person in CRM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email box 1",
+        "to": "Get email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email box 2",
+        "to": "Get email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get response",
+        "to": "IF interested",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "In campaign?",
+        "to": "Is interested?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF interested",
+        "to": "Create deal in CRM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is interested?",
+        "to": "Get response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get person from CRM",
+        "to": "In campaign?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Person in CRM",
+        "to": "Get person from CRM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/n8n",
+      "files": [
+        "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/n8n/search-person-pipedrive-and-get-person-pipedrive-and-open-ai.json"
+      ],
+      "sha256": "4b2f903a8ac866395ff5ac6d52f16efca6dd1f5696632df3a72fff3f3847e9da",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/n8n/provenance.json"
+}

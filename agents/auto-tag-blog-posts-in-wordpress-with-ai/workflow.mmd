@@ -1,0 +1,45 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["Auto-fixing Output Parser"]
+  n2["OpenAI Chat Model1"]
+  n3["Structured Output Parser"]
+  n4["RSS Feed Trigger"]
+  n5["Return article details"]
+  n6["Split Out"]
+  n7["Loop over articles"]
+  n8["SET initial record"]
+  n9["GET WP tags"]
+  n10["POST WP tags"]
+  n11["GET updated WP tags"]
+  n12["Keep matches"]
+  n13["Combine tag_ids"]
+  n14["Combine slugs"]
+  n15["If"]
+  n16["MOCK article"]
+  n17["Return missing tags"]
+  n18["Wordpress"]
+  n19["Demo Usage in Another Workflow"]
+  n20["Auto-Tag Posts in WordPress"]
+  n21["Generate tags for article"]
+  n15 -->|"main out 0 to in 0"| n11
+  n15 -->|"main out 1 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n14
+  n12 -->|"main out 0 to in 0"| n13
+  n16 -->|"main out 0 to in 0"| n20
+  n10 -->|"main out 0 to in 0"| n11
+  n14 -->|"main out 0 to in 0"| n17
+  n13 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 0 to in 0"| n21
+  n0 -->|"ai_languageModel out 0 to in 0"| n21
+  n7 -->|"main out 1 to in 0"| n8
+  n2 -->|"ai_languageModel out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n9
+  n11 -->|"main out 0 to in 0"| n12
+  n17 -->|"main out 0 to in 0"| n15
+  n5 -->|"main out 0 to in 0"| n18
+  n3 -->|"ai_outputParser out 0 to in 0"| n1
+  n1 -->|"ai_outputParser out 0 to in 0"| n21
+  n21 -->|"main out 0 to in 0"| n16
+  n20 -->|"main out 0 to in 0"| n5
+  n19 -->|"main out 0 to in 0"| n7

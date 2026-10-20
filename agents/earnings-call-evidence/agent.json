@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "slug": "earnings-call-evidence",
+  "title": "My workflow 7",
+  "purpose": "Adapt the published “My workflow 7” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 28 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook: Receive Transcript"
+  ],
+  "terminal_nodes": [
+    "Webhook Response",
+    "Execute a SQL query"
+  ],
+  "credential_types": [
+    "groqApi",
+    "httpHeaderAuth",
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook: Receive Transcript",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Validate Input",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DB: Insert earnings_call",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Set Call Context",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Process Section Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DB: Insert transcript_section",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Route by Section Type",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Process Guidance Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Process Risk Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Process QA Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DB: Insert guidance_signal",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "DB: Insert risk_admission",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "DB: Insert qa_pressure",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "DB: Log Agent Run",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Fetch All Signals for Summary",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Process Summary Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DB: Insert call_summary",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "DB: Mark Call Complete",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Final Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Groq: Generate Call Summary",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Groq: Parse Transcript Sections",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Groq: Extract Guidance Signals",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Groq: Extract Risk Admissions",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Groq: Map QA Pressure",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Execute a SQL query",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": true
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook: Receive Transcript",
+        "to": "Validate Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate Input",
+        "to": "DB: Insert earnings_call",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Insert earnings_call",
+        "to": "Set Call Context",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Call Context",
+        "to": "Groq: Parse Transcript Sections",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Section Response",
+        "to": "DB: Insert transcript_section",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Insert transcript_section",
+        "to": "Route by Section Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route by Section Type",
+        "to": "Groq: Extract Guidance Signals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route by Section Type",
+        "to": "Groq: Extract Risk Admissions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route by Section Type",
+        "to": "Groq: Map QA Pressure",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Route by Section Type",
+        "to": "Groq: Extract Risk Admissions",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Route by Section Type",
+        "to": "Groq: Extract Guidance Signals",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Process Guidance Response",
+        "to": "DB: Insert guidance_signal",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Risk Response",
+        "to": "DB: Insert risk_admission",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process QA Response",
+        "to": "DB: Insert qa_pressure",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Insert guidance_signal",
+        "to": "DB: Log Agent Run",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Insert risk_admission",
+        "to": "DB: Log Agent Run",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Insert qa_pressure",
+        "to": "DB: Log Agent Run",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Log Agent Run",
+        "to": "Fetch All Signals for Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch All Signals for Summary",
+        "to": "Groq: Generate Call Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Summary Response",
+        "to": "DB: Insert call_summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Insert call_summary",
+        "to": "DB: Mark Call Complete",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Mark Call Complete",
+        "to": "Final Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Response",
+        "to": "Webhook Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq: Generate Call Summary",
+        "to": "Process Summary Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq: Parse Transcript Sections",
+        "to": "Process Section Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq: Extract Guidance Signals",
+        "to": "Process Guidance Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq: Extract Risk Admissions",
+        "to": "Process Risk Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq: Map QA Pressure",
+        "to": "Process QA Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/earnings-call-evidence/implementations/n8n",
+      "files": [
+        "agents/earnings-call-evidence/implementations/n8n/earnings-call-evidence.json"
+      ],
+      "sha256": "7db28523f2bc980a65f7b98230fb234ba1f56174345a81d11adcab7706227cfe",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/earnings-call-evidence/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/earnings-call-evidence/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/earnings-call-evidence/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/earnings-call-evidence/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/earnings-call-evidence/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/earnings-call-evidence/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/earnings-call-evidence/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/earnings-call-evidence/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/earnings-call-evidence/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/earnings-call-evidence/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/earnings-call-evidence/implementations/n8n/provenance.json"
+}

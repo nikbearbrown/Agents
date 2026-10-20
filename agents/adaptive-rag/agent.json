@@ -1,0 +1,528 @@
+{
+  "schema_version": 1,
+  "slug": "adaptive-rag",
+  "title": "Adaptive RAG",
+  "purpose": "Adapt the published “Adaptive RAG” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 30 executable nodes and 32 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Chat",
+    "When Executed by Another Workflow"
+  ],
+  "terminal_nodes": [
+    "Gemini Classification",
+    "Gemini Factual",
+    "Gemini Analytical",
+    "Chat Buffer Memory Analytical",
+    "Chat Buffer Memory Factual",
+    "Gemini Opinion",
+    "Chat Buffer Memory Opinion",
+    "Gemini Contextual",
+    "Chat Buffer Memory Contextual",
+    "Embeddings",
+    "Gemini Answer",
+    "Chat Buffer Memory",
+    "Respond to Webhook"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "qdrantApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Query Classification",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Factual Strategy - Focus on Precision",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Analytical Strategy - Comprehensive Coverage",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Opinion Strategy - Diverse Perspectives",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Contextual Strategy - User Context Integration",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Chat",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Factual Prompt and Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Contextual Prompt and Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Opinion Prompt and Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Analytical Prompt and Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gemini Classification",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gemini Factual",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gemini Analytical",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Buffer Memory Analytical",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Chat Buffer Memory Factual",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Gemini Opinion",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Buffer Memory Opinion",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Gemini Contextual",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Buffer Memory Contextual",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Concatenate Context",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Documents from Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Prompt and Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gemini Answer",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Answer",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Chat Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Combined Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Chat",
+        "to": "Combined Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Answer",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Factual Strategy - Focus on Precision",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Analytical Strategy - Comprehensive Coverage",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Opinion Strategy - Diverse Perspectives",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Contextual Strategy - User Context Integration",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Embeddings",
+        "to": "Retrieve Documents from Vector Store",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini Answer",
+        "to": "Answer",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini Factual",
+        "to": "Factual Strategy - Focus on Precision",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini Opinion",
+        "to": "Opinion Strategy - Diverse Perspectives",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combined Fields",
+        "to": "Query Classification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini Analytical",
+        "to": "Analytical Strategy - Comprehensive Coverage",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini Contextual",
+        "to": "Contextual Strategy - User Context Integration",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Buffer Memory",
+        "to": "Answer",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Concatenate Context",
+        "to": "Answer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query Classification",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini Classification",
+        "to": "Query Classification",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Prompt and Output",
+        "to": "Retrieve Documents from Vector Store",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Factual Prompt and Output",
+        "to": "Set Prompt and Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Opinion Prompt and Output",
+        "to": "Set Prompt and Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Buffer Memory Factual",
+        "to": "Factual Strategy - Focus on Precision",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Buffer Memory Opinion",
+        "to": "Opinion Strategy - Diverse Perspectives",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analytical Prompt and Output",
+        "to": "Set Prompt and Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Contextual Prompt and Output",
+        "to": "Set Prompt and Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Buffer Memory Analytical",
+        "to": "Analytical Strategy - Comprehensive Coverage",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Buffer Memory Contextual",
+        "to": "Contextual Strategy - User Context Integration",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Combined Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Documents from Vector Store",
+        "to": "Concatenate Context",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Factual Strategy - Focus on Precision",
+        "to": "Factual Prompt and Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Opinion Strategy - Diverse Perspectives",
+        "to": "Opinion Prompt and Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analytical Strategy - Comprehensive Coverage",
+        "to": "Analytical Prompt and Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Contextual Strategy - User Context Integration",
+        "to": "Contextual Prompt and Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/adaptive-rag/implementations/n8n",
+      "files": [
+        "agents/adaptive-rag/implementations/n8n/adaptive-rag.json"
+      ],
+      "sha256": "bdf27aa2459b551fa861c969234bc49544b118706a59a2b22b83c0c568fa5a50",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/adaptive-rag/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/adaptive-rag/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/adaptive-rag/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/adaptive-rag/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/adaptive-rag/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/adaptive-rag/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/adaptive-rag/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/adaptive-rag/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/adaptive-rag/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/adaptive-rag/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/adaptive-rag/implementations/n8n/provenance.json"
+}

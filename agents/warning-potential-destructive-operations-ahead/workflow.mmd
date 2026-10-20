@@ -1,0 +1,20 @@
+flowchart LR
+  n0["Local File Trigger"]
+  n1["Get Files and Folders"]
+  n2["Files and Folders to Array"]
+  n3["Mistral Cloud Chat Model"]
+  n4["Structured Output Parser"]
+  n5["Set Variables"]
+  n6["Move Files into Folders"]
+  n7["If Has Target Files..."]
+  n8["Get Suggestions to List"]
+  n9["AI File Manager"]
+  n5 -->|"main out 0 to in 0"| n1
+  n9 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n6
+  n3 -->|"ai_languageModel out 0 to in 0"| n9
+  n4 -->|"ai_outputParser out 0 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n7

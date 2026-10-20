@@ -1,0 +1,27 @@
+flowchart LR
+  n0["Remove AI label from email"]
+  n1["Add email draft to thread"]
+  n2["Convert raw to base64"]
+  n3["Build email raw"]
+  n4["Convert response to HTML"]
+  n5["Map fields for further processing"]
+  n6["Ask OpenAI Assistant"]
+  n7["Get single message content"]
+  n8["Return last message in thread"]
+  n9["Get thread messages"]
+  n10["Loop over threads"]
+  n11["Get threads with specific labels"]
+  n12["Schedule trigger #40;1 min#41;"]
+  n3 -->|"main out 0 to in 0"| n2
+  n10 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 1 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n3
+  n12 -->|"main out 0 to in 0"| n11
+  n1 -->|"main out 0 to in 0"| n0
+  n7 -->|"main out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n4

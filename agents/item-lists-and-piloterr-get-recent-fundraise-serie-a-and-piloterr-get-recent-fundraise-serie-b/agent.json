@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "slug": "item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b",
+  "title": "item lists and piloterr get recent fundraise serie a and piloterr get recent fundraise serie b",
+  "purpose": "Adapt the published “item lists and piloterr get recent fundraise serie a and piloterr get recent fundraise serie b” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger - Run Workflow Every Day"
+  ],
+  "terminal_nodes": [
+    "Google Sheets"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Split results",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Piloterr - Get Recent Fundraise - Serie A",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Piloterr - Get Recent Fundraise - Serie B",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4,
+        "disabled": false
+      },
+      {
+        "name": "Piloterr - Get Recent Fundraise - Seed",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Prepare data",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Piloterr - Enrich company",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger - Run Workflow Every Day",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare data before importing to Gsheets",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Linkedin URL from object",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare data",
+        "to": "Piloterr - Enrich company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare data",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split results",
+        "to": "Prepare data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Piloterr - Enrich company",
+        "to": "Get Linkedin URL from object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Linkedin URL from object",
+        "to": "Prepare data before importing to Gsheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Piloterr - Get Recent Fundraise - Seed",
+        "to": "Split results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare data before importing to Gsheets",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Piloterr - Get Recent Fundraise - Serie A",
+        "to": "Split results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Piloterr - Get Recent Fundraise - Serie B",
+        "to": "Split results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger - Run Workflow Every Day",
+        "to": "Piloterr - Get Recent Fundraise - Serie A",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger - Run Workflow Every Day",
+        "to": "Piloterr - Get Recent Fundraise - Serie B",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger - Run Workflow Every Day",
+        "to": "Piloterr - Get Recent Fundraise - Seed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/n8n",
+      "files": [
+        "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/n8n/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b.json"
+      ],
+      "sha256": "c676122ea92ef3dee8c4702bb775dd9f7967177678aaabff35e4efe9cbacbbea",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,26 @@
+flowchart LR
+  n0["On schedule"]
+  n1["Derive last request time"]
+  n2["Get emails from label and last request time"]
+  n3["Create database page"]
+  n4["Try get database page"]
+  n5["If checked off"]
+  n6["On updated database page"]
+  n7["Remove label from target email"]
+  n8["Not yet checked off, do nothing"]
+  n9["Merge"]
+  n10["If found, do nothing"]
+  n11["If database page not found"]
+  n12["Find my email address"]
+  n9 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 1 to in 0"| n8
+  n12 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 0 to in 1"| n9
+  n1 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n5
+  n11 -->|"main out 0 to in 0"| n12
+  n11 -->|"main out 1 to in 0"| n10
+  n2 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n9

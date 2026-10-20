@@ -1,0 +1,58 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Embeddings OpenAI"]
+  n2["Default Data Loader"]
+  n3["Recursive Character Text Splitter"]
+  n4["Issues Similarity Database"]
+  n5["Supabase Vector Store"]
+  n6["Embeddings OpenAI1"]
+  n7["OpenAI Chat Model"]
+  n8["Find Similar Issues #43; Assignees"]
+  n9["Check User Workflow"]
+  n10["For Each User"]
+  n11["Assign User to Ticket"]
+  n12["Schedule Trigger1"]
+  n13["Remove Duplicates"]
+  n14["Collect Fields"]
+  n15["Get Unassigned Tickets more than 5 days"]
+  n16["For Each Issue"]
+  n17["Issue Ref"]
+  n18["Add Comment to Issue"]
+  n19["Last 50 Resolved"]
+  n20["OpenAI Chat Model1"]
+  n21["Issues to Items"]
+  n22["To Structured Output"]
+  n23["Count Assigned Open Issues per User"]
+  n24["Tally In-Progress Issues per User"]
+  n25["Sort By Most Capacity"]
+  n26["If has Items#63;"]
+  n27["Skip"]
+  n27 -->|"main out 0 to in 0"| n16
+  n17 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n23
+  n10 -->|"main out 1 to in 0"| n9
+  n26 -->|"main out 0 to in 0"| n10
+  n26 -->|"main out 1 to in 0"| n27
+  n14 -->|"main out 0 to in 0"| n4
+  n16 -->|"main out 1 to in 0"| n17
+  n21 -->|"main out 0 to in 0"| n26
+  n19 -->|"main out 0 to in 0"| n13
+  n0 -->|"main out 0 to in 0"| n19
+  n1 -->|"ai_embedding out 0 to in 0"| n4
+  n7 -->|"ai_languageModel out 0 to in 0"| n8
+  n13 -->|"main out 0 to in 0"| n14
+  n12 -->|"main out 0 to in 0"| n15
+  n6 -->|"ai_embedding out 0 to in 0"| n5
+  n20 -->|"ai_languageModel out 0 to in 0"| n22
+  n9 -->|"main out 0 to in 0"| n24
+  n2 -->|"ai_document out 0 to in 0"| n4
+  n18 -->|"main out 0 to in 0"| n16
+  n22 -->|"main out 0 to in 0"| n21
+  n11 -->|"main out 0 to in 0"| n18
+  n25 -->|"main out 0 to in 0"| n11
+  n5 -->|"ai_tool out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n22
+  n3 -->|"ai_textSplitter out 0 to in 0"| n2
+  n24 -->|"main out 0 to in 0"| n10
+  n23 -->|"main out 0 to in 0"| n25
+  n15 -->|"main out 0 to in 0"| n16

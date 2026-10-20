@@ -1,0 +1,26 @@
+flowchart LR
+  n0["Parse Webhook"]
+  n1["Qualys Create Report"]
+  n2["Required Report Variables"]
+  n3["Qualys Start Vulnerability Scan"]
+  n4["Scan Report Task Modal"]
+  n5["Vuln Scan Modal"]
+  n6["Route Message"]
+  n7["Required Scan Variables"]
+  n8["Route Submission"]
+  n9["Close Modal Popup"]
+  n10["Webhook"]
+  n11["Respond to Slack Webhook - Vulnerability"]
+  n12["Respond to Slack Webhook - Report"]
+  n10 -->|"main out 0 to in 0"| n0
+  n0 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 1 to in 0"| n12
+  n6 -->|"main out 2 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 1 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n1
+  n12 -->|"main out 0 to in 0"| n4
+  n11 -->|"main out 0 to in 0"| n5

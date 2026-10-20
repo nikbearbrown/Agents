@@ -1,0 +1,19 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["OpenAI Chat Model"]
+  n2["Simple Memory"]
+  n3["When Executed by Another Workflow"]
+  n4["Check if user has provided email"]
+  n5["Message Slack for help"]
+  n6["Confirm that we#39;ve messaged a human"]
+  n7["Prompt the user to provide an email"]
+  n8["Not sure#63;"]
+  n9["AI Agent"]
+  n8 -->|"ai_tool out 0 to in 0"| n9
+  n2 -->|"ai_memory out 0 to in 0"| n9
+  n1 -->|"ai_languageModel out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 1 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n4

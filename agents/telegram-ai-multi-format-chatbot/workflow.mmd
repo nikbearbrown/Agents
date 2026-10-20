@@ -1,0 +1,25 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["Window Buffer Memory"]
+  n2["Correct errors"]
+  n3["Listen for incoming events"]
+  n4["Download voice file"]
+  n5["Combine content and set properties"]
+  n6["Send final reply"]
+  n7["Send error message"]
+  n8["Convert audio to text"]
+  n9["Send Typing action"]
+  n10["AI Agent"]
+  n11["Determine content type"]
+  n10 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 1 to in 0"| n2
+  n0 -->|"ai_languageModel out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n8
+  n1 -->|"ai_memory out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n5
+  n11 -->|"main out 0 to in 0"| n5
+  n11 -->|"main out 1 to in 0"| n4
+  n11 -->|"main out 2 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n10

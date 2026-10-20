@@ -1,56 +1,9 @@
 # Save the data to Hubspot
 
-This folder contains the **Save the data to Hubspot** workflow. Its executable nodes use `agent`, `chainSummarization`, `form`, `formTrigger`, `gmailTool`, `hubspot`, `lmChatOpenAi`, `set`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/save-the-data-to-hubspot](../../agents/save-the-data-to-hubspot/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/save-the-data-to-hubspot/implementations/n8n/README.md)
+- [Importable JSON](../../agents/save-the-data-to-hubspot/implementations/n8n/save-the-data-to-hubspot.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/save-the-data-to-hubspot)
 
-## Files
-
-- [`save-the-data-to-hubspot.json`](save-the-data-to-hubspot.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** `gmailOAuth2`, `hubspotOAuth2Api`, `openAiApi`
-
-**Entry nodes:** Enter Client Transcript
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| HubSpot | `hubspot` | engagement |
-| HubSpot1 | `hubspot` | search |
-| Router Agent | `agent` | Inspect parameters |
-| Summarization | `chainSummarization` | Inspect parameters |
-| Enter Client Transcript | `formTrigger` | Inspect parameters |
-| Form | `form` | completion |
-| OpenAI Chat Model | `lmChatOpenAi` | Inspect parameters |
-| Define routing emails here | `set` | Inspect parameters |
-| Gmail | `gmailTool` | Inspect parameters |
-
-## Connection map
-
-- Gmail → Router Agent (`ai_tool`, output 0, input 0)
-- HubSpot1 → HubSpot (`main`, output 0, input 0)
-- Router Agent → Form (`main`, output 0, input 0)
-- Summarization → Router Agent (`main`, output 0, input 0)
-- Summarization → HubSpot1 (`main`, output 0, input 0)
-- OpenAI Chat Model → Summarization (`ai_languageModel`, output 0, input 0)
-- OpenAI Chat Model → Router Agent (`ai_languageModel`, output 0, input 0)
-- Enter Client Transcript → Define routing emails here (`main`, output 0, input 0)
-- Define routing emails here → Summarization (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Form/0890_Form_Stickynote_Send_Triggered.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Form/0890_Form_Stickynote_Send_Triggered.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

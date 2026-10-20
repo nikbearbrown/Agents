@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "slug": "receive-slack-webhook-slash-command",
+  "title": "Receive Slack Webhook Slash Command",
+  "purpose": "Adapt the published “Receive Slack Webhook Slash Command” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Send Incident Details to Slack",
+    "Notify User no Incident was Found",
+    "Notify User of Error with ServiceNow"
+  ],
+  "credential_types": [
+    "serviceNowBasicApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Incident ID from Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Search For Incident in ServiceNow",
+        "type": "n8n-nodes-base.serviceNow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Incident Details to Slack",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Notify User no Incident was Found",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Notify User of Error with ServiceNow",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Parse ServiceNow Response",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Extract Incident ID from Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse ServiceNow Response",
+        "to": "Notify User of Error with ServiceNow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse ServiceNow Response",
+        "to": "Notify User no Incident was Found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Parse ServiceNow Response",
+        "to": "Send Incident Details to Slack",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Extract Incident ID from Response",
+        "to": "Search For Incident in ServiceNow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search For Incident in ServiceNow",
+        "to": "Parse ServiceNow Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-slack-webhook-slash-command/implementations/n8n",
+      "files": [
+        "agents/receive-slack-webhook-slash-command/implementations/n8n/receive-slack-webhook-slash-command.json"
+      ],
+      "sha256": "a0ebc0e1595f18ca636dd363e77e45a6b2dcd0f9b808d7c27404ff2e4a1fb0c3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-slack-webhook-slash-command/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-slack-webhook-slash-command/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-slack-webhook-slash-command/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-slack-webhook-slash-command/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-slack-webhook-slash-command/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-slack-webhook-slash-command/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-slack-webhook-slash-command/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-slack-webhook-slash-command/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-slack-webhook-slash-command/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-slack-webhook-slash-command/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-slack-webhook-slash-command/implementations/n8n/provenance.json"
+}

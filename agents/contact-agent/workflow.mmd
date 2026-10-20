@@ -1,0 +1,14 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["Get Contacts"]
+  n2["Add or Update Contact"]
+  n3["Contact Agent"]
+  n4["Response"]
+  n5["Try Again"]
+  n6["When Executed by Another Workflow"]
+  n0 -->|"ai_languageModel out 0 to in 0"| n3
+  n1 -->|"ai_tool out 0 to in 0"| n3
+  n2 -->|"ai_tool out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 1 to in 0"| n5
+  n6 -->|"main out 0 to in 0"| n3

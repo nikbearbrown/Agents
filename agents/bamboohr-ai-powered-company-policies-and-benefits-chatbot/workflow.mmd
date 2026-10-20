@@ -1,0 +1,76 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Default Data Loader"]
+  n2["Embeddings OpenAI"]
+  n3["Recursive Character Text Splitter"]
+  n4["Window Buffer Memory"]
+  n5["OpenAI Chat Model"]
+  n6["Vector Store Tool"]
+  n7["OpenAI Chat Model1"]
+  n8["Embeddings OpenAI1"]
+  n9["Employee Lookup Tool"]
+  n10["OpenAI Chat Model2"]
+  n11["OpenAI Chat Model3"]
+  n12["OpenAI Chat Model4"]
+  n13["Auto-fixing Output Parser"]
+  n14["OpenAI Chat Model5"]
+  n15["Structured Output Parser"]
+  n16["GET all files"]
+  n17["Filter out files from undesired categories"]
+  n18["Split out individual files"]
+  n19["Filter out non-pdf files"]
+  n20["Download file from BambooHR"]
+  n21["Supabase Vector Store"]
+  n22["Employee initiates a conversation"]
+  n23["Supabase Vector Store Retrieval"]
+  n24["AI-Powered HR Benefits and Company Policies Chatbot"]
+  n25["Text Classifier"]
+  n26["GET all employees"]
+  n27["Filter out other employees"]
+  n28["Stringify employee record for response"]
+  n29["GET all employees #40;second path#41;"]
+  n30["Extract departments"]
+  n31["Ensure uniqueness in department list"]
+  n32["Extract department"]
+  n33["Retrieve all employees"]
+  n34["Filter out other departments"]
+  n35["Extract relevant employee fields"]
+  n36["Identify most senior employee"]
+  n37["Format name for response"]
+  n38["HR AI Agent"]
+  n16 -->|"main out 0 to in 0"| n17
+  n25 -->|"main out 0 to in 0"| n26
+  n25 -->|"main out 1 to in 0"| n29
+  n2 -->|"ai_embedding out 0 to in 0"| n21
+  n26 -->|"main out 0 to in 0"| n27
+  n5 -->|"ai_languageModel out 0 to in 0"| n38
+  n6 -->|"ai_tool out 0 to in 0"| n38
+  n8 -->|"ai_embedding out 0 to in 0"| n23
+  n32 -->|"main out 0 to in 0"| n33
+  n7 -->|"ai_languageModel out 0 to in 0"| n6
+  n10 -->|"ai_languageModel out 0 to in 0"| n25
+  n11 -->|"ai_languageModel out 0 to in 0"| n32
+  n12 -->|"ai_languageModel out 0 to in 0"| n36
+  n14 -->|"ai_languageModel out 0 to in 0"| n13
+  n1 -->|"ai_document out 0 to in 0"| n21
+  n30 -->|"main out 0 to in 0"| n31
+  n9 -->|"ai_tool out 0 to in 0"| n38
+  n4 -->|"ai_memory out 0 to in 0"| n38
+  n33 -->|"main out 0 to in 0"| n34
+  n19 -->|"main out 0 to in 0"| n20
+  n15 -->|"ai_outputParser out 0 to in 0"| n13
+  n13 -->|"ai_outputParser out 0 to in 0"| n36
+  n27 -->|"main out 0 to in 0"| n28
+  n18 -->|"main out 0 to in 0"| n19
+  n20 -->|"main out 0 to in 0"| n21
+  n34 -->|"main out 0 to in 0"| n35
+  n36 -->|"main out 0 to in 0"| n37
+  n29 -->|"main out 0 to in 0"| n30
+  n23 -->|"ai_vectorStore out 0 to in 0"| n6
+  n35 -->|"main out 0 to in 0"| n36
+  n22 -->|"main out 0 to in 0"| n38
+  n3 -->|"ai_textSplitter out 0 to in 0"| n1
+  n0 -->|"main out 0 to in 0"| n16
+  n31 -->|"main out 0 to in 0"| n32
+  n17 -->|"main out 0 to in 0"| n18
+  n24 -->|"main out 0 to in 0"| n25

@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "slug": "fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags",
+  "title": "fetch manifest digest and remove old tags and retrieve image tags",
+  "purpose": "Adapt the published “fetch manifest digest and remove old tags and retrieve image tags” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Scheduled Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Notification Email",
+    "Send Failure Notification Email",
+    "Execute Garbage Collection"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Fetch Manifest Digest",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Remove Old Tags",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Image Tags",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "List Images",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Image Names",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Identify Tags to Remove",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Scheduled Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Notification Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Tags",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Valid Tags",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Manifest Digest for Blob",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Update Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Group Tags by Image",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Sort by Creation Date",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Failure Notification Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Garbage Collection",
+        "type": "n8n-nodes-base.ssh",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split Tags",
+        "to": "Filter Valid Tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List Images",
+        "to": "Extract Image Names",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Fields",
+        "to": "Sort by Creation Date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Old Tags",
+        "to": "Execute Garbage Collection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Old Tags",
+        "to": "Send Failure Notification Email",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Filter Valid Tags",
+        "to": "Fetch Manifest Digest",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scheduled Trigger",
+        "to": "List Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Image Names",
+        "to": "Retrieve Image Tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Group Tags by Image",
+        "to": "Identify Tags to Remove",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Image Tags",
+        "to": "Split Tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Manifest Digest",
+        "to": "Fetch Manifest Digest for Blob",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort by Creation Date",
+        "to": "Group Tags by Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Identify Tags to Remove",
+        "to": "Remove Old Tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Identify Tags to Remove",
+        "to": "Send Notification Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Manifest Digest for Blob",
+        "to": "Update Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/n8n",
+      "files": [
+        "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/n8n/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags.json"
+      ],
+      "sha256": "f41610d584f897ae2d0746288272410863c6d80a1d72a7c634d8fe86bb63a30d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/n8n/provenance.json"
+}

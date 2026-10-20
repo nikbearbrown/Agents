@@ -1,0 +1,29 @@
+flowchart LR
+  n0["Check User #38; Chat ID"]
+  n1["Error message"]
+  n2["Listen for Telegram Events"]
+  n3["Validation"]
+  n4["Message Router"]
+  n5["AI Agent"]
+  n6["Merge"]
+  n7["Window Buffer Memory"]
+  n8["When chat message received"]
+  n9["Telegram Response"]
+  n10["Save Long Term Memories"]
+  n11["Retrieve Long Term Memories"]
+  n12["Response Error message"]
+  n13["DeepSeek-R1 Reasoning"]
+  n14["DeepSeek-V3 Chat"]
+  n6 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 1 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n0
+  n4 -->|"main out 1 to in 0"| n6
+  n4 -->|"main out 1 to in 0"| n11
+  n4 -->|"main out 3 to in 0"| n1
+  n14 -->|"ai_languageModel out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 1 to in 0"| n1
+  n10 -->|"ai_tool out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n11 -->|"main out 0 to in 1"| n6

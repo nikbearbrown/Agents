@@ -1,0 +1,856 @@
+{
+  "schema_version": 1,
+  "slug": "puq-docker-nextcloud-deploy",
+  "title": "PUQ Docker NextCloud deploy",
+  "purpose": "Adapt the published “PUQ Docker NextCloud deploy” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 43 executable nodes and 68 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "API"
+  ],
+  "terminal_nodes": [
+    "422-Invalid server domain",
+    "Add record",
+    "Delete record",
+    "API answer1",
+    "REPLACE_WITH_CREDENTIAL",
+    "REPLACE_WITH_CREDENTIAL",
+    "API answer2"
+  ],
+  "credential_types": [
+    "httpBasicAuth",
+    "sshPassword"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Parametrs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "API",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "422-Invalid server domain",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Container Actions",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Container Stats",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Inspect",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Stat",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Start",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Stop",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Mount Disk",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Unmount Disk",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Log",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Deploy-docker-compose",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Version",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Users",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Change Password",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "NextCloud",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "nginx",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Test Connection",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "ChangePackage",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Terminated",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Unsuspend",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Suspend",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Deploy",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Service Actions",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "If1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Dependent containers Stat",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "GET ACL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "SET ACL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "GET NET",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "If2",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Split domain",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DNS Service Actions",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "DNS Parametrs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Add record",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Delete record",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "API answer1",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "REPLACE_WITH_CREDENTIAL",
+        "type": "n8n-nodes-base.ssh",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "REPLACE_WITH_CREDENTIAL",
+        "type": "n8n-nodes-base.ssh",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Servers Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Code",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "API answer2",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "Container Stats",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Container Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "NextCloud",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "If1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "422-Invalid server domain",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "API",
+        "to": "Parametrs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "nginx",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "Service Actions",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If2",
+        "to": "DNS Service Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Log",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code",
+        "to": "API answer2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Stat",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Stop",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Users",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "nginx",
+        "to": "Deploy-docker-compose",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Deploy",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET ACL",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET NET",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Inspect",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SET ACL",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Suspend",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Version",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "NextCloud",
+        "to": "Version",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "NextCloud",
+        "to": "Users",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "NextCloud",
+        "to": "Change Password",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Parametrs",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unsuspend",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mount Disk",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Terminated",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split domain",
+        "to": "DNS Parametrs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Unmount Disk",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ChangePackage",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DNS Parametrs",
+        "to": "If2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Servers Switch",
+        "to": "REPLACE_WITH_CREDENTIAL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Servers Switch",
+        "to": "REPLACE_WITH_CREDENTIAL",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Change Password",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Container Stats",
+        "to": "Inspect",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Container Stats",
+        "to": "Stat",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Container Stats",
+        "to": "Log",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Container Stats",
+        "to": "Dependent containers Stat",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Container Stats",
+        "to": "Split domain",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Test Connection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Deploy",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Split domain",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Suspend",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Unsuspend",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Terminated",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Split domain",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "ChangePackage",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Service Actions",
+        "to": "Split domain",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Test Connection",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "Start",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "Stop",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "Mount Disk",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "Unmount Disk",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "GET ACL",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "SET ACL",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Container Actions",
+        "to": "GET NET",
+        "kind": "main",
+        "output": 6,
+        "input": 0
+      },
+      {
+        "from": "DNS Service Actions",
+        "to": "Add record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DNS Service Actions",
+        "to": "API answer1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DNS Service Actions",
+        "to": "Add record",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "DNS Service Actions",
+        "to": "Delete record",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "DNS Service Actions",
+        "to": "Add record",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "DNS Service Actions",
+        "to": "Delete record",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "DNS Service Actions",
+        "to": "Add record",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Deploy-docker-compose",
+        "to": "Service Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dependent containers Stat",
+        "to": "Servers Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Duplicate executable node names need review.",
+    "Unresolved connection: d01-test.uuq.pl -> Code",
+    "Unresolved connection: d01-test.uuq.pl -> Code",
+    "Unresolved connection: d02-test.uuq.pl -> Code",
+    "Unresolved connection: d02-test.uuq.pl -> Code",
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/puq-docker-nextcloud-deploy/implementations/n8n",
+      "files": [
+        "agents/puq-docker-nextcloud-deploy/implementations/n8n/puq-docker-nextcloud-deploy.json"
+      ],
+      "sha256": "bfc9b78a7a8ef2e0c96a530406f79441830d264865524a6739d3579da7a08f4b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/puq-docker-nextcloud-deploy/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/puq-docker-nextcloud-deploy/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/puq-docker-nextcloud-deploy/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/puq-docker-nextcloud-deploy/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/puq-docker-nextcloud-deploy/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/puq-docker-nextcloud-deploy/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/puq-docker-nextcloud-deploy/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/puq-docker-nextcloud-deploy/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/puq-docker-nextcloud-deploy/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/puq-docker-nextcloud-deploy/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/puq-docker-nextcloud-deploy/implementations/n8n/provenance.json"
+}

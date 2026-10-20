@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "slug": "printify-automation-update-title-and-description-alexk1919",
+  "title": "Printify Automation - Update Title and Description - AlexK1919",
+  "purpose": "Adapt the published “Printify Automation - Update Title and Description - AlexK1919” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 20 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Google Sheets Trigger"
+  ],
+  "terminal_nodes": [
+    "Calculator",
+    "Wikipedia",
+    "Printify - Update Product"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "googleSheetsTriggerOAuth2Api",
+    "httpHeaderAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Printify - Get Shops",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Printify - Get Products",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Split - id, title, desc",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Printify - Update Product",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Brand Guidelines + Custom Instructions",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Printify - Get Shops1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "GS - Add Product Option",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Product Option",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "If1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Number of Options",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Options",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Remember Options",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Generate Title and Desc",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "Printify - Get Shops1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "GS - Add Product Option",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wikipedia",
+        "to": "Generate Title and Desc",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculator",
+        "to": "Generate Title and Desc",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Split - id, title, desc",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Remember Options",
+        "to": "Calculate Options",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Options",
+        "to": "If1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Number of Options",
+        "to": "Calculate Options",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Printify - Get Shops",
+        "to": "Printify - Get Products",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets Trigger",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Printify - Get Shops1",
+        "to": "Printify - Update Product",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Product Option",
+        "to": "Remember Options",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GS - Add Product Option",
+        "to": "Generate Title and Desc",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Title and Desc",
+        "to": "Update Product Option",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Printify - Get Products",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split - id, title, desc",
+        "to": "Number of Options",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Brand Guidelines + Custom Instructions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Brand Guidelines + Custom Instructions",
+        "to": "Printify - Get Shops",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/implementations/n8n",
+      "files": [
+        "agents/printify-automation-update-title-and-description-alexk1919/implementations/n8n/printify-automation-update-title-and-description-alexk1919.json"
+      ],
+      "sha256": "307c24301b346b2e1737954168b2628665036d944bf5bddd379cbe92315c7bb3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/printify-automation-update-title-and-description-alexk1919/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/printify-automation-update-title-and-description-alexk1919/implementations/n8n/provenance.json"
+}

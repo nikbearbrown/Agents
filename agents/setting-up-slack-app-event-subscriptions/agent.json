@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "slug": "setting-up-slack-app-event-subscriptions",
+  "title": "Setting Up Slack App Event Subscriptions",
+  "purpose": "Adapt the published “Setting Up Slack App Event Subscriptions” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On BOT/APP Mention"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Search All Outlook Events",
+    "Create New Calendar Event",
+    "Get Available Calendars",
+    "Simple Memory",
+    "Send Reply",
+    "Respond to Challenge"
+  ],
+  "credential_types": [
+    "microsoftOutlookOAuth2Api",
+    "openAiApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search All Outlook Events",
+        "type": "n8n-nodes-base.microsoftOutlookTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create New Calendar Event",
+        "type": "n8n-nodes-base.microsoftOutlookTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Available Calendars",
+        "type": "n8n-nodes-base.microsoftOutlookTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Outlook Calendar Assistant",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Send Reply",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Challenge",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Is Auth Challenge?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Message",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "On BOT/APP Mention",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Message",
+        "to": "Outlook Calendar Assistant",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory",
+        "to": "Outlook Calendar Assistant",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Outlook Calendar Assistant",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Auth Challenge?",
+        "to": "Respond to Challenge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Auth Challenge?",
+        "to": "Get Message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "On BOT/APP Mention",
+        "to": "Is Auth Challenge?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Available Calendars",
+        "to": "Outlook Calendar Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create New Calendar Event",
+        "to": "Outlook Calendar Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search All Outlook Events",
+        "to": "Outlook Calendar Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Outlook Calendar Assistant",
+        "to": "Send Reply",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/setting-up-slack-app-event-subscriptions/implementations/n8n",
+      "files": [
+        "agents/setting-up-slack-app-event-subscriptions/implementations/n8n/setting-up-slack-app-event-subscriptions.json"
+      ],
+      "sha256": "912fb0801a86e77d18fa7f0de1e66208bc6ac7a85586b47bafc290b6e95c12d4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/setting-up-slack-app-event-subscriptions/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/setting-up-slack-app-event-subscriptions/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/setting-up-slack-app-event-subscriptions/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/setting-up-slack-app-event-subscriptions/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/setting-up-slack-app-event-subscriptions/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/setting-up-slack-app-event-subscriptions/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/setting-up-slack-app-event-subscriptions/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/setting-up-slack-app-event-subscriptions/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/setting-up-slack-app-event-subscriptions/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/setting-up-slack-app-event-subscriptions/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/setting-up-slack-app-event-subscriptions/implementations/n8n/provenance.json"
+}

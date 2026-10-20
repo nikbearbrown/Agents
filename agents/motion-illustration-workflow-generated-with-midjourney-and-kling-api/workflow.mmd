@@ -1,0 +1,24 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Kling Video Generator"]
+  n2["Get Video"]
+  n3["Get Image"]
+  n4["Basic Prompt"]
+  n5["Get Data Status"]
+  n6["Wait for Image Generation"]
+  n7["Midjourney Image Generator"]
+  n8["Wait for Video Generation"]
+  n9["Get Final Video URL"]
+  n10["Verify Data Status"]
+  n3 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 1 to in 0"| n6
+  n10 -->|"main out 0 to in 0"| n9
+  n10 -->|"main out 1 to in 0"| n8
+  n1 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n4

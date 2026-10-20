@@ -1,0 +1,19 @@
+flowchart LR
+  n0["list people"]
+  n1["Pipedrive - Enrich Organization"]
+  n2["Pipedrive - Add Person"]
+  n3["Datagma - Enrich Company"]
+  n4["Merge"]
+  n5["If lead is Ideal Buyer"]
+  n6["Datagma - Find Emails"]
+  n7["Prepare Data Before Merge"]
+  n8["Pipedrive Trigger - New Company Created"]
+  n4 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 1"| n4
+  n6 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n0
+  n3 -->|"main out 0 to in 0"| n1
+  n7 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n3

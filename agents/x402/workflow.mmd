@@ -1,0 +1,22 @@
+flowchart LR
+  n0["Webhook"]
+  n1["Check for presence of X-HEADER"]
+  n2["Decode #38; Validate X-Payment"]
+  n3["Simulate Payment"]
+  n4["On Successful Payment Simulation"]
+  n5["1Shot API Submit #38; Wait"]
+  n6["Ensure Well Formatted Payment Payload"]
+  n7["Response: Missing or Invalid Payment Headers"]
+  n8["Response: Payment Invalid"]
+  n9["Response: 200 - Payment Successful"]
+  n0 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 1 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 1 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 1 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n3
+  n6 -->|"main out 1 to in 0"| n7

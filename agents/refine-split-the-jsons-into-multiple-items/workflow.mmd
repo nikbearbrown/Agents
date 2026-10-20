@@ -1,0 +1,28 @@
+flowchart LR
+  n0["Information Extractor"]
+  n1["OpenAI Chat Model1"]
+  n2["If"]
+  n3["Google Sheets"]
+  n4["Code"]
+  n5["Loop Over Items"]
+  n6["Replace Me"]
+  n7["No Operation, do nothing"]
+  n8["Triggered on Restaurant Chat workflow"]
+  n9["When chat message received"]
+  n10["AI Agent"]
+  n11["OpenAI Chat Model"]
+  n12["Call n8n Workflow Tool"]
+  n13["Last 5 conversations Memory"]
+  n2 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 1 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 1 to in 0"| n6
+  n11 -->|"ai_languageModel out 0 to in 0"| n10
+  n1 -->|"ai_languageModel out 0 to in 0"| n0
+  n0 -->|"main out 0 to in 0"| n2
+  n12 -->|"ai_tool out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n10
+  n13 -->|"ai_memory out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n0

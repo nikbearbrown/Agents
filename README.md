@@ -1,43 +1,44 @@
-# N8N workflow collection
+# Agents
 
-A documented collection of **1,876 workflow folders**, consolidated from 8,070 snapshots. **1,876 workflow JSON files** have redistribution evidence and are included; 24 formatting-only snapshot pairs have been consolidated. Start with the [searchable JSON catalog](catalog.json) or [linked workflow index](CATALOG.md).
+**One purpose, multiple implementations, explicit evidence.** Curated by Nik Bear Brown.
 
-## What is in this repository?
+Explore the [searchable website](https://www.bearbrown.co/agents), [agent catalog](CATALOG.md), or [machine-readable index](agents-catalog.json).
 
-Each folder under `workflows/` represents one selected workflow family. Its README describes the configured nodes, credential types, setup, connection map, verification limits, and attribution. `provenance.json` records source and publication hashes; `configuration.json` records removed configuration locations without exposing values.
+## What is here
 
-Published workflows include an overview sticky note. It describes observed structure and setup requirements; it is not a claim that the workflow has been executed. The original inputs and redundant snapshots are preserved outside this repository, not uploaded.
+There are **1,877 agent packages**: **1,876 collected n8n workflow families**, plus **Lectern job search**, an original multi-workflow package. “Agent” is an organizational term: many entries are deterministic automations and do not involve model judgment.
 
-## Original workflows (not part of the 1,900)
+Each `agents/<slug>/` folder holds a shared specification, a Mermaid diagram, implementation records, and separate build/operate instructions for Claude, Codex, Grok Bot, Muse and Dots. Every collected package retains its sanitized n8n source under `implementations/n8n/`. Python, Pydantic AI, CrewAI Flow, CrewAI Crew and LangGraph targets have porting plans. **A planned folder or an untested prompt is not a working implementation.**
 
-[`lectern-job-search/`](lectern-job-search/README.md) holds five workflows written and tested for a course, not collected from elsewhere: collect, filter, delta, post to Discord and a daily runner, which rebuild a Python job-search pipeline as native n8n nodes. Each is tested against the Python's output (the filter agrees on 2,465 real postings), run headless in a disposable n8n 1.113.3 profile. The Discord node has not sent a message from n8n, and SmartRecruiters is not read live; the folder's README lists what is and is not tested. The counts and checks in this repository's other sections do not cover this folder.
+The first specifications and Mermaid maps are derived from source structure. They preserve observed nodes and connections rather than inventing a verified business process. Review intent, schemas, side effects and expected outputs before treating them as a shared behavioral contract. Ten collected sources have structural graph findings recorded in their agent metadata and the migration report.
 
-## Use a workflow
+## Start here
 
-1. Choose a folder in [CATALOG.md](CATALOG.md) and read its README.
-2. Import its JSON into an isolated n8n instance and leave it inactive.
-3. Connect your own credentials using n8n's credential store. Replace `REPLACE_WITH_*` configuration placeholders.
-4. Review outbound actions, URLs, code, SQL and file access. Test with synthetic data before enabling schedules, webhooks, messages, or other writes.
+- [Telegram echo-bot](agents/telegram-echo-bot/README.md): a small source graph to inspect.
+- [Lectern job search](agents/lectern-job-search/README.md): five workflows with preserved fixtures and reported parity tests.
+- [All collected agents](CATALOG.md): existing source templates and their implementation plans.
+- [Architecture and contribution contract](ARCHITECTURE.md): how to add an implementation without duplicating an agent.
+- [Migration review](MIGRATION.md): validation results, source findings and next implementation work.
+- [Migration details](migration.json): original paths, new paths and unchanged source hashes.
 
-## What the checks mean
+## Use an implementation
 
-- **Deduplicated:** a canonical source was selected using structure, lineage and known defects. It does not mean the newest export was provable.
-- **Sanitized:** credential bindings, pinned/runtime data, scanner findings and selected personal/resource identifiers were removed from publication copies. Secret scanning is not a guarantee against every possible encoding or identifier.
-- **Documented:** node inventory and connection-map descriptions are generated from actual JSON. They do not certify business logic.
-- **Runtime-tested:** only explicitly identified classroom teaching references have passed synthetic headless tests. The bulk catalog has not passed service-level testing.
+Read the agent specification and the selected implementation README. Import n8n JSON inactive, or follow an implemented backend's setup. Supply your own credentials outside source control. Inspect external destinations and test synthetic inputs before enabling writes or schedules. A prompt's operating section does not authorize unattended work.
 
-## Scope and counts
+## Evidence means what it says
 
-The local cleanup selected 1,900 families from 8,070 snapshots, archiving 6,167 noncanonical copies and quarantining 3 malformed files. A second comparison consolidated 24 pairs into 1,876 published folders. Matching executable graphs differed only in horizontal whitespace within strings; retained JSON is unchanged. This is not a claim that all remaining workflows are semantically distinct or runtime-tested. See [the consolidation manifest](consolidation.json) for retired names, both source/license records, and recoverable Git history. See [publication-report.json](publication-report.json) for excluded JSON files and current counts.
+- `source-available`: code or workflow exists; execution has not been established.
+- `planned`: instructions exist, but no executable port is supplied.
+- `reported-fixture-tested`: previous test reports are retained; read their scope and dates.
+- `fixture-tested`: local deterministic tests have been run and recorded; live services may remain unverified.
+- `live-tested`: requires a dated, scoped receipt; never inferred from a successful import.
 
-## Licensing and attribution
+The bulk collection is not runtime-tested. Agreement between implementations is evidence of parity, not proof of correctness. Model decisions need independent labels and failure tests. Public logs must be sanitized; private payloads and credentials do not belong here.
 
-This is a curated collection, not a claim of authorship over all workflows. Preserve per-folder attribution and the notices in [licenses/](licenses/). There is no blanket license overriding individual sources. Workflows with unresolved redistribution rights are withheld. MIT and Apache notices remain with their respective sources. Availability here does not authorize reposting someone else's work to the n8n Creator Portal as your own.
+## Provenance, licensing and compatibility
 
-## Annotation
+The original collection selected 1,900 families from 8,070 snapshots; 24 formatting-only pairs were subsequently consolidated to 1,876. See [consolidation.json](consolidation.json). The Agents migration does not rewrite any collected n8n JSON bytes. Per-source provenance, configuration records and [license notices](licenses/) remain intact. No blanket license overrides the original licenses, and curation is not a claim of authorship.
 
-The initial overview notes are generated locally without model calls. The official n8n annotation tool can add richer notes after review; keep renaming disabled until reference rewriting is proven safe. Compare executable nodes and all connections before and after annotation. See [ANNOTATION.md](ANNOTATION.md).
+The repository was named `N8N`. GitHub's repository rename preserves repository redirects. Old `workflows/<slug>/README.md` paths are compatibility landing pages, not duplicate agents. Moved raw GitHub JSON paths are listed in migration.json with their original commit for recovery; website JSON download URLs remain stable. Do not create another `nikbearbrown/N8N` repository, which would displace the old-name redirect.
 
-## Contributing
-
-Keep folder names descriptive and lowercase kebab-case. Include provenance and a README. Do not commit credentials, execution payloads or personal sample data. Validate JSON, scan for secrets, and document actual test evidence separately from proposed behavior.
+Run `python3 scripts/validate.py` for publication checks and `python3 scripts/validate_agents.py` for package, diagram, prompt, hash and local-link checks. Validation does not execute workflows. See [ANNOTATION.md](ANNOTATION.md) for annotation policy.

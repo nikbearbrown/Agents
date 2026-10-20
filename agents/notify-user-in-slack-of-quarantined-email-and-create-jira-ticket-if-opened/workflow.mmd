@@ -1,0 +1,20 @@
+flowchart LR
+  n0["has email been opened#63;"]
+  n1["Receive Sublime Security Alert"]
+  n2["Get message details in Sublime Security"]
+  n3["Jira Software"]
+  n4["lookup slack user by email"]
+  n5["user found#63;"]
+  n6["Found, notify user"]
+  n7["Not Found, Do Nothing"]
+  n8["No, do nothing"]
+  n9["Yes, prep flaggedRules table"]
+  n5 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 1 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 1 to in 0"| n8
+  n4 -->|"main out 0 to in 0"| n5
+  n9 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n4

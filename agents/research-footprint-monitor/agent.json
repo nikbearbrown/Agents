@@ -1,0 +1,596 @@
+{
+  "schema_version": 1,
+  "slug": "research-footprint-monitor",
+  "title": "Mycroft Agent 5 — Research Footprint Monitor",
+  "purpose": "Adapt the published “Mycroft Agent 5 — Research Footprint Monitor” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 31 executable nodes and 43 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron Trigger",
+    "Manual Pipeline Webhook"
+  ],
+  "terminal_nodes": [
+    "Pipeline Response"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Manual Pipeline Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Watchlist",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Scholar: NVIDIA",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scholar: AMD",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scholar: Intel",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scholar: Google",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scholar: Apple",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scholar: Microsoft",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scholar: Meta",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Scholar Results",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Parse Scholar Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia: NVIDIA",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia: AMD",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia: Intel",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia: Google",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia: Apple",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia: Microsoft",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia: Meta",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Wikipedia Results",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Parse Wikipedia Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Combine Signals",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Footprint Scores",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate for Groq",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Groq: Footprint Analyst",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Groq Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Signal Assembler",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Upsert to Supabase",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Report",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Store Report in Supabase",
+        "type": "n8n-nodes-base.supabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Pipeline Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron Trigger",
+        "to": "Fetch Watchlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Pipeline Webhook",
+        "to": "Fetch Watchlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Scholar: NVIDIA",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Scholar: AMD",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Scholar: Intel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Scholar: Google",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Scholar: Apple",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Scholar: Microsoft",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Scholar: Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Wikipedia: NVIDIA",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Wikipedia: AMD",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Wikipedia: Intel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Wikipedia: Google",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Wikipedia: Apple",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Wikipedia: Microsoft",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Watchlist",
+        "to": "Wikipedia: Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scholar: NVIDIA",
+        "to": "Merge Scholar Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scholar: AMD",
+        "to": "Merge Scholar Results",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Scholar: Intel",
+        "to": "Merge Scholar Results",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Scholar: Google",
+        "to": "Merge Scholar Results",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Scholar: Apple",
+        "to": "Merge Scholar Results",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Scholar: Microsoft",
+        "to": "Merge Scholar Results",
+        "kind": "main",
+        "output": 0,
+        "input": 5
+      },
+      {
+        "from": "Scholar: Meta",
+        "to": "Merge Scholar Results",
+        "kind": "main",
+        "output": 0,
+        "input": 6
+      },
+      {
+        "from": "Merge Scholar Results",
+        "to": "Parse Scholar Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wikipedia: NVIDIA",
+        "to": "Merge Wikipedia Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wikipedia: AMD",
+        "to": "Merge Wikipedia Results",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Wikipedia: Intel",
+        "to": "Merge Wikipedia Results",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Wikipedia: Google",
+        "to": "Merge Wikipedia Results",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Wikipedia: Apple",
+        "to": "Merge Wikipedia Results",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Wikipedia: Microsoft",
+        "to": "Merge Wikipedia Results",
+        "kind": "main",
+        "output": 0,
+        "input": 5
+      },
+      {
+        "from": "Wikipedia: Meta",
+        "to": "Merge Wikipedia Results",
+        "kind": "main",
+        "output": 0,
+        "input": 6
+      },
+      {
+        "from": "Merge Wikipedia Results",
+        "to": "Parse Wikipedia Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Scholar Data",
+        "to": "Combine Signals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Wikipedia Data",
+        "to": "Combine Signals",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Combine Signals",
+        "to": "Calculate Footprint Scores",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Footprint Scores",
+        "to": "Aggregate for Groq",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Groq",
+        "to": "Groq: Footprint Analyst",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq: Footprint Analyst",
+        "to": "Parse Groq Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Groq Response",
+        "to": "Signal Assembler",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Signal Assembler",
+        "to": "Upsert to Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upsert to Supabase",
+        "to": "Generate Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Report",
+        "to": "Store Report in Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Report in Supabase",
+        "to": "Pipeline Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/research-footprint-monitor/implementations/n8n",
+      "files": [
+        "agents/research-footprint-monitor/implementations/n8n/research-footprint-monitor.json"
+      ],
+      "sha256": "dc9787b3376e8b444b15e1d039b1647d656a63691fff5875183dfe7621e76968",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/research-footprint-monitor/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/research-footprint-monitor/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/research-footprint-monitor/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/research-footprint-monitor/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/research-footprint-monitor/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/research-footprint-monitor/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/research-footprint-monitor/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/research-footprint-monitor/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/research-footprint-monitor/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/research-footprint-monitor/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/research-footprint-monitor/implementations/n8n/provenance.json"
+}

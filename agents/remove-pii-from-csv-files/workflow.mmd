@@ -1,0 +1,20 @@
+flowchart LR
+  n0["Google Drive Trigger"]
+  n1["Google Drive"]
+  n2["Extract from File"]
+  n3["OpenAI"]
+  n4["Merge"]
+  n5["Upload to Drive"]
+  n6["Get filename"]
+  n7["Get result"]
+  n8["Remove PII columns"]
+  n4 -->|"main out 0 to in 0"| n8
+  n3 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 0 to in 1"| n4
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 2"| n4
+  n8 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n1

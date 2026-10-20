@@ -1,0 +1,26 @@
+flowchart LR
+  n0["Set your company#39;s variables"]
+  n1["Get linkedin Posts"]
+  n2["Get twitter ID"]
+  n3["Get tweets"]
+  n4["Extract and limit Linkedin"]
+  n5["Exract and limit X"]
+  n6["OpenAI Chat Model"]
+  n7["Structured Output Parser"]
+  n8["Generate Subject and cover letter based on match"]
+  n9["Send Cover letter and CC me"]
+  n10["Google Sheets Trigger"]
+  n11["Google Sheets"]
+  n12["If"]
+  n12 -->|"main out 0 to in 0"| n0
+  n3 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n6 -->|"ai_languageModel out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n4
+  n10 -->|"main out 0 to in 0"| n12
+  n7 -->|"ai_outputParser out 0 to in 0"| n8
+  n4 -->|"main out 0 to in 0"| n8
+  n9 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n9

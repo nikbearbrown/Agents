@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "slug": "send-follow-up-emails-if-appropriate",
+  "title": "Send follow-up emails if appropriate",
+  "purpose": "Adapt the published “Send follow-up emails if appropriate” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 25 executable nodes and 23 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger",
+    "Every hour"
+  ],
+  "terminal_nodes": [
+    "Update last contacted time",
+    "Send new message",
+    "Call message send sub-workflow",
+    "Reply to message"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Update last contacted time",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set message template",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": true
+      },
+      {
+        "name": "Email sequence",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Fill message placeholders",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Compose message",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get previous message threads",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get thread details",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Classify threads",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Next message due?",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Replying?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send new message",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Call message send sub-workflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare reply params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Prepare first message params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Call message send sub-workflow1",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "To email?",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Decode messages",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Decode placeholder values",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Package placeholder values",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Settings",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Reply to message",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get emails",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Every hour",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Don't email on weekends",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Settings",
+        "to": "Email sequence",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Replying?",
+        "to": "Reply to message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Replying?",
+        "to": "Send new message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "To email?",
+        "to": "Prepare first message params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every hour",
+        "to": "Don't email on weekends",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get emails",
+        "to": "To email?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email sequence",
+        "to": "Get previous message threads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email sequence",
+        "to": "Get emails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compose message",
+        "to": "Replying?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Decode messages",
+        "to": "Classify threads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Classify threads",
+        "to": "Next message due?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Next message due?",
+        "to": "Prepare reply params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get thread details",
+        "to": "Decode messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare reply params",
+        "to": "Decode placeholder values",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set message template",
+        "to": "Fill message placeholders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Don't email on weekends",
+        "to": "Settings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Set message template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Decode placeholder values",
+        "to": "Call message send sub-workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fill message placeholders",
+        "to": "Compose message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Package placeholder values",
+        "to": "Call message send sub-workflow1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get previous message threads",
+        "to": "Get thread details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare first message params",
+        "to": "Package placeholder values",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call message send sub-workflow1",
+        "to": "Update last contacted time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/send-follow-up-emails-if-appropriate/implementations/n8n",
+      "files": [
+        "agents/send-follow-up-emails-if-appropriate/implementations/n8n/send-follow-up-emails-if-appropriate.json"
+      ],
+      "sha256": "aa82423691723b9c7335aa169be0e57c1569c75098c6260f1c424d225fd91ae3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/send-follow-up-emails-if-appropriate/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/send-follow-up-emails-if-appropriate/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/send-follow-up-emails-if-appropriate/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/send-follow-up-emails-if-appropriate/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/send-follow-up-emails-if-appropriate/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/send-follow-up-emails-if-appropriate/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/send-follow-up-emails-if-appropriate/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/send-follow-up-emails-if-appropriate/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/send-follow-up-emails-if-appropriate/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/send-follow-up-emails-if-appropriate/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/send-follow-up-emails-if-appropriate/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "slug": "signl4-alert",
+  "title": "SIGNL4 Alert",
+  "purpose": "Adapt the published “SIGNL4 Alert” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "Write Binary File",
+    "SIGNL4 Resolve"
+  ],
+  "credential_types": [
+    "signl4Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Write Binary File",
+        "type": "n8n-nodes-base.writeBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Binary File",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Binary to JSON",
+        "type": "n8n-nodes-base.moveBinaryData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "JSON to Binary",
+        "type": "n8n-nodes-base.moveBinaryData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Done",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SIGNL4 Resolve",
+        "type": "n8n-nodes-base.signl4",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SIGNL4 Alert",
+        "type": "n8n-nodes-base.signl4",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "IF",
+        "to": "SIGNL4 Alert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "SIGNL4 Resolve",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Cron",
+        "to": "Read Binary File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Done",
+        "to": "JSON to Binary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SIGNL4 Alert",
+        "to": "Mark as Done",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Binary to JSON",
+        "to": "IF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "JSON to Binary",
+        "to": "Write Binary File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Binary File",
+        "to": "Binary to JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/signl4-alert/implementations/n8n",
+      "files": [
+        "agents/signl4-alert/implementations/n8n/signl4-alert.json"
+      ],
+      "sha256": "2f7066445052654a7ff8d524938884205831a27bf3dda42cbdd46d56cc8de6b6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/signl4-alert/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/signl4-alert/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/signl4-alert/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/signl4-alert/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/signl4-alert/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/signl4-alert/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/signl4-alert/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/signl4-alert/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/signl4-alert/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/signl4-alert/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/signl4-alert/implementations/n8n/provenance.json"
+}

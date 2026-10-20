@@ -1,0 +1,43 @@
+flowchart LR
+  n0["Get invoice"]
+  n1["Get payment"]
+  n2["Extract invoice"]
+  n3["Extract payment"]
+  n4["HTML"]
+  n5["Split Out"]
+  n6["Structured Output Parser1"]
+  n7["Google Gemini Chat Model1"]
+  n8["Send"]
+  n9["Set data 0"]
+  n10["Set data 1"]
+  n11["Set data 2"]
+  n12["Invoice data"]
+  n13["Payment data"]
+  n14["Switch"]
+  n15["Groq Chat Model"]
+  n16["Structured Output Parser"]
+  n17["Send1"]
+  n18["Extract details1"]
+  n19["Merge"]
+  n20["Extract details"]
+  n4 -->|"main out 0 to in 0"| n5
+  n19 -->|"main out 0 to in 0"| n20
+  n14 -->|"main out 0 to in 0"| n4
+  n14 -->|"main out 1 to in 0"| n10
+  n14 -->|"main out 2 to in 0"| n11
+  n5 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n19
+  n10 -->|"main out 0 to in 1"| n19
+  n11 -->|"main out 0 to in 0"| n18
+  n0 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n3
+  n12 -->|"main out 0 to in 0"| n14
+  n13 -->|"main out 0 to in 0"| n14
+  n20 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n13
+  n15 -->|"ai_languageModel out 0 to in 0"| n18
+  n18 -->|"main out 0 to in 0"| n17
+  n16 -->|"ai_outputParser out 0 to in 0"| n18
+  n7 -->|"ai_languageModel out 0 to in 0"| n20
+  n6 -->|"ai_outputParser out 0 to in 0"| n20

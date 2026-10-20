@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-get-file-github-and-n8n-workflow-detail",
+  "title": "http request and get file github and n8n workflow detail",
+  "purpose": "Adapt the published “http request and get file github and n8n workflow detail” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'",
+    "Daily @ 20:00"
+  ],
+  "terminal_nodes": [],
+  "credential_types": [
+    "githubApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "dataArray",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "N8N Workflows",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "N8N Workflow Detail",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "github_status",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "same",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "different",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "new",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub Edit",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub Create",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "isDiffOrNew",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Daily @ 20:00",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OneAtATime",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "new",
+        "to": "GitHub Create",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "same",
+        "to": "OneAtATime",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "isDiffOrNew",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GitHub",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Globals",
+        "to": "N8N Workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "dataArray",
+        "to": "OneAtATime",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "different",
+        "to": "GitHub Edit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OneAtATime",
+        "to": "GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OneAtATime",
+        "to": "N8N Workflow Detail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GitHub Edit",
+        "to": "OneAtATime",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "isDiffOrNew",
+        "to": "github_status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Daily @ 20:00",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GitHub Create",
+        "to": "OneAtATime",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "N8N Workflows",
+        "to": "dataArray",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "github_status",
+        "to": "same",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "github_status",
+        "to": "different",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "github_status",
+        "to": "new",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "N8N Workflow Detail",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/n8n",
+      "files": [
+        "agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/n8n/http-request-and-get-file-github-and-n8n-workflow-detail.json"
+      ],
+      "sha256": "00af95a78459b35bf3383a873d8b98d37d7a350175e0a3134b673c76fc6882da",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/n8n/provenance.json"
+}

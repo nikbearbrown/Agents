@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "slug": "3-3-anomaly-detection-tool-crops-dataset",
+  "title": "[3/3] Anomaly detection tool (crops dataset)",
+  "purpose": "Adapt the published “[3/3] Anomaly detection tool (crops dataset)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Compare scores"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "qdrantApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Embed image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get similarity of medoids",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Compare scores",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Variables for medoids",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Info About Crop Labeled Clusters",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Total Points in Collection",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Each Crop Counts",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Image URL hardcode",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Embed image",
+        "to": "Get similarity of medoids",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Each Crop Counts",
+        "to": "Info About Crop Labeled Clusters",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Image URL hardcode",
+        "to": "Variables for medoids",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Variables for medoids",
+        "to": "Total Points in Collection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Image URL hardcode",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get similarity of medoids",
+        "to": "Compare scores",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Total Points in Collection",
+        "to": "Each Crop Counts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Info About Crop Labeled Clusters",
+        "to": "Embed image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/implementations/n8n",
+      "files": [
+        "agents/3-3-anomaly-detection-tool-crops-dataset/implementations/n8n/3-3-anomaly-detection-tool-crops-dataset.json"
+      ],
+      "sha256": "ee64823ed751a546214b93eed4eadddd2b715dd4a8fcfe71ed08ee62858b90d6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/3-3-anomaly-detection-tool-crops-dataset/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/3-3-anomaly-detection-tool-crops-dataset/implementations/n8n/provenance.json"
+}

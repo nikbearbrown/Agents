@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "slug": "update-google-sheets-and-google-sheets-and-run-every-5-minutes",
+  "title": "update google sheets and google sheets and run every 5 minutes",
+  "purpose": "Adapt the published “update google sheets and google sheets and run every 5 minutes” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Do something here",
+    "Mark Row as processed"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is new?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Do something here",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Mark Row as processed",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set processed value",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Run every 5 minutes",
+        "type": "n8n-nodes-base.interval",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Is new?",
+        "to": "Do something here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is new?",
+        "to": "Set processed value",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read sheet",
+        "to": "Is new?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run every 5 minutes",
+        "to": "Read sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set processed value",
+        "to": "Mark Row as processed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Read sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/n8n",
+      "files": [
+        "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/n8n/update-google-sheets-and-google-sheets-and-run-every-5-minutes.json"
+      ],
+      "sha256": "36da158313999b282526b5fe0ffddf38eeabfa5e7c7d32d6f91c3b003ec1b749",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/n8n/provenance.json"
+}

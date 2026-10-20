@@ -1,0 +1,513 @@
+{
+  "schema_version": 1,
+  "slug": "find-woocommerce-user-id",
+  "title": "Find WooCommerce User-ID",
+  "purpose": "Adapt the published “Find WooCommerce User-ID” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 31 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Execute Workflow Trigger",
+    "Chat Trigger",
+    "Webhook Example Page"
+  ],
+  "terminal_nodes": [
+    "No email provided",
+    "No customer found",
+    "Window Buffer Memory",
+    "No order found",
+    "Send Response",
+    "OpenAI Chat Model",
+    "WooCommerce_Tool",
+    "Respond to Webhook",
+    "Decrypt email",
+    "Encrypt email",
+    "AI Agent"
+  ],
+  "credential_types": [
+    "dhlApi",
+    "openAiApi",
+    "wooCommerceApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "No email provided",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "If email provided",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If user found",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "No customer found",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "If contains DHL data",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Tracking Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Merge Orders",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Order and Tracking Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Tracking Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WooCommerce - Get User",
+        "type": "n8n-nodes-base.wooCommerce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If order found",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "WooCommerce Get Orders",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "No order found",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Add Error Information",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "DHL",
+        "type": "n8n-nodes-base.dhl",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WooCommerce_Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Trigger",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook Example Page",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Decrypt email",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Encrypt email",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Example encrypted email",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Decrypt email address",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": true
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Mock Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "DHL",
+        "to": "Merge Tracking Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DHL",
+        "to": "Add Error Information",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "Merge Orders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mock Data",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "DHL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Trigger",
+        "to": "Decrypt email address",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Orders",
+        "to": "Merge Order and Tracking Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If user found",
+        "to": "WooCommerce Get Orders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If user found",
+        "to": "No customer found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If order found",
+        "to": "Extract Tracking Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If order found",
+        "to": "Merge Order and Tracking Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "If order found",
+        "to": "No order found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "WooCommerce_Tool",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If email provided",
+        "to": "WooCommerce - Get User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If email provided",
+        "to": "No email provided",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Tracking Data",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If contains DHL data",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If contains DHL data",
+        "to": "Merge Orders",
+        "kind": "main",
+        "output": 1,
+        "input": 1
+      },
+      {
+        "from": "Webhook Example Page",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Error Information",
+        "to": "Merge Tracking Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Decrypt email address",
+        "to": "Mock Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Tracking Data",
+        "to": "If contains DHL data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "WooCommerce - Get User",
+        "to": "If user found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "WooCommerce Get Orders",
+        "to": "If order found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Example encrypted email",
+        "to": "Decrypt email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "If email provided",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Order and Tracking Data",
+        "to": "Send Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/find-woocommerce-user-id/implementations/n8n",
+      "files": [
+        "agents/find-woocommerce-user-id/implementations/n8n/find-woocommerce-user-id.json"
+      ],
+      "sha256": "bfbfc5966e21d1306c62c547229cc2f5a4b5333fa58815a5cf7a5acc1796e8a1",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/find-woocommerce-user-id/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/find-woocommerce-user-id/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/find-woocommerce-user-id/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/find-woocommerce-user-id/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/find-woocommerce-user-id/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/find-woocommerce-user-id/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/find-woocommerce-user-id/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/find-woocommerce-user-id/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/find-woocommerce-user-id/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/find-woocommerce-user-id/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/find-woocommerce-user-id/implementations/n8n/provenance.json"
+}

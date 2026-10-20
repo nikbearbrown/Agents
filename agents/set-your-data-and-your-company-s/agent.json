@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "slug": "set-your-data-and-your-company-s",
+  "title": "Set your data and your company's",
+  "purpose": "Adapt the published “Set your data and your company's” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 25 executable nodes and 23 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook",
+    "When Executed by Another Workflow",
+    "HubSpot Trigger"
+  ],
+  "terminal_nodes": [
+    "Try Again",
+    "Success",
+    "Create Event with Attendee",
+    "Create Event",
+    "Get Events",
+    "Delete Event",
+    "Update Event",
+    "OpenAI Chat Model2",
+    "calendarAgent",
+    "Structured Output Parser",
+    "Set owner to contact",
+    "OpenAI Model"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleCalendarOAuth2Api",
+    "hubspotDeveloperApi",
+    "hubspotOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Try Again",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Success",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Calendar Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Create Event with Attendee",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Create Event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Get Events",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Delete Event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "calendarAgent",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get list of owners",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out owners",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get current owner",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot Trigger",
+        "type": "n8n-nodes-base.hubspotTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Enter your company data here",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "If a contact is created",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get all info about the contact",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Write a personalized message",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.9,
+        "disabled": false
+      },
+      {
+        "name": "Send the message",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Set owner to contact",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Transforms markdown to HTML",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Enter your company data here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Events",
+        "to": "Calendar Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Event",
+        "to": "Calendar Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete Event",
+        "to": "Calendar Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Model",
+        "to": "Calendar Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Event",
+        "to": "Calendar Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "calendarAgent",
+        "to": "Write a personalized message",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calendar Agent",
+        "to": "Success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calendar Agent",
+        "to": "Try Again",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "HubSpot Trigger",
+        "to": "Enter your company data here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send the message",
+        "to": "Set owner to contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out owners",
+        "to": "Get current owner",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get current owner",
+        "to": "If a contact is created",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get list of owners",
+        "to": "Split Out owners",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Write a personalized message",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If a contact is created",
+        "to": "Get all info about the contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Write a personalized message",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Event with Attendee",
+        "to": "Calendar Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transforms markdown to HTML",
+        "to": "Send the message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Enter your company data here",
+        "to": "Get list of owners",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write a personalized message",
+        "to": "Transforms markdown to HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all info about the contact",
+        "to": "Write a personalized message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Calendar Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/set-your-data-and-your-company-s/implementations/n8n",
+      "files": [
+        "agents/set-your-data-and-your-company-s/implementations/n8n/set-your-data-and-your-company-s.json"
+      ],
+      "sha256": "15e365fe7bf0f91c7c8eea72d35374d07afb370523451a32238b4355beb9f456",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/set-your-data-and-your-company-s/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/set-your-data-and-your-company-s/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/set-your-data-and-your-company-s/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/set-your-data-and-your-company-s/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/set-your-data-and-your-company-s/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/set-your-data-and-your-company-s/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/set-your-data-and-your-company-s/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/set-your-data-and-your-company-s/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/set-your-data-and-your-company-s/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/set-your-data-and-your-company-s/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/set-your-data-and-your-company-s/implementations/n8n/provenance.json"
+}

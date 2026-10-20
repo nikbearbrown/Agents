@@ -1,0 +1,26 @@
+flowchart LR
+  n0["Detect new lead in Google Sheets"]
+  n1["Send SMS reminder to call lead in 5 minutes"]
+  n2["Wait 5 minutes before making call"]
+  n3["Call new lead using RetellAI"]
+  n4["Receive inbound call from RetellAI #40;webhook#41;"]
+  n5["Check if phone number exists in Google Sheets"]
+  n6["Send response to inbound webhook call"]
+  n7["Receive post-call data from RetellAI #40;webhook#41;"]
+  n8["Filter for analyzed calls only"]
+  n9["Check if call was outbound"]
+  n10["Update lead record in Google Sheets"]
+  n11["Send call summary email"]
+  n12["Generate call summary with OpenAI"]
+  n13["Send confirmation email to lead"]
+  n9 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 1 to in 0"| n12
+  n8 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n1
+  n12 -->|"main out 0 to in 0"| n13
+  n2 -->|"main out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n11
+  n1 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n8

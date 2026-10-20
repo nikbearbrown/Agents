@@ -1,0 +1,300 @@
+{
+  "schema_version": 1,
+  "slug": "mycroft-patent-intelligence-agent",
+  "title": "Mycroft - Patent Intelligence Agent",
+  "purpose": "Adapt the published “Mycroft - Patent Intelligence Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Setup Environment and Output Directories",
+    "Cleanup Repository Error",
+    "Respond to Webhook"
+  ],
+  "credential_types": [
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Set Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Setup Github Repo",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Path Variables",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Setup Environment and Output Directories",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Patents",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Extraction Success",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Process Patents",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Processed Data",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Metrics",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Report Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Error Notification",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Cleanup Repository",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cleanup Repository Error",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set Variables",
+        "to": "Setup Github Repo",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Setup Github Repo",
+        "to": "Set Path Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Path Variables",
+        "to": "Setup Environment and Output Directories",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Path Variables",
+        "to": "Extract Patents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Patents",
+        "to": "Check Extraction Success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Extraction Success",
+        "to": "Process Patents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Extraction Success",
+        "to": "Error Notification",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Process Patents",
+        "to": "Read Metrics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Processed Data",
+        "to": "Send Report Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Metrics",
+        "to": "Read Processed Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Report Email",
+        "to": "Cleanup Repository",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Error Notification",
+        "to": "Cleanup Repository Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Set Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cleanup Repository",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/mycroft-patent-intelligence-agent/implementations/n8n",
+      "files": [
+        "agents/mycroft-patent-intelligence-agent/implementations/n8n/mycroft-patent-intelligence-agent.json"
+      ],
+      "sha256": "5e26eeab5b80ce5bd3d7ecd53b4a93e8e84421c34df55381505810ca9ff4b359",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/mycroft-patent-intelligence-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/mycroft-patent-intelligence-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/mycroft-patent-intelligence-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/mycroft-patent-intelligence-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/mycroft-patent-intelligence-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/mycroft-patent-intelligence-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/mycroft-patent-intelligence-agent/implementations/n8n/provenance.json"
+}

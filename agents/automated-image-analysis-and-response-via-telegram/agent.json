@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "slug": "automated-image-analysis-and-response-via-telegram",
+  "title": "Automated Image Analysis and Response via Telegram",
+  "purpose": "Adapt the published “Automated Image Analysis and Response via Telegram” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Get the Image"
+  ],
+  "terminal_nodes": [
+    "Send Content for the Analyzed image",
+    "Update Telegram Error Message"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get the Image",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Content for the Analyzed image",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Update Telegram Error Message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Analyze image",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Switch ( image or not )",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "Update Telegram Error Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyze image",
+        "to": "Send Content for the Analyzed image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Image",
+        "to": "Switch ( image or not )",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch ( image or not )",
+        "to": "Analyze image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch ( image or not )",
+        "to": "Wait",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/implementations/n8n",
+      "files": [
+        "agents/automated-image-analysis-and-response-via-telegram/implementations/n8n/automated-image-analysis-and-response-via-telegram.json"
+      ],
+      "sha256": "c8b8fae6ad7ef8cb7a183c1e7c941e396429fecb8745614c0d8252b72da50241",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/automated-image-analysis-and-response-via-telegram/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/automated-image-analysis-and-response-via-telegram/implementations/n8n/provenance.json"
+}

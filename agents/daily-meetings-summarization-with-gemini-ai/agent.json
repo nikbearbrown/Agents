@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "slug": "daily-meetings-summarization-with-gemini-ai",
+  "title": "Daily meetings summarization with Gemini AI",
+  "purpose": "Adapt the published “Daily meetings summarization with Gemini AI” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Send response back to slack channel",
+    "Google Calendar - Get Events",
+    "Google Gemini Chat Model"
+  ],
+  "credential_types": [
+    "googleCalendarOAuth2Api",
+    "googlePalmApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Send response back to slack channel",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Google Calendar - Get Events",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Calendar AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Schedule Trigger",
+        "to": "Calendar AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calendar AI Agent",
+        "to": "Send response back to slack channel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Calendar AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Calendar - Get Events",
+        "to": "Calendar AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/implementations/n8n",
+      "files": [
+        "agents/daily-meetings-summarization-with-gemini-ai/implementations/n8n/daily-meetings-summarization-with-gemini-ai.json"
+      ],
+      "sha256": "bb9d425c74abb3645a41d2cd450091b40da77269d97427f7afc97bd9649947d4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/daily-meetings-summarization-with-gemini-ai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/daily-meetings-summarization-with-gemini-ai/implementations/n8n/provenance.json"
+}

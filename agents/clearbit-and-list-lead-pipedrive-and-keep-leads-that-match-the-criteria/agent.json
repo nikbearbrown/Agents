@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "slug": "clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria",
+  "title": "clearbit and list lead pipedrive and keep leads that match the criteria",
+  "purpose": "Adapt the published “clearbit and list lead pipedrive and keep leads that match the criteria” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger every 5 minutes"
+  ],
+  "terminal_nodes": [
+    "Send alert to Slack",
+    "Show only custom lead fields",
+    "Show only custom organization fields"
+  ],
+  "credential_types": [
+    "clearbitApi",
+    "pipedriveApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Enrich company",
+        "type": "n8n-nodes-base.clearbit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all leads",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Organization ID to data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Keep leads that match the criteria",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Trigger every 5 minutes",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Setup",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Send alert to Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge data",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get organization details",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all organization keys",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Get all lead keys",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Split out lead field data",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split out organization field",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Show only custom lead fields",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Show only custom organization fields",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Mark lead as enriched in Pipedrive",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Setup",
+        "to": "Get all leads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge data",
+        "to": "Mark lead as enriched in Pipedrive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all leads",
+        "to": "Get organization details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all leads",
+        "to": "Merge data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Enrich company",
+        "to": "Add Organization ID to data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all lead keys",
+        "to": "Split out lead field data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger every 5 minutes",
+        "to": "Setup",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get organization details",
+        "to": "Enrich company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all organization keys",
+        "to": "Split out organization field",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split out lead field data",
+        "to": "Show only custom lead fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Organization ID to data",
+        "to": "Merge data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split out organization field",
+        "to": "Show only custom organization fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep leads that match the criteria",
+        "to": "Send alert to Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark lead as enriched in Pipedrive",
+        "to": "Keep leads that match the criteria",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/n8n",
+      "files": [
+        "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/n8n/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria.json"
+      ],
+      "sha256": "25770f0240e082eb8e74409a9f419e07c25501ba721ec7d5b5bd83ec34c16689",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/n8n/provenance.json"
+}

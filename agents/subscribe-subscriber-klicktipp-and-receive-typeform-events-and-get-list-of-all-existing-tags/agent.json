@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "slug": "subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags",
+  "title": "subscribe subscriber klicktipp and receive typeform events and get list of all existing tags",
+  "purpose": "Adapt the published “subscribe subscriber klicktipp and receive typeform events and get list of all existing tags” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "New quiz sumbmission via Typeform"
+  ],
+  "terminal_nodes": [
+    "Tag contact directly in KlickTipp",
+    "Tag contact KlickTipp after trag creation"
+  ],
+  "credential_types": [
+    "klickTippApi",
+    "typeformApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Convert and set quiz data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Subscribe contact in KlickTipp",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "New quiz sumbmission via Typeform",
+        "type": "n8n-nodes-base.typeformTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get list of all existing tags",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Define Array of tags from Typeform",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Typeform tags",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Tag creation check",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create the tag in KlickTipp",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate tags to add to contact",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Tag contact directly in KlickTipp",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate array of created tags",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Tag contact KlickTipp after trag creation",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Tag creation check",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tag creation check",
+        "to": "Aggregate tags to add to contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tag creation check",
+        "to": "Create the tag in KlickTipp",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Split Out Typeform tags",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert and set quiz data",
+        "to": "Subscribe contact in KlickTipp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create the tag in KlickTipp",
+        "to": "Aggregate array of created tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get list of all existing tags",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Subscribe contact in KlickTipp",
+        "to": "Define Array of tags from Typeform",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Subscribe contact in KlickTipp",
+        "to": "Get list of all existing tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate array of created tags",
+        "to": "Tag contact KlickTipp after trag creation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate tags to add to contact",
+        "to": "Tag contact directly in KlickTipp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New quiz sumbmission via Typeform",
+        "to": "Convert and set quiz data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Define Array of tags from Typeform",
+        "to": "Split Out Typeform tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/n8n",
+      "files": [
+        "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/n8n/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags.json"
+      ],
+      "sha256": "d854c8034f85f3e0f41e092ff488cc4a4c9c4c85ec1cddb61db5eaf1ae4eeefe",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/n8n/provenance.json"
+}

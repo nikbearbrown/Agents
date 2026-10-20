@@ -1,0 +1,25 @@
+flowchart LR
+  n0["Default Data Loader"]
+  n1["Embeddings Cohere"]
+  n2["When chat message received"]
+  n3["Watch New Files"]
+  n4["Download New"]
+  n5["Insert into Milvus"]
+  n6["RAG Agent"]
+  n7["Retrieve from Milvus"]
+  n8["OpenAI 4o"]
+  n9["Memory"]
+  n10["Cohere embeddings"]
+  n11["Set Chunks"]
+  n12["Extract from File"]
+  n9 -->|"ai_memory out 0 to in 0"| n6
+  n8 -->|"ai_languageModel out 0 to in 0"| n6
+  n11 -->|"ai_textSplitter out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n4
+  n10 -->|"ai_embedding out 0 to in 0"| n7
+  n1 -->|"ai_embedding out 0 to in 0"| n5
+  n12 -->|"main out 0 to in 0"| n5
+  n0 -->|"ai_document out 0 to in 0"| n5
+  n7 -->|"ai_tool out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n6

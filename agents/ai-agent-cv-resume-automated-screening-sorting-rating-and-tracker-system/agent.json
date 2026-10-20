@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "slug": "ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system",
+  "title": "AI Agent - Cv Resume - Automated Screening , Sorting , Rating and Tracker System",
+  "purpose": "Adapt the published “AI Agent - Cv Resume - Automated Screening , Sorting , Rating and Tracker System” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Google Drive - Resume CV File Created"
+  ],
+  "terminal_nodes": [
+    "AI Agent",
+    "Gmail:Notification",
+    "Gdrive:Move-To-Reject-Folder",
+    "Gdrive:Move-To-KIV-Folder",
+    "Gdrive:Move-To-Shortlisted-Folder",
+    "Gsheet: Update Candidate Tracker",
+    "Groq - llama 4 AI MODEL"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDocsOAuth2Api",
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "groqApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "GDocs - Get Job Desc",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive - Resume CV File Created",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download Resume File From Gdrive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.9,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail:Notification",
+        "type": "n8n-nodes-base.gmailTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Gdrive:Move-To-Reject-Folder",
+        "type": "n8n-nodes-base.googleDriveTool",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Gdrive:Move-To-KIV-Folder",
+        "type": "n8n-nodes-base.googleDriveTool",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Gdrive:Move-To-Shortlisted-Folder",
+        "type": "n8n-nodes-base.googleDriveTool",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Gsheet: Update Candidate Tracker",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Groq - llama 4 AI MODEL",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Extract from File",
+        "to": "GDocs - Get Job Desc",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail:Notification",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GDocs - Get Job Desc",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq - llama 4 AI MODEL",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gdrive:Move-To-KIV-Folder",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gdrive:Move-To-Reject-Folder",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Resume File From Gdrive",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gsheet: Update Candidate Tracker",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gdrive:Move-To-Shortlisted-Folder",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive - Resume CV File Created",
+        "to": "Download Resume File From Gdrive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/n8n",
+      "files": [
+        "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/n8n/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system.json"
+      ],
+      "sha256": "5d94a7ecae10304f520a60209ff17a187842df9214eb05df39ab30a2b7a67496",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/n8n/provenance.json"
+}

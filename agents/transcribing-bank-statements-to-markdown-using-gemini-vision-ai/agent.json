@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "slug": "transcribing-bank-statements-to-markdown-using-gemini-vision-ai",
+  "title": "transcribing bank statements to markdown using gemini vision ai",
+  "purpose": "Adapt the published “transcribing bank statements to markdown using gemini vision ai” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Model",
+    "Microsoft Excel 365"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "microsoftExcelOAuth2Api",
+    "microsoftOutlookOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Split Attachments",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Download Attachments",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "For Each Message",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Message Ref",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Message Classifier",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Empty Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Invoices",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Has Invoice?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Recent Messages",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft Excel 365",
+        "type": "n8n-nodes-base.microsoftExcel",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Invoice Classifier With Gemini 2.0",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "File-Based OCR with Gemini 2.0",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "For Each Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Model",
+        "to": "Message Classifier",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Markdown",
+        "to": "Message Classifier",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message Ref",
+        "to": "Download Attachments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Invoice?",
+        "to": "File-Based OCR with Gemini 2.0",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Invoice?",
+        "to": "Empty Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Parse Output",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Empty Response",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Invoices",
+        "to": "Has Invoice?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Message",
+        "to": "Microsoft Excel 365",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Message",
+        "to": "Message Ref",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get Recent Messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "Invoice Classifier With Gemini 2.0",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Attachments",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message Classifier",
+        "to": "For Each Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Recent Messages",
+        "to": "Markdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Attachments",
+        "to": "Split Attachments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File-Based OCR with Gemini 2.0",
+        "to": "Parse Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File-Based OCR with Gemini 2.0",
+        "to": "Empty Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Invoice Classifier With Gemini 2.0",
+        "to": "Filter Invoices",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/n8n",
+      "files": [
+        "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/n8n/transcribing-bank-statements-to-markdown-using-gemini-vision-ai.json"
+      ],
+      "sha256": "c545453d786ce72d0ac7c2486d685a295bbe41681b67c72e64f581739c286b8e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/n8n/provenance.json"
+}

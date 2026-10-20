@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "slug": "5-1-google-reverse-image-tool",
+  "title": "5.1 Google Reverse Image Tool",
+  "purpose": "Adapt the published “5.1 Google Reverse Image Tool” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test workflow\"",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model1",
+    "Fallback Response",
+    "Reverse Image Search Response",
+    "Reverse Image Search Tool",
+    "Firecrawl Scrape Success Response",
+    "Firecrawl scrape Error Response",
+    "Firecrawl Web Scaper Tool",
+    "Structured Output Parser",
+    "Enrich Product Rows"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "httpHeaderAuth",
+    "openAiApi",
+    "serpApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Applicable Rows",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Fallback Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "SERP Google Reverse Image API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Reverse Image Search Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Reverse Image Search Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Firecrawl Scrape API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scrape Success?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Firecrawl Scrape Success Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Firecrawl scrape Error Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Firecrawl Web Scaper Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Enrich Product Rows",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Analyse Image",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Object Identifier Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Actions Router",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Edit Fields",
+        "to": "Actions Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyse Image",
+        "to": "Object Identifier Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Actions Router",
+        "to": "SERP Google Reverse Image API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Actions Router",
+        "to": "Firecrawl Scrape API",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Actions Router",
+        "to": "Fallback Response",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Scrape Success?",
+        "to": "Firecrawl Scrape Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scrape Success?",
+        "to": "Firecrawl scrape Error Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Object Identifier Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Applicable Rows",
+        "to": "Analyse Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Firecrawl Scrape API",
+        "to": "Scrape Success?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Object Identifier Agent",
+        "to": "Enrich Product Rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Object Identifier Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Firecrawl Web Scaper Tool",
+        "to": "Object Identifier Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Reverse Image Search Tool",
+        "to": "Object Identifier Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SERP Google Reverse Image API",
+        "to": "Reverse Image Search Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Get Applicable Rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/5-1-google-reverse-image-tool/implementations/n8n",
+      "files": [
+        "agents/5-1-google-reverse-image-tool/implementations/n8n/5-1-google-reverse-image-tool.json"
+      ],
+      "sha256": "65bf9767c74057ea5bd878a4735bc2b0538e7ac29d7edaf00fe0754326e6bf3b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/5-1-google-reverse-image-tool/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/5-1-google-reverse-image-tool/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/5-1-google-reverse-image-tool/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/5-1-google-reverse-image-tool/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/5-1-google-reverse-image-tool/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/5-1-google-reverse-image-tool/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/5-1-google-reverse-image-tool/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/5-1-google-reverse-image-tool/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/5-1-google-reverse-image-tool/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/5-1-google-reverse-image-tool/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/5-1-google-reverse-image-tool/implementations/n8n/provenance.json"
+}

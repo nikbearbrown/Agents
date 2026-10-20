@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "slug": "receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com",
+  "title": "Receive an alert when new breaches are added to haveibeenpwned.com",
+  "purpose": "Adapt the published “Receive an alert when new breaches are added to haveibeenpwned.com” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Write breach name to file",
+    "New breach",
+    "Old breach",
+    "Write cache.json"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Request breaches",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Read last breach",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get JSON from file",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check for content",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set to none",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "If - check for new",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set breach name",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Write breach name to file",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "New breach",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Old breach",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set empty json",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Write cache.json",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert json to file",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Add information about the last breach we alerted",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split Out",
+        "to": "Check for content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set to none",
+        "to": "Add information about the last breach we alerted",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Set empty json",
+        "to": "Convert json to file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert to File",
+        "to": "Write breach name to file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set breach name",
+        "to": "Convert to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read last breach",
+        "to": "Get JSON from file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Request breaches",
+        "to": "Read last breach",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Request breaches",
+        "to": "Add information about the last breach we alerted",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Request breaches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for content",
+        "to": "Add information about the last breach we alerted",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Check for content",
+        "to": "Set to none",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get JSON from file",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If - check for new",
+        "to": "Set breach name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If - check for new",
+        "to": "New breach",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If - check for new",
+        "to": "Old breach",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Convert json to file",
+        "to": "Write cache.json",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Set empty json",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add information about the last breach we alerted",
+        "to": "If - check for new",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/n8n",
+      "files": [
+        "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/n8n/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com.json"
+      ],
+      "sha256": "3edb364408128f665dd5b369ea4eacc7987049db43763d23934d292e4b70f599",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/n8n/provenance.json"
+}

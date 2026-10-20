@@ -1,0 +1,26 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["RSS Read Testing Catalog"]
+  n2["Transform date"]
+  n3["Filter by date #40;more than 7 days#41;"]
+  n4["Sort by date"]
+  n5["Limit news to x"]
+  n6["Transform new to MD"]
+  n7["Publish comment"]
+  n8["Send revision email"]
+  n9["Merge"]
+  n10["RSS Read marktechpost"]
+  n11["RSS Read"]
+  n9 -->|"main out 0 to in 0"| n2
+  n11 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n1
+  n0 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 1"| n9
+  n1 -->|"main out 0 to in 2"| n9
+  n3 -->|"main out 0 to in 0"| n4

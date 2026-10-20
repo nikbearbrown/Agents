@@ -1,0 +1,545 @@
+{
+  "schema_version": 1,
+  "slug": "ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi",
+  "title": "💥AI Social Video Generator with GPT-4, Kling & Blotato —Auto-Post to Instagram, Facebook,, TikTok, Twitter & Pinterest - vide",
+  "purpose": "Adapt the published “💥AI Social Video Generator with GPT-4, Kling & Blotato —Auto-Post to Instagram, Facebook,, TikTok, Twitter & Pinterest - vide” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 33 executable nodes and 32 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger: Telegram Prompt"
+  ],
+  "terminal_nodes": [
+    "OpenAI Model Bridge",
+    "Post to Instagram",
+    "Post to YouTube",
+    "Post to TikTok",
+    "Post to Facebook Page",
+    "Post to Threads",
+    "Post to Twitter (X)",
+    "Post to LinkedIn",
+    "Post to Bluesky",
+    "Post to Pinterest"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "httpBasicAuth",
+    "httpHeaderAuth",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Trigger: Telegram Prompt",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Prompt & Caption",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Transform Prompt for Kling (GPT-4)",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Model Bridge",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Video via Kling API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Video Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Generated Video URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Voice-Over Script",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Convert Script to Audio (TTS)",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Upload Audio to Cloudinary",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Audio + Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Audio/Video Fusion",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Video URL with Audio",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait Before Captioning",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Add Captions/Subtitles to Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Caption Render",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Final Video URL (Audio + Captions)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Social Caption from Voiceover",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Generate YouTube-Style Title",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Save Video Metadata to Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Send Final Video to Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Caption Link via Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Assign Social Media IDs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Upload Video to Blotato",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Instagram",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to YouTube",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to TikTok",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Facebook Page",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Threads",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Twitter (X)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to LinkedIn",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Bluesky",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Post to Pinterest",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge Audio + Video",
+        "to": "Wait for Audio/Video Fusion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Model Bridge",
+        "to": "Transform Prompt for Kling (GPT-4)",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait Before Captioning",
+        "to": "Add Captions/Subtitles to Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign Social Media IDs",
+        "to": "Upload Video to Blotato",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Generated Video URL",
+        "to": "Generate Voice-Over Script",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Instagram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to YouTube",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to TikTok",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Facebook Page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Threads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Twitter (X)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to LinkedIn",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Bluesky",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to Blotato",
+        "to": "Post to Pinterest",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Caption Render",
+        "to": "Get Final Video URL (Audio + Captions)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Prompt & Caption",
+        "to": "Transform Prompt for Kling (GPT-4)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Video URL with Audio",
+        "to": "Wait Before Captioning",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger: Telegram Prompt",
+        "to": "Extract Prompt & Caption",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Video Generation",
+        "to": "Get Generated Video URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Voice-Over Script",
+        "to": "Convert Script to Audio (TTS)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Audio to Cloudinary",
+        "to": "Merge Audio + Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Audio/Video Fusion",
+        "to": "Get Video URL with Audio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Video via Kling API",
+        "to": "Wait for Video Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate YouTube-Style Title",
+        "to": "Save Video Metadata to Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Final Video to Telegram",
+        "to": "Send Caption Link via Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Script to Audio (TTS)",
+        "to": "Upload Audio to Cloudinary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Caption Link via Telegram",
+        "to": "Assign Social Media IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Captions/Subtitles to Video",
+        "to": "Wait for Caption Render",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Transform Prompt for Kling (GPT-4)",
+        "to": "Generate Video via Kling API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Video Metadata to Google Sheets",
+        "to": "Send Final Video to Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Social Caption from Voiceover",
+        "to": "Generate YouTube-Style Title",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Final Video URL (Audio + Captions)",
+        "to": "Generate Social Caption from Voiceover",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/n8n",
+      "files": [
+        "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/n8n/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi.json"
+      ],
+      "sha256": "7eb2ee122c32ef723b4b1e75f93bc3bbdeab10bc1f9bab34017ba09b8f965424",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,18 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["Qdrant Vector Store"]
+  n2["Embeddings Ollama"]
+  n3["Default Data Loader"]
+  n4["Token Splitter"]
+  n5["IF: PDF"]
+  n6["Extract from File"]
+  n7["Split Out"]
+  n8["Code"]
+  n0 -->|"main out 0 to in 0"| n5
+  n2 -->|"ai_embedding out 0 to in 0"| n1
+  n3 -->|"ai_document out 0 to in 0"| n1
+  n4 -->|"ai_textSplitter out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n1

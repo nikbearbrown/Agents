@@ -1,0 +1,40 @@
+flowchart LR
+  n0["Send Daily News"]
+  n1["Get Date"]
+  n2["Merge"]
+  n3["Create HTML"]
+  n4["Aggregate"]
+  n5["Clean Text"]
+  n6["Extract Text"]
+  n7["Fetch HTML"]
+  n8["Split Out"]
+  n9["ChatGPT 4o"]
+  n10["Clean List"]
+  n11["Sort List"]
+  n12["Remove NaN"]
+  n13["Merged RSS"]
+  n14["Edit Fields - Mako"]
+  n15["Edit Fields - Calcalist"]
+  n16["RSS - Calcalist"]
+  n17["RSS - Mako"]
+  n18["Schedule Trigger"]
+  n2 -->|"main out 0 to in 0"| n0
+  n1 -->|"main out 0 to in 1"| n2
+  n4 -->|"main out 0 to in 0"| n3
+  n11 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 0 to in 0"| n6
+  n13 -->|"main out 0 to in 0"| n12
+  n17 -->|"main out 0 to in 0"| n14
+  n12 -->|"main out 0 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n5
+  n16 -->|"main out 0 to in 0"| n15
+  n18 -->|"main out 0 to in 0"| n17
+  n18 -->|"main out 0 to in 0"| n1
+  n18 -->|"main out 0 to in 0"| n16
+  n14 -->|"main out 0 to in 0"| n13
+  n15 -->|"main out 0 to in 1"| n13

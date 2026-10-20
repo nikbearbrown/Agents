@@ -1,0 +1,23 @@
+flowchart LR
+  n0["Gmail trigger"]
+  n1["Get message content"]
+  n2["Set label values"]
+  n3["Get all labels"]
+  n4["Split out assigned labels"]
+  n5["Merge corresponding labels"]
+  n6["Aggregate label IDs"]
+  n7["Add labels to message"]
+  n8["Assign labels for message"]
+  n9["JSON Parser"]
+  n10["OpenAI Chat"]
+  n9 -->|"ai_outputParser out 0 to in 0"| n8
+  n10 -->|"ai_languageModel out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 1"| n5
+  n5 -->|"main out 0 to in 0"| n6

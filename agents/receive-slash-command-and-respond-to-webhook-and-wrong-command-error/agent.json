@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "slug": "receive-slash-command-and-respond-to-webhook-and-wrong-command-error",
+  "title": "receive slash command and respond to webhook and wrong command error",
+  "purpose": "Adapt the published “receive slash command and respond to webhook and wrong command error” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 16 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Receive Slash Command"
+  ],
+  "terminal_nodes": [
+    "Reject",
+    "Wrong Command Error",
+    "Missing Email Error",
+    "Respond to Slack"
+  ],
+  "credential_types": [
+    "airtableApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Receive Slash Command",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Reject",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Read Command",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wrong Command Error",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Acknowledge",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Empty Email?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Missing Email Error",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Valid Token?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Paddle Data Deletion",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Customer.io Data Deletion",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Zendesk Data Deletion",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Log Entry",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Crypto",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Slack",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set",
+        "to": "Read Command",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Crypto",
+        "to": "Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable",
+        "to": "Respond to Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Acknowledge",
+        "to": "Paddle Data Deletion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Empty Email?",
+        "to": "Missing Email Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Empty Email?",
+        "to": "Acknowledge",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Read Command",
+        "to": "Empty Email?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Command",
+        "to": "Wrong Command Error",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Valid Token?",
+        "to": "Set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Valid Token?",
+        "to": "Reject",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Prepare Log Entry",
+        "to": "Crypto",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Paddle Data Deletion",
+        "to": "Customer.io Data Deletion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive Slash Command",
+        "to": "Valid Token?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Zendesk Data Deletion",
+        "to": "Prepare Log Entry",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Customer.io Data Deletion",
+        "to": "Zendesk Data Deletion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/n8n",
+      "files": [
+        "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/n8n/receive-slash-command-and-respond-to-webhook-and-wrong-command-error.json"
+      ],
+      "sha256": "cdbc5b7d16624def1299340309fd76145ad5c1ec38fa3c5a06e15e1f85b3cae3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/n8n/provenance.json"
+}

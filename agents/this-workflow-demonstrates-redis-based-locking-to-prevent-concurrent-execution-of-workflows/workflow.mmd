@@ -1,0 +1,32 @@
+flowchart LR
+  n0["END"]
+  n1["Workflow 1"]
+  n2["Workflow 2"]
+  n3["Workflow 3"]
+  n4["Incoming Webhook Data"]
+  n5["Fetch Webhook Data #38; Declare lockValue"]
+  n6["Check Redis Lock"]
+  n7["Acquire Redis Lock"]
+  n8["redisLock existence boolean"]
+  n9["redisLock acquired booleans"]
+  n10["Poll for lock"]
+  n11["duplicateWebhook boolean"]
+  n12["Discard Redis Lock"]
+  n13["Workflow Switch"]
+  n1 -->|"main out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n12
+  n10 -->|"main out 0 to in 0"| n11
+  n13 -->|"main out 0 to in 0"| n1
+  n13 -->|"main out 1 to in 0"| n2
+  n13 -->|"main out 2 to in 0"| n3
+  n6 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 0 to in 0"| n5
+  n11 -->|"main out 0 to in 0"| n0
+  n11 -->|"main out 1 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 1 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 1 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n6

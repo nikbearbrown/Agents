@@ -1,0 +1,2566 @@
+{
+  "schema_version": 1,
+  "slug": "realtime-notion-todoist-2-way-sync-template",
+  "title": "Realtime Notion Todoist 2-way Sync Template",
+  "purpose": "Adapt the published “Realtime Notion Todoist 2-way Sync Template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 174 executable nodes and 197 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "OAuth redirect",
+    "Notion-Todoist Sync Setup Helper",
+    "Todoist Webhook Setup Helper",
+    "Schedule Trigger",
+    "Execute Workflow Trigger",
+    "Notion Webhook",
+    "Todoist Webhook",
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Redirect to Auth Page",
+    "Respond with success",
+    "Respond with error",
+    "Return config JSON",
+    "Lock Todoist ID",
+    "Lock Todoist ID1",
+    "Lock Todoist ID2",
+    "Gmail",
+    "Globals",
+    "Execute Workflow Trigger",
+    "Lock Notion ID",
+    "Update Description in Todoist",
+    "Update Description in Todoist1",
+    "Update section (Sync API)1",
+    "Globals1",
+    "Store Todoist ID1",
+    "Globals2",
+    "Lock Todoist ID4",
+    "Execute Workflow",
+    "Execute Workflow1",
+    "End here",
+    "Retry limit reached",
+    "Retry limit reached1",
+    "Retry limit reached2"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "notionApi",
+    "redis",
+    "todoistApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get projects",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get sections",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Notion Databases",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Prep Dropdown",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Prep Dropdown1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Generate config",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Choose Notion Database",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Choose Todoist Project",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Verify security token",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate security token",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store variables",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get variables",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Redirect to Auth Page",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OAuth redirect",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Exchange Tokens",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Respond with success",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Respond with error",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Notion Database ID",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Todoist Project ID",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Notion-Todoist Sync Setup Helper",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Todoist Webhook Setup Helper",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Return config JSON",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Todoist",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Exists/Completed in Notion",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Todoist Task",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "If Todoist ID exists",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Store Todoist ID",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Incomplete in Todoist",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Completed in Todoist",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Delete Task in Todoist",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get Notion Task",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Task in Todoist",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Pick Todoist Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Map Notion to Todoist",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Update task in Todoist before closing",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Map Notion to Todoist1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Handle empty dates",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Handle empty dates1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Handle empty dates2",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create task in Todoist",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Add project ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Lock Todoist ID",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate UUID",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update section (Sync API)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Status changed",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Batching Items",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items1",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Status is Done",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Lock Todoist ID1",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Lock Todoist ID2",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update task in Todoist",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get mapped item",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get mapped item1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Prepare summary data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Prepare summary data1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Prepare summary data2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Filter out status changes",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Map Todoist to Notion",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Map summary fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Convert to HTML Table",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate email body",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get mapped item2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gmail",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge summary",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Differences exist1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Requires completion change1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create task in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update task in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Done in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Obsolete in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Mark as In Progress in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Only continue if not locked",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Lock Notion ID",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check if Todoist ID is locked",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Description in Todoist",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Description has changed in Todoist",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Description in Todoist1",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate UUID1",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update section (Sync API)1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Backlog Section ID",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Notion Task not found",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if creating flag exists1",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Only continue if flag does not exist1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set creating flag1",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Neither focussed nor planned1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Focussed in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Todoist trigger reference",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Notion Task2",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Notion Task found1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Switch by Event",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "If event is not :deleted",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data1",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data2",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data3",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data4",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Globals1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Map Todoist to Notion1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Todoist Task1",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Notion Task1",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Requires completion change",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Has been completed?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Differences exist",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Only continue if not locked1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if Notion ID is locked",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Notion task",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if creating flag exists",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Only continue if flag does not exist",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set creating flag",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Todoist ID exists?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get todoist ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Todoist ID exists",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get todoist ID1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Status changed but not empty",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Status is Obsolete?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Status is not Done",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Neither focussed nor planned",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Notion trigger reference",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Notion Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Store Todoist ID1",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Completed in Todoist1",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Update task in Todoist1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Globals2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Mark as Incomplete in Todoist1",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate UUID2",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update section (Sync API)2",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Lock Todoist ID4",
+        "type": "n8n-nodes-base.redis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Delete Task in Todoist2",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Map Notion to Todoist2",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Todoist Task2",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Create task in Todoist1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data5",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data6",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Todoist Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": true
+      },
+      {
+        "name": "Extract IDs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Split out Notion changes",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Body is array?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Switch by project",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": true
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": true
+      },
+      {
+        "name": "Execute Workflow1",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": true
+      },
+      {
+        "name": "Due date empty",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Has not been completed?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "End here",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retry limit reached",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set tries",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Update tries",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Catch known error",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "If tries left",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Retry limit reached1",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set tries1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Update tries1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Catch known error1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "If tries left1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set tries2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Update tries2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait2",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Catch known error2",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "If tries left2",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Retry limit reached2",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Turn Markdown into Notion Blocks",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Handle each block separately",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Append Notion Block",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "Update tries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Loop Over Items1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Merge summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait1",
+        "to": "Update tries1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait2",
+        "to": "Update tries2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion",
+        "to": "Map Notion to Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Execute Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Execute Workflow1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Todoist",
+        "to": "Pick Todoist Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "Update section (Sync API)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set tries",
+        "to": "Get Todoist Task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set tries1",
+        "to": "Get Todoist Task2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set tries2",
+        "to": "Get Todoist Task1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract IDs",
+        "to": "Notion trigger reference",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get projects",
+        "to": "Prep Dropdown1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get sections",
+        "to": "Generate config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update tries",
+        "to": "If tries left",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate UUID",
+        "to": "Prepare Batching Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get variables",
+        "to": "Verify security token",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If tries left",
+        "to": "Set tries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If tries left",
+        "to": "Retry limit reached",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Merge summary",
+        "to": "Filter out status changes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Dropdown",
+        "to": "Choose Notion Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update tries1",
+        "to": "If tries left1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update tries2",
+        "to": "If tries left2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add project ID",
+        "to": "If Todoist ID exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Body is array?",
+        "to": "Split out Notion changes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Body is array?",
+        "to": "Notion trigger reference",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Due date empty",
+        "to": "Mark as Focussed in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data",
+        "to": "Check if Todoist ID is locked",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate UUID1",
+        "to": "Update section (Sync API)1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate UUID2",
+        "to": "Update section (Sync API)2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get todoist ID",
+        "to": "Lock Todoist ID4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If tries left1",
+        "to": "Set tries1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If tries left1",
+        "to": "Retry limit reached1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If tries left2",
+        "to": "Set tries2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If tries left2",
+        "to": "Retry limit reached2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Notion Webhook",
+        "to": "Body is array?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OAuth redirect",
+        "to": "Get variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Dropdown1",
+        "to": "Choose Todoist Project",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status changed",
+        "to": "Get mapped item1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status is Done",
+        "to": "Mark as Completed in Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status is Done",
+        "to": "Delete Task in Todoist",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Exchange Tokens",
+        "to": "Respond with success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Exchange Tokens",
+        "to": "Respond with error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Execution Data1",
+        "to": "Get Notion Task1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data2",
+        "to": "Update Description in Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data2",
+        "to": "Lock Notion ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data3",
+        "to": "Switch by Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data4",
+        "to": "Mark as Obsolete in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data5",
+        "to": "Check if Notion ID is locked",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execution Data6",
+        "to": "Status is Obsolete?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate config",
+        "to": "Return config JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Notion Task",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Notion task",
+        "to": "Map Notion to Todoist2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get mapped item",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get todoist ID1",
+        "to": "Lock Todoist ID4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Exists/Completed in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Get Notion Task",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Store variables",
+        "to": "Redirect to Auth Page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch by Event",
+        "to": "Differences exist1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch by Event",
+        "to": "Description has changed in Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch by Event",
+        "to": "Requires completion change1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch by Event",
+        "to": "Requires completion change1",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Todoist Webhook",
+        "to": "Switch by project",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Handle empty dates2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Handle empty dates",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Get Notion Task1",
+        "to": "Notion Task not found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Notion Task2",
+        "to": "Notion Task found1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Task",
+        "to": "Mark as Incomplete in Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Task",
+        "to": "Catch known error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get mapped item1",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Get mapped item2",
+        "to": "Merge summary",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Loop Over Items1",
+        "to": "Generate UUID",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Todoist ID",
+        "to": "Get mapped item2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Catch known error",
+        "to": "Create task in Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Catch known error",
+        "to": "Wait",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Differences exist",
+        "to": "Update task in Todoist1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Task1",
+        "to": "Map Todoist to Notion1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Task1",
+        "to": "Catch known error2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Task2",
+        "to": "Differences exist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Task2",
+        "to": "Requires completion change",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Task2",
+        "to": "Status changed but not empty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Task2",
+        "to": "Catch known error1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set creating flag",
+        "to": "Create task in Todoist1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch by project",
+        "to": "Todoist trigger reference",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Todoist ID exists",
+        "to": "Delete Task in Todoist2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Catch known error1",
+        "to": "Status is not Done",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Catch known error1",
+        "to": "Wait1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Catch known error2",
+        "to": "End here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Catch known error2",
+        "to": "Wait2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Differences exist1",
+        "to": "Update task in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Differences exist1",
+        "to": "Due date empty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Handle empty dates",
+        "to": "Update Task in Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map summary fields",
+        "to": "Convert to HTML Table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion Task found1",
+        "to": "Execution Data4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set creating flag1",
+        "to": "Get Backlog Section ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status is not Done",
+        "to": "Check if creating flag exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Todoist ID exists?",
+        "to": "Set tries1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Todoist ID exists?",
+        "to": "Check if creating flag exists",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Append Notion Block",
+        "to": "Lock Notion ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate email body",
+        "to": "Gmail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Handle empty dates1",
+        "to": "Update task in Todoist before closing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Handle empty dates2",
+        "to": "Add project ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has been completed?",
+        "to": "Mark as Completed in Todoist1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has been completed?",
+        "to": "Mark as Incomplete in Todoist1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Pick Todoist Fields",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Status is Obsolete?",
+        "to": "Todoist ID exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status is Obsolete?",
+        "to": "Neither focussed nor planned",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Notion Databases",
+        "to": "Prep Dropdown",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Todoist ID exists",
+        "to": "Set tries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Todoist ID exists",
+        "to": "Create task in Todoist",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Prepare summary data",
+        "to": "Merge summary",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Convert to HTML Table",
+        "to": "Generate email body",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create task in Notion",
+        "to": "Execution Data2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create task in Notion",
+        "to": "Turn Markdown into Notion Blocks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Notion to Todoist",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Todoist to Notion",
+        "to": "Map summary fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion Task not found",
+        "to": "Check if creating flag exists1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion Task not found",
+        "to": "Execution Data3",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Prepare summary data1",
+        "to": "Merge summary",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Prepare summary data2",
+        "to": "Merge summary",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Update task in Notion",
+        "to": "Lock Notion ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify security token",
+        "to": "Exchange Tokens",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify security token",
+        "to": "Respond with error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Choose Notion Database",
+        "to": "Get Notion Database ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Choose Todoist Project",
+        "to": "Get Todoist Project ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create task in Todoist",
+        "to": "Store Todoist ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create task in Todoist",
+        "to": "Lock Todoist ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete Task in Todoist",
+        "to": "Prepare summary data2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Backlog Section ID",
+        "to": "Generate UUID1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Backlog Section ID",
+        "to": "Create task in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Notion Database ID",
+        "to": "Get projects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Todoist Project ID",
+        "to": "Get sections",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Notion to Todoist1",
+        "to": "Handle empty dates1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Notion to Todoist2",
+        "to": "Execution Data6",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Todoist to Notion1",
+        "to": "Execution Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Done in Notion",
+        "to": "Lock Notion ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Batching Items",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Task in Todoist",
+        "to": "Status changed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Task in Todoist",
+        "to": "Lock Todoist ID2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Task in Todoist",
+        "to": "Prepare summary data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update task in Todoist",
+        "to": "Get mapped item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create task in Todoist1",
+        "to": "Store Todoist ID1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create task in Todoist1",
+        "to": "Lock Todoist ID4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete Task in Todoist2",
+        "to": "Get todoist ID1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate security token",
+        "to": "Store variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has not been completed?",
+        "to": "Mark as In Progress in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has not been completed?",
+        "to": "Neither focussed nor planned1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has not been completed?",
+        "to": "Mark as Done in Notion",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Update task in Todoist1",
+        "to": "Get todoist ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If event is not :deleted",
+        "to": "Set tries2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If event is not :deleted",
+        "to": "Get Notion Task2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Notion trigger reference",
+        "to": "Globals2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion trigger reference",
+        "to": "Execution Data5",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split out Notion changes",
+        "to": "Extract IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter out status changes",
+        "to": "Map Todoist to Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Todoist trigger reference",
+        "to": "Execution Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Todoist trigger reference",
+        "to": "Globals1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update section (Sync API)",
+        "to": "Loop Over Items1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Exists/Completed in Notion",
+        "to": "Map Notion to Todoist1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Exists/Completed in Notion",
+        "to": "Delete Task in Todoist",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Mark as Focussed in Notion",
+        "to": "Lock Notion ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Obsolete in Notion",
+        "to": "Lock Notion ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Requires completion change",
+        "to": "Has been completed?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update section (Sync API)2",
+        "to": "Get todoist ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only continue if not locked",
+        "to": "If event is not :deleted",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Requires completion change1",
+        "to": "Has not been completed?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Notion ID is locked",
+        "to": "Only continue if not locked1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Handle each block separately",
+        "to": "Append Notion Block",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Completed in Todoist",
+        "to": "Prepare summary data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Neither focussed nor planned",
+        "to": "Todoist ID exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Neither focussed nor planned",
+        "to": "Todoist ID exists?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Only continue if not locked1",
+        "to": "Get Notion task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status changed but not empty",
+        "to": "Generate UUID2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Todoist Webhook Setup Helper",
+        "to": "Generate security token",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Todoist ID is locked",
+        "to": "Only continue if not locked",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if creating flag exists",
+        "to": "Only continue if flag does not exist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Completed in Todoist1",
+        "to": "Get todoist ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as In Progress in Notion",
+        "to": "Lock Notion ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Incomplete in Todoist",
+        "to": "Update task in Todoist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Incomplete in Todoist",
+        "to": "Lock Todoist ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Neither focussed nor planned1",
+        "to": "Mark as Focussed in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if creating flag exists1",
+        "to": "Only continue if flag does not exist1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Mark as Incomplete in Todoist1",
+        "to": "Get todoist ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion-Todoist Sync Setup Helper",
+        "to": "Get Notion Databases",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Turn Markdown into Notion Blocks",
+        "to": "Handle each block separately",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Description has changed in Todoist",
+        "to": "Update Description in Todoist1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only continue if flag does not exist",
+        "to": "Set creating flag",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only continue if flag does not exist1",
+        "to": "Set creating flag1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update task in Todoist before closing",
+        "to": "Status is Done",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update task in Todoist before closing",
+        "to": "Lock Todoist ID1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/implementations/n8n",
+      "files": [
+        "agents/realtime-notion-todoist-2-way-sync-template/implementations/n8n/realtime-notion-todoist-2-way-sync-template.json"
+      ],
+      "sha256": "711f08ee991b2f20c881274bbe4df86e1fb58700fd1b6874a1043990a6815bf6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/realtime-notion-todoist-2-way-sync-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/realtime-notion-todoist-2-way-sync-template/implementations/n8n/provenance.json"
+}

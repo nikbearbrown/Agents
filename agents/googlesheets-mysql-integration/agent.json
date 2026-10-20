@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "slug": "googlesheets-mysql-integration",
+  "title": "GoogleSheets MySQL Integration",
+  "purpose": "Adapt the published “GoogleSheets MySQL Integration” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Execute Workflow\"",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Notifications",
+    "Add MySQL records",
+    "Update GSheet status",
+    "Sync MySQL data"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "mySql"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Send Notifications",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheet Data",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4,
+        "disabled": false
+      },
+      {
+        "name": "SQL Get inquiries from Google",
+        "type": "n8n-nodes-base.mySql",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Add MySQL records",
+        "type": "n8n-nodes-base.mySql",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Rename GSheet variables",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "No reply too long?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "DB Status assigned?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update GSheet status",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4,
+        "disabled": false
+      },
+      {
+        "name": "DB Status in sync?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sync MySQL data",
+        "type": "n8n-nodes-base.mySql",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Compare Datasets",
+        "to": "Add MySQL records",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "No reply too long?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "DB Status assigned?",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "DB Status in sync?",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Google Sheet Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "SQL Get inquiries from Google",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheet Data",
+        "to": "Rename GSheet variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB Status in sync?",
+        "to": "Sync MySQL data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No reply too long?",
+        "to": "Send Notifications",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB Status assigned?",
+        "to": "Update GSheet status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename GSheet variables",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SQL Get inquiries from Google",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "Google Sheet Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Execute Workflow\"",
+        "to": "SQL Get inquiries from Google",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/googlesheets-mysql-integration/implementations/n8n",
+      "files": [
+        "agents/googlesheets-mysql-integration/implementations/n8n/googlesheets-mysql-integration.json"
+      ],
+      "sha256": "9c848b30281a876e67adee6d58d0d5c3193b966761e359c1daeb4f6ae57cfdde",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/googlesheets-mysql-integration/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/googlesheets-mysql-integration/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/googlesheets-mysql-integration/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/googlesheets-mysql-integration/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/googlesheets-mysql-integration/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/googlesheets-mysql-integration/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/googlesheets-mysql-integration/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/googlesheets-mysql-integration/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/googlesheets-mysql-integration/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/googlesheets-mysql-integration/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/googlesheets-mysql-integration/implementations/n8n/provenance.json"
+}

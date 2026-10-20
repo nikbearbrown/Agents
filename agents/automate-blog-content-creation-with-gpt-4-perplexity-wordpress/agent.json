@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "slug": "automate-blog-content-creation-with-gpt-4-perplexity-wordpress",
+  "title": "💥🛠️Automate Blog Content Creation with GPT-4, Perplexity & WordPress",
+  "purpose": "Adapt the published “💥🛠️Automate Blog Content Creation with GPT-4, Perplexity & WordPress” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received",
+    "Start with Research Query Submission"
+  ],
+  "terminal_nodes": [
+    "Slack-List",
+    "Copywriting AI Agent",
+    "Publish Article to WordPress",
+    "Send Email Notification",
+    "Notify Slack Channel",
+    "Generate SEO Blog Content (GPT-4o)",
+    "Notion-List",
+    "Insert Article in Notion"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "httpHeaderAuth",
+    "mcpClientApi",
+    "openAiApi",
+    "wordpressApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Perplexity Research",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Slack-List",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Copywriting AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Format Research Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Publish Article to WordPress",
+        "type": "n8n-nodes-base.wordpressTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email Notification",
+        "type": "n8n-nodes-base.gmailTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Notify Slack Channel",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate SEO Blog Content (GPT-4o)",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Start with Research Query Submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Workflow Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Notion-List",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Insert Article in Notion",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Slack-List",
+        "to": "Copywriting AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notion-List",
+        "to": "Copywriting AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Perplexity Research",
+        "to": "Format Research Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notify Slack Channel",
+        "to": "Copywriting AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Research Output",
+        "to": "Edit Workflow Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Workflow Variables",
+        "to": "Copywriting AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Email Notification",
+        "to": "Copywriting AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Insert Article in Notion",
+        "to": "Copywriting AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Copywriting AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Publish Article to WordPress",
+        "to": "Copywriting AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate SEO Blog Content (GPT-4o)",
+        "to": "Copywriting AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start with Research Query Submission",
+        "to": "Perplexity Research",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/n8n",
+      "files": [
+        "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/n8n/automate-blog-content-creation-with-gpt-4-perplexity-wordpress.json"
+      ],
+      "sha256": "9387ed797455c700795c8e37310f5830cbf72adf722d843bb1f176dde5d92c6f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/n8n/provenance.json"
+}

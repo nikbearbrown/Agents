@@ -1,0 +1,36 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["sends slack message"]
+  n2["Split In Batches"]
+  n3["Mark as read"]
+  n4["VirusTotal: Scan URL"]
+  n5["VirusTotal: Get report"]
+  n6["Schedule Trigger"]
+  n7["Find indicators of compromise"]
+  n8["URLScan: Get report"]
+  n9["URLScan: Scan URL"]
+  n10["Has URL#63;"]
+  n11["No error#63;"]
+  n12["Not empty#63;"]
+  n13["Wait 1 Minute"]
+  n14["Get all unread messages"]
+  n15["Merge Reports"]
+  n10 -->|"main out 0 to in 0"| n9
+  n10 -->|"main out 0 to in 0"| n4
+  n10 -->|"main out 1 to in 0"| n2
+  n11 -->|"main out 0 to in 0"| n15
+  n11 -->|"main out 1 to in 0"| n13
+  n12 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n2
+  n15 -->|"main out 0 to in 0"| n2
+  n13 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n14
+  n2 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 1 to in 0"| n12
+  n9 -->|"main out 0 to in 0"| n11
+  n8 -->|"main out 0 to in 0"| n15
+  n4 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 1"| n15
+  n14 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n14

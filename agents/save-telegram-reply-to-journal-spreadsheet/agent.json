@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "slug": "save-telegram-reply-to-journal-spreadsheet",
+  "title": "Save Telegram reply to journal spreadsheet",
+  "purpose": "Adapt the published “Save Telegram reply to journal spreadsheet” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Get journal reply"
+  ],
+  "terminal_nodes": [
+    "Add entry to sheet"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Add entry to sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get journal reply",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse message",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Parse message",
+        "to": "Add entry to sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get journal reply",
+        "to": "Parse message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/implementations/n8n",
+      "files": [
+        "agents/save-telegram-reply-to-journal-spreadsheet/implementations/n8n/save-telegram-reply-to-journal-spreadsheet.json"
+      ],
+      "sha256": "59e9debf90e51e58350280c70a8b3d03292d944ac5158e4b23a9c369de1d3774",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/save-telegram-reply-to-journal-spreadsheet/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/save-telegram-reply-to-journal-spreadsheet/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-create-new-file-and-edit-file-github",
+  "title": "http request and create new file and edit file github",
+  "purpose": "Adapt the published “http request and create new file and edit file github” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 20 executable nodes and 24 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'",
+    "Schedule Trigger",
+    "Execute Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Return"
+  ],
+  "credential_types": [
+    "githubApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Return",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Get File",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "If file too large",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Items",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "isDiffOrNew",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Status",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Same file - Do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "File is different",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "File is new",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create new file",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit existing file",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get file data",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Execute Command",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "JSON formatting",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Globals",
+        "to": "Get file data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get File",
+        "to": "Merge Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File is new",
+        "to": "Create new file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Items",
+        "to": "isDiffOrNew",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "isDiffOrNew",
+        "to": "Check Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Status",
+        "to": "Same file - Do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Status",
+        "to": "File is different",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Check Status",
+        "to": "File is new",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Get file data",
+        "to": "If file too large",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create new file",
+        "to": "Return",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Command",
+        "to": "JSON formatting",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "JSON formatting",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Execute Workflow",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Execute Workflow",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Execute Command",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File is different",
+        "to": "Edit existing file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If file too large",
+        "to": "Get File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If file too large",
+        "to": "Merge Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Edit existing file",
+        "to": "Return",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Execute Command",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Same file - Do nothing",
+        "to": "Return",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "Merge Items",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/implementations/n8n",
+      "files": [
+        "agents/http-request-and-create-new-file-and-edit-file-github/implementations/n8n/http-request-and-create-new-file-and-edit-file-github.json"
+      ],
+      "sha256": "229257ea9a93152747ff8a54eed12e653954e5b59d503f419936a1f91264f639",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-create-new-file-and-edit-file-github/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-create-new-file-and-edit-file-github/implementations/n8n/provenance.json"
+}

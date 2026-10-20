@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "slug": "always-authenticate-your-server-865df2b4",
+  "title": "Always Authenticate Your Server!",
+  "purpose": "Adapt the published “Always Authenticate Your Server!” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "Github MCP Server"
+  ],
+  "terminal_nodes": [
+    "Github MCP Server",
+    "Get Latest Issues",
+    "Add Issue Comment",
+    "Aggregate Results",
+    "Get Issue Comments",
+    "Aggregate Comments",
+    "Get Response"
+  ],
+  "credential_types": [
+    "githubApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Operation",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Github MCP Server",
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Latest Issues",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Add Issue Comment",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Simplify Issues",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Results",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Issue Comments",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Comments",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Simplify Comments",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Comments",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Many Issues",
+        "type": "n8n-nodes-base.github",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Single Issue",
+        "type": "n8n-nodes-base.github",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Create Comment",
+        "type": "n8n-nodes-base.github",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Operation",
+        "to": "Get Many Issues",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Operation",
+        "to": "Get Single Issue",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Operation",
+        "to": "Create Comment",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Get Comments",
+        "to": "Simplify Comments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Comment",
+        "to": "Get Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Many Issues",
+        "to": "Simplify Issues",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simplify Issues",
+        "to": "Aggregate Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Single Issue",
+        "to": "Get Comments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Issue Comment",
+        "to": "Github MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Latest Issues",
+        "to": "Github MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simplify Comments",
+        "to": "Aggregate Comments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Issue Comments",
+        "to": "Github MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Operation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/always-authenticate-your-server-865df2b4/implementations/n8n",
+      "files": [
+        "agents/always-authenticate-your-server-865df2b4/implementations/n8n/always-authenticate-your-server-865df2b4.json"
+      ],
+      "sha256": "0427b38bea1edb9c47e41fc8327ed5b9f2b2c1256cbf7fb1459300ae8eb335b9",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-865df2b4/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-865df2b4/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-865df2b4/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-865df2b4/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-865df2b4/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/always-authenticate-your-server-865df2b4/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/always-authenticate-your-server-865df2b4/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/always-authenticate-your-server-865df2b4/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/always-authenticate-your-server-865df2b4/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/always-authenticate-your-server-865df2b4/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/always-authenticate-your-server-865df2b4/implementations/n8n/provenance.json"
+}

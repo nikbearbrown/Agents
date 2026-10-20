@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "slug": "text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates",
+  "title": "text classifier and list message discord and removeitemsseeninpreviousexecutions remove duplicates",
+  "purpose": "Adapt the published “text classifier and list message discord and removeitemsseeninpreviousexecutions remove duplicates” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 23 executable nodes and 24 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Model",
+    "Warn User",
+    "Warn User Only",
+    "No Action Taken"
+  ],
+  "credential_types": [
+    "discordBotApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Spam Detection",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Recent Messages",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Only Once",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Warn User",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Warn User Only",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Group By User",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "For Each User...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Message to List",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Notify Moderators with Send & Wait",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Flag as Spam",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Flag as Not Spam",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Spam Messages Only",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Has Flagged Messages?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Message IDs",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Delete Messages",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Receive Instructions",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Moderation Subworkflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "No Action Taken",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Spam Messages Only",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Model",
+        "to": "Spam Detection",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only Once",
+        "to": "Group By User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "For Each User...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Flag as Spam",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Group By User",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Spam Detection",
+        "to": "Flag as Spam",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Spam Detection",
+        "to": "Flag as Not Spam",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Delete Messages",
+        "to": "Warn User",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Message IDs",
+        "to": "Delete Messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message to List",
+        "to": "Spam Detection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Flag as Not Spam",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "For Each User...",
+        "to": "Message to List",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get Recent Messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Spam Messages Only",
+        "to": "Has Flagged Messages?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Recent Messages",
+        "to": "Only Once",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive Instructions",
+        "to": "Get Message IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive Instructions",
+        "to": "Warn User Only",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Receive Instructions",
+        "to": "No Action Taken",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Has Flagged Messages?",
+        "to": "Moderation Subworkflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Flagged Messages?",
+        "to": "For Each User...",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Moderation Subworkflow",
+        "to": "For Each User...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Notify Moderators with Send & Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notify Moderators with Send & Wait",
+        "to": "Receive Instructions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/n8n",
+      "files": [
+        "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/n8n/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates.json"
+      ],
+      "sha256": "63bacb0c9c812e8e0ea2b3426b85b8cc610826333bc059c2d9a8268794150eba",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "slug": "the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this",
+  "title": "The Chain is connected to the Mistral-7B-Instruct-v0.1 model, but you can change this",
+  "purpose": "Adapt the published “The Chain is connected to the Mistral-7B-Instruct-v0.1 model, but you can change this” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "Basic LLM Chain",
+    "Hugging Face Inference Model"
+  ],
+  "credential_types": [
+    "huggingFaceApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Hugging Face Inference Model",
+        "type": "@n8n/n8n-nodes-langchain.lmOpenHuggingFaceInference",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "When chat message received",
+        "to": "Basic LLM Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Hugging Face Inference Model",
+        "to": "Basic LLM Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/n8n",
+      "files": [
+        "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/n8n/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this.json"
+      ],
+      "sha256": "2090fdec1b76db46bc6106c83ca3f84db0e01a61ab56af550dc6eac0cfcdce1e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/n8n/provenance.json"
+}

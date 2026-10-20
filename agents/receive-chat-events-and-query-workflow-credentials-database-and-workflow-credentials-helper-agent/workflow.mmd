@@ -1,0 +1,17 @@
+flowchart LR
+  n0["When clicking #34;Test workflow#34;"]
+  n1["Map Workflows #38; Credentials"]
+  n2["Save to Database"]
+  n3["Chat Trigger"]
+  n4["Query Workflow Credentials Database"]
+  n5["OpenAI Chat Model"]
+  n6["Window Buffer Memory"]
+  n7["Workflow Credentials Helper Agent"]
+  n8["n8n"]
+  n8 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n7
+  n5 -->|"ai_languageModel out 0 to in 0"| n7
+  n6 -->|"ai_memory out 0 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n8
+  n4 -->|"ai_tool out 0 to in 0"| n7

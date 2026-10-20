@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "slug": "dropcontact-250-batch-asynchronously",
+  "title": "DROPCONTACT 250 BATCH ASYNCHRONOUSLY",
+  "purpose": "Adapt the published “DROPCONTACT 250 BATCH ASYNCHRONOUSLY” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Slack"
+  ],
+  "credential_types": [
+    "dropcontactApi",
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "PROFILES QUERY",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "BULK DROPCONTACT REQUESTS",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items2",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Postgres",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "BULK DROPCONTACT DOWNLOAD",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait2",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DATA TRANSFORMATION",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait2",
+        "to": "BULK DROPCONTACT DOWNLOAD",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Postgres",
+        "to": "Loop Over Items2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "DATA TRANSFORMATION",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Postgres",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "PROFILES QUERY",
+        "to": "Loop Over Items2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items2",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "PROFILES QUERY",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DATA TRANSFORMATION",
+        "to": "BULK DROPCONTACT REQUESTS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "BULK DROPCONTACT DOWNLOAD",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "BULK DROPCONTACT DOWNLOAD",
+        "to": "Slack",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "BULK DROPCONTACT REQUESTS",
+        "to": "Wait2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/dropcontact-250-batch-asynchronously/implementations/n8n",
+      "files": [
+        "agents/dropcontact-250-batch-asynchronously/implementations/n8n/dropcontact-250-batch-asynchronously.json"
+      ],
+      "sha256": "6c937187b913b5f92d89d4a0c759c28e7d5d7dad1e17e65f97f00d222fecf9b2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/dropcontact-250-batch-asynchronously/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/dropcontact-250-batch-asynchronously/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/dropcontact-250-batch-asynchronously/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/dropcontact-250-batch-asynchronously/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/dropcontact-250-batch-asynchronously/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/dropcontact-250-batch-asynchronously/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/dropcontact-250-batch-asynchronously/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/dropcontact-250-batch-asynchronously/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/dropcontact-250-batch-asynchronously/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/dropcontact-250-batch-asynchronously/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/dropcontact-250-batch-asynchronously/implementations/n8n/provenance.json"
+}

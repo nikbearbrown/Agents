@@ -1,0 +1,43 @@
+flowchart LR
+  n0["Switch"]
+  n1["msg_greet"]
+  n2["msg_wrongcommand"]
+  n3["Telegram Trigger"]
+  n4["msg_getweather"]
+  n5["City List"]
+  n6["Convert API response"]
+  n7["Get weather data"]
+  n8["Spreadsheet File"]
+  n9["Write csv"]
+  n10["Filename"]
+  n11["msg_errorAPI"]
+  n12["Any errors API#63;"]
+  n13["msg_errorR"]
+  n14["Read Binary File"]
+  n15["R successful#63;"]
+  n16["Merge"]
+  n17["Merge1"]
+  n18["msg_pleasewait"]
+  n19["Merge2"]
+  n20["Run R script"]
+  n16 -->|"main out 0 to in 0"| n2
+  n17 -->|"main out 0 to in 0"| n1
+  n19 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n17
+  n0 -->|"main out 1 to in 0"| n18
+  n0 -->|"main out 1 to in 0"| n19
+  n0 -->|"main out 3 to in 0"| n16
+  n10 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n20
+  n20 -->|"main out 0 to in 0"| n15
+  n15 -->|"main out 0 to in 0"| n14
+  n15 -->|"main out 1 to in 0"| n13
+  n18 -->|"main out 0 to in 1"| n19
+  n12 -->|"main out 0 to in 0"| n11
+  n12 -->|"main out 1 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n12
+  n14 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n8

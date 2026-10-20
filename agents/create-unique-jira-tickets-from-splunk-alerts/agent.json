@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "slug": "create-unique-jira-tickets-from-splunk-alerts",
+  "title": "Create_Unique_Jira_tickets_from_Splunk_alerts",
+  "purpose": "Adapt the published “Create_Unique_Jira_tickets_from_Splunk_alerts” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Add Ticket Comment",
+    "Create Ticket"
+  ],
+  "credential_types": [
+    "jiraSoftwareCloudApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Ticket Comment",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search Ticket",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Host Name",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "IF Ticket Not Exists",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Ticket",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Set Host Name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Ticket",
+        "to": "IF Ticket Not Exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Host Name",
+        "to": "Search Ticket",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF Ticket Not Exists",
+        "to": "Create Ticket",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF Ticket Not Exists",
+        "to": "Add Ticket Comment",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/implementations/n8n",
+      "files": [
+        "agents/create-unique-jira-tickets-from-splunk-alerts/implementations/n8n/create-unique-jira-tickets-from-splunk-alerts.json"
+      ],
+      "sha256": "c3c3daf8ee744bed2996d7faa7b259d96f61de2d3ecf6c3dbf09f2c514f7cb1d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-unique-jira-tickets-from-splunk-alerts/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-unique-jira-tickets-from-splunk-alerts/implementations/n8n/provenance.json"
+}

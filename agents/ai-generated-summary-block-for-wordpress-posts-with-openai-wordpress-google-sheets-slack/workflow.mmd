@@ -1,0 +1,43 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Text Classifier"]
+  n2["OpenAI Chat Model"]
+  n3["Loop Over Items"]
+  n4["If"]
+  n5["Webhook"]
+  n6["Schedule Trigger"]
+  n7["Wordpress - Update Post"]
+  n8["Google Sheets - Get rows"]
+  n9["HTML to Markdown"]
+  n10["OpenAI"]
+  n11["Google Sheets - Add Row"]
+  n12["Slack - Notify Channel"]
+  n13["Set fields - From Webhook input"]
+  n14["Date #38; Time - Substract"]
+  n15["Set fields - Prepare data for Gsheets #38; Slack"]
+  n16["WordPress - Get Post2"]
+  n17["No Operation, do nothing"]
+  n18["WordPress - Get Last Posts"]
+  n19["WordPress - Get Post1"]
+  n20["WordPress - Get All Posts"]
+  n4 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 1 to in 0"| n16
+  n10 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n13
+  n3 -->|"main out 0 to in 0"| n17
+  n3 -->|"main out 1 to in 0"| n8
+  n1 -->|"main out 0 to in 0"| n10
+  n1 -->|"main out 1 to in 0"| n3
+  n9 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n14
+  n2 -->|"ai_languageModel out 0 to in 0"| n1
+  n16 -->|"main out 0 to in 0"| n9
+  n12 -->|"main out 0 to in 0"| n3
+  n14 -->|"main out 0 to in 0"| n18
+  n11 -->|"main out 0 to in 0"| n12
+  n7 -->|"main out 0 to in 0"| n15
+  n8 -->|"main out 0 to in 0"| n4
+  n20 -->|"main out 0 to in 0"| n3
+  n13 -->|"main out 0 to in 0"| n19
+  n0 -->|"main out 0 to in 0"| n20
+  n15 -->|"main out 0 to in 0"| n11

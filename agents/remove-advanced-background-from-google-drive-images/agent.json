@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "slug": "remove-advanced-background-from-google-drive-images",
+  "title": "Remove Advanced Background from Google Drive Images",
+  "purpose": "Adapt the published “Remove Advanced Background from Google Drive Images” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Watch for new images"
+  ],
+  "terminal_nodes": [],
+  "credential_types": [
+    "googleDriveOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Config",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "remove background",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload Picture to Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "remove background fixed size",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Upload Picture to Google Drive1",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Download Image",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get Image Size",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Watch for new images",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "check which output size method is used",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "loop all over your images",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "loop all over your images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Config",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Split Out",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Image",
+        "to": "Get Image Size",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image Size",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "remove background",
+        "to": "Upload Picture to Google Drive1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Watch for new images",
+        "to": "Download Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Watch for new images",
+        "to": "Config",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "loop all over your images",
+        "to": "check which output size method is used",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "remove background fixed size",
+        "to": "Upload Picture to Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Picture to Google Drive",
+        "to": "loop all over your images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Picture to Google Drive1",
+        "to": "loop all over your images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check which output size method is used",
+        "to": "remove background fixed size",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check which output size method is used",
+        "to": "remove background",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/remove-advanced-background-from-google-drive-images/implementations/n8n",
+      "files": [
+        "agents/remove-advanced-background-from-google-drive-images/implementations/n8n/remove-advanced-background-from-google-drive-images.json"
+      ],
+      "sha256": "332a90e80cf3daf4b0968c2588250e0606c5ef43667dd96f886966687dd0d9e3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/remove-advanced-background-from-google-drive-images/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/remove-advanced-background-from-google-drive-images/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/remove-advanced-background-from-google-drive-images/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/remove-advanced-background-from-google-drive-images/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/remove-advanced-background-from-google-drive-images/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/remove-advanced-background-from-google-drive-images/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/remove-advanced-background-from-google-drive-images/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/remove-advanced-background-from-google-drive-images/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/remove-advanced-background-from-google-drive-images/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/remove-advanced-background-from-google-drive-images/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/remove-advanced-background-from-google-drive-images/implementations/n8n/provenance.json"
+}

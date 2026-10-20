@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "slug": "build-custom-ai-agent-with-langchain-gemini-self-hosted",
+  "title": "Build Custom AI Agent with LangChain & Gemini (Self-Hosted)",
+  "purpose": "Adapt the published “Build Custom AI Agent with LangChain & Gemini (Self-Hosted)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "Google Gemini Chat Model",
+    "Store conversation history",
+    "Construct & Execute LLM Prompt"
+  ],
+  "credential_types": [
+    "googlePalmApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store conversation history",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Construct & Execute LLM Prompt",
+        "type": "@n8n/n8n-nodes-langchain.code",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Construct & Execute LLM Prompt",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store conversation history",
+        "to": "Construct & Execute LLM Prompt",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store conversation history",
+        "to": "When chat message received",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "Construct & Execute LLM Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/n8n",
+      "files": [
+        "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/n8n/build-custom-ai-agent-with-langchain-gemini-self-hosted.json"
+      ],
+      "sha256": "381d4f3fe6d8e70bbe811ed4ca97ff22de9d73fc398a0808ccc06a3d0514d6ac",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/n8n/provenance.json"
+}

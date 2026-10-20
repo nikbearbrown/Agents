@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "slug": "daily-language-learning",
+  "title": "Daily Language Learning",
+  "purpose": "Adapt the published “Daily Language Learning” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Daily trigger"
+  ],
+  "terminal_nodes": [
+    "Save today's words",
+    "Send SMS"
+  ],
+  "credential_types": [
+    "airtableApi",
+    "lingvaNexApi",
+    "vonageApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Daily trigger",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get top 3 articles",
+        "type": "n8n-nodes-base.hackerNews",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract words",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Translate",
+        "type": "n8n-nodes-base.lingvaNex",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter data ",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Save today's words",
+        "type": "n8n-nodes-base.airtable",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Craft message",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send SMS",
+        "type": "n8n-nodes-base.vonage",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Translate",
+        "to": "Filter data ",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter data ",
+        "to": "Craft message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter data ",
+        "to": "Save today's words",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Craft message",
+        "to": "Send SMS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Daily trigger",
+        "to": "Get top 3 articles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract words",
+        "to": "Translate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get top 3 articles",
+        "to": "Extract words",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/daily-language-learning/implementations/n8n",
+      "files": [
+        "agents/daily-language-learning/implementations/n8n/daily-language-learning.json"
+      ],
+      "sha256": "921b4cc39f863ebd08ac2eb89c585abe302d338cc43a3815b105b5b7d7462f04",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/daily-language-learning/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/daily-language-learning/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/daily-language-learning/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/daily-language-learning/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/daily-language-learning/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/daily-language-learning/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/daily-language-learning/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/daily-language-learning/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/daily-language-learning/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/daily-language-learning/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/daily-language-learning/implementations/n8n/provenance.json"
+}

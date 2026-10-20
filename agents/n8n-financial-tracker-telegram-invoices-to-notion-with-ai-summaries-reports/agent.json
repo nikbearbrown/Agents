@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "slug": "n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports",
+  "title": "N8N Financial Tracker Telegram Invoices to Notion with AI Summaries & Reports",
+  "purpose": "Adapt the published “N8N Financial Tracker Telegram Invoices to Notion with AI Summaries & Reports” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger | for send chart report",
+    "Telegram Trigger | When recive photo"
+  ],
+  "terminal_nodes": [
+    "Google Gemini Chat Model",
+    "Send Chart Image to Group or Private Chat",
+    "Parse To your object | Table",
+    "Sendback to chat and give summarize text",
+    "Record To Notion Database"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "notionApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger | for send chart report",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Recent Data from Notions",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Summarize Transaction Data",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Chart",
+        "type": "n8n-nodes-base.quickChart",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Chart Image to Group or Private Chat",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Convert Data to JSON chart payload",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Trigger | When recive photo",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Image Info",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse To your object | Table",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out | data transaction",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sendback to chat and give summarize text",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Record To Notion Database",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Telegram",
+        "to": "Get Image Info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Chart",
+        "to": "Send Chart Image to Group or Private Chat",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image Info",
+        "to": "Basic LLM Chain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain",
+        "to": "Split Out | data transaction",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain",
+        "to": "Sendback to chat and give summarize text",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Basic LLM Chain",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize Transaction Data",
+        "to": "Convert Data to JSON chart payload",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Recent Data from Notions",
+        "to": "Summarize Transaction Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse To your object | Table",
+        "to": "Basic LLM Chain",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out | data transaction",
+        "to": "Record To Notion Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Data to JSON chart payload",
+        "to": "Generate Chart",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Telegram Trigger | When recive photo",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger | for send chart report",
+        "to": "Get Recent Data from Notions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/n8n",
+      "files": [
+        "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/n8n/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports.json"
+      ],
+      "sha256": "f60ab8f00e8b8fc91800b504d1eb82d83cac87c0ccfad17fcd5cdd1dc2ce0dc6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/n8n/provenance.json"
+}

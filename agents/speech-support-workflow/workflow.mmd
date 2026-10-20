@@ -1,0 +1,36 @@
+flowchart LR
+  n0["AI Agent"]
+  n1["Google Gemini Chat Model"]
+  n2["Recieve Telegram Message"]
+  n3["Check For Text or Voice Message"]
+  n4["Download Audio File"]
+  n5["Transcribe Audio File"]
+  n6["If Voice Message"]
+  n7["Code to remove unwanted characters from LLM response"]
+  n8["Code to split output into chunks under 4000 characters"]
+  n9["Respond to Telegram Message"]
+  n10["Wipe Conversation Memory"]
+  n11["Store Conversation Memory"]
+  n12["Set prompt to start a new speech"]
+  n13["Set prompt to generate a speech based on the feedback"]
+  n14["Set prompt to provide feedback on speech"]
+  n15["Route Flow Based on Message Content"]
+  n0 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 1 to in 0"| n15
+  n4 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n15
+  n1 -->|"ai_languageModel out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n12
+  n11 -->|"ai_memory out 0 to in 0"| n0
+  n11 -->|"ai_memory out 0 to in 0"| n10
+  n3 -->|"main out 0 to in 0"| n6
+  n12 -->|"main out 0 to in 0"| n0
+  n15 -->|"main out 0 to in 0"| n10
+  n15 -->|"main out 1 to in 0"| n13
+  n15 -->|"main out 2 to in 0"| n14
+  n14 -->|"main out 0 to in 0"| n0
+  n7 -->|"main out 0 to in 0"| n8
+  n13 -->|"main out 0 to in 0"| n0
+  n8 -->|"main out 0 to in 0"| n9

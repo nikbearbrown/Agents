@@ -1,0 +1,531 @@
+{
+  "schema_version": 1,
+  "slug": "import-productboard-notes-companies-and-features-into-snowflake",
+  "title": "Import Productboard Notes, Companies and Features into Snowflake",
+  "purpose": "Adapt the published “Import Productboard Notes, Companies and Features into Snowflake” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 33 executable nodes and 31 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "[CREATE] PRODUCTBOARD_NOTES",
+    "[CREATE] PRODUCTBOARD_COMPANIES",
+    "[CREATE] PRODUCTBOARD_NOTES_FEATURES",
+    "[CREATE] PRODUCTBOARD_FEATURES",
+    "Slack"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "slackApi",
+    "snowflake"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Manual mapping feature",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "get productboard companies",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Manual mapping companies",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "get productboard notes",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Manual mapping notes",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Split features",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split companies",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split notes",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split features in notes",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine Feature ID + Note ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "get productboard features",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Update Productboard Notes",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Empty Table Productboard Notes",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "[CREATE] PRODUCTBOARD_NOTES",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "[CREATE] PRODUCTBOARD_COMPANIES",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Productboard Companies",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Manual mapping companies db",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Manual mapping notes db",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Empty Table Productboard Companies",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "[CREATE] PRODUCTBOARD_NOTES_FEATURES",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Manual mapping feature note IDs db",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Productboard Note and Feature IDs",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Empty Table Productboard Note and Feature IDs",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items notes",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items features notes",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "[CREATE] PRODUCTBOARD_FEATURES",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Empty Table Productboard Features",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items features",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Manual mapping features db",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Productboard Features",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Count Notes Last 7 days and Unprocessed",
+        "type": "n8n-nodes-base.snowflake",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split notes",
+        "to": "Manual mapping notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split notes",
+        "to": "Split features in notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split notes",
+        "to": "Count Notes Last 7 days and Unprocessed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split features",
+        "to": "Manual mapping feature",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split companies",
+        "to": "Manual mapping companies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Empty Table Productboard Features",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual mapping notes",
+        "to": "Loop Over Items notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items notes",
+        "to": "Manual mapping notes db",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Manual mapping feature",
+        "to": "Loop Over Items features",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get productboard notes",
+        "to": "Split notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual mapping notes db",
+        "to": "Update Productboard Notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split features in notes",
+        "to": "Combine Feature ID + Note ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items features",
+        "to": "Empty Table Productboard Companies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items features",
+        "to": "Manual mapping features db",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Manual mapping companies",
+        "to": "Manual mapping companies db",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Productboard Notes",
+        "to": "Loop Over Items notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get productboard features",
+        "to": "Split features",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual mapping features db",
+        "to": "Update Productboard Features",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get productboard companies",
+        "to": "Split companies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual mapping companies db",
+        "to": "Update Productboard Companies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Feature ID + Note ID",
+        "to": "Loop Over Items features notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Productboard Features",
+        "to": "Loop Over Items features",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Productboard Companies",
+        "to": "Empty Table Productboard Note and Feature IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Empty Table Productboard Notes",
+        "to": "get productboard notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items features notes",
+        "to": "Manual mapping feature note IDs db",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Empty Table Productboard Features",
+        "to": "get productboard features",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Empty Table Productboard Companies",
+        "to": "get productboard companies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual mapping feature note IDs db",
+        "to": "Update Productboard Note and Feature IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Count Notes Last 7 days and Unprocessed",
+        "to": "Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Productboard Note and Feature IDs",
+        "to": "Loop Over Items features notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Empty Table Productboard Note and Feature IDs",
+        "to": "Empty Table Productboard Notes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/n8n",
+      "files": [
+        "agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/n8n/import-productboard-notes-companies-and-features-into-snowflake.json"
+      ],
+      "sha256": "4bfb3578cdc4c4badfaea614445845f5e9fb61cf8b2b9ce1cdf6cf4871344f18",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/import-productboard-notes-companies-and-features-into-snowflake/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/n8n/provenance.json"
+}

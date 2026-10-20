@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "slug": "send-file-to-kindle-through-telegram-bot",
+  "title": "send file to kindle through telegram bot",
+  "purpose": "Adapt the published “send file to kindle through telegram bot” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "receive file message from telegram bot"
+  ],
+  "terminal_nodes": [
+    "reply to warn that file is missing",
+    "reply to telegram chat that the file has been sent successfully"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "receive file message from telegram bot",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "check if there is a file in the message",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "reply to warn that file is missing",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "rename file to as attachment out email",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "send email with the file as attchament to kindle",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "reply to telegram chat that the file has been sent successfully",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "receive file message from telegram bot",
+        "to": "check if there is a file in the message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "rename file to as attachment out email",
+        "to": "send email with the file as attchament to kindle",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if there is a file in the message",
+        "to": "rename file to as attachment out email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if there is a file in the message",
+        "to": "reply to warn that file is missing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "send email with the file as attchament to kindle",
+        "to": "reply to telegram chat that the file has been sent successfully",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/implementations/n8n",
+      "files": [
+        "agents/send-file-to-kindle-through-telegram-bot/implementations/n8n/send-file-to-kindle-through-telegram-bot.json"
+      ],
+      "sha256": "505a3ae745da36a8edfe2b95df237f933016381d84165ee9cbd4d1f99f1208c0",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/send-file-to-kindle-through-telegram-bot/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/send-file-to-kindle-through-telegram-bot/implementations/n8n/provenance.json"
+}

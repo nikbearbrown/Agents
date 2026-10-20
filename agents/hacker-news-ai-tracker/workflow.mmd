@@ -1,0 +1,29 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Manual Trigger"]
+  n2["Get Day Ago Unix Time"]
+  n3["WatchList"]
+  n4["Merge"]
+  n5["HTTP Request"]
+  n6["Loop Over Entities"]
+  n7["Entity Term Pair"]
+  n8["When Executed by Another Workflow"]
+  n9["Call #39;HackerNews#39;"]
+  n10["Merge1"]
+  n11["Get Metrics"]
+  n12["Code in Python"]
+  n0 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 1"| n4
+  n4 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n12
+  n6 -->|"main out 1 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n5
+  n8 -->|"main out 0 to in 1"| n10
+  n9 -->|"main out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n6

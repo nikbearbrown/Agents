@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "slug": "automated-content-generation-publishing-wordpress",
+  "title": "Automated Content Generation & Publishing - Wordpress",
+  "purpose": "Adapt the published “Automated Content Generation & Publishing - Wordpress” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "1. Auto Start",
+    "2. When clicking ‘Test workflow’",
+    "3. Schedule Your Posts"
+  ],
+  "terminal_nodes": [
+    "Create posts on Wordpress",
+    "1. Auto Start",
+    "2. When clicking ‘Test workflow’"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openAiApi",
+    "wordpressApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Create posts on Wordpress",
+        "type": "n8n-nodes-base.wordpress",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Processing Delay",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Random Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Save to Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "1. Auto Start",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": true
+      },
+      {
+        "name": "2. When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "3. Schedule Your Posts",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Automated Image Retrieval from Pexels",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate AI Content",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.6,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Random Wait",
+        "to": "Generate AI Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save to Sheet",
+        "to": "Automated Image Retrieval from Pexels",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Processing Delay",
+        "to": "Random Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate AI Content",
+        "to": "Save to Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "3. Schedule Your Posts",
+        "to": "Processing Delay",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Automated Image Retrieval from Pexels",
+        "to": "Create posts on Wordpress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/automated-content-generation-publishing-wordpress/implementations/n8n",
+      "files": [
+        "agents/automated-content-generation-publishing-wordpress/implementations/n8n/automated-content-generation-publishing-wordpress.json"
+      ],
+      "sha256": "b612169fb5a6d7755fc6311097b54208b7e1ee2ee301f381138f2a7a89513cf6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/automated-content-generation-publishing-wordpress/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/automated-content-generation-publishing-wordpress/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/automated-content-generation-publishing-wordpress/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/automated-content-generation-publishing-wordpress/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/automated-content-generation-publishing-wordpress/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/automated-content-generation-publishing-wordpress/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/automated-content-generation-publishing-wordpress/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/automated-content-generation-publishing-wordpress/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/automated-content-generation-publishing-wordpress/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/automated-content-generation-publishing-wordpress/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/automated-content-generation-publishing-wordpress/implementations/n8n/provenance.json"
+}

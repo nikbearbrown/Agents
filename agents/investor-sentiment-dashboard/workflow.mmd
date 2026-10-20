@@ -1,0 +1,67 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Manual Run Trigger"]
+  n2["Fetch WSB"]
+  n3["Fetch Investing"]
+  n4["Fetch Stocks"]
+  n5["Merge Reddit Feeds"]
+  n6["1A: Raw Merge #38; Structural Clean"]
+  n7["1B: Linguistic #38; Relevance Filter"]
+  n8["Keyword Pre-Scorer"]
+  n9["Aggregate for Claude"]
+  n10["Claude 1: Anxiety Score"]
+  n11["Claude 2: Narrative Velocity"]
+  n12["Claude 3: Herd Detection"]
+  n13["Claude 4: Conviction vs Uncertainty"]
+  n14["Claude 5: Crowd Cycle Stage"]
+  n15["Anthropic Model 1"]
+  n16["Anthropic Model 2"]
+  n17["Anthropic Model 3"]
+  n18["Anthropic Model 4"]
+  n19["Anthropic Model 5"]
+  n20["Merge Claude Outputs"]
+  n21["Signal Aggregator"]
+  n22["Persist to File"]
+  n23["Generate Quickchart URLs"]
+  n24["Write output.json"]
+  n25["Insert to Supabase"]
+  n26["Pipeline Response"]
+  n27["Dashboard Webhook"]
+  n28["Build Dashboard Response"]
+  n29["Serve Dashboard HTML"]
+  n0 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 1"| n5
+  n4 -->|"main out 0 to in 2"| n5
+  n5 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 0 to in 0"| n12
+  n9 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n14
+  n10 -->|"main out 0 to in 0"| n20
+  n11 -->|"main out 0 to in 1"| n20
+  n12 -->|"main out 0 to in 2"| n20
+  n13 -->|"main out 0 to in 3"| n20
+  n14 -->|"main out 0 to in 4"| n20
+  n20 -->|"main out 0 to in 0"| n21
+  n21 -->|"main out 0 to in 0"| n22
+  n22 -->|"main out 0 to in 0"| n23
+  n23 -->|"main out 0 to in 0"| n24
+  n24 -->|"main out 0 to in 0"| n25
+  n25 -->|"main out 0 to in 0"| n26
+  n15 -->|"ai_languageModel out 0 to in 0"| n10
+  n16 -->|"ai_languageModel out 0 to in 0"| n11
+  n17 -->|"ai_languageModel out 0 to in 0"| n12
+  n18 -->|"ai_languageModel out 0 to in 0"| n13
+  n19 -->|"ai_languageModel out 0 to in 0"| n14
+  n27 -->|"main out 0 to in 0"| n28
+  n28 -->|"main out 0 to in 0"| n29

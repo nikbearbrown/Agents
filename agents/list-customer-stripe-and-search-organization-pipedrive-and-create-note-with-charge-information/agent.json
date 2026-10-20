@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "slug": "list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information",
+  "title": "list customer stripe and search organization pipedrive and create note with charge information",
+  "purpose": "Adapt the published “list customer stripe and search organization pipedrive and create note with charge information” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Every day at 8 am"
+  ],
+  "terminal_nodes": [
+    "Set new last execution timestamp"
+  ],
+  "credential_types": [
+    "pipedriveApi",
+    "stripeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get customers",
+        "type": "n8n-nodes-base.stripe",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Rename fields and keep only needed fields",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add customer name to charge data",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search organisation",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add organisation Information to charge data",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create note with charge information",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get last execution timestamp",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set new last execution timestamp",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split array of charges to items",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search for charges in Stripe",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Every day at 8 am",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get customers",
+        "to": "Rename fields and keep only needed fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every day at 8 am",
+        "to": "Get last execution timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search organisation",
+        "to": "Add organisation Information to charge data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Get last execution timestamp",
+        "to": "Search for charges in Stripe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search for charges in Stripe",
+        "to": "Split array of charges to items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split array of charges to items",
+        "to": "Add customer name to charge data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add customer name to charge data",
+        "to": "Search organisation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add customer name to charge data",
+        "to": "Add organisation Information to charge data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create note with charge information",
+        "to": "Set new last execution timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename fields and keep only needed fields",
+        "to": "Add customer name to charge data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Add organisation Information to charge data",
+        "to": "Create note with charge information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/n8n",
+      "files": [
+        "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/n8n/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information.json"
+      ],
+      "sha256": "11f1e7b776461400cdf1ba6717659a39afc903f6b365fd65f136d543d5768616",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/n8n/provenance.json"
+}

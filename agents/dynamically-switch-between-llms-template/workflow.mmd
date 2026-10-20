@@ -1,0 +1,31 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["Switch Model"]
+  n2["Set LLM index"]
+  n3["Increase LLM index"]
+  n4["No Operation, do nothing"]
+  n5["Check for expected error"]
+  n6["Loop finished without results"]
+  n7["Unexpected error"]
+  n8["Return result"]
+  n9["OpenAI 4o-mini"]
+  n10["OpenAI 4o"]
+  n11["OpenAI o1"]
+  n12["OpenAI Chat Model"]
+  n13["Validate response"]
+  n14["Generate response"]
+  n10 -->|"ai_languageModel out 0 to in 0"| n1
+  n11 -->|"ai_languageModel out 0 to in 0"| n1
+  n1 -->|"ai_languageModel out 0 to in 0"| n14
+  n2 -->|"main out 0 to in 0"| n14
+  n9 -->|"ai_languageModel out 0 to in 0"| n1
+  n14 -->|"main out 0 to in 0"| n13
+  n14 -->|"main out 1 to in 0"| n5
+  n12 -->|"ai_languageModel out 0 to in 0"| n13
+  n13 -->|"main out 0 to in 0"| n8
+  n13 -->|"main out 1 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 1 to in 0"| n7
+  n4 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n2

@@ -1,0 +1,33 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["When clicking #34;Execute Workflow#34;"]
+  n2["Fetch Essay List"]
+  n3["Extract essay names"]
+  n4["Split out into items"]
+  n5["Fetch essay texts"]
+  n6["Limit to first 3"]
+  n7["Extract Text Only"]
+  n8["When chat message received"]
+  n9["Milvus Vector Store"]
+  n10["Default Data Loader"]
+  n11["Embeddings OpenAI"]
+  n12["Recursive Character Text Splitter"]
+  n13["Embeddings OpenAI1"]
+  n14["Milvus Vector Store1"]
+  n15["Q#38;A Chain to Retrieve from Milvus and Answer Question"]
+  n16["Milvus Vector Store Retriever"]
+  n2 -->|"main out 0 to in 0"| n3
+  n6 -->|"main out 0 to in 0"| n5
+  n11 -->|"ai_embedding out 0 to in 0"| n9
+  n7 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n7
+  n0 -->|"ai_languageModel out 0 to in 0"| n15
+  n13 -->|"ai_embedding out 0 to in 0"| n14
+  n10 -->|"ai_document out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n4
+  n14 -->|"ai_vectorStore out 0 to in 0"| n16
+  n4 -->|"main out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n15
+  n16 -->|"ai_retriever out 0 to in 0"| n15
+  n1 -->|"main out 0 to in 0"| n2
+  n12 -->|"ai_textSplitter out 0 to in 0"| n10

@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "slug": "move-binary-data-and-http-request-and-get-workflow-list",
+  "title": "move binary data and http request and get workflow list",
+  "purpose": "Adapt the published “move binary data and http request and get workflow list” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'",
+    "Run Daily at 2:30am"
+  ],
+  "terminal_nodes": [
+    "Google Drive"
+  ],
+  "credential_types": [
+    "googleApi",
+    "httpBasicAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Move Binary Data",
+        "type": "n8n-nodes-base.moveBinaryData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Map",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Workflow",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Workflow List",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "FunctionItem",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Run Daily at 2:30am",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Map",
+        "to": "Get Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "FunctionItem",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "FunctionItem",
+        "to": "Move Binary Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Workflow",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Move Binary Data",
+        "to": "Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Workflow List",
+        "to": "Map",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run Daily at 2:30am",
+        "to": "Get Workflow List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Get Workflow List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/n8n",
+      "files": [
+        "agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/n8n/move-binary-data-and-http-request-and-get-workflow-list.json"
+      ],
+      "sha256": "94b670686196f3f2ac6f6ca7c9061657905693cdf28df38b70d1a451f8b33126",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/move-binary-data-and-http-request-and-get-workflow-list/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/n8n/provenance.json"
+}

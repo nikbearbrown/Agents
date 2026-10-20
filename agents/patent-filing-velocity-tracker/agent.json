@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "slug": "patent-filing-velocity-tracker",
+  "title": "Patent Filing Velocity Tracker",
+  "purpose": "Adapt the published “Patent Filing Velocity Tracker” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 24 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Manual Run Trigger",
+    "Dashboard Webhook"
+  ],
+  "terminal_nodes": [
+    "Anthropic Model 1",
+    "Anthropic Model 2",
+    "Anthropic Model 3",
+    "Anthropic Model 4",
+    "Anthropic Model 5",
+    "Pipeline Response",
+    "Serve Dashboard HTML"
+  ],
+  "credential_types": [
+    "anthropicApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Manual Run Trigger",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Dashboard Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Patent Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "1A: Structural Clean",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "1B: Category Classifier + Velocity Pre-Scorer",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate for Claude",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Claude 1: Velocity Score",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Claude 2: Concept Novelty",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Claude 3: Inventor Network",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Claude 4: Cross-Company Convergence",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Claude 5: Strategic Intent",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 3",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 4",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Model 5",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Merge Claude Outputs",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Signal Aggregator",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Insert to Supabase",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Check Trigger Type",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If Webhook",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Pipeline Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Build Dashboard HTML",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Serve Dashboard HTML",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Manual Run Trigger",
+        "to": "Fetch Patent Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dashboard Webhook",
+        "to": "Build Dashboard HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Patent Data",
+        "to": "1A: Structural Clean",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "1A: Structural Clean",
+        "to": "1B: Category Classifier + Velocity Pre-Scorer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "1B: Category Classifier + Velocity Pre-Scorer",
+        "to": "Aggregate for Claude",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 1: Velocity Score",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 2: Concept Novelty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 3: Inventor Network",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 4: Cross-Company Convergence",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate for Claude",
+        "to": "Claude 5: Strategic Intent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude 1: Velocity Score",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Claude 2: Concept Novelty",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Claude 3: Inventor Network",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Claude 4: Cross-Company Convergence",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Claude 5: Strategic Intent",
+        "to": "Merge Claude Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Merge Claude Outputs",
+        "to": "Signal Aggregator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Signal Aggregator",
+        "to": "Insert to Supabase",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Insert to Supabase",
+        "to": "Check Trigger Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Trigger Type",
+        "to": "If Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Webhook",
+        "to": "Pipeline Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Dashboard HTML",
+        "to": "Serve Dashboard HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 1",
+        "to": "Claude 1: Velocity Score",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 2",
+        "to": "Claude 2: Concept Novelty",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 3",
+        "to": "Claude 3: Inventor Network",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 4",
+        "to": "Claude 4: Cross-Company Convergence",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Model 5",
+        "to": "Claude 5: Strategic Intent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/patent-filing-velocity-tracker/implementations/n8n",
+      "files": [
+        "agents/patent-filing-velocity-tracker/implementations/n8n/patent-filing-velocity-tracker.json"
+      ],
+      "sha256": "47c3e710c78dbc0623fb86969794a6ae9c7640efd767bff04cd224bbcf075111",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/patent-filing-velocity-tracker/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/patent-filing-velocity-tracker/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/patent-filing-velocity-tracker/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/patent-filing-velocity-tracker/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/patent-filing-velocity-tracker/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/patent-filing-velocity-tracker/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/patent-filing-velocity-tracker/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/patent-filing-velocity-tracker/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/patent-filing-velocity-tracker/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/patent-filing-velocity-tracker/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/patent-filing-velocity-tracker/implementations/n8n/provenance.json"
+}

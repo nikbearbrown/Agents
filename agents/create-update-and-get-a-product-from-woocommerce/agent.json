@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "create-update-and-get-a-product-from-woocommerce",
+  "title": "Create, update and get a product from WooCommerce",
+  "purpose": "Adapt the published “Create, update and get a product from WooCommerce” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "WooCommerce2"
+  ],
+  "credential_types": [
+    "wooCommerceApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WooCommerce",
+        "type": "n8n-nodes-base.wooCommerce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WooCommerce1",
+        "type": "n8n-nodes-base.wooCommerce",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WooCommerce2",
+        "type": "n8n-nodes-base.wooCommerce",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "WooCommerce",
+        "to": "WooCommerce1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "WooCommerce1",
+        "to": "WooCommerce2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "WooCommerce",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/implementations/n8n",
+      "files": [
+        "agents/create-update-and-get-a-product-from-woocommerce/implementations/n8n/create-update-and-get-a-product-from-woocommerce.json"
+      ],
+      "sha256": "8bbf107801195a9536318f4411f2d760e24476ca360dc97e466835f525cc542a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-update-and-get-a-product-from-woocommerce/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-update-and-get-a-product-from-woocommerce/implementations/n8n/provenance.json"
+}

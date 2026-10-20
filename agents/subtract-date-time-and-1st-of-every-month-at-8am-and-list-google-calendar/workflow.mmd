@@ -1,0 +1,27 @@
+flowchart LR
+  n0["Previous Month"]
+  n1["1st of Every month at 8am"]
+  n2["Check Summary for Illness or Holiday"]
+  n3["Holiday"]
+  n4["Illness"]
+  n5["Filter Holiday Days"]
+  n6["Filter Illness Days"]
+  n7["Merge"]
+  n8["Get previous months events"]
+  n9["Send email to payroll"]
+  n10["Combine Holiday Counts"]
+  n11["Combine Illness Counts"]
+  n12["Build the message to send"]
+  n7 -->|"main out 0 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n7
+  n11 -->|"main out 0 to in 1"| n7
+  n1 -->|"main out 0 to in 0"| n0
+  n12 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 1 to in 0"| n4

@@ -1,65 +1,9 @@
-# GitLab MR Auto-Review & Risk Assessment
+# GitLab MR Auto-Review &amp; Risk Assessment
 
-This folder contains the **GitLab MR Auto-Review & Risk Assessment** workflow. Its executable nodes use `agent`, `code`, `gitlabTrigger`, `gmail`, `httpRequest`, `if`, `lmChatAnthropic`, `merge`, `outputParserAutofixing`, `outputParserStructured`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/gitlab-mr-auto-review-risk-assessment](../../agents/gitlab-mr-auto-review-risk-assessment/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/gitlab-mr-auto-review-risk-assessment/implementations/n8n/README.md)
+- [Importable JSON](../../agents/gitlab-mr-auto-review-risk-assessment/implementations/n8n/gitlab-mr-auto-review-risk-assessment.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/gitlab-mr-auto-review-risk-assessment)
 
-## Files
-
-- [`gitlab-mr-auto-review-risk-assessment.json`](gitlab-mr-auto-review-risk-assessment.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** `anthropicApi`, `gitlabApi`, `gmailOAuth2`
-
-**Entry nodes:** GitLab Trigger, GitLab Trigger1, GitLab Trigger2
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| Extract Diff | `httpRequest` | Inspect parameters |
-| Distribution List Generator | `code` | Inspect parameters |
-| If Some Change | `if` | Inspect parameters |
-| Merge | `merge` | Inspect parameters |
-| AI Agent | `agent` | Inspect parameters |
-| Auto-fixing Output Parser | `outputParserAutofixing` | Inspect parameters |
-| Structured Output Parser | `outputParserStructured` | Inspect parameters |
-| Anthropic Chat Model | `lmChatAnthropic` | Inspect parameters |
-| Anthropic Chat Model1 | `lmChatAnthropic` | Inspect parameters |
-| Comment Back on MR | `httpRequest` | POST |
-| GitLab Trigger | `gitlabTrigger` | Inspect parameters |
-| Send to DL ( Email Notification) | `gmail` | Inspect parameters |
-| GitLab Trigger1 | `gitlabTrigger` | Inspect parameters |
-| GitLab Trigger2 | `gitlabTrigger` | Inspect parameters |
-
-## Connection map
-
-- Merge → Extract Diff (`main`, output 0, input 0)
-- AI Agent → Distribution List Generator (`main`, output 0, input 0)
-- AI Agent → Comment Back on MR (`main`, output 0, input 0)
-- Extract Diff → If Some Change (`main`, output 0, input 0)
-- GitLab Trigger → Merge (`main`, output 0, input 0)
-- If Some Change → AI Agent (`main`, output 0, input 0)
-- GitLab Trigger1 → Merge (`main`, output 0, input 0)
-- GitLab Trigger2 → Merge (`main`, output 0, input 0)
-- Anthropic Chat Model → Auto-fixing Output Parser (`ai_languageModel`, output 0, input 0)
-- Anthropic Chat Model1 → AI Agent (`ai_languageModel`, output 0, input 0)
-- Structured Output Parser → Auto-fixing Output Parser (`ai_outputParser`, output 0, input 0)
-- Auto-fixing Output Parser → AI Agent (`ai_outputParser`, output 0, input 0)
-- Distribution List Generator → Send to DL ( Email Notification) (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Gitlab/1895_Gitlab_Code_Automation_Webhook.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Gitlab/1895_Gitlab_Code_Automation_Webhook.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

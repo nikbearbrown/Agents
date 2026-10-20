@@ -1,0 +1,26 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["OpenAI Chat Model1"]
+  n2["Schedule Trigger"]
+  n3["Recursive Character Text Splitter"]
+  n4["OpenAI Chat Model2"]
+  n5["Create a Prompt for DALL-E"]
+  n6["Generate an Image for the Story"]
+  n7["Generate Audio for the Story"]
+  n8["Send the Story To Channel"]
+  n9["Send Image to the Channel"]
+  n10["Translate the Story to Arabic"]
+  n11["Send Audio to the Channel"]
+  n12["Create a Story for Kids"]
+  n2 -->|"main out 0 to in 0"| n12
+  n0 -->|"ai_languageModel out 0 to in 0"| n12
+  n1 -->|"ai_languageModel out 0 to in 0"| n10
+  n4 -->|"ai_languageModel out 0 to in 0"| n5
+  n12 -->|"main out 0 to in 0"| n10
+  n12 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n9
+  n3 -->|"ai_textSplitter out 0 to in 0"| n12

@@ -1,0 +1,799 @@
+{
+  "schema_version": 1,
+  "slug": "linkedin-leads-scraping-enrichment-main",
+  "title": "LinkedIn Leads Scraping & Enrichment (Main)",
+  "purpose": "Adapt the published “LinkedIn Leads Scraping & Enrichment (Main)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 56 executable nodes and 47 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission",
+    "Google Sheets Trigger",
+    "Google Sheets Trigger2",
+    "Schedule Trigger",
+    "Google Sheets Trigger3",
+    "Google Sheets Trigger4",
+    "Google Sheets Trigger5",
+    "Schedule Trigger2",
+    "Schedule Trigger3",
+    "Google Sheets Trigger6"
+  ],
+  "terminal_nodes": [
+    "Add Leads to Google Sheet",
+    "Add Linkedin Username",
+    "Add Email Address",
+    "Mark Invalid Email",
+    "update_to_pending",
+    "update_to_pending1",
+    "Update Profile Summary",
+    "Update Posts Summary",
+    "update_to_unscraped",
+    "Append to Enriched Leads Database",
+    "update status to failed",
+    "Google Sheets",
+    "Update Profile Summary1",
+    "update status to failed1"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "googleSheetsTriggerOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI1",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger2",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Clean Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Add Leads to Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Add Linkedin Username",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get Pending Username Row",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Add Email Address",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Mark Invalid Email",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Email from Apollo",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Confirm Email Validity",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Pending Email Statuses",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger3",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Profile Posts",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get About Profile",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Pending About and Posts Rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Clean Profile Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger4",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Pending About and Posts Rows1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Clean Posts Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger5",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger2",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "get invalid email rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "update_to_pending",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "get_failed_profile_summary_rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "update_to_pending1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger3",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "get_failed_posts_summary_rows1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Posts AI Summarizer",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "AI Profile Summarizer",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Update Profile Summary",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Update Posts Summary",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Get Completely Enriched Profiles",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "update_to_unscraped",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Append to Enriched Leads Database",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "update status to failed",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Stringify Profile Data1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Stringify Posts Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Leads with Apollo.io",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger6",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Pending About and Posts Rows2",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Clean Profile Data1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Stringify Data2",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "AI Profile Summarizer1",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Update Profile Summary1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Stringify Data3",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Posts AI Summarizer1",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Get About Profile2",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Clean Profile Data2",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "update status to failed1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "If email is valid",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Update Profile Summary1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI1",
+        "to": "Add Linkedin Username",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Clean Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean Data",
+        "to": "Add Leads to Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Stringify Data2",
+        "to": "AI Profile Summarizer1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Stringify Data3",
+        "to": "Posts AI Summarizer1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean Posts Data",
+        "to": "Stringify Posts Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean Posts Data",
+        "to": "Google Sheets",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "get invalid email rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get About Profile",
+        "to": "Clean Profile Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Profile Posts",
+        "to": "Clean Posts Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If email is valid",
+        "to": "Add Email Address",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If email is valid",
+        "to": "Mark Invalid Email",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger2",
+        "to": "get_failed_profile_summary_rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger3",
+        "to": "get_failed_posts_summary_rows1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean Profile Data",
+        "to": "Stringify Profile Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean Profile Data",
+        "to": "update status to failed",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get About Profile2",
+        "to": "Clean Profile Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get About Profile2",
+        "to": "Clean Profile Data2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get About Profile2",
+        "to": "update status to failed1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "Generate Leads with Apollo.io",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean Profile Data1",
+        "to": "Stringify Data2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Clean Profile Data2",
+        "to": "Stringify Data3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Posts AI Summarizer",
+        "to": "Update Posts Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Posts AI Summarizer1",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Stringify Posts Data",
+        "to": "Posts AI Summarizer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Profile Summarizer",
+        "to": "Update Profile Summary",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Email from Apollo",
+        "to": "Confirm Email Validity",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets Trigger",
+        "to": "Get Pending Username Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Profile Summarizer1",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Confirm Email Validity",
+        "to": "If email is valid",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets Trigger2",
+        "to": "Get Pending Email Statuses",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets Trigger3",
+        "to": "Get Pending About and Posts Rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets Trigger4",
+        "to": "Get Pending About and Posts Rows1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets Trigger5",
+        "to": "Get Completely Enriched Profiles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets Trigger6",
+        "to": "Get Pending About and Posts Rows2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get invalid email rows",
+        "to": "update_to_pending",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Stringify Profile Data1",
+        "to": "AI Profile Summarizer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Pending Username Row",
+        "to": "OpenAI1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Pending Email Statuses",
+        "to": "Get Email from Apollo",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Leads with Apollo.io",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_failed_posts_summary_rows1",
+        "to": "update_to_unscraped",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_failed_profile_summary_rows",
+        "to": "update_to_pending1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Completely Enriched Profiles",
+        "to": "Append to Enriched Leads Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Pending About and Posts Rows",
+        "to": "Get About Profile",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Pending About and Posts Rows1",
+        "to": "Get Profile Posts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Pending About and Posts Rows2",
+        "to": "Get About Profile2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/implementations/n8n",
+      "files": [
+        "agents/linkedin-leads-scraping-enrichment-main/implementations/n8n/linkedin-leads-scraping-enrichment-main.json"
+      ],
+      "sha256": "3ea60361380063c6f2af19f084f5a9959ef3512ce549939e34eb4b0d6269b6fd",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/linkedin-leads-scraping-enrichment-main/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/linkedin-leads-scraping-enrichment-main/implementations/n8n/provenance.json"
+}

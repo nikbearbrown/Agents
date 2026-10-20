@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "slug": "find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet",
+  "title": "Find contact information for linkedin profile URLs stored in a Google Sheet",
+  "purpose": "Adapt the published “Find contact information for linkedin profile URLs stored in a Google Sheet” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "No Operation, do nothing",
+    "Update the sheet with information"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "HTTP Request - Utilize Prospeo.io LinkedIn Email Finder API1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Conditional Check",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Field Editing",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Data Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get links from Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Update the sheet with information",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Data Merge",
+        "to": "Field Editing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Field Editing",
+        "to": "Update the sheet with information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get links from Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Conditional Check",
+        "to": "Data Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Conditional Check",
+        "to": "HTTP Request - Utilize Prospeo.io LinkedIn Email Finder API1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Conditional Check",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get links from Google Sheet",
+        "to": "Conditional Check",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request - Utilize Prospeo.io LinkedIn Email Finder API1",
+        "to": "Data Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/n8n",
+      "files": [
+        "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/n8n/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet.json"
+      ],
+      "sha256": "a8f4f7c904c03e545a4125797f1cb7d7d5089bc69eeae413562a540e433977e2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,37 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["Execute SQL Query"]
+  n2["When Executed by Another Workflow"]
+  n3["query_db_tool"]
+  n4["generate_quickchart_tool"]
+  n5["Create QuickChart"]
+  n6["QuickChart Object Schema"]
+  n7["gpt-4o-mini"]
+  n8["gpt-4o-mini-2"]
+  n9["#129302;Primary Agent"]
+  n10["#129302;Secondary Postgres Agent"]
+  n11["#129302;Secondary QuickChart Agent"]
+  n12["#128256;Tool Agent Router"]
+  n13["Table Definitions"]
+  n14["Postgres Chat Memory"]
+  n15["Final QuickChart URL"]
+  n16["QuickChart GET URL"]
+  n17["DB Schema and Tables"]
+  n18["gpt-40-mini-1"]
+  n7 -->|"ai_languageModel out 0 to in 0"| n9
+  n18 -->|"ai_languageModel out 0 to in 0"| n10
+  n8 -->|"ai_languageModel out 0 to in 0"| n11
+  n3 -->|"ai_tool out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n15
+  n1 -->|"ai_tool out 0 to in 0"| n10
+  n13 -->|"ai_tool out 0 to in 0"| n10
+  n16 -->|"main out 0 to in 0"| n5
+  n17 -->|"ai_tool out 0 to in 0"| n10
+  n14 -->|"ai_memory out 0 to in 0"| n9
+  n12 -->|"main out 0 to in 0"| n10
+  n12 -->|"main out 1 to in 0"| n11
+  n6 -->|"ai_outputParser out 0 to in 0"| n11
+  n4 -->|"ai_tool out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n9
+  n11 -->|"main out 0 to in 0"| n16
+  n2 -->|"main out 0 to in 0"| n12

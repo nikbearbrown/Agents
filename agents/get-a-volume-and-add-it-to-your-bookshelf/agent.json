@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "get-a-volume-and-add-it-to-your-bookshelf",
+  "title": "Get a volume and add it to your bookshelf",
+  "purpose": "Adapt the published “Get a volume and add it to your bookshelf” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Google Books2"
+  ],
+  "credential_types": [
+    "googleBooksOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Books",
+        "type": "n8n-nodes-base.googleBooks",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Books1",
+        "type": "n8n-nodes-base.googleBooks",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Books2",
+        "type": "n8n-nodes-base.googleBooks",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Google Books",
+        "to": "Google Books1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Books1",
+        "to": "Google Books2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Google Books",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/n8n",
+      "files": [
+        "agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/n8n/get-a-volume-and-add-it-to-your-bookshelf.json"
+      ],
+      "sha256": "fc3106589b96925e9bc72bf9e6d07993c1ab8f2cca09b464ff1c969a3b8cd056",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-a-volume-and-add-it-to-your-bookshelf/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/n8n/provenance.json"
+}

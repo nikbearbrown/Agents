@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "slug": "confirm-the-key-names-and-column-references",
+  "title": "Confirm the key names and column references",
+  "purpose": "Adapt the published “Confirm the key names and column references” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "New Upload"
+  ],
+  "terminal_nodes": [
+    "Status Failed",
+    "Status Uploaded"
+  ],
+  "credential_types": [
+    "airtableTokenApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get File ID",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Status Failed",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Status Uploaded",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Campaign is Not Empty",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Campaign Not Empty",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Campaign Not Empty1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Read File",
+        "type": "n8n-nodes-base.spreadsheetFile",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Airtable Base IDs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Status Processing",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Download File",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Create Records",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "New Upload",
+        "type": "n8n-nodes-base.airtableTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Read File",
+        "to": "Campaign is Not Empty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Upload",
+        "to": "Airtable Base IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get File ID",
+        "to": "Status Processing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download File",
+        "to": "Read File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Records",
+        "to": "Status Uploaded",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Records",
+        "to": "Status Failed",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Airtable Base IDs",
+        "to": "Get File ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status Processing",
+        "to": "Download File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Campaign Not Empty",
+        "to": "Create Records",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Campaign Not Empty1",
+        "to": "Create Records",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Campaign is Not Empty",
+        "to": "Campaign Not Empty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Campaign is Not Empty",
+        "to": "Campaign Not Empty1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/confirm-the-key-names-and-column-references/implementations/n8n",
+      "files": [
+        "agents/confirm-the-key-names-and-column-references/implementations/n8n/confirm-the-key-names-and-column-references.json"
+      ],
+      "sha256": "4f67908dba76f170529ce03c2ad8587ed94bc38ca1274963b9cb48421503562a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/confirm-the-key-names-and-column-references/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/confirm-the-key-names-and-column-references/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/confirm-the-key-names-and-column-references/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/confirm-the-key-names-and-column-references/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/confirm-the-key-names-and-column-references/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/confirm-the-key-names-and-column-references/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/confirm-the-key-names-and-column-references/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/confirm-the-key-names-and-column-references/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/confirm-the-key-names-and-column-references/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/confirm-the-key-names-and-column-references/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/confirm-the-key-names-and-column-references/implementations/n8n/provenance.json"
+}

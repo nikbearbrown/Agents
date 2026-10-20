@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "slug": "always-authenticate-your-server-20dbcd39",
+  "title": "Always Authenticate Your Server!",
+  "purpose": "Adapt the published “Always Authenticate Your Server!” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "Google Drive MCP Server"
+  ],
+  "terminal_nodes": [
+    "Google Drive MCP Server",
+    "Get PDF Response",
+    "Get CSV Response",
+    "Read File From GDrive",
+    "Search Files from Gdrive",
+    "Analyse Image",
+    "Transcribe Audio"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive MCP Server",
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download File1",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "FileType",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Operation",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract from PDF",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract from CSV",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get PDF Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get CSV Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Read File From GDrive",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Search Files from Gdrive",
+        "type": "n8n-nodes-base.googleDriveTool",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Analyse Image",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Transcribe Audio",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "FileType",
+        "to": "Extract from PDF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "FileType",
+        "to": "Extract from CSV",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "FileType",
+        "to": "Analyse Image",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "FileType",
+        "to": "Transcribe Audio",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Operation",
+        "to": "Download File1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download File1",
+        "to": "FileType",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from CSV",
+        "to": "Get CSV Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from PDF",
+        "to": "Get PDF Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read File From GDrive",
+        "to": "Google Drive MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Files from Gdrive",
+        "to": "Google Drive MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Operation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/always-authenticate-your-server-20dbcd39/implementations/n8n",
+      "files": [
+        "agents/always-authenticate-your-server-20dbcd39/implementations/n8n/always-authenticate-your-server-20dbcd39.json"
+      ],
+      "sha256": "cb85e990f638d11e1d36d6ee44cfae412499eae8c60854e6af2a8297a87900f3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-20dbcd39/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-20dbcd39/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-20dbcd39/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-20dbcd39/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server-20dbcd39/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/always-authenticate-your-server-20dbcd39/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/always-authenticate-your-server-20dbcd39/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/always-authenticate-your-server-20dbcd39/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/always-authenticate-your-server-20dbcd39/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/always-authenticate-your-server-20dbcd39/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/always-authenticate-your-server-20dbcd39/implementations/n8n/provenance.json"
+}

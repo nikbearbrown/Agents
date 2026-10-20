@@ -1,0 +1,26 @@
+flowchart LR
+  n0["When clicking #34;Test workflow#34;"]
+  n1["Google Drive"]
+  n2["Get Color Information"]
+  n3["Resize Image"]
+  n4["Default Data Loader"]
+  n5["Recursive Character Text Splitter"]
+  n6["Combine Image Analysis"]
+  n7["Document for Embedding"]
+  n8["Embeddings OpenAI1"]
+  n9["In-Memory Vector Store"]
+  n10["Embeddings OpenAI"]
+  n11["Search for Image"]
+  n12["Get Image Keywords"]
+  n1 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n12
+  n10 -->|"ai_embedding out 0 to in 0"| n9
+  n8 -->|"ai_embedding out 0 to in 0"| n11
+  n12 -->|"main out 0 to in 1"| n6
+  n4 -->|"ai_document out 0 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n1
+  n5 -->|"ai_textSplitter out 0 to in 0"| n4

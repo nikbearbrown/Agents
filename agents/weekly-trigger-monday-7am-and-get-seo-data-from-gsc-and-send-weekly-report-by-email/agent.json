@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email",
+  "title": "My workflow 3",
+  "purpose": "Adapt the published “My workflow 3” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Weekly Trigger (Monday 7AM)"
+  ],
+  "terminal_nodes": [
+    "Send Weekly Report by Email"
+  ],
+  "credential_types": [
+    "gmailOAuth2"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Weekly Trigger (Monday 7AM)",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get SEO Data from GSC",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Generate SEO Report",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Weekly Report by Email",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Generate SEO Report",
+        "to": "Send Weekly Report by Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get SEO Data from GSC",
+        "to": "Generate SEO Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Weekly Trigger (Monday 7AM)",
+        "to": "Get SEO Data from GSC",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/n8n",
+      "files": [
+        "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/n8n/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email.json"
+      ],
+      "sha256": "3428bb8a2de5f3407dad7a9bdd9e795d62a8ed650e2a575b38b4999b556ce13d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/n8n/provenance.json"
+}

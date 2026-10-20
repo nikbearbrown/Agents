@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "slug": "signl4-and-open-weather-map-and-receive-schedule-events",
+  "title": "signl4 and open weather map and receive schedule events",
+  "purpose": "Adapt the published “signl4 and open weather map and receive schedule events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "SIGNL4"
+  ],
+  "credential_types": [
+    "openWeatherMapApi",
+    "signl4Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SIGNL4",
+        "type": "n8n-nodes-base.signl4",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenWeatherMap",
+        "type": "n8n-nodes-base.openWeatherMap",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "SIGNL4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenWeatherMap",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "OpenWeatherMap",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "OpenWeatherMap",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/n8n",
+      "files": [
+        "agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/n8n/signl4-and-open-weather-map-and-receive-schedule-events.json"
+      ],
+      "sha256": "345b20a77f8abf3e80326267771b61f2edbb49d8b97a9b2f010d1ac0f24aed63",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/signl4-and-open-weather-map-and-receive-schedule-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/n8n/provenance.json"
+}

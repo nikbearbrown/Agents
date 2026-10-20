@@ -1,0 +1,496 @@
+{
+  "schema_version": 1,
+  "slug": "find-top-keywords",
+  "title": "Find Top Keywords",
+  "purpose": "Adapt the published “Find Top Keywords” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 28 executable nodes and 31 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [],
+  "credential_types": [
+    "httpBasicAuth",
+    "httpHeaderAuth",
+    "nocoDbApiToken"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Gen Time",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "NocoDB",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Second Order Google Autocomplete Keywords",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Search Volume",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Google Search",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "YouTube Search Volume",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Second Order YouTube Autocomplete Keywords",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out YT Search",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "YT Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Add Second Tier YT Keyword Data",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Add Second Tier G Keyword Data",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Format G Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format YT Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Bulk Import G Monthly Search Volume",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Bulk Import YT Monthly Search Volume",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Google Keyword Available",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Is YT Keyword Avaliable",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check for Google Keyword",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Check for YT Keyword",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over YT Keywords",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Update Second Tier G Keyword Data",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Update Second Tier YT Keyword Data",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Google Keywords",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Combine G Keywords and Filter",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Combine YT Keywords and Filter",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "NocoDB",
+        "to": "Second Order YouTube Autocomplete Keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "NocoDB",
+        "to": "Second Order Google Autocomplete Keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gen Time",
+        "to": "NocoDB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "YT Filter",
+        "to": "Loop Over YT Keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format G Data",
+        "to": "Bulk Import G Monthly Search Volume",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Filter",
+        "to": "Loop Over Google Keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format YT Data",
+        "to": "Bulk Import YT Monthly Search Volume",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Gen Time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out YT Search",
+        "to": "YT Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for YT Keyword",
+        "to": "Is YT Keyword Avaliable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Search Volume",
+        "to": "Split Out Google Search",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over YT Keywords",
+        "to": "Check for YT Keyword",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "YouTube Search Volume",
+        "to": "Split Out YT Search",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is YT Keyword Avaliable",
+        "to": "Add Second Tier YT Keyword Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is YT Keyword Avaliable",
+        "to": "Update Second Tier YT Keyword Data",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Split Out Google Search",
+        "to": "Google Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for Google Keyword",
+        "to": "Is Google Keyword Available",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Google Keywords",
+        "to": "Check for Google Keyword",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Is Google Keyword Available",
+        "to": "Add Second Tier G Keyword Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Google Keyword Available",
+        "to": "Update Second Tier G Keyword Data",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Combine G Keywords and Filter",
+        "to": "Google Search Volume",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Second Tier G Keyword Data",
+        "to": "Format G Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine YT Keywords and Filter",
+        "to": "YouTube Search Volume",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Second Tier YT Keyword Data",
+        "to": "Format YT Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Second Tier G Keyword Data",
+        "to": "Loop Over Google Keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Gen Time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Second Tier YT Keyword Data",
+        "to": "Loop Over YT Keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Bulk Import G Monthly Search Volume",
+        "to": "Loop Over Google Keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Bulk Import YT Monthly Search Volume",
+        "to": "Loop Over YT Keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Second Order Google Autocomplete Keywords",
+        "to": "Combine G Keywords and Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Second Order YouTube Autocomplete Keywords",
+        "to": "Combine YT Keywords and Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/find-top-keywords/implementations/n8n",
+      "files": [
+        "agents/find-top-keywords/implementations/n8n/find-top-keywords.json"
+      ],
+      "sha256": "9360caf487602030bc95067ce6e2413f7ed892559257c75ead70bf3e9818b181",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/find-top-keywords/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/find-top-keywords/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/find-top-keywords/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/find-top-keywords/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/find-top-keywords/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/find-top-keywords/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/find-top-keywords/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/find-top-keywords/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/find-top-keywords/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/find-top-keywords/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/find-top-keywords/implementations/n8n/provenance.json"
+}

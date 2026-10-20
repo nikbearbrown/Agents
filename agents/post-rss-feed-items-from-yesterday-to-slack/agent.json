@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "slug": "post-rss-feed-items-from-yesterday-to-slack",
+  "title": "Post RSS feed items from yesterday to Slack",
+  "purpose": "Adapt the published “Post RSS feed items from yesterday to Slack” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Every Morning"
+  ],
+  "terminal_nodes": [
+    "Post to Slack"
+  ],
+  "credential_types": [
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Build our message",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Every Morning",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Yesterdays Date",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get the RSS Feed",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If it was published after yesterday",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Post to Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Every Morning",
+        "to": "Get Yesterdays Date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the RSS Feed",
+        "to": "If it was published after yesterday",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build our message",
+        "to": "Post to Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Yesterdays Date",
+        "to": "Get the RSS Feed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If it was published after yesterday",
+        "to": "Build our message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/implementations/n8n",
+      "files": [
+        "agents/post-rss-feed-items-from-yesterday-to-slack/implementations/n8n/post-rss-feed-items-from-yesterday-to-slack.json"
+      ],
+      "sha256": "127953cc80afb58fa1e6456b1e83483162dd355995ac1887ffd1cb4f1f9be14d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/post-rss-feed-items-from-yesterday-to-slack/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/post-rss-feed-items-from-yesterday-to-slack/implementations/n8n/provenance.json"
+}

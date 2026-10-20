@@ -1,0 +1,24 @@
+flowchart LR
+  n0["Get Models"]
+  n1["When chat message received"]
+  n2["Get timeDifference"]
+  n3["Run Model with Dunamic Inputs"]
+  n4["Analyze LLM Response Metrics"]
+  n5["Save Results to Google Sheets"]
+  n6["Capture End Time"]
+  n7["Capture Start Time"]
+  n8["Prepare Data for Analysis"]
+  n9["Extract Model IDsto Run Separately"]
+  n10["Add System Prompt"]
+  n11["LLM Response Analysis"]
+  n0 -->|"main out 0 to in 0"| n9
+  n6 -->|"main out 0 to in 0"| n2
+  n10 -->|"main out 0 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n10
+  n2 -->|"main out 0 to in 0"| n8
+  n11 -->|"main out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n5
+  n3 -->|"ai_languageModel out 0 to in 0"| n11
+  n9 -->|"main out 0 to in 0"| n7

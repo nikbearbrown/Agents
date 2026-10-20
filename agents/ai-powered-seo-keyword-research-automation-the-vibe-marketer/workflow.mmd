@@ -1,0 +1,56 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["Structured Output Parser"]
+  n2["Topic Expansion"]
+  n3["Competitor Analysis"]
+  n4["Keyword Difficulty"]
+  n5["Search Volume #38; CPC"]
+  n6["split primary keywords"]
+  n7["OpenAI Chat Model2"]
+  n8["Keyword Ranking per URL"]
+  n9["Final Keyword Strategy"]
+  n10["Get Input from NocoDB"]
+  n11["Split the Competitor URLs"]
+  n12["Set relevant fields"]
+  n13["OpenAI Chat Model1"]
+  n14["Format Json and add Competitor URLs"]
+  n15["Aggregate SV #38; CPC"]
+  n16["Aggregate KWD"]
+  n17["Merge SV, CPC #38; KWD"]
+  n18["Merge Topic Expansion, SV, CPC #38; KWD"]
+  n19["Aggregate Competitor Analysis"]
+  n20["Merge Everything"]
+  n21["Write Content Brief"]
+  n22["Update Status - Done"]
+  n23["Send Notification"]
+  n24["Start Notification"]
+  n25["Update Status - Started"]
+  n16 -->|"main out 0 to in 1"| n17
+  n2 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 1"| n18
+  n20 -->|"main out 0 to in 0"| n9
+  n0 -->|"ai_languageModel out 0 to in 0"| n2
+  n15 -->|"main out 0 to in 0"| n17
+  n4 -->|"main out 0 to in 0"| n16
+  n13 -->|"ai_languageModel out 0 to in 0"| n3
+  n7 -->|"ai_languageModel out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n19
+  n17 -->|"main out 0 to in 0"| n18
+  n5 -->|"main out 0 to in 0"| n15
+  n12 -->|"main out 0 to in 0"| n2
+  n12 -->|"main out 0 to in 0"| n14
+  n12 -->|"main out 0 to in 2"| n20
+  n12 -->|"main out 0 to in 0"| n25
+  n12 -->|"main out 0 to in 0"| n24
+  n10 -->|"main out 0 to in 0"| n12
+  n9 -->|"main out 0 to in 0"| n21
+  n9 -->|"main out 0 to in 0"| n22
+  n9 -->|"main out 0 to in 0"| n23
+  n6 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n3
+  n1 -->|"ai_outputParser out 0 to in 0"| n2
+  n11 -->|"main out 0 to in 0"| n8
+  n19 -->|"main out 0 to in 1"| n20
+  n14 -->|"main out 0 to in 0"| n11
+  n18 -->|"main out 0 to in 0"| n20

@@ -1,0 +1,461 @@
+{
+  "schema_version": 1,
+  "slug": "events-webhook-trigger-8e718da6",
+  "title": "Events Webhook Trigger",
+  "purpose": "Adapt the published “Events Webhook Trigger” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 27 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Venafi Request Certificate",
+    "Send Auto Generated Confirmation",
+    "Send Message Request for Manual Approval",
+    "Send Auto Generated Confirmation1"
+  ],
+  "credential_types": [
+    "openAiApi",
+    "slackApi",
+    "venafiTlsProtectCloudApi",
+    "virusTotalApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Venafi TLS Protect Cloud",
+        "type": "n8n-nodes-base.venafiTlsProtectCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Webhook",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Close Modal Popup",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Slack Webhook - Vulnerability",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Venafi Request Certificate",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Slack User ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Translate Slack User ID to Email",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "VirusTotal HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Summarize output to save on tokens",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Auto Issue Certificate Based on 0 Malicious Reports",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Auto Issue Certificate",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Report For Manual Approval",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Slack Team ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge User and Team Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Merge Requestor and VT Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Send Auto Generated Confirmation",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Message Request for Manual Approval",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Route Message",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Venafi TLS Protect Cloud1",
+        "type": "n8n-nodes-base.venafiTlsProtectCloud",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Auto Generated Confirmation1",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Manual Issue Certificate",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Respond to webhook success",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "OpenAI",
+        "to": "Send Message Request for Manual Approval",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Parse Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Webhook",
+        "to": "Route Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route Message",
+        "to": "Respond to Slack Webhook - Vulnerability",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route Message",
+        "to": "Close Modal Popup",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Route Message",
+        "to": "Respond to webhook success",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Extract Fields",
+        "to": "VirusTotal HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow",
+        "to": "Merge User and Team Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Close Modal Popup",
+        "to": "Extract Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Close Modal Popup",
+        "to": "Get Slack User ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Close Modal Popup",
+        "to": "Get Slack Team ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Slack Team ID",
+        "to": "Execute Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Slack User ID",
+        "to": "Translate Slack User ID to Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto Issue Certificate",
+        "to": "Venafi TLS Protect Cloud",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "VirusTotal HTTP Request",
+        "to": "Summarize output to save on tokens",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Issue Certificate",
+        "to": "Venafi TLS Protect Cloud1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge User and Team Data",
+        "to": "Merge Requestor and VT Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Venafi TLS Protect Cloud",
+        "to": "Send Auto Generated Confirmation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Venafi TLS Protect Cloud1",
+        "to": "Send Auto Generated Confirmation1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Respond to webhook success",
+        "to": "Manual Issue Certificate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Requestor and VT Data",
+        "to": "Auto Issue Certificate Based on 0 Malicious Reports",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Translate Slack User ID to Email",
+        "to": "Merge User and Team Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize output to save on tokens",
+        "to": "Merge Requestor and VT Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Report For Manual Approval",
+        "to": "OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Respond to Slack Webhook - Vulnerability",
+        "to": "Venafi Request Certificate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto Issue Certificate Based on 0 Malicious Reports",
+        "to": "Auto Issue Certificate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto Issue Certificate Based on 0 Malicious Reports",
+        "to": "Generate Report For Manual Approval",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/events-webhook-trigger-8e718da6/implementations/n8n",
+      "files": [
+        "agents/events-webhook-trigger-8e718da6/implementations/n8n/events-webhook-trigger-8e718da6.json"
+      ],
+      "sha256": "46e547bfcb4b1f947bd43a189cc321950b5fa6d3ad25adb8e8579a2298e77534",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-8e718da6/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-8e718da6/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-8e718da6/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-8e718da6/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-8e718da6/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/events-webhook-trigger-8e718da6/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/events-webhook-trigger-8e718da6/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/events-webhook-trigger-8e718da6/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/events-webhook-trigger-8e718da6/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/events-webhook-trigger-8e718da6/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/events-webhook-trigger-8e718da6/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "slug": "receive-typeform-events-and-append-google-sheets-and-create-user-mattermost",
+  "title": "receive typeform events and append google sheets and create user mattermost",
+  "purpose": "Adapt the published “receive typeform events and append google sheets and create user mattermost” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Attendee Registrations"
+  ],
+  "terminal_nodes": [
+    "Welcome Email"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleCalendarOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "mattermostApi",
+    "typeformApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Attendee Registrations",
+        "type": "n8n-nodes-base.typeformTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add to Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Account",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add to team",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Array to Rows",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Session Details",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add to channels",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add to Event",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Welcome Email",
+        "type": "n8n-nodes-base.gmail",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge Data",
+        "to": "Add to channels",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add to team",
+        "to": "Array to Rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add to Event",
+        "to": "Welcome Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add to Sheets",
+        "to": "Create Account",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Array to Rows",
+        "to": "Merge Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Account",
+        "to": "Add to team",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add to channels",
+        "to": "Add to Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Session Details",
+        "to": "Merge Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Attendee Registrations",
+        "to": "Add to Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/n8n",
+      "files": [
+        "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/n8n/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost.json"
+      ],
+      "sha256": "24d9752c6cb25191ca1c3332f4a635b1fb68b13eb583cd9292e92bc978190e6b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/n8n/provenance.json"
+}

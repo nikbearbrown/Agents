@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "slug": "analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost",
+  "title": "Analyze the sentiment of feedback and send a message on Mattermost",
+  "purpose": "Adapt the published “Analyze the sentiment of feedback and send a message on Mattermost” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Typeform Trigger"
+  ],
+  "terminal_nodes": [
+    "Mattermost",
+    "NoOp"
+  ],
+  "credential_types": [
+    "googleCloudNaturalLanguageOAuth2Api",
+    "mattermostApi",
+    "typeformApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Typeform Trigger",
+        "type": "n8n-nodes-base.typeformTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Cloud Natural Language",
+        "type": "n8n-nodes-base.googleCloudNaturalLanguage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Mattermost",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "NoOp",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "IF",
+        "to": "Mattermost",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "NoOp",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Typeform Trigger",
+        "to": "Google Cloud Natural Language",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Cloud Natural Language",
+        "to": "IF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/n8n",
+      "files": [
+        "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/n8n/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost.json"
+      ],
+      "sha256": "da9120a3f9c3a0bedd079028d811a97e20a680bbcc3571e16cae16ba183d17e7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "slug": "query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries",
+  "title": "query for upwork job posts and receive schedule events and find existing entries",
+  "purpose": "Adapt the published “query for upwork job posts and receive schedule events and find existing entries” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Add New Entries To MongoDB",
+    "Send message in #general"
+  ],
+  "credential_types": [
+    "httpQueryAuth",
+    "mongoDb",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Assign parameters",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Query For Upwork Job Posts",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "If Working Hours",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Find Existing Entries",
+        "type": "n8n-nodes-base.mongoDb",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Output New Entries",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Add New Entries To MongoDB",
+        "type": "n8n-nodes-base.mongoDb",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Send message in #general",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If Working Hours",
+        "to": "Assign parameters",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "If Working Hours",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Assign parameters",
+        "to": "Query For Upwork Job Posts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Output New Entries",
+        "to": "Add New Entries To MongoDB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Output New Entries",
+        "to": "Send message in #general",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Existing Entries",
+        "to": "Output New Entries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query For Upwork Job Posts",
+        "to": "Find Existing Entries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query For Upwork Job Posts",
+        "to": "Output New Entries",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/n8n",
+      "files": [
+        "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/n8n/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries.json"
+      ],
+      "sha256": "9c859c50bf4abd5ff5eb0538ea5e036de20b8396807bc9456676a9712952bf08",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/n8n/provenance.json"
+}

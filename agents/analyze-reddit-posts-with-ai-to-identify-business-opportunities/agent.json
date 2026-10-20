@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "slug": "analyze-reddit-posts-with-ai-to-identify-business-opportunities",
+  "title": "Analyze Reddit Posts with AI to Identify Business Opportunities",
+  "purpose": "Adapt the published “Analyze Reddit Posts with AI to Identify Business Opportunities” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "OpenAI Chat Model1",
+    "OpenAI Chat Model2",
+    "Positive Posts Draft",
+    "Neutral  Posts Draft",
+    "Negative  Posts Draft",
+    "Output The Results"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleSheetsOAuth2Api",
+    "openAiApi",
+    "redditOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Post Sentiment Analysis",
+        "type": "@n8n/n8n-nodes-langchain.sentimentAnalysis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Positive Posts Draft",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Neutral  Posts Draft",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Negative  Posts Draft",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Find Proper Solutions",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Post Summarization",
+        "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Input",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Output The Results",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Merge 3 Inputs",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Filter Posts By Features",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Posts By Content",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Select Key Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Analysis Content  By AI",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Get Posts",
+        "type": "n8n-nodes-base.reddit",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Posts",
+        "to": "Filter Posts By Features",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Input",
+        "to": "Filter Posts By Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge 3 Inputs",
+        "to": "Output The Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Analysis Content  By AI",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Select Key Fields",
+        "to": "Merge Input",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Select Key Fields",
+        "to": "Analysis Content  By AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Post Summarization",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Post Sentiment Analysis",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Post Summarization",
+        "to": "Merge 3 Inputs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Proper Solutions",
+        "to": "Merge 3 Inputs",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Analysis Content  By AI",
+        "to": "Merge Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Posts By Content",
+        "to": "Post Summarization",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Posts By Content",
+        "to": "Find Proper Solutions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Posts By Content",
+        "to": "Merge 3 Inputs",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Filter Posts By Content",
+        "to": "Post Sentiment Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Post Sentiment Analysis",
+        "to": "Positive Posts Draft",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Post Sentiment Analysis",
+        "to": "Neutral  Posts Draft",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Post Sentiment Analysis",
+        "to": "Negative  Posts Draft",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Filter Posts By Features",
+        "to": "Select Key Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get Posts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/n8n",
+      "files": [
+        "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/n8n/analyze-reddit-posts-with-ai-to-identify-business-opportunities.json"
+      ],
+      "sha256": "e07c305e415a88b87dab6065e28575cd7d70b44022d49ffaf6fffe6ab22f2d07",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/n8n/provenance.json"
+}

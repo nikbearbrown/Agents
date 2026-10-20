@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "slug": "automate-google-analytics-reporting-alexk1919",
+  "title": "Automate Google Analytics Reporting - AlexK1919",
+  "purpose": "Adapt the published “Automate Google Analytics Reporting - AlexK1919” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Email the Report",
+    "Schedule Trigger"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleAnalyticsOAuth2"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Page Engagement Stats for this week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Page Engagement Stats for prior week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Google Search Results for this week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Country views data for this week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Google Search Results for prior week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Country views data for prior week",
+        "type": "n8n-nodes-base.googleAnalytics",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse - Get Page Engagement This Week",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse - Get Page Engagement Prior Week",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse - Get Google Search This Week",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse - Get Google Search Prior Week",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse - Country Views This Week",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse - Country Views Prior Week",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set urlStrings",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Input All",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Email the Report",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Input All",
+        "to": "Format Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Data",
+        "to": "Email the Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Data",
+        "to": "Input All",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set urlStrings",
+        "to": "Aggregate Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse - Country Views This Week",
+        "to": "Get Country views data for prior week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse - Country Views Prior Week",
+        "to": "Set urlStrings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get Page Engagement Stats for this week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse - Get Google Search This Week",
+        "to": "Get Google Search Results for prior week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Country views data for this week",
+        "to": "Parse - Country Views This Week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse - Get Google Search Prior Week",
+        "to": "Get Country views data for this week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Country views data for prior week",
+        "to": "Parse - Country Views Prior Week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse - Get Page Engagement This Week",
+        "to": "Get Page Engagement Stats for prior week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse - Get Page Engagement Prior Week",
+        "to": "Get Google Search Results for this week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Google Search Results for this week",
+        "to": "Parse - Get Google Search This Week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Page Engagement Stats for this week",
+        "to": "Parse - Get Page Engagement This Week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Google Search Results for prior week",
+        "to": "Parse - Get Google Search Prior Week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Page Engagement Stats for prior week",
+        "to": "Parse - Get Page Engagement Prior Week",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/implementations/n8n",
+      "files": [
+        "agents/automate-google-analytics-reporting-alexk1919/implementations/n8n/automate-google-analytics-reporting-alexk1919.json"
+      ],
+      "sha256": "e4c129fff506359f9b9c829b224a5adb14a0f61a775ee8584c9113964a776844",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/automate-google-analytics-reporting-alexk1919/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/automate-google-analytics-reporting-alexk1919/implementations/n8n/provenance.json"
+}

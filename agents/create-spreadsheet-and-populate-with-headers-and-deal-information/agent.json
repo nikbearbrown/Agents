@@ -1,0 +1,654 @@
+{
+  "schema_version": 1,
+  "slug": "create-spreadsheet-and-populate-with-headers-and-deal-information",
+  "title": "Create spreadsheet and populate with headers and deal information",
+  "purpose": "Adapt the published “Create spreadsheet and populate with headers and deal information” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 40 executable nodes and 42 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On email received",
+    "On feedback given"
+  ],
+  "terminal_nodes": [
+    "Send reply to recipient",
+    "Successfully created or updated row",
+    "Paste data",
+    "Send feedback for fine-tuned data",
+    "Fallback route",
+    "Do not send unfinished email reply",
+    "Do not send email to this recipient",
+    "Do nothing"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Generate reply",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "On email received",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Only continue for specific emails",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Configure",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send reply to recipient",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Generate UUID",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Thanks for your response!",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract message content (advanced)",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If spreadsheet doesn't exist",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Successfully created or updated row",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create spreadsheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Store spreadsheet ID",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Paste data",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "If no sheet IDs",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create or update rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get data from `Format data`",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get data from `Format data` node",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format data",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send email reply",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "On feedback given",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send feedback for fine-tuned data",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Show HTML page",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get sheet IDs #1",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If no spreadsheet in configuration #2",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store specific sheet IDs #2",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get sheet IDs #2",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If no spreadsheet in configuration #1",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store specific sheet IDs #1",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Email template",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Record feedback",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fallback route",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Identify trigger #2",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Identify trigger #1",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Do not send unfinished email reply",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If reply is complete",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Do not send email to this recipient",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send reply to database",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Determine which trigger ran",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is text within token limit?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Configure",
+        "to": "Determine which trigger ran",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format data",
+        "to": "If no spreadsheet in configuration #1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate UUID",
+        "to": "Extract message content (advanced)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Email template",
+        "to": "Send reply to recipient",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate reply",
+        "to": "Send reply to database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate reply",
+        "to": "If reply is complete",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Show HTML page",
+        "to": "If no spreadsheet in configuration #2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no sheet IDs",
+        "to": "Create spreadsheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no sheet IDs",
+        "to": "Get data from `Format data`",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Record feedback",
+        "to": "Thanks for your response!",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get sheet IDs #1",
+        "to": "If no sheet IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get sheet IDs #2",
+        "to": "Send feedback for fine-tuned data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send email reply",
+        "to": "Email template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On email received",
+        "to": "Identify trigger #1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On feedback given",
+        "to": "Identify trigger #2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create spreadsheet",
+        "to": "Store spreadsheet ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Identify trigger #1",
+        "to": "Configure",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Identify trigger #2",
+        "to": "Configure",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If reply is complete",
+        "to": "Send email reply",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If reply is complete",
+        "to": "Do not send unfinished email reply",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Store spreadsheet ID",
+        "to": "Get data from `Format data` node",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create or update rows",
+        "to": "If spreadsheet doesn't exist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send reply to database",
+        "to": "Format data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Thanks for your response!",
+        "to": "Show HTML page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine which trigger ran",
+        "to": "Only continue for specific emails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine which trigger ran",
+        "to": "Record feedback",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Determine which trigger ran",
+        "to": "Fallback route",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Get data from `Format data`",
+        "to": "Create or update rows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is text within token limit?",
+        "to": "Generate reply",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is text within token limit?",
+        "to": "Do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Store specific sheet IDs #1",
+        "to": "If no sheet IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store specific sheet IDs #2",
+        "to": "Send feedback for fine-tuned data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If spreadsheet doesn't exist",
+        "to": "Create spreadsheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If spreadsheet doesn't exist",
+        "to": "Successfully created or updated row",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get data from `Format data` node",
+        "to": "Paste data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only continue for specific emails",
+        "to": "Generate UUID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only continue for specific emails",
+        "to": "Do not send email to this recipient",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Extract message content (advanced)",
+        "to": "Is text within token limit?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no spreadsheet in configuration #1",
+        "to": "Get sheet IDs #1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no spreadsheet in configuration #1",
+        "to": "Store specific sheet IDs #1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If no spreadsheet in configuration #2",
+        "to": "Get sheet IDs #2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no spreadsheet in configuration #2",
+        "to": "Store specific sheet IDs #2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/n8n",
+      "files": [
+        "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/n8n/create-spreadsheet-and-populate-with-headers-and-deal-information.json"
+      ],
+      "sha256": "f4115c1edbe4c20b8b8917a4712e166025dcf23c63f2e2a902953329f6053c1f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/n8n/provenance.json"
+}

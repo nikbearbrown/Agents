@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "slug": "pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2",
+  "title": "Pyragogy AI Village - Orchestrazione Master (Architettura Profonda V2)",
+  "purpose": "Adapt the published “Pyragogy AI Village - Orchestrazione Master (Architettura Profonda V2)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 35 executable nodes and 45 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Start",
+    "Webhook Trigger"
+  ],
+  "terminal_nodes": [
+    "Start",
+    "Final Response"
+  ],
+  "credential_types": [
+    "emailSend",
+    "githubApi",
+    "openAiApi",
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Start",
+        "type": "n8n-nodes-base.start",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook Trigger",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check DB Connection",
+        "type": "n8n-nodes-base.postgres",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Meta-Orchestrator",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Orchestration Plan",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "More Agents to Run?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Agent Input",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Route Agents with Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarizer Agent",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Synthesizer Agent",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Peer Reviewer Agent",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sensemaking Agent",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prompt Engineer Agent",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Onboarding/Explainer Agent",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Handbook Metadata",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Content for Review",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Review ID",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Review Request Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Human Approval",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Human Decision Split",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Save to handbook_entries",
+        "type": "n8n-nodes-base.postgres",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Approved Contribution Data",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Save Agent Contribution (Approved)",
+        "type": "n8n-nodes-base.postgres",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate GitHub File Path",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub Enabled?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Commit to GitHub (Approved)",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Log Human Rejection",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Archivist Paths",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Evaluate Board Consensus",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Redraft Needed",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Handle Redraft",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Process Agent Output",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack Enabled?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Notify Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Final Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook Trigger",
+        "to": "Check DB Connection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check DB Connection",
+        "to": "Meta-Orchestrator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Meta-Orchestrator",
+        "to": "Parse Orchestration Plan",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Orchestration Plan",
+        "to": "More Agents to Run?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "More Agents to Run?",
+        "to": "Prepare Agent Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "More Agents to Run?",
+        "to": "Slack Enabled?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Prepare Agent Input",
+        "to": "Route Agents with Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route Agents with Switch",
+        "to": "Summarizer Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Route Agents with Switch",
+        "to": "Synthesizer Agent",
+        "kind": "main",
+        "output": 1,
+        "input": 1
+      },
+      {
+        "from": "Route Agents with Switch",
+        "to": "Peer Reviewer Agent",
+        "kind": "main",
+        "output": 2,
+        "input": 2
+      },
+      {
+        "from": "Route Agents with Switch",
+        "to": "Sensemaking Agent",
+        "kind": "main",
+        "output": 3,
+        "input": 3
+      },
+      {
+        "from": "Route Agents with Switch",
+        "to": "Prompt Engineer Agent",
+        "kind": "main",
+        "output": 4,
+        "input": 4
+      },
+      {
+        "from": "Route Agents with Switch",
+        "to": "Onboarding/Explainer Agent",
+        "kind": "main",
+        "output": 5,
+        "input": 5
+      },
+      {
+        "from": "Route Agents with Switch",
+        "to": "Add Handbook Metadata",
+        "kind": "main",
+        "output": 6,
+        "input": 6
+      },
+      {
+        "from": "Summarizer Agent",
+        "to": "Process Agent Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Synthesizer Agent",
+        "to": "Process Agent Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Peer Reviewer Agent",
+        "to": "Sensemaking Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sensemaking Agent",
+        "to": "Prompt Engineer Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prompt Engineer Agent",
+        "to": "Evaluate Board Consensus",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Onboarding/Explainer Agent",
+        "to": "Process Agent Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Handbook Metadata",
+        "to": "Generate Content for Review",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Content for Review",
+        "to": "Generate Review ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Review ID",
+        "to": "Send Review Request Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Review Request Email",
+        "to": "Wait for Human Approval",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Human Approval",
+        "to": "Human Decision Split",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Human Decision Split",
+        "to": "Save to handbook_entries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Human Decision Split",
+        "to": "Log Human Rejection",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Save to handbook_entries",
+        "to": "Prepare Approved Contribution Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Approved Contribution Data",
+        "to": "Save Agent Contribution (Approved)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Agent Contribution (Approved)",
+        "to": "Generate GitHub File Path",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate GitHub File Path",
+        "to": "GitHub Enabled?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GitHub Enabled?",
+        "to": "Commit to GitHub (Approved)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GitHub Enabled?",
+        "to": "Merge Archivist Paths",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Commit to GitHub (Approved)",
+        "to": "Merge Archivist Paths",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Log Human Rejection",
+        "to": "Merge Archivist Paths",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Archivist Paths",
+        "to": "Process Agent Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Evaluate Board Consensus",
+        "to": "Check Redraft Needed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Redraft Needed",
+        "to": "Handle Redraft",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Redraft Needed",
+        "to": "Process Agent Output",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Handle Redraft",
+        "to": "More Agents to Run?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Agent Output",
+        "to": "More Agents to Run?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Slack Enabled?",
+        "to": "Notify Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Slack Enabled?",
+        "to": "Final Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Notify Slack",
+        "to": "Final Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notify Slack",
+        "to": "Final Response",
+        "kind": "error",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/n8n",
+      "files": [
+        "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/n8n/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2.json"
+      ],
+      "sha256": "9c3d887732ced3162126e8b7c5dca25964c9b11e2123d8b876b8d9fbdb3843f7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/n8n/provenance.json"
+}

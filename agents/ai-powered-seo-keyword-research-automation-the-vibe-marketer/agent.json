@@ -1,0 +1,480 @@
+{
+  "schema_version": 1,
+  "slug": "ai-powered-seo-keyword-research-automation-the-vibe-marketer",
+  "title": "AI powered SEO Keyword Research Automation - The vibe Marketer",
+  "purpose": "Adapt the published “AI powered SEO Keyword Research Automation - The vibe Marketer” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Get Input from NocoDB"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Structured Output Parser",
+    "OpenAI Chat Model2",
+    "OpenAI Chat Model1",
+    "Write Content Brief ",
+    "Update Status - Done",
+    "Send Notification",
+    "Start Notification",
+    "Update Status - Started"
+  ],
+  "credential_types": [
+    "dataForSeoApi",
+    "nocoDbApiToken",
+    "openAiApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Topic Expansion",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Competitor Analysis",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Keyword Difficulty",
+        "type": "n8n-nodes-dataforseo.dataForSeo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search Volume & CPC",
+        "type": "n8n-nodes-dataforseo.dataForSeo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "split primary keywords",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Keyword Ranking per URL",
+        "type": "n8n-nodes-dataforseo.dataForSeo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Final Keyword Strategy",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Get Input from NocoDB",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split the Competitor URLs",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set relevant fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Format Json and add Competitor URLs",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate SV & CPC",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate KWD",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge SV, CPC & KWD",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Topic Expansion, SV, CPC & KWD",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Competitor Analysis",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Everything",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "Write Content Brief ",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Update Status - Done",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Send Notification",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Start Notification",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Status - Started",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Aggregate KWD",
+        "to": "Merge SV, CPC & KWD",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Topic Expansion",
+        "to": "split primary keywords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Topic Expansion",
+        "to": "Merge Topic Expansion, SV, CPC & KWD",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge Everything",
+        "to": "Final Keyword Strategy",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Topic Expansion",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate SV & CPC",
+        "to": "Merge SV, CPC & KWD",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keyword Difficulty",
+        "to": "Aggregate KWD",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Competitor Analysis",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Final Keyword Strategy",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Competitor Analysis",
+        "to": "Aggregate Competitor Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge SV, CPC & KWD",
+        "to": "Merge Topic Expansion, SV, CPC & KWD",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Volume & CPC",
+        "to": "Aggregate SV & CPC",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set relevant fields",
+        "to": "Topic Expansion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set relevant fields",
+        "to": "Format Json and add Competitor URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set relevant fields",
+        "to": "Merge Everything",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Set relevant fields",
+        "to": "Update Status - Started",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set relevant fields",
+        "to": "Start Notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Input from NocoDB",
+        "to": "Set relevant fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Keyword Strategy",
+        "to": "Write Content Brief ",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Keyword Strategy",
+        "to": "Update Status - Done",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Keyword Strategy",
+        "to": "Send Notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "split primary keywords",
+        "to": "Search Volume & CPC",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "split primary keywords",
+        "to": "Keyword Difficulty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keyword Ranking per URL",
+        "to": "Competitor Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Topic Expansion",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split the Competitor URLs",
+        "to": "Keyword Ranking per URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Competitor Analysis",
+        "to": "Merge Everything",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Format Json and add Competitor URLs",
+        "to": "Split the Competitor URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Topic Expansion, SV, CPC & KWD",
+        "to": "Merge Everything",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/n8n",
+      "files": [
+        "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/n8n/ai-powered-seo-keyword-research-automation-the-vibe-marketer.json"
+      ],
+      "sha256": "8f4d09e450e3bbc3f47f83784f0d5570e2fffc286bcf92f6fb56bc4a5844d368",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/n8n/provenance.json"
+}

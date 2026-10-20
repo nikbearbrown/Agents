@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "slug": "google-maps-full",
+  "title": "Google Maps FULL",
+  "purpose": "Adapt the published “Google Maps FULL” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger - When User Sends Message",
+    "Trigger - On Subworkflow Start"
+  ],
+  "terminal_nodes": [
+    "AI Agent - Lead Collection",
+    "GPT-4o - Generate & Process Requests",
+    "Memory - Track Recent Context",
+    "Tool - Scrape Google Maps Business Data",
+    "Fallback - Enrich with Google Search",
+    "Tool - Crawl Business Website",
+    "Aggregate Business Listings",
+    "Aggregate Website Content"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openAiApi",
+    "serpApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Trigger - When User Sends Message",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent - Lead Collection",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "GPT-4o - Generate & Process Requests",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Memory - Track Recent Context",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Tool - Scrape Google Maps Business Data",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Fallback - Enrich with Google Search",
+        "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Tool - Crawl Business Website",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Trigger - On Subworkflow Start",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Scrape Google Maps (via Apify)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Save Extracted Data to Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Business Listings",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Scrape Website Content (via Apify)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Save Website Data to Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Website Content",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Memory - Track Recent Context",
+        "to": "AI Agent - Lead Collection",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tool - Crawl Business Website",
+        "to": "AI Agent - Lead Collection",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scrape Google Maps (via Apify)",
+        "to": "Save Extracted Data to Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger - On Subworkflow Start",
+        "to": "Scrape Google Maps (via Apify)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger - When User Sends Message",
+        "to": "AI Agent - Lead Collection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Website Data to Google Sheets",
+        "to": "Aggregate Website Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scrape Website Content (via Apify)",
+        "to": "Save Website Data to Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fallback - Enrich with Google Search",
+        "to": "AI Agent - Lead Collection",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GPT-4o - Generate & Process Requests",
+        "to": "AI Agent - Lead Collection",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Extracted Data to Google Sheets",
+        "to": "Aggregate Business Listings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Tool - Scrape Google Maps Business Data",
+        "to": "AI Agent - Lead Collection",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/google-maps-full/implementations/n8n",
+      "files": [
+        "agents/google-maps-full/implementations/n8n/google-maps-full.json"
+      ],
+      "sha256": "80c42420f5f67c2560a99f3db4e7431513dbc657f6743783003a47109528415d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/google-maps-full/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/google-maps-full/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/google-maps-full/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/google-maps-full/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/google-maps-full/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/google-maps-full/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/google-maps-full/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/google-maps-full/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/google-maps-full/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/google-maps-full/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/google-maps-full/implementations/n8n/provenance.json"
+}

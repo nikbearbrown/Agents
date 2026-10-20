@@ -1,0 +1,21 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["Window Buffer Memory"]
+  n2["Telegram"]
+  n3["Correct errors"]
+  n4["Execute Workflow Trigger"]
+  n5["Listen for incoming events"]
+  n6["Send back an image"]
+  n7["add response field"]
+  n8["Dall-E 3 Tool"]
+  n9["Generate image in Dall-E 3"]
+  n10["AI Agent"]
+  n10 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 1 to in 0"| n3
+  n8 -->|"ai_tool out 0 to in 0"| n10
+  n0 -->|"ai_languageModel out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n7
+  n1 -->|"ai_memory out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n10

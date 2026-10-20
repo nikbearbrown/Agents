@@ -1,0 +1,14 @@
+flowchart LR
+  n0["Telegram Send Message"]
+  n1["OpenAI Chat Model"]
+  n2["Window Buffer Memory"]
+  n3["Telegram Trigger1"]
+  n4["CoinMarketCap Price Agent"]
+  n5["Adds SessionId"]
+  n6["CoinMarketCap Price"]
+  n5 -->|"main out 0 to in 0"| n4
+  n1 -->|"ai_languageModel out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n5
+  n6 -->|"ai_tool out 0 to in 0"| n4
+  n2 -->|"ai_memory out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n0

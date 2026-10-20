@@ -1,0 +1,18 @@
+flowchart LR
+  n0["Cron"]
+  n1["Write Binary File"]
+  n2["Read Binary File"]
+  n3["Binary to JSON"]
+  n4["JSON to Binary"]
+  n5["Mark as Done"]
+  n6["IF"]
+  n7["SIGNL4 Resolve"]
+  n8["SIGNL4 Alert"]
+  n6 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 1 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 0 to in 0"| n3

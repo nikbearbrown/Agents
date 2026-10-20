@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "slug": "log-errors-and-avoid-sending-too-many-emails",
+  "title": "Log errors and avoid sending too many emails",
+  "purpose": "Adapt the published “Log errors and avoid sending too many emails” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Error Trigger",
+    "Sometimes... just cleanup",
+    "See below to prepend this at your error handling"
+  ],
+  "terminal_nodes": [
+    "Fallback E-Mail",
+    "Push mobile notification",
+    "Truncate Log Database",
+    "CleanUp execution. See below if you will prepend this workflow",
+    "Insert your error handling logic after this"
+  ],
+  "credential_types": [
+    "postgres",
+    "pushoverApi",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Error Trigger",
+        "type": "n8n-nodes-base.errorTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Insert Log",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Count for 5 minutes",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Principal E-Mail",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": true
+      },
+      {
+        "name": "Fallback E-Mail",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": true
+      },
+      {
+        "name": "Push mobile notification",
+        "type": "n8n-nodes-base.pushover",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Truncate Log Database",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Sometimes... just cleanup",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Call this Sample - Prepend to your error catcher",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": true
+      },
+      {
+        "name": "See below to prepend this at your error handling",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "If there is no logs in 5 minutes",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "CleanUp execution. See below if you will prepend this workflow",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Insert your error handling logic after this",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Insert Log",
+        "to": "CleanUp execution. See below if you will prepend this workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Error Trigger",
+        "to": "Insert Log",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Error Trigger",
+        "to": "Count for 5 minutes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Principal E-Mail",
+        "to": "Fallback E-Mail",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Count for 5 minutes",
+        "to": "If there is no logs in 5 minutes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sometimes... just cleanup",
+        "to": "Truncate Log Database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If there is no logs in 5 minutes",
+        "to": "Insert your error handling logic after this",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If there is no logs in 5 minutes",
+        "to": "CleanUp execution. See below if you will prepend this workflow",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Call this Sample - Prepend to your error catcher",
+        "to": "Principal E-Mail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call this Sample - Prepend to your error catcher",
+        "to": "Push mobile notification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "See below to prepend this at your error handling",
+        "to": "Insert Log",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "See below to prepend this at your error handling",
+        "to": "Count for 5 minutes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/implementations/n8n",
+      "files": [
+        "agents/log-errors-and-avoid-sending-too-many-emails/implementations/n8n/log-errors-and-avoid-sending-too-many-emails.json"
+      ],
+      "sha256": "5121c46e7248cac7b53d2890759d630470b35f7429f67953bcfb0427f18e27c5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/log-errors-and-avoid-sending-too-many-emails/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/log-errors-and-avoid-sending-too-many-emails/implementations/n8n/provenance.json"
+}

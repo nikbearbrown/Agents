@@ -1,0 +1,50 @@
+flowchart LR
+  n0["Cron Trigger"]
+  n1["Manual Pipeline Webhook"]
+  n2["Fetch Watchlist"]
+  n3["Fetch NVIDIA GitHub"]
+  n4["Fetch AMD GitHub"]
+  n5["Fetch Intel GitHub"]
+  n6["Fetch Google GitHub"]
+  n7["Fetch Apple GitHub"]
+  n8["Fetch Microsoft GitHub"]
+  n9["Fetch Meta GitHub"]
+  n10["Merge GitHub Results"]
+  n11["Parse #38; Calculate Velocity"]
+  n12["Load Previous Run from Supabase"]
+  n13["Calculate Week-over-Week Delta"]
+  n14["Aggregate for Groq"]
+  n15["Groq: Activity Classifier"]
+  n16["Parse Groq Response"]
+  n17["Signal Assembler"]
+  n18["Upsert to Supabase"]
+  n19["Generate Report"]
+  n20["Store Report in Supabase"]
+  n21["Pipeline Response"]
+  n0 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 1"| n10
+  n5 -->|"main out 0 to in 2"| n10
+  n6 -->|"main out 0 to in 3"| n10
+  n7 -->|"main out 0 to in 4"| n10
+  n8 -->|"main out 0 to in 5"| n10
+  n9 -->|"main out 0 to in 6"| n10
+  n10 -->|"main out 0 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n13
+  n13 -->|"main out 0 to in 0"| n14
+  n14 -->|"main out 0 to in 0"| n15
+  n15 -->|"main out 0 to in 0"| n16
+  n16 -->|"main out 0 to in 0"| n17
+  n17 -->|"main out 0 to in 0"| n18
+  n18 -->|"main out 0 to in 0"| n19
+  n19 -->|"main out 0 to in 0"| n20
+  n20 -->|"main out 0 to in 0"| n21

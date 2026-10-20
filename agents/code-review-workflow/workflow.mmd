@@ -1,0 +1,16 @@
+flowchart LR
+  n0["OpenAI Chat Model"]
+  n1["PR Trigger"]
+  n2["Get file#39;s Diffs from PR"]
+  n3["Create target Prompt from PR Diffs"]
+  n4["GitHub Robot"]
+  n5["Add Label to PR"]
+  n6["Code Best Practices"]
+  n7["Code Review Agent"]
+  n1 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n4
+  n0 -->|"ai_languageModel out 0 to in 0"| n7
+  n6 -->|"ai_tool out 0 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n7

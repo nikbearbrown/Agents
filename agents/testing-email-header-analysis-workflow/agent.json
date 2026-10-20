@@ -1,0 +1,595 @@
+{
+  "schema_version": 1,
+  "slug": "testing-email-header-analysis-workflow",
+  "title": "Testing Email Header Analysis Workflow",
+  "purpose": "Adapt the published “Testing Email Header Analysis Workflow” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 34 executable nodes and 40 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger on New Email",
+    "Webhook1"
+  ],
+  "terminal_nodes": [
+    "Respond to Webhook"
+  ],
+  "credential_types": [
+    "microsoftOutlookOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Trigger on New Email",
+        "type": "n8n-nodes-base.microsoftOutlookTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Retrieve Headers of Email",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Received Headers",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Remove Extra Received Headers",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Original From IP",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Query IP Quality Score API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Query IP API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Authentication-Results Header?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Authentication-Results Header",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Received-SPF Header?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "DKIM-Signature Header?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set SPF Value",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract Received-SPF Header",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DKIM Signature Found",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "DMARC Header?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "No DMARC Header",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract DMARC Header",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set DMARC Value",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Original IP Found?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "No DKIM Signature Found",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Determine Auth Values",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "No SPF Found",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format Webhook Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format Individual Auth Outputs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Format Combined Auth Output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook1",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set Headers",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Received-SPF Headers",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Headers Here",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Set Webhook Headers Here",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook1",
+        "to": "Set Webhook Headers Here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "Format Individual Auth Outputs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Headers",
+        "to": "Extract Received Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No SPF Found",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query IP API",
+        "to": "Authentication-Results Header?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DMARC Header?",
+        "to": "Extract DMARC Header",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DMARC Header?",
+        "to": "No DMARC Header",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set SPF Value",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No DMARC Header",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Set DMARC Value",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Set Headers Here",
+        "to": "Set Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Original IP Found?",
+        "to": "Query IP Quality Score API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Original IP Found?",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "DKIM Signature Found",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Extract DMARC Header",
+        "to": "Set DMARC Value",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Received-SPF Header?",
+        "to": "Extract Received-SPF Header",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Received-SPF Header?",
+        "to": "No SPF Found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Trigger on New Email",
+        "to": "Retrieve Headers of Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine Auth Values",
+        "to": "Format Combined Auth Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Webhook Output",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DKIM-Signature Header?",
+        "to": "DKIM Signature Found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DKIM-Signature Header?",
+        "to": "No DKIM Signature Found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "No DKIM Signature Found",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Extract Original From IP",
+        "to": "Original IP Found?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Received Headers",
+        "to": "Remove Extra Received Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation, do nothing",
+        "to": "Authentication-Results Header?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Webhook Headers Here",
+        "to": "Set Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Headers of Email",
+        "to": "Set Headers Here",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Query IP Quality Score API",
+        "to": "Query IP API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Received-SPF Header",
+        "to": "Aggregate Received-SPF Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Combined Auth Output",
+        "to": "Format Webhook Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Extra Received Headers",
+        "to": "Extract Original From IP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Received-SPF Headers",
+        "to": "Set SPF Value",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Authentication-Results Header?",
+        "to": "Extract Authentication-Results Header",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Authentication-Results Header?",
+        "to": "Received-SPF Header?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Authentication-Results Header?",
+        "to": "DKIM-Signature Header?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Authentication-Results Header?",
+        "to": "DMARC Header?",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Format Individual Auth Outputs",
+        "to": "Format Webhook Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Authentication-Results Header",
+        "to": "Determine Auth Values",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/testing-email-header-analysis-workflow/implementations/n8n",
+      "files": [
+        "agents/testing-email-header-analysis-workflow/implementations/n8n/testing-email-header-analysis-workflow.json"
+      ],
+      "sha256": "00848a2cfa8440113985299cbdb74f833377f21e18460bcdae5fae414fea1347",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/testing-email-header-analysis-workflow/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/testing-email-header-analysis-workflow/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/testing-email-header-analysis-workflow/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/testing-email-header-analysis-workflow/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/testing-email-header-analysis-workflow/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/testing-email-header-analysis-workflow/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/testing-email-header-analysis-workflow/implementations/n8n/provenance.json"
+}

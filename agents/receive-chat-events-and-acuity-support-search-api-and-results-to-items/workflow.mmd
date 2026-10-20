@@ -1,0 +1,23 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["OpenAI Chat Model"]
+  n2["Simple Memory"]
+  n3["Acuity Support Search API"]
+  n4["Extract Relevant Fields"]
+  n5["Results to Items"]
+  n6["Has Results#63;"]
+  n7["Empty Response"]
+  n8["Aggregate Response"]
+  n9["Knowledgebase Tool"]
+  n10["AcuityScheduling Support Chatbot"]
+  n11["KnowledgeBase Tool Subworkflow"]
+  n6 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 1 to in 0"| n7
+  n2 -->|"ai_memory out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n4
+  n1 -->|"ai_languageModel out 0 to in 0"| n10
+  n9 -->|"ai_tool out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n8
+  n3 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 0 to in 0"| n3

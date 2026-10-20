@@ -1,0 +1,819 @@
+{
+  "schema_version": 1,
+  "slug": "miscellaneous-ai-tools",
+  "title": "MISCELLANEOUS AI TOOLS",
+  "purpose": "Adapt the published “MISCELLANEOUS AI TOOLS” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 97 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Gmail Trigger App",
+    "Google Sheets Trigger App",
+    "Calendly Trigger",
+    "Google Drive Trigger",
+    "Gumroad Trigger",
+    "Local File Trigger",
+    "On form submission",
+    "Schedule Trigger",
+    "Webhook",
+    "When chat message received",
+    "When clicking 'Test workflow'",
+    "Workflow Input Trigger",
+    "Gmail Trigger",
+    "Google Sheets Trigger"
+  ],
+  "terminal_nodes": [
+    "AI Agent",
+    "OpenAI",
+    "Basic LLM Chain",
+    "Information Extractor",
+    "Question and Answer Chain",
+    "Sentiment Analysis",
+    "Summarization Chain",
+    "Text Classifier",
+    "Chat Memory Manager",
+    "Bitly App",
+    "Dropbox App",
+    "Gmail App",
+    "Google Calendar App",
+    "Google Docs App",
+    "Google Sheets App",
+    "Pushbullet App",
+    "YouTube App",
+    "Bluesky App",
+    "Perplexity App",
+    "ElevenLabs App",
+    "Reddit App",
+    "Gmail Trigger App",
+    "Google Sheets Trigger App",
+    "Call n8n Workflow Tool",
+    "Code Tool",
+    "HTTP Request1",
+    "Calculator",
+    "Postgres",
+    "Redis",
+    "Send Email",
+    "SerpAPI",
+    "Wikipedia",
+    "Wolfram Alpha",
+    "gmailTool App",
+    "googleCalendarTool App",
+    "googleDocsTool App",
+    "googleSheetsTool App",
+    "Default Data Loader",
+    "Auto-fixing Output Parser",
+    "Answer questions with a vector store",
+    "In-Memory Vector Store",
+    "Pinecone Vector Store",
+    "Postgres PGVector Store",
+    "Supabase Vector Store",
+    "Anthropic Chat Model",
+    "Google Gemini Chat Model",
+    "OpenAI Chat Model",
+    "Window Buffer Memory",
+    "Postgres Chat Memory",
+    "Redis Chat Memory",
+    "Item List Output Parser",
+    "Structured Output Parser",
+    "Embeddings Google Gemini",
+    "Embeddings OpenAI",
+    "X",
+    "Calendly Trigger",
+    "Email Trigger (IMAP)",
+    "Google Drive Trigger",
+    "Gumroad Trigger",
+    "Local File Trigger",
+    "On form submission",
+    "Schedule Trigger",
+    "Webhook",
+    "When chat message received",
+    "When clicking 'Test workflow'",
+    "Workflow Input Trigger",
+    "Gmail Trigger",
+    "Google Sheets Trigger",
+    "Code",
+    "Date & Time",
+    "Edit Fields",
+    "Filter",
+    "Limit",
+    "Remove Duplicates",
+    "Split Out",
+    "Aggregate",
+    "Merge",
+    "Summarize",
+    "Convert to File",
+    "Extract from File",
+    "HTML",
+    "Markdown",
+    "Rename Keys",
+    "Sort",
+    "If",
+    "Execute Workflow",
+    "Wait",
+    "Execute Command",
+    "HTTP Request",
+    "Execution Data",
+    "FTP",
+    "Respond to Webhook",
+    "RSS Read",
+    "AI Transform",
+    "MCP Client"
+  ],
+  "credential_types": [
+    "dropboxOAuth2Api",
+    "elevenLabsApi",
+    "googleCalendarOAuth2Api",
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "openAiApi",
+    "serpApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Information Extractor",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Question and Answer Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Sentiment Analysis",
+        "type": "@n8n/n8n-nodes-langchain.sentimentAnalysis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarization Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Text Classifier",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Memory Manager",
+        "type": "@n8n/n8n-nodes-langchain.memoryManager",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Bitly App",
+        "type": "n8n-nodes-base.bitly",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Dropbox App",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail App",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Google Calendar App",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Google Docs App",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets App",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Pushbullet App",
+        "type": "n8n-nodes-base.pushbullet",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "YouTube App",
+        "type": "n8n-nodes-base.youTube",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Bluesky App",
+        "type": "@muench-dev/n8n-nodes-bluesky.bluesky",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Perplexity App",
+        "type": "@watzon/n8n-nodes-perplexity.perplexity",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ElevenLabs App",
+        "type": "n8n-nodes-elevenlabs.elevenLabs",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Reddit App",
+        "type": "n8n-nodes-base.reddit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail Trigger App",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger App",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Call n8n Workflow Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Code Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolCode",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request1",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Calculator",
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Postgres",
+        "type": "n8n-nodes-base.postgresTool",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Redis",
+        "type": "n8n-nodes-base.redisTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSendTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "SerpAPI",
+        "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wikipedia",
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wolfram Alpha",
+        "type": "@n8n/n8n-nodes-langchain.toolWolframAlpha",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "gmailTool App",
+        "type": "n8n-nodes-base.gmailTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "googleCalendarTool App",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "googleDocsTool App",
+        "type": "n8n-nodes-base.googleDocsTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "googleSheetsTool App",
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Auto-fixing Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Answer questions with a vector store",
+        "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "In-Memory Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Pinecone Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Postgres PGVector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Supabase Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Postgres Chat Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Redis Chat Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Item List Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserItemList",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings Google Gemini",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "X",
+        "type": "n8n-nodes-base.twitter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Calendly Trigger",
+        "type": "n8n-nodes-base.calendlyTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Email Trigger (IMAP)",
+        "type": "n8n-nodes-base.emailReadImap",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive Trigger",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gumroad Trigger",
+        "type": "n8n-nodes-base.gumroadTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Local File Trigger",
+        "type": "n8n-nodes-base.localFileTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "When clicking 'Test workflow'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Input Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail Trigger",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets Trigger",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Code",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Date & Time",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Limit",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remove Duplicates",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Summarize",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTML",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Markdown",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Rename Keys",
+        "type": "n8n-nodes-base.renameKeys",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sort",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Replace Me",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Execute Command",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Execution Data",
+        "type": "n8n-nodes-base.executionData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "FTP",
+        "type": "n8n-nodes-base.ftp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "RSS Read",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "AI Transform",
+        "type": "n8n-nodes-base.aiTransform",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MCP Client",
+        "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Replace Me",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Replace Me",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/miscellaneous-ai-tools/implementations/n8n",
+      "files": [
+        "agents/miscellaneous-ai-tools/implementations/n8n/miscellaneous-ai-tools.json"
+      ],
+      "sha256": "3442f20d8a6398916664e6d7f58c58cfe6cc1d0fa609a295d5acbaddc5c95fea",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/miscellaneous-ai-tools/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/miscellaneous-ai-tools/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/miscellaneous-ai-tools/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/miscellaneous-ai-tools/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/miscellaneous-ai-tools/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/miscellaneous-ai-tools/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/miscellaneous-ai-tools/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/miscellaneous-ai-tools/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/miscellaneous-ai-tools/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/miscellaneous-ai-tools/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/miscellaneous-ai-tools/implementations/n8n/provenance.json"
+}

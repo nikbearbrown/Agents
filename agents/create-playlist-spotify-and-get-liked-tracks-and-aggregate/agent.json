@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "slug": "create-playlist-spotify-and-get-liked-tracks-and-aggregate",
+  "title": "create playlist spotify and get liked tracks and aggregate",
+  "purpose": "Adapt the published “create playlist spotify and get liked tracks and aggregate” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Remove oldest tracks from Downloads"
+  ],
+  "credential_types": [
+    "spotifyOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "If no playlist",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create Downloads Playlist",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Liked Tracks",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add tracks to Downloads",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Downloads Playlist",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter out new tracks",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get tracks to remove",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Remove oldest tracks from Downloads",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter out Downloads Playlist",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Updated Downloads Playlist",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all Playlists",
+        "type": "n8n-nodes-base.spotify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "If no Downloads Playlist found",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Globals",
+        "to": "Get all Playlists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "If no Downloads Playlist found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Filter out Downloads Playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no playlist",
+        "to": "Create Downloads Playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no playlist",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Get Updated Downloads Playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Add tracks to Downloads",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Liked Tracks",
+        "to": "Filter out new tracks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all Playlists",
+        "to": "If no playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get tracks to remove",
+        "to": "Remove oldest tracks from Downloads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter out new tracks",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Downloads Playlist",
+        "to": "Get Liked Tracks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add tracks to Downloads",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Downloads Playlist",
+        "to": "Get all Playlists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter out Downloads Playlist",
+        "to": "Get Downloads Playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Updated Downloads Playlist",
+        "to": "Get tracks to remove",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no Downloads Playlist found",
+        "to": "Create Downloads Playlist",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If no Downloads Playlist found",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/n8n",
+      "files": [
+        "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/n8n/create-playlist-spotify-and-get-liked-tracks-and-aggregate.json"
+      ],
+      "sha256": "57887a8db1d1e5079ee94ee1eaadca8d0be829756e6f25f491d199c9ee076c6e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,44 @@
+flowchart LR
+  n0["For Each User ID..."]
+  n1["Get User"]
+  n2["Search for Invite Requests"]
+  n3["Get Existing Invite EventID"]
+  n4["Should Create Event#63;"]
+  n5["Create Event"]
+  n6["Get Invite Reactions"]
+  n7["Get Invite Replies"]
+  n8["Extract Invite Reactions"]
+  n9["Get Old EventId"]
+  n10["Add Attendee to Event"]
+  n11["Get Event Details"]
+  n12["Is Attending"]
+  n13["Get User Email"]
+  n14["Should Add Attendee#63;"]
+  n15["Structured Output Parser"]
+  n16["SerpAPI"]
+  n17["OpenAI Chat Model"]
+  n18["Wikipedia"]
+  n19["Schedule Trigger"]
+  n20["Reply Invite with EventId"]
+  n21["Calendar Event Booking Agent"]
+  n16 -->|"ai_tool out 0 to in 0"| n21
+  n1 -->|"main out 0 to in 0"| n14
+  n18 -->|"ai_tool out 0 to in 0"| n21
+  n5 -->|"main out 0 to in 0"| n20
+  n12 -->|"main out 0 to in 0"| n0
+  n13 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n11
+  n19 -->|"main out 0 to in 0"| n2
+  n11 -->|"main out 0 to in 0"| n6
+  n17 -->|"ai_languageModel out 0 to in 0"| n21
+  n7 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n8
+  n14 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 0 to in 0"| n21
+  n4 -->|"main out 1 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n12
+  n15 -->|"ai_outputParser out 0 to in 0"| n21
+  n2 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n4
+  n21 -->|"main out 0 to in 0"| n5

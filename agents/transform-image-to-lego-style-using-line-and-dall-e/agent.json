@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "slug": "transform-image-to-lego-style-using-line-and-dall-e",
+  "title": "Transform Image to Lego Style Using Line and Dall-E",
+  "purpose": "Adapt the published “Transform Image to Lego Style Using Line and Dall-E” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Receive a Line Webhook"
+  ],
+  "terminal_nodes": [
+    "Send Back an Image through Line"
+  ],
+  "credential_types": [
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Receive a Line Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Receive Line Messages",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Creating an Image using Dall-E",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Creating a Prompt for Dall-E (Lego Style)",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Send Back an Image through Line",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Receive Line Messages",
+        "to": "Creating a Prompt for Dall-E (Lego Style)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive a Line Webhook",
+        "to": "Receive Line Messages",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Creating an Image using Dall-E",
+        "to": "Send Back an Image through Line",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Creating a Prompt for Dall-E (Lego Style)",
+        "to": "Creating an Image using Dall-E",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/n8n",
+      "files": [
+        "agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/n8n/transform-image-to-lego-style-using-line-and-dall-e.json"
+      ],
+      "sha256": "18b39a5f62b67ffb6010c2b9a27f8b27195ac7eea41b73aab8e4499ec55de4a2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/transform-image-to-lego-style-using-line-and-dall-e/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/n8n/provenance.json"
+}

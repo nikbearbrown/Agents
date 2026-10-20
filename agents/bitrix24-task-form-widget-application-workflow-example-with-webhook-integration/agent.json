@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "slug": "bitrix24-task-form-widget-application-workflow-example-with-webhook-integration",
+  "title": "Bitrix24 Task Form Widget Application Workflow example with Webhook Integration",
+  "purpose": "Adapt the published “Bitrix24 Task Form Widget Application Workflow example with Webhook Integration” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 21 executable nodes and 22 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Bitrix24 Handler"
+  ],
+  "terminal_nodes": [
+    "Installation Response",
+    "Task View Response",
+    "Error Response",
+    "Installation finished Response"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Bitrix24 Handler",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Credentials",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Check Event Type",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Is Installation?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Register Placement",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Process Settings",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Installation Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Has Valid Settings?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Task Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Format Task Data",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Task View Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Error Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Save Installation Settings",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Settings Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Create Settings File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Read Installation Settings",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If Installation finished",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Installation finished Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Installation info",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Extract Installation Settings",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge request data with installation settings",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Task Data",
+        "to": "Format Task Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Bitrix24 Handler",
+        "to": "Extract Credentials",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Event Type",
+        "to": "Is Installation?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Task Data",
+        "to": "Task View Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Installation?",
+        "to": "If Installation finished",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Installation?",
+        "to": "Read Installation Settings",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Is Installation?",
+        "to": "Merge request data with installation settings",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Process Settings",
+        "to": "Has Valid Settings?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Settings Data",
+        "to": "Create Settings File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Register Placement",
+        "to": "Merge Installation info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Credentials",
+        "to": "Check Event Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Valid Settings?",
+        "to": "Get Task Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has Valid Settings?",
+        "to": "Error Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create Settings File",
+        "to": "Save Installation Settings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Installation info",
+        "to": "Installation Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Installation finished",
+        "to": "Installation finished Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Installation finished",
+        "to": "Register Placement",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If Installation finished",
+        "to": "Set Settings Data",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Read Installation Settings",
+        "to": "Extract Installation Settings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Installation Settings",
+        "to": "Merge Installation info",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Extract Installation Settings",
+        "to": "Merge request data with installation settings",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge request data with installation settings",
+        "to": "Process Settings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/n8n",
+      "files": [
+        "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/n8n/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration.json"
+      ],
+      "sha256": "3364dccbd941bc24cb5cb7ecde624966d8d4ecc7507332c7c738db530e7b78e4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "slug": "personal-portfolio-resume-cv-chatbot",
+  "title": "Personal Portfolio Resume CV Chatbot",
+  "purpose": "Adapt the published “Personal Portfolio Resume CV Chatbot” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 24 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger",
+    "Google Drive - Resume CV File Created",
+    "Google Drive - Resume CV File Updated",
+    "Chat API - webhook",
+    "Save Conversation API - Webhook"
+  ],
+  "terminal_nodes": [
+    "Embeddings Google Gemini",
+    "Google Gemini Chat Model",
+    "Pinecone - Vector Store forr CV Content",
+    "CV File Data Loader",
+    "CV content - Recursive Character Text Splitter",
+    "Chat API Response - Webhook",
+    "Chat Memory -  Window Buffer",
+    "Resume lookup : Vector Store Tool",
+    "Resume Vector Store (Retrieval)",
+    "Resume Embeddings Google Gemini (retrieval)",
+    "Resume Google Gemini Chat Model (retrieval)",
+    "Save Conversation API Webhook - Response",
+    "Send Report To Gmail"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDriveOAuth2Api",
+    "googlePalmApi",
+    "nocoDbApiToken",
+    "pineconeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Embeddings Google Gemini",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive - Resume CV File Created",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive - Resume CV File Updated",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download CV File From Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Pinecone - Vector Store forr CV Content",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CV File Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CV content - Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Chat API - webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Personal CV AI Agent Assistant",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Chat API Response - Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Chat Memory -  Window Buffer",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Resume lookup : Vector Store Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Resume Vector Store (Retrieval)",
+        "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Resume Embeddings Google Gemini (retrieval)",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Resume Google Gemini Chat Model (retrieval)",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Save Conversation API - Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Save Conversation - NocoDB",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Save Conversation API Webhook - Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "NocoDB - get all todays conversation",
+        "type": "n8n-nodes-base.nocoDb",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Group Conversation By Unique Session + Email - Code",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format HTML Display  For email",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Report To Gmail",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Schedule Trigger",
+        "to": "NocoDB - get all todays conversation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat API - webhook",
+        "to": "Personal CV AI Agent Assistant",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CV File Data Loader",
+        "to": "Pinecone - Vector Store forr CV Content",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings Google Gemini",
+        "to": "Pinecone - Vector Store forr CV Content",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "Personal CV AI Agent Assistant",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Conversation - NocoDB",
+        "to": "Save Conversation API Webhook - Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Chat Memory -  Window Buffer",
+        "to": "Personal CV AI Agent Assistant",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format HTML Display  For email",
+        "to": "Send Report To Gmail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Personal CV AI Agent Assistant",
+        "to": "Chat API Response - Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Resume Vector Store (Retrieval)",
+        "to": "Resume lookup : Vector Store Tool",
+        "kind": "ai_vectorStore",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Conversation API - Webhook",
+        "to": "Save Conversation - NocoDB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Resume lookup : Vector Store Tool",
+        "to": "Personal CV AI Agent Assistant",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download CV File From Google Drive",
+        "to": "Pinecone - Vector Store forr CV Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "NocoDB - get all todays conversation",
+        "to": "Group Conversation By Unique Session + Email - Code",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive - Resume CV File Created",
+        "to": "Download CV File From Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive - Resume CV File Updated",
+        "to": "Download CV File From Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Resume Embeddings Google Gemini (retrieval)",
+        "to": "Resume Vector Store (Retrieval)",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Resume Google Gemini Chat Model (retrieval)",
+        "to": "Resume lookup : Vector Store Tool",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CV content - Recursive Character Text Splitter",
+        "to": "CV File Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Group Conversation By Unique Session + Email - Code",
+        "to": "Format HTML Display  For email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/implementations/n8n",
+      "files": [
+        "agents/personal-portfolio-resume-cv-chatbot/implementations/n8n/personal-portfolio-resume-cv-chatbot.json"
+      ],
+      "sha256": "400be37b1b1057060a538e1336ba99e7654df9542136861b0b3d83a638464ce5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/personal-portfolio-resume-cv-chatbot/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/personal-portfolio-resume-cv-chatbot/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,59 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["No Operation, do nothing1"]
+  n2["Information Extractor"]
+  n3["OpenAI Chat Model"]
+  n4["get wait seconds"]
+  n5["Set last_seen"]
+  n6["Get waiting_reply"]
+  n7["Mod input"]
+  n8["waiting_reply#63;"]
+  n9["When chat message received"]
+  n10["Set waiting_reply"]
+  n11["Get buffer"]
+  n12["Delete buffer_in"]
+  n13["Delete waiting_reply"]
+  n14["WaitSeconds"]
+  n15["Buffer messages"]
+  n16["Set buffer_count increment"]
+  n17["Get last_seen"]
+  n18["Get buffer_count"]
+  n19["Map ouput"]
+  n20["Check Inactivity #43; Count"]
+  n21["Delete waiting_reply1"]
+  n22["No Operation, do nothing2"]
+  n23["Wait"]
+  n24["When Executed by Another Workflow"]
+  n25["Mock input data"]
+  n26["No Operation, do nothing3"]
+  n23 -->|"main out 0 to in 0"| n20
+  n7 -->|"main out 0 to in 0"| n8
+  n11 -->|"main out 0 to in 0"| n2
+  n14 -->|"main out 0 to in 0"| n17
+  n17 -->|"main out 0 to in 0"| n18
+  n5 -->|"main out 0 to in 0"| n22
+  n8 -->|"main out 0 to in 0"| n22
+  n8 -->|"main out 1 to in 0"| n10
+  n15 -->|"main out 0 to in 0"| n16
+  n15 -->|"main out 0 to in 0"| n5
+  n15 -->|"main out 0 to in 0"| n6
+  n25 -->|"main out 0 to in 0"| n4
+  n12 -->|"main out 0 to in 0"| n26
+  n18 -->|"main out 0 to in 0"| n20
+  n4 -->|"main out 0 to in 0"| n15
+  n6 -->|"main out 0 to in 0"| n7
+  n3 -->|"ai_languageModel out 0 to in 0"| n2
+  n10 -->|"main out 0 to in 0"| n14
+  n13 -->|"main out 0 to in 0"| n26
+  n21 -->|"main out 0 to in 0"| n26
+  n2 -->|"main out 0 to in 0"| n19
+  n2 -->|"main out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n13
+  n2 -->|"main out 0 to in 0"| n21
+  n20 -->|"main out 0 to in 0"| n11
+  n20 -->|"main out 1 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n23
+  n16 -->|"main out 0 to in 0"| n22
+  n9 -->|"main out 0 to in 0"| n25
+  n24 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n25

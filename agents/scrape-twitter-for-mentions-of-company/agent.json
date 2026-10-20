@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "slug": "scrape-twitter-for-mentions-of-company",
+  "title": "Scrape Twitter for mentions of company",
+  "purpose": "Adapt the published “Scrape Twitter for mentions of company” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Run Every 10 Minutes"
+  ],
+  "terminal_nodes": [
+    "Post to Slack"
+  ],
+  "credential_types": [
+    "slackApi",
+    "twitterOAuth1Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Filter Tweet Data",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Run Every 10 Minutes",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Now - 10 minutes",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get last 50 mentions",
+        "type": "n8n-nodes-base.twitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Created since last run?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Setup",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Post to Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Setup",
+        "to": "Now - 10 minutes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Now - 10 minutes",
+        "to": "Get last 50 mentions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Tweet Data",
+        "to": "Post to Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get last 50 mentions",
+        "to": "Created since last run?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run Every 10 Minutes",
+        "to": "Setup",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Created since last run?",
+        "to": "Filter Tweet Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/scrape-twitter-for-mentions-of-company/implementations/n8n",
+      "files": [
+        "agents/scrape-twitter-for-mentions-of-company/implementations/n8n/scrape-twitter-for-mentions-of-company.json"
+      ],
+      "sha256": "b7c2fcb6fca23461ed450d57a1c14d8566846808e727884e1c9c3527666889f1",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/scrape-twitter-for-mentions-of-company/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/scrape-twitter-for-mentions-of-company/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/scrape-twitter-for-mentions-of-company/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/scrape-twitter-for-mentions-of-company/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/scrape-twitter-for-mentions-of-company/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/scrape-twitter-for-mentions-of-company/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/scrape-twitter-for-mentions-of-company/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/scrape-twitter-for-mentions-of-company/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/scrape-twitter-for-mentions-of-company/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/scrape-twitter-for-mentions-of-company/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/scrape-twitter-for-mentions-of-company/implementations/n8n/provenance.json"
+}

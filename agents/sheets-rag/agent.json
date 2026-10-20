@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "slug": "sheets-rag",
+  "title": "SHEETS RAG",
+  "purpose": "Adapt the published “SHEETS RAG” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 20 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Google Drive Trigger",
+    "Execute Workflow Trigger",
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "execute_query_tool",
+    "Google Gemini Chat Model",
+    "get_postgres_schema",
+    "perform insertion",
+    "response output",
+    "schema to string",
+    "AI Agent With SQL Query Prompt"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googlePalmApi",
+    "googleSheetsOAuth2Api",
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "create table query",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "create insertion query",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive Trigger",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "execute_query_tool",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "get_postgres_schema",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "change_this",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "is not in database",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "table exists?",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "fetch sheet data",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "remove table",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "create table",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "perform insertion",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "response output",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "sql query executor",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "schema finder",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "schema to string",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent With SQL Query Prompt",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "change_this",
+        "to": "table exists?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "create table",
+        "to": "create insertion query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "remove table",
+        "to": "create table query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "schema finder",
+        "to": "schema to string",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "table exists?",
+        "to": "fetch sheet data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "fetch sheet data",
+        "to": "is not in database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "create table query",
+        "to": "create table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "execute_query_tool",
+        "to": "AI Agent With SQL Query Prompt",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "is not in database",
+        "to": "create table query",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "is not in database",
+        "to": "remove table",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "sql query executor",
+        "to": "response output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_postgres_schema",
+        "to": "AI Agent With SQL Query Prompt",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive Trigger",
+        "to": "change_this",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "create insertion query",
+        "to": "perform insertion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "sql query executor",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "schema finder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model",
+        "to": "AI Agent With SQL Query Prompt",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "AI Agent With SQL Query Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/sheets-rag/implementations/n8n",
+      "files": [
+        "agents/sheets-rag/implementations/n8n/sheets-rag.json"
+      ],
+      "sha256": "eabbb50a40ae6214e8f414891e86879881cfb16a18de84ab1d53581b54865d9a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/sheets-rag/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/sheets-rag/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/sheets-rag/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/sheets-rag/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/sheets-rag/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/sheets-rag/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/sheets-rag/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/sheets-rag/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/sheets-rag/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/sheets-rag/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/sheets-rag/implementations/n8n/provenance.json"
+}

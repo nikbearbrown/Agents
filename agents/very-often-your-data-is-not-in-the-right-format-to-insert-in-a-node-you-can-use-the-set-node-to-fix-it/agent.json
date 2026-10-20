@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it",
+  "title": "Very often your data is not in the right format to insert in a node. you can use the set node to fix it.",
+  "purpose": "Adapt the published “Very often your data is not in the right format to insert in a node. you can use the set node to fix it.” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Create or Update record in Google Sheet"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create or Update record in Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set - Prepare fields",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Customer Datastore - Generate some data",
+        "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set - Prepare fields",
+        "to": "Create or Update record in Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Customer Datastore - Generate some data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Customer Datastore - Generate some data",
+        "to": "Set - Prepare fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/n8n",
+      "files": [
+        "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/n8n/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it.json"
+      ],
+      "sha256": "5e84a05a98dc7bad59cd931a8511ac36de13923fd99f180c0dbedd4c145383b9",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "slug": "dynamic-credentials-using-expressions",
+  "title": "Dynamic credentials using expressions",
+  "purpose": "Adapt the published “Dynamic credentials using expressions” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "n8n Form Trigger"
+  ],
+  "terminal_nodes": [
+    "Respond to Webhook"
+  ],
+  "credential_types": [
+    "nasaApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "n8n Form Trigger",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "NASA",
+        "type": "n8n-nodes-base.nasa",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "NASA",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "n8n Form Trigger",
+        "to": "NASA",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/dynamic-credentials-using-expressions/implementations/n8n",
+      "files": [
+        "agents/dynamic-credentials-using-expressions/implementations/n8n/dynamic-credentials-using-expressions.json"
+      ],
+      "sha256": "8d2cbaaa7a433e86058519f9906398c67949e919a9eb6ef371eae20a3669fe73",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/dynamic-credentials-using-expressions/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/dynamic-credentials-using-expressions/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/dynamic-credentials-using-expressions/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/dynamic-credentials-using-expressions/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/dynamic-credentials-using-expressions/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/dynamic-credentials-using-expressions/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/dynamic-credentials-using-expressions/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/dynamic-credentials-using-expressions/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/dynamic-credentials-using-expressions/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/dynamic-credentials-using-expressions/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/dynamic-credentials-using-expressions/implementations/n8n/provenance.json"
+}

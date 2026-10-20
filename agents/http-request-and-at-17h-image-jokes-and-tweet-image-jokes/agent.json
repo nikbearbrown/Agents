@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-at-17h-image-jokes-and-tweet-image-jokes",
+  "title": "http request and at 17h image jokes and tweet image jokes",
+  "purpose": "Adapt the published “http request and at 17h image jokes and tweet image jokes” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "At 17H image jokes"
+  ],
+  "terminal_nodes": [
+    "Tweet image jokes"
+  ],
+  "credential_types": [
+    "twitterOAuth1Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Request blablagues",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Recup image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "At 17H image jokes",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Tweet image jokes",
+        "type": "n8n-nodes-base.twitter",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Recup image",
+        "to": "Tweet image jokes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "At 17H image jokes",
+        "to": "Request blablagues",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Request blablagues",
+        "to": "Recup image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/n8n",
+      "files": [
+        "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/n8n/http-request-and-at-17h-image-jokes-and-tweet-image-jokes.json"
+      ],
+      "sha256": "f506cabf68015ee7a60d82901c3bae8d957f08bc4b9123e041414d1e5e6d6d84",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/n8n/provenance.json"
+}

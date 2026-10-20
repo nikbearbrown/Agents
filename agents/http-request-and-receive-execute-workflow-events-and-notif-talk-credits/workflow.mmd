@@ -1,0 +1,21 @@
+flowchart LR
+  n0["Token SuiteCRM"]
+  n1["CaptainMail"]
+  n2["If mail ok"]
+  n3["If Credits OK"]
+  n4["Tally Forms Trigger"]
+  n5["Notif Talk credits"]
+  n6["Notif Talk bad email"]
+  n7["Create Lead SuiteCRM"]
+  n8["Notif Talk Lead created"]
+  n9["Brevo Create Contact"]
+  n2 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 1 to in 0"| n0
+  n1 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 1 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n1
+  n9 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n9

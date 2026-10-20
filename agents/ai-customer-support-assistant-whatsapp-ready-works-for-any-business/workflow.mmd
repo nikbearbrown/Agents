@@ -1,0 +1,22 @@
+flowchart LR
+  n0["AI Agent"]
+  n1["list_links"]
+  n2["OpenAI Chat Model"]
+  n3["WhatsApp Trigger"]
+  n4["cleanAnswer"]
+  n5["get_page"]
+  n6["24-hour window check"]
+  n7["If"]
+  n8["Send Pre-approved Template Message to Reopen the Conversation"]
+  n9["Send AI Agent#39;s Answer"]
+  n10["Postgres Users Memory"]
+  n7 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 1 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n6
+  n5 -->|"ai_tool out 0 to in 0"| n0
+  n1 -->|"ai_tool out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n0
+  n2 -->|"ai_languageModel out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n7
+  n10 -->|"ai_memory out 0 to in 0"| n0

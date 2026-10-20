@@ -1,1882 +1,1886 @@
-# Workflow catalog
+# Agents catalog
 
-All entries have folder documentation. Unresolved licenses are listed without workflow JSON.
+One purpose, multiple implementations. The collected entries have n8n source; other implementations are planned unless their records say otherwise.
 
-| Workflow | Nodes | JSON status |
+| Agent | Nodes | n8n source |
 |---|---:|---|
-| [getallpeople n8n training customer datastore and http request b524576f](workflows/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/README.md) | 6 | Available |
-| [Clockify Backup Template](workflows/clockify-backup-template/README.md) | 16 | Available |
-| [location_by_ip](workflows/location-by-ip/README.md) | 6 | Available |
-| [Simple OpenAI Image Generator](workflows/simple-openai-image-generator/README.md) | 4 | Available |
-| [make an http request](workflows/make-an-http-request/README.md) | 1 | Available |
-| [information edit image and http request](workflows/information-edit-image-and-http-request/README.md) | 3 | Available |
-| [Baserow markdown to html](workflows/baserow-markdown-to-html/README.md) | 8 | Available |
-| [cron and graphql and item lists](workflows/cron-and-graphql-and-item-lists/README.md) | 5 | Available |
-| [receive telegram events and send next question and telegram](workflows/receive-telegram-events-and-send-next-question-and-telegram/README.md) | 33 | Available |
-| [Travel AssistantAgent](workflows/travel-assistantagent/README.md) | 11 | Available |
-| [🔒 This workflow demonstrates Redis-based locking to prevent concurrent execution of workflows.](workflows/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/README.md) | 14 | Available |
-| [1/ Add Your credentials](workflows/1-add-your-credentials-7a93229f/README.md) | 6 | Available |
-| [Blockchain DEX Screener Insights Agent](workflows/blockchain-dex-screener-insights-agent/README.md) | 15 | Available |
-| [Automatizacion X](workflows/automatizacion-x/README.md) | 6 | Available |
-| [MycroftResearchAgent_2.0](workflows/mycroftresearchagent-2-0/README.md) | 16 | Available |
-| [CallForge - The AI Gong Sales Call Processor](workflows/callforge-the-ai-gong-sales-call-processor/README.md) | 18 | Available |
-| [Dynamically create tables in Airtable for your Webflow form submissions](workflows/dynamically-create-tables-in-airtable-for-your-webflow-form-submissions/README.md) | 13 | Available |
-| [receive schedule events and list strava and append google sheets](workflows/receive-schedule-events-and-list-strava-and-append-google-sheets/README.md) | 13 | Available |
-| [search airtable and update airtable](workflows/search-airtable-and-update-airtable/README.md) | 3 | Available |
-| [Receive messages from a topic and send an SMS](workflows/receive-messages-from-a-topic-and-send-an-sms/README.md) | 4 | Available |
-| [Line Save File to Google Drive and Log File's URL](workflows/line-save-file-to-google-drive-and-log-file-s-url/README.md) | 23 | Available |
-| [dropbox and compress compression and http request](workflows/dropbox-and-compress-compression-and-http-request/README.md) | 5 | Available |
-| [Convert Image Files (JPG, PNG, JPEG) to URLs and Reduce File Size](workflows/convert-image-files-jpg-png-jpeg-to-urls-and-reduce-file-size/README.md) | 6 | Available |
-| [default data loader and recursive character text splitter and get survey results](workflows/default-data-loader-and-recursive-character-text-splitter-and-get-survey-results/README.md) | 30 | Available |
-| [Supabase Setup Postgres](workflows/supabase-setup-postgres/README.md) | 6 | Available |
-| [Generate Image Workflow](workflows/generate-image-workflow/README.md) | 3 | Available |
-| [Patent Filing Velocity Tracker](workflows/patent-filing-velocity-tracker/README.md) | 24 | Available |
-| [webhook and mindee and append airtable](workflows/webhook-and-mindee-and-append-airtable/README.md) | 4 | Available |
-| [Send updates about the position of the ISS every minute to a topic in RabbitMQ](workflows/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-rabbitmq/README.md) | 4 | Available |
-| [6](workflows/list-contact-hubspot/README.md) | 2 | Available |
-| [Insert data into a new row for a table in Coda](workflows/insert-data-into-a-new-row-for-a-table-in-coda/README.md) | 3 | Available |
-| [5.1 Google Reverse Image Tool](workflows/5-1-google-reverse-image-tool/README.md) | 19 | Available |
-| [receive schedule events and get g2 data with scrapingbee and extracthtmlcontent html](workflows/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/README.md) | 11 | Available |
-| [receive typeform events and append google sheets and create user mattermost](workflows/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/README.md) | 10 | Available |
-| [Fetch reports from Qualys](workflows/fetch-reports-from-qualys/README.md) | 15 | Available |
-| [Todoist Weekly Review Template](workflows/todoist-weekly-review-template/README.md) | 6 | Available |
-| [Generate New Keywords with Search Volumes⚒️⚒️🟢🟢](workflows/generate-new-keywords-with-search-volumes/README.md) | 6 | Available |
-| [Create an organization in Affinity](workflows/create-an-organization-in-affinity/README.md) | 2 | Available |
-| [Create a simple API endpoint](workflows/create-a-simple-api-endpoint/README.md) | 3 | Available |
-| [Phishing_analysis__URLScan_io_and_Virustotal_](workflows/phishing-analysis-urlscan-io-and-virustotal/README.md) | 16 | Available |
-| [jira and update zendesk and get zendesk](workflows/jira-and-update-zendesk-and-get-zendesk/README.md) | 7 | Available |
-| [Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI](workflows/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/README.md) | 16 | Available |
-| [Receive updates for support in Zendesk](workflows/receive-updates-for-support-in-zendesk/README.md) | 1 | Available |
-| [Loading data into a spreadsheet](workflows/loading-data-into-a-spreadsheet/README.md) | 4 | Available |
-| [notion knowledge base ai assistant](workflows/notion-knowledge-base-ai-assistant/README.md) | 18 | Available |
-| [Translate Telegram audio messages with AI (55 supported languages) v1](workflows/translate-telegram-audio-messages-with-ai-55-supported-languages-v1/README.md) | 10 | Available |
-| [CoinMarketCap_AI_Data_Analyst_Agent](workflows/coinmarketcap-ai-data-analyst-agent/README.md) | 9 | Available |
-| [get last execution timestamp and set new last execution timestamp and list zendesk](workflows/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/README.md) | 17 | Available |
-| [photos to list and download google drive and resize edit image](workflows/photos-to-list-and-download-google-drive-and-resize-edit-image/README.md) | 8 | Available |
-| [Customer Experience Agent (AI)](workflows/customer-experience-agent-ai-7baea82e/README.md) | 10 | Available |
-| [receive chat events and http request and respond to chat](workflows/receive-chat-events-and-http-request-and-respond-to-chat/README.md) | 18 | Available |
-| [Example Customer Data](workflows/example-customer-data/README.md) | 12 | Available |
-| [Weekly_Shodan_Query___Report_Accidents__no_function_node_](workflows/weekly-shodan-query-report-accidents-no-function-node/README.md) | 10 | Available |
-| [Online Marketing Weekly Report](workflows/online-marketing-weekly-report/README.md) | 46 | Available |
-| [Wordpress Form to Mautic](workflows/wordpress-form-to-mautic/README.md) | 6 | Available |
-| [Prepare CSV files with GPT-4](workflows/prepare-csv-files-with-gpt-4/README.md) | 9 | Available |
-| [webhook and get new accesstoken and receive schedule events](workflows/webhook-and-get-new-accesstoken-and-receive-schedule-events/README.md) | 7 | Available |
-| [⚡📽️ Ultimate AI-Powered Chatbot for YouTube Summarization & Analysis](workflows/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/README.md) | 16 | Available |
-| [asana and webhook](workflows/asana-and-webhook/README.md) | 3 | Available |
-| [NameCheap Dynamic DNS (DDNS)](workflows/namecheap-dynamic-dns-ddns/README.md) | 7 | Available |
-| [Get only new RSS with Photo](workflows/get-only-new-rss-with-photo/README.md) | 5 | Available |
-| [Reference "Single" Binary Using Expressions](workflows/reference-single-binary-using-expressions/README.md) | 6 | Available |
-| [ETL pipeline](workflows/etl-pipeline/README.md) | 9 | Available |
-| [SearchApi AI Agent](workflows/searchapi-ai-agent/README.md) | 5 | Available |
-| [Inverview Scheduler](workflows/inverview-scheduler/README.md) | 22 | Available |
-| [Selenium Ultimate Scraper Workflow](workflows/selenium-ultimate-scraper-workflow/README.md) | 56 | Available |
-| [MCP_CALENDAR](workflows/mcp-calendar/README.md) | 7 | Available |
-| [Extract And Decode Google News RSS URLs to Clean Article Links](workflows/extract-and-decode-google-news-rss-urls-to-clean-article-links/README.md) | 10 | Available |
-| [Backup Squarespace code Injections to Github](workflows/backup-squarespace-code-injections-to-github/README.md) | 13 | Available |
-| [receive typeform events and append airtable and slack](workflows/receive-typeform-events-and-append-airtable-and-slack/README.md) | 4 | Available |
-| [Build Custom AI Agent with LangChain & Gemini (Self-Hosted)](workflows/build-custom-ai-agent-with-langchain-gemini-self-hosted/README.md) | 4 | Available |
-| [search reddit and edit open ai and open ai](workflows/search-reddit-and-edit-open-ai-and-open-ai/README.md) | 11 | Available |
-| [Extract Product Images from Template](workflows/extract-product-images-from-template/README.md) | 13 | Available |
-| [🚨 PERFORMANCE WARNING!](workflows/performance-warning/README.md) | 14 | Available |
-| [Archive empty pages in Notion Database](workflows/archive-empty-pages-in-notion-database/README.md) | 10 | Available |
-| [👆 This adds due dates to tasks from description..](workflows/this-adds-due-dates-to-tasks-from-description/README.md) | 10 | Available |
-| [Qualify new leads in Google Sheets via OpenAI's GPT-4](workflows/qualify-new-leads-in-google-sheets-via-openai-s-gpt-4/README.md) | 5 | Available |
-| [StatsInstagram](workflows/statsinstagram/README.md) | 5 | Available |
-| [get meraki organizations and get network ids and get uplink loss and latency](workflows/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/README.md) | 16 | Available |
-| [receive schedule events and readrows worksheet microsoft excel and aggregate](workflows/receive-schedule-events-and-readrows-worksheet-microsoft-excel-and-aggregate/README.md) | 25 | Available |
-| [Receive messages for a MQTT queue](workflows/receive-messages-for-a-mqtt-queue/README.md) | 1 | Available |
-| [Get event triggered notifications / updates on preferred messaging channels with TwentyCRM](workflows/get-event-triggered-notifications-updates-on-preferred-messaging-channels-with-twentycrm/README.md) | 6 | Available |
-| [http request and binarytopropery extract from file](workflows/http-request-and-binarytopropery-extract-from-file/README.md) | 6 | Available |
-| [🧠 Give Your AI Agent Chatbot Long Term Memory Tools Router](workflows/give-your-ai-agent-chatbot-long-term-memory-tools-router/README.md) | 22 | Available |
-| [FetchGithubIssues](workflows/fetchgithubissues/README.md) | 5 | Available |
-| [function item and http request and append airtable](workflows/function-item-and-http-request-and-append-airtable/README.md) | 5 | Available |
-| [Get all the contacts from GetResponse and update them](workflows/get-all-the-contacts-from-getresponse-and-update-them/README.md) | 5 | Available |
-| [Receive an alert when new breaches are added to haveibeenpwned.com](workflows/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/README.md) | 18 | Available |
-| [list gmail and split out and extract news items](workflows/list-gmail-and-split-out-and-extract-news-items/README.md) | 6 | Available |
-| [InstaTest](workflows/easy-instagram-via-manychat-bot/README.md) | 6 | Available |
-| [Image-to-3D](workflows/verified-image-to-3d/README.md) | 12 | Available |
-| [receive local file events and read write file and default data loader](workflows/receive-local-file-events-and-read-write-file-and-default-data-loader/README.md) | 23 | Available |
-| [Use any LLM-Model via OpenRouter](workflows/use-any-llm-model-via-openrouter/README.md) | 5 | Available |
-| [Delete NM of KV (By Name Serach)](workflows/delete-nm-of-kv-by-name-serach/README.md) | 31 | Available |
-| [write binary file](workflows/write-binary-file/README.md) | 3 | Available |
-| [Receive updates when an event occurs in Asana](workflows/receive-updates-when-an-event-occurs-in-asana/README.md) | 1 | Available |
-| [receive pipedrive events and get organization pipedrive and http request](workflows/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/README.md) | 7 | Available |
-| [write read write file and download pdf file and protect file with password](workflows/write-read-write-file-and-download-pdf-file-and-protect-file-with-password/README.md) | 5 | Available |
-| [RAG with PDF as source](workflows/rag-with-pdf-as-source/README.md) | 26 | Available |
-| [🤖 AI Powered RAG Chatbot for Your Docs + Google Drive + Gemini + Qdrant](workflows/ai-powered-rag-chatbot-for-your-docs-google-drive-gemini-qdrant/README.md) | 35 | Available |
-| [Get details of a forum in Disqus](workflows/get-details-of-a-forum-in-disqus/README.md) | 2 | Available |
-| [[n8n] Advanced URL Parsing and Shortening Workflow - Switchy.io Integration](workflows/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/README.md) | 47 | Available |
-| [New Ticket Alerts to Teams](workflows/new-ticket-alerts-to-teams/README.md) | 8 | Available |
-| [copper and update person copper and get person copper](workflows/copper-and-update-person-copper-and-get-person-copper/README.md) | 4 | Available |
-| [🎨 Image Generation (OpenAI)](workflows/image-generation-openai/README.md) | 5 | Available |
-| [Extract spend details (template)](workflows/extract-spend-details-template/README.md) | 21 | Available |
-| [Configure your credentials](workflows/configure-your-credentials/README.md) | 6 | Available |
-| [cron and list person pipedrive and pipedrive](workflows/cron-and-list-person-pipedrive-and-pipedrive/README.md) | 7 | Available |
-| [Matomo Analytics Report](workflows/matomo-analytics-report/README.md) | 6 | Available |
-| [Travel Planning Agent with Couchbase Vector Search, Gemini 2.0 Flash and OpenAI](workflows/travel-planning-agent-with-couchbase-vector-search-gemini-2-0-flash-and-openai/README.md) | 11 | Available |
-| [Never expose or hard code below values](workflows/never-expose-or-hard-code-below-values/README.md) | 4 | Available |
-| [AI Agent with charts capabilities using OpenAI Structured Output](workflows/ai-agent-with-charts-capabilities-using-openai-structured-output/README.md) | 8 | Available |
-| [Telegram ChatBot with multiple sessions](workflows/telegram-chatbot-with-multiple-sessions/README.md) | 31 | Available |
-| [aws textract and aws s3](workflows/aws-textract-and-aws-s3/README.md) | 3 | Available |
-| [Bubble Data Access](workflows/bubble-data-access/README.md) | 2 | Available |
-| [query extraction airtop and update google sheets and google sheets](workflows/query-extraction-airtop-and-update-google-sheets-and-google-sheets/README.md) | 5 | Available |
-| [open ai and respond to webhook and receive form events](workflows/open-ai-and-respond-to-webhook-and-receive-form-events/README.md) | 5 | Available |
-| [List Builder](workflows/list-builder/README.md) | 7 | Available |
-| [receive schedule events and http request and twilio](workflows/receive-schedule-events-and-http-request-and-twilio/README.md) | 4 | Available |
-| [Obsidian Notes Read Aloud: Available as a Podcast Feed](workflows/obsidian-notes-read-aloud-available-as-a-podcast-feed/README.md) | 15 | Available |
-| [Chat with Google Sheet](workflows/chat-with-google-sheet/README.md) | 14 | Available |
-| [fetch apple press releases1 and parse apple press xml1 and fetch google news rss1](workflows/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/README.md) | 47 | Available |
-| [Send daily weather updates via a push notification](workflows/send-daily-weather-updates-via-a-push-notification/README.md) | 3 | Available |
-| [Submit batch request to Anthropic](workflows/submit-batch-request-to-anthropic/README.md) | 27 | Available |
-| [Mycroft — Signal Contradiction Detector (Agent 6)](workflows/mycroft-signal-contradiction-detector-agent-6/README.md) | 20 | Available |
-| [has shared with external users and create google sheets and permissions to items](workflows/has-shared-with-external-users-and-create-google-sheets-and-permissions-to-items/README.md) | 14 | Available |
-| [Create a short URL and get the statistics of the URL](workflows/create-a-short-url-and-get-the-statistics-of-the-url/README.md) | 3 | Available |
-| [Workflow: Extract data from PDF with Claude 3.5 Sonnet or Gemini 2.0 Flash](workflows/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/README.md) | 6 | Available |
-| [Generate audio from text using OpenAI - text-to-speech Workflow](workflows/generate-audio-from-text-using-openai-text-to-speech-workflow/README.md) | 3 | Available |
-| [webhook and text edit image and read file url](workflows/webhook-and-text-edit-image-and-read-file-url/README.md) | 3 | Available |
-| [Agent Access Control Template](workflows/agent-access-control-template/README.md) | 23 | Available |
-| [LinkedIn Leads Scraping & Enrichment (Main)](workflows/linkedin-leads-scraping-enrichment-main/README.md) | 56 | Available |
-| [💥🛠️Build a Web Search Chatbot with GPT-4o and MCP Brave Search](workflows/build-a-web-search-chatbot-with-gpt-4o-and-mcp-brave-search/README.md) | 6 | Available |
-| [n8n and http request and create new file](workflows/n8n-and-http-request-and-create-new-file/README.md) | 19 | Available |
-| [Extract text from PDF](workflows/extract-text-from-pdf/README.md) | 33 | Available |
-| [get rows to enrich and basic llm chain ice breaker and http request](workflows/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/README.md) | 14 | Available |
-| [Restore your credentials from GitHub](workflows/restore-your-credentials-from-github/README.md) | 8 | Available |
-| [🧠 Place your logic here!](workflows/place-your-logic-here/README.md) | 3 | Available |
-| [dub.co URL Shortener](workflows/dub-co-url-shortener/README.md) | 8 | Available |
-| [Zendesk-to-slack](workflows/zendesk-to-slack/README.md) | 5 | Available |
-| [receive notion events and mattermost](workflows/receive-notion-events-and-mattermost/README.md) | 4 | Available |
-| [Get all files of subfolders](workflows/get-all-files-of-subfolders/README.md) | 23 | Available |
-| [paypal api example](workflows/paypal-api-example/README.md) | 2 | Available |
-| [receive schedule events and search airtable and gmail](workflows/receive-schedule-events-and-search-airtable-and-gmail/README.md) | 24 | Available |
-| [Create a channel, invite users to the channel, post a message, and upload a file](workflows/create-a-channel-invite-users-to-the-channel-post-a-message-and-upload-a-file/README.md) | 6 | Available |
-| [Get Apprropraite Data](workflows/get-apprropraite-data/README.md) | 23 | Available |
-| [Load data into database](workflows/load-data-into-database/README.md) | 12 | Available |
-| [mattermost and update jira and update pager duty](workflows/mattermost-and-update-jira-and-update-pager-duty/README.md) | 5 | Available |
-| [issues to list and sentiment over issue comments and search airtable](workflows/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/README.md) | 14 | Available |
-| [http request and cron and telegram](workflows/http-request-and-cron-and-telegram/README.md) | 7 | Available |
-| [Automate Your Customer Service With WhatsApp Business Cloud & Asana](workflows/automate-your-customer-service-with-whatsapp-business-cloud-asana/README.md) | 3 | Available |
-| [✍️🌄 Your First Wordpress Content Creator - Quick Start](workflows/your-first-wordpress-content-creator-quick-start/README.md) | 28 | Available |
-| [receive gmail events and split out and only keep invoice link](workflows/receive-gmail-events-and-split-out-and-only-keep-invoice-link/README.md) | 11 | Available |
-| [ProspectLens company research](workflows/prospectlens-company-research/README.md) | 6 | Available |
-| [Add new incoming emails to a Google Sheets spreadsheet as a new row.](workflows/add-new-incoming-emails-to-a-google-sheets-spreadsheet-as-a-new-row/README.md) | 2 | Available |
-| [extracthtmlcontent html and reviews to list and default data loader](workflows/extracthtmlcontent-html-and-reviews-to-list-and-default-data-loader/README.md) | 24 | Available |
-| [http request and create random masked email and respond to webhook](workflows/http-request-and-create-random-masked-email-and-respond-to-webhook/README.md) | 6 | Available |
-| [receive schedule events and rss feed read and send email with each post](workflows/receive-schedule-events-and-rss-feed-read-and-send-email-with-each-post/README.md) | 8 | Available |
-| [Main workflow: AI agent using custom tool](workflows/main-workflow-ai-agent-using-custom-tool/README.md) | 15 | Available |
-| [emailverifier hunter](workflows/emailverifier-hunter/README.md) | 2 | Available |
-| [Business WhatsApp AI RAG Chatbot](workflows/business-whatsapp-ai-rag-chatbot-693566f5/README.md) | 22 | Available |
-| [YT AI News Playlist Creator/AI News Form Updater](workflows/yt-ai-news-playlist-creator-ai-news-form-updater/README.md) | 15 | Available |
-| [list google drive and share google drive](workflows/list-google-drive-and-share-google-drive/README.md) | 8 | Available |
-| [Age and number of the news](workflows/age-and-number-of-the-news/README.md) | 12 | Available |
-| [Testing Email Header Analysis Workflow](workflows/testing-email-header-analysis-workflow-a45bd7ae/README.md) | 33 | Available |
-| [Social Media Publisher](workflows/social-media-publisher/README.md) | 12 | Available |
-| [Automate Drive-To-Store Lead Generation System (with coupon) on SuiteCRM](workflows/automate-drive-to-store-lead-generation-system-with-coupon-on-suitecrm/README.md) | 11 | Available |
-| [freshdesk api example](workflows/freshdesk-api-example/README.md) | 2 | Available |
-| [read harvey s email and read excuses file and retrieve excuses spreadsheet data](workflows/read-harvey-s-email-and-read-excuses-file-and-retrieve-excuses-spreadsheet-data/README.md) | 9 | Available |
-| [Financial News Recap Workflow](workflows/financial-news-recap-workflow/README.md) | 7 | Available |
-| [Add a datapoint to Beeminder when new activity is added to Strava](workflows/add-a-datapoint-to-beeminder-when-new-activity-is-added-to-strava/README.md) | 2 | Available |
-| [list message gmail and google drive](workflows/list-message-gmail-and-google-drive/README.md) | 3 | Available |
-| [receive shopify events and list zendesk and create new ticket for new orders](workflows/receive-shopify-events-and-list-zendesk-and-create-new-ticket-for-new-orders/README.md) | 7 | Available |
-| [create raindrop and create bookmark raindrop and update bookmark raindrop](workflows/create-raindrop-and-create-bookmark-raindrop-and-update-bookmark-raindrop/README.md) | 4 | Available |
-| [Send a cocktail recipe every day via a Telegram](workflows/send-a-cocktail-recipe-every-day-via-a-telegram/README.md) | 3 | Available |
-| [Calendar_scheduling](workflows/calendar-scheduling/README.md) | 17 | Available |
-| [Create Threads on Bluesky](workflows/create-threads-on-bluesky/README.md) | 14 | Available |
-| [🌐 Confluence Page AI Powered Chatbot](workflows/confluence-page-ai-powered-chatbot/README.md) | 12 | Available |
-| [INSEE Enrichment for Agile CRM](workflows/insee-enrichment-for-agile-crm/README.md) | 10 | Available |
-| [Entra Contacts to Zammad User Sync](workflows/entra-contacts-to-zammad-user-sync/README.md) | 13 | Available |
-| [write read write file and download pdf file and file conversion to pdfa](workflows/write-read-write-file-and-download-pdf-file-and-file-conversion-to-pdfa/README.md) | 4 | Available |
-| [What To Eat](workflows/what-to-eat/README.md) | 9 | Available |
-| [webhook and update pager duty and mattermost](workflows/webhook-and-update-pager-duty-and-mattermost/README.md) | 3 | Available |
-| [Automated Resume Review System Using OpenAI + Google Sheets](workflows/automated-resume-review-system-using-openai-google-sheets/README.md) | 12 | Available |
-| [Send specific PDF attachments from Gmail to Google Drive using OpenAI](workflows/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/README.md) | 16 | Available |
-| [create microsoft to do and update microsoft to do and microsoft to do2](workflows/create-microsoft-to-do-and-update-microsoft-to-do-and-microsoft-to-do2/README.md) | 4 | Available |
-| [Create, update, and get an entry in Strapi](workflows/create-update-and-get-an-entry-in-strapi/README.md) | 6 | Available |
-| [fetch hacker news content](workflows/fetch-hacker-news-content/README.md) | 2 | Available |
-| [TEMPLATES](workflows/split-out-and-get-boarditem-monday-com-and-http-request/README.md) | 14 | Available |
-| [Reply draft with OpenAI Assistant](workflows/reply-draft-with-openai-assistant/README.md) | 13 | Available |
-| [My workflow 4](workflows/github-get-repos-and-github-get-languages-and-arxiv-search-papers/README.md) | 17 | Available |
-| [🦙👁️👁️ Find the Best Local Ollama Vision Models by Comparison](workflows/find-the-best-local-ollama-vision-models-by-comparison/README.md) | 13 | Available |
-| [receive mailjet events](workflows/receive-mailjet-events/README.md) | 1 | Available |
-| [default data loader and text splitter token splitter and download google drive](workflows/default-data-loader-and-text-splitter-token-splitter-and-download-google-drive/README.md) | 6 | Available |
-| [Create a new user in Intercom](workflows/create-a-new-user-in-intercom/README.md) | 2 | Available |
-| [Create a coupon on Paddle](workflows/create-a-coupon-on-paddle/README.md) | 2 | Available |
-| [twitter and telegram and receive shopify events](workflows/twitter-and-telegram-and-receive-shopify-events/README.md) | 3 | Available |
-| [Create a contact in Drift](workflows/create-a-contact-in-drift/README.md) | 2 | Available |
-| [Entra User to Zammad User Sync](workflows/entra-user-to-zammad-user-sync/README.md) | 16 | Available |
-| [receive google drive events and download google drive and spreadsheet file](workflows/receive-google-drive-events-and-download-google-drive-and-spreadsheet-file/README.md) | 12 | Available |
-| [send email with mailgun](workflows/send-email-with-mailgun/README.md) | 2 | Available |
-| [🤖🧠 AI Agent Chatbot + LONG TERM Memory + Note Storage + Telegram](workflows/ai-agent-chatbot-long-term-memory-note-storage-telegram/README.md) | 13 | Available |
-| [receive chat events and categorize and name prompt and create airtable](workflows/receive-chat-events-and-categorize-and-name-prompt-and-create-airtable/README.md) | 11 | Available |
-| [TEMPLATE - Multi Methods API Endpoint](workflows/template-multi-methods-api-endpoint/README.md) | 13 | Available |
-| [LinkedIn Profile Discovery](workflows/linkedin-profile-discovery/README.md) | 5 | Available |
-| [ai data extraction with dynamic prompts and airtable](workflows/ai-data-extraction-with-dynamic-prompts-and-airtable/README.md) | 30 | Available |
-| [🤖🧑‍💻 AI Agent  for Top n8n Creators Leaderboard Reporting](workflows/ai-agent-for-top-n8n-creators-leaderboard-reporting/README.md) | 31 | Available |
-| [Simplest n8n Workflow Backup – Automating Your Data Security in Google Drive](workflows/simplest-n8n-workflow-backup-automating-your-data-security-in-google-drive/README.md) | 5 | Available |
-| [http request and filter leads by company criteria and clearbit](workflows/http-request-and-filter-leads-by-company-criteria-and-clearbit/README.md) | 11 | Available |
-| [Receive the weather information of any city](workflows/receive-the-weather-information-of-any-city/README.md) | 3 | Available |
-| [Analyze Reddit Posts with AI to Identify Business Opportunities](workflows/analyze-reddit-posts-with-ai-to-identify-business-opportunities/README.md) | 18 | Available |
-| [Amazon Ads AI Optimization](workflows/amazon-ads-ai-optimization/README.md) | 15 | Available |
-| [receive schedule events and google sheets and chain llm](workflows/receive-schedule-events-and-google-sheets-and-chain-llm/README.md) | 18 | Available |
-| [🙋‍♀️What's the difference?](workflows/what-s-the-difference/README.md) | 31 | Available |
-| [Assign values to variables using the Set node](workflows/assign-values-to-variables-using-the-set-node/README.md) | 2 | Available |
-| [Get Company by Name](workflows/get-company-by-name/README.md) | 4 | Available |
-| [receive schedule events and scrape website with scrappey](workflows/receive-schedule-events-and-scrape-website-with-scrappey/README.md) | 3 | Available |
-| [Image-Based Data Extraction API using Gemini AI](workflows/image-based-data-extraction-api-using-gemini-ai/README.md) | 6 | Available |
-| [Send SMS to numbers stored in Airtable with Twilio](workflows/send-sms-to-numbers-stored-in-airtable-with-twilio/README.md) | 3 | Available |
-| [Indeed Company Data Scraper & Summarization with Airtable, Bright Data and Google Gemini](workflows/indeed-company-data-scraper-summarization-with-airtable-bright-data-and-google-gemini/README.md) | 16 | Available |
-| [🎦💌Advanced YouTube RSS Feed Buddy for Your Favorite Channels](workflows/advanced-youtube-rss-feed-buddy-for-your-favorite-channels/README.md) | 29 | Available |
-| [Receive a Mattermost message when new data gets added to Airtable](workflows/receive-a-mattermost-message-when-new-data-gets-added-to-airtable/README.md) | 2 | Available |
-| [Speech Support Workflow](workflows/speech-support-workflow/README.md) | 16 | Available |
-| [Customer and Sales Support](workflows/customer-and-sales-support/README.md) | 7 | Available |
-| [upload ftp and receive schedule events and send zigbee2mqtt backup request](workflows/upload-ftp-and-receive-schedule-events-and-send-zigbee2mqtt-backup-request/README.md) | 6 | Available |
-| [open weather map and webhook](workflows/open-weather-map-and-webhook/README.md) | 3 | Available |
-| [receive acuity scheduling events](workflows/receive-acuity-scheduling-events/README.md) | 1 | Available |
-| [LLM Chaining examples](workflows/llm-orchestration-lab/README.md) | 31 | Available |
-| [Get Threads API Access Token](workflows/get-threads-api-access-token/README.md) | 19 | Available |
-| [send email with mandrill](workflows/send-email-with-mandrill/README.md) | 2 | Available |
-| [list google calendar and create trello cards and trigger every day at 8am](workflows/list-google-calendar-and-create-trello-cards-and-trigger-every-day-at-8am/README.md) | 8 | Available |
-| [webhook and create netlify](workflows/webhook-and-create-netlify/README.md) | 2 | Available |
-| [screenshot](workflows/screenshot/README.md) | 10 | Available |
-| [ClockifyBlockiaWorkflow](workflows/clockifyblockiaworkflow/README.md) | 16 | Available |
-| [TheHive](workflows/thehive/README.md) | 7 | Available |
-| [Daily Text Affirmations](workflows/daily-text-affirmations/README.md) | 3 | Available |
-| [JSON file > Google Sheets](workflows/json-file-google-sheets/README.md) | 10 | Available |
-| [PURCHASE ORDER EXAMPLE](workflows/purchase-order-example/README.md) | 16 | Available |
-| [Receive updates when a new activity gets created and tweet about it](workflows/receive-updates-when-a-new-activity-gets-created-and-tweet-about-it/README.md) | 2 | Available |
-| [http request and write read write file](workflows/http-request-and-write-read-write-file/README.md) | 4 | Available |
-| [http request and append google sheets and receive form events](workflows/http-request-and-append-google-sheets-and-receive-form-events/README.md) | 12 | Available |
-| [google big query and http request and cron](workflows/google-big-query-and-http-request-and-cron/README.md) | 4 | Available |
-| [↔️ Airtable Batch Processing](workflows/airtable-batch-processing/README.md) | 29 | Available |
-| [Search for all contacts that last contact date for is unknown](workflows/search-for-all-contacts-that-last-contact-date-for-is-unknown/README.md) | 5 | Available |
-| [Update Crypto Values](workflows/update-crypto-values/README.md) | 8 | Available |
-| [Create, update, and get a subscriber using the e-goi node](workflows/create-update-and-get-a-subscriber-using-the-e-goi-node/README.md) | 4 | Available |
-| [Optimise images uploaded to GDrive](workflows/optimise-images-uploaded-to-gdrive/README.md) | 5 | Available |
-| [Sending an SMS using sms77](workflows/sending-an-sms-using-sms77/README.md) | 2 | Available |
-| [OpenAI Assistant for Hubspot Chat](workflows/openai-assistant-for-hubspot-chat/README.md) | 26 | Available |
-| [Conducting user interviews have been traditionally difficult due to preparation, timing and execution costs. What if we let an AI/LLM do it instead?](workflows/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/README.md) | 30 | Available |
-| [Discord MCP Chat Agent](workflows/discord-mcp-chat-agent/README.md) | 4 | Available |
-| [AI Agent - Cv Resume - Automated Screening , Sorting , Rating and Tracker System](workflows/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/README.md) | 11 | Available |
-| [Activate workflow to use!](workflows/activate-workflow-to-use/README.md) | 24 | Available |
-| [Example of EDI Message](workflows/example-of-edi-message/README.md) | 12 | Available |
-| [Pyragogy AI Village - Orchestrazione Master (Architettura Profonda V2)](workflows/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/README.md) | 35 | Available |
-| [every day at 07 00 and search contact hubspot and mailchimp](workflows/every-day-at-07-00-and-search-contact-hubspot-and-mailchimp/README.md) | 3 | Available |
-| [Click the `Execute Workflow` button and double click on the nodes to see the input and output items.](workflows/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items/README.md) | 5 | Available |
-| [N8N Financial Tracker Telegram Invoices to Notion with AI Summaries & Reports](workflows/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/README.md) | 15 | Available |
-| [Webhook Node (Shopify Listener)](workflows/webhook-node-shopify-listener/README.md) | 8 | Available |
-| [Standup Bot - Override Config](workflows/standup-bot-override-config/README.md) | 3 | Available |
-| [Automatically Send Daily Meeting List to Telegram](workflows/automatically-send-daily-meeting-list-to-telegram/README.md) | 5 | Available |
-| [Clone n8n Workflows between Instances using n8n API](workflows/clone-n8n-workflows-between-instances-using-n8n-api/README.md) | 14 | Available |
-| [Add a event to Calender](workflows/add-a-event-to-calender/README.md) | 2 | Available |
-| [write read write file and download pptx file and file conversion to pdf](workflows/write-read-write-file-and-download-pptx-file-and-file-conversion-to-pdf/README.md) | 4 | Available |
-| [Scrape Twitter for mentions of company](workflows/scrape-twitter-for-mentions-of-company/README.md) | 7 | Available |
-| [Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini](workflows/vision-based-ai-agent-scraper-with-google-sheets-scrapingbee-and-gemini/README.md) | 14 | Available |
-| [split out and remove duplicates and respond to webhook](workflows/split-out-and-remove-duplicates-and-respond-to-webhook/README.md) | 7 | Available |
-| [piepdrive-test](workflows/enrich-pipedrive-s-organization-data-with-gpt-4o-when-an-organization-is-created-in-pipedrive/README.md) | 7 | Available |
-| [AutoClip – Automatically Generate Video Clips and Upload to YouTube](workflows/autoclip-automatically-generate-video-clips-and-upload-to-youtube/README.md) | 20 | Available |
-| [Create a Google sheet](workflows/create-a-google-sheet/README.md) | 7 | Available |
-| [plivo and open weather map and cron](workflows/plivo-and-open-weather-map-and-cron/README.md) | 3 | Available |
-| [Squarespace Fulfillment Automation with n8n](workflows/squarespace-fulfillment-automation-with-n8n/README.md) | 8 | Available |
-| [receive schedule events and default data loader and recursive character text splitter](workflows/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/README.md) | 28 | Available |
-| [Timer starts the Update every 24 hours and Read the Links out of a Google Sheets File (RSS-Links)](workflows/timer-starts-the-update-every-24-hours-and-read-the-links-out-of-a-google-sheets-file-rss-links/README.md) | 16 | Available |
-| [receive jira events](workflows/receive-jira-events/README.md) | 1 | Available |
-| [Scrape Web Data with Bright Data, Google Gemini and MCP Automated AI Agent](workflows/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/README.md) | 15 | Available |
-| [SIGNL4 Alert](workflows/signl4-alert/README.md) | 9 | Available |
-| [nl2sql](workflows/query-postgres-and-create-charts-from-natural-language/README.md) | 24 | Available |
-| [Create Animated Stories using GPT-4o-mini, Midjourney, Kling and Creatomate API](workflows/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/README.md) | 45 | Available |
-| [Search LinkedIn companies, Score with AI and add them to Google Sheet CRM](workflows/search-linkedin-companies-score-with-ai-and-add-them-to-google-sheet-crm/README.md) | 12 | Available |
-| [html to pdf and webhook and respond to webhook](workflows/html-to-pdf-and-webhook-and-respond-to-webhook/README.md) | 5 | Available |
-| [Orchestrator v2 - Enhanced](workflows/orchestrator-v2-enhanced/README.md) | 11 | Available |
-| [Moving metrics from Google Sheets to Orbit](workflows/moving-metrics-from-google-sheets-to-orbit/README.md) | 6 | Available |
-| [Scalable Webhook Orchestrator](workflows/scalable-webhook-orchestrator/README.md) | 7 | Available |
-| [cron and executequery my sql and append google sheets](workflows/cron-and-executequery-my-sql-and-append-google-sheets/README.md) | 3 | Available |
-| [basic llm chain and hacker news and http request](workflows/basic-llm-chain-and-hacker-news-and-http-request/README.md) | 10 | Available |
-| [Creating an Onfleet Task for a new Shopify Fulfillment](workflows/creating-an-onfleet-task-for-a-new-shopify-fulfillment/README.md) | 2 | Available |
-| [Get new time entries from Toggl](workflows/get-new-time-entries-from-toggl/README.md) | 1 | Available |
-| [Convert image from jpg/png to webp](workflows/convert-image-from-jpg-png-to-webp/README.md) | 10 | Available |
-| [DROPCONTACT 250 BATCH ASYNCHRONOUSLY](workflows/dropcontact-250-batch-asynchronously/README.md) | 11 | Available |
-| [Post New YouTube Videos to X](workflows/post-new-youtube-videos-to-x/README.md) | 4 | Available |
-| [Email Validation and extract domain](workflows/email-validation-and-extract-domain/README.md) | 3 | Available |
-| [Simple Conversion of Emails into HTML Webpages](workflows/simple-conversion-of-emails-into-html-webpages/README.md) | 6 | Available |
-| [receive google sheets events and take a screenshot of a website and google drive](workflows/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/README.md) | 3 | Available |
-| [Get today's date and day using the Function node](workflows/get-today-s-date-and-day-using-the-function-node/README.md) | 2 | Available |
-| [box file api example](workflows/box-file-api-example/README.md) | 2 | Available |
-| [webhook and executequery my sql and http request](workflows/webhook-and-executequery-my-sql-and-http-request/README.md) | 6 | Available |
-| [Image Generation API](workflows/image-generation-api/README.md) | 3 | Available |
-| [address validation](workflows/address-validation/README.md) | 21 | Available |
-| [n8n-農產品](workflows/http-request-and-split-out-and-append-google-sheets/README.md) | 4 | Available |
-| [cron and elasticsearch and create work item](workflows/cron-and-elasticsearch-and-create-work-item/README.md) | 5 | Available |
-| [http request and get reddit ml and groq llm sentiment](workflows/http-request-and-get-reddit-ml-and-groq-llm-sentiment/README.md) | 17 | Available |
-| [Receive updates when an event occurs in TheHive](workflows/receive-updates-when-an-event-occurs-in-thehive/README.md) | 1 | Available |
-| [Send Google Sheets data as a message to a Discord channel](workflows/send-google-sheets-data-as-a-message-to-a-discord-channel/README.md) | 3 | Available |
-| [Tech_Stack_Directional_Signal_Agent](workflows/tech-stack-directional-signal-agent/README.md) | 12 | Available |
-| [Basic PDF Digital Sign Service](workflows/basic-pdf-digital-sign-service/README.md) | 27 | Available |
-| [RAG Workflow For Company Documents stored in Google Drive](workflows/rag-workflow-for-company-documents-stored-in-google-drive/README.md) | 15 | Available |
-| [isavailable peekalink and peekalink](workflows/isavailable-peekalink-and-peekalink/README.md) | 5 | Available |
-| [receive telegram events and fetch voice message and translate audio open ai](workflows/receive-telegram-events-and-fetch-voice-message-and-translate-audio-open-ai/README.md) | 12 | Available |
-| [signl4 and open weather map and receive schedule events](workflows/signl4-and-open-weather-map-and-receive-schedule-events/README.md) | 5 | Available |
-| [OpenSea NFT Agent Tool](workflows/opensea-nft-agent-tool/README.md) | 14 | Available |
-| [Reschedule overdue Asana tasks and clean up completed tasks](workflows/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/README.md) | 7 | Available |
-| [Receive MQTT message from IKEA 5-button Switch, and route actions.](workflows/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/README.md) | 24 | Available |
-| [receive invoice ninja events](workflows/receive-invoice-ninja-events/README.md) | 1 | Available |
-| [AI Lead Generation & Enrichment (Outscraper + Gemini)](workflows/ai-lead-generation-enrichment-outscraper-gemini/README.md) | 9 | Available |
-| [list customer stripe and search organization pipedrive and create note with charge information](workflows/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/README.md) | 11 | Available |
-| [Contact Form Text Classifier for eCommerce](workflows/contact-form-text-classifier-for-ecommerce/README.md) | 13 | Available |
-| [pinecone vector store and receive chat events and download google drive](workflows/pinecone-vector-store-and-receive-chat-events-and-download-google-drive/README.md) | 16 | Available |
-| [CV Evaluation - Error Handling](workflows/cv-evaluation-error-handling/README.md) | 10 | Available |
-| [executequery postgres and tofile spreadsheet file and write binary file](workflows/executequery-postgres-and-tofile-spreadsheet-file-and-write-binary-file/README.md) | 3 | Available |
-| [Structured Bulk Data Extract with Bright Data Web Scraper](workflows/structured-bulk-data-extract-with-bright-data-web-scraper/README.md) | 13 | Available |
-| [Start here: Step-by Step Youtube Tutorial :star:](workflows/start-here-step-by-step-youtube-tutorial-star/README.md) | 6 | Available |
-| [check twitch channel status with graphql](workflows/check-twitch-channel-status-with-graphql/README.md) | 4 | Available |
-| [Snowflake CSV](workflows/snowflake-csv/README.md) | 5 | Available |
-| [Find WooCommerce User-ID](workflows/find-woocommerce-user-id/README.md) | 31 | Available |
-| [Zoom AI Meeting Assistant](workflows/zoom-ai-meeting-assistant/README.md) | 22 | Available |
-| [Extract expenses from emails and add to Google Sheet](workflows/extract-expenses-from-emails-and-add-to-google-sheet/README.md) | 6 | Available |
-| [Receive updates when a subscriber is added to a group and strore the information in Airtable](workflows/receive-updates-when-a-subscriber-is-added-to-a-group-and-strore-the-information-in-airtable/README.md) | 4 | Available |
-| [http request and filter](workflows/http-request-and-filter/README.md) | 11 | Available |
-| [TwitterWorkflow](workflows/twitterworkflow/README.md) | 6 | Available |
-| [Auto WordPress Blog Generator (GPT + Postgres + WP Media)](workflows/auto-wordpress-blog-generator-gpt-postgres-wp-media/README.md) | 23 | Available |
-| [Discord Intro](workflows/discord-intro/README.md) | 2 | Available |
-| [process items in batches with conditions](workflows/process-items-in-batches-with-conditions/README.md) | 5 | Available |
-| [Creating your first workflow](workflows/creating-your-first-workflow/README.md) | 5 | Available |
-| [Fully automated Video Captions generation with json2video](workflows/fully-automated-video-captions-generation-with-json2video/README.md) | 9 | Available |
-| [conversational interviews with ai agents and n8n forms](workflows/conversational-interviews-with-ai-agents-and-n8n-forms/README.md) | 64 | Available |
-| [Receive updates when an email is bounced or opened](workflows/receive-updates-when-an-email-is-bounced-or-opened/README.md) | 1 | Available |
-| [My workflow 6](workflows/slash-command/README.md) | 5 | Available |
-| [Very quick quickstart](workflows/very-quick-quickstart/README.md) | 3 | Available |
-| [You only have to run this part once!](workflows/you-only-have-to-run-this-part-once/README.md) | 18 | Available |
-| [Create an empty google sheet file](workflows/create-an-empty-google-sheet-file/README.md) | 12 | Available |
-| [read binary file and spreadsheet file and move binary data](workflows/read-binary-file-and-spreadsheet-file-and-move-binary-data/README.md) | 5 | Available |
-| [receive shopify events](workflows/receive-shopify-events/README.md) | 1 | Available |
-| [Connect Airtable Contacts to telli for Automated AI Voice Call Scheduling](workflows/connect-airtable-contacts-to-telli-for-automated-ai-voice-call-scheduling/README.md) | 3 | Available |
-| [crypto hashing example](workflows/crypto-hashing-example/README.md) | 2 | Available |
-| [Create entry in Mailchimp from Airtable](workflows/create-entry-in-mailchimp-from-airtable/README.md) | 3 | Available |
-| [Events Webhook Trigger](workflows/events-webhook-trigger/README.md) | 22 | Available |
-| [Enrich Company Data from Google Sheet with OpenAI Agent and Scraper Tool](workflows/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/README.md) | 12 | Available |
-| [Vector DB Loader from Google Drive](workflows/vector-db-loader-from-google-drive/README.md) | 14 | Available |
-| [on clicking execute and check if pagination and set next url](workflows/on-clicking-execute-and-check-if-pagination-and-set-next-url/README.md) | 8 | Available |
-| [Convert Parquet, Avro, ORC & Feather via ParquetReader to JSON](workflows/convert-parquet-avro-orc-feather-via-parquetreader-to-json/README.md) | 3 | Available |
-| [New invoice email notification](workflows/new-invoice-email-notification/README.md) | 6 | Available |
-| [list contentful](workflows/list-contentful/README.md) | 2 | Available |
-| [Use Stripe Predefined Credential](workflows/use-stripe-predefined-credential/README.md) | 12 | Available |
-| [Create a client in Harvest](workflows/create-a-client-in-harvest/README.md) | 2 | Available |
-| [template in store](workflows/template-in-store/README.md) | 12 | Available |
-| [Fetch, filter and sort notion tasks](workflows/fetch-filter-and-sort-notion-tasks/README.md) | 18 | Available |
-| [n8n and create new folder and tojson convert to file](workflows/n8n-and-create-new-folder-and-tojson-convert-to-file/README.md) | 10 | Available |
-| [http request and update google sheets and append google sheets](workflows/http-request-and-update-google-sheets-and-append-google-sheets/README.md) | 7 | Available |
-| [Main workflow: AI agent using custom tool](workflows/main-workflow-ai-agent-using-custom-tool-96d92b57/README.md) | 11 | Available |
-| [Find a New Book](workflows/find-a-new-book/README.md) | 13 | Available |
-| [Data reception via Webhook call or message](workflows/data-reception-via-webhook-call-or-message/README.md) | 7 | Available |
-| [fetch new followers and item lists and http request](workflows/fetch-new-followers-and-item-lists-and-http-request/README.md) | 12 | Available |
-| [list aws s3 and download all files from folder and all into one item include binary](workflows/list-aws-s3-and-download-all-files-from-folder-and-all-into-one-item-include-binary/README.md) | 5 | Available |
-| [Retrieve Customer Messages Data (Google Sheets Node ):](workflows/retrieve-customer-messages-data-google-sheets-node/README.md) | 7 | Available |
-| [🎙️ Generate Text-to-Speech Using Eleven Labs via API](workflows/generate-text-to-speech-using-eleven-labs-via-api/README.md) | 8 | Available |
-| [Linear Project Status and End Date to Productboard feature Sync](workflows/linear-project-status-and-end-date-to-productboard-feature-sync/README.md) | 15 | Available |
-| [Get More Templates Like This 👇](workflows/get-more-templates-like-this/README.md) | 16 | Available |
-| [itemMatching() example](workflows/itemmatching-example/README.md) | 4 | Available |
-| [🚫 Error Handling Nodes](workflows/error-handling-nodes/README.md) | 10 | Available |
-| [Create and update a channel, and send a message on Twist](workflows/create-and-update-a-channel-and-send-a-message-on-twist/README.md) | 4 | Available |
-| [Get the current weather data for a city](workflows/get-the-current-weather-data-for-a-city/README.md) | 2 | Available |
-| [Always Authenticate Your Server!](workflows/always-authenticate-your-server-db28c8ed/README.md) | 20 | Available |
-| [list airtable and incr redis and webhook](workflows/list-airtable-and-incr-redis-and-webhook/README.md) | 11 | Available |
-| [AI-Powered WhatsApp Chatbot for Text, Voice, Images & PDFs](workflows/ai-powered-whatsapp-chatbot-for-text-voice-images-pdfs/README.md) | 26 | Available |
-| [Open Deep Research - AI-Powered Autonomous Research Workflow](workflows/open-deep-research-ai-powered-autonomous-research-workflow/README.md) | 14 | Available |
-| [💡 Can't find your transcript?](workflows/can-t-find-your-transcript/README.md) | 19 | Available |
-| [Sync New Shopify Customers to Odoo Contacts](workflows/sync-new-shopify-customers-to-odoo-contacts/README.md) | 5 | Available |
-| [Steam + CF Report](workflows/steam-cf-report/README.md) | 9 | Available |
-| [Syncro Alert to OpsGenie](workflows/syncro-alert-to-opsgenie/README.md) | 7 | Available |
-| [Update the properties by object Workflow](workflows/update-the-properties-by-object-workflow/README.md) | 26 | Available |
-| [fetch manifest digest and remove old tags and retrieve image tags](workflows/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/README.md) | 16 | Available |
-| [Get synonyms of a German word](workflows/get-synonyms-of-a-german-word/README.md) | 2 | Available |
-| [AI News & Sentiment Agent](workflows/ai-news-sentiment-agent/README.md) | 8 | Available |
-| [Google Sheet to Mailchimp](workflows/google-sheet-to-mailchimp/README.md) | 4 | Available |
-| [receive schedule events and create meal plan and http request](workflows/receive-schedule-events-and-create-meal-plan-and-http-request/README.md) | 6 | Available |
-| [Chatbot AI](workflows/chatbot-ai/README.md) | 8 | Available |
-| [ℹ️ Replacing the initial nodes](workflows/i-replacing-the-initial-nodes/README.md) | 5 | Available |
-| [✨📊Multi-AI Agent Chatbot for Postgres/Supabase DB and QuickCharts + Tool Router](workflows/multi-ai-agent-chatbot-for-postgres-supabase-db-and-quickcharts-tool-router/README.md) | 19 | Available |
-| [receive hubspot events](workflows/receive-hubspot-events/README.md) | 1 | Available |
-| [Personalized AI Tech Newsletter Using RSS, OpenAI and Gmail](workflows/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/README.md) | 17 | Available |
-| [Template for Kids' Story in Arabic](workflows/template-for-kids-story-in-arabic/README.md) | 13 | Available |
-| [#️⃣Nostr #damus AI Powered Reporting + Gmail + Telegram](workflows/nostr-damus-ai-powered-reporting-gmail-telegram/README.md) | 17 | Available |
-| [get mediamarkt offers website and create html for email and extract items from results](workflows/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/README.md) | 8 | Available |
-| [Data Standardization & Google DNS Integration](workflows/data-standardization-google-dns-integration/README.md) | 23 | Available |
-| [Log errors and avoid sending too many emails](workflows/log-errors-and-avoid-sending-too-many-emails/README.md) | 13 | Available |
-| [Forward Filtered Gmail Notifications to Telegram Chat](workflows/forward-filtered-gmail-notifications-to-telegram-chat/README.md) | 3 | Available |
-| [Business Canvas Generator](workflows/business-canvas-generator/README.md) | 25 | Available |
-| [get monday com](workflows/get-monday-com/README.md) | 2 | Available |
-| [Merge multiple runs into one](workflows/merge-multiple-runs-into-one/README.md) | 7 | Available |
-| [receive github events and slack add and slack remove](workflows/receive-github-events-and-slack-add-and-slack-remove/README.md) | 4 | Available |
-| [Monitor USDT ERC-20 Wallet Balance with Etherscan and Telegram Notifications](workflows/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/README.md) | 7 | Available |
-| [🔍 LinkedIn Jobs API – Parameter Guide](workflows/linkedin-jobs-api-parameter-guide/README.md) | 9 | Available |
-| [Mycroft - SEC_Filings_Analysis_Enhanced](workflows/mycroft-sec-filings-analysis-enhanced/README.md) | 29 | Available |
-| [receive schedule events and get all emails in the last day and get thread gmail](workflows/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/README.md) | 7 | Available |
-| [Workflow Results to Markdown Notes in Your Obsidian Vault, via Google Drive](workflows/workflow-results-to-markdown-notes-in-your-obsidian-vault-via-google-drive/README.md) | 11 | Available |
-| [Track an event in Segment](workflows/track-an-event-in-segment/README.md) | 2 | Available |
-| [Google Maps Email Scraper Template](workflows/google-maps-email-scraper-template/README.md) | 18 | Available |
-| [split out and aggregate and webhook](workflows/split-out-and-aggregate-and-webhook/README.md) | 7 | Available |
-| [cheems](workflows/cron-and-discord/README.md) | 6 | Available |
-| [hmac crypto and move binary data and respond to webhook](workflows/hmac-crypto-and-move-binary-data-and-respond-to-webhook/README.md) | 9 | Available |
-| [Slack Modal Interface](workflows/slack-modal-interface/README.md) | 21 | Available |
-| [Search news using Perplexity AI and post to X (Twitter)](workflows/search-news-using-perplexity-ai-and-post-to-x-twitter/README.md) | 5 | Available |
-| [pdf to text](workflows/pdf-to-text/README.md) | 5 | Available |
-| [Namesilo Bulk Domain Availability [Template]](workflows/namesilo-bulk-domain-availability-template/README.md) | 9 | Available |
-| [The Ultimate Guide to Optimize WordPress Blog Posts with AI](workflows/the-ultimate-guide-to-optimize-wordpress-blog-posts-with-ai/README.md) | 15 | Available |
-| [Automatically Update YouTube Video Descriptions with Inserted Text](workflows/automatically-update-youtube-video-descriptions-with-inserted-text/README.md) | 7 | Available |
-| [Get all the tasks in Flow](workflows/get-all-the-tasks-in-flow/README.md) | 2 | Available |
-| [Update email addresses](workflows/update-email-addresses/README.md) | 5 | Available |
-| [Get information about a company with UpLead](workflows/get-information-about-a-company-with-uplead/README.md) | 2 | Available |
-| [My workflow 3](workflows/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/README.md) | 4 | Available |
-| [✨😃Automated Workflow Backups to Google Drive](workflows/automated-workflow-backups-to-google-drive/README.md) | 14 | Available |
-| [Save New Sales Opportunities](workflows/save-new-sales-opportunities/README.md) | 4 | Available |
-| [Add AI labels to Gmail messages](workflows/add-ai-labels-to-gmail-messages/README.md) | 11 | Available |
-| [AI Summarizer (LLM-ready)](workflows/ai-summarizer-llm-ready/README.md) | 5 | Available |
-| [Gmail to Vector Embeddings with PGVector and Ollama](workflows/gmail-to-vector-embeddings-with-pgvector-and-ollama/README.md) | 16 | Available |
-| [n8n Graphic Design Team](workflows/n8n-graphic-design-team/README.md) | 30 | Available |
-| [get file gitlab and gitlab and fromjson extract from file](workflows/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/README.md) | 19 | Available |
-| [Finance Literacy Bot - RAG & ChatBot](workflows/finance-literacy-bot-rag-chatbot/README.md) | 6 | Available |
-| [Ask AI what are the information you are looking for about the company](workflows/ask-ai-what-are-the-information-you-are-looking-for-about-the-company/README.md) | 14 | Available |
-| [Zip multiple files](workflows/zip-multiple-files/README.md) | 4 | Available |
-| [http request and html extract and open ai](workflows/http-request-and-html-extract-and-open-ai/README.md) | 11 | Available |
-| [My workflow 7](workflows/earnings-call-evidence/README.md) | 26 | Available |
-| [receive telegram events and telegram and google drive](workflows/receive-telegram-events-and-telegram-and-google-drive/README.md) | 32 | Available |
-| [receive form events and completion form and enter date time](workflows/receive-form-events-and-completion-form-and-enter-date-time/README.md) | 19 | Available |
-| [create quote wise and create transfer wise and execute transfer wise](workflows/create-quote-wise-and-create-transfer-wise-and-execute-transfer-wise/README.md) | 4 | Available |
-| [create draft email for review and generate sales email and analyse and build persona](workflows/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/README.md) | 11 | Available |
-| [Generate AI Videos with HeyGen in n8n](workflows/generate-ai-videos-with-heygen-in-n8n/README.md) | 7 | Available |
-| [LangChain - Example - Workflow Retriever](workflows/langchain-example-workflow-retriever/README.md) | 5 | Available |
-| [User Request Management](workflows/user-request-management/README.md) | 7 | Available |
-| [crm webhook trigger and update groundhogg deliverable and update groundhogg not deliverable](workflows/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/README.md) | 6 | Available |
-| [Automated Image Metadata Tagging](workflows/automated-image-metadata-tagging/README.md) | 8 | Available |
-| [item lists and piloterr get recent fundraise serie a and piloterr get recent fundraise serie b](workflows/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/README.md) | 11 | Available |
-| [Create a new task in Asana](workflows/create-a-new-task-in-asana/README.md) | 2 | Available |
-| [http request and create new file and edit file github](workflows/http-request-and-create-new-file-and-edit-file-github/README.md) | 20 | Available |
-| [Generate Graphic Wallpaper with Midjourney, GPT-4o-mini and Canvas APIs](workflows/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/README.md) | 11 | Available |
-| [http request and read write files from disk](workflows/http-request-and-read-write-files-from-disk/README.md) | 3 | Available |
-| [1/ Add Your credentials](workflows/1-add-your-credentials-18731028/README.md) | 4 | Available |
-| [receive telegram events and agent and telegram](workflows/receive-telegram-events-and-agent-and-telegram/README.md) | 4 | Available |
-| [TOTP VALIDATION (WITHOUT CREATING CREDENTIAL)](workflows/totp-validation-without-creating-credential/README.md) | 4 | Available |
-| [Set verification token](workflows/set-verification-token/README.md) | 9 | Available |
-| [Exponential Backoff for Google APIs](workflows/exponential-backoff-for-google-apis/README.md) | 7 | Available |
-| [Smart Factory Use Case](workflows/smart-factory-use-case/README.md) | 9 | Available |
-| [Reservation Medcin](workflows/reservation-medcin/README.md) | 7 | Available |
-| [http request and cron](workflows/http-request-and-cron/README.md) | 4 | Available |
-| [Translate text from English to German](workflows/translate-text-from-english-to-german/README.md) | 2 | Available |
-| [Effortless Email Management with AI](workflows/effortless-email-management-with-ai/README.md) | 22 | Available |
-| [list message gmail and delete message gmail](workflows/list-message-gmail-and-delete-message-gmail/README.md) | 4 | Available |
-| [Add new clients from Notion to Clockify](workflows/add-new-clients-from-notion-to-clockify/README.md) | 2 | Available |
-| [download google drive and http request and resize edit image](workflows/download-google-drive-and-http-request-and-resize-edit-image/README.md) | 8 | Available |
-| [Linkedin Automation](workflows/linkedin-automation/README.md) | 13 | Available |
-| [Receive updates when a subscriber unsubscribes in Customer.io](workflows/receive-updates-when-a-subscriber-unsubscribes-in-customer-io/README.md) | 1 | Available |
-| [Telegram-bot AI Da Nang](workflows/telegram-bot-ai-da-nang/README.md) | 15 | Available |
-| [receive chat events and acuity support search api and results to items](workflows/receive-chat-events-and-acuity-support-search-api-and-results-to-items/README.md) | 12 | Available |
-| [Tiktok Downloader](workflows/tiktok-downloader/README.md) | 6 | Available |
-| [Scenario 1 - AI Agent](workflows/scenario-1-ai-agent/README.md) | 24 | Available |
-| [Two Way Sync Pipedrive and MySQL](workflows/two-way-sync-pipedrive-and-mysql/README.md) | 14 | Available |
-| [Receive updates for the position of the ISS every minute and push it to a database](workflows/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/README.md) | 4 | Available |
-| [Publish post to a publication](workflows/publish-post-to-a-publication/README.md) | 2 | Available |
-| [Dynamic credentials using expressions](workflows/dynamic-credentials-using-expressions/README.md) | 3 | Available |
-| [OpenAI e-mail classification - application](workflows/openai-e-mail-classification-application/README.md) | 9 | Available |
-| [The `If` and the `Switch` nodes are the key nodes to set conditional logic for filtering and routing data](workflows/the-if-and-the-switch-nodes-are-the-key-nodes-to-set-conditional-logic-for-filtering-and-routing-data/README.md) | 5 | Available |
-| [Transform Image to Lego Style Using Line and Dall-E](workflows/transform-image-to-lego-style-using-line-and-dall-e/README.md) | 5 | Available |
-| [Convert Squarespace Profiles to Shopify Customers in Google Sheets](workflows/convert-squarespace-profiles-to-shopify-customers-in-google-sheets/README.md) | 7 | Available |
-| [Smart Factory Data Generator](workflows/smart-factory-data-generator/README.md) | 3 | Available |
-| [Receive updates when a form submission occurs in your Webflow website](workflows/receive-updates-when-a-form-submission-occurs-in-your-webflow-website/README.md) | 1 | Available |
-| [Send follow-up emails if appropriate](workflows/send-follow-up-emails-if-appropriate/README.md) | 25 | Available |
-| [Extract personal data with a self-hosted LLM Mistral NeMo](workflows/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/README.md) | 7 | Available |
-| [Translate](workflows/translate/README.md) | 14 | Available |
-| [AI Agent to chat with Supabase/PostgreSQL DB](workflows/ai-agent-to-chat-with-supabase-postgresql-db/README.md) | 6 | Available |
-| [Form with Dynamic Dropdown Field](workflows/form-with-dynamic-dropdown-field/README.md) | 9 | Available |
-| [agente](workflows/appointment-confirmation-assistant/README.md) | 31 | Available |
-| [webhook and http request](workflows/webhook-and-http-request/README.md) | 5 | Available |
-| [receive schedule events and http request and get contact for deals](workflows/receive-schedule-events-and-http-request-and-get-contact-for-deals/README.md) | 16 | Available |
-| [zoom and receive schedule events and update page wordpress](workflows/zoom-and-receive-schedule-events-and-update-page-wordpress/README.md) | 4 | Available |
-| [CFP Selection 2](workflows/cfp-selection-2/README.md) | 4 | Available |
-| [getallpeople n8n training customer datastore](workflows/getallpeople-n8n-training-customer-datastore/README.md) | 3 | Available |
-| [sample data name language and sample data greeting language](workflows/sample-data-name-language-and-sample-data-greeting-language/README.md) | 4 | Available |
-| [RAG:Context-Aware Chunking \\| Google Drive to Pinecone via OpenRouter & Gemini](workflows/rag-context-aware-chunking-google-drive-to-pinecone-via-openrouter-gemini/README.md) | 13 | Available |
-| [move binary data and http request and get workflow list](workflows/move-binary-data-and-http-request-and-get-workflow-list/README.md) | 9 | Available |
-| [Daylight Saving Time Notification](workflows/daylight-saving-time-notification/README.md) | 9 | Available |
-| [puq-docker-immich-deploy](workflows/puq-docker-immich-deploy/README.md) | 34 | Available |
-| [YogiAI](workflows/yogiai/README.md) | 25 | Available |
-| [Email Summary Agent](workflows/email-summary-agent/README.md) | 5 | Available |
-| [Receive updates for events in Chargebee](workflows/receive-updates-for-events-in-chargebee/README.md) | 1 | Available |
-| [AI Agent to chat with you Search Console Data, using OpenAI and Postgres](workflows/ai-agent-to-chat-with-you-search-console-data-using-openai-and-postgres/README.md) | 16 | Available |
-| [On User created event in Intercom](workflows/on-user-created-event-in-intercom/README.md) | 9 | Available |
-| [receive typeform events and append google sheets and email send](workflows/receive-typeform-events-and-append-google-sheets-and-email-send/README.md) | 5 | Available |
-| [Get messages with a certain label, remove the label, and add a new one](workflows/get-messages-with-a-certain-label-remove-the-label-and-add-a-new-one/README.md) | 4 | Available |
-| [Clockify to Syncro](workflows/clockify-to-syncro/README.md) | 13 | Available |
-| [LinkedIn Web Scraping with Bright Data MCP Server & Google Gemini](workflows/linkedin-web-scraping-with-bright-data-mcp-server-google-gemini/README.md) | 18 | Available |
-| [Don't forget to connect a GMail account to this node!](workflows/don-t-forget-to-connect-a-gmail-account-to-this-node/README.md) | 12 | Available |
-| [AI Document Assistant via Telegram + Supabase](workflows/ai-document-assistant-via-telegram-supabase/README.md) | 25 | Available |
-| [receive schedule events and subtractfromdate date time and delete dropbox](workflows/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/README.md) | 14 | Available |
-| [Remove PII from CSV Files](workflows/remove-pii-from-csv-files/README.md) | 9 | Available |
-| [receive chat events and agent and tool code](workflows/receive-chat-events-and-agent-and-tool-code/README.md) | 6 | Available |
-| [report execution errors to telegram](workflows/report-execution-errors-to-telegram/README.md) | 3 | Available |
-| [split out and http request and receive form events](workflows/split-out-and-http-request-and-receive-form-events/README.md) | 16 | Available |
-| [Clone this spreadsheet](workflows/clone-this-spreadsheet-2c27dcc7/README.md) | 11 | Available |
-| [receive calendly events](workflows/receive-calendly-events/README.md) | 1 | Available |
-| [Steps to Use Filters Inside the Gmail Trigger Node:](workflows/steps-to-use-filters-inside-the-gmail-trigger-node/README.md) | 10 | Available |
-| [Add a subscriber to a list and create and send a campaign](workflows/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/README.md) | 3 | Available |
-| [list mailbox help scout](workflows/list-mailbox-help-scout/README.md) | 2 | Available |
-| [Syncro to Clockify](workflows/syncro-to-clockify/README.md) | 2 | Available |
-| [Funding Intelligence Agent](workflows/funding-intelligence-agent/README.md) | 16 | Available |
-| [Add your company details here!](workflows/add-your-company-details-here/README.md) | 16 | Available |
-| [bash-dash telegram](workflows/bash-dash-telegram/README.md) | 3 | Available |
-| [agent and appendorupdate google sheets and receive form events](workflows/agent-and-appendorupdate-google-sheets-and-receive-form-events/README.md) | 9 | Available |
-| [MCP_GMAIL](workflows/mcp-gmail/README.md) | 5 | Available |
-| [Market Sentiment Analysis - Part 1](workflows/market-sentiment-analysis-part-1/README.md) | 11 | Available |
-| [typeform feedback workflow](workflows/typeform-feedback-workflow/README.md) | 5 | Available |
-| [FLUX-fill standalone](workflows/flux-fill-standalone/README.md) | 12 | Available |
-| [AI Email Filtering Automation](workflows/ai-email-filtering-automation/README.md) | 12 | Available |
-| [Insert and retrieve documents](workflows/insert-and-retrieve-documents/README.md) | 20 | Available |
-| [Receive updates for specified tasks in Flow](workflows/receive-updates-for-specified-tasks-in-flow/README.md) | 1 | Available |
-| [Send customer feedback to OpenAI for sentiment analysis](workflows/send-customer-feedback-to-openai-for-sentiment-analysis/README.md) | 4 | Available |
-| [extract_swifts](workflows/extract-swifts/README.md) | 23 | Available |
-| [Events Webhook Trigger](workflows/events-webhook-trigger-bf43f4d8/README.md) | 13 | Available |
-| [default data loader and download google drive and receive chat events](workflows/default-data-loader-and-download-google-drive-and-receive-chat-events/README.md) | 18 | Available |
-| [aws textract and receive telegram events and append airtable](workflows/aws-textract-and-receive-telegram-events-and-append-airtable/README.md) | 4 | Available |
-| [receive keap events](workflows/receive-keap-events/README.md) | 1 | Available |
-| [Comparing data with the Compare Datasets node](workflows/comparing-data-with-the-compare-datasets-node/README.md) | 4 | Available |
-| [Streamline data from an n8n form into Google Sheet and Airtable](workflows/streamline-data-from-an-n8n-form-into-google-sheet-and-airtable/README.md) | 7 | Available |
-| [Mycroft - Financial Intelligence Hub](workflows/mycroft-financial-intelligence-hub/README.md) | 22 | Available |
-| [Send Daily Birthday Reminders from Google Contacts to Slack](workflows/send-daily-birthday-reminders-from-google-contacts-to-slack/README.md) | 5 | Available |
-| [Check for valid Mautic contact email](workflows/check-for-valid-mautic-contact-email/README.md) | 6 | Available |
-| [Receive updates from Telegram and send an image of a cocktail](workflows/receive-updates-from-telegram-and-send-an-image-of-a-cocktail/README.md) | 3 | Available |
-| [Export Zammad Objects Users, Roles, Groups and Organizations to Excel](workflows/export-zammad-objects-users-roles-groups-and-organizations-to-excel/README.md) | 18 | Available |
-| [Validate Seatable Webhooks with HMAC SHA256 Authentication](workflows/validate-seatable-webhooks-with-hmac-sha256-authentication/README.md) | 6 | Available |
-| [Main workflow: AI agent using custom tool](workflows/main-workflow-ai-agent-using-custom-tool-2000a697/README.md) | 10 | Available |
-| [Sync Youtube Video Urls with Google Sheets](workflows/sync-youtube-video-urls-with-google-sheets/README.md) | 6 | Available |
-| [report execution errors to slack](workflows/report-execution-errors-to-slack/README.md) | 2 | Available |
-| [Receive updates for changes in the specified list in Trello](workflows/receive-updates-for-changes-in-the-specified-list-in-trello/README.md) | 1 | Available |
-| [🚨 Change Base URL here!](workflows/change-base-url-here/README.md) | 15 | Available |
-| [receive notion events and webhook and update database page notion](workflows/receive-notion-events-and-webhook-and-update-database-page-notion/README.md) | 13 | Available |
-| [Job Finder](workflows/job-finder/README.md) | 5 | Available |
-| [Auto-create and publish AI social videos with Telegram, GPT-4 and Blotato](workflows/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/README.md) | 37 | Available |
-| [Mycroft - Patent Intelligence System](workflows/mycroft-patent-intelligence-system/README.md) | 14 | Available |
-| [e-mail Chatbot with both semantic and structured RAG, using Telegram and Pgvector](workflows/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector/README.md) | 16 | Available |
-| [🎦🚀 YouTube Video Comment Analysis Agent](workflows/youtube-video-comment-analysis-agent/README.md) | 17 | Available |
-| [Receive updates when a form is submitted in Mautic, and send a confirmation SMS](workflows/receive-updates-when-a-form-is-submitted-in-mautic-and-send-a-confirmation-sms/README.md) | 2 | Available |
-| [Multi-Agent Conversation](workflows/multi-agent-conversation/README.md) | 13 | Available |
-| [Automate LinkedIn Posts with AI](workflows/automate-linkedin-posts-with-ai/README.md) | 9 | Available |
-| [email send and cron and http request](workflows/email-send-and-cron-and-http-request/README.md) | 7 | Available |
-| [OpenSea Marketplace Agent Tool](workflows/opensea-marketplace-agent-tool/README.md) | 14 | Available |
-| [Send an SMS using the Mocean node](workflows/send-an-sms-using-the-mocean-node/README.md) | 2 | Available |
-| [Dsp agent](workflows/dsp-agent-a1f0c8bf/README.md) | 18 | Available |
-| [Push Multiple Files to Github Repo via Github REST API](workflows/push-multiple-files-to-github-repo-via-github-rest-api/README.md) | 9 | Available |
-| [Perform Batch Processing of Email verifications with Icypeas](workflows/perform-batch-processing-of-email-verifications-with-icypeas/README.md) | 4 | Available |
-| [Automated Image Metadata Tagging (Community Node)](workflows/automated-image-metadata-tagging-community-node/README.md) | 6 | Available |
-| [list airtable and lemlist and get lead lemlist](workflows/list-airtable-and-lemlist-and-get-lead-lemlist/README.md) | 3 | Available |
-| [Slack AI Chatbot with RAG for company staff](workflows/slack-ai-chatbot-with-rag-for-company-staff/README.md) | 17 | Available |
-| [wekan and update wekan](workflows/wekan-and-update-wekan/README.md) | 6 | Available |
-| [Needed pre-work: Add a Slack App](workflows/needed-pre-work-add-a-slack-app-e63199cf/README.md) | 5 | Available |
-| [Entrypoint to use in other workflows](workflows/entrypoint-to-use-in-other-workflows/README.md) | 13 | Available |
-| [receive schedule events and list database page notion and slack](workflows/receive-schedule-events-and-list-database-page-notion-and-slack/README.md) | 6 | Available |
-| [http request and html extract and list news url](workflows/http-request-and-html-extract-and-list-news-url/README.md) | 8 | Available |
-| [set and preserve opportunity close dates](workflows/set-and-preserve-opportunity-close-dates/README.md) | 6 | Available |
-| [Refine/Split the jsons into multiple items](workflows/refine-split-the-jsons-into-multiple-items/README.md) | 14 | Available |
-| [Post a message to a channel in RocketChat](workflows/post-a-message-to-a-channel-in-rocketchat/README.md) | 2 | Available |
-| [Create a new member, update the information of the member, create a note and a post for the member in Orbit](workflows/create-a-new-member-update-the-information-of-the-member-create-a-note-and-a-post-for-the-member-in-orbit/README.md) | 5 | Available |
-| [http request and generate french audio and translate text to english](workflows/http-request-and-generate-french-audio-and-translate-text-to-english/README.md) | 8 | Available |
-| [subscribe subscriber klicktipp and receive jot form events and split out jotform tags](workflows/subscribe-subscriber-klicktipp-and-receive-jot-form-events-and-split-out-jotform-tags/README.md) | 13 | Available |
-| [🔐 How to Get Your Product Hunt Token](workflows/how-to-get-your-product-hunt-token/README.md) | 9 | Available |
-| [information edit image and resize edit image and multistep edit image](workflows/information-edit-image-and-resize-edit-image-and-multistep-edit-image/README.md) | 11 | Available |
-| [(G) - Email Classification](workflows/g-email-classification/README.md) | 9 | Available |
-| ["Hey Siri, Ask Agent" workflow](workflows/hey-siri-ask-agent-workflow/README.md) | 4 | Available |
-| [Slack Webhook - Verify Signature](workflows/slack-webhook-verify-signature/README.md) | 7 | Available |
-| [Aggregating data with the Merge node](workflows/aggregating-data-with-the-merge-node/README.md) | 10 | Available |
-| [Send the Astronomy Picture of the day daily to a Telegram channel](workflows/send-the-astronomy-picture-of-the-day-daily-to-a-telegram-channel/README.md) | 3 | Available |
-| [Generate 360° Virtual Try-on Videos for Clothing with Kling API](workflows/generate-360-virtual-try-on-videos-for-clothing-with-kling-api/README.md) | 13 | Available |
-| [Automated Content Generation & Publishing - Wordpress](workflows/automated-content-generation-publishing-wordpress/README.md) | 9 | Available |
-| [Synchronize your Google Sheets with Postgres](workflows/synchronize-your-google-sheets-with-postgres/README.md) | 7 | Available |
-| [slack and receive form events and score lead with madkudu](workflows/slack-and-receive-form-events-and-score-lead-with-madkudu/README.md) | 8 | Available |
-| [webhook and execute command and respond to webhook1](workflows/webhook-and-execute-command-and-respond-to-webhook1/README.md) | 7 | Available |
-| [Test Webhooks in n8n Without Changing WEBHOOK_URL (PostBin & BambooHR Example)](workflows/test-webhooks-in-n8n-without-changing-webhook-url-postbin-bamboohr-example/README.md) | 34 | Available |
-| [3D Figurine Orthographic Views with Midjourney and GPT-4o-Image API](workflows/character-reference-consistency/README.md) | 10 | Available |
-| [getallpeople n8n training customer datastore and http request](workflows/getallpeople-n8n-training-customer-datastore-and-http-request/README.md) | 4 | Available |
-| [http request and get urls to scrape and chain llm](workflows/http-request-and-get-urls-to-scrape-and-chain-llm/README.md) | 10 | Available |
-| [get last execution timestamp and every day at 07 00 and set new last execution timestamp](workflows/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/README.md) | 5 | Available |
-| [``Aggregate `amount_captured` ``](workflows/aggregate-amount-captured/README.md) | 15 | Available |
-| [Portfolio Price Fetcher](workflows/portfolio-price-fetcher/README.md) | 5 | Available |
-| [N_01_Simple_Lead_Tracker_Automation_v4](workflows/n-01-simple-lead-tracker-automation-v4/README.md) | 8 | Available |
-| [Jira Retrospective](workflows/jira-retrospective/README.md) | 10 | Available |
-| [1/ Add Your credentials](workflows/1-add-your-credentials-180acc32/README.md) | 10 | Available |
-| [telegram and google sheets](workflows/telegram-and-google-sheets/README.md) | 5 | Available |
-| [Edit your own prompt ⬇️](workflows/edit-your-own-prompt-d84ae6c5/README.md) | 10 | Available |
-| [Daily Cartoon (w/ AI Translate)](workflows/daily-cartoon-w-ai-translate/README.md) | 7 | Available |
-| [v1 helper - Find params with affected expressions](workflows/v1-helper-find-params-with-affected-expressions/README.md) | 3 | Available |
-| [update google sheets and google sheets and run every 5 minutes](workflows/update-google-sheets-and-google-sheets-and-run-every-5-minutes/README.md) | 7 | Available |
-| [receive clockify events](workflows/receive-clockify-events/README.md) | 1 | Available |
-| [getBible Query v1.0](workflows/getbible-query-v1-0/README.md) | 4 | Available |
-| [My workflow 4](workflows/webhook-and-analyze-with-ai-and-send-feedback-report/README.md) | 6 | Available |
-| [Email mailbox as Todoist tasks](workflows/email-mailbox-as-todoist-tasks/README.md) | 21 | Available |
-| [append airtable and receive get response events](workflows/append-airtable-and-receive-get-response-events/README.md) | 3 | Available |
-| [agent and receive telegram events and google sheets](workflows/agent-and-receive-telegram-events-and-google-sheets/README.md) | 7 | Available |
-| [LINE BOT - Google Sheets Record Receipt](workflows/line-bot-google-sheets-record-receipt/README.md) | 7 | Available |
-| [webhook and jira and update jira](workflows/webhook-and-jira-and-update-jira/README.md) | 14 | Available |
-| [Embed your Vector Store](workflows/embed-your-vector-store/README.md) | 23 | Available |
-| [🐋DeepSeek V3 Chat & R1 Reasoning Quick Start](workflows/deepseek-v3-chat-r1-reasoning-quick-start/README.md) | 8 | Available |
-| [Available source and target languages`*`:](workflows/available-source-and-target-languages/README.md) | 12 | Available |
-| [Save SQL table as a CSV file](workflows/save-sql-table-as-a-csv-file/README.md) | 4 | Available |
-| [Ultimate Personal Assistant](workflows/ultimate-personal-assistant/README.md) | 15 | Available |
-| [Chat with GitHub OpenAPI Specification using RAG (Pinecone and OpenAI)](workflows/chat-with-github-openapi-specification-using-rag-pinecone-and-openai/README.md) | 14 | Available |
-| [Wait for file do be processed](workflows/wait-for-file-do-be-processed/README.md) | 14 | Available |
-| [Enhance Chat Responses with Real-Time Search Data via Bright Data & Gemini AI](workflows/enhance-chat-responses-with-real-time-search-data-via-bright-data-gemini-ai/README.md) | 13 | Available |
-| [Podcast Digest](workflows/podcast-digest/README.md) | 15 | Available |
-| [Gmail labelling agent](workflows/gmail-labelling-agent/README.md) | 9 | Available |
-| [When clicking "Test workflow"](workflows/when-clicking-test-workflow-d9d73c93/README.md) | 22 | Available |
-| [🔍 Indeed Jobs API – Parameter Guide](workflows/indeed-jobs-api-parameter-guide/README.md) | 11 | Available |
-| [Analyze_Crowdstrike_Detections__search_for_IOCs_in_VirusTotal__create_a_ticket_in_Jira_and_post_a_message_in_Slack](workflows/analyze-crowdstrike-detections-search-for-iocs-in-virustotal-create-a-ticket-in-jira-and-post-a-message-in-sla/README.md) | 13 | Available |
-| [get jobs from prusa connect and add row to google sheet](workflows/get-jobs-from-prusa-connect-and-add-row-to-google-sheet/README.md) | 3 | Available |
-| [⚙️ Turn blocks into rich text](workflows/turn-blocks-into-rich-text/README.md) | 24 | Available |
-| [Always Authenticate Your Server!](workflows/always-authenticate-your-server-20dbcd39/README.md) | 13 | Available |
-| [Send an SMS when a workflow fails](workflows/send-an-sms-when-a-workflow-fails/README.md) | 2 | Available |
-| [🚨Warning! Potentially Destructive Operations!](workflows/warning-potentially-destructive-operations/README.md) | 11 | Available |
-| [Amadeus Flight Bargains](workflows/amadeus-flight-bargains/README.md) | 11 | Available |
-| [tool serp api and receive chat events and agent](workflows/tool-serp-api-and-receive-chat-events-and-agent/README.md) | 5 | Available |
-| [Receive Slack Webhook Slash Command](workflows/receive-slack-webhook-slash-command/README.md) | 7 | Available |
-| [Youtube Video Transcript Extraction](workflows/youtube-video-transcript-extraction/README.md) | 4 | Available |
-| [extract domain from email address](workflows/extract-domain-from-email-address/README.md) | 3 | Available |
-| [Get the and Validate  New Email](workflows/get-the-and-validate-new-email/README.md) | 11 | Available |
-| [Ahrefs Keyword Research Workflow](workflows/ahrefs-keyword-research-workflow/README.md) | 9 | Available |
-| [Scrape Latest 20 TechCrunch Articles](workflows/scrape-latest-20-techcrunch-articles/README.md) | 9 | Available |
-| [Mycroft - News Intelligence Agent](workflows/mycroft-news-intelligence-agent-6178eb47/README.md) | 18 | Available |
-| [Extract & Summarize Yelp Business Review with Bright Data and Google Gemini](workflows/extract-summarize-yelp-business-review-with-bright-data-and-google-gemini/README.md) | 10 | Available |
-| [Trigger scan on Qualys agent](workflows/trigger-scan-on-qualys-agent/README.md) | 19 | Available |
-| [Create, update and get a user from Iterable](workflows/create-update-and-get-a-user-from-iterable/README.md) | 4 | Available |
-| [download example data and decompress example data](workflows/download-example-data-and-decompress-example-data/README.md) | 4 | Available |
-| [[hiroshidigital.com] Send Message In Larksuite](workflows/hiroshidigital-com-send-message-in-larksuite/README.md) | 4 | Available |
-| [langchain code](workflows/langchain-code/README.md) | 4 | Available |
-| [Google Cal to Zoom meeting](workflows/google-cal-to-zoom-meeting/README.md) | 6 | Available |
-| [The Easiest Way to Send SMS Worldwide](workflows/the-easiest-way-to-send-sms-worldwide/README.md) | 3 | Available |
-| [Adding to GSheet-List, Creating a OTP / Verification Code](workflows/adding-to-gsheet-list-creating-a-otp-verification-code/README.md) | 14 | Available |
-| [when clicking test workflow and http request update rank math meta](workflows/when-clicking-test-workflow-and-http-request-update-rank-math-meta/README.md) | 3 | Available |
-| [discourse and update discourse and get discourse](workflows/discourse-and-update-discourse-and-get-discourse/README.md) | 4 | Available |
-| [The Chain is connected to the Mistral-7B-Instruct-v0.1 model, but you can change this](workflows/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/README.md) | 3 | Available |
-| [💡 About the Example PDF](workflows/about-the-example-pdf/README.md) | 12 | Available |
-| [Create Zendesk Ticket](workflows/create-zendesk-ticket/README.md) | 29 | Available |
-| [Mycroft - Financial Regulatory Intelligence System - Enhanced](workflows/mycroft-financial-regulatory-intelligence-system-enhanced/README.md) | 22 | Available |
-| [Post RSS feed items from yesterday to Slack](workflows/post-rss-feed-items-from-yesterday-to-slack/README.md) | 6 | Available |
-| [Dynamically Replace Images in Google Slides](workflows/dynamically-replace-images-in-google-slides/README.md) | 7 | Available |
-| [graphql and webhook](workflows/graphql-and-webhook/README.md) | 4 | Available |
-| [receive survey monkey events](workflows/receive-survey-monkey-events/README.md) | 1 | Available |
-| [Send TTS (Text-to-speech) voice calls](workflows/send-tts-text-to-speech-voice-calls/README.md) | 2 | Available |
-| [Umami analytics template](workflows/umami-analytics-template/README.md) | 11 | Available |
-| [Create, update, and get a profile in Humantic AI](workflows/create-update-and-get-a-profile-in-humantic-ai/README.md) | 5 | Available |
-| [Complete Youtube](workflows/complete-youtube/README.md) | 13 | Available |
-| [Create a QuickBooks invoice on a new Onfleet Task creation](workflows/create-a-quickbooks-invoice-on-a-new-onfleet-task-creation/README.md) | 2 | Available |
-| [My workflow 6](workflows/extract-pages-from-pdf1-and-http-request/README.md) | 3 | Available |
-| [YouTube to X Post- AlexK1919](workflows/youtube-to-x-post-alexk1919/README.md) | 20 | Available |
-| [receive calendly events and pipedrive and calculate date time](workflows/receive-calendly-events-and-pipedrive-and-calculate-date-time/README.md) | 5 | Available |
-| [Turn YouTube Videos into Summaries, Transcripts, and Visual Insights](workflows/turn-youtube-videos-into-summaries-transcripts-and-visual-insights/README.md) | 14 | Available |
-| [list gmail and tofile spreadsheet file and move binary data](workflows/list-gmail-and-tofile-spreadsheet-file-and-move-binary-data/README.md) | 3 | Available |
-| [2. Refresh Pipedrive tokens](workflows/get-token-from-pipedrive/README.md) | 20 | Available |
-| [receive form events and copy google drive and replace data in google doc](workflows/receive-form-events-and-copy-google-drive-and-replace-data-in-google-doc/README.md) | 5 | Available |
-| [OpenAI Assistant workflow: uploa file, create an Assistant, chat with it!](workflows/openai-assistant-workflow-uploa-file-create-an-assistant-chat-with-it/README.md) | 6 | Available |
-| [Scrape Trustpilot Reviews Using Bright Data for Winning Ad Insights](workflows/scrape-trustpilot-reviews-using-bright-data-for-winning-ad-insights/README.md) | 12 | Available |
-| [send signl4 alert](workflows/send-signl4-alert/README.md) | 2 | Available |
-| [receive calendly events and notion](workflows/receive-calendly-events-and-notion/README.md) | 2 | Available |
-| [GitLab MR Auto-Review & Risk Assessment](workflows/gitlab-mr-auto-review-risk-assessment/README.md) | 14 | Available |
-| [Sell a Used Car](workflows/sell-a-used-car/README.md) | 14 | Available |
-| [Get Google Search Results (SERPs) for SEO Research](workflows/get-google-search-results-serps-for-seo-research/README.md) | 11 | Available |
-| [Figure out issue assignee and title (shortening if necessary)](workflows/figure-out-issue-assignee-and-title-shortening-if-necessary/README.md) | 19 | Available |
-| [Post on X](workflows/post-on-x/README.md) | 8 | Available |
-| [Email form](workflows/email-form/README.md) | 5 | Available |
-| [Extract & Summarize Indeed Company Info with Bright Data and Google Gemini](workflows/extract-summarize-indeed-company-info-with-bright-data-and-google-gemini/README.md) | 13 | Available |
-| [list google calendar and date time and date time1](workflows/list-google-calendar-and-date-time-and-date-time1/README.md) | 12 | Available |
-| [N8N Español - BOT](workflows/n8n-espanol-bot/README.md) | 5 | Available |
-| [🐋🤖 DeepSeek AI Agent + Telegram + LONG TERM Memory 🧠](workflows/deepseek-ai-agent-telegram-long-term-memory/README.md) | 15 | Available |
-| [Postgres Data Ingestion](workflows/postgres-data-ingestion/README.md) | 3 | Available |
-| [Receive Call Data and standardize User Prompt](workflows/receive-call-data-and-standardize-user-prompt/README.md) | 21 | Available |
-| [receive twilio events and search airtable tool and getschema base airtable tool](workflows/receive-twilio-events-and-search-airtable-tool-and-getschema-base-airtable-tool/README.md) | 11 | Available |
-| [webhook and hmac crypto](workflows/webhook-and-hmac-crypto/README.md) | 3 | Available |
-| [3.2: Fetch Last Email Correspondance](workflows/3-2-fetch-last-email-correspondance/README.md) | 47 | Available |
-| [Addon for Workflow Nodes Update Check Template](workflows/addon-for-workflow-nodes-update-check-template/README.md) | 8 | Available |
-| [💥AI Social Video Generator with GPT-4, Kling & Blotato —Auto-Post to Instagram, Facebook,, TikTok, Twitter & Pinterest - vide](workflows/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/README.md) | 33 | Available |
-| [Receive updates for events in ClickUp](workflows/receive-updates-for-events-in-clickup/README.md) | 1 | Available |
-| [extract yesterday records and extracthtmlcontent html and google tasks](workflows/extract-yesterday-records-and-extracthtmlcontent-html-and-google-tasks/README.md) | 12 | Available |
-| [http request and receive execute workflow events and notif talk credits](workflows/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/README.md) | 10 | Available |
-| [split out binary data](workflows/split-out-binary-data/README.md) | 9 | Available |
-| [spreadsheet file and read binary file](workflows/spreadsheet-file-and-read-binary-file/README.md) | 3 | Available |
-| [Needed pre-work: Add a Slack App](workflows/needed-pre-work-add-a-slack-app-9a5534ff/README.md) | 7 | Available |
-| [AI Logo Sheet Extractor to Airtable](workflows/ai-logo-sheet-extractor-to-airtable/README.md) | 33 | Available |
-| [Extract information from an image of a receipt](workflows/extract-information-from-an-image-of-a-receipt/README.md) | 3 | Available |
-| [DSP Certificate w/ Google Forms](workflows/dsp-certificate-w-google-forms/README.md) | 8 | Available |
-| [Payment Detials are Selected](workflows/payment-detials-are-selected/README.md) | 9 | Available |
-| [executequery postgres and postgres](workflows/executequery-postgres-and-postgres/README.md) | 4 | Available |
-| [Create, update, and get an issue on Taiga](workflows/create-update-and-get-an-issue-on-taiga/README.md) | 4 | Available |
-| [NetSuite Rest API workflow](workflows/netsuite-rest-api-workflow/README.md) | 3 | Available |
-| [Perform a domain search (single) with Icypeas](workflows/perform-a-domain-search-single-with-icypeas/README.md) | 3 | Available |
-| [Convert the JSON data received from the CocktailDB API in XML](workflows/convert-the-json-data-received-from-the-cocktaildb-api-in-xml/README.md) | 3 | Available |
-| [telegram and receive telegram events and sendphoto telegram](workflows/telegram-and-receive-telegram-events-and-sendphoto-telegram/README.md) | 21 | Available |
-| [Key Sections of n8n Workflow](workflows/key-sections-of-n8n-workflow/README.md) | 27 | Available |
-| [Update email addresses](workflows/update-email-addresses-6682b576/README.md) | 7 | Available |
-| [Decide Whether to Create or Edit or Skip](workflows/decide-whether-to-create-or-edit-or-skip/README.md) | 12 | Available |
-| [Sample Spotify](workflows/sample-spotify/README.md) | 2 | Available |
-| [receive github events](workflows/receive-github-events/README.md) | 1 | Available |
-| [2. Add Beehiiv newsletter subscribers from Gumroad sales](workflows/trigger-on-a-new-gumroad-sale/README.md) | 6 | Available |
-| [google drive to instagram, tiktok and youtube](workflows/google-drive-to-instagram-tiktok-and-youtube/README.md) | 14 | Available |
-| [Analyze the sentiment of feedback and send a message on Mattermost](workflows/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/README.md) | 5 | Available |
-| [Bitrix24 Task Form Widget Application Workflow example with Webhook Integration](workflows/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/README.md) | 21 | Available |
-| [Create Custom Presentations per Lead](workflows/create-custom-presentations-per-lead/README.md) | 12 | Available |
-| [YouTube to Raindrop](workflows/youtube-to-raindrop/README.md) | 6 | Available |
-| [timescale db and http request and cron](workflows/timescale-db-and-http-request-and-cron/README.md) | 4 | Available |
-| [Generate Instagram Content from Top Trends with AI Image Generation](workflows/generate-instagram-content-from-top-trends-with-ai-image-generation/README.md) | 27 | Available |
-| [外送記帳](workflows/list-gmail-and-receive-gmail-events-and-send-to-slack-with-block/README.md) | 6 | Available |
-| [Get Long Lived Facebook User or Page Access Token](workflows/get-long-lived-facebook-user-or-page-access-token/README.md) | 4 | Available |
-| [My workflow](workflows/automatic-weekly-digital-pr-stories-suggestions/README.md) | 28 | Available |
-| [webhook and crypto and append airtable](workflows/webhook-and-crypto-and-append-airtable/README.md) | 26 | Available |
-| [Generate Exam Questions](workflows/generate-exam-questions/README.md) | 32 | Available |
-| [receive box events](workflows/receive-box-events/README.md) | 1 | Available |
-| [Google Site Index - sitemap.xml example](workflows/google-site-index-sitemap-xml-example/README.md) | 16 | Available |
-| [getslides google slides and getthumbnail page google slides](workflows/getslides-google-slides-and-getthumbnail-page-google-slides/README.md) | 3 | Available |
-| [Intelligent Web Query and Semantic Re-Ranking Flow](workflows/intelligent-web-query-and-semantic-re-ranking-flow/README.md) | 16 | Available |
-| [Set your data and your company's](workflows/set-your-data-and-your-company-s/README.md) | 25 | Available |
-| [GoogleSheets MySQL Integration](workflows/googlesheets-mysql-integration/README.md) | 13 | Available |
-| [Retry on fail except for known error Template](workflows/retry-on-fail-except-for-known-error-template/README.md) | 10 | Available |
-| [WhatsApp business bot](workflows/whatsapp-business-bot/README.md) | 12 | Available |
-| [Brand Content Extract, Summarize & Sentiment Analysis with Bright Data](workflows/brand-content-extract-summarize-sentiment-analysis-with-bright-data/README.md) | 18 | Available |
-| [transcribing bank statements to markdown using gemini vision ai](workflows/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/README.md) | 18 | Available |
-| [receive chat events and qdrant vector store and retrieval qa chain](workflows/receive-chat-events-and-qdrant-vector-store-and-retrieval-qa-chain/README.md) | 6 | Available |
-| [Job-App](workflows/job-app/README.md) | 32 | Available |
-| [Create_Unique_Jira_tickets_from_Splunk_alerts](workflows/create-unique-jira-tickets-from-splunk-alerts/README.md) | 6 | Available |
-| [RAG Workflow For Stock Earnings Report Analysis](workflows/rag-workflow-for-stock-earnings-report-analysis/README.md) | 15 | Available |
-| [Workflow B — Synthesize & Store Clusters](workflows/workflow-b-synthesize-store-clusters/README.md) | 13 | Available |
-| [N8N Español - NocodeBot](workflows/n8n-espanol-nocodebot/README.md) | 7 | Available |
-| [Google Doc Summarizer to Google Sheets](workflows/google-doc-summarizer-to-google-sheets/README.md) | 6 | Available |
-| [Creating a meeting with the Zoom node](workflows/creating-a-meeting-with-the-zoom-node/README.md) | 2 | Available |
-| [Make OpenAI Citation for File Retrieval RAG](workflows/make-openai-citation-for-file-retrieval-rag/README.md) | 12 | Available |
-| [Integration Data Processing](workflows/integration-data-processing/README.md) | 30 | Available |
-| [Real Estate Market Scanning](workflows/real-estate-market-scanning/README.md) | 11 | Available |
-| [append google sheets tool and receive form events and completion form](workflows/append-google-sheets-tool-and-receive-form-events-and-completion-form/README.md) | 12 | Available |
-| [Weekly failures report](workflows/weekly-failures-report/README.md) | 6 | Available |
-| [Whisper Transkription copy](workflows/whisper-transkription-copy/README.md) | 5 | Available |
-| [Filtering orders for fulfillment 👇](workflows/filtering-orders-for-fulfillment/README.md) | 8 | Available |
-| [active campaign](workflows/active-campaign/README.md) | 2 | Available |
-| [Process Telegram Request](workflows/process-telegram-request/README.md) | 13 | Available |
-| [Get the price of BTC in EUR and send an SMS when the price is larger than EUR 9000](workflows/get-the-price-of-btc-in-eur-and-send-an-sms-when-the-price-is-larger-than-eur-9000/README.md) | 5 | Available |
-| [Blog Automation TEMPLATE](workflows/blog-automation-template/README.md) | 22 | Available |
-| [Monitor ProductHunt](workflows/monitor-producthunt/README.md) | 5 | Available |
-| [medium and webhook and http request](workflows/medium-and-webhook-and-http-request/README.md) | 3 | Available |
-| [Convert URL HTML to Markdown and Get Page Links](workflows/convert-url-html-to-markdown-and-get-page-links/README.md) | 10 | Available |
-| [publish aws sns message](workflows/publish-aws-sns-message/README.md) | 2 | Available |
-| [Independent "Async" Process](workflows/independent-async-process/README.md) | 13 | Available |
-| [receive schedule events and list todoist and subtractfromdate date time](workflows/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/README.md) | 15 | Available |
-| [SEO Blog Generator with GPT-4o, Perplexity, and Telegram Integration](workflows/seo-blog-generator-with-gpt-4o-perplexity-and-telegram-integration/README.md) | 18 | Available |
-| [report execution errors to gmail](workflows/report-execution-errors-to-gmail/README.md) | 2 | Available |
-| [Get Gong Transcript and Call Details](workflows/get-gong-transcript-and-call-details/README.md) | 9 | Available |
-| [interval and you tube and telegram](workflows/interval-and-you-tube-and-telegram/README.md) | 5 | Available |
-| [🔐🦙🤖 Private & Local Ollama Self-Hosted LLM Router](workflows/private-local-ollama-self-hosted-llm-router/README.md) | 7 | Available |
-| [puq-docker-influxdb-deploy](workflows/puq-docker-influxdb-deploy/README.md) | 32 | Available |
-| [Generate google meet links in slack](workflows/generate-google-meet-links-in-slack/README.md) | 4 | Available |
-| [get zendesk and update zendesk and github](workflows/get-zendesk-and-update-zendesk-and-github/README.md) | 7 | Available |
-| [Always Authenticate Your Server!](workflows/always-authenticate-your-server-865df2b4/README.md) | 15 | Available |
-| [http request and split out and filter owned projects](workflows/http-request-and-split-out-and-filter-owned-projects/README.md) | 31 | Available |
-| [Create, update and get a subscriber using the MailerLite node](workflows/create-update-and-get-a-subscriber-using-the-mailerlite-node/README.md) | 4 | Available |
-| [receive schedule events and list google calendar and only follow ups](workflows/receive-schedule-events-and-list-google-calendar-and-only-follow-ups/README.md) | 16 | Available |
-| [Hacker News to Video Template - AlexK1919](workflows/hacker-news-to-video-template-alexk1919/README.md) | 39 | Available |
-| [dropcontact and google sheets and lemlist](workflows/dropcontact-and-google-sheets-and-lemlist/README.md) | 4 | Available |
-| [append google sheets and get aws transcribe and aws transcribe 1](workflows/append-google-sheets-and-get-aws-transcribe-and-aws-transcribe-1/README.md) | 8 | Available |
-| [webhook and notion and list database page notion](workflows/webhook-and-notion-and-list-database-page-notion/README.md) | 12 | Available |
-| [Play with Spotify from Telegram](workflows/play-with-spotify-from-telegram/README.md) | 13 | Available |
-| [💻 Schedule workflow activity time](workflows/schedule-workflow-activity-time/README.md) | 7 | Available |
-| [Meeting booked - to newsletter and CRM](workflows/meeting-booked-to-newsletter-and-crm/README.md) | 7 | Available |
-| [New tweets](workflows/new-tweets/README.md) | 7 | Available |
-| [http request and linked in](workflows/http-request-and-linked-in/README.md) | 3 | Available |
-| [create json items from mock data](workflows/create-json-items-from-mock-data/README.md) | 2 | Available |
-| [Self-coded LLM Chain Node](workflows/self-coded-llm-chain-node/README.md) | 8 | Available |
-| [Dialpad to Syncro](workflows/dialpad-to-syncro/README.md) | 22 | Available |
-| [Notion to Clockify Sync Template](workflows/notion-to-clockify-sync-template/README.md) | 56 | Available |
-| [Send updates about the position of the ISS every minute to a topic in ActiveMQ](workflows/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/README.md) | 4 | Available |
-| [getallpeople n8n training customer datastore and sort item lists and one item per template](workflows/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/README.md) | 8 | Available |
-| [Local chatbot with retrieval augmented generation (RAG) Gemini](workflows/local-chatbot-with-retrieval-augmented-generation-rag-gemini/README.md) | 13 | Available |
-| [receive copper events](workflows/receive-copper-events/README.md) | 1 | Available |
-| [Spot Workplace Discrimination Patterns with AI](workflows/spot-workplace-discrimination-patterns-with-ai/README.md) | 26 | Available |
-| [webhook and mattermost](workflows/webhook-and-mattermost/README.md) | 3 | Available |
-| [Replace Images in Google Docs Documents and Download as PDF/Docx](workflows/replace-images-in-google-docs-documents-and-download-as-pdf-docx/README.md) | 9 | Available |
-| [Youtube_Automation](workflows/youtube-automation/README.md) | 25 | Available |
-| [Printify Automation - Update Title and Description - AlexK1919](workflows/printify-automation-update-title-and-description-alexk1919/README.md) | 20 | Available |
-| [Gmail Integration and Data Extraction](workflows/gmail-integration-and-data-extraction/README.md) | 13 | Available |
-| [tool http request and remove duplicates and results to list](workflows/tool-http-request-and-remove-duplicates-and-results-to-list/README.md) | 30 | Available |
-| [Automate PDF Image Extraction & Analysis with GPT-4o and Google Drive](workflows/automate-pdf-image-extraction-analysis-with-gpt-4o-and-google-drive/README.md) | 9 | Available |
-| [Add text to an image downloaded from the internet](workflows/add-text-to-an-image-downloaded-from-the-internet/README.md) | 3 | Available |
-| [Expense Tracker App](workflows/expense-tracker-app/README.md) | 5 | Available |
-| [Discord Agent](workflows/discord-agent/README.md) | 8 | Available |
-| [receive schedule events and get auth token and get latest requests](workflows/receive-schedule-events-and-get-auth-token-and-get-latest-requests/README.md) | 13 | Available |
-| [http request and update keap deliverable and update keap not deliverable](workflows/http-request-and-update-keap-deliverable-and-update-keap-not-deliverable/README.md) | 6 | Available |
-| [Workflow A — Extract & Store Raw Data](workflows/workflow-a-extract-store-raw-data/README.md) | 20 | Available |
-| [XML Conversion](workflows/xml-conversion/README.md) | 3 | Available |
-| [new](workflows/getprofile-repository-github/README.md) | 2 | Available |
-| [Build an MCP server with Airtable](workflows/build-an-mcp-server-with-airtable/README.md) | 11 | Available |
-| [Automated Research Report Generation with OpenAI, Wikipedia, Google Search, and Gmail/Telegram](workflows/automated-research-report-generation-with-openai-wikipedia-google-search-and-gmail-telegram/README.md) | 25 | Available |
-| [sort item lists and markdown and email send](workflows/sort-item-lists-and-markdown-and-email-send/README.md) | 10 | Available |
-| [search salesforce accounts and removeduplicates item lists and set account id for existing accounts 353b61b9](workflows/search-salesforce-accounts-and-removeduplicates-item-lists-and-set-account-id-for-existing-accounts-353b61b9/README.md) | 12 | Available |
-| [Filemaker Workflow](workflows/create-and-edit-filemaker-records/README.md) | 6 | Available |
-| [Notify_user_in_Slack_of_quarantined_email_and_create_Jira_ticket_if_opened](workflows/notify-user-in-slack-of-quarantined-email-and-create-jira-ticket-if-opened/README.md) | 10 | Available |
-| [Fetch the Most Recent Document from Google Drive](workflows/fetch-the-most-recent-document-from-google-drive/README.md) | 6 | Available |
-| [Create Google Creds](workflows/create-google-creds/README.md) | 6 | Available |
-| [Receive updates when a billing plan is activated in PayPal](workflows/receive-updates-when-a-billing-plan-is-activated-in-paypal/README.md) | 1 | Available |
-| [Receive updates when a form is submitted in Wufoo](workflows/receive-updates-when-a-form-is-submitted-in-wufoo/README.md) | 1 | Available |
-| [Send new Clockify invoice to Notion database](workflows/send-new-clockify-invoice-to-notion-database/README.md) | 2 | Available |
-| [SSH login credentials](workflows/ssh-login-credentials/README.md) | 5 | Available |
-| [run python script and read binary files](workflows/run-python-script-and-read-binary-files/README.md) | 4 | Available |
-| [Extract Business Leads from Google Maps with Dumpling AI to Google Sheets](workflows/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets/README.md) | 4 | Available |
-| [Zammad Open Tickets](workflows/zammad-open-tickets/README.md) | 5 | Available |
-| [webhook and lookup google sheets and http request](workflows/webhook-and-lookup-google-sheets-and-http-request/README.md) | 6 | Available |
-| [Verify phone numbers](workflows/verify-phone-numbers/README.md) | 4 | Available |
-| [Store Notion's Pages as Vector Documents into Supabase with OpenAI](workflows/store-notion-s-pages-as-vector-documents-into-supabase-with-openai/README.md) | 8 | Available |
-| [Mycroft - Patent Intelligence System Enhanced](workflows/mycroft-patent-intelligence-system-enhanced/README.md) | 23 | Available |
-| [Scrape latest Paul Graham essays](workflows/scrape-latest-paul-graham-essays-49a09065/README.md) | 13 | Available |
-| [Telegram RAG pdf](workflows/telegram-rag-pdf/README.md) | 18 | Available |
-| [Check email deliverability](workflows/check-email-deliverability/README.md) | 5 | Available |
-| [Personal Portfolio Resume CV Chatbot](workflows/personal-portfolio-resume-cv-chatbot/README.md) | 24 | Available |
-| [Daily Journal Reminder](workflows/daily-journal-reminder/README.md) | 3 | Available |
-| [Import Productboard Notes, Companies and Features into Snowflake](workflows/import-productboard-notes-companies-and-features-into-snowflake/README.md) | 33 | Available |
-| [Update all Zammad Roles to default values](workflows/update-all-zammad-roles-to-default-values/README.md) | 10 | Available |
-| [ai agent that can scrape webpages](workflows/ai-agent-that-can-scrape-webpages/README.md) | 9 | Available |
-| [HR-focused automation pipeline with AI](workflows/hr-focused-automation-pipeline-with-ai/README.md) | 12 | Available |
-| [Prevent concurrent workflow runs using Redis](workflows/prevent-concurrent-workflow-runs-using-redis/README.md) | 31 | Available |
-| [http request and graphql and call from baserow](workflows/http-request-and-graphql-and-call-from-baserow/README.md) | 6 | Available |
-| [SearchApi Youtube Video Summary](workflows/searchapi-youtube-video-summary/README.md) | 7 | Available |
-| [Auto categorize wordpress template](workflows/auto-categorize-wordpress-template/README.md) | 5 | Available |
-| [Append, lookup, update, and read data from a Google Sheets spreadsheet](workflows/append-lookup-update-and-read-data-from-a-google-sheets-spreadsheet/README.md) | 7 | Available |
-| [Mycroft Agent 5 — Research Footprint Monitor](workflows/research-footprint-monitor/README.md) | 31 | Available |
-| [Create, update, and get a post in Ghost](workflows/create-update-and-get-a-post-in-ghost/README.md) | 4 | Available |
-| [New OpenAI Image Generation](workflows/new-openai-image-generation/README.md) | 5 | Available |
-| [Attachments Gmail to drive and google sheets](workflows/attachments-gmail-to-drive-and-google-sheets/README.md) | 14 | Available |
-| [receive telegram events and google perspective and telegram](workflows/receive-telegram-events-and-google-perspective-and-telegram/README.md) | 5 | Available |
-| [Telegram AI Langchain bot](workflows/telegram-ai-langchain-bot/README.md) | 11 | Available |
-| [Very simple Human in the loop system email with AI e IMAP](workflows/very-simple-human-in-the-loop-system-email-with-ai-e-imap/README.md) | 10 | Available |
-| [Analyze Screenshots with AI](workflows/analyze-screenshots-with-ai/README.md) | 5 | Available |
-| [📬 You will receive one email for every company in your calendar. These emails will look something like this:](workflows/you-will-receive-one-email-for-every-company-in-your-calendar-these-emails-will-look-something-like-this-d7de36bb/README.md) | 18 | Available |
-| [get overview page and html extract and removeduplicates item lists](workflows/get-overview-page-and-html-extract-and-removeduplicates-item-lists/README.md) | 11 | Available |
-| [Telegram Chat with Buffering](workflows/telegram-chat-with-buffering/README.md) | 13 | Available |
-| [News Monitoring Agent](workflows/news-monitoring-agent/README.md) | 74 | Available |
-| [DigialOceanUpload](workflows/digialoceanupload/README.md) | 3 | Available |
-| [Create a screenshot of a website and send it to a telegram channel](workflows/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/README.md) | 3 | Available |
-| [Sample of Raw CSV Data Send](workflows/sample-of-raw-csv-data-send/README.md) | 13 | Available |
-| [Receive a Mattermost message when a user updates their profile on Facebook](workflows/receive-a-mattermost-message-when-a-user-updates-their-profile-on-facebook/README.md) | 2 | Available |
-| [Simple indexing workflow using the Google Indexing API](workflows/simple-indexing-workflow-using-the-google-indexing-api/README.md) | 11 | Available |
-| [Mycroft News Intelligence Agent](workflows/mycroft-news-intelligence-agent/README.md) | 16 | Available |
-| [Send Slack message from Webflow form submission](workflows/send-slack-message-from-webflow-form-submission/README.md) | 9 | Available |
-| [Google analytics template](workflows/google-analytics-template/README.md) | 18 | Available |
-| [Agent Milvus tool](workflows/agent-milvus-tool/README.md) | 16 | Available |
-| [line message api demo](workflows/line-message-api-demo/README.md) | 6 | Available |
-| [Receive updates when a new account is added by an admin in ActiveCampaign](workflows/receive-updates-when-a-new-account-is-added-by-an-admin-in-activecampaign/README.md) | 1 | Available |
-| [Working with Excel files](workflows/working-with-excel-files/README.md) | 12 | Available |
-| [subscribe subscriber klicktipp and split out guest bookings and split out guest cancellations](workflows/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/README.md) | 18 | Available |
-| [basic llm chain and receive telegram events and fetch voice message](workflows/basic-llm-chain-and-receive-telegram-events-and-fetch-voice-message/README.md) | 10 | Available |
-| [download the file and post to slack](workflows/download-the-file-and-post-to-slack/README.md) | 3 | Available |
-| [My workflow](workflows/http-request-and-write-read-write-file-943b534d/README.md) | 8 | Available |
-| [Standup Bot - Read Config](workflows/standup-bot-read-config/README.md) | 3 | Available |
-| [receive gitlab events and http request](workflows/receive-gitlab-events-and-http-request/README.md) | 3 | Available |
-| [Publish Image Post to Bluesky](workflows/publish-image-post-to-bluesky/README.md) | 11 | Available |
-| [download google drive and http request and upload to drive](workflows/download-google-drive-and-http-request-and-upload-to-drive/README.md) | 24 | Available |
-| [Generate Image Keywords](workflows/generate-image-keywords/README.md) | 13 | Available |
-| [Publish Videos & Images - Blotato](workflows/publish-videos-images-blotato/README.md) | 21 | Available |
-| [[2/2] KNN classifier (lands dataset)](workflows/2-2-knn-classifier-lands-dataset/README.md) | 10 | Available |
-| [Send a Telegram message](workflows/send-a-telegram-message/README.md) | 15 | Available |
-| [create new contact and update lead stage and receive typeform events](workflows/create-new-contact-and-update-lead-stage-and-receive-typeform-events/README.md) | 7 | Available |
-| [Either use the official Notion getAll: Blocks node](workflows/either-use-the-official-notion-getall-blocks-node/README.md) | 8 | Available |
-| [text classifier and list message discord and removeitemsseeninpreviousexecutions remove duplicates](workflows/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/README.md) | 23 | Available |
-| [Build a Chatbot, Voice Agent and Phone Agent with Voiceflow, Google Calendar and RAG](workflows/build-a-chatbot-voice-agent-and-phone-agent-with-voiceflow-google-calendar-and-rag/README.md) | 28 | Available |
-| [report execution errors to monday com](workflows/report-execution-errors-to-monday-com/README.md) | 5 | Available |
-| [Parse DMARC reports](workflows/parse-dmarc-reports/README.md) | 15 | Available |
-| [Monitor_security_advisories](workflows/monitor-security-advisories/README.md) | 11 | Available |
-| [receive sse events](workflows/receive-sse-events/README.md) | 1 | Available |
-| [🚨 Warning! Potential destructive operations ahead!](workflows/warning-potential-destructive-operations-ahead/README.md) | 10 | Available |
-| [http request and get all masked emails and create random masked email](workflows/http-request-and-get-all-masked-emails-and-create-random-masked-email/README.md) | 10 | Available |
-| [Get Gong Calls and Supporting Data](workflows/get-gong-calls-and-supporting-data/README.md) | 20 | Available |
-| [Build a Phone Agent to qualify outbound leads and inbound calls with RetellAI -vide](workflows/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/README.md) | 14 | Available |
-| [Summarize Glassdoor Company Info with Google Gemini and Bright Data Web Scraper](workflows/summarize-glassdoor-company-info-with-google-gemini-and-bright-data-web-scraper/README.md) | 12 | Available |
-| [Resume Screening & Behavioral Interviews with Gemini, Elevenlabs, & Notion ATS copy](workflows/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/README.md) | 33 | Available |
-| [receive chat events and query workflow credentials database and workflow credentials helper agent](workflows/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/README.md) | 9 | Available |
-| [💥🛠️Automate Blog Content Creation with GPT-4, Perplexity & WordPress](workflows/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/README.md) | 13 | Available |
-| [Dynamically switch between LLMs Template](workflows/dynamically-switch-between-llms-template/README.md) | 15 | Available |
-| [Property Lead Contact Enrichment from CRM](workflows/property-lead-contact-enrichment-from-crm/README.md) | 11 | Available |
-| [Build an OpenAI Assistant with Google Drive Integration](workflows/build-an-openai-assistant-with-google-drive-integration/README.md) | 8 | Available |
-| [Sync New Files From Google Drive with Airtable](workflows/sync-new-files-from-google-drive-with-airtable/README.md) | 3 | Available |
-| [set new last execution timestamp and get last execution timestamp and getrecentlymodified company hubspot](workflows/set-new-last-execution-timestamp-and-get-last-execution-timestamp-and-getrecentlymodified-company-hubspot/README.md) | 9 | Available |
-| [AI Automated TikTok/Youtube Shorts/Reels Generator](workflows/ai-automated-tiktok-youtube-shorts-reels-generator/README.md) | 34 | Available |
-| [airflow dag_run](workflows/airflow-dag-run/README.md) | 12 | Available |
-| [youtube chapter generator](workflows/youtube-chapter-generator/README.md) | 10 | Available |
-| [Retrieve the Background Image and fetch Meta from the File](workflows/retrieve-the-background-image-and-fetch-meta-from-the-file/README.md) | 12 | Available |
-| [list database page notion and notion and update database page notion](workflows/list-database-page-notion-and-notion-and-update-database-page-notion/README.md) | 23 | Available |
-| [You will receive one email for every company in your calendar. These emails will look something like this:](workflows/you-will-receive-one-email-for-every-company-in-your-calendar-these-emails-will-look-something-like-this/README.md) | 16 | Available |
-| [sendandwait telegram and set redis and get redis](workflows/sendandwait-telegram-and-set-redis-and-get-redis/README.md) | 30 | Available |
-| [executequery my sql and my sql](workflows/executequery-my-sql-and-my-sql/README.md) | 4 | Available |
-| [UTM Link Creator & QR Code Generator with Scheduled Google Analytics Reports](workflows/utm-link-creator-qr-code-generator-with-scheduled-google-analytics-reports/README.md) | 11 | Available |
-| [Real-time listening and processing of search results with Icypeas.](workflows/real-time-listening-and-processing-of-search-results-with-icypeas/README.md) | 2 | Available |
-| [list xero](workflows/list-xero/README.md) | 2 | Available |
-| [RAG](workflows/rag/README.md) | 19 | Available |
-| [Example subworkflow for command WITHOUT Slack thread..](workflows/example-subworkflow-for-command-without-slack-thread/README.md) | 30 | Available |
-| [It structures the script for direct use with the Hugging Face text-to-speech model.](workflows/it-structures-the-script-for-direct-use-with-the-hugging-face-text-to-speech-model/README.md) | 16 | Available |
-| [Google Drive Automation](workflows/google-drive-automation/README.md) | 14 | Available |
-| [ComparativeAnalysisAgent](workflows/comparativeanalysisagent/README.md) | 16 | Available |
-| [upsert contact zoho crm and trello and gmail coupon](workflows/upsert-contact-zoho-crm-and-trello-and-gmail-coupon/README.md) | 9 | Available |
-| [Save the data to Hubspot](workflows/save-the-data-to-hubspot/README.md) | 9 | Available |
-| [⏳ Inactivity & Threshold Check](workflows/inactivity-threshold-check/README.md) | 27 | Available |
-| [Cloudflare Account Required](workflows/cloudflare-account-required/README.md) | 12 | Available |
-| [Format Typeform inputs to Pipedrive](workflows/format-typeform-inputs-to-pipedrive/README.md) | 7 | Available |
-| [Example - Backup n8n to Nextcloud](workflows/example-backup-n8n-to-nextcloud/README.md) | 9 | Available |
-| [respond all items and respond asked item and incoming webhook trigger](workflows/respond-all-items-and-respond-asked-item-and-incoming-webhook-trigger/README.md) | 8 | Available |
-| [🦜✨Use OpenAI to Transcribe Audio + Summarize with AI + Save to Google Drive](workflows/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/README.md) | 25 | Available |
-| [mattermost and google sheets and execute every 45 mins](workflows/mattermost-and-google-sheets-and-execute-every-45-mins/README.md) | 4 | Available |
-| [Send an SMS to a number whenever you go out](workflows/send-an-sms-to-a-number-whenever-you-go-out/README.md) | 2 | Available |
-| [Sorting and Posting Incident Details to Slack](workflows/sorting-and-posting-incident-details-to-slack/README.md) | 9 | Available |
-| [Cocktail Recipe Sharing](workflows/cocktail-recipe-sharing/README.md) | 4 | Available |
-| [Send Discord message from Webflow form submission](workflows/send-discord-message-from-webflow-form-submission/README.md) | 9 | Available |
-| [Summarize YouTube Videos & Chat About Content with GPT-4o-mini via Telegram](workflows/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/README.md) | 19 | Available |
-| [Get the logo, icon, and information of a company and store it in Airtable](workflows/get-the-logo-icon-and-information-of-a-company-and-store-it-in-airtable/README.md) | 5 | Available |
-| [Mycroft - SEC Filings Analysis Agent](workflows/mycroft-sec-filings-analysis-agent/README.md) | 19 | Available |
-| [Dary](workflows/receive-telegram-events-and-send-a-text-message-and-evolution-api/README.md) | 15 | Available |
-| [webhook and item lists and tofile spreadsheet file](workflows/webhook-and-item-lists-and-tofile-spreadsheet-file/README.md) | 4 | Available |
-| [Create, update, and get activity in Strava](workflows/create-update-and-get-activity-in-strava/README.md) | 4 | Available |
-| [route items with switch conditions](workflows/route-items-with-switch-conditions/README.md) | 7 | Available |
-| [Mycroft - SEC_Filings_Analysis](workflows/mycroft-sec-filings-analysis/README.md) | 15 | Available |
-| [receive n8n events and mattermost](workflows/receive-n8n-events-and-mattermost/README.md) | 2 | Available |
-| [Retrieve all checkout sessions from the last 7 days.](workflows/retrieve-all-checkout-sessions-from-the-last-7-days/README.md) | 4 | Available |
-| [OpenAI Assistant with custom n8n tools](workflows/openai-assistant-with-custom-n8n-tools/README.md) | 12 | Available |
-| [Portfolio Intelligence Agent - Complete with RAG](workflows/portfolio-intelligence-agent-complete-with-rag/README.md) | 23 | Available |
-| [Ask a human](workflows/ask-a-human/README.md) | 10 | Available |
-| [rss-telegram](workflows/rss-telegram/README.md) | 18 | Available |
-| [Generate Leads with Google Maps - AlexK1919](workflows/generate-leads-with-google-maps-alexk1919/README.md) | 36 | Available |
-| [upload-post images](workflows/upload-post-images/README.md) | 9 | Available |
-| [My workflow 2](workflows/authentication-set-up/README.md) | 21 | Available |
-| [Github Releases](workflows/github-releases/README.md) | 18 | Available |
-| [Post new Google Calendar events to Telegram](workflows/post-new-google-calendar-events-to-telegram/README.md) | 2 | Available |
-| [My workflow 2](workflows/google-sheet-database/README.md) | 15 | Available |
-| [Coffee Bot (Mattermost)](workflows/coffee-bot-mattermost/README.md) | 6 | Available |
-| [Create, update and get records in Quick Base](workflows/create-update-and-get-records-in-quick-base/README.md) | 6 | Available |
-| [receive execute workflow events and n8n and http request](workflows/receive-execute-workflow-events-and-n8n-and-http-request/README.md) | 23 | Available |
-| [General 3D Presentation](workflows/general-3d-presentation/README.md) | 14 | Available |
-| [receive typeform events and download next cloud and spreadsheet file](workflows/receive-typeform-events-and-download-next-cloud-and-spreadsheet-file/README.md) | 6 | Available |
-| [receive mailchimp events](workflows/receive-mailchimp-events/README.md) | 1 | Available |
-| [Scrape Today's Github Trend 13 Top Repositories](workflows/scrape-today-s-github-trend-13-top-repositories/README.md) | 7 | Available |
-| [AI Social Media Publisher from WordPress](workflows/ai-social-media-publisher-from-wordpress/README.md) | 16 | Available |
-| [read binary file and spreadsheet file and postgres](workflows/read-binary-file-and-spreadsheet-file-and-postgres/README.md) | 3 | Available |
-| [Colombian Invoices Processing](workflows/colombian-invoices-processing/README.md) | 22 | Available |
-| [MCP Client with Brave and Telegram](workflows/mcp-client-with-brave-and-telegram/README.md) | 7 | Available |
-| [🎥 Analyze YouTube Video for Summaries, Transcripts & Content + Google Gemini AI](workflows/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/README.md) | 15 | Available |
-| [Send daily weather updates via a message in Line](workflows/send-daily-weather-updates-via-a-message-in-line/README.md) | 3 | Available |
-| [xml and respond to webhook and webhook](workflows/xml-and-respond-to-webhook-and-webhook/README.md) | 4 | Available |
-| [Structured Data Extract, Data Mining with Bright Data & Google Gemini](workflows/structured-data-extract-data-mining-with-bright-data-google-gemini/README.md) | 16 | Available |
-| [Create new tasks to airtable from a slack command](workflows/create-new-tasks-to-airtable-from-a-slack-command/README.md) | 4 | Available |
-| [read items from an rss feed](workflows/read-items-from-an-rss-feed/README.md) | 6 | Available |
-| [Receive messages for an ActiveMQ queue via AMQP Trigger](workflows/receive-messages-for-an-activemq-queue-via-amqp-trigger/README.md) | 1 | Available |
-| [write read write file and convert file to pdf](workflows/write-read-write-file-and-convert-file-to-pdf/README.md) | 5 | Available |
-| [Create a project, tag, and time entry, and update the time entry in Clockify](workflows/create-a-project-tag-and-time-entry-and-update-the-time-entry-in-clockify/README.md) | 5 | Available |
-| [Group K](workflows/receive-telegram-events-and-extract-information-from-telegram-and-telegram/README.md) | 11 | Available |
-| [google sheets and cron and update google sheets](workflows/google-sheets-and-cron-and-update-google-sheets/README.md) | 4 | Available |
-| [Example 1. Publicly Hosted Files](workflows/example-1-publicly-hosted-files/README.md) | 17 | Available |
-| [http request and get photo for testing purposes](workflows/http-request-and-get-photo-for-testing-purposes/README.md) | 6 | Available |
-| [receive gmail events and upload files to google drive](workflows/receive-gmail-events-and-upload-files-to-google-drive/README.md) | 3 | Available |
-| [Events Webhook Trigger](workflows/events-webhook-trigger-8e718da6/README.md) | 26 | Available |
-| [Orchestrator](workflows/route-chat-requests-with-ollama/README.md) | 5 | Available |
-| [Automate Figma Versioning and Jira Updates with n8n Webhook Integration](workflows/automate-figma-versioning-and-jira-updates-with-n8n-webhook-integration/README.md) | 3 | Available |
-| [Email](workflows/email-read-imap-and-the-hive-and-promote-the-hive/README.md) | 15 | Available |
-| [HDW Lead Geländewagen](workflows/hdw-lead-gelandewagen/README.md) | 71 | Available |
-| [Import CSV from URL to GoogleSheet](workflows/import-csv-from-url-to-googlesheet/README.md) | 6 | Available |
-| [Parser which defines the output format and which gets used to validate the output](workflows/parser-which-defines-the-output-format-and-which-gets-used-to-validate-the-output/README.md) | 7 | Available |
-| [AI-Driven WooCommerce Product Importer with SEO](workflows/ai-driven-woocommerce-product-importer-with-seo/README.md) | 12 | Available |
-| [execute workflow and receive schedule events and get redis](workflows/execute-workflow-and-receive-schedule-events-and-get-redis/README.md) | 10 | Available |
-| [list microsoft excel](workflows/list-microsoft-excel/README.md) | 2 | Available |
-| [hubspot and slack and append airtable](workflows/hubspot-and-slack-and-append-airtable/README.md) | 10 | Available |
-| [🤖 On-Page SEO Audit](workflows/on-page-seo-audit/README.md) | 10 | Available |
-| [webhook and mautic and list mautic](workflows/webhook-and-mautic-and-list-mautic/README.md) | 17 | Available |
-| [Generate Company Stories from LinkedIn with Bright Data & Google Gemini](workflows/generate-company-stories-from-linkedin-with-bright-data-google-gemini/README.md) | 17 | Available |
-| [for each user id and slack and search slack](workflows/for-each-user-id-and-slack-and-search-slack/README.md) | 22 | Available |
-| [Forward Netflix emails to multiple email addresses with GMail and Mailjet](workflows/forward-netflix-emails-to-multiple-email-addresses-with-gmail-and-mailjet/README.md) | 4 | Available |
-| [Automate Etsy Data Mining with Bright Data Scrape & Google Gemini](workflows/automate-etsy-data-mining-with-bright-data-scrape-google-gemini/README.md) | 15 | Available |
-| [The conversation history(last 20 messages) is stored in a buffer memory](workflows/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/README.md) | 6 | Available |
-| [AirQuality Scheduler](workflows/airquality-scheduler/README.md) | 9 | Available |
-| [🔗 1. Webhook Entry & Initial Decryption Block](workflows/1-webhook-entry-initial-decryption-block/README.md) | 11 | Available |
-| [Track Working Time and Pauses](workflows/track-working-time-and-pauses/README.md) | 24 | Available |
-| [Get a pipeline in CircleCI](workflows/get-a-pipeline-in-circleci/README.md) | 2 | Available |
-| [Automated Content SEO Audit Report](workflows/automated-content-seo-audit-report/README.md) | 20 | Available |
-| [Google Analytics: Weekly Report](workflows/google-analytics-weekly-report/README.md) | 13 | Available |
-| [read from google sheets and tofile spreadsheet file and webhook](workflows/read-from-google-sheets-and-tofile-spreadsheet-file-and-webhook/README.md) | 3 | Available |
-| [n8n_mysql_purge_history_greater_than_10_days](workflows/n8n-mysql-purge-history-greater-than-10-days/README.md) | 3 | Available |
-| [mattermost and receive emelia events](workflows/mattermost-and-receive-emelia-events/README.md) | 2 | Available |
-| [Check if the song is present in the database](workflows/check-if-the-song-is-present-in-the-database/README.md) | 27 | Available |
-| [microsoft teams and update microsoft teams](workflows/microsoft-teams-and-update-microsoft-teams/README.md) | 4 | Available |
-| [SSL Expiry Alert](workflows/ssl-expiry-alert/README.md) | 6 | Available |
-| [ScenarioStressTestingAgent](workflows/scenariostresstestingagent/README.md) | 16 | Available |
-| [Automating Posting content to WordPress and setting up the featured Image](workflows/automating-posting-content-to-wordpress-and-setting-up-the-featured-image/README.md) | 11 | Available |
-| [Mattermost Webhook](workflows/mattermost-webhook/README.md) | 3 | Available |
-| [CV Screening with OpenAI](workflows/cv-screening-with-openai/README.md) | 6 | Available |
-| [Save SQL table as a binary XLSX file](workflows/save-sql-table-as-a-binary-xlsx-file/README.md) | 4 | Available |
-| [Optimize Prompt](workflows/optimize-prompt/README.md) | 6 | Available |
-| [list gmail and delete gmail and ai check email](workflows/list-gmail-and-delete-gmail-and-ai-check-email/README.md) | 17 | Available |
-| [Setting Up Slack App Event Subscriptions](workflows/setting-up-slack-app-event-subscriptions/README.md) | 11 | Available |
-| [Create, update, and get a user using the G Suite Admin node](workflows/create-update-and-get-a-user-using-the-g-suite-admin-node/README.md) | 4 | Available |
-| [Upload attachments to Drive](workflows/upload-attachments-to-drive/README.md) | 13 | Available |
-| [Replicate Line Items on New Deal in HubSpot Workflow](workflows/replicate-line-items-on-new-deal-in-hubspot-workflow/README.md) | 7 | Available |
-| [receive linear events and only tickets that need to be classified and update linear](workflows/receive-linear-events-and-only-tickets-that-need-to-be-classified-and-update-linear/README.md) | 10 | Available |
-| [Extract engaging moments from YouTube video](workflows/extract-engaging-moments-from-youtube-video/README.md) | 14 | Available |
-| [Google Trend Data Extract, Summarization with Bright Data & Google Gemini](workflows/google-trend-data-extract-summarization-with-bright-data-google-gemini/README.md) | 14 | Available |
-| [Docsify example](workflows/docsify-example/README.md) | 48 | Available |
-| [Qdrant Vector Database Embedding Pipeline](workflows/qdrant-vector-database-embedding-pipeline/README.md) | 8 | Available |
-| [Scrape latest Paul Graham essays](workflows/scrape-latest-paul-graham-essays/README.md) | 14 | Available |
-| [Training Feedback Automation](workflows/training-feedback-automation/README.md) | 12 | Available |
-| [receive schedule events and list microsoft outlook and markdown](workflows/receive-schedule-events-and-list-microsoft-outlook-and-markdown/README.md) | 8 | Available |
-| [Stage 1 - Research for API Documentation](workflows/stage-1-research-for-api-documentation/README.md) | 82 | Available |
-| [Stripe Payment Order Sync – Auto Retrieve Customer & Product Purchased](workflows/stripe-payment-order-sync-auto-retrieve-customer-product-purchased/README.md) | 3 | Available |
-| [Remote IOT Sensor monitoring via MQTT and InfluxDB](workflows/remote-iot-sensor-monitoring-via-mqtt-and-influxdb/README.md) | 3 | Available |
-| [Retrieves recent posts from specific Reddit community (subreddit)](workflows/retrieves-recent-posts-from-specific-reddit-community-subreddit/README.md) | 14 | Available |
-| [Monitor Multiple Github Repos](workflows/monitor-multiple-github-repos/README.md) | 13 | Available |
-| [send email with mailjet](workflows/send-email-with-mailjet/README.md) | 2 | Available |
-| [respond to webhook and respond with error and upload s3](workflows/respond-to-webhook-and-respond-with-error-and-upload-s3/README.md) | 12 | Available |
-| [Email search with Icypeas (bulk search)](workflows/email-search-with-icypeas-bulk-search/README.md) | 4 | Available |
-| [Import Odoo Product Images from Google Drive](workflows/import-odoo-product-images-from-google-drive/README.md) | 19 | Available |
-| [verify email](workflows/verify-email/README.md) | 4 | Available |
-| [Academic Assistant Chatbot (Telegram + OpenAI)](workflows/academic-assistant-chatbot-telegram-openai/README.md) | 5 | Available |
-| [Search console REPORTS](workflows/search-console-reports/README.md) | 14 | Available |
-| [Create a ticket in Zendesk](workflows/create-a-ticket-in-zendesk/README.md) | 2 | Available |
-| [receive telegram events and append google sheets and telegram](workflows/receive-telegram-events-and-append-google-sheets-and-telegram/README.md) | 18 | Available |
-| [cron and telegram and webhook](workflows/cron-and-telegram-and-webhook/README.md) | 7 | Available |
-| [xml extract from file and respond to webhook and webhook](workflows/xml-extract-from-file-and-respond-to-webhook-and-webhook/README.md) | 9 | Available |
-| [receive github events and trigger travis ci](workflows/receive-github-events-and-trigger-travis-ci/README.md) | 4 | Available |
-| [Chat with Postgresql Database](workflows/chat-with-postgresql-database/README.md) | 7 | Available |
-| [Airtop Web Agent](workflows/airtop-web-agent/README.md) | 17 | Available |
-| [Upload video, create playlist and add video to playlist](workflows/upload-video-create-playlist-and-add-video-to-playlist/README.md) | 5 | Available |
-| [Perform an email search with Icypeas (single)](workflows/perform-an-email-search-with-icypeas-single/README.md) | 3 | Available |
-| [Streamline Your Zoom Meetings with Secure, Automated Stripe Payments](workflows/streamline-your-zoom-meetings-with-secure-automated-stripe-payments/README.md) | 16 | Available |
-| [Start Multiple Sub-Workflows Asynchronously](workflows/start-multiple-sub-workflows-asynchronously/README.md) | 14 | Available |
-| [Receive updates for all changes in Pipedrive](workflows/receive-updates-for-all-changes-in-pipedrive/README.md) | 1 | Available |
-| [AI agent: expense tracker in Google Sheets and n8n chat](workflows/ai-agent-expense-tracker-in-google-sheets-and-n8n-chat/README.md) | 9 | Available |
-| [Media Narrative Tracker — Mycroft Agent 3 (Groq)](workflows/media-narrative-novelty/README.md) | 21 | Available |
-| [Get Product Feedback](workflows/get-product-feedback/README.md) | 6 | Available |
-| [Website check](workflows/website-check/README.md) | 5 | Available |
-| [create playlist spotify and get liked tracks and aggregate](workflows/create-playlist-spotify-and-get-liked-tracks-and-aggregate/README.md) | 17 | Available |
-| [Send Telegram Alerts for New WooCommerce Orders](workflows/send-telegram-alerts-for-new-woocommerce-orders/README.md) | 4 | Available |
-| [xml and get xml data and dropbox](workflows/xml-and-get-xml-data-and-dropbox/README.md) | 5 | Available |
-| [receive form events and split out and open ai](workflows/receive-form-events-and-split-out-and-open-ai/README.md) | 15 | Available |
-| [Amazon keywords](workflows/amazon-keywords/README.md) | 8 | Available |
-| [quick chart and google drive upload file](workflows/quick-chart-and-google-drive-upload-file/README.md) | 4 | Available |
-| [Shopify order UTM to Baserow](workflows/shopify-order-utm-to-baserow/README.md) | 8 | Available |
-| [Send a welcome private message to your new BlueSky followers](workflows/send-a-welcome-private-message-to-your-new-bluesky-followers/README.md) | 15 | Available |
-| [Automated Daily Weather Data Fetcher and Storage](workflows/automated-daily-weather-data-fetcher-and-storage/README.md) | 3 | Available |
-| [Credentials Transfer](workflows/credentials-transfer/README.md) | 13 | Available |
-| [Create a task in ClickUp](workflows/create-a-task-in-clickup/README.md) | 2 | Available |
-| [twitter api example](workflows/twitter-api-example/README.md) | 4 | Available |
-| [read google sheet and search salesforce accounts and removeduplicates item lists](workflows/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/README.md) | 12 | Available |
-| [Standup Bot - Worker](workflows/standup-bot-worker/README.md) | 29 | Available |
-| [append google sheets and google sheets](workflows/append-google-sheets-and-google-sheets/README.md) | 4 | Available |
-| [MongoDB Agent](workflows/mongodb-agent/README.md) | 6 | Available |
-| [Get Airtable data in Obsidian Notes](workflows/get-airtable-data-in-obsidian-notes/README.md) | 5 | Available |
-| [Create a room, invite members from a different room, and send a message in the room we created](workflows/create-a-room-invite-members-from-a-different-room-and-send-a-message-in-the-room-we-created/README.md) | 8 | Available |
-| [get Google Drive folders](workflows/get-google-drive-folders/README.md) | 23 | Available |
-| [Get a volume and add it to your bookshelf](workflows/get-a-volume-and-add-it-to-your-bookshelf/README.md) | 4 | Available |
-| [Restore your workflows from GitHub](workflows/restore-your-workflows-from-github/README.md) | 7 | Available |
-| [autopilot and list contact list autopilot](workflows/autopilot-and-list-contact-list-autopilot/README.md) | 4 | Available |
-| [Sending an SMS with MessageBird](workflows/sending-an-sms-with-messagebird/README.md) | 2 | Available |
-| [clearbit and list lead pipedrive and keep leads that match the criteria](workflows/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/README.md) | 16 | Available |
-| [Creates a folder in Google Drive to store the generated content and outline](workflows/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/README.md) | 27 | Available |
-| [Gumroad sale trigger](workflows/gumroad-sale-trigger/README.md) | 4 | Available |
-| [Chinese Translator](workflows/chinese-translator/README.md) | 11 | Available |
-| [Send daily weather updates to a phone number using the Vonage node](workflows/send-daily-weather-updates-to-a-phone-number-using-the-vonage-node/README.md) | 3 | Available |
-| [Sync New Shopify Products to Odoo Product](workflows/sync-new-shopify-products-to-odoo-product/README.md) | 5 | Available |
-| [fetch source image and split out results only and filter score 0 9](workflows/fetch-source-image-and-split-out-results-only-and-filter-score-0-9/README.md) | 10 | Available |
-| [send email with smtp](workflows/send-email-with-smtp/README.md) | 2 | Available |
-| [respond to webhook and webhook](workflows/respond-to-webhook-and-webhook/README.md) | 2 | Available |
-| [create webflow and update webflow and webflow](workflows/create-webflow-and-update-webflow-and-webflow/README.md) | 4 | Available |
-| [Simple LinkedIn profile collector](workflows/simple-linkedin-profile-collector/README.md) | 10 | Available |
-| [Create, update and get a contact in Google Contacts](workflows/create-update-and-get-a-contact-in-google-contacts/README.md) | 4 | Available |
-| [OpenAI-model-examples](workflows/openai-model-examples/README.md) | 17 | Available |
-| [🧹 Archive (delete) duplicate items from a Notion database](workflows/archive-delete-duplicate-items-from-a-notion-database/README.md) | 7 | Available |
-| [AI Email processing autoresponder with approval (Yes/No)](workflows/approval-gated-email/README.md) | 12 | Available |
-| [agent and fetch keywords from sheet and update google sheets](workflows/agent-and-fetch-keywords-from-sheet-and-update-google-sheets/README.md) | 8 | Available |
-| [Turn on a light to a specific color on any update in GitHub repository](workflows/turn-on-a-light-to-a-specific-color-on-any-update-in-github-repository/README.md) | 2 | Available |
-| [receive wise events and wise and append airtable](workflows/receive-wise-events-and-wise-and-append-airtable/README.md) | 4 | Available |
-| [AI Agent : Google calendar assistant using OpenAI](workflows/ai-agent-google-calendar-assistant-using-openai/README.md) | 6 | Available |
-| [Coffee Bot (Matrix)](workflows/coffee-bot-matrix/README.md) | 5 | Available |
-| [OpenAI ImageGen1 Template](workflows/openai-imagegen1-template/README.md) | 4 | Available |
-| [Create Atlassian Confluence page from template](workflows/create-atlassian-confluence-page-from-template/README.md) | 5 | Available |
-| [1/ Add Your credentials](workflows/1-add-your-credentials/README.md) | 5 | Available |
-| [puq-docker-minio-deploy](workflows/puq-docker-minio-deploy/README.md) | 32 | Available |
-| [http request and at 17h image jokes and tweet image jokes](workflows/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/README.md) | 4 | Available |
-| [create emelia and addcontact emelia and emelia](workflows/create-emelia-and-addcontact-emelia-and-emelia/README.md) | 3 | Available |
-| [LinkedIn Content Automation (RSS + Gemini)](workflows/linkedin-content-automation-rss-gemini/README.md) | 13 | Available |
-| [Plex Automatic Throttler](workflows/plex-automatic-throttler/README.md) | 21 | Available |
-| [Import multiple Manufacturers from Google Sheets to Shopware 6](workflows/import-multiple-manufacturers-from-google-sheets-to-shopware-6/README.md) | 8 | Available |
-| [executequery my sql and receive schedule events and microsoft outlook](workflows/executequery-my-sql-and-receive-schedule-events-and-microsoft-outlook/README.md) | 6 | Available |
-| [Create Email Campaign From LinkedIn Post Interactions](workflows/create-email-campaign-from-linkedin-post-interactions/README.md) | 16 | Available |
-| [Summarize emails with A.I. then send to messenger](workflows/summarize-emails-with-a-i-then-send-to-messenger/README.md) | 3 | Available |
-| [Create, update and get a case in TheHive](workflows/create-update-and-get-a-case-in-thehive/README.md) | 4 | Available |
-| [Flow starts when receiving a get http call](workflows/flow-starts-when-receiving-a-get-http-call/README.md) | 5 | Available |
-| [Standup Bot - Initialize](workflows/standup-bot-initialize/README.md) | 4 | Available |
-| [get local date and time](workflows/get-local-date-and-time/README.md) | 2 | Available |
-| [aws sqs and http request and cron](workflows/aws-sqs-and-http-request-and-cron/README.md) | 4 | Available |
-| [unleashed software](workflows/unleashed-software/README.md) | 2 | Available |
-| [n8n update](workflows/n8n-update/README.md) | 14 | Available |
-| [Always Authenticate Your Server!](workflows/always-authenticate-your-server-d0d8bb72/README.md) | 15 | Available |
-| [🏢 Company Decision Maker Discovery](workflows/company-decision-maker-discovery/README.md) | 25 | Available |
-| [PUQ Docker NextCloud deploy](workflows/puq-docker-nextcloud-deploy/README.md) | 43 | Available |
-| [n8n_check](workflows/n8n-check/README.md) | 7 | Available |
-| [[1/3 - anomaly detection] [1/2 - KNN classification] Batch upload dataset to Qdrant (crops dataset)](workflows/1-3-anomaly-detection-1-2-knn-classification-batch-upload-dataset-to-qdrant-crops-dataset/README.md) | 13 | Available |
-| [Edit your own prompt ⬇️](workflows/edit-your-own-prompt/README.md) | 10 | Available |
-| [Send a message on Mattermost when an order is created in WooCommerce](workflows/send-a-message-on-mattermost-when-an-order-is-created-in-woocommerce/README.md) | 2 | Available |
-| [🚨Ensure Qdrant collection exists!](workflows/ensure-qdrant-collection-exists/README.md) | 24 | Available |
-| [update postgres and exclude default error false tagged workflows and receive schedule events](workflows/update-postgres-and-exclude-default-error-false-tagged-workflows-and-receive-schedule-events/README.md) | 6 | Available |
-| [Send DingTalk message on new Azure DevOps Pull Request](workflows/send-dingtalk-message-on-new-azure-devops-pull-request/README.md) | 4 | Available |
-| [Lead Qualification with BatchData](workflows/lead-qualification-with-batchdata/README.md) | 8 | Available |
-| [Scrape Trustpilot Reviews to Google Sheets](workflows/scrape-trustpilot-reviews-to-google-sheets/README.md) | 10 | Available |
-| [write binary file and read binary file and http request](workflows/write-binary-file-and-read-binary-file-and-http-request/README.md) | 11 | Available |
-| [Threads](workflows/threads/README.md) | 6 | Available |
-| [basic llm chain and receive schedule events and split out](workflows/basic-llm-chain-and-receive-schedule-events-and-split-out/README.md) | 13 | Available |
-| [📦 New Email ➔ Create Google Task](workflows/new-email-create-google-task/README.md) | 2 | Available |
-| [Auto - Resume Disabled Workflows](workflows/auto-resume-disabled-workflows/README.md) | 5 | Available |
-| [Execute a command that gives the hard disk memory used on the host machine](workflows/execute-a-command-that-gives-the-hard-disk-memory-used-on-the-host-machine/README.md) | 5 | Available |
-| [receive linear events and filter and slack](workflows/receive-linear-events-and-filter-and-slack/README.md) | 6 | Available |
-| [send invoice quickbooks and create invoice quickbooks and create quickbooks](workflows/send-invoice-quickbooks-and-create-invoice-quickbooks-and-create-quickbooks/README.md) | 3 | Available |
-| [Monitor Competitor Pricing](workflows/monitor-competitor-pricing/README.md) | 8 | Available |
-| [get portfolio from sheets and fetch live prices and call groq api](workflows/get-portfolio-from-sheets-and-fetch-live-prices-and-call-groq-api/README.md) | 8 | Available |
-| [Google Calendar to Slack Status & Philips Hue](workflows/google-calendar-to-slack-status-philips-hue/README.md) | 9 | Available |
-| [BambooHR AI-Powered Company Policies and Benefits Chatbot](workflows/bamboohr-ai-powered-company-policies-and-benefits-chatbot/README.md) | 39 | Available |
-| [Receive updates when a new list is created in Affinity](workflows/receive-updates-when-a-new-list-is-created-in-affinity/README.md) | 1 | Available |
-| [Load Prompts from Github Repo and auto populate n8n expressions](workflows/load-prompts-from-github-repo-and-auto-populate-n8n-expressions/README.md) | 13 | Available |
-| [Agent with custom HTTP Request](workflows/agent-with-custom-http-request/README.md) | 16 | Available |
-| [Discard found Google Apps documents](workflows/discard-found-google-apps-documents/README.md) | 14 | Available |
-| [list wordpress](workflows/list-wordpress/README.md) | 2 | Available |
-| [Click the `Execute Workflow` button and double click on the nodes to see the input and output items.](workflows/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items-b41f2eba/README.md) | 10 | Available |
-| [Get analytics of a website and store it Airtable](workflows/get-analytics-of-a-website-and-store-it-airtable/README.md) | 4 | Available |
-| [Scrape Books from URL with Dumpling AI, Clean HTML, Save to Sheets, Email as CSV](workflows/scrape-books-from-url-with-dumpling-ai-clean-html-save-to-sheets-email-as-csv/README.md) | 8 | Available |
-| [webhook and youtube transcripter and split out](workflows/webhook-and-youtube-transcripter-and-split-out/README.md) | 12 | Available |
-| [start and http request](workflows/start-and-http-request/README.md) | 4 | Available |
-| [Youtube Discord Bot](workflows/youtube-discord-bot/README.md) | 6 | Available |
-| [WordPress Contact Form (CF7) Responses and Classification](workflows/wordpress-contact-form-cf7-responses-and-classification/README.md) | 19 | Available |
-| [subscribe subscriber klicktipp and receive typeform events and get list of all existing tags](workflows/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/README.md) | 13 | Available |
-| [template-demo-chatgpt-image-1-with-drive-and-sheet copy](workflows/template-demo-chatgpt-image-1-with-drive-and-sheet-copy/README.md) | 12 | Available |
-| [post to slack and receive hubspot events and get company hubspot](workflows/post-to-slack-and-receive-hubspot-events-and-get-company-hubspot/README.md) | 5 | Available |
-| [build your own image search using ai object detection cdn and elasticsearch](workflows/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/README.md) | 7 | Available |
-| [rag grader](workflows/rag-answer-evaluation/README.md) | 12 | Available |
-| [Telegram Weather Workflow](workflows/telegram-weather-workflow/README.md) | 3 | Available |
-| [Githubtrigger Workflow](workflows/receive-github-events-and-edit-github-and-createcomment-github/README.md) | 12 | Available |
-| [CalcsLive Demo Workflow Template](workflows/calcslive-demo-workflow-template/README.md) | 6 | Available |
-| [http request and receive google calendar events and filter out myself](workflows/http-request-and-receive-google-calendar-events-and-filter-out-myself/README.md) | 14 | Available |
-| [💥workflow n8n d'Auto-Post sur les réseaux sociaux - vide](workflows/workflow-n8n-d-auto-post-sur-les-reseaux-sociaux-vide/README.md) | 14 | Available |
-| [Send daily weather updates via a push notification using the Pushcut node](workflows/send-daily-weather-updates-via-a-push-notification-using-the-pushcut-node/README.md) | 3 | Available |
-| [Create an Onfleet task when a file in Google Drive is updated](workflows/create-an-onfleet-task-when-a-file-in-google-drive-is-updated/README.md) | 2 | Available |
-| [Testing Email Header Analysis Workflow](workflows/testing-email-header-analysis-workflow/README.md) | 34 | Available |
-| [query for upwork job posts and receive schedule events and find existing entries](workflows/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/README.md) | 8 | Available |
-| [Code Review workflow](workflows/code-review-workflow/README.md) | 8 | Available |
-| [post to mattermost v2](workflows/post-to-mattermost-v2/README.md) | 6 | Available |
-| [receive typeform events and slack and list airtable](workflows/receive-typeform-events-and-slack-and-list-airtable/README.md) | 10 | Available |
-| [Use XMLRPC via HttpRequest-node to post on Wordpress.com](workflows/use-xmlrpc-via-httprequest-node-to-post-on-wordpress-com/README.md) | 8 | Available |
-| [Google Maps FULL](workflows/google-maps-full/README.md) | 14 | Available |
-| [email read imap](workflows/email-read-imap/README.md) | 1 | Available |
-| [graphql](workflows/graphql/README.md) | 2 | Available |
-| [xSend and check TTS (Text-to-speech) voice calls end email verification](workflows/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/README.md) | 13 | Available |
-| [receive chat events and n8n research ai agent and n8n assistant tool lookup](workflows/receive-chat-events-and-n8n-research-ai-agent-and-n8n-assistant-tool-lookup/README.md) | 5 | Available |
-| [Check for valid Hubspot contact email](workflows/check-for-valid-hubspot-contact-email/README.md) | 5 | Available |
-| [Put this node in any workflow.](workflows/put-this-node-in-any-workflow/README.md) | 31 | Available |
-| [Convert YouTube Videos into SEO Blog Posts](workflows/convert-youtube-videos-into-seo-blog-posts/README.md) | 8 | Available |
-| [Daily poems in Telegram](workflows/daily-poems-in-telegram/README.md) | 4 | Available |
-| [Create spreadsheet and populate with headers and deal information](workflows/create-spreadsheet-and-populate-with-headers-and-deal-information/README.md) | 40 | Available |
-| [stackby and list stackby](workflows/stackby-and-list-stackby/README.md) | 4 | Available |
-| [Notion to Linkedin](workflows/notion-to-linkedin/README.md) | 9 | Available |
-| [spy tool](workflows/spy-tool/README.md) | 9 | Available |
-| [Automate assigning GitHub issues](workflows/automate-assigning-github-issues/README.md) | 10 | Available |
-| [Create, update and get a product from WooCommerce](workflows/create-update-and-get-a-product-from-woocommerce/README.md) | 4 | Available |
-| [AI T-Shirt Redesign Workflow from any Mockup Image](workflows/ai-t-shirt-redesign-workflow-from-any-mockup-image/README.md) | 9 | Available |
-| [Google calendar to Outlook](workflows/google-calendar-to-outlook/README.md) | 7 | Available |
-| [Weather via Slack](workflows/weather-via-slack/README.md) | 5 | Available |
-| [Bitrix24 Chatbot Application Workflow example with Webhook Integration](workflows/bitrix24-chatbot-application-workflow-example-with-webhook-integration/README.md) | 13 | Available |
-| [Main workflow: AI agent using custom tool](workflows/main-workflow-ai-agent-using-custom-tool-79ad24f8/README.md) | 8 | Available |
-| [YouTube to Airtable Anonym](workflows/youtube-to-airtable-anonym/README.md) | 10 | Available |
-| [create strapi and every 30 minutes and search twitter](workflows/create-strapi-and-every-30-minutes-and-search-twitter/README.md) | 14 | Available |
-| [gmail and fetch github repo releases and split out content](workflows/gmail-and-fetch-github-repo-releases-and-split-out-content/README.md) | 5 | Available |
-| [Automatically store Retell transcripts in Google Sheets/Airtable/Notion from webhook](workflows/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/README.md) | 6 | Available |
-| [Personal Assistant MCP server](workflows/personal-assistant-mcp-server/README.md) | 15 | Available |
-| [http request and search person pipedrive and pipedrive](workflows/http-request-and-search-person-pipedrive-and-pipedrive/README.md) | 6 | Available |
-| [Store the output of a phantom in Airtable](workflows/store-the-output-of-a-phantom-in-airtable/README.md) | 4 | Available |
-| [Image to license plate number](workflows/image-to-license-plate-number/README.md) | 5 | Available |
-| [Orlen](workflows/cron-and-list-google-drive-and-list-message-gmail/README.md) | 10 | Available |
-| [ERP AI chatbot for Odoo sales module](workflows/erp-ai-chatbot-for-odoo-sales-module/README.md) | 15 | Available |
-| [AI Voice Chat using Webhook, Memory Manager, OpenAI, Google Gemini & ElevenLabs](workflows/ai-voice-chat-using-webhook-memory-manager-openai-google-gemini-elevenlabs/README.md) | 11 | Available |
-| [Suspicious_login_detection](workflows/suspicious-login-detection/README.md) | 33 | Available |
-| [ai control tower agent and call query tool and google big query](workflows/ai-control-tower-agent-and-call-query-tool-and-google-big-query/README.md) | 8 | Available |
-| [Create, update, and get a document in Google Cloud Firestore](workflows/create-update-and-get-a-document-in-google-cloud-firestore/README.md) | 6 | Available |
-| [Default Error Handler](workflows/default-error-handler/README.md) | 8 | Available |
-| [http request and cron and discord](workflows/http-request-and-cron-and-discord/README.md) | 6 | Available |
-| [Telegram AI multi-format chatbot](workflows/telegram-ai-multi-format-chatbot/README.md) | 12 | Available |
-| [Adding data to notion](workflows/adding-data-to-notion/README.md) | 2 | Available |
-| [Analyze_email_headers_for_IPs_and_spoofing__3](workflows/analyze-email-headers-for-ips-and-spoofing-3/README.md) | 27 | Available |
-| [get last execution timestamp and set new last execution timestamp and get zendesk comments for tickets](workflows/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-get-zendesk-comments-for-tickets/README.md) | 21 | Available |
-| [Line_Chatbot_Extract_Text_from_Pay_Slip_with_Gemini](workflows/line-chatbot-extract-text-from-pay-slip-with-gemini/README.md) | 12 | Available |
-| [Contradiction_detection_agent](workflows/contradiction-detection/README.md) | 26 | Available |
-| [report execution errors to mailgun](workflows/report-execution-errors-to-mailgun/README.md) | 2 | Available |
-| [item lists and html extract and http request](workflows/item-lists-and-html-extract-and-http-request/README.md) | 12 | Available |
-| [Gmail MCP Server](workflows/gmail-mcp-server/README.md) | 22 | Available |
-| [HN Who is Hiring Scrape](workflows/hn-who-is-hiring-scrape/README.md) | 15 | Available |
-| [receive telegram events and monday com and telegram](workflows/receive-telegram-events-and-monday-com-and-telegram/README.md) | 8 | Available |
-| [DSP Agent](workflows/dsp-agent/README.md) | 17 | Available |
-| [execute workflow](workflows/execute-workflow/README.md) | 2 | Available |
-| [🔍🛠️Perplexity Researcher to HTML Web Page](workflows/perplexity-researcher-to-html-web-page/README.md) | 38 | Available |
-| [Send updates about the position of the ISS every minute to a topic in Kafka](workflows/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-kafka/README.md) | 4 | Available |
-| [Flux Dev Image Generation Fal.ai](workflows/flux-dev-image-generation-fal-ai/README.md) | 9 | Available |
-| [create object arrays from mock data](workflows/create-object-arrays-from-mock-data/README.md) | 2 | Available |
-| [AutoQoutesV2_template](workflows/autoqoutesv2-template/README.md) | 22 | Available |
-| [convert web page to pdf and write read write file](workflows/convert-web-page-to-pdf-and-write-read-write-file/README.md) | 3 | Available |
-| [[Check the Tutorial]({{ $env.WEBHOOK_URL }}](workflows/check-the-tutorial-env-webhook-url/README.md) | 16 | Available |
-| [Portfolio Dashboard](workflows/portfolio-dashboard/README.md) | 4 | Available |
-| [Get your lemlist API key](workflows/get-your-lemlist-api-key/README.md) | 10 | Available |
-| [TechStackComparativeAgentWorkflow](workflows/techstackcomparativeagentworkflow/README.md) | 18 | Available |
-| [My workflow 4](workflows/executequery-postgres-and-message-a-model-and-email-send/README.md) | 9 | Available |
-| [N8N Español - Ejemplos](workflows/n8n-espanol-ejemplos/README.md) | 7 | Available |
-| [Updating Shopify tags on Onfleet events](workflows/updating-shopify-tags-on-onfleet-events/README.md) | 2 | Available |
-| [report execution errors to twilio](workflows/report-execution-errors-to-twilio/README.md) | 3 | Available |
-| [Twitter notifications](workflows/twitter-notifications/README.md) | 5 | Available |
-| [Agentic Telegram AI bot with LangChain nodes and new tools](workflows/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/README.md) | 7 | Available |
-| [Madison_Content_Agent_MVP copy 1](workflows/brand-content-governance/README.md) | 26 | Available |
-| [[AI/LangChain] Output Parser 4](workflows/ai-langchain-output-parser-4/README.md) | 7 | Available |
-| [Some questions to try](workflows/some-questions-to-try/README.md) | 14 | Available |
-| [MCP_SUPABASE_AGENT](workflows/mcp-supabase-agent/README.md) | 23 | Available |
-| [receive netlify events and append airtable](workflows/receive-netlify-events-and-append-airtable/README.md) | 3 | Available |
-| [receive schedule events and get all your team s tickets and get next page](workflows/receive-schedule-events-and-get-all-your-team-s-tickets-and-get-next-page/README.md) | 9 | Available |
-| [iterate batches and route results](workflows/iterate-batches-and-route-results/README.md) | 5 | Available |
-| [google translate and agent and receive google sheets events](workflows/google-translate-and-agent-and-receive-google-sheets-events/README.md) | 17 | Available |
-| [Dynamically generate HTML page from user request using OpenAI Structured Output](workflows/dynamically-generate-html-page-from-user-request-using-openai-structured-output/README.md) | 5 | Available |
-| [🤓 Conversion Rate Optimizer](workflows/conversion-rate-optimizer/README.md) | 4 | Available |
-| [Save Telegram reply to journal spreadsheet](workflows/save-telegram-reply-to-journal-spreadsheet/README.md) | 3 | Available |
-| [JSON to Google Sheets](workflows/json-to-google-sheets/README.md) | 5 | Available |
-| [Create Onfleet tasks from Spreadsheets](workflows/create-onfleet-tasks-from-spreadsheets/README.md) | 3 | Available |
-| [Needed pre-work: Add a Slack App](workflows/needed-pre-work-add-a-slack-app/README.md) | 5 | Available |
-| [receive form events and score lead with madkudu and emailverifier hunter ca6dd455](workflows/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter-ca6dd455/README.md) | 8 | Available |
-| [Realtime Notion Todoist 2-way Sync Template](workflows/realtime-notion-todoist-2-way-sync-template/README.md) | 174 | Available |
-| [Shopify + Mautic](workflows/shopify-mautic/README.md) | 20 | Available |
-| [Email body parser by aprenden8n.com](workflows/email-body-parser-by-aprenden8n-com/README.md) | 3 | Available |
-| [http request and next cloud and list folder next cloud](workflows/http-request-and-next-cloud-and-list-folder-next-cloud/README.md) | 5 | Available |
-| [AccountCraft WhatsApp Automation - Infridet](workflows/accountcraft-whatsapp-automation-infridet/README.md) | 6 | Available |
-| [tapfiliate api example](workflows/tapfiliate-api-example/README.md) | 4 | Available |
-| [invoke an aws lambda function](workflows/invoke-an-aws-lambda-function/README.md) | 2 | Available |
-| [fetch github repo releases and receive schedule events and slack](workflows/fetch-github-repo-releases-and-receive-schedule-events-and-slack/README.md) | 5 | Available |
-| [MLOps Pipeline EN-PT](workflows/mlops-pipeline-en-pt/README.md) | 16 | Available |
-| [Template - SSL Expiry Alert System](workflows/template-ssl-expiry-alert-system/README.md) | 11 | Available |
-| [Add task to tasklist](workflows/add-task-to-tasklist/README.md) | 2 | Available |
-| [Unique QRcode coupon assignment and validation for Lead Generation system](workflows/unique-qrcode-coupon-assignment-and-validation-for-lead-generation-system/README.md) | 21 | Available |
-| [Luma AI - Webhook Response v1 - AK](workflows/luma-ai-webhook-response-v1-ak/README.md) | 6 | Available |
-| [Financial Literacy Bot - Knowledge Base](workflows/financial-literacy-bot-knowledge-base/README.md) | 7 | Available |
-| [rundeck job api example](workflows/rundeck-job-api-example/README.md) | 2 | Available |
-| [search slack and receive schedule events and list linear](workflows/search-slack-and-receive-schedule-events-and-list-linear/README.md) | 12 | Available |
-| [Automated Form Submission Data Storage in Airtable](workflows/automated-form-submission-data-storage-in-airtable/README.md) | 2 | Available |
-| [receive schedule events and http request and appendorupdate google sheets](workflows/receive-schedule-events-and-http-request-and-appendorupdate-google-sheets/README.md) | 9 | Available |
-| [Load data into database](workflows/load-data-into-database-871ea973/README.md) | 13 | Available |
-| [🤖 Telegram Messaging Agent for Text/Audio/Images](workflows/telegram-messaging-agent-for-text-audio-images/README.md) | 29 | Available |
-| [Scrape latest Paul Graham essays](workflows/scrape-latest-paul-graham-essays-6f58a52c/README.md) | 17 | Available |
-| [Extract text from PDF and image using Vertex AI (Gemini) into CSV](workflows/extract-text-from-pdf-and-image-using-vertex-ai-gemini-into-csv/README.md) | 12 | Available |
-| [HR Job Posting and Evaluation with AI](workflows/hr-job-posting-and-evaluation-with-ai/README.md) | 30 | Available |
-| [generate french audio and translate text to english and translate english text to speech](workflows/generate-french-audio-and-translate-text-to-english-and-translate-english-text-to-speech/README.md) | 7 | Available |
-| [Error Handler send Telegram](workflows/error-handler-send-telegram/README.md) | 3 | Available |
-| [receive typeform events and google cloud natural language and notion](workflows/receive-typeform-events-and-google-cloud-natural-language-and-notion/README.md) | 6 | Available |
-| [item lists and function item](workflows/item-lists-and-function-item/README.md) | 3 | Available |
-| [read from file and convert to spreadsheet and insert into mysql](workflows/read-from-file-and-convert-to-spreadsheet-and-insert-into-mysql/README.md) | 4 | Available |
-| [send file to kindle through telegram bot](workflows/send-file-to-kindle-through-telegram-bot/README.md) | 6 | Available |
-| [Daily Podcast Summary](workflows/daily-podcast-summary/README.md) | 16 | Available |
-| [list shopify](workflows/list-shopify/README.md) | 2 | Available |
-| [n8n workflow deployer](workflows/n8n-workflow-deployer/README.md) | 12 | Available |
-| [http request and append google sheets and tofile spreadsheet file](workflows/http-request-and-append-google-sheets-and-tofile-spreadsheet-file/README.md) | 4 | Available |
-| [On User created in HubSpot](workflows/on-user-created-in-hubspot/README.md) | 7 | Available |
-| [My workflow](workflows/receive-form-events-and-update-google-sheets-and-gmail/README.md) | 7 | Available |
-| [Check for Bot Responses](workflows/check-for-bot-responses/README.md) | 11 | Available |
-| [(Not published) Three-View Orthographic Projection to Dynamic Video Conversion](workflows/not-published-three-view-orthographic-projection-to-dynamic-video-conversion/README.md) | 13 | Available |
-| [Summarize Google Sheets form feedback via OpenAI's GPT-4](workflows/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/README.md) | 6 | Available |
-| [Set receiving email account](workflows/set-receiving-email-account/README.md) | 9 | Available |
-| [google sheets and webhook](workflows/google-sheets-and-webhook/README.md) | 2 | Available |
-| [Switch depending on content](workflows/switch-depending-on-content/README.md) | 9 | Available |
-| [download google drive and write binary file](workflows/download-google-drive-and-write-binary-file/README.md) | 3 | Available |
-| [The conversation history (last 20 messages) is stored in a buffer memory](workflows/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory/README.md) | 6 | Available |
-| [New WooCommerce Product to Twitter and Telegram](workflows/new-woocommerce-product-to-twitter-and-telegram/README.md) | 3 | Available |
-| [AI-Powered Information Monitoring with OpenAI, Google Sheets, Jina AI and Slack](workflows/ai-powered-information-monitoring-with-openai-google-sheets-jina-ai-and-slack/README.md) | 18 | Available |
-| [Youtube Meta Generator](workflows/youtube-meta-generator/README.md) | 9 | Available |
-| [Voice RAG Chatbot with ElevenLabs and OpenAI](workflows/voice-rag-chatbot-with-elevenlabs-and-openai/README.md) | 18 | Available |
-| [search person pipedrive and get person pipedrive and open ai](workflows/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/README.md) | 10 | Available |
-| [report execution errors to get execution n8n](workflows/report-execution-errors-to-get-execution-n8n/README.md) | 3 | Available |
-| [Create AI-Ready Vector Datasets for LLMs with Bright Data, Gemini & Pinecone](workflows/create-ai-ready-vector-datasets-for-llms-with-bright-data-gemini-pinecone/README.md) | 16 | Available |
-| [Q&A on data returned from a workflow](workflows/q-a-on-data-returned-from-a-workflow/README.md) | 5 | Available |
-| [generate report security scorecard and security scorecard and download report security scorecard](workflows/generate-report-security-scorecard-and-security-scorecard-and-download-report-security-scorecard/README.md) | 4 | Available |
-| [notion and humantic ai and receive calendly events](workflows/notion-and-humantic-ai-and-receive-calendly-events/README.md) | 4 | Available |
-| [Scans von PDF zu Nextcloud](workflows/scans-von-pdf-zu-nextcloud/README.md) | 4 | Available |
-| [receive slash command and respond to webhook and wrong command error](workflows/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/README.md) | 16 | Available |
-| [Scenario 1: Transcribe Call with AssemblyAI](workflows/scenario-1-transcribe-call-with-assemblyai/README.md) | 9 | Available |
-| [telegram and send assign alert and webhook](workflows/telegram-and-send-assign-alert-and-webhook/README.md) | 8 | Available |
-| [AI-Powered Research with Jina AI Deep Search](workflows/ai-powered-research-with-jina-ai-deep-search/README.md) | 3 | Available |
-| [LangChain - Example - Code Node Example](workflows/langchain-example-code-node-example/README.md) | 8 | Available |
-| [LinkedIn Profile Finder via Form using Bright Data & GPT-4o-mini](workflows/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/README.md) | 19 | Available |
-| [Create a channel, add a member, and post a message to the channel](workflows/create-a-channel-add-a-member-and-post-a-message-to-the-channel/README.md) | 4 | Available |
-| [🚨 Change your Base ID and Table ID here!](workflows/change-your-base-id-and-table-id-here/README.md) | 26 | Available |
-| [receive chat events and executequery postgres tool and agent](workflows/receive-chat-events-and-executequery-postgres-tool-and-agent/README.md) | 5 | Available |
-| [🌐🪛 AI Agent Chatbot with Jina.ai Webpage Scraper](workflows/ai-agent-chatbot-with-jina-ai-webpage-scraper/README.md) | 5 | Available |
-| [New WooCommerce Customer to Mautic](workflows/new-woocommerce-customer-to-mautic/README.md) | 5 | Available |
-| [Line Chatbot Handling AI Responses with Groq and Llama3](workflows/line-chatbot-handling-ai-responses-with-groq-and-llama3/README.md) | 4 | Available |
-| [Create a new task in Todoist](workflows/create-a-new-task-in-todoist/README.md) | 2 | Available |
-| [The conversation history(last 20 messages) is stored in a buffer memory](workflows/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-0fb8e07f/README.md) | 6 | Available |
-| [cron and mysql insert and google sheets read](workflows/cron-and-mysql-insert-and-google-sheets-read/README.md) | 3 | Available |
-| [Spotify Sync Liked Songs to Playlist](workflows/spotify-sync-liked-songs-to-playlist/README.md) | 24 | Available |
-| [Create a new contact in Agile CRM](workflows/create-a-new-contact-in-agile-crm/README.md) | 2 | Available |
-| [Create a release and get all releases](workflows/create-a-release-and-get-all-releases/README.md) | 3 | Available |
-| [📄🛠️PDF2Blog](workflows/pdf2blog/README.md) | 9 | Available |
-| [get redis](workflows/get-redis/README.md) | 2 | Available |
-| [Tech Radar](workflows/tech-radar/README.md) | 37 | Available |
-| [Conversation history is stored in memory using the body token as the chatsession id](workflows/conversation-history-is-stored-in-memory-using-the-body-token-as-the-chatsession-id/README.md) | 5 | Available |
-| [Automated PDF to HTML Conversion](workflows/automated-pdf-to-html-conversion/README.md) | 5 | Available |
-| [executequery postgres](workflows/executequery-postgres/README.md) | 2 | Available |
-| [Match Spotify Tracks to YouTube Videos](workflows/match-spotify-tracks-to-youtube-videos/README.md) | 45 | Available |
-| [Get all orders in Squarespace to Google Sheets](workflows/get-all-orders-in-squarespace-to-google-sheets/README.md) | 6 | Available |
-| [📌 Daily Crypto Market Summary Bot](workflows/daily-crypto-market-summary-bot/README.md) | 4 | Available |
-| [ICP Company Scoring](workflows/icp-company-scoring/README.md) | 5 | Available |
-| [receive schedule events and list jira and label prioritize rewrite](workflows/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/README.md) | 22 | Available |
-| [Notion knowledge base assistant [v1]](workflows/notion-knowledge-base-assistant-v1/README.md) | 8 | Available |
-| [transform mock data with javascript](workflows/transform-mock-data-with-javascript/README.md) | 2 | Available |
-| [Fine-tuning with OpenAI models](workflows/fine-tuning-with-openai-models/README.md) | 7 | Available |
-| [Marketing Insights Processing](workflows/marketing-insights-processing/README.md) | 19 | Available |
-| [Send labeled email to a Notion database](workflows/send-labeled-email-to-a-notion-database/README.md) | 13 | Available |
-| [News Extraction](workflows/news-extraction/README.md) | 18 | Available |
-| [list invoice ninja](workflows/list-invoice-ninja/README.md) | 2 | Available |
-| [Translate cocktail instructions using LingvaNex](workflows/translate-cocktail-instructions-using-lingvanex/README.md) | 3 | Available |
-| [Opportunity Matcher v2](workflows/opportunity-matcher/README.md) | 10 | Available |
-| [Sync Todoist tasks to Notion](workflows/sync-todoist-tasks-to-notion/README.md) | 4 | Available |
-| [receive local file events and default data loader and recursive character text splitter](workflows/receive-local-file-events-and-default-data-loader-and-recursive-character-text-splitter/README.md) | 35 | Available |
-| [receive gitlab events](workflows/receive-gitlab-events/README.md) | 1 | Available |
-| [Send a private message on Zulip](workflows/send-a-private-message-on-zulip/README.md) | 2 | Available |
-| [OCR receipts from Google Drive](workflows/ocr-receipts-from-google-drive/README.md) | 9 | Available |
-| [Create a new list, add a new contact to the list, update the contact, and get all contacts in the list](workflows/create-a-new-list-add-a-new-contact-to-the-list-update-the-contact-and-get-all-contacts-in-the-list/README.md) | 5 | Available |
-| [fetch github repo releases and split out content and convert markdown to html](workflows/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/README.md) | 6 | Available |
-| [CoinMarketCap_Exchange_and_Community_Agent_Tool](workflows/coinmarketcap-exchange-and-community-agent-tool/README.md) | 9 | Available |
-| [clearbit and hubspot and update company hubspot](workflows/clearbit-and-hubspot-and-update-company-hubspot/README.md) | 12 | Available |
-| [Create an deal in Pipedrive](workflows/create-an-deal-in-pipedrive/README.md) | 2 | Available |
-| [receive telegram events and github](workflows/receive-telegram-events-and-github/README.md) | 5 | Available |
-| [Luma AI Dream Machine - Simple v1 - AK](workflows/luma-ai-dream-machine-simple-v1-ak/README.md) | 6 | Available |
-| [⚠️ When and how to use this workflow](workflows/when-and-how-to-use-this-workflow/README.md) | 5 | Available |
-| [Stock Q&A Workflow](workflows/stock-q-a-workflow/README.md) | 14 | Available |
-| [Execute an SQL query in Microsoft SQL](workflows/execute-an-sql-query-in-microsoft-sql/README.md) | 2 | Available |
-| [OpenAI Security Analysis](workflows/openai-security-analysis/README.md) | 12 | Available |
-| [Replace Google Drive connection](workflows/replace-google-drive-connection/README.md) | 9 | Available |
-| [Extract Amazon Best Seller Electronic Information with Bright Data and Google Gemini](workflows/extract-amazon-best-seller-electronic-information-with-bright-data-and-google-gemini/README.md) | 6 | Available |
-| [USDT TRC20 Wallet Tracker](workflows/usdt-trc20-wallet-tracker/README.md) | 7 | Available |
-| [New WooCommerce refund to Slack](workflows/new-woocommerce-refund-to-slack/README.md) | 3 | Available |
-| [Get Comments from Facebook Page](workflows/get-comments-from-facebook-page/README.md) | 10 | Available |
-| [Create, update and get a contact using the SendGrid node](workflows/create-update-and-get-a-contact-using-the-sendgrid-node/README.md) | 4 | Available |
-| [Receive Query from Parent Workflow](workflows/receive-query-from-parent-workflow/README.md) | 3 | Available |
-| [on get request and fetch binary file and respond with attachment](workflows/on-get-request-and-fetch-binary-file-and-respond-with-attachment/README.md) | 3 | Available |
-| [receive shopify events and create contact in zendesk and update user zendesk](workflows/receive-shopify-events-and-create-contact-in-zendesk-and-update-user-zendesk/README.md) | 9 | Available |
-| [💡🌐 Essential Multipage Website Scraper with Jina.ai](workflows/essential-multipage-website-scraper-with-jina-ai/README.md) | 12 | Available |
-| [Use Config Bot to setup your telegram details, like:](workflows/use-config-bot-to-setup-your-telegram-details-like/README.md) | 31 | Available |
-| [Technical Analysis Tool](workflows/technical-analysis-tool/README.md) | 33 | Available |
-| [read binary file and http request](workflows/read-binary-file-and-http-request/README.md) | 2 | Available |
-| [🤖Email Agent](workflows/email-agent/README.md) | 12 | Available |
-| [SERPBear analytics template](workflows/serpbear-analytics-template/README.md) | 6 | Available |
-| [Adaptive RAG](workflows/adaptive-rag/README.md) | 30 | Available |
-| [🙋‍♂️ Optimise your images!](workflows/optimise-your-images/README.md) | 7 | Available |
-| [mails2notion V2](workflows/mails2notion-v2/README.md) | 25 | Available |
-| [My workflow 3](workflows/receive-form-events-and-aggregate-and-parsing-the-document/README.md) | 33 | Available |
-| [MONDAY GET FULL ITEM](workflows/monday-get-full-item/README.md) | 21 | Available |
-| [Main Function to Receive and Send Telegram Messages](workflows/main-function-to-receive-and-send-telegram-messages/README.md) | 19 | Available |
-| [Store the data received from the CocktailDB API in JSON](workflows/store-the-data-received-from-the-cocktaildb-api-in-json/README.md) | 4 | Available |
-| [n8n and n8n list execution and receive schedule events](workflows/n8n-and-n8n-list-execution-and-receive-schedule-events/README.md) | 7 | Available |
-| [sort and split pdf into images and extract zip file](workflows/sort-and-split-pdf-into-images-and-extract-zip-file/README.md) | 39 | Available |
-| [Generate SEO Keyword Search Volume Data using Google API](workflows/generate-seo-keyword-search-volume-data-using-google-api/README.md) | 5 | Available |
-| [Resume Screener from Gmail to Sheets](workflows/resume-screener-from-gmail-to-sheets/README.md) | 6 | Available |
-| [google drive list files1 and executequery postgres and download google drive](workflows/google-drive-list-files1-and-executequery-postgres-and-download-google-drive/README.md) | 11 | Available |
-| [push redis and receive twilio events and get redis](workflows/push-redis-and-receive-twilio-events-and-get-redis/README.md) | 13 | Available |
-| [Sync Zendesk tickets to Slack threads](workflows/sync-zendesk-tickets-to-slack-threads/README.md) | 8 | Available |
-| [Receive updates when a subscriber is added through a form in ConvertKit](workflows/receive-updates-when-a-subscriber-is-added-through-a-form-in-convertkit/README.md) | 1 | Available |
-| [salesforce and update salesforce and addnote salesforce](workflows/salesforce-and-update-salesforce-and-addnote-salesforce/README.md) | 4 | Available |
-| [Hugging Face  to Notion](workflows/hugging-face-to-notion/README.md) | 11 | Available |
-| [Adjust frequency to your own needs](workflows/adjust-frequency-to-your-own-needs/README.md) | 15 | Available |
-| [receive telegram events and addlabels gmail tool and removelabels gmail tool](workflows/receive-telegram-events-and-addlabels-gmail-tool-and-removelabels-gmail-tool/README.md) | 12 | Available |
-| [ImapEmail, XmlToJson, POST-HTTP-Request](workflows/imapemail-xmltojson-post-http-request/README.md) | 5 | Available |
-| [Automating Betting Data Retrieval with TheOddsAPI and Airtable](workflows/automating-betting-data-retrieval-with-theoddsapi-and-airtable/README.md) | 7 | Available |
-| [Self-hosted N8N users only:](workflows/self-hosted-n8n-users-only/README.md) | 3 | Available |
-| [Coinmarketcap Price Agent](workflows/coinmarketcap-price-agent/README.md) | 7 | Available |
-| [split out and http request and write read write file](workflows/split-out-and-http-request-and-write-read-write-file/README.md) | 7 | Available |
-| [notion and dropcontact and receive calendly events](workflows/notion-and-dropcontact-and-receive-calendly-events/README.md) | 3 | Available |
-| [Automate Google Analytics Reporting - AlexK1919](workflows/automate-google-analytics-reporting-alexk1919/README.md) | 19 | Available |
-| [Email Body Screenshot Creation](workflows/email-body-screenshot-creation/README.md) | 19 | Available |
-| [YouTube Videos with AI Summaries on Discord](workflows/youtube-videos-with-ai-summaries-on-discord/README.md) | 7 | Available |
-| [CoinMarketCap_Crypto_Agent_Tool](workflows/coinmarketcap-crypto-agent-tool/README.md) | 10 | Available |
-| [download xml file and parse xml content and create new spreadsheet file](workflows/download-xml-file-and-parse-xml-content-and-create-new-spreadsheet-file/README.md) | 9 | Available |
-| [Click the `Execute Workflow` button and double click on the nodes to see the input and output items.](workflows/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items-6890efd5/README.md) | 10 | Available |
-| [receive google drive events and create database page](workflows/receive-google-drive-events-and-create-database-page/README.md) | 2 | Available |
-| [reach out via email to new form submissions that meet a certain criteria](workflows/reach-out-via-email-to-new-form-submissions-that-meet-a-certain-criteria/README.md) | 7 | Available |
-| [Daily AI News Translation & Summary with GPT-4 and Telegram Delivery](workflows/daily-ai-news-translation-summary-with-gpt-4-and-telegram-delivery/README.md) | 9 | Available |
-| [Backup n8n Workflows to Bitbucket](workflows/backup-n8n-workflows-to-bitbucket/README.md) | 9 | Available |
-| [facebook graph api](workflows/facebook-graph-api/README.md) | 2 | Available |
-| [executequery crate db and crate db](workflows/executequery-crate-db-and-crate-db/README.md) | 4 | Available |
-| [Example Webhook Request](workflows/example-webhook-request/README.md) | 13 | Available |
-| [Create a table and insert data into it](workflows/create-a-table-and-insert-data-into-it/README.md) | 4 | Available |
-| [receive telegram events and connect to graph api and tofile spreadsheet file](workflows/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/README.md) | 10 | Available |
-| [get zendesk and asana and update zendesk](workflows/get-zendesk-and-asana-and-update-zendesk/README.md) | 7 | Available |
-| [n8n and http request and create new file 53093cc6](workflows/n8n-and-http-request-and-create-new-file-53093cc6/README.md) | 21 | Available |
-| [... or watch set up video [13 min]](workflows/or-watch-set-up-video-13-min/README.md) | 22 | Available |
-| [Turn on a light and set its brightness](workflows/turn-on-a-light-and-set-its-brightness/README.md) | 2 | Available |
-| [receive bitbucket events](workflows/receive-bitbucket-events/README.md) | 1 | Available |
-| [YouTube Comment Sentiment Analyzer](workflows/youtube-comment-sentiment-analyzer/README.md) | 14 | Available |
-| [get_a_web_page](workflows/get-a-web-page/README.md) | 3 | Available |
-| [receive form events and score lead with madkudu and emailverifier hunter](workflows/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter/README.md) | 8 | Available |
-| [Finance Literacy Bot - Chatbot w/ Memory](workflows/finance-literacy-bot-chatbot-w-memory/README.md) | 13 | Available |
-| [Chat with local LLMs using n8n and Ollama](workflows/chat-with-local-llms-using-n8n-and-ollama/README.md) | 3 | Available |
-| [list contact keap](workflows/list-contact-keap/README.md) | 2 | Available |
-| [✨🔪 Advanced AI Powered Document Parsing & Text Extraction with Llama Parse](workflows/advanced-ai-powered-document-parsing-text-extraction-with-llama-parse/README.md) | 36 | Available |
-| [Content to 9:16 Aspect Image Generator v1](workflows/content-to-9-16-aspect-image-generator-v1/README.md) | 27 | Available |
-| [Activity Encouragement](workflows/activity-encouragement/README.md) | 6 | Available |
-| [TechCrunch & VentureBeat](workflows/techcrunch-venturebeat/README.md) | 35 | Available |
-| [talk to your sqlite database with a langchain ai agent](workflows/talk-to-your-sqlite-database-with-a-langchain-ai-agent/README.md) | 14 | Available |
-| [list airtable and mailcheck and update airtable](workflows/list-airtable-and-mailcheck-and-update-airtable/README.md) | 4 | Available |
-| [receive schedule events and get hash of contents and notify of change](workflows/receive-schedule-events-and-get-hash-of-contents-and-notify-of-change/README.md) | 10 | Available |
-| [get monitor uptime robot and create monitor uptime robot and update monitor uptime robot](workflows/get-monitor-uptime-robot-and-create-monitor-uptime-robot-and-update-monitor-uptime-robot/README.md) | 3 | Available |
-| [Testing Mulitple Local LLM with LM Studio](workflows/testing-mulitple-local-llm-with-lm-studio/README.md) | 12 | Available |
-| [Onfleet Driver signup message in Slack](workflows/onfleet-driver-signup-message-in-slack/README.md) | 2 | Available |
-| [Create Mailchimp contact based on Squarespace newsletter](workflows/create-mailchimp-contact-based-on-squarespace-newsletter/README.md) | 5 | Available |
-| [clearbit and receive hubspot events and get contact hubspot](workflows/clearbit-and-receive-hubspot-events-and-get-contact-hubspot/README.md) | 4 | Available |
-| [Gmail AI auto-responder: create draft replies to incoming emails](workflows/gmail-ai-auto-responder-create-draft-replies-to-incoming-emails/README.md) | 8 | Available |
-| [get content ideas and generate post with openai and post to twitter](workflows/get-content-ideas-and-generate-post-with-openai-and-post-to-twitter/README.md) | 5 | Available |
-| [🎥 Gemini AI Video Analysis](workflows/gemini-ai-video-analysis/README.md) | 7 | Available |
-| [👆🏽 Set target email here](workflows/set-target-email-here/README.md) | 2 | Available |
-| [create folder microsoft one drive](workflows/create-folder-microsoft-one-drive/README.md) | 2 | Available |
-| [Noco Kanban Board with AI Prioritization](workflows/noco-kanban-board-with-ai-prioritization/README.md) | 22 | Available |
-| [GROQ LLAVA V1.5 7B](workflows/groq-llava-v1-5-7b/README.md) | 6 | Available |
-| [unsubscribe lead lemlist and follow up task and lemlist mark as interested](workflows/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/README.md) | 12 | Available |
-| [open ai assistant and tool calculator and aggregate](workflows/open-ai-assistant-and-tool-calculator-and-aggregate/README.md) | 9 | Available |
-| [Mailchimp](workflows/mailchimp-api-example/README.md) | 2 | Available |
-| [My workflow](workflows/oauth2-settings-finder-with-openrouter-chat-model-and-llama-3-3/README.md) | 5 | Available |
-| [agent and reply gmail and text extract from file](workflows/agent-and-reply-gmail-and-text-extract-from-file/README.md) | 10 | Available |
-| [Upload video to drive via google script](workflows/upload-video-to-drive-via-google-script/README.md) | 3 | Available |
-| [n8n and activate n8n](workflows/n8n-and-activate-n8n/README.md) | 4 | Available |
-| [Sub-workflow: Return the capitals of fictional countries](workflows/sub-workflow-return-the-capitals-of-fictional-countries/README.md) | 13 | Available |
-| [CFP Selection 1](workflows/cfp-selection-1/README.md) | 2 | Available |
-| [cron and http request and mqtt](workflows/cron-and-http-request-and-mqtt/README.md) | 4 | Available |
-| [send email with aws ses](workflows/send-email-with-aws-ses/README.md) | 2 | Available |
-| [Motion-illustration Workflow Generated with Midjourney and Kling API](workflows/motion-illustration-workflow-generated-with-midjourney-and-kling-api/README.md) | 11 | Available |
-| [Receive updates when an event occurs in Taiga](workflows/receive-updates-when-an-event-occurs-in-taiga/README.md) | 1 | Available |
-| [Search for all contacts that last contact date for is known](workflows/search-for-all-contacts-that-last-contact-date-for-is-known/README.md) | 8 | Available |
-| [List existing Snapshots](workflows/list-existing-snapshots/README.md) | 22 | Available |
-| [Setting Up a Workflow for "AI-Powered Children's English Storytelling on Telegram"](workflows/setting-up-a-workflow-for-ai-powered-children-s-english-storytelling-on-telegram/README.md) | 12 | Available |
-| [React to PDFMonkey Callback](workflows/react-to-pdfmonkey-callback/README.md) | 3 | Available |
-| [http request and aws rekognition and append google sheets](workflows/http-request-and-aws-rekognition-and-append-google-sheets/README.md) | 4 | Available |
-| [LINE Assistant with Google Calendar and Gmail Integration](workflows/line-assistant-with-google-calendar-and-gmail-integration/README.md) | 14 | Available |
-| [💡Criteria For Follow Up Candidates](workflows/criteria-for-follow-up-candidates/README.md) | 24 | Available |
-| [Patent Filing Velocity Tracker — Mycroft Agent](workflows/patent-filing-velocity-tracker-mycroft-agent/README.md) | 38 | Available |
-| [write read write file and http request and file conversion to pdf](workflows/write-read-write-file-and-http-request-and-file-conversion-to-pdf/README.md) | 4 | Available |
-| [n8n Subworkflow Dependency Graph & Auto-Tagging](workflows/workflow-dependency-graph/README.md) | 27 | Available |
-| [PREPARATION (in Supabase)](workflows/preparation-in-supabase/README.md) | 16 | Available |
-| [receive schedule events and list channelmessage microsoft teams and team member weekly report agent](workflows/receive-schedule-events-and-list-channelmessage-microsoft-teams-and-team-member-weekly-report-agent/README.md) | 12 | Available |
-| [route items with if conditions](workflows/route-items-with-if-conditions/README.md) | 5 | Available |
-| [A workflow with the Twilio node](workflows/a-workflow-with-the-twilio-node/README.md) | 2 | Available |
-| [Extranet Releases](workflows/extranet-releases/README.md) | 2 | Available |
-| [YT New Video Upload](workflows/yt-new-video-upload/README.md) | 12 | Available |
-| [Receive messages from a queue via RabbitMQ and send an SMS](workflows/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/README.md) | 4 | Available |
-| [receive execute workflow events and get mcp tagged workflows and filter matching ids](workflows/receive-execute-workflow-events-and-get-mcp-tagged-workflows-and-filter-matching-ids/README.md) | 38 | Available |
-| [🔥📈🤖 AI Agent for n8n Creators Leaderboard - Find Popular Workflows](workflows/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/README.md) | 27 | Available |
-| [Build your first AI MCP Server](workflows/build-your-first-ai-mcp-server/README.md) | 22 | Available |
-| [edit file github and get file github and github](workflows/edit-file-github-and-get-file-github-and-github/README.md) | 11 | Available |
-| [Always Authenticate Your Server!](workflows/always-authenticate-your-server-c381ff68/README.md) | 11 | Available |
-| [split out and execute command and receive schedule events](workflows/split-out-and-execute-command-and-receive-schedule-events/README.md) | 7 | Available |
-| [Merge](workflows/write-read-write-file-and-download-first-remote-pdf-file-and-download-second-pdf-file/README.md) | 5 | Available |
-| [Discord MCP Server](workflows/discord-mcp-server/README.md) | 10 | Available |
-| [webhook and mattermost and receive workflow events](workflows/webhook-and-mattermost-and-receive-workflow-events/README.md) | 4 | Available |
-| [create group bitwarden and list member bitwarden and update members group bitwarden](workflows/create-group-bitwarden-and-list-member-bitwarden-and-update-members-group-bitwarden/README.md) | 4 | Available |
-| [Loop over calls for analysis and Create Parent](workflows/loop-over-calls-for-analysis-and-create-parent/README.md) | 18 | Available |
-| [Easily Compare LLMs Using OpenAI and Google Sheets](workflows/easily-compare-llms-using-openai-and-google-sheets/README.md) | 14 | Available |
-| [Mycroft - Forecasting Agent](workflows/mycroft-forecasting-agent/README.md) | 14 | Available |
-| [read binary file and move binary data and execute command](workflows/read-binary-file-and-move-binary-data-and-execute-command/README.md) | 7 | Available |
-| [Auth0 User Login](workflows/auth0-user-login/README.md) | 9 | Available |
-| [Deep Research Report Generation Using Open Router, Google Search, Webhook/Telegram and Notion](workflows/deep-research-report-generation-using-open-router-google-search-webhook-telegram-and-notion/README.md) | 37 | Available |
-| [Generate AI-Ready llms.txt Files from Screaming Frog Website Crawls](workflows/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/README.md) | 12 | Available |
-| [Workflow: Text automations using Apple Shortcuts](workflows/workflow-text-automations-using-apple-shortcuts/README.md) | 8 | Available |
-| [Export WordPress Posts to CSV and Upload to Google Drive](workflows/export-wordpress-posts-to-csv-and-upload-to-google-drive/README.md) | 5 | Available |
-| [Summarize Google Drive Documents with Mistral AI and Send via Gmail](workflows/summarize-google-drive-documents-with-mistral-ai-and-send-via-gmail/README.md) | 5 | Available |
-| [Create, add an attachment, and send a draft using the Microsoft Outlook node](workflows/create-add-an-attachment-and-send-a-draft-using-the-microsoft-outlook-node/README.md) | 5 | Available |
-| [delete google sheets and append google sheets and google sheets](workflows/delete-google-sheets-and-append-google-sheets-and-google-sheets/README.md) | 14 | Available |
-| [GitHub Commit Velocity Tracker](workflows/github-activity-monitor/README.md) | 22 | Available |
-| [Save new Files received on Telegram to Google Drive](workflows/save-new-files-received-on-telegram-to-google-drive/README.md) | 3 | Available |
-| [list contact hubspot and list person pipedrive and hubspot](workflows/list-contact-hubspot-and-list-person-pipedrive-and-hubspot/README.md) | 5 | Available |
-| [[📺Complete Tutorial]({{ $env.WEBHOOK_URL }}](workflows/complete-tutorial-env-webhook-url/README.md) | 10 | Available |
-| [Create Nextcloud Deck card from email](workflows/create-nextcloud-deck-card-from-email/README.md) | 3 | Available |
-| [when clicking test workflow](workflows/when-clicking-test-workflow/README.md) | 4 | Available |
-| [AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack](workflows/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/README.md) | 21 | Available |
-| [search salesforce accounts and removeduplicates item lists and set account id for existing accounts](workflows/search-salesforce-accounts-and-removeduplicates-item-lists-and-set-account-id-for-existing-accounts/README.md) | 13 | Available |
-| [Microsoft Outlook AI Email Assistant](workflows/microsoft-outlook-ai-email-assistant/README.md) | 20 | Available |
-| [MAIA - Health Check](workflows/maia-health-check/README.md) | 5 | Available |
-| [post to wallabag](workflows/post-to-wallabag/README.md) | 10 | Available |
-| [read binary file](workflows/read-binary-file/README.md) | 2 | Available |
-| [Update Roles by Excel](workflows/update-roles-by-excel/README.md) | 8 | Available |
-| [New member or Member left](workflows/new-member-or-member-left/README.md) | 21 | Available |
-| [Very often your data is not in the right format to insert in a node. you can use the set node to fix it.](workflows/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/README.md) | 4 | Available |
-| [Main workflow: AI agent using custom tool](workflows/main-workflow-ai-agent-using-custom-tool-49809ec1/README.md) | 8 | Available |
-| [Parents smart bot](workflows/parents-smart-bot/README.md) | 27 | Available |
-| [TopSourcer - Finds LinkedIn Profiles using natural language](workflows/topsourcer-finds-linkedin-profiles-using-natural-language/README.md) | 12 | Available |
-| [🔍🛠️Generate SEO-Optimized WordPress Content with Perplexity Research](workflows/generate-seo-optimized-wordpress-content-with-perplexity-research/README.md) | 18 | Available |
-| [MarketMind - Run Analysis (Webhook)](workflows/marketmind-run-analysis-webhook/README.md) | 5 | Available |
-| [n8n Community Topic Tracker by Keyword](workflows/n8n-community-topic-tracker-by-keyword/README.md) | 7 | Available |
-| [Mycroft - Patent Intelligence Agent](workflows/mycroft-patent-intelligence-agent/README.md) | 15 | Available |
-| [🤖Calendar Agent](workflows/calendar-agent/README.md) | 10 | Available |
-| [Monthly Spotify Track Archiving and Playlist Classification](workflows/monthly-spotify-track-archiving-and-playlist-classification/README.md) | 30 | Available |
-| [list zoho crm](workflows/list-zoho-crm/README.md) | 2 | Available |
-| [Complete Guide to Setting Up and Generating TOTP Codes in n8n 🔐](workflows/complete-guide-to-setting-up-and-generating-totp-codes-in-n8n/README.md) | 2 | Available |
-| [SQL agent with memory](workflows/sql-agent-with-memory/README.md) | 10 | Available |
-| [Use this to get all your contacts 👉](workflows/use-this-to-get-all-your-contacts/README.md) | 7 | Available |
-| [AI Talent Intelligence Agent](workflows/ai-talent-intelligence-agent/README.md) | 16 | Available |
-| [Auto-Tag Blog Posts in WordPress with AI](workflows/auto-tag-blog-posts-in-wordpress-with-ai/README.md) | 22 | Available |
-| [Enrich new Discourse members then notify in Slack for high value leads](workflows/enrich-new-discourse-members-then-notify-in-slack-for-high-value-leads/README.md) | 7 | Available |
-| [WooCommerce AI Chatbot Workflow for Post-Sales Support](workflows/woocommerce-ai-chatbot-workflow-for-post-sales-support/README.md) | 26 | Available |
-| [OpenAI Personal Shopper with RAG and WooCommerce](workflows/openai-personal-shopper-with-rag-and-woocommerce/README.md) | 21 | Available |
-| [read binary files](workflows/read-binary-files/README.md) | 2 | Available |
-| [What-If Simulation Agent](workflows/what-if-simulation-agent/README.md) | 13 | Available |
-| [Create Google Drive Folders by Path](workflows/create-google-drive-folders-by-path/README.md) | 11 | Available |
-| [receive aws sns events](workflows/receive-aws-sns-events/README.md) | 1 | Available |
-| [Restaurant Agent](workflows/restaurant-agent/README.md) | 12 | Available |
-| [Automated Work Attendance with Location Triggers](workflows/automated-work-attendance-with-location-triggers/README.md) | 7 | Available |
-| [Gmail PDF Invoice/Receipt Classifier & Google Drive Uploader (via n8n & OpenAI)](workflows/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/README.md) | 18 | Available |
-| [Invite users to n8n from Google sheets](workflows/invite-users-to-n8n-from-google-sheets/README.md) | 9 | Available |
-| [Get all scaleway server info copy](workflows/get-all-scaleway-server-info-copy/README.md) | 21 | Available |
-| [🗨️Ollama Chat](workflows/ollama-chat/README.md) | 6 | Available |
-| [Upload a file and get a list of all the files in a bucket](workflows/upload-a-file-and-get-a-list-of-all-the-files-in-a-bucket/README.md) | 4 | Available |
-| [Custom Branded n8n Chatbot](workflows/custom-branded-n8n-chatbot/README.md) | 17 | Available |
-| [create database page and list database page notion and update database page notion](workflows/create-database-page-and-list-database-page-notion-and-update-database-page-notion/README.md) | 10 | Available |
-| [Create a table, and insert and update data in the table in Snowflake](workflows/create-a-table-and-insert-and-update-data-in-the-table-in-snowflake/README.md) | 6 | Available |
-| [x402](workflows/x402/README.md) | 10 | Available |
-| [Chunk the transcript into several parts, and refine-summarize it](workflows/chunk-the-transcript-into-several-parts-and-refine-summarize-it/README.md) | 14 | Available |
-| [Telegram Tron Wallet Blacklist Checker](workflows/telegram-tron-wallet-blacklist-checker/README.md) | 6 | Available |
-| [backup n8n workflows to google drive](workflows/backup-n8n-workflows-to-google-drive/README.md) | 18 | Available |
-| [get user zendesk and update ticket hubspot and update zendesk](workflows/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk/README.md) | 13 | Available |
-| [email read imap and next cloud](workflows/email-read-imap-and-next-cloud/README.md) | 3 | Available |
-| [Insert and update data in Airtable](workflows/insert-and-update-data-in-airtable/README.md) | 6 | Available |
-| [Part1 -Investor_ Agent](workflows/part1-investor-agent/README.md) | 9 | Available |
-| [write read write file and http request](workflows/write-read-write-file-and-http-request/README.md) | 4 | Available |
-| [Create a company in Salesmate](workflows/create-a-company-in-salesmate/README.md) | 2 | Available |
-| [RSS to Telegram](workflows/rss-to-telegram/README.md) | 7 | Available |
-| [... or watch set up video [10 min]](workflows/or-watch-set-up-video-10-min/README.md) | 9 | Available |
-| [👆🏽 Adjust error message here](workflows/adjust-error-message-here/README.md) | 3 | Available |
-| [rss feed read](workflows/rss-feed-read/README.md) | 2 | Available |
-| [URL Pinger](workflows/url-pinger/README.md) | 4 | Available |
-| [send email via gmail on workflow error](workflows/send-email-via-gmail-on-workflow-error/README.md) | 8 | Available |
-| [Analyze a URL and get the job details using the Cortex node](workflows/analyze-a-url-and-get-the-job-details-using-the-cortex-node/README.md) | 3 | Available |
-| [Business WhatsApp AI RAG Chatbot](workflows/business-whatsapp-ai-rag-chatbot/README.md) | 18 | Available |
-| [Sync Discord scheduled events to Google Calendar](workflows/sync-discord-scheduled-events-to-google-calendar/README.md) | 7 | Available |
-| [Send financial metrics monthly to Mattermost](workflows/send-financial-metrics-monthly-to-mattermost/README.md) | 3 | Available |
-| [Gmail API Credentials](workflows/gmail-api-credentials/README.md) | 9 | Available |
-| [Search & Summarize Web Data with Perplexity, Gemini AI & Bright Data to Webhooks](workflows/search-summarize-web-data-with-perplexity-gemini-ai-bright-data-to-webhooks/README.md) | 15 | Available |
-| [Events Webhook Trigger](workflows/events-webhook-trigger-3d11dc3b/README.md) | 45 | Available |
-| [http request and deep l](workflows/http-request-and-deep-l/README.md) | 2 | Available |
-| [Dynamic Form with AI](workflows/dynamic-form-with-ai/README.md) | 11 | Available |
-| [Discord AI bot](workflows/discord-ai-bot/README.md) | 9 | Available |
-| [Youtube Searcher](workflows/youtube-searcher/README.md) | 19 | Available |
-| [on clicking execute](workflows/on-clicking-execute/README.md) | 4 | Available |
-| [CoinMarketCap_DEXScan_Agent_Tool](workflows/coinmarketcap-dexscan-agent-tool/README.md) | 12 | Available |
-| [Error Alert and Summarizer](workflows/error-alert-and-summarizer/README.md) | 11 | Available |
-| [Replace API key for Fireflies](workflows/replace-api-key-for-fireflies/README.md) | 10 | Available |
-| [Pyragogy AI Village - Orchestrazione Master (Architettura Profonda V2)](workflows/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2-d7ff69e3/README.md) | 36 | Available |
-| [N8N Workflow: AI-Enhanced Image Processing and Communication](workflows/n8n-workflow-ai-enhanced-image-processing-and-communication/README.md) | 5 | Available |
-| [format and transform date time](workflows/format-and-transform-date-time/README.md) | 2 | Available |
-| [subtract date time and 1st of every month at 8am and list google calendar](workflows/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/README.md) | 13 | Available |
-| [New WooCommerce product to Slack](workflows/new-woocommerce-product-to-slack/README.md) | 2 | Available |
-| [[3/3] Anomaly detection tool (crops dataset)](workflows/3-3-anomaly-detection-tool-crops-dataset/README.md) | 9 | Available |
-| [Handle Retell's Inbound call webhooks](workflows/handle-retell-s-inbound-call-webhooks/README.md) | 3 | Available |
-| [Github Workflow](workflows/list-release-github-and-cron-and-gitlab/README.md) | 7 | Available |
-| [DeepSeek v3.1](workflows/deepseek-v3-1/README.md) | 8 | Available |
-| [Student Assistant Automation System](workflows/student-assistant-automation-system/README.md) | 16 | Available |
-| [Product Data Processing](workflows/product-data-processing/README.md) | 14 | Available |
-| [Daily meetings summarization with Gemini AI](workflows/daily-meetings-summarization-with-gemini-ai/README.md) | 5 | Available |
-| [Create a new issue in Jira](workflows/create-a-new-issue-in-jira/README.md) | 2 | Available |
-| [Default frequency: every hour](workflows/default-frequency-every-hour/README.md) | 12 | Available |
-| [Material Issue Request and Approval](workflows/material-issue-request-and-approval/README.md) | 48 | Available |
-| [crypto market alert system with binance and telegram integration](workflows/crypto-market-alert-system-with-binance-and-telegram-integration/README.md) | 6 | Available |
-| [Calculate the Centroid of a Set of Vectors](workflows/calculate-the-centroid-of-a-set-of-vectors/README.md) | 4 | Available |
-| [list mautic](workflows/list-mautic/README.md) | 2 | Available |
-| [BillBot](workflows/billbot/README.md) | 6 | Available |
-| [cron and baserow and fetch tradegate stock page](workflows/cron-and-baserow-and-fetch-tradegate-stock-page/README.md) | 9 | Available |
-| [The incoming message from the webhook is queried from the Supabase Vector Store.  The response is provided in the response webhook.](workflows/the-incoming-message-from-the-webhook-is-queried-from-the-supabase-vector-store-the-response-is-provided-in-th/README.md) | 14 | Available |
-| [📬 Workflow: Transparent Tracking Pixel for Email Open Detection](workflows/workflow-transparent-tracking-pixel-for-email-open-detection/README.md) | 5 | Available |
-| [Workflow dashboard with mermaid.js](workflows/workflow-dashboard-with-mermaid-js/README.md) | 11 | Available |
-| [open weather map and webhook 6920b5f5](workflows/open-weather-map-and-webhook-6920b5f5/README.md) | 4 | Available |
-| [Type a Keyword and Discover What People Search on Google](workflows/type-a-keyword-and-discover-what-people-search-on-google/README.md) | 8 | Available |
-| [Automate Content Generator for WordPress with DeepSeek R1](workflows/automate-content-generator-for-wordpress-with-deepseek-r1/README.md) | 10 | Available |
-| [receive schedule events and list issuecomment jira and update jira](workflows/receive-schedule-events-and-list-issuecomment-jira-and-update-jira/README.md) | 29 | Available |
-| [Here you can modify the prompt](workflows/here-you-can-modify-the-prompt/README.md) | 13 | Available |
-| [🤖Contact Agent](workflows/contact-agent/README.md) | 7 | Available |
-| [receive eventbrite events](workflows/receive-eventbrite-events/README.md) | 1 | Available |
-| [http request and get mailbox ids and split out](workflows/http-request-and-get-mailbox-ids-and-split-out/README.md) | 9 | Available |
-| [Amazon Product Price Tracker](workflows/amazon-product-price-tracker/README.md) | 14 | Available |
-| [Slack POSTs to Webhook on every message so we need to filter-out bot messages](workflows/slack-posts-to-webhook-on-every-message-so-we-need-to-filter-out-bot-messages/README.md) | 9 | Available |
-| [AI powered SEO Keyword Research Automation - The vibe Marketer](workflows/ai-powered-seo-keyword-research-automation-the-vibe-marketer/README.md) | 26 | Available |
-| [Read RSS feed from two different sources](workflows/read-rss-feed-from-two-different-sources/README.md) | 4 | Available |
-| [Generate SQL queries from schema only - AI-powered](workflows/generate-sql-queries-from-schema-only-ai-powered/README.md) | 20 | Available |
-| [Create a new customer in Chargebee](workflows/create-a-new-customer-in-chargebee/README.md) | 2 | Available |
-| [request youtube transcript and summarization of a youtube script and receive form events](workflows/request-youtube-transcript-and-summarization-of-a-youtube-script-and-receive-form-events/README.md) | 5 | Available |
-| [Crypto News & Sentiment](workflows/crypto-news-sentiment/README.md) | 20 | Available |
-| [api to check existing merge request and create new merge request and api to close existing merge request](workflows/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/README.md) | 10 | Available |
-| [Retry Execution Hourly](workflows/retry-execution-hourly/README.md) | 9 | Available |
-| [insert mongo db](workflows/insert-mongo-db/README.md) | 3 | Available |
-| [Extract & Summarize Wikipedia Data with Bright Data and Gemini AI](workflows/extract-summarize-wikipedia-data-with-bright-data-and-gemini-ai/README.md) | 8 | Available |
-| [http request and get file github and n8n workflow detail](workflows/http-request-and-get-file-github-and-n8n-workflow-detail/README.md) | 16 | Available |
-| [Build an MCP Server with Google Calendar](workflows/build-an-mcp-server-with-google-calendar/README.md) | 10 | Available |
-| [💫 To setup this template](workflows/to-setup-this-template/README.md) | 7 | Available |
-| [Q. Do I need to analyse Brand Voice for every article?](workflows/q-do-i-need-to-analyse-brand-voice-for-every-article/README.md) | 18 | Available |
-| [Email verification with Icypeas (single)](workflows/email-verification-with-icypeas-single/README.md) | 3 | Available |
-| [when clicking execute workflow](workflows/when-clicking-execute-workflow/README.md) | 4 | Available |
-| [[n8n] YouTube Channel Advanced RSS Feeds Generator](workflows/n8n-youtube-channel-advanced-rss-feeds-generator/README.md) | 18 | Available |
-| [Write a WordPress post with AI (starting from a few keywords)](workflows/write-a-wordpress-post-with-ai-starting-from-a-few-keywords/README.md) | 15 | Available |
-| [agent and receive telegram events and telegram](workflows/agent-and-receive-telegram-events-and-telegram/README.md) | 4 | Available |
-| [(G) LineChatBot + Google Sheets (as a memory)](workflows/g-linechatbot-google-sheets-as-a-memory/README.md) | 9 | Available |
-| [Telegram channel to Readeck & Hoarder](workflows/telegram-channel-to-readeck-hoarder/README.md) | 12 | Available |
-| [All-in-One Telegram/Baserow AI Assistant 🤖🧠 Voice/Photo/Save Notes/Long Term Mem](workflows/all-in-one-telegram-baserow-ai-assistant-voice-photo-save-notes-long-term-mem/README.md) | 28 | Available |
-| [Generate SEO Seed Keywords Using AI](workflows/generate-seo-seed-keywords-using-ai/README.md) | 7 | Available |
-| [Linkedin Chrome Extensions](workflows/linkedin-chrome-extensions/README.md) | 8 | Available |
-| [Send a message on Twake](workflows/send-a-message-on-twake/README.md) | 2 | Available |
-| [PG&E Daily Cost Tracker](workflows/pg-e-daily-cost-tracker/README.md) | 14 | Available |
-| [On new Stripe Invoice Payment update Hubspot and notify the team in Slack](workflows/on-new-stripe-invoice-payment-update-hubspot-and-notify-the-team-in-slack/README.md) | 8 | Available |
-| [Triggered from Slack Parent Workflow](workflows/triggered-from-slack-parent-workflow/README.md) | 14 | Available |
-| [Latest company news before a call](workflows/latest-company-news-before-a-call/README.md) | 9 | Available |
-| [receive google drive events and list aws s3 and upload aws s3](workflows/receive-google-drive-events-and-list-aws-s3-and-upload-aws-s3/README.md) | 4 | Available |
-| [[2/3] Set up medoids (2 types) for anomaly detection (crops dataset)](workflows/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/README.md) | 26 | Available |
-| [pdf extract from file and create airtable and text classifier](workflows/pdf-extract-from-file-and-create-airtable-and-text-classifier/README.md) | 11 | Available |
-| [cockpit api example](workflows/cockpit-api-example/README.md) | 2 | Available |
-| [[n8n] - Shopify Orders to D365 Business Central Sales Orders / Sales Invoices](workflows/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/README.md) | 31 | Available |
-| [Rapid ETL: HTTP -> Transform -> Deliver](workflows/rapid-etl-http-transform-deliver/README.md) | 4 | Available |
-| [Get SSL Certificate](workflows/get-ssl-certificate/README.md) | 5 | Available |
-| [Sync Jira issues with subsequent comments to Notion database](workflows/sync-jira-issues-with-subsequent-comments-to-notion-database/README.md) | 9 | Available |
-| [Get PDF with JSReport](workflows/get-pdf-with-jsreport/README.md) | 3 | Available |
-| [receive postgres events and filter and appendorupdate google sheets](workflows/receive-postgres-events-and-filter-and-appendorupdate-google-sheets/README.md) | 5 | Available |
-| [webhook and http request and html extract](workflows/webhook-and-http-request-and-html-extract/README.md) | 7 | Available |
-| [🙋‍♂️ Why not just use the built-in PDF convertor?](workflows/why-not-just-use-the-built-in-pdf-convertor/README.md) | 17 | Available |
-| [Lead Generation System (Template)](workflows/lead-generation-system-template/README.md) | 5 | Available |
-| [Receive updates when a sale is made in Gumroad](workflows/receive-updates-when-a-sale-is-made-in-gumroad/README.md) | 1 | Available |
-| [Slack-GitHub User Info](workflows/slack-github-user-info/README.md) | 4 | Available |
-| [Merge PDFs](workflows/merge-pdfs/README.md) | 7 | Available |
-| [http request and receive form events and append google sheets](workflows/http-request-and-receive-form-events-and-append-google-sheets/README.md) | 11 | Available |
-| [Congratulations Workflow](workflows/cron-and-google-sheets-and-twilio/README.md) | 8 | Available |
-| [sum numeric item values](workflows/sum-numeric-item-values/README.md) | 3 | Available |
-| [Generate Text-to-Speech Using Elevenlabs via API](workflows/generate-text-to-speech-using-elevenlabs-via-api/README.md) | 5 | Available |
-| [receive telegram events and telegram and return no sticker found](workflows/receive-telegram-events-and-telegram-and-return-no-sticker-found/README.md) | 4 | Available |
-| [MiniBear Webhook](workflows/minibear-webhook/README.md) | 27 | Available |
-| [receive chat events and tool serp api and agent](workflows/receive-chat-events-and-tool-serp-api-and-agent/README.md) | 5 | Available |
-| [Create/update Mautic contact on a new Calendly event](workflows/create-update-mautic-contact-on-a-new-calendly-event/README.md) | 2 | Available |
-| [reddit and get reddit](workflows/reddit-and-get-reddit/README.md) | 4 | Available |
-| [Airtable markdown to html](workflows/airtable-markdown-to-html/README.md) | 8 | Available |
-| [telegram and transcribe audio open ai and receive gmail events](workflows/telegram-and-transcribe-audio-open-ai-and-receive-gmail-events/README.md) | 17 | Available |
-| [Fan-Out Broadcast and Merge](workflows/fan-out-broadcast-and-merge/README.md) | 6 | Available |
-| [Unnamed Workflow](workflows/manual-trigger-starter/README.md) | 2 | Available |
-| [go to webinar and update webinar go to webinar and create webinar go to webinar](workflows/go-to-webinar-and-update-webinar-go-to-webinar-and-create-webinar-go-to-webinar/README.md) | 3 | Available |
-| [Send daily weather updates via a message using the Gotify node](workflows/send-daily-weather-updates-via-a-message-using-the-gotify-node/README.md) | 3 | Available |
-| [Get and prepare Dummy Data](workflows/get-and-prepare-dummy-data/README.md) | 16 | Available |
-| [Check if incoming email is about appointment](workflows/check-if-incoming-email-is-about-appointment/README.md) | 8 | Available |
-| [monday com and receive mautic events](workflows/monday-com-and-receive-mautic-events/README.md) | 2 | Available |
-| [puq-docker-n8n-deploy](workflows/puq-docker-n8n-deploy/README.md) | 33 | Available |
-| [OpenSea Analytics Agent Tool](workflows/opensea-analytics-agent-tool/README.md) | 9 | Available |
-| [mattermost and detectsentiment aws comprehend and receive typeform events](workflows/mattermost-and-detectsentiment-aws-comprehend-and-receive-typeform-events/README.md) | 5 | Available |
-| [Syncro Status Update Clockify](workflows/syncro-status-update-clockify/README.md) | 6 | Available |
-| [modelo do chatbot](workflows/modelo-do-chatbot/README.md) | 11 | Available |
-| [webhook and function item and http request](workflows/webhook-and-function-item-and-http-request/README.md) | 8 | Available |
-| [receive typeform events and api template io](workflows/receive-typeform-events-and-api-template-io/README.md) | 2 | Available |
-| [aws transcribe and list aws s3](workflows/aws-transcribe-and-list-aws-s3/README.md) | 3 | Available |
-| [Automate instagram posts with Google Drive, AI Captions & Facebook Graph API Agent (Easy to Set-Up)](workflows/automate-instagram-posts-with-google-drive-ai-captions-facebook-graph-api-agent-easy-to-set-up/README.md) | 6 | Available |
-| [append google sheets and read json file and move binary data 2](workflows/append-google-sheets-and-read-json-file-and-move-binary-data-2/README.md) | 3 | Available |
-| [Trigger workflow every 48 hours](workflows/trigger-workflow-every-48-hours/README.md) | 6 | Available |
-| [upload ftp and list ftp and http request](workflows/upload-ftp-and-list-ftp-and-http-request/README.md) | 4 | Available |
-| [Hacker News AI Tracker](workflows/hacker-news-ai-tracker/README.md) | 13 | Available |
-| [Check To Do on Notion and send message on Slack](workflows/check-to-do-on-notion-and-send-message-on-slack/README.md) | 6 | Available |
-| [cron and list airtable and sendphoto telegram](workflows/cron-and-list-airtable-and-sendphoto-telegram/README.md) | 15 | Available |
-| [RAG on living data](workflows/rag-on-living-data/README.md) | 19 | Available |
-| [Live link checker](workflows/live-link-checker/README.md) | 9 | Available |
-| [n8napi-check-workflow-which-model-is-using](workflows/n8napi-check-workflow-which-model-is-using/README.md) | 9 | Available |
-| [Bitrix24 Open Chanel RAG Chatbot Application Workflow example with Webhook Integration](workflows/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/README.md) | 33 | Available |
-| [clearbit and searchbydomain company hubspot and hubspot](workflows/clearbit-and-searchbydomain-company-hubspot-and-hubspot/README.md) | 12 | Available |
-| [Get all the stories starting with `release` and publish them](workflows/get-all-the-stories-starting-with-release-and-publish-them/README.md) | 3 | Available |
-| [Get companies from database](workflows/get-companies-from-database/README.md) | 28 | Available |
-| [Customer Experience Agent (AI)](workflows/customer-experience-agent-ai/README.md) | 16 | Available |
-| [Find a different ideal buyer:](workflows/find-a-different-ideal-buyer/README.md) | 9 | Available |
-| [webhook and create grist and grist](workflows/webhook-and-create-grist-and-grist/README.md) | 5 | Available |
-| [SHEETS RAG](workflows/sheets-rag/README.md) | 20 | Available |
-| [Retrieve the playlists you want to synchronise](workflows/retrieve-the-playlists-you-want-to-synchronise/README.md) | 9 | Available |
-| [cron and google sheets and mattermost](workflows/cron-and-google-sheets-and-mattermost/README.md) | 3 | Available |
-| [New WooCommerce order to Slack](workflows/new-woocommerce-order-to-slack/README.md) | 3 | Available |
-| [Simple conversion to XML](workflows/simple-conversion-to-xml/README.md) | 11 | Available |
-| [Create a customer and add them to a segment in Customer.io](workflows/create-a-customer-and-add-them-to-a-segment-in-customer-io/README.md) | 3 | Available |
-| [NeurochainAI Basic API Integration](workflows/neurochainai-basic-api-integration/README.md) | 20 | Available |
-| [Linkedin to Airtable](workflows/linkedin-to-airtable/README.md) | 7 | Available |
-| [form and join beta testers and receive form events](workflows/form-and-join-beta-testers-and-receive-form-events/README.md) | 8 | Available |
-| [receive form events and emailverifier hunter and clearbit](workflows/receive-form-events-and-emailverifier-hunter-and-clearbit/README.md) | 13 | Available |
-| [Add subscriber to form, create tag and subscriber to the tag](workflows/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/README.md) | 4 | Available |
-| [Auto Categorise Outlook Emails with AI](workflows/auto-categorise-outlook-emails-with-ai/README.md) | 26 | Available |
-| [HR & IT Helpdesk Chatbot with Audio Transcription](workflows/hr-it-helpdesk-chatbot-with-audio-transcription/README.md) | 21 | Available |
-| [receive schedule events and markdown and removeitemsseeninpreviousexecutions remove duplicates](workflows/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/README.md) | 8 | Available |
-| [AI Social Media Caption Creator](workflows/ai-social-media-caption-creator/README.md) | 9 | Available |
-| [Telegram AI-bot](workflows/telegram-ai-bot/README.md) | 12 | Available |
-| [Always Authenticate Your Server!](workflows/always-authenticate-your-server-4f28d5b3/README.md) | 11 | Available |
-| [chrome extension backend with AI](workflows/chrome-extension-backend-with-ai/README.md) | 3 | Available |
-| [receive shopify events and create new deal and search hubspot](workflows/receive-shopify-events-and-create-new-deal-and-search-hubspot/README.md) | 8 | Available |
-| [Thie workflow showcases how you can build a simple website monitoring service using Scheduled Triggers and the HTTP Requests node.](workflows/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/README.md) | 10 | Available |
-| [post sales receipt and get quickbooks customer and get stripe customer](workflows/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/README.md) | 10 | Available |
-| [Retail Investor Anxiety Index](workflows/investor-sentiment-dashboard/README.md) | 30 | Available |
-| [get node types and split out and aggregate](workflows/get-node-types-and-split-out-and-aggregate/README.md) | 12 | Available |
-| [Receive updates when a customer is created in HelpScout](workflows/receive-updates-when-a-customer-is-created-in-helpscout/README.md) | 1 | Available |
-| [Wordpress-to-csv](workflows/wordpress-to-csv/README.md) | 4 | Available |
-| [📄✨ Easy Wordpress Content Creation from PDF Document + Human In The Loop with Gmail Approval](workflows/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/README.md) | 19 | Available |
-| [write read write file and download xlsx file and file conversion to pdf](workflows/write-read-write-file-and-download-xlsx-file-and-file-conversion-to-pdf/README.md) | 4 | Available |
-| [Grab recent drink data](workflows/grab-recent-drink-data/README.md) | 16 | Available |
-| [Porxmox Custom AI Agent](workflows/porxmox-custom-ai-agent/README.md) | 27 | Available |
-| [Confirm the key names and column references](workflows/confirm-the-key-names-and-column-references/README.md) | 12 | Available |
-| [aws rekognition and http request and append google sheets](workflows/aws-rekognition-and-http-request-and-append-google-sheets/README.md) | 6 | Available |
-| [Send daily weather updates via a push notification using Spontit](workflows/send-daily-weather-updates-via-a-push-notification-using-spontit/README.md) | 3 | Available |
-| [Building RAG Chatbot for Movie Recommendations with Qdrant and Open AI](workflows/building-rag-chatbot-for-movie-recommendations-with-qdrant-and-open-ai/README.md) | 25 | Available |
-| [Web Server Monitor.](workflows/web-server-monitor/README.md) | 6 | Available |
-| [google sheets and limit and analyze image open ai](workflows/google-sheets-and-limit-and-analyze-image-open-ai/README.md) | 11 | Available |
-| [Automate Event Creation in Google Calendar from Google Sheets](workflows/automate-event-creation-in-google-calendar-from-google-sheets/README.md) | 3 | Available |
-| [extracthtmlcontent html and http request and item lists](workflows/extracthtmlcontent-html-and-http-request-and-item-lists/README.md) | 9 | Available |
-| [i cal and email send](workflows/i-cal-and-email-send/README.md) | 3 | Available |
-| [FORECASTING](workflows/market-data-and-sentiment-forecast-review/README.md) | 14 | Available |
-| [If time available Respond](workflows/if-time-available-respond/README.md) | 55 | Available |
-| [Search LinkedIn companies and add them to Airtable CRM](workflows/search-linkedin-companies-and-add-them-to-airtable-crm/README.md) | 10 | Available |
-| [✨🩷Automated Social Media Content Publishing Factory + System Prompt Composition](workflows/automated-social-media-content-publishing-factory-system-prompt-composition/README.md) | 57 | Available |
-| [Keep discord clean](workflows/keep-discord-clean/README.md) | 10 | Available |
-| [YouTube Video Transcriber](workflows/youtube-video-transcriber/README.md) | 9 | Available |
-| [Compare 2 SQL datasets](workflows/compare-2-sql-datasets/README.md) | 5 | Available |
-| [Create a post and update the post in WordPress](workflows/create-a-post-and-update-the-post-in-wordpress/README.md) | 3 | Available |
-| [Domain scan with Icypeas (bulk search)](workflows/domain-scan-with-icypeas-bulk-search/README.md) | 4 | Available |
-| [Google Calendar Event Reminder](workflows/google-calendar-event-reminder/README.md) | 6 | Available |
-| [PostgreSQL export to CSV](workflows/postgresql-export-to-csv/README.md) | 4 | Available |
-| [My workflow 4](workflows/rss-feed-times-of-india-and-list-gmail-and-list-todoist/README.md) | 7 | Available |
-| [🔍🛠️ Tavily Search & Extract - Template](workflows/tavily-search-extract-template/README.md) | 10 | Available |
-| [My workflow](workflows/email-send-and-read-binary-file-and-spreadsheet-file/README.md) | 6 | Available |
-| [dropbox and http request and list folder dropbox](workflows/dropbox-and-http-request-and-list-folder-dropbox/README.md) | 5 | Available |
-| [receive typeform events and register demio](workflows/receive-typeform-events-and-register-demio/README.md) | 2 | Available |
-| [HUBSPOT LIFECYCLESTAGE (LEAD STATUS)](workflows/hubspot-lifecyclestage-lead-status/README.md) | 18 | Available |
-| [My workflow](workflows/get-financial-overview1-and-get-income-statement1-and-google-search-patent/README.md) | 12 | Available |
-| [Remove Advanced Background from Google Drive Images](workflows/remove-advanced-background-from-google-drive-images/README.md) | 12 | Available |
-| [Test the workflow with this email!](workflows/test-the-workflow-with-this-email/README.md) | 7 | Available |
-| [Configure influencer profile](workflows/configure-influencer-profile/README.md) | 6 | Available |
-| [AI Telegram Bot with Supabase memory](workflows/ai-telegram-bot-with-supabase-memory/README.md) | 10 | Available |
-| [Clone this spreadsheet](workflows/clone-this-spreadsheet/README.md) | 9 | Available |
-| [Workflow Importer](workflows/workflow-importer/README.md) | 37 | Available |
-| [Way 1 - We call the subworklow for each file in the specified folder](workflows/way-1-we-call-the-subworklow-for-each-file-in-the-specified-folder/README.md) | 14 | Available |
-| [telegram and list noco db and receive telegram events](workflows/telegram-and-list-noco-db-and-receive-telegram-events/README.md) | 17 | Available |
-| [Integrating AI with Open-Meteo API for Enhanced Weather Forecasting](workflows/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/README.md) | 6 | Available |
-| [Perplexity Researcher](workflows/perplexity-researcher/README.md) | 4 | Available |
-| [receive autopilot events and append airtable](workflows/receive-autopilot-events-and-append-airtable/README.md) | 3 | Available |
-| [webhook and append airtable and open weather map](workflows/webhook-and-append-airtable-and-open-weather-map/README.md) | 5 | Available |
-| [MISCELLANEOUS AI TOOLS](workflows/miscellaneous-ai-tools/README.md) | 97 | Available |
-| [Google Page Entity Extraction Template](workflows/google-page-entity-extraction-template/README.md) | 5 | Available |
-| [Create a new card in Trello](workflows/create-a-new-card-in-trello/README.md) | 2 | Available |
-| [AI CV Screening Workflow](workflows/ai-cv-screening-workflow/README.md) | 7 | Available |
-| [High-Level Service Page SEO Blueprint Report](workflows/high-level-service-page-seo-blueprint-report/README.md) | 32 | Available |
-| [Tools / Backup Gitlab](workflows/tools-backup-gitlab/README.md) | 7 | Available |
-| [Backup workflows to git repository](workflows/backup-workflows-to-git-repository/README.md) | 10 | Available |
-| [POC - Chatbot Order by Sheet Data](workflows/poc-chatbot-order-by-sheet-data/README.md) | 8 | Available |
-| [RAG AI Agent with Milvus and Cohere](workflows/rag-ai-agent-with-milvus-and-cohere/README.md) | 13 | Available |
-| [Send Emails from Obsidian](workflows/send-emails-from-obsidian/README.md) | 13 | Available |
-| [html extract and cron and function item](workflows/html-extract-and-cron-and-function-item/README.md) | 25 | Available |
-| [OpenSea AI-Powered Insights via Telegram](workflows/opensea-ai-powered-insights-via-telegram/README.md) | 10 | Available |
-| [RAG & GenAI App With WordPress Content](workflows/rag-genai-app-with-wordpress-content/README.md) | 45 | Available |
-| [receive lemlist events and mattermost](workflows/receive-lemlist-events-and-mattermost/README.md) | 2 | Available |
-| [AI-Powered Short-Form Video Generator with OpenAI, Flux, Kling, and ElevenLabs and upload to all social networks](workflows/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/README.md) | 43 | Available |
-| [Replace Mapbox public key - <your_public_key> in code](workflows/replace-mapbox-public-key-your-public-key-in-code/README.md) | 30 | Available |
-| [hacker news and split out and qdrant vector store](workflows/hacker-news-and-split-out-and-qdrant-vector-store/README.md) | 23 | Available |
-| [Look up a person using their email in Clearbit](workflows/look-up-a-person-using-their-email-in-clearbit/README.md) | 2 | Available |
-| [Capture Website Screenshots with Bright Data Web Unlocker and Save to Disk](workflows/capture-website-screenshots-with-bright-data-web-unlocker-and-save-to-disk/README.md) | 4 | Available |
-| [Send log entries to BetterStack](workflows/send-log-entries-to-betterstack/README.md) | 4 | Available |
-| [Schedule Mon - Friday @ 09:00am](workflows/schedule-mon-friday-09-00am/README.md) | 11 | Available |
-| [Convert the query string into JSON, apply the limit for a page length](workflows/convert-the-query-string-into-json-apply-the-limit-for-a-page-length/README.md) | 16 | Available |
-| [execute command and to flow data](workflows/execute-command-and-to-flow-data/README.md) | 3 | Available |
-| [Always Authenticate Your Server!](workflows/always-authenticate-your-server/README.md) | 10 | Available |
-| [receive jot form events](workflows/receive-jot-form-events/README.md) | 1 | Available |
-| [subscribe subscriber klicktipp and tag contact directly in klicktipp and aggregate tags to add to contact](workflows/subscribe-subscriber-klicktipp-and-tag-contact-directly-in-klicktipp-and-aggregate-tags-to-add-to-contact/README.md) | 13 | Available |
-| [Fetch Squarespace Blog & Event Collections to Google Sheets  ](workflows/fetch-squarespace-blog-event-collections-to-google-sheets/README.md) | 5 | Available |
-| [send daily news and html and aggregate](workflows/send-daily-news-and-html-and-aggregate/README.md) | 19 | Available |
-| [Calling a Sub-workflow](workflows/calling-a-sub-workflow/README.md) | 36 | Available |
-| [n8n get all executions and convert to csv](workflows/n8n-get-all-executions-and-convert-to-csv/README.md) | 4 | Available |
-| [OIDC client workflow](workflows/oidc-client-workflow/README.md) | 12 | Available |
-| [Import multiple CSV to GoogleSheet](workflows/import-multiple-csv-to-googlesheet/README.md) | 9 | Available |
-| [get elastic alert and send email notification and receive schedule events](workflows/get-elastic-alert-and-send-email-notification-and-receive-schedule-events/README.md) | 7 | Available |
-| [Shopify to Google Sheets Product Sync Automation](workflows/shopify-to-google-sheets-product-sync-automation/README.md) | 16 | Available |
-| [Telegram echo-bot](workflows/telegram-echo-bot/README.md) | 2 | Available |
-| [New order is sent to the Webhook via POST with params {orderID, orderPrice}](workflows/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/README.md) | 8 | Available |
-| [Googlesheets Workflow](workflows/gs-read-data2-1-and-mautic-and-gs-read-data2-2/README.md) | 5 | Available |
-| [Monitoring and alerting](workflows/monitoring-and-alerting/README.md) | 5 | Available |
-| [Email AI Auto-responder. Summerize and send email](workflows/email-ai-auto-responder-summerize-and-send-email/README.md) | 23 | Available |
-| [🤖Content Creator Agent](workflows/content-creator-agent/README.md) | 6 | Available |
-| [A/B Split Testing](workflows/a-b-split-testing/README.md) | 9 | Available |
-| [read from google sheets and respond to webhook and webhook](workflows/read-from-google-sheets-and-respond-to-webhook-and-webhook/README.md) | 4 | Available |
-| [lemlist add lead to campaign and hubspot follow up task and lonescale new job intent](workflows/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/README.md) | 18 | Available |
-| [generate an image with bannerbear](workflows/generate-an-image-with-bannerbear/README.md) | 2 | Available |
-| [Create a user profile in Vero](workflows/create-a-user-profile-in-vero/README.md) | 2 | Available |
-| [Unsubscribe Mautic contacts from automated unsubscribe emails](workflows/unsubscribe-mautic-contacts-from-automated-unsubscribe-emails/README.md) | 11 | Available |
-| [add git and commit git and git](workflows/add-git-and-commit-git-and-git/README.md) | 5 | Available |
-| [Prerequisite: Setup Qdrant Collection](workflows/prerequisite-setup-qdrant-collection/README.md) | 37 | Available |
-| [Gratitude Jar Reminder](workflows/gratitude-jar-reminder/README.md) | 5 | Available |
-| [post hog and webhook](workflows/post-hog-and-webhook/README.md) | 2 | Available |
-| [receive netlify events and slack](workflows/receive-netlify-events-and-slack/README.md) | 2 | Available |
-| [cron and list shopify and append google sheets](workflows/cron-and-list-shopify-and-append-google-sheets/README.md) | 9 | Available |
-| [AI Phone Agent with RetellAI](workflows/ai-phone-agent-with-retellai/README.md) | 29 | Available |
-| [search airtable and get url content and extracthtmlcontent html](workflows/search-airtable-and-get-url-content-and-extracthtmlcontent-html/README.md) | 5 | Available |
-| [Send an SMS using MSG91](workflows/send-an-sms-using-msg91/README.md) | 2 | Available |
-| [Get DNS entries](workflows/get-dns-entries/README.md) | 3 | Available |
-| [getrecentlycreatedupdated company hubspot and notify sales rep and receive schedule events](workflows/getrecentlycreatedupdated-company-hubspot-and-notify-sales-rep-and-receive-schedule-events/README.md) | 4 | Available |
-| [YouTube Video Analyzer with AI](workflows/youtube-video-analyzer-with-ai/README.md) | 13 | Available |
-| [rename item fields](workflows/rename-item-fields/README.md) | 3 | Available |
-| [Google Search Engine Results Page Extraction with Bright Data](workflows/google-search-engine-results-page-extraction-with-bright-data/README.md) | 10 | Available |
-| [read binary file and read pdf](workflows/read-binary-file-and-read-pdf/README.md) | 3 | Available |
-| [Investor agent - part 2](workflows/investor-agent-part-2/README.md) | 9 | Available |
-| [Translate questions about e-mails into SQL queries and run them](workflows/translate-questions-about-e-mails-into-sql-queries-and-run-them/README.md) | 23 | Available |
-| [My workflow 5](workflows/survey-evidence-dashboard/README.md) | 21 | Available |
-| [Gender Inclusive Language](workflows/gender-inclusive-language/README.md) | 4 | Available |
-| [👆 Set instance url instead of `{{ $vars.instance_url }}` (or set the env variable if you have that feature)](workflows/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/README.md) | 8 | Available |
-| [qdrant](workflows/ingest-pdf-documents-into-qdrant-with-ollama/README.md) | 9 | Available |
-| [Extract & Summarize Bing Copilot Search Results with Gemini AI and Bright Data](workflows/extract-summarize-bing-copilot-search-results-with-gemini-ai-and-bright-data/README.md) | 17 | Available |
-| [Add more fields to Mautic](workflows/add-more-fields-to-mautic/README.md) | 2 | Available |
-| [history channel slack and split out and slack](workflows/history-channel-slack-and-split-out-and-slack/README.md) | 40 | Available |
-| [receive schedule events and list database page notion and create database page](workflows/receive-schedule-events-and-list-database-page-notion-and-create-database-page/README.md) | 9 | Available |
-| [Text to Speech (OpenAI)](workflows/text-to-speech-openai/README.md) | 3 | Available |
-| [Replace Storage name, database ID and credentials.](workflows/replace-storage-name-database-id-and-credentials/README.md) | 22 | Available |
-| [Query List of Sign-in IPs](workflows/query-list-of-sign-in-ips/README.md) | 11 | Available |
-| [AI Concierge](workflows/ai-concierge/README.md) | 7 | Available |
-| [comentarios automaticos](workflows/comentarios-automaticos/README.md) | 9 | Available |
-| [ai data extraction with dynamic prompts and baserow](workflows/ai-data-extraction-with-dynamic-prompts-and-baserow/README.md) | 36 | Available |
-| [Workflow stats](workflows/workflow-stats/README.md) | 28 | Available |
-| [Dashboard](workflows/cron-and-retrieve-docker-data-and-http-request/README.md) | 24 | Available |
-| [http request and html extract](workflows/http-request-and-html-extract/README.md) | 4 | Available |
-| [Format US Phone Number](workflows/format-us-phone-number/README.md) | 7 | Available |
-| [Sub-Agent for scheduling calendar events](workflows/sub-agent-for-scheduling-calendar-events/README.md) | 24 | Available |
-| [Write a file to the host machine](workflows/write-a-file-to-the-host-machine/README.md) | 3 | Available |
-| [Receive_and_analyze_emails_with_rules_in_Sublime_Security](workflows/receive-and-analyze-emails-with-rules-in-sublime-security/README.md) | 9 | Available |
-| [Import CSV from URL to Excel](workflows/import-csv-from-url-to-excel/README.md) | 4 | Available |
-| [merge transformed datasets by key](workflows/merge-transformed-datasets-by-key/README.md) | 5 | Available |
-| [Automate Pinterest Analysis & AI-Powered Content Suggestions With Pinterest API](workflows/automate-pinterest-analysis-ai-powered-content-suggestions-with-pinterest-api/README.md) | 10 | Available |
-| [Prod: Notion to Vector Store - Dimension 768](workflows/prod-notion-to-vector-store-dimension-768/README.md) | 8 | Available |
-| [AI Customer-Support Assistant · WhatsApp Ready · Works for Any Business](workflows/ai-customer-support-assistant-whatsapp-ready-works-for-any-business/README.md) | 11 | Available |
-| [receive google drive events and email send](workflows/receive-google-drive-events-and-email-send/README.md) | 2 | Available |
-| [rss feed read and cron and telegram](workflows/rss-feed-read-and-cron-and-telegram/README.md) | 11 | Available |
-| [webhook and respond to webhook and html to pdf](workflows/webhook-and-respond-to-webhook-and-html-to-pdf/README.md) | 3 | Available |
-| [open ai and tool calculator and receive chat events](workflows/open-ai-and-tool-calculator-and-receive-chat-events/README.md) | 4 | Available |
-| [Find Top Keywords](workflows/find-top-keywords/README.md) | 28 | Available |
-| [receive facebook lead ads events and subscribe subscriber klicktipp](workflows/receive-facebook-lead-ads-events-and-subscribe-subscriber-klicktipp/README.md) | 2 | Available |
-| [Workflow management](workflows/workflow-management/README.md) | 19 | Available |
-| [Automated Image Analysis and Response via Telegram](workflows/automated-image-analysis-and-response-via-telegram/README.md) | 6 | Available |
-| [pipedrive and receive github events and create note with github url](workflows/pipedrive-and-receive-github-events-and-create-note-with-github-url/README.md) | 8 | Available |
-| [Auto Knowledge Base Article Generator](workflows/auto-knowledge-base-article-generator/README.md) | 19 | Available |
-| [Prepare data in Google Sheets](workflows/prepare-data-in-google-sheets/README.md) | 29 | Available |
-| [html to pdf and convert pdf into png1 and convert pdf into png](workflows/html-to-pdf-and-convert-pdf-into-png1-and-convert-pdf-into-png/README.md) | 5 | Available |
-| [Read sitemap and filter URLs](workflows/read-sitemap-and-filter-urls/README.md) | 6 | Available |
-| [receive form events and score lead with madkudu and emailverifier hunter 59e5a108](workflows/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter-59e5a108/README.md) | 11 | Available |
-| [google sheets and tofile spreadsheet file and dropbox](workflows/google-sheets-and-tofile-spreadsheet-file-and-dropbox/README.md) | 4 | Available |
-| [Outlook](workflows/outlook/README.md) | 4 | Available |
-| [receive form events and clearbit and gmail](workflows/receive-form-events-and-clearbit-and-gmail/README.md) | 8 | Available |
-| [⚡AI-Powered YouTube Playlist & Video Summarization and Analysis v2](workflows/ai-powered-youtube-playlist-video-summarization-and-analysis-v2/README.md) | 60 | Available |
-| [Create, update, and get an incident on PagerDuty](workflows/create-update-and-get-an-incident-on-pagerduty/README.md) | 4 | Available |
-| [Walkthrough and Overview](workflows/walkthrough-and-overview/README.md) | 10 | Available |
-| [Find contact information for linkedin profile URLs stored in a Google Sheet](workflows/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/README.md) | 8 | Available |
-| [[OPS] Restore workflows from GitHub to n8n](workflows/ops-restore-workflows-from-github-to-n8n/README.md) | 12 | Available |
-| [webhook and respond to webhook](workflows/webhook-and-respond-to-webhook/README.md) | 5 | Available |
-| [Backup workflows to git repository on Gitea](workflows/backup-workflows-to-git-repository-on-gitea/README.md) | 13 | Available |
-| [receive pipedrive events and set item to only current product data and create product in stripe](workflows/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/README.md) | 7 | Available |
-| [receive notion events and update click up and receive click up events](workflows/receive-notion-events-and-update-click-up-and-receive-click-up-events/README.md) | 5 | Available |
-| [WhatsApp starter workflow](workflows/whatsapp-starter-workflow/README.md) | 5 | Available |
-| [Trigger a build using the TravisCI node](workflows/trigger-a-build-using-the-travisci-node/README.md) | 2 | Available |
-| [update database page notion and notion and get asana](workflows/update-database-page-notion-and-notion-and-get-asana/README.md) | 10 | Available |
-| [Social Media AI Agent - Telegram](workflows/social-media-ai-agent-telegram/README.md) | 19 | Available |
-| [Account qualification](workflows/account-qualification/README.md) | 7 | Available |
-| [Send Typeforms leads via Whatsapp (Twilio)](workflows/send-typeforms-leads-via-whatsapp-twilio/README.md) | 3 | Available |
-| [How to automatically import CSV files into postgres](workflows/how-to-automatically-import-csv-files-into-postgres/README.md) | 4 | Available |
-| [n8n Error Report to Line](workflows/n8n-error-report-to-line/README.md) | 2 | Available |
-| [Compress Pages from PDF](workflows/compress-pages-from-pdf/README.md) | 5 | Available |
-| [Daily Language Learning](workflows/daily-language-learning/README.md) | 8 | Available |
-| [crm webhook trigger and http request and update highlevel deliverable](workflows/crm-webhook-trigger-and-http-request-and-update-highlevel-deliverable/README.md) | 6 | Available |
+| [getallpeople n8n training customer datastore and http request b524576f](agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/README.md) | 6 | [JSON](agents/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f/implementations/n8n/getallpeople-n8n-training-customer-datastore-and-http-request-b524576f.json) |
+| [Clockify Backup Template](agents/clockify-backup-template/README.md) | 16 | [JSON](agents/clockify-backup-template/implementations/n8n/clockify-backup-template.json) |
+| [location_by_ip](agents/location-by-ip/README.md) | 6 | [JSON](agents/location-by-ip/implementations/n8n/location-by-ip.json) |
+| [Simple OpenAI Image Generator](agents/simple-openai-image-generator/README.md) | 4 | [JSON](agents/simple-openai-image-generator/implementations/n8n/simple-openai-image-generator.json) |
+| [make an http request](agents/make-an-http-request/README.md) | 1 | [JSON](agents/make-an-http-request/implementations/n8n/make-an-http-request.json) |
+| [information edit image and http request](agents/information-edit-image-and-http-request/README.md) | 3 | [JSON](agents/information-edit-image-and-http-request/implementations/n8n/information-edit-image-and-http-request.json) |
+| [Baserow markdown to html](agents/baserow-markdown-to-html/README.md) | 8 | [JSON](agents/baserow-markdown-to-html/implementations/n8n/baserow-markdown-to-html.json) |
+| [cron and graphql and item lists](agents/cron-and-graphql-and-item-lists/README.md) | 5 | [JSON](agents/cron-and-graphql-and-item-lists/implementations/n8n/cron-and-graphql-and-item-lists.json) |
+| [receive telegram events and send next question and telegram](agents/receive-telegram-events-and-send-next-question-and-telegram/README.md) | 33 | [JSON](agents/receive-telegram-events-and-send-next-question-and-telegram/implementations/n8n/receive-telegram-events-and-send-next-question-and-telegram.json) |
+| [Travel AssistantAgent](agents/travel-assistantagent/README.md) | 11 | [JSON](agents/travel-assistantagent/implementations/n8n/travel-assistantagent.json) |
+| [🔒 This workflow demonstrates Redis-based locking to prevent concurrent execution of workflows.](agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/README.md) | 14 | [JSON](agents/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows/implementations/n8n/this-workflow-demonstrates-redis-based-locking-to-prevent-concurrent-execution-of-workflows.json) |
+| [1/ Add Your credentials](agents/1-add-your-credentials-7a93229f/README.md) | 6 | [JSON](agents/1-add-your-credentials-7a93229f/implementations/n8n/1-add-your-credentials-7a93229f.json) |
+| [Blockchain DEX Screener Insights Agent](agents/blockchain-dex-screener-insights-agent/README.md) | 15 | [JSON](agents/blockchain-dex-screener-insights-agent/implementations/n8n/blockchain-dex-screener-insights-agent.json) |
+| [Automatizacion X](agents/automatizacion-x/README.md) | 6 | [JSON](agents/automatizacion-x/implementations/n8n/automatizacion-x.json) |
+| [MycroftResearchAgent_2.0](agents/mycroftresearchagent-2-0/README.md) | 16 | [JSON](agents/mycroftresearchagent-2-0/implementations/n8n/mycroftresearchagent-2-0.json) |
+| [CallForge - The AI Gong Sales Call Processor](agents/callforge-the-ai-gong-sales-call-processor/README.md) | 18 | [JSON](agents/callforge-the-ai-gong-sales-call-processor/implementations/n8n/callforge-the-ai-gong-sales-call-processor.json) |
+| [Dynamically create tables in Airtable for your Webflow form submissions](agents/dynamically-create-tables-in-airtable-for-your-webflow-form-submissions/README.md) | 13 | [JSON](agents/dynamically-create-tables-in-airtable-for-your-webflow-form-submissions/implementations/n8n/dynamically-create-tables-in-airtable-for-your-webflow-form-submissions.json) |
+| [receive schedule events and list strava and append google sheets](agents/receive-schedule-events-and-list-strava-and-append-google-sheets/README.md) | 13 | [JSON](agents/receive-schedule-events-and-list-strava-and-append-google-sheets/implementations/n8n/receive-schedule-events-and-list-strava-and-append-google-sheets.json) |
+| [search airtable and update airtable](agents/search-airtable-and-update-airtable/README.md) | 3 | [JSON](agents/search-airtable-and-update-airtable/implementations/n8n/search-airtable-and-update-airtable.json) |
+| [Receive messages from a topic and send an SMS](agents/receive-messages-from-a-topic-and-send-an-sms/README.md) | 4 | [JSON](agents/receive-messages-from-a-topic-and-send-an-sms/implementations/n8n/receive-messages-from-a-topic-and-send-an-sms.json) |
+| [Line Save File to Google Drive and Log File's URL](agents/line-save-file-to-google-drive-and-log-file-s-url/README.md) | 23 | [JSON](agents/line-save-file-to-google-drive-and-log-file-s-url/implementations/n8n/line-save-file-to-google-drive-and-log-file-s-url.json) |
+| [dropbox and compress compression and http request](agents/dropbox-and-compress-compression-and-http-request/README.md) | 5 | [JSON](agents/dropbox-and-compress-compression-and-http-request/implementations/n8n/dropbox-and-compress-compression-and-http-request.json) |
+| [Convert Image Files (JPG, PNG, JPEG) to URLs and Reduce File Size](agents/convert-image-files-jpg-png-jpeg-to-urls-and-reduce-file-size/README.md) | 6 | [JSON](agents/convert-image-files-jpg-png-jpeg-to-urls-and-reduce-file-size/implementations/n8n/convert-image-files-jpg-png-jpeg-to-urls-and-reduce-file-size.json) |
+| [default data loader and recursive character text splitter and get survey results](agents/default-data-loader-and-recursive-character-text-splitter-and-get-survey-results/README.md) | 30 | [JSON](agents/default-data-loader-and-recursive-character-text-splitter-and-get-survey-results/implementations/n8n/default-data-loader-and-recursive-character-text-splitter-and-get-survey-results.json) |
+| [Supabase Setup Postgres](agents/supabase-setup-postgres/README.md) | 6 | [JSON](agents/supabase-setup-postgres/implementations/n8n/supabase-setup-postgres.json) |
+| [Generate Image Workflow](agents/generate-image-workflow/README.md) | 3 | [JSON](agents/generate-image-workflow/implementations/n8n/generate-image-workflow.json) |
+| [Patent Filing Velocity Tracker](agents/patent-filing-velocity-tracker/README.md) | 24 | [JSON](agents/patent-filing-velocity-tracker/implementations/n8n/patent-filing-velocity-tracker.json) |
+| [webhook and mindee and append airtable](agents/webhook-and-mindee-and-append-airtable/README.md) | 4 | [JSON](agents/webhook-and-mindee-and-append-airtable/implementations/n8n/webhook-and-mindee-and-append-airtable.json) |
+| [Send updates about the position of the ISS every minute to a topic in RabbitMQ](agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-rabbitmq/README.md) | 4 | [JSON](agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-rabbitmq/implementations/n8n/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-rabbitmq.json) |
+| [6](agents/list-contact-hubspot/README.md) | 2 | [JSON](agents/list-contact-hubspot/implementations/n8n/list-contact-hubspot.json) |
+| [Insert data into a new row for a table in Coda](agents/insert-data-into-a-new-row-for-a-table-in-coda/README.md) | 3 | [JSON](agents/insert-data-into-a-new-row-for-a-table-in-coda/implementations/n8n/insert-data-into-a-new-row-for-a-table-in-coda.json) |
+| [5.1 Google Reverse Image Tool](agents/5-1-google-reverse-image-tool/README.md) | 19 | [JSON](agents/5-1-google-reverse-image-tool/implementations/n8n/5-1-google-reverse-image-tool.json) |
+| [receive schedule events and get g2 data with scrapingbee and extracthtmlcontent html](agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/README.md) | 11 | [JSON](agents/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html/implementations/n8n/receive-schedule-events-and-get-g2-data-with-scrapingbee-and-extracthtmlcontent-html.json) |
+| [receive typeform events and append google sheets and create user mattermost](agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/README.md) | 10 | [JSON](agents/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost/implementations/n8n/receive-typeform-events-and-append-google-sheets-and-create-user-mattermost.json) |
+| [Fetch reports from Qualys](agents/fetch-reports-from-qualys/README.md) | 15 | [JSON](agents/fetch-reports-from-qualys/implementations/n8n/fetch-reports-from-qualys.json) |
+| [Todoist Weekly Review Template](agents/todoist-weekly-review-template/README.md) | 6 | [JSON](agents/todoist-weekly-review-template/implementations/n8n/todoist-weekly-review-template.json) |
+| [Generate New Keywords with Search Volumes⚒️⚒️🟢🟢](agents/generate-new-keywords-with-search-volumes/README.md) | 6 | [JSON](agents/generate-new-keywords-with-search-volumes/implementations/n8n/generate-new-keywords-with-search-volumes.json) |
+| [Create an organization in Affinity](agents/create-an-organization-in-affinity/README.md) | 2 | [JSON](agents/create-an-organization-in-affinity/implementations/n8n/create-an-organization-in-affinity.json) |
+| [Create a simple API endpoint](agents/create-a-simple-api-endpoint/README.md) | 3 | [JSON](agents/create-a-simple-api-endpoint/implementations/n8n/create-a-simple-api-endpoint.json) |
+| [Phishing_analysis__URLScan_io_and_Virustotal_](agents/phishing-analysis-urlscan-io-and-virustotal/README.md) | 16 | [JSON](agents/phishing-analysis-urlscan-io-and-virustotal/implementations/n8n/phishing-analysis-urlscan-io-and-virustotal.json) |
+| [jira and update zendesk and get zendesk](agents/jira-and-update-zendesk-and-get-zendesk/README.md) | 7 | [JSON](agents/jira-and-update-zendesk-and-get-zendesk/implementations/n8n/jira-and-update-zendesk-and-get-zendesk.json) |
+| [Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI](agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/README.md) | 16 | [JSON](agents/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai/implementations/n8n/scrape-trustpilot-reviews-with-deepseek-analyze-sentiment-with-openai.json) |
+| [Receive updates for support in Zendesk](agents/receive-updates-for-support-in-zendesk/README.md) | 1 | [JSON](agents/receive-updates-for-support-in-zendesk/implementations/n8n/receive-updates-for-support-in-zendesk.json) |
+| [Loading data into a spreadsheet](agents/loading-data-into-a-spreadsheet/README.md) | 4 | [JSON](agents/loading-data-into-a-spreadsheet/implementations/n8n/loading-data-into-a-spreadsheet.json) |
+| [notion knowledge base ai assistant](agents/notion-knowledge-base-ai-assistant/README.md) | 18 | [JSON](agents/notion-knowledge-base-ai-assistant/implementations/n8n/notion-knowledge-base-ai-assistant.json) |
+| [Translate Telegram audio messages with AI (55 supported languages) v1](agents/translate-telegram-audio-messages-with-ai-55-supported-languages-v1/README.md) | 10 | [JSON](agents/translate-telegram-audio-messages-with-ai-55-supported-languages-v1/implementations/n8n/translate-telegram-audio-messages-with-ai-55-supported-languages-v1.json) |
+| [CoinMarketCap_AI_Data_Analyst_Agent](agents/coinmarketcap-ai-data-analyst-agent/README.md) | 9 | [JSON](agents/coinmarketcap-ai-data-analyst-agent/implementations/n8n/coinmarketcap-ai-data-analyst-agent.json) |
+| [get last execution timestamp and set new last execution timestamp and list zendesk](agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/README.md) | 17 | [JSON](agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk/implementations/n8n/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-list-zendesk.json) |
+| [photos to list and download google drive and resize edit image](agents/photos-to-list-and-download-google-drive-and-resize-edit-image/README.md) | 8 | [JSON](agents/photos-to-list-and-download-google-drive-and-resize-edit-image/implementations/n8n/photos-to-list-and-download-google-drive-and-resize-edit-image.json) |
+| [Customer Experience Agent (AI)](agents/customer-experience-agent-ai-7baea82e/README.md) | 10 | [JSON](agents/customer-experience-agent-ai-7baea82e/implementations/n8n/customer-experience-agent-ai-7baea82e.json) |
+| [receive chat events and http request and respond to chat](agents/receive-chat-events-and-http-request-and-respond-to-chat/README.md) | 18 | [JSON](agents/receive-chat-events-and-http-request-and-respond-to-chat/implementations/n8n/receive-chat-events-and-http-request-and-respond-to-chat.json) |
+| [Example Customer Data](agents/example-customer-data/README.md) | 12 | [JSON](agents/example-customer-data/implementations/n8n/example-customer-data.json) |
+| [Weekly_Shodan_Query___Report_Accidents__no_function_node_](agents/weekly-shodan-query-report-accidents-no-function-node/README.md) | 10 | [JSON](agents/weekly-shodan-query-report-accidents-no-function-node/implementations/n8n/weekly-shodan-query-report-accidents-no-function-node.json) |
+| [Online Marketing Weekly Report](agents/online-marketing-weekly-report/README.md) | 46 | [JSON](agents/online-marketing-weekly-report/implementations/n8n/online-marketing-weekly-report.json) |
+| [Wordpress Form to Mautic](agents/wordpress-form-to-mautic/README.md) | 6 | [JSON](agents/wordpress-form-to-mautic/implementations/n8n/wordpress-form-to-mautic.json) |
+| [Prepare CSV files with GPT-4](agents/prepare-csv-files-with-gpt-4/README.md) | 9 | [JSON](agents/prepare-csv-files-with-gpt-4/implementations/n8n/prepare-csv-files-with-gpt-4.json) |
+| [webhook and get new accesstoken and receive schedule events](agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/README.md) | 7 | [JSON](agents/webhook-and-get-new-accesstoken-and-receive-schedule-events/implementations/n8n/webhook-and-get-new-accesstoken-and-receive-schedule-events.json) |
+| [⚡📽️ Ultimate AI-Powered Chatbot for YouTube Summarization &amp; Analysis](agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/README.md) | 16 | [JSON](agents/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis/implementations/n8n/ultimate-ai-powered-chatbot-for-youtube-summarization-analysis.json) |
+| [asana and webhook](agents/asana-and-webhook/README.md) | 3 | [JSON](agents/asana-and-webhook/implementations/n8n/asana-and-webhook.json) |
+| [NameCheap Dynamic DNS (DDNS)](agents/namecheap-dynamic-dns-ddns/README.md) | 7 | [JSON](agents/namecheap-dynamic-dns-ddns/implementations/n8n/namecheap-dynamic-dns-ddns.json) |
+| [Get only new RSS with Photo](agents/get-only-new-rss-with-photo/README.md) | 5 | [JSON](agents/get-only-new-rss-with-photo/implementations/n8n/get-only-new-rss-with-photo.json) |
+| [Reference "Single" Binary Using Expressions](agents/reference-single-binary-using-expressions/README.md) | 6 | [JSON](agents/reference-single-binary-using-expressions/implementations/n8n/reference-single-binary-using-expressions.json) |
+| [ETL pipeline](agents/etl-pipeline/README.md) | 9 | [JSON](agents/etl-pipeline/implementations/n8n/etl-pipeline.json) |
+| [SearchApi AI Agent](agents/searchapi-ai-agent/README.md) | 5 | [JSON](agents/searchapi-ai-agent/implementations/n8n/searchapi-ai-agent.json) |
+| [Inverview Scheduler](agents/inverview-scheduler/README.md) | 22 | [JSON](agents/inverview-scheduler/implementations/n8n/inverview-scheduler.json) |
+| [Selenium Ultimate Scraper Workflow](agents/selenium-ultimate-scraper-workflow/README.md) | 56 | [JSON](agents/selenium-ultimate-scraper-workflow/implementations/n8n/selenium-ultimate-scraper-workflow.json) |
+| [MCP_CALENDAR](agents/mcp-calendar/README.md) | 7 | [JSON](agents/mcp-calendar/implementations/n8n/mcp-calendar.json) |
+| [Extract And Decode Google News RSS URLs to Clean Article Links](agents/extract-and-decode-google-news-rss-urls-to-clean-article-links/README.md) | 10 | [JSON](agents/extract-and-decode-google-news-rss-urls-to-clean-article-links/implementations/n8n/extract-and-decode-google-news-rss-urls-to-clean-article-links.json) |
+| [Backup Squarespace code Injections to Github](agents/backup-squarespace-code-injections-to-github/README.md) | 13 | [JSON](agents/backup-squarespace-code-injections-to-github/implementations/n8n/backup-squarespace-code-injections-to-github.json) |
+| [receive typeform events and append airtable and slack](agents/receive-typeform-events-and-append-airtable-and-slack/README.md) | 4 | [JSON](agents/receive-typeform-events-and-append-airtable-and-slack/implementations/n8n/receive-typeform-events-and-append-airtable-and-slack.json) |
+| [Build Custom AI Agent with LangChain &amp; Gemini (Self-Hosted)](agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/README.md) | 4 | [JSON](agents/build-custom-ai-agent-with-langchain-gemini-self-hosted/implementations/n8n/build-custom-ai-agent-with-langchain-gemini-self-hosted.json) |
+| [search reddit and edit open ai and open ai](agents/search-reddit-and-edit-open-ai-and-open-ai/README.md) | 11 | [JSON](agents/search-reddit-and-edit-open-ai-and-open-ai/implementations/n8n/search-reddit-and-edit-open-ai-and-open-ai.json) |
+| [Extract Product Images from Template](agents/extract-product-images-from-template/README.md) | 13 | [JSON](agents/extract-product-images-from-template/implementations/n8n/extract-product-images-from-template.json) |
+| [🚨 PERFORMANCE WARNING!](agents/performance-warning/README.md) | 14 | [JSON](agents/performance-warning/implementations/n8n/performance-warning.json) |
+| [Archive empty pages in Notion Database](agents/archive-empty-pages-in-notion-database/README.md) | 10 | [JSON](agents/archive-empty-pages-in-notion-database/implementations/n8n/archive-empty-pages-in-notion-database.json) |
+| [👆 This adds due dates to tasks from description..](agents/this-adds-due-dates-to-tasks-from-description/README.md) | 10 | [JSON](agents/this-adds-due-dates-to-tasks-from-description/implementations/n8n/this-adds-due-dates-to-tasks-from-description.json) |
+| [Qualify new leads in Google Sheets via OpenAI's GPT-4](agents/qualify-new-leads-in-google-sheets-via-openai-s-gpt-4/README.md) | 5 | [JSON](agents/qualify-new-leads-in-google-sheets-via-openai-s-gpt-4/implementations/n8n/qualify-new-leads-in-google-sheets-via-openai-s-gpt-4.json) |
+| [StatsInstagram](agents/statsinstagram/README.md) | 5 | [JSON](agents/statsinstagram/implementations/n8n/statsinstagram.json) |
+| [get meraki organizations and get network ids and get uplink loss and latency](agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/README.md) | 16 | [JSON](agents/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency/implementations/n8n/get-meraki-organizations-and-get-network-ids-and-get-uplink-loss-and-latency.json) |
+| [receive schedule events and readrows worksheet microsoft excel and aggregate](agents/receive-schedule-events-and-readrows-worksheet-microsoft-excel-and-aggregate/README.md) | 25 | [JSON](agents/receive-schedule-events-and-readrows-worksheet-microsoft-excel-and-aggregate/implementations/n8n/receive-schedule-events-and-readrows-worksheet-microsoft-excel-and-aggregate.json) |
+| [Receive messages for a MQTT queue](agents/receive-messages-for-a-mqtt-queue/README.md) | 1 | [JSON](agents/receive-messages-for-a-mqtt-queue/implementations/n8n/receive-messages-for-a-mqtt-queue.json) |
+| [Get event triggered notifications / updates on preferred messaging channels with TwentyCRM](agents/get-event-triggered-notifications-updates-on-preferred-messaging-channels-with-twentycrm/README.md) | 6 | [JSON](agents/get-event-triggered-notifications-updates-on-preferred-messaging-channels-with-twentycrm/implementations/n8n/get-event-triggered-notifications-updates-on-preferred-messaging-channels-with-twentycrm.json) |
+| [http request and binarytopropery extract from file](agents/http-request-and-binarytopropery-extract-from-file/README.md) | 6 | [JSON](agents/http-request-and-binarytopropery-extract-from-file/implementations/n8n/http-request-and-binarytopropery-extract-from-file.json) |
+| [🧠 Give Your AI Agent Chatbot Long Term Memory Tools Router](agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/README.md) | 22 | [JSON](agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/n8n/give-your-ai-agent-chatbot-long-term-memory-tools-router.json) |
+| [FetchGithubIssues](agents/fetchgithubissues/README.md) | 5 | [JSON](agents/fetchgithubissues/implementations/n8n/fetchgithubissues.json) |
+| [function item and http request and append airtable](agents/function-item-and-http-request-and-append-airtable/README.md) | 5 | [JSON](agents/function-item-and-http-request-and-append-airtable/implementations/n8n/function-item-and-http-request-and-append-airtable.json) |
+| [Get all the contacts from GetResponse and update them](agents/get-all-the-contacts-from-getresponse-and-update-them/README.md) | 5 | [JSON](agents/get-all-the-contacts-from-getresponse-and-update-them/implementations/n8n/get-all-the-contacts-from-getresponse-and-update-them.json) |
+| [Receive an alert when new breaches are added to haveibeenpwned.com](agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/README.md) | 18 | [JSON](agents/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com/implementations/n8n/receive-an-alert-when-new-breaches-are-added-to-haveibeenpwned-com.json) |
+| [list gmail and split out and extract news items](agents/list-gmail-and-split-out-and-extract-news-items/README.md) | 6 | [JSON](agents/list-gmail-and-split-out-and-extract-news-items/implementations/n8n/list-gmail-and-split-out-and-extract-news-items.json) |
+| [InstaTest](agents/easy-instagram-via-manychat-bot/README.md) | 6 | [JSON](agents/easy-instagram-via-manychat-bot/implementations/n8n/easy-instagram-via-manychat-bot.json) |
+| [Image-to-3D](agents/verified-image-to-3d/README.md) | 12 | [JSON](agents/verified-image-to-3d/implementations/n8n/verified-image-to-3d.json) |
+| [receive local file events and read write file and default data loader](agents/receive-local-file-events-and-read-write-file-and-default-data-loader/README.md) | 23 | [JSON](agents/receive-local-file-events-and-read-write-file-and-default-data-loader/implementations/n8n/receive-local-file-events-and-read-write-file-and-default-data-loader.json) |
+| [Use any LLM-Model via OpenRouter](agents/use-any-llm-model-via-openrouter/README.md) | 5 | [JSON](agents/use-any-llm-model-via-openrouter/implementations/n8n/use-any-llm-model-via-openrouter.json) |
+| [Delete NM of KV (By Name Serach)](agents/delete-nm-of-kv-by-name-serach/README.md) | 31 | [JSON](agents/delete-nm-of-kv-by-name-serach/implementations/n8n/delete-nm-of-kv-by-name-serach.json) |
+| [write binary file](agents/write-binary-file/README.md) | 3 | [JSON](agents/write-binary-file/implementations/n8n/write-binary-file.json) |
+| [Receive updates when an event occurs in Asana](agents/receive-updates-when-an-event-occurs-in-asana/README.md) | 1 | [JSON](agents/receive-updates-when-an-event-occurs-in-asana/implementations/n8n/receive-updates-when-an-event-occurs-in-asana.json) |
+| [receive pipedrive events and get organization pipedrive and http request](agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/README.md) | 7 | [JSON](agents/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request/implementations/n8n/receive-pipedrive-events-and-get-organization-pipedrive-and-http-request.json) |
+| [write read write file and download pdf file and protect file with password](agents/write-read-write-file-and-download-pdf-file-and-protect-file-with-password/README.md) | 5 | [JSON](agents/write-read-write-file-and-download-pdf-file-and-protect-file-with-password/implementations/n8n/write-read-write-file-and-download-pdf-file-and-protect-file-with-password.json) |
+| [RAG with PDF as source](agents/rag-with-pdf-as-source/README.md) | 26 | [JSON](agents/rag-with-pdf-as-source/implementations/n8n/rag-with-pdf-as-source.json) |
+| [🤖 AI Powered RAG Chatbot for Your Docs + Google Drive + Gemini + Qdrant](agents/ai-powered-rag-chatbot-for-your-docs-google-drive-gemini-qdrant/README.md) | 35 | [JSON](agents/ai-powered-rag-chatbot-for-your-docs-google-drive-gemini-qdrant/implementations/n8n/ai-powered-rag-chatbot-for-your-docs-google-drive-gemini-qdrant.json) |
+| [Get details of a forum in Disqus](agents/get-details-of-a-forum-in-disqus/README.md) | 2 | [JSON](agents/get-details-of-a-forum-in-disqus/implementations/n8n/get-details-of-a-forum-in-disqus.json) |
+| [&#91;n8n&#93; Advanced URL Parsing and Shortening Workflow - Switchy.io Integration](agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/README.md) | 47 | [JSON](agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/n8n/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration.json) |
+| [New Ticket Alerts to Teams](agents/new-ticket-alerts-to-teams/README.md) | 8 | [JSON](agents/new-ticket-alerts-to-teams/implementations/n8n/new-ticket-alerts-to-teams.json) |
+| [copper and update person copper and get person copper](agents/copper-and-update-person-copper-and-get-person-copper/README.md) | 4 | [JSON](agents/copper-and-update-person-copper-and-get-person-copper/implementations/n8n/copper-and-update-person-copper-and-get-person-copper.json) |
+| [🎨 Image Generation (OpenAI)](agents/image-generation-openai/README.md) | 5 | [JSON](agents/image-generation-openai/implementations/n8n/image-generation-openai.json) |
+| [Extract spend details (template)](agents/extract-spend-details-template/README.md) | 21 | [JSON](agents/extract-spend-details-template/implementations/n8n/extract-spend-details-template.json) |
+| [Configure your credentials](agents/configure-your-credentials/README.md) | 6 | [JSON](agents/configure-your-credentials/implementations/n8n/configure-your-credentials.json) |
+| [cron and list person pipedrive and pipedrive](agents/cron-and-list-person-pipedrive-and-pipedrive/README.md) | 7 | [JSON](agents/cron-and-list-person-pipedrive-and-pipedrive/implementations/n8n/cron-and-list-person-pipedrive-and-pipedrive.json) |
+| [Matomo Analytics Report](agents/matomo-analytics-report/README.md) | 6 | [JSON](agents/matomo-analytics-report/implementations/n8n/matomo-analytics-report.json) |
+| [Travel Planning Agent with Couchbase Vector Search, Gemini 2.0 Flash and OpenAI](agents/travel-planning-agent-with-couchbase-vector-search-gemini-2-0-flash-and-openai/README.md) | 11 | [JSON](agents/travel-planning-agent-with-couchbase-vector-search-gemini-2-0-flash-and-openai/implementations/n8n/travel-planning-agent-with-couchbase-vector-search-gemini-2-0-flash-and-openai.json) |
+| [Never expose or hard code below values](agents/never-expose-or-hard-code-below-values/README.md) | 4 | [JSON](agents/never-expose-or-hard-code-below-values/implementations/n8n/never-expose-or-hard-code-below-values.json) |
+| [AI Agent with charts capabilities using OpenAI Structured Output](agents/ai-agent-with-charts-capabilities-using-openai-structured-output/README.md) | 8 | [JSON](agents/ai-agent-with-charts-capabilities-using-openai-structured-output/implementations/n8n/ai-agent-with-charts-capabilities-using-openai-structured-output.json) |
+| [Telegram ChatBot with multiple sessions](agents/telegram-chatbot-with-multiple-sessions/README.md) | 31 | [JSON](agents/telegram-chatbot-with-multiple-sessions/implementations/n8n/telegram-chatbot-with-multiple-sessions.json) |
+| [aws textract and aws s3](agents/aws-textract-and-aws-s3/README.md) | 3 | [JSON](agents/aws-textract-and-aws-s3/implementations/n8n/aws-textract-and-aws-s3.json) |
+| [Bubble Data Access](agents/bubble-data-access/README.md) | 2 | [JSON](agents/bubble-data-access/implementations/n8n/bubble-data-access.json) |
+| [query extraction airtop and update google sheets and google sheets](agents/query-extraction-airtop-and-update-google-sheets-and-google-sheets/README.md) | 5 | [JSON](agents/query-extraction-airtop-and-update-google-sheets-and-google-sheets/implementations/n8n/query-extraction-airtop-and-update-google-sheets-and-google-sheets.json) |
+| [open ai and respond to webhook and receive form events](agents/open-ai-and-respond-to-webhook-and-receive-form-events/README.md) | 5 | [JSON](agents/open-ai-and-respond-to-webhook-and-receive-form-events/implementations/n8n/open-ai-and-respond-to-webhook-and-receive-form-events.json) |
+| [List Builder](agents/list-builder/README.md) | 7 | [JSON](agents/list-builder/implementations/n8n/list-builder.json) |
+| [receive schedule events and http request and twilio](agents/receive-schedule-events-and-http-request-and-twilio/README.md) | 4 | [JSON](agents/receive-schedule-events-and-http-request-and-twilio/implementations/n8n/receive-schedule-events-and-http-request-and-twilio.json) |
+| [Obsidian Notes Read Aloud: Available as a Podcast Feed](agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/README.md) | 15 | [JSON](agents/obsidian-notes-read-aloud-available-as-a-podcast-feed/implementations/n8n/obsidian-notes-read-aloud-available-as-a-podcast-feed.json) |
+| [Chat with Google Sheet](agents/chat-with-google-sheet/README.md) | 14 | [JSON](agents/chat-with-google-sheet/implementations/n8n/chat-with-google-sheet.json) |
+| [fetch apple press releases1 and parse apple press xml1 and fetch google news rss1](agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/README.md) | 47 | [JSON](agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/n8n/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1.json) |
+| [Send daily weather updates via a push notification](agents/send-daily-weather-updates-via-a-push-notification/README.md) | 3 | [JSON](agents/send-daily-weather-updates-via-a-push-notification/implementations/n8n/send-daily-weather-updates-via-a-push-notification.json) |
+| [Submit batch request to Anthropic](agents/submit-batch-request-to-anthropic/README.md) | 27 | [JSON](agents/submit-batch-request-to-anthropic/implementations/n8n/submit-batch-request-to-anthropic.json) |
+| [Mycroft — Signal Contradiction Detector (Agent 6)](agents/mycroft-signal-contradiction-detector-agent-6/README.md) | 20 | [JSON](agents/mycroft-signal-contradiction-detector-agent-6/implementations/n8n/mycroft-signal-contradiction-detector-agent-6.json) |
+| [has shared with external users and create google sheets and permissions to items](agents/has-shared-with-external-users-and-create-google-sheets-and-permissions-to-items/README.md) | 14 | [JSON](agents/has-shared-with-external-users-and-create-google-sheets-and-permissions-to-items/implementations/n8n/has-shared-with-external-users-and-create-google-sheets-and-permissions-to-items.json) |
+| [Create a short URL and get the statistics of the URL](agents/create-a-short-url-and-get-the-statistics-of-the-url/README.md) | 3 | [JSON](agents/create-a-short-url-and-get-the-statistics-of-the-url/implementations/n8n/create-a-short-url-and-get-the-statistics-of-the-url.json) |
+| [Workflow: Extract data from PDF with Claude 3.5 Sonnet or Gemini 2.0 Flash](agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/README.md) | 6 | [JSON](agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/n8n/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash.json) |
+| [Generate audio from text using OpenAI - text-to-speech Workflow](agents/generate-audio-from-text-using-openai-text-to-speech-workflow/README.md) | 3 | [JSON](agents/generate-audio-from-text-using-openai-text-to-speech-workflow/implementations/n8n/generate-audio-from-text-using-openai-text-to-speech-workflow.json) |
+| [webhook and text edit image and read file url](agents/webhook-and-text-edit-image-and-read-file-url/README.md) | 3 | [JSON](agents/webhook-and-text-edit-image-and-read-file-url/implementations/n8n/webhook-and-text-edit-image-and-read-file-url.json) |
+| [Agent Access Control Template](agents/agent-access-control-template/README.md) | 23 | [JSON](agents/agent-access-control-template/implementations/n8n/agent-access-control-template.json) |
+| [LinkedIn Leads Scraping &amp; Enrichment (Main)](agents/linkedin-leads-scraping-enrichment-main/README.md) | 56 | [JSON](agents/linkedin-leads-scraping-enrichment-main/implementations/n8n/linkedin-leads-scraping-enrichment-main.json) |
+| [💥🛠️Build a Web Search Chatbot with GPT-4o and MCP Brave Search](agents/build-a-web-search-chatbot-with-gpt-4o-and-mcp-brave-search/README.md) | 6 | [JSON](agents/build-a-web-search-chatbot-with-gpt-4o-and-mcp-brave-search/implementations/n8n/build-a-web-search-chatbot-with-gpt-4o-and-mcp-brave-search.json) |
+| [n8n and http request and create new file](agents/n8n-and-http-request-and-create-new-file/README.md) | 19 | [JSON](agents/n8n-and-http-request-and-create-new-file/implementations/n8n/n8n-and-http-request-and-create-new-file.json) |
+| [Extract text from PDF](agents/extract-text-from-pdf/README.md) | 33 | [JSON](agents/extract-text-from-pdf/implementations/n8n/extract-text-from-pdf.json) |
+| [get rows to enrich and basic llm chain ice breaker and http request](agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/README.md) | 14 | [JSON](agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/n8n/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request.json) |
+| [Restore your credentials from GitHub](agents/restore-your-credentials-from-github/README.md) | 8 | [JSON](agents/restore-your-credentials-from-github/implementations/n8n/restore-your-credentials-from-github.json) |
+| [🧠 Place your logic here!](agents/place-your-logic-here/README.md) | 3 | [JSON](agents/place-your-logic-here/implementations/n8n/place-your-logic-here.json) |
+| [dub.co URL Shortener](agents/dub-co-url-shortener/README.md) | 8 | [JSON](agents/dub-co-url-shortener/implementations/n8n/dub-co-url-shortener.json) |
+| [Zendesk-to-slack](agents/zendesk-to-slack/README.md) | 5 | [JSON](agents/zendesk-to-slack/implementations/n8n/zendesk-to-slack.json) |
+| [receive notion events and mattermost](agents/receive-notion-events-and-mattermost/README.md) | 4 | [JSON](agents/receive-notion-events-and-mattermost/implementations/n8n/receive-notion-events-and-mattermost.json) |
+| [Get all files of subfolders](agents/get-all-files-of-subfolders/README.md) | 23 | [JSON](agents/get-all-files-of-subfolders/implementations/n8n/get-all-files-of-subfolders.json) |
+| [paypal api example](agents/paypal-api-example/README.md) | 2 | [JSON](agents/paypal-api-example/implementations/n8n/paypal-api-example.json) |
+| [receive schedule events and search airtable and gmail](agents/receive-schedule-events-and-search-airtable-and-gmail/README.md) | 24 | [JSON](agents/receive-schedule-events-and-search-airtable-and-gmail/implementations/n8n/receive-schedule-events-and-search-airtable-and-gmail.json) |
+| [Create a channel, invite users to the channel, post a message, and upload a file](agents/create-a-channel-invite-users-to-the-channel-post-a-message-and-upload-a-file/README.md) | 6 | [JSON](agents/create-a-channel-invite-users-to-the-channel-post-a-message-and-upload-a-file/implementations/n8n/create-a-channel-invite-users-to-the-channel-post-a-message-and-upload-a-file.json) |
+| [Get Apprropraite Data](agents/get-apprropraite-data/README.md) | 23 | [JSON](agents/get-apprropraite-data/implementations/n8n/get-apprropraite-data.json) |
+| [Load data into database](agents/load-data-into-database/README.md) | 12 | [JSON](agents/load-data-into-database/implementations/n8n/load-data-into-database.json) |
+| [mattermost and update jira and update pager duty](agents/mattermost-and-update-jira-and-update-pager-duty/README.md) | 5 | [JSON](agents/mattermost-and-update-jira-and-update-pager-duty/implementations/n8n/mattermost-and-update-jira-and-update-pager-duty.json) |
+| [issues to list and sentiment over issue comments and search airtable](agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/README.md) | 14 | [JSON](agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/n8n/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable.json) |
+| [http request and cron and telegram](agents/http-request-and-cron-and-telegram/README.md) | 7 | [JSON](agents/http-request-and-cron-and-telegram/implementations/n8n/http-request-and-cron-and-telegram.json) |
+| [Automate Your Customer Service With WhatsApp Business Cloud &amp; Asana](agents/automate-your-customer-service-with-whatsapp-business-cloud-asana/README.md) | 3 | [JSON](agents/automate-your-customer-service-with-whatsapp-business-cloud-asana/implementations/n8n/automate-your-customer-service-with-whatsapp-business-cloud-asana.json) |
+| [✍️🌄 Your First Wordpress Content Creator - Quick Start](agents/your-first-wordpress-content-creator-quick-start/README.md) | 28 | [JSON](agents/your-first-wordpress-content-creator-quick-start/implementations/n8n/your-first-wordpress-content-creator-quick-start.json) |
+| [receive gmail events and split out and only keep invoice link](agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/README.md) | 11 | [JSON](agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/n8n/receive-gmail-events-and-split-out-and-only-keep-invoice-link.json) |
+| [ProspectLens company research](agents/prospectlens-company-research/README.md) | 6 | [JSON](agents/prospectlens-company-research/implementations/n8n/prospectlens-company-research.json) |
+| [Add new incoming emails to a Google Sheets spreadsheet as a new row.](agents/add-new-incoming-emails-to-a-google-sheets-spreadsheet-as-a-new-row/README.md) | 2 | [JSON](agents/add-new-incoming-emails-to-a-google-sheets-spreadsheet-as-a-new-row/implementations/n8n/add-new-incoming-emails-to-a-google-sheets-spreadsheet-as-a-new-row.json) |
+| [extracthtmlcontent html and reviews to list and default data loader](agents/extracthtmlcontent-html-and-reviews-to-list-and-default-data-loader/README.md) | 24 | [JSON](agents/extracthtmlcontent-html-and-reviews-to-list-and-default-data-loader/implementations/n8n/extracthtmlcontent-html-and-reviews-to-list-and-default-data-loader.json) |
+| [http request and create random masked email and respond to webhook](agents/http-request-and-create-random-masked-email-and-respond-to-webhook/README.md) | 6 | [JSON](agents/http-request-and-create-random-masked-email-and-respond-to-webhook/implementations/n8n/http-request-and-create-random-masked-email-and-respond-to-webhook.json) |
+| [receive schedule events and rss feed read and send email with each post](agents/receive-schedule-events-and-rss-feed-read-and-send-email-with-each-post/README.md) | 8 | [JSON](agents/receive-schedule-events-and-rss-feed-read-and-send-email-with-each-post/implementations/n8n/receive-schedule-events-and-rss-feed-read-and-send-email-with-each-post.json) |
+| [Main workflow: AI agent using custom tool](agents/main-workflow-ai-agent-using-custom-tool/README.md) | 15 | [JSON](agents/main-workflow-ai-agent-using-custom-tool/implementations/n8n/main-workflow-ai-agent-using-custom-tool.json) |
+| [emailverifier hunter](agents/emailverifier-hunter/README.md) | 2 | [JSON](agents/emailverifier-hunter/implementations/n8n/emailverifier-hunter.json) |
+| [Business WhatsApp AI RAG Chatbot](agents/business-whatsapp-ai-rag-chatbot-693566f5/README.md) | 22 | [JSON](agents/business-whatsapp-ai-rag-chatbot-693566f5/implementations/n8n/business-whatsapp-ai-rag-chatbot-693566f5.json) |
+| [YT AI News Playlist Creator/AI News Form Updater](agents/yt-ai-news-playlist-creator-ai-news-form-updater/README.md) | 15 | [JSON](agents/yt-ai-news-playlist-creator-ai-news-form-updater/implementations/n8n/yt-ai-news-playlist-creator-ai-news-form-updater.json) |
+| [list google drive and share google drive](agents/list-google-drive-and-share-google-drive/README.md) | 8 | [JSON](agents/list-google-drive-and-share-google-drive/implementations/n8n/list-google-drive-and-share-google-drive.json) |
+| [Age and number of the news](agents/age-and-number-of-the-news/README.md) | 12 | [JSON](agents/age-and-number-of-the-news/implementations/n8n/age-and-number-of-the-news.json) |
+| [Testing Email Header Analysis Workflow](agents/testing-email-header-analysis-workflow-a45bd7ae/README.md) | 33 | [JSON](agents/testing-email-header-analysis-workflow-a45bd7ae/implementations/n8n/testing-email-header-analysis-workflow-a45bd7ae.json) |
+| [Social Media Publisher](agents/social-media-publisher/README.md) | 12 | [JSON](agents/social-media-publisher/implementations/n8n/social-media-publisher.json) |
+| [Automate Drive-To-Store Lead Generation System (with coupon) on SuiteCRM](agents/automate-drive-to-store-lead-generation-system-with-coupon-on-suitecrm/README.md) | 11 | [JSON](agents/automate-drive-to-store-lead-generation-system-with-coupon-on-suitecrm/implementations/n8n/automate-drive-to-store-lead-generation-system-with-coupon-on-suitecrm.json) |
+| [freshdesk api example](agents/freshdesk-api-example/README.md) | 2 | [JSON](agents/freshdesk-api-example/implementations/n8n/freshdesk-api-example.json) |
+| [read harvey s email and read excuses file and retrieve excuses spreadsheet data](agents/read-harvey-s-email-and-read-excuses-file-and-retrieve-excuses-spreadsheet-data/README.md) | 9 | [JSON](agents/read-harvey-s-email-and-read-excuses-file-and-retrieve-excuses-spreadsheet-data/implementations/n8n/read-harvey-s-email-and-read-excuses-file-and-retrieve-excuses-spreadsheet-data.json) |
+| [Financial News Recap Workflow](agents/financial-news-recap-workflow/README.md) | 7 | [JSON](agents/financial-news-recap-workflow/implementations/n8n/financial-news-recap-workflow.json) |
+| [Add a datapoint to Beeminder when new activity is added to Strava](agents/add-a-datapoint-to-beeminder-when-new-activity-is-added-to-strava/README.md) | 2 | [JSON](agents/add-a-datapoint-to-beeminder-when-new-activity-is-added-to-strava/implementations/n8n/add-a-datapoint-to-beeminder-when-new-activity-is-added-to-strava.json) |
+| [list message gmail and google drive](agents/list-message-gmail-and-google-drive/README.md) | 3 | [JSON](agents/list-message-gmail-and-google-drive/implementations/n8n/list-message-gmail-and-google-drive.json) |
+| [receive shopify events and list zendesk and create new ticket for new orders](agents/receive-shopify-events-and-list-zendesk-and-create-new-ticket-for-new-orders/README.md) | 7 | [JSON](agents/receive-shopify-events-and-list-zendesk-and-create-new-ticket-for-new-orders/implementations/n8n/receive-shopify-events-and-list-zendesk-and-create-new-ticket-for-new-orders.json) |
+| [create raindrop and create bookmark raindrop and update bookmark raindrop](agents/create-raindrop-and-create-bookmark-raindrop-and-update-bookmark-raindrop/README.md) | 4 | [JSON](agents/create-raindrop-and-create-bookmark-raindrop-and-update-bookmark-raindrop/implementations/n8n/create-raindrop-and-create-bookmark-raindrop-and-update-bookmark-raindrop.json) |
+| [Send a cocktail recipe every day via a Telegram](agents/send-a-cocktail-recipe-every-day-via-a-telegram/README.md) | 3 | [JSON](agents/send-a-cocktail-recipe-every-day-via-a-telegram/implementations/n8n/send-a-cocktail-recipe-every-day-via-a-telegram.json) |
+| [Calendar_scheduling](agents/calendar-scheduling/README.md) | 17 | [JSON](agents/calendar-scheduling/implementations/n8n/calendar-scheduling.json) |
+| [Create Threads on Bluesky](agents/create-threads-on-bluesky/README.md) | 14 | [JSON](agents/create-threads-on-bluesky/implementations/n8n/create-threads-on-bluesky.json) |
+| [🌐 Confluence Page AI Powered Chatbot](agents/confluence-page-ai-powered-chatbot/README.md) | 12 | [JSON](agents/confluence-page-ai-powered-chatbot/implementations/n8n/confluence-page-ai-powered-chatbot.json) |
+| [INSEE Enrichment for Agile CRM](agents/insee-enrichment-for-agile-crm/README.md) | 10 | [JSON](agents/insee-enrichment-for-agile-crm/implementations/n8n/insee-enrichment-for-agile-crm.json) |
+| [Entra Contacts to Zammad User Sync](agents/entra-contacts-to-zammad-user-sync/README.md) | 13 | [JSON](agents/entra-contacts-to-zammad-user-sync/implementations/n8n/entra-contacts-to-zammad-user-sync.json) |
+| [write read write file and download pdf file and file conversion to pdfa](agents/write-read-write-file-and-download-pdf-file-and-file-conversion-to-pdfa/README.md) | 4 | [JSON](agents/write-read-write-file-and-download-pdf-file-and-file-conversion-to-pdfa/implementations/n8n/write-read-write-file-and-download-pdf-file-and-file-conversion-to-pdfa.json) |
+| [What To Eat](agents/what-to-eat/README.md) | 9 | [JSON](agents/what-to-eat/implementations/n8n/what-to-eat.json) |
+| [webhook and update pager duty and mattermost](agents/webhook-and-update-pager-duty-and-mattermost/README.md) | 3 | [JSON](agents/webhook-and-update-pager-duty-and-mattermost/implementations/n8n/webhook-and-update-pager-duty-and-mattermost.json) |
+| [Automated Resume Review System Using OpenAI + Google Sheets](agents/automated-resume-review-system-using-openai-google-sheets/README.md) | 12 | [JSON](agents/automated-resume-review-system-using-openai-google-sheets/implementations/n8n/automated-resume-review-system-using-openai-google-sheets.json) |
+| [Send specific PDF attachments from Gmail to Google Drive using OpenAI](agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/README.md) | 16 | [JSON](agents/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai/implementations/n8n/send-specific-pdf-attachments-from-gmail-to-google-drive-using-openai.json) |
+| [create microsoft to do and update microsoft to do and microsoft to do2](agents/create-microsoft-to-do-and-update-microsoft-to-do-and-microsoft-to-do2/README.md) | 4 | [JSON](agents/create-microsoft-to-do-and-update-microsoft-to-do-and-microsoft-to-do2/implementations/n8n/create-microsoft-to-do-and-update-microsoft-to-do-and-microsoft-to-do2.json) |
+| [Create, update, and get an entry in Strapi](agents/create-update-and-get-an-entry-in-strapi/README.md) | 6 | [JSON](agents/create-update-and-get-an-entry-in-strapi/implementations/n8n/create-update-and-get-an-entry-in-strapi.json) |
+| [fetch hacker news content](agents/fetch-hacker-news-content/README.md) | 2 | [JSON](agents/fetch-hacker-news-content/implementations/n8n/fetch-hacker-news-content.json) |
+| [TEMPLATES](agents/split-out-and-get-boarditem-monday-com-and-http-request/README.md) | 14 | [JSON](agents/split-out-and-get-boarditem-monday-com-and-http-request/implementations/n8n/split-out-and-get-boarditem-monday-com-and-http-request.json) |
+| [Reply draft with OpenAI Assistant](agents/reply-draft-with-openai-assistant/README.md) | 13 | [JSON](agents/reply-draft-with-openai-assistant/implementations/n8n/reply-draft-with-openai-assistant.json) |
+| [My workflow 4](agents/github-get-repos-and-github-get-languages-and-arxiv-search-papers/README.md) | 17 | [JSON](agents/github-get-repos-and-github-get-languages-and-arxiv-search-papers/implementations/n8n/github-get-repos-and-github-get-languages-and-arxiv-search-papers.json) |
+| [🦙👁️👁️ Find the Best Local Ollama Vision Models by Comparison](agents/find-the-best-local-ollama-vision-models-by-comparison/README.md) | 13 | [JSON](agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/n8n/find-the-best-local-ollama-vision-models-by-comparison.json) |
+| [receive mailjet events](agents/receive-mailjet-events/README.md) | 1 | [JSON](agents/receive-mailjet-events/implementations/n8n/receive-mailjet-events.json) |
+| [default data loader and text splitter token splitter and download google drive](agents/default-data-loader-and-text-splitter-token-splitter-and-download-google-drive/README.md) | 6 | [JSON](agents/default-data-loader-and-text-splitter-token-splitter-and-download-google-drive/implementations/n8n/default-data-loader-and-text-splitter-token-splitter-and-download-google-drive.json) |
+| [Create a new user in Intercom](agents/create-a-new-user-in-intercom/README.md) | 2 | [JSON](agents/create-a-new-user-in-intercom/implementations/n8n/create-a-new-user-in-intercom.json) |
+| [Create a coupon on Paddle](agents/create-a-coupon-on-paddle/README.md) | 2 | [JSON](agents/create-a-coupon-on-paddle/implementations/n8n/create-a-coupon-on-paddle.json) |
+| [twitter and telegram and receive shopify events](agents/twitter-and-telegram-and-receive-shopify-events/README.md) | 3 | [JSON](agents/twitter-and-telegram-and-receive-shopify-events/implementations/n8n/twitter-and-telegram-and-receive-shopify-events.json) |
+| [Create a contact in Drift](agents/create-a-contact-in-drift/README.md) | 2 | [JSON](agents/create-a-contact-in-drift/implementations/n8n/create-a-contact-in-drift.json) |
+| [Entra User to Zammad User Sync](agents/entra-user-to-zammad-user-sync/README.md) | 16 | [JSON](agents/entra-user-to-zammad-user-sync/implementations/n8n/entra-user-to-zammad-user-sync.json) |
+| [receive google drive events and download google drive and spreadsheet file](agents/receive-google-drive-events-and-download-google-drive-and-spreadsheet-file/README.md) | 12 | [JSON](agents/receive-google-drive-events-and-download-google-drive-and-spreadsheet-file/implementations/n8n/receive-google-drive-events-and-download-google-drive-and-spreadsheet-file.json) |
+| [send email with mailgun](agents/send-email-with-mailgun/README.md) | 2 | [JSON](agents/send-email-with-mailgun/implementations/n8n/send-email-with-mailgun.json) |
+| [🤖🧠 AI Agent Chatbot + LONG TERM Memory + Note Storage + Telegram](agents/ai-agent-chatbot-long-term-memory-note-storage-telegram/README.md) | 13 | [JSON](agents/ai-agent-chatbot-long-term-memory-note-storage-telegram/implementations/n8n/ai-agent-chatbot-long-term-memory-note-storage-telegram.json) |
+| [receive chat events and categorize and name prompt and create airtable](agents/receive-chat-events-and-categorize-and-name-prompt-and-create-airtable/README.md) | 11 | [JSON](agents/receive-chat-events-and-categorize-and-name-prompt-and-create-airtable/implementations/n8n/receive-chat-events-and-categorize-and-name-prompt-and-create-airtable.json) |
+| [TEMPLATE - Multi Methods API Endpoint](agents/template-multi-methods-api-endpoint/README.md) | 13 | [JSON](agents/template-multi-methods-api-endpoint/implementations/n8n/template-multi-methods-api-endpoint.json) |
+| [LinkedIn Profile Discovery](agents/linkedin-profile-discovery/README.md) | 5 | [JSON](agents/linkedin-profile-discovery/implementations/n8n/linkedin-profile-discovery.json) |
+| [ai data extraction with dynamic prompts and airtable](agents/ai-data-extraction-with-dynamic-prompts-and-airtable/README.md) | 30 | [JSON](agents/ai-data-extraction-with-dynamic-prompts-and-airtable/implementations/n8n/ai-data-extraction-with-dynamic-prompts-and-airtable.json) |
+| [🤖🧑‍💻 AI Agent  for Top n8n Creators Leaderboard Reporting](agents/ai-agent-for-top-n8n-creators-leaderboard-reporting/README.md) | 31 | [JSON](agents/ai-agent-for-top-n8n-creators-leaderboard-reporting/implementations/n8n/ai-agent-for-top-n8n-creators-leaderboard-reporting.json) |
+| [Simplest n8n Workflow Backup – Automating Your Data Security in Google Drive](agents/simplest-n8n-workflow-backup-automating-your-data-security-in-google-drive/README.md) | 5 | [JSON](agents/simplest-n8n-workflow-backup-automating-your-data-security-in-google-drive/implementations/n8n/simplest-n8n-workflow-backup-automating-your-data-security-in-google-drive.json) |
+| [http request and filter leads by company criteria and clearbit](agents/http-request-and-filter-leads-by-company-criteria-and-clearbit/README.md) | 11 | [JSON](agents/http-request-and-filter-leads-by-company-criteria-and-clearbit/implementations/n8n/http-request-and-filter-leads-by-company-criteria-and-clearbit.json) |
+| [Receive the weather information of any city](agents/receive-the-weather-information-of-any-city/README.md) | 3 | [JSON](agents/receive-the-weather-information-of-any-city/implementations/n8n/receive-the-weather-information-of-any-city.json) |
+| [Analyze Reddit Posts with AI to Identify Business Opportunities](agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/README.md) | 18 | [JSON](agents/analyze-reddit-posts-with-ai-to-identify-business-opportunities/implementations/n8n/analyze-reddit-posts-with-ai-to-identify-business-opportunities.json) |
+| [Amazon Ads AI Optimization](agents/amazon-ads-ai-optimization/README.md) | 15 | [JSON](agents/amazon-ads-ai-optimization/implementations/n8n/amazon-ads-ai-optimization.json) |
+| [receive schedule events and google sheets and chain llm](agents/receive-schedule-events-and-google-sheets-and-chain-llm/README.md) | 18 | [JSON](agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/n8n/receive-schedule-events-and-google-sheets-and-chain-llm.json) |
+| [🙋‍♀️What's the difference?](agents/what-s-the-difference/README.md) | 31 | [JSON](agents/what-s-the-difference/implementations/n8n/what-s-the-difference.json) |
+| [Assign values to variables using the Set node](agents/assign-values-to-variables-using-the-set-node/README.md) | 2 | [JSON](agents/assign-values-to-variables-using-the-set-node/implementations/n8n/assign-values-to-variables-using-the-set-node.json) |
+| [Get Company by Name](agents/get-company-by-name/README.md) | 4 | [JSON](agents/get-company-by-name/implementations/n8n/get-company-by-name.json) |
+| [receive schedule events and scrape website with scrappey](agents/receive-schedule-events-and-scrape-website-with-scrappey/README.md) | 3 | [JSON](agents/receive-schedule-events-and-scrape-website-with-scrappey/implementations/n8n/receive-schedule-events-and-scrape-website-with-scrappey.json) |
+| [Image-Based Data Extraction API using Gemini AI](agents/image-based-data-extraction-api-using-gemini-ai/README.md) | 6 | [JSON](agents/image-based-data-extraction-api-using-gemini-ai/implementations/n8n/image-based-data-extraction-api-using-gemini-ai.json) |
+| [Send SMS to numbers stored in Airtable with Twilio](agents/send-sms-to-numbers-stored-in-airtable-with-twilio/README.md) | 3 | [JSON](agents/send-sms-to-numbers-stored-in-airtable-with-twilio/implementations/n8n/send-sms-to-numbers-stored-in-airtable-with-twilio.json) |
+| [Indeed Company Data Scraper &amp; Summarization with Airtable, Bright Data and Google Gemini](agents/indeed-company-data-scraper-summarization-with-airtable-bright-data-and-google-gemini/README.md) | 16 | [JSON](agents/indeed-company-data-scraper-summarization-with-airtable-bright-data-and-google-gemini/implementations/n8n/indeed-company-data-scraper-summarization-with-airtable-bright-data-and-google-gemini.json) |
+| [🎦💌Advanced YouTube RSS Feed Buddy for Your Favorite Channels](agents/advanced-youtube-rss-feed-buddy-for-your-favorite-channels/README.md) | 29 | [JSON](agents/advanced-youtube-rss-feed-buddy-for-your-favorite-channels/implementations/n8n/advanced-youtube-rss-feed-buddy-for-your-favorite-channels.json) |
+| [Receive a Mattermost message when new data gets added to Airtable](agents/receive-a-mattermost-message-when-new-data-gets-added-to-airtable/README.md) | 2 | [JSON](agents/receive-a-mattermost-message-when-new-data-gets-added-to-airtable/implementations/n8n/receive-a-mattermost-message-when-new-data-gets-added-to-airtable.json) |
+| [Speech Support Workflow](agents/speech-support-workflow/README.md) | 16 | [JSON](agents/speech-support-workflow/implementations/n8n/speech-support-workflow.json) |
+| [Customer and Sales Support](agents/customer-and-sales-support/README.md) | 7 | [JSON](agents/customer-and-sales-support/implementations/n8n/customer-and-sales-support.json) |
+| [upload ftp and receive schedule events and send zigbee2mqtt backup request](agents/upload-ftp-and-receive-schedule-events-and-send-zigbee2mqtt-backup-request/README.md) | 6 | [JSON](agents/upload-ftp-and-receive-schedule-events-and-send-zigbee2mqtt-backup-request/implementations/n8n/upload-ftp-and-receive-schedule-events-and-send-zigbee2mqtt-backup-request.json) |
+| [open weather map and webhook](agents/open-weather-map-and-webhook/README.md) | 3 | [JSON](agents/open-weather-map-and-webhook/implementations/n8n/open-weather-map-and-webhook.json) |
+| [receive acuity scheduling events](agents/receive-acuity-scheduling-events/README.md) | 1 | [JSON](agents/receive-acuity-scheduling-events/implementations/n8n/receive-acuity-scheduling-events.json) |
+| [LLM Chaining examples](agents/llm-orchestration-lab/README.md) | 31 | [JSON](agents/llm-orchestration-lab/implementations/n8n/llm-orchestration-lab.json) |
+| [Get Threads API Access Token](agents/get-threads-api-access-token/README.md) | 19 | [JSON](agents/get-threads-api-access-token/implementations/n8n/get-threads-api-access-token.json) |
+| [send email with mandrill](agents/send-email-with-mandrill/README.md) | 2 | [JSON](agents/send-email-with-mandrill/implementations/n8n/send-email-with-mandrill.json) |
+| [list google calendar and create trello cards and trigger every day at 8am](agents/list-google-calendar-and-create-trello-cards-and-trigger-every-day-at-8am/README.md) | 8 | [JSON](agents/list-google-calendar-and-create-trello-cards-and-trigger-every-day-at-8am/implementations/n8n/list-google-calendar-and-create-trello-cards-and-trigger-every-day-at-8am.json) |
+| [webhook and create netlify](agents/webhook-and-create-netlify/README.md) | 2 | [JSON](agents/webhook-and-create-netlify/implementations/n8n/webhook-and-create-netlify.json) |
+| [screenshot](agents/screenshot/README.md) | 10 | [JSON](agents/screenshot/implementations/n8n/screenshot.json) |
+| [ClockifyBlockiaWorkflow](agents/clockifyblockiaworkflow/README.md) | 16 | [JSON](agents/clockifyblockiaworkflow/implementations/n8n/clockifyblockiaworkflow.json) |
+| [TheHive](agents/thehive/README.md) | 7 | [JSON](agents/thehive/implementations/n8n/thehive.json) |
+| [Daily Text Affirmations](agents/daily-text-affirmations/README.md) | 3 | [JSON](agents/daily-text-affirmations/implementations/n8n/daily-text-affirmations.json) |
+| [JSON file &gt; Google Sheets](agents/json-file-google-sheets/README.md) | 10 | [JSON](agents/json-file-google-sheets/implementations/n8n/json-file-google-sheets.json) |
+| [PURCHASE ORDER EXAMPLE](agents/purchase-order-example/README.md) | 16 | [JSON](agents/purchase-order-example/implementations/n8n/purchase-order-example.json) |
+| [Receive updates when a new activity gets created and tweet about it](agents/receive-updates-when-a-new-activity-gets-created-and-tweet-about-it/README.md) | 2 | [JSON](agents/receive-updates-when-a-new-activity-gets-created-and-tweet-about-it/implementations/n8n/receive-updates-when-a-new-activity-gets-created-and-tweet-about-it.json) |
+| [http request and write read write file](agents/http-request-and-write-read-write-file/README.md) | 4 | [JSON](agents/http-request-and-write-read-write-file/implementations/n8n/http-request-and-write-read-write-file.json) |
+| [http request and append google sheets and receive form events](agents/http-request-and-append-google-sheets-and-receive-form-events/README.md) | 12 | [JSON](agents/http-request-and-append-google-sheets-and-receive-form-events/implementations/n8n/http-request-and-append-google-sheets-and-receive-form-events.json) |
+| [google big query and http request and cron](agents/google-big-query-and-http-request-and-cron/README.md) | 4 | [JSON](agents/google-big-query-and-http-request-and-cron/implementations/n8n/google-big-query-and-http-request-and-cron.json) |
+| [↔️ Airtable Batch Processing](agents/airtable-batch-processing/README.md) | 29 | [JSON](agents/airtable-batch-processing/implementations/n8n/airtable-batch-processing.json) |
+| [Search for all contacts that last contact date for is unknown](agents/search-for-all-contacts-that-last-contact-date-for-is-unknown/README.md) | 5 | [JSON](agents/search-for-all-contacts-that-last-contact-date-for-is-unknown/implementations/n8n/search-for-all-contacts-that-last-contact-date-for-is-unknown.json) |
+| [Update Crypto Values](agents/update-crypto-values/README.md) | 8 | [JSON](agents/update-crypto-values/implementations/n8n/update-crypto-values.json) |
+| [Create, update, and get a subscriber using the e-goi node](agents/create-update-and-get-a-subscriber-using-the-e-goi-node/README.md) | 4 | [JSON](agents/create-update-and-get-a-subscriber-using-the-e-goi-node/implementations/n8n/create-update-and-get-a-subscriber-using-the-e-goi-node.json) |
+| [Optimise images uploaded to GDrive](agents/optimise-images-uploaded-to-gdrive/README.md) | 5 | [JSON](agents/optimise-images-uploaded-to-gdrive/implementations/n8n/optimise-images-uploaded-to-gdrive.json) |
+| [Sending an SMS using sms77](agents/sending-an-sms-using-sms77/README.md) | 2 | [JSON](agents/sending-an-sms-using-sms77/implementations/n8n/sending-an-sms-using-sms77.json) |
+| [OpenAI Assistant for Hubspot Chat](agents/openai-assistant-for-hubspot-chat/README.md) | 26 | [JSON](agents/openai-assistant-for-hubspot-chat/implementations/n8n/openai-assistant-for-hubspot-chat.json) |
+| [Conducting user interviews have been traditionally difficult due to preparation, timing and execution costs. What if we let an AI/LLM do it instead?](agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/README.md) | 30 | [JSON](agents/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha/implementations/n8n/conducting-user-interviews-have-been-traditionally-difficult-due-to-preparation-timing-and-execution-costs-wha.json) |
+| [Discord MCP Chat Agent](agents/discord-mcp-chat-agent/README.md) | 4 | [JSON](agents/discord-mcp-chat-agent/implementations/n8n/discord-mcp-chat-agent.json) |
+| [AI Agent - Cv Resume - Automated Screening , Sorting , Rating and Tracker System](agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/README.md) | 11 | [JSON](agents/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system/implementations/n8n/ai-agent-cv-resume-automated-screening-sorting-rating-and-tracker-system.json) |
+| [Activate workflow to use!](agents/activate-workflow-to-use/README.md) | 24 | [JSON](agents/activate-workflow-to-use/implementations/n8n/activate-workflow-to-use.json) |
+| [Example of EDI Message](agents/example-of-edi-message/README.md) | 12 | [JSON](agents/example-of-edi-message/implementations/n8n/example-of-edi-message.json) |
+| [Pyragogy AI Village - Orchestrazione Master (Architettura Profonda V2)](agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/README.md) | 35 | [JSON](agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2/implementations/n8n/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2.json) |
+| [every day at 07 00 and search contact hubspot and mailchimp](agents/every-day-at-07-00-and-search-contact-hubspot-and-mailchimp/README.md) | 3 | [JSON](agents/every-day-at-07-00-and-search-contact-hubspot-and-mailchimp/implementations/n8n/every-day-at-07-00-and-search-contact-hubspot-and-mailchimp.json) |
+| [Click the `Execute Workflow` button and double click on the nodes to see the input and output items.](agents/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items/README.md) | 5 | [JSON](agents/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items/implementations/n8n/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items.json) |
+| [N8N Financial Tracker Telegram Invoices to Notion with AI Summaries &amp; Reports](agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/README.md) | 15 | [JSON](agents/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports/implementations/n8n/n8n-financial-tracker-telegram-invoices-to-notion-with-ai-summaries-reports.json) |
+| [Webhook Node (Shopify Listener)](agents/webhook-node-shopify-listener/README.md) | 8 | [JSON](agents/webhook-node-shopify-listener/implementations/n8n/webhook-node-shopify-listener.json) |
+| [Standup Bot - Override Config](agents/standup-bot-override-config/README.md) | 3 | [JSON](agents/standup-bot-override-config/implementations/n8n/standup-bot-override-config.json) |
+| [Automatically Send Daily Meeting List to Telegram](agents/automatically-send-daily-meeting-list-to-telegram/README.md) | 5 | [JSON](agents/automatically-send-daily-meeting-list-to-telegram/implementations/n8n/automatically-send-daily-meeting-list-to-telegram.json) |
+| [Clone n8n Workflows between Instances using n8n API](agents/clone-n8n-workflows-between-instances-using-n8n-api/README.md) | 14 | [JSON](agents/clone-n8n-workflows-between-instances-using-n8n-api/implementations/n8n/clone-n8n-workflows-between-instances-using-n8n-api.json) |
+| [Add a event to Calender](agents/add-a-event-to-calender/README.md) | 2 | [JSON](agents/add-a-event-to-calender/implementations/n8n/add-a-event-to-calender.json) |
+| [write read write file and download pptx file and file conversion to pdf](agents/write-read-write-file-and-download-pptx-file-and-file-conversion-to-pdf/README.md) | 4 | [JSON](agents/write-read-write-file-and-download-pptx-file-and-file-conversion-to-pdf/implementations/n8n/write-read-write-file-and-download-pptx-file-and-file-conversion-to-pdf.json) |
+| [Scrape Twitter for mentions of company](agents/scrape-twitter-for-mentions-of-company/README.md) | 7 | [JSON](agents/scrape-twitter-for-mentions-of-company/implementations/n8n/scrape-twitter-for-mentions-of-company.json) |
+| [Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini](agents/vision-based-ai-agent-scraper-with-google-sheets-scrapingbee-and-gemini/README.md) | 14 | [JSON](agents/vision-based-ai-agent-scraper-with-google-sheets-scrapingbee-and-gemini/implementations/n8n/vision-based-ai-agent-scraper-with-google-sheets-scrapingbee-and-gemini.json) |
+| [split out and remove duplicates and respond to webhook](agents/split-out-and-remove-duplicates-and-respond-to-webhook/README.md) | 7 | [JSON](agents/split-out-and-remove-duplicates-and-respond-to-webhook/implementations/n8n/split-out-and-remove-duplicates-and-respond-to-webhook.json) |
+| [piepdrive-test](agents/enrich-pipedrive-s-organization-data-with-gpt-4o-when-an-organization-is-created-in-pipedrive/README.md) | 7 | [JSON](agents/enrich-pipedrive-s-organization-data-with-gpt-4o-when-an-organization-is-created-in-pipedrive/implementations/n8n/enrich-pipedrive-s-organization-data-with-gpt-4o-when-an-organization-is-created-in-pipedrive.json) |
+| [AutoClip – Automatically Generate Video Clips and Upload to YouTube](agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/README.md) | 20 | [JSON](agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/n8n/autoclip-automatically-generate-video-clips-and-upload-to-youtube.json) |
+| [Create a Google sheet](agents/create-a-google-sheet/README.md) | 7 | [JSON](agents/create-a-google-sheet/implementations/n8n/create-a-google-sheet.json) |
+| [plivo and open weather map and cron](agents/plivo-and-open-weather-map-and-cron/README.md) | 3 | [JSON](agents/plivo-and-open-weather-map-and-cron/implementations/n8n/plivo-and-open-weather-map-and-cron.json) |
+| [Squarespace Fulfillment Automation with n8n](agents/squarespace-fulfillment-automation-with-n8n/README.md) | 8 | [JSON](agents/squarespace-fulfillment-automation-with-n8n/implementations/n8n/squarespace-fulfillment-automation-with-n8n.json) |
+| [receive schedule events and default data loader and recursive character text splitter](agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/README.md) | 28 | [JSON](agents/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/n8n/receive-schedule-events-and-default-data-loader-and-recursive-character-text-splitter.json) |
+| [Timer starts the Update every 24 hours and Read the Links out of a Google Sheets File (RSS-Links)](agents/timer-starts-the-update-every-24-hours-and-read-the-links-out-of-a-google-sheets-file-rss-links/README.md) | 16 | [JSON](agents/timer-starts-the-update-every-24-hours-and-read-the-links-out-of-a-google-sheets-file-rss-links/implementations/n8n/timer-starts-the-update-every-24-hours-and-read-the-links-out-of-a-google-sheets-file-rss-links.json) |
+| [receive jira events](agents/receive-jira-events/README.md) | 1 | [JSON](agents/receive-jira-events/implementations/n8n/receive-jira-events.json) |
+| [Scrape Web Data with Bright Data, Google Gemini and MCP Automated AI Agent](agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/README.md) | 15 | [JSON](agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/n8n/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent.json) |
+| [SIGNL4 Alert](agents/signl4-alert/README.md) | 9 | [JSON](agents/signl4-alert/implementations/n8n/signl4-alert.json) |
+| [nl2sql](agents/query-postgres-and-create-charts-from-natural-language/README.md) | 24 | [JSON](agents/query-postgres-and-create-charts-from-natural-language/implementations/n8n/query-postgres-and-create-charts-from-natural-language.json) |
+| [Create Animated Stories using GPT-4o-mini, Midjourney, Kling and Creatomate API](agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/README.md) | 45 | [JSON](agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/n8n/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api.json) |
+| [Search LinkedIn companies, Score with AI and add them to Google Sheet CRM](agents/search-linkedin-companies-score-with-ai-and-add-them-to-google-sheet-crm/README.md) | 12 | [JSON](agents/search-linkedin-companies-score-with-ai-and-add-them-to-google-sheet-crm/implementations/n8n/search-linkedin-companies-score-with-ai-and-add-them-to-google-sheet-crm.json) |
+| [html to pdf and webhook and respond to webhook](agents/html-to-pdf-and-webhook-and-respond-to-webhook/README.md) | 5 | [JSON](agents/html-to-pdf-and-webhook-and-respond-to-webhook/implementations/n8n/html-to-pdf-and-webhook-and-respond-to-webhook.json) |
+| [Orchestrator v2 - Enhanced](agents/orchestrator-v2-enhanced/README.md) | 11 | [JSON](agents/orchestrator-v2-enhanced/implementations/n8n/orchestrator-v2-enhanced.json) |
+| [Moving metrics from Google Sheets to Orbit](agents/moving-metrics-from-google-sheets-to-orbit/README.md) | 6 | [JSON](agents/moving-metrics-from-google-sheets-to-orbit/implementations/n8n/moving-metrics-from-google-sheets-to-orbit.json) |
+| [Scalable Webhook Orchestrator](agents/scalable-webhook-orchestrator/README.md) | 7 | [JSON](agents/scalable-webhook-orchestrator/implementations/n8n/scalable-webhook-orchestrator.json) |
+| [cron and executequery my sql and append google sheets](agents/cron-and-executequery-my-sql-and-append-google-sheets/README.md) | 3 | [JSON](agents/cron-and-executequery-my-sql-and-append-google-sheets/implementations/n8n/cron-and-executequery-my-sql-and-append-google-sheets.json) |
+| [basic llm chain and hacker news and http request](agents/basic-llm-chain-and-hacker-news-and-http-request/README.md) | 10 | [JSON](agents/basic-llm-chain-and-hacker-news-and-http-request/implementations/n8n/basic-llm-chain-and-hacker-news-and-http-request.json) |
+| [Creating an Onfleet Task for a new Shopify Fulfillment](agents/creating-an-onfleet-task-for-a-new-shopify-fulfillment/README.md) | 2 | [JSON](agents/creating-an-onfleet-task-for-a-new-shopify-fulfillment/implementations/n8n/creating-an-onfleet-task-for-a-new-shopify-fulfillment.json) |
+| [Get new time entries from Toggl](agents/get-new-time-entries-from-toggl/README.md) | 1 | [JSON](agents/get-new-time-entries-from-toggl/implementations/n8n/get-new-time-entries-from-toggl.json) |
+| [Convert image from jpg/png to webp](agents/convert-image-from-jpg-png-to-webp/README.md) | 10 | [JSON](agents/convert-image-from-jpg-png-to-webp/implementations/n8n/convert-image-from-jpg-png-to-webp.json) |
+| [DROPCONTACT 250 BATCH ASYNCHRONOUSLY](agents/dropcontact-250-batch-asynchronously/README.md) | 11 | [JSON](agents/dropcontact-250-batch-asynchronously/implementations/n8n/dropcontact-250-batch-asynchronously.json) |
+| [Post New YouTube Videos to X](agents/post-new-youtube-videos-to-x/README.md) | 4 | [JSON](agents/post-new-youtube-videos-to-x/implementations/n8n/post-new-youtube-videos-to-x.json) |
+| [Email Validation and extract domain](agents/email-validation-and-extract-domain/README.md) | 3 | [JSON](agents/email-validation-and-extract-domain/implementations/n8n/email-validation-and-extract-domain.json) |
+| [Simple Conversion of Emails into HTML Webpages](agents/simple-conversion-of-emails-into-html-webpages/README.md) | 6 | [JSON](agents/simple-conversion-of-emails-into-html-webpages/implementations/n8n/simple-conversion-of-emails-into-html-webpages.json) |
+| [receive google sheets events and take a screenshot of a website and google drive](agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/README.md) | 3 | [JSON](agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/n8n/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive.json) |
+| [Get today's date and day using the Function node](agents/get-today-s-date-and-day-using-the-function-node/README.md) | 2 | [JSON](agents/get-today-s-date-and-day-using-the-function-node/implementations/n8n/get-today-s-date-and-day-using-the-function-node.json) |
+| [box file api example](agents/box-file-api-example/README.md) | 2 | [JSON](agents/box-file-api-example/implementations/n8n/box-file-api-example.json) |
+| [webhook and executequery my sql and http request](agents/webhook-and-executequery-my-sql-and-http-request/README.md) | 6 | [JSON](agents/webhook-and-executequery-my-sql-and-http-request/implementations/n8n/webhook-and-executequery-my-sql-and-http-request.json) |
+| [Image Generation API](agents/image-generation-api/README.md) | 3 | [JSON](agents/image-generation-api/implementations/n8n/image-generation-api.json) |
+| [address validation](agents/address-validation/README.md) | 21 | [JSON](agents/address-validation/implementations/n8n/address-validation.json) |
+| [n8n-農產品](agents/http-request-and-split-out-and-append-google-sheets/README.md) | 4 | [JSON](agents/http-request-and-split-out-and-append-google-sheets/implementations/n8n/http-request-and-split-out-and-append-google-sheets.json) |
+| [cron and elasticsearch and create work item](agents/cron-and-elasticsearch-and-create-work-item/README.md) | 5 | [JSON](agents/cron-and-elasticsearch-and-create-work-item/implementations/n8n/cron-and-elasticsearch-and-create-work-item.json) |
+| [http request and get reddit ml and groq llm sentiment](agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/README.md) | 17 | [JSON](agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/n8n/http-request-and-get-reddit-ml-and-groq-llm-sentiment.json) |
+| [Receive updates when an event occurs in TheHive](agents/receive-updates-when-an-event-occurs-in-thehive/README.md) | 1 | [JSON](agents/receive-updates-when-an-event-occurs-in-thehive/implementations/n8n/receive-updates-when-an-event-occurs-in-thehive.json) |
+| [Send Google Sheets data as a message to a Discord channel](agents/send-google-sheets-data-as-a-message-to-a-discord-channel/README.md) | 3 | [JSON](agents/send-google-sheets-data-as-a-message-to-a-discord-channel/implementations/n8n/send-google-sheets-data-as-a-message-to-a-discord-channel.json) |
+| [Tech_Stack_Directional_Signal_Agent](agents/tech-stack-directional-signal-agent/README.md) | 12 | [JSON](agents/tech-stack-directional-signal-agent/implementations/n8n/tech-stack-directional-signal-agent.json) |
+| [Basic PDF Digital Sign Service](agents/basic-pdf-digital-sign-service/README.md) | 27 | [JSON](agents/basic-pdf-digital-sign-service/implementations/n8n/basic-pdf-digital-sign-service.json) |
+| [RAG Workflow For Company Documents stored in Google Drive](agents/rag-workflow-for-company-documents-stored-in-google-drive/README.md) | 15 | [JSON](agents/rag-workflow-for-company-documents-stored-in-google-drive/implementations/n8n/rag-workflow-for-company-documents-stored-in-google-drive.json) |
+| [isavailable peekalink and peekalink](agents/isavailable-peekalink-and-peekalink/README.md) | 5 | [JSON](agents/isavailable-peekalink-and-peekalink/implementations/n8n/isavailable-peekalink-and-peekalink.json) |
+| [receive telegram events and fetch voice message and translate audio open ai](agents/receive-telegram-events-and-fetch-voice-message-and-translate-audio-open-ai/README.md) | 12 | [JSON](agents/receive-telegram-events-and-fetch-voice-message-and-translate-audio-open-ai/implementations/n8n/receive-telegram-events-and-fetch-voice-message-and-translate-audio-open-ai.json) |
+| [signl4 and open weather map and receive schedule events](agents/signl4-and-open-weather-map-and-receive-schedule-events/README.md) | 5 | [JSON](agents/signl4-and-open-weather-map-and-receive-schedule-events/implementations/n8n/signl4-and-open-weather-map-and-receive-schedule-events.json) |
+| [OpenSea NFT Agent Tool](agents/opensea-nft-agent-tool/README.md) | 14 | [JSON](agents/opensea-nft-agent-tool/implementations/n8n/opensea-nft-agent-tool.json) |
+| [Reschedule overdue Asana tasks and clean up completed tasks](agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/README.md) | 7 | [JSON](agents/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks/implementations/n8n/reschedule-overdue-asana-tasks-and-clean-up-completed-tasks.json) |
+| [Receive MQTT message from IKEA 5-button Switch, and route actions.](agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/README.md) | 24 | [JSON](agents/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions/implementations/n8n/receive-mqtt-message-from-ikea-5-button-switch-and-route-actions.json) |
+| [receive invoice ninja events](agents/receive-invoice-ninja-events/README.md) | 1 | [JSON](agents/receive-invoice-ninja-events/implementations/n8n/receive-invoice-ninja-events.json) |
+| [AI Lead Generation &amp; Enrichment (Outscraper + Gemini)](agents/ai-lead-generation-enrichment-outscraper-gemini/README.md) | 9 | [JSON](agents/ai-lead-generation-enrichment-outscraper-gemini/implementations/n8n/ai-lead-generation-enrichment-outscraper-gemini.json) |
+| [list customer stripe and search organization pipedrive and create note with charge information](agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/README.md) | 11 | [JSON](agents/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information/implementations/n8n/list-customer-stripe-and-search-organization-pipedrive-and-create-note-with-charge-information.json) |
+| [Contact Form Text Classifier for eCommerce](agents/contact-form-text-classifier-for-ecommerce/README.md) | 13 | [JSON](agents/contact-form-text-classifier-for-ecommerce/implementations/n8n/contact-form-text-classifier-for-ecommerce.json) |
+| [pinecone vector store and receive chat events and download google drive](agents/pinecone-vector-store-and-receive-chat-events-and-download-google-drive/README.md) | 16 | [JSON](agents/pinecone-vector-store-and-receive-chat-events-and-download-google-drive/implementations/n8n/pinecone-vector-store-and-receive-chat-events-and-download-google-drive.json) |
+| [CV Evaluation - Error Handling](agents/cv-evaluation-error-handling/README.md) | 10 | [JSON](agents/cv-evaluation-error-handling/implementations/n8n/cv-evaluation-error-handling.json) |
+| [executequery postgres and tofile spreadsheet file and write binary file](agents/executequery-postgres-and-tofile-spreadsheet-file-and-write-binary-file/README.md) | 3 | [JSON](agents/executequery-postgres-and-tofile-spreadsheet-file-and-write-binary-file/implementations/n8n/executequery-postgres-and-tofile-spreadsheet-file-and-write-binary-file.json) |
+| [Structured Bulk Data Extract with Bright Data Web Scraper](agents/structured-bulk-data-extract-with-bright-data-web-scraper/README.md) | 13 | [JSON](agents/structured-bulk-data-extract-with-bright-data-web-scraper/implementations/n8n/structured-bulk-data-extract-with-bright-data-web-scraper.json) |
+| [Start here: Step-by Step Youtube Tutorial :star:](agents/start-here-step-by-step-youtube-tutorial-star/README.md) | 6 | [JSON](agents/start-here-step-by-step-youtube-tutorial-star/implementations/n8n/start-here-step-by-step-youtube-tutorial-star.json) |
+| [check twitch channel status with graphql](agents/check-twitch-channel-status-with-graphql/README.md) | 4 | [JSON](agents/check-twitch-channel-status-with-graphql/implementations/n8n/check-twitch-channel-status-with-graphql.json) |
+| [Snowflake CSV](agents/snowflake-csv/README.md) | 5 | [JSON](agents/snowflake-csv/implementations/n8n/snowflake-csv.json) |
+| [Find WooCommerce User-ID](agents/find-woocommerce-user-id/README.md) | 31 | [JSON](agents/find-woocommerce-user-id/implementations/n8n/find-woocommerce-user-id.json) |
+| [Zoom AI Meeting Assistant](agents/zoom-ai-meeting-assistant/README.md) | 22 | [JSON](agents/zoom-ai-meeting-assistant/implementations/n8n/zoom-ai-meeting-assistant.json) |
+| [Extract expenses from emails and add to Google Sheet](agents/extract-expenses-from-emails-and-add-to-google-sheet/README.md) | 6 | [JSON](agents/extract-expenses-from-emails-and-add-to-google-sheet/implementations/n8n/extract-expenses-from-emails-and-add-to-google-sheet.json) |
+| [Receive updates when a subscriber is added to a group and strore the information in Airtable](agents/receive-updates-when-a-subscriber-is-added-to-a-group-and-strore-the-information-in-airtable/README.md) | 4 | [JSON](agents/receive-updates-when-a-subscriber-is-added-to-a-group-and-strore-the-information-in-airtable/implementations/n8n/receive-updates-when-a-subscriber-is-added-to-a-group-and-strore-the-information-in-airtable.json) |
+| [http request and filter](agents/http-request-and-filter/README.md) | 11 | [JSON](agents/http-request-and-filter/implementations/n8n/http-request-and-filter.json) |
+| [TwitterWorkflow](agents/twitterworkflow/README.md) | 6 | [JSON](agents/twitterworkflow/implementations/n8n/twitterworkflow.json) |
+| [Auto WordPress Blog Generator (GPT + Postgres + WP Media)](agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/README.md) | 23 | [JSON](agents/auto-wordpress-blog-generator-gpt-postgres-wp-media/implementations/n8n/auto-wordpress-blog-generator-gpt-postgres-wp-media.json) |
+| [Discord Intro](agents/discord-intro/README.md) | 2 | [JSON](agents/discord-intro/implementations/n8n/discord-intro.json) |
+| [process items in batches with conditions](agents/process-items-in-batches-with-conditions/README.md) | 5 | [JSON](agents/process-items-in-batches-with-conditions/implementations/n8n/process-items-in-batches-with-conditions.json) |
+| [Creating your first workflow](agents/creating-your-first-workflow/README.md) | 5 | [JSON](agents/creating-your-first-workflow/implementations/n8n/creating-your-first-workflow.json) |
+| [Fully automated Video Captions generation with json2video](agents/fully-automated-video-captions-generation-with-json2video/README.md) | 9 | [JSON](agents/fully-automated-video-captions-generation-with-json2video/implementations/n8n/fully-automated-video-captions-generation-with-json2video.json) |
+| [conversational interviews with ai agents and n8n forms](agents/conversational-interviews-with-ai-agents-and-n8n-forms/README.md) | 64 | [JSON](agents/conversational-interviews-with-ai-agents-and-n8n-forms/implementations/n8n/conversational-interviews-with-ai-agents-and-n8n-forms.json) |
+| [Receive updates when an email is bounced or opened](agents/receive-updates-when-an-email-is-bounced-or-opened/README.md) | 1 | [JSON](agents/receive-updates-when-an-email-is-bounced-or-opened/implementations/n8n/receive-updates-when-an-email-is-bounced-or-opened.json) |
+| [My workflow 6](agents/slash-command/README.md) | 5 | [JSON](agents/slash-command/implementations/n8n/slash-command.json) |
+| [Very quick quickstart](agents/very-quick-quickstart/README.md) | 3 | [JSON](agents/very-quick-quickstart/implementations/n8n/very-quick-quickstart.json) |
+| [You only have to run this part once!](agents/you-only-have-to-run-this-part-once/README.md) | 18 | [JSON](agents/you-only-have-to-run-this-part-once/implementations/n8n/you-only-have-to-run-this-part-once.json) |
+| [Create an empty google sheet file](agents/create-an-empty-google-sheet-file/README.md) | 12 | [JSON](agents/create-an-empty-google-sheet-file/implementations/n8n/create-an-empty-google-sheet-file.json) |
+| [read binary file and spreadsheet file and move binary data](agents/read-binary-file-and-spreadsheet-file-and-move-binary-data/README.md) | 5 | [JSON](agents/read-binary-file-and-spreadsheet-file-and-move-binary-data/implementations/n8n/read-binary-file-and-spreadsheet-file-and-move-binary-data.json) |
+| [receive shopify events](agents/receive-shopify-events/README.md) | 1 | [JSON](agents/receive-shopify-events/implementations/n8n/receive-shopify-events.json) |
+| [Connect Airtable Contacts to telli for Automated AI Voice Call Scheduling](agents/connect-airtable-contacts-to-telli-for-automated-ai-voice-call-scheduling/README.md) | 3 | [JSON](agents/connect-airtable-contacts-to-telli-for-automated-ai-voice-call-scheduling/implementations/n8n/connect-airtable-contacts-to-telli-for-automated-ai-voice-call-scheduling.json) |
+| [crypto hashing example](agents/crypto-hashing-example/README.md) | 2 | [JSON](agents/crypto-hashing-example/implementations/n8n/crypto-hashing-example.json) |
+| [Create entry in Mailchimp from Airtable](agents/create-entry-in-mailchimp-from-airtable/README.md) | 3 | [JSON](agents/create-entry-in-mailchimp-from-airtable/implementations/n8n/create-entry-in-mailchimp-from-airtable.json) |
+| [Events Webhook Trigger](agents/events-webhook-trigger/README.md) | 22 | [JSON](agents/events-webhook-trigger/implementations/n8n/events-webhook-trigger.json) |
+| [Enrich Company Data from Google Sheet with OpenAI Agent and Scraper Tool](agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/README.md) | 12 | [JSON](agents/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool/implementations/n8n/enrich-company-data-from-google-sheet-with-openai-agent-and-scraper-tool.json) |
+| [Vector DB Loader from Google Drive](agents/vector-db-loader-from-google-drive/README.md) | 14 | [JSON](agents/vector-db-loader-from-google-drive/implementations/n8n/vector-db-loader-from-google-drive.json) |
+| [on clicking execute and check if pagination and set next url](agents/on-clicking-execute-and-check-if-pagination-and-set-next-url/README.md) | 8 | [JSON](agents/on-clicking-execute-and-check-if-pagination-and-set-next-url/implementations/n8n/on-clicking-execute-and-check-if-pagination-and-set-next-url.json) |
+| [Convert Parquet, Avro, ORC &amp; Feather via ParquetReader to JSON](agents/convert-parquet-avro-orc-feather-via-parquetreader-to-json/README.md) | 3 | [JSON](agents/convert-parquet-avro-orc-feather-via-parquetreader-to-json/implementations/n8n/convert-parquet-avro-orc-feather-via-parquetreader-to-json.json) |
+| [New invoice email notification](agents/new-invoice-email-notification/README.md) | 6 | [JSON](agents/new-invoice-email-notification/implementations/n8n/new-invoice-email-notification.json) |
+| [list contentful](agents/list-contentful/README.md) | 2 | [JSON](agents/list-contentful/implementations/n8n/list-contentful.json) |
+| [Use Stripe Predefined Credential](agents/use-stripe-predefined-credential/README.md) | 12 | [JSON](agents/use-stripe-predefined-credential/implementations/n8n/use-stripe-predefined-credential.json) |
+| [Create a client in Harvest](agents/create-a-client-in-harvest/README.md) | 2 | [JSON](agents/create-a-client-in-harvest/implementations/n8n/create-a-client-in-harvest.json) |
+| [template in store](agents/template-in-store/README.md) | 12 | [JSON](agents/template-in-store/implementations/n8n/template-in-store.json) |
+| [Fetch, filter and sort notion tasks](agents/fetch-filter-and-sort-notion-tasks/README.md) | 18 | [JSON](agents/fetch-filter-and-sort-notion-tasks/implementations/n8n/fetch-filter-and-sort-notion-tasks.json) |
+| [n8n and create new folder and tojson convert to file](agents/n8n-and-create-new-folder-and-tojson-convert-to-file/README.md) | 10 | [JSON](agents/n8n-and-create-new-folder-and-tojson-convert-to-file/implementations/n8n/n8n-and-create-new-folder-and-tojson-convert-to-file.json) |
+| [http request and update google sheets and append google sheets](agents/http-request-and-update-google-sheets-and-append-google-sheets/README.md) | 7 | [JSON](agents/http-request-and-update-google-sheets-and-append-google-sheets/implementations/n8n/http-request-and-update-google-sheets-and-append-google-sheets.json) |
+| [Main workflow: AI agent using custom tool](agents/main-workflow-ai-agent-using-custom-tool-96d92b57/README.md) | 11 | [JSON](agents/main-workflow-ai-agent-using-custom-tool-96d92b57/implementations/n8n/main-workflow-ai-agent-using-custom-tool-96d92b57.json) |
+| [Find a New Book](agents/find-a-new-book/README.md) | 13 | [JSON](agents/find-a-new-book/implementations/n8n/find-a-new-book.json) |
+| [Data reception via Webhook call or message](agents/data-reception-via-webhook-call-or-message/README.md) | 7 | [JSON](agents/data-reception-via-webhook-call-or-message/implementations/n8n/data-reception-via-webhook-call-or-message.json) |
+| [fetch new followers and item lists and http request](agents/fetch-new-followers-and-item-lists-and-http-request/README.md) | 12 | [JSON](agents/fetch-new-followers-and-item-lists-and-http-request/implementations/n8n/fetch-new-followers-and-item-lists-and-http-request.json) |
+| [list aws s3 and download all files from folder and all into one item include binary](agents/list-aws-s3-and-download-all-files-from-folder-and-all-into-one-item-include-binary/README.md) | 5 | [JSON](agents/list-aws-s3-and-download-all-files-from-folder-and-all-into-one-item-include-binary/implementations/n8n/list-aws-s3-and-download-all-files-from-folder-and-all-into-one-item-include-binary.json) |
+| [Retrieve Customer Messages Data (Google Sheets Node ):](agents/retrieve-customer-messages-data-google-sheets-node/README.md) | 7 | [JSON](agents/retrieve-customer-messages-data-google-sheets-node/implementations/n8n/retrieve-customer-messages-data-google-sheets-node.json) |
+| [🎙️ Generate Text-to-Speech Using Eleven Labs via API](agents/generate-text-to-speech-using-eleven-labs-via-api/README.md) | 8 | [JSON](agents/generate-text-to-speech-using-eleven-labs-via-api/implementations/n8n/generate-text-to-speech-using-eleven-labs-via-api.json) |
+| [Linear Project Status and End Date to Productboard feature Sync](agents/linear-project-status-and-end-date-to-productboard-feature-sync/README.md) | 15 | [JSON](agents/linear-project-status-and-end-date-to-productboard-feature-sync/implementations/n8n/linear-project-status-and-end-date-to-productboard-feature-sync.json) |
+| [Get More Templates Like This 👇](agents/get-more-templates-like-this/README.md) | 16 | [JSON](agents/get-more-templates-like-this/implementations/n8n/get-more-templates-like-this.json) |
+| [itemMatching() example](agents/itemmatching-example/README.md) | 4 | [JSON](agents/itemmatching-example/implementations/n8n/itemmatching-example.json) |
+| [🚫 Error Handling Nodes](agents/error-handling-nodes/README.md) | 10 | [JSON](agents/error-handling-nodes/implementations/n8n/error-handling-nodes.json) |
+| [Create and update a channel, and send a message on Twist](agents/create-and-update-a-channel-and-send-a-message-on-twist/README.md) | 4 | [JSON](agents/create-and-update-a-channel-and-send-a-message-on-twist/implementations/n8n/create-and-update-a-channel-and-send-a-message-on-twist.json) |
+| [Get the current weather data for a city](agents/get-the-current-weather-data-for-a-city/README.md) | 2 | [JSON](agents/get-the-current-weather-data-for-a-city/implementations/n8n/get-the-current-weather-data-for-a-city.json) |
+| [Always Authenticate Your Server!](agents/always-authenticate-your-server-db28c8ed/README.md) | 20 | [JSON](agents/always-authenticate-your-server-db28c8ed/implementations/n8n/always-authenticate-your-server-db28c8ed.json) |
+| [list airtable and incr redis and webhook](agents/list-airtable-and-incr-redis-and-webhook/README.md) | 11 | [JSON](agents/list-airtable-and-incr-redis-and-webhook/implementations/n8n/list-airtable-and-incr-redis-and-webhook.json) |
+| [AI-Powered WhatsApp Chatbot for Text, Voice, Images &amp; PDFs](agents/ai-powered-whatsapp-chatbot-for-text-voice-images-pdfs/README.md) | 26 | [JSON](agents/ai-powered-whatsapp-chatbot-for-text-voice-images-pdfs/implementations/n8n/ai-powered-whatsapp-chatbot-for-text-voice-images-pdfs.json) |
+| [Open Deep Research - AI-Powered Autonomous Research Workflow](agents/open-deep-research-ai-powered-autonomous-research-workflow/README.md) | 14 | [JSON](agents/open-deep-research-ai-powered-autonomous-research-workflow/implementations/n8n/open-deep-research-ai-powered-autonomous-research-workflow.json) |
+| [💡 Can't find your transcript?](agents/can-t-find-your-transcript/README.md) | 19 | [JSON](agents/can-t-find-your-transcript/implementations/n8n/can-t-find-your-transcript.json) |
+| [Sync New Shopify Customers to Odoo Contacts](agents/sync-new-shopify-customers-to-odoo-contacts/README.md) | 5 | [JSON](agents/sync-new-shopify-customers-to-odoo-contacts/implementations/n8n/sync-new-shopify-customers-to-odoo-contacts.json) |
+| [Steam + CF Report](agents/steam-cf-report/README.md) | 9 | [JSON](agents/steam-cf-report/implementations/n8n/steam-cf-report.json) |
+| [Syncro Alert to OpsGenie](agents/syncro-alert-to-opsgenie/README.md) | 7 | [JSON](agents/syncro-alert-to-opsgenie/implementations/n8n/syncro-alert-to-opsgenie.json) |
+| [Update the properties by object Workflow](agents/update-the-properties-by-object-workflow/README.md) | 26 | [JSON](agents/update-the-properties-by-object-workflow/implementations/n8n/update-the-properties-by-object-workflow.json) |
+| [fetch manifest digest and remove old tags and retrieve image tags](agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/README.md) | 16 | [JSON](agents/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags/implementations/n8n/fetch-manifest-digest-and-remove-old-tags-and-retrieve-image-tags.json) |
+| [Get synonyms of a German word](agents/get-synonyms-of-a-german-word/README.md) | 2 | [JSON](agents/get-synonyms-of-a-german-word/implementations/n8n/get-synonyms-of-a-german-word.json) |
+| [AI News &amp; Sentiment Agent](agents/ai-news-sentiment-agent/README.md) | 8 | [JSON](agents/ai-news-sentiment-agent/implementations/n8n/ai-news-sentiment-agent.json) |
+| [Google Sheet to Mailchimp](agents/google-sheet-to-mailchimp/README.md) | 4 | [JSON](agents/google-sheet-to-mailchimp/implementations/n8n/google-sheet-to-mailchimp.json) |
+| [receive schedule events and create meal plan and http request](agents/receive-schedule-events-and-create-meal-plan-and-http-request/README.md) | 6 | [JSON](agents/receive-schedule-events-and-create-meal-plan-and-http-request/implementations/n8n/receive-schedule-events-and-create-meal-plan-and-http-request.json) |
+| [Chatbot AI](agents/chatbot-ai/README.md) | 8 | [JSON](agents/chatbot-ai/implementations/n8n/chatbot-ai.json) |
+| [ℹ️ Replacing the initial nodes](agents/i-replacing-the-initial-nodes/README.md) | 5 | [JSON](agents/i-replacing-the-initial-nodes/implementations/n8n/i-replacing-the-initial-nodes.json) |
+| [✨📊Multi-AI Agent Chatbot for Postgres/Supabase DB and QuickCharts + Tool Router](agents/multi-ai-agent-chatbot-for-postgres-supabase-db-and-quickcharts-tool-router/README.md) | 19 | [JSON](agents/multi-ai-agent-chatbot-for-postgres-supabase-db-and-quickcharts-tool-router/implementations/n8n/multi-ai-agent-chatbot-for-postgres-supabase-db-and-quickcharts-tool-router.json) |
+| [receive hubspot events](agents/receive-hubspot-events/README.md) | 1 | [JSON](agents/receive-hubspot-events/implementations/n8n/receive-hubspot-events.json) |
+| [Personalized AI Tech Newsletter Using RSS, OpenAI and Gmail](agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/README.md) | 17 | [JSON](agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/n8n/personalized-ai-tech-newsletter-using-rss-openai-and-gmail.json) |
+| [Template for Kids' Story in Arabic](agents/template-for-kids-story-in-arabic/README.md) | 13 | [JSON](agents/template-for-kids-story-in-arabic/implementations/n8n/template-for-kids-story-in-arabic.json) |
+| [#️⃣Nostr #damus AI Powered Reporting + Gmail + Telegram](agents/nostr-damus-ai-powered-reporting-gmail-telegram/README.md) | 17 | [JSON](agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/n8n/nostr-damus-ai-powered-reporting-gmail-telegram.json) |
+| [get mediamarkt offers website and create html for email and extract items from results](agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/README.md) | 8 | [JSON](agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/n8n/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results.json) |
+| [Data Standardization &amp; Google DNS Integration](agents/data-standardization-google-dns-integration/README.md) | 23 | [JSON](agents/data-standardization-google-dns-integration/implementations/n8n/data-standardization-google-dns-integration.json) |
+| [Log errors and avoid sending too many emails](agents/log-errors-and-avoid-sending-too-many-emails/README.md) | 13 | [JSON](agents/log-errors-and-avoid-sending-too-many-emails/implementations/n8n/log-errors-and-avoid-sending-too-many-emails.json) |
+| [Forward Filtered Gmail Notifications to Telegram Chat](agents/forward-filtered-gmail-notifications-to-telegram-chat/README.md) | 3 | [JSON](agents/forward-filtered-gmail-notifications-to-telegram-chat/implementations/n8n/forward-filtered-gmail-notifications-to-telegram-chat.json) |
+| [Business Canvas Generator](agents/business-canvas-generator/README.md) | 25 | [JSON](agents/business-canvas-generator/implementations/n8n/business-canvas-generator.json) |
+| [get monday com](agents/get-monday-com/README.md) | 2 | [JSON](agents/get-monday-com/implementations/n8n/get-monday-com.json) |
+| [Merge multiple runs into one](agents/merge-multiple-runs-into-one/README.md) | 7 | [JSON](agents/merge-multiple-runs-into-one/implementations/n8n/merge-multiple-runs-into-one.json) |
+| [receive github events and slack add and slack remove](agents/receive-github-events-and-slack-add-and-slack-remove/README.md) | 4 | [JSON](agents/receive-github-events-and-slack-add-and-slack-remove/implementations/n8n/receive-github-events-and-slack-add-and-slack-remove.json) |
+| [Monitor USDT ERC-20 Wallet Balance with Etherscan and Telegram Notifications](agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/README.md) | 7 | [JSON](agents/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications/implementations/n8n/monitor-usdt-erc-20-wallet-balance-with-etherscan-and-telegram-notifications.json) |
+| [🔍 LinkedIn Jobs API – Parameter Guide](agents/linkedin-jobs-api-parameter-guide/README.md) | 9 | [JSON](agents/linkedin-jobs-api-parameter-guide/implementations/n8n/linkedin-jobs-api-parameter-guide.json) |
+| [Mycroft - SEC_Filings_Analysis_Enhanced](agents/mycroft-sec-filings-analysis-enhanced/README.md) | 29 | [JSON](agents/mycroft-sec-filings-analysis-enhanced/implementations/n8n/mycroft-sec-filings-analysis-enhanced.json) |
+| [receive schedule events and get all emails in the last day and get thread gmail](agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/README.md) | 7 | [JSON](agents/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail/implementations/n8n/receive-schedule-events-and-get-all-emails-in-the-last-day-and-get-thread-gmail.json) |
+| [Workflow Results to Markdown Notes in Your Obsidian Vault, via Google Drive](agents/workflow-results-to-markdown-notes-in-your-obsidian-vault-via-google-drive/README.md) | 11 | [JSON](agents/workflow-results-to-markdown-notes-in-your-obsidian-vault-via-google-drive/implementations/n8n/workflow-results-to-markdown-notes-in-your-obsidian-vault-via-google-drive.json) |
+| [Track an event in Segment](agents/track-an-event-in-segment/README.md) | 2 | [JSON](agents/track-an-event-in-segment/implementations/n8n/track-an-event-in-segment.json) |
+| [Google Maps Email Scraper Template](agents/google-maps-email-scraper-template/README.md) | 18 | [JSON](agents/google-maps-email-scraper-template/implementations/n8n/google-maps-email-scraper-template.json) |
+| [split out and aggregate and webhook](agents/split-out-and-aggregate-and-webhook/README.md) | 7 | [JSON](agents/split-out-and-aggregate-and-webhook/implementations/n8n/split-out-and-aggregate-and-webhook.json) |
+| [cheems](agents/cron-and-discord/README.md) | 6 | [JSON](agents/cron-and-discord/implementations/n8n/cron-and-discord.json) |
+| [hmac crypto and move binary data and respond to webhook](agents/hmac-crypto-and-move-binary-data-and-respond-to-webhook/README.md) | 9 | [JSON](agents/hmac-crypto-and-move-binary-data-and-respond-to-webhook/implementations/n8n/hmac-crypto-and-move-binary-data-and-respond-to-webhook.json) |
+| [Slack Modal Interface](agents/slack-modal-interface/README.md) | 21 | [JSON](agents/slack-modal-interface/implementations/n8n/slack-modal-interface.json) |
+| [Search news using Perplexity AI and post to X (Twitter)](agents/search-news-using-perplexity-ai-and-post-to-x-twitter/README.md) | 5 | [JSON](agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/n8n/search-news-using-perplexity-ai-and-post-to-x-twitter.json) |
+| [pdf to text](agents/pdf-to-text/README.md) | 5 | [JSON](agents/pdf-to-text/implementations/n8n/pdf-to-text.json) |
+| [Namesilo Bulk Domain Availability &#91;Template&#93;](agents/namesilo-bulk-domain-availability-template/README.md) | 9 | [JSON](agents/namesilo-bulk-domain-availability-template/implementations/n8n/namesilo-bulk-domain-availability-template.json) |
+| [The Ultimate Guide to Optimize WordPress Blog Posts with AI](agents/the-ultimate-guide-to-optimize-wordpress-blog-posts-with-ai/README.md) | 15 | [JSON](agents/the-ultimate-guide-to-optimize-wordpress-blog-posts-with-ai/implementations/n8n/the-ultimate-guide-to-optimize-wordpress-blog-posts-with-ai.json) |
+| [Automatically Update YouTube Video Descriptions with Inserted Text](agents/automatically-update-youtube-video-descriptions-with-inserted-text/README.md) | 7 | [JSON](agents/automatically-update-youtube-video-descriptions-with-inserted-text/implementations/n8n/automatically-update-youtube-video-descriptions-with-inserted-text.json) |
+| [Get all the tasks in Flow](agents/get-all-the-tasks-in-flow/README.md) | 2 | [JSON](agents/get-all-the-tasks-in-flow/implementations/n8n/get-all-the-tasks-in-flow.json) |
+| [Update email addresses](agents/update-email-addresses/README.md) | 5 | [JSON](agents/update-email-addresses/implementations/n8n/update-email-addresses.json) |
+| [Get information about a company with UpLead](agents/get-information-about-a-company-with-uplead/README.md) | 2 | [JSON](agents/get-information-about-a-company-with-uplead/implementations/n8n/get-information-about-a-company-with-uplead.json) |
+| [My workflow 3](agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/README.md) | 4 | [JSON](agents/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email/implementations/n8n/weekly-trigger-monday-7am-and-get-seo-data-from-gsc-and-send-weekly-report-by-email.json) |
+| [✨😃Automated Workflow Backups to Google Drive](agents/automated-workflow-backups-to-google-drive/README.md) | 14 | [JSON](agents/automated-workflow-backups-to-google-drive/implementations/n8n/automated-workflow-backups-to-google-drive.json) |
+| [Save New Sales Opportunities](agents/save-new-sales-opportunities/README.md) | 4 | [JSON](agents/save-new-sales-opportunities/implementations/n8n/save-new-sales-opportunities.json) |
+| [Add AI labels to Gmail messages](agents/add-ai-labels-to-gmail-messages/README.md) | 11 | [JSON](agents/add-ai-labels-to-gmail-messages/implementations/n8n/add-ai-labels-to-gmail-messages.json) |
+| [AI Summarizer (LLM-ready)](agents/ai-summarizer-llm-ready/README.md) | 5 | [JSON](agents/ai-summarizer-llm-ready/implementations/n8n/ai-summarizer-llm-ready.json) |
+| [Gmail to Vector Embeddings with PGVector and Ollama](agents/gmail-to-vector-embeddings-with-pgvector-and-ollama/README.md) | 16 | [JSON](agents/gmail-to-vector-embeddings-with-pgvector-and-ollama/implementations/n8n/gmail-to-vector-embeddings-with-pgvector-and-ollama.json) |
+| [n8n Graphic Design Team](agents/n8n-graphic-design-team/README.md) | 30 | [JSON](agents/n8n-graphic-design-team/implementations/n8n/n8n-graphic-design-team.json) |
+| [get file gitlab and gitlab and fromjson extract from file](agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/README.md) | 19 | [JSON](agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/n8n/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file.json) |
+| [Finance Literacy Bot - RAG &amp; ChatBot](agents/finance-literacy-bot-rag-chatbot/README.md) | 6 | [JSON](agents/finance-literacy-bot-rag-chatbot/implementations/n8n/finance-literacy-bot-rag-chatbot.json) |
+| [Ask AI what are the information you are looking for about the company](agents/ask-ai-what-are-the-information-you-are-looking-for-about-the-company/README.md) | 14 | [JSON](agents/ask-ai-what-are-the-information-you-are-looking-for-about-the-company/implementations/n8n/ask-ai-what-are-the-information-you-are-looking-for-about-the-company.json) |
+| [Zip multiple files](agents/zip-multiple-files/README.md) | 4 | [JSON](agents/zip-multiple-files/implementations/n8n/zip-multiple-files.json) |
+| [http request and html extract and open ai](agents/http-request-and-html-extract-and-open-ai/README.md) | 11 | [JSON](agents/http-request-and-html-extract-and-open-ai/implementations/n8n/http-request-and-html-extract-and-open-ai.json) |
+| [My workflow 7](agents/earnings-call-evidence/README.md) | 26 | [JSON](agents/earnings-call-evidence/implementations/n8n/earnings-call-evidence.json) |
+| [receive telegram events and telegram and google drive](agents/receive-telegram-events-and-telegram-and-google-drive/README.md) | 32 | [JSON](agents/receive-telegram-events-and-telegram-and-google-drive/implementations/n8n/receive-telegram-events-and-telegram-and-google-drive.json) |
+| [receive form events and completion form and enter date time](agents/receive-form-events-and-completion-form-and-enter-date-time/README.md) | 19 | [JSON](agents/receive-form-events-and-completion-form-and-enter-date-time/implementations/n8n/receive-form-events-and-completion-form-and-enter-date-time.json) |
+| [create quote wise and create transfer wise and execute transfer wise](agents/create-quote-wise-and-create-transfer-wise-and-execute-transfer-wise/README.md) | 4 | [JSON](agents/create-quote-wise-and-create-transfer-wise-and-execute-transfer-wise/implementations/n8n/create-quote-wise-and-create-transfer-wise-and-execute-transfer-wise.json) |
+| [create draft email for review and generate sales email and analyse and build persona](agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/README.md) | 11 | [JSON](agents/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona/implementations/n8n/create-draft-email-for-review-and-generate-sales-email-and-analyse-and-build-persona.json) |
+| [Generate AI Videos with HeyGen in n8n](agents/generate-ai-videos-with-heygen-in-n8n/README.md) | 7 | [JSON](agents/generate-ai-videos-with-heygen-in-n8n/implementations/n8n/generate-ai-videos-with-heygen-in-n8n.json) |
+| [LangChain - Example - Workflow Retriever](agents/langchain-example-workflow-retriever/README.md) | 5 | [JSON](agents/langchain-example-workflow-retriever/implementations/n8n/langchain-example-workflow-retriever.json) |
+| [User Request Management](agents/user-request-management/README.md) | 7 | [JSON](agents/user-request-management/implementations/n8n/user-request-management.json) |
+| [crm webhook trigger and update groundhogg deliverable and update groundhogg not deliverable](agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/README.md) | 6 | [JSON](agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/n8n/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable.json) |
+| [Automated Image Metadata Tagging](agents/automated-image-metadata-tagging/README.md) | 8 | [JSON](agents/automated-image-metadata-tagging/implementations/n8n/automated-image-metadata-tagging.json) |
+| [item lists and piloterr get recent fundraise serie a and piloterr get recent fundraise serie b](agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/README.md) | 11 | [JSON](agents/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b/implementations/n8n/item-lists-and-piloterr-get-recent-fundraise-serie-a-and-piloterr-get-recent-fundraise-serie-b.json) |
+| [Create a new task in Asana](agents/create-a-new-task-in-asana/README.md) | 2 | [JSON](agents/create-a-new-task-in-asana/implementations/n8n/create-a-new-task-in-asana.json) |
+| [http request and create new file and edit file github](agents/http-request-and-create-new-file-and-edit-file-github/README.md) | 20 | [JSON](agents/http-request-and-create-new-file-and-edit-file-github/implementations/n8n/http-request-and-create-new-file-and-edit-file-github.json) |
+| [Generate Graphic Wallpaper with Midjourney, GPT-4o-mini and Canvas APIs](agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/README.md) | 11 | [JSON](agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/n8n/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis.json) |
+| [http request and read write files from disk](agents/http-request-and-read-write-files-from-disk/README.md) | 3 | [JSON](agents/http-request-and-read-write-files-from-disk/implementations/n8n/http-request-and-read-write-files-from-disk.json) |
+| [1/ Add Your credentials](agents/1-add-your-credentials-18731028/README.md) | 4 | [JSON](agents/1-add-your-credentials-18731028/implementations/n8n/1-add-your-credentials-18731028.json) |
+| [receive telegram events and agent and telegram](agents/receive-telegram-events-and-agent-and-telegram/README.md) | 4 | [JSON](agents/receive-telegram-events-and-agent-and-telegram/implementations/n8n/receive-telegram-events-and-agent-and-telegram.json) |
+| [TOTP VALIDATION (WITHOUT CREATING CREDENTIAL)](agents/totp-validation-without-creating-credential/README.md) | 4 | [JSON](agents/totp-validation-without-creating-credential/implementations/n8n/totp-validation-without-creating-credential.json) |
+| [Set verification token](agents/set-verification-token/README.md) | 9 | [JSON](agents/set-verification-token/implementations/n8n/set-verification-token.json) |
+| [Exponential Backoff for Google APIs](agents/exponential-backoff-for-google-apis/README.md) | 7 | [JSON](agents/exponential-backoff-for-google-apis/implementations/n8n/exponential-backoff-for-google-apis.json) |
+| [Smart Factory Use Case](agents/smart-factory-use-case/README.md) | 9 | [JSON](agents/smart-factory-use-case/implementations/n8n/smart-factory-use-case.json) |
+| [Reservation Medcin](agents/reservation-medcin/README.md) | 7 | [JSON](agents/reservation-medcin/implementations/n8n/reservation-medcin.json) |
+| [http request and cron](agents/http-request-and-cron/README.md) | 4 | [JSON](agents/http-request-and-cron/implementations/n8n/http-request-and-cron.json) |
+| [Translate text from English to German](agents/translate-text-from-english-to-german/README.md) | 2 | [JSON](agents/translate-text-from-english-to-german/implementations/n8n/translate-text-from-english-to-german.json) |
+| [Effortless Email Management with AI](agents/effortless-email-management-with-ai/README.md) | 22 | [JSON](agents/effortless-email-management-with-ai/implementations/n8n/effortless-email-management-with-ai.json) |
+| [list message gmail and delete message gmail](agents/list-message-gmail-and-delete-message-gmail/README.md) | 4 | [JSON](agents/list-message-gmail-and-delete-message-gmail/implementations/n8n/list-message-gmail-and-delete-message-gmail.json) |
+| [Add new clients from Notion to Clockify](agents/add-new-clients-from-notion-to-clockify/README.md) | 2 | [JSON](agents/add-new-clients-from-notion-to-clockify/implementations/n8n/add-new-clients-from-notion-to-clockify.json) |
+| [download google drive and http request and resize edit image](agents/download-google-drive-and-http-request-and-resize-edit-image/README.md) | 8 | [JSON](agents/download-google-drive-and-http-request-and-resize-edit-image/implementations/n8n/download-google-drive-and-http-request-and-resize-edit-image.json) |
+| [Linkedin Automation](agents/linkedin-automation/README.md) | 13 | [JSON](agents/linkedin-automation/implementations/n8n/linkedin-automation.json) |
+| [Receive updates when a subscriber unsubscribes in Customer.io](agents/receive-updates-when-a-subscriber-unsubscribes-in-customer-io/README.md) | 1 | [JSON](agents/receive-updates-when-a-subscriber-unsubscribes-in-customer-io/implementations/n8n/receive-updates-when-a-subscriber-unsubscribes-in-customer-io.json) |
+| [Telegram-bot AI Da Nang](agents/telegram-bot-ai-da-nang/README.md) | 15 | [JSON](agents/telegram-bot-ai-da-nang/implementations/n8n/telegram-bot-ai-da-nang.json) |
+| [receive chat events and acuity support search api and results to items](agents/receive-chat-events-and-acuity-support-search-api-and-results-to-items/README.md) | 12 | [JSON](agents/receive-chat-events-and-acuity-support-search-api-and-results-to-items/implementations/n8n/receive-chat-events-and-acuity-support-search-api-and-results-to-items.json) |
+| [Tiktok Downloader](agents/tiktok-downloader/README.md) | 6 | [JSON](agents/tiktok-downloader/implementations/n8n/tiktok-downloader.json) |
+| [Scenario 1 - AI Agent](agents/scenario-1-ai-agent/README.md) | 24 | [JSON](agents/scenario-1-ai-agent/implementations/n8n/scenario-1-ai-agent.json) |
+| [Two Way Sync Pipedrive and MySQL](agents/two-way-sync-pipedrive-and-mysql/README.md) | 14 | [JSON](agents/two-way-sync-pipedrive-and-mysql/implementations/n8n/two-way-sync-pipedrive-and-mysql.json) |
+| [Receive updates for the position of the ISS every minute and push it to a database](agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/README.md) | 4 | [JSON](agents/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database/implementations/n8n/receive-updates-for-the-position-of-the-iss-every-minute-and-push-it-to-a-database.json) |
+| [Publish post to a publication](agents/publish-post-to-a-publication/README.md) | 2 | [JSON](agents/publish-post-to-a-publication/implementations/n8n/publish-post-to-a-publication.json) |
+| [Dynamic credentials using expressions](agents/dynamic-credentials-using-expressions/README.md) | 3 | [JSON](agents/dynamic-credentials-using-expressions/implementations/n8n/dynamic-credentials-using-expressions.json) |
+| [OpenAI e-mail classification - application](agents/openai-e-mail-classification-application/README.md) | 9 | [JSON](agents/openai-e-mail-classification-application/implementations/n8n/openai-e-mail-classification-application.json) |
+| [The `If` and the `Switch` nodes are the key nodes to set conditional logic for filtering and routing data](agents/the-if-and-the-switch-nodes-are-the-key-nodes-to-set-conditional-logic-for-filtering-and-routing-data/README.md) | 5 | [JSON](agents/the-if-and-the-switch-nodes-are-the-key-nodes-to-set-conditional-logic-for-filtering-and-routing-data/implementations/n8n/the-if-and-the-switch-nodes-are-the-key-nodes-to-set-conditional-logic-for-filtering-and-routing-data.json) |
+| [Transform Image to Lego Style Using Line and Dall-E](agents/transform-image-to-lego-style-using-line-and-dall-e/README.md) | 5 | [JSON](agents/transform-image-to-lego-style-using-line-and-dall-e/implementations/n8n/transform-image-to-lego-style-using-line-and-dall-e.json) |
+| [Convert Squarespace Profiles to Shopify Customers in Google Sheets](agents/convert-squarespace-profiles-to-shopify-customers-in-google-sheets/README.md) | 7 | [JSON](agents/convert-squarespace-profiles-to-shopify-customers-in-google-sheets/implementations/n8n/convert-squarespace-profiles-to-shopify-customers-in-google-sheets.json) |
+| [Smart Factory Data Generator](agents/smart-factory-data-generator/README.md) | 3 | [JSON](agents/smart-factory-data-generator/implementations/n8n/smart-factory-data-generator.json) |
+| [Receive updates when a form submission occurs in your Webflow website](agents/receive-updates-when-a-form-submission-occurs-in-your-webflow-website/README.md) | 1 | [JSON](agents/receive-updates-when-a-form-submission-occurs-in-your-webflow-website/implementations/n8n/receive-updates-when-a-form-submission-occurs-in-your-webflow-website.json) |
+| [Send follow-up emails if appropriate](agents/send-follow-up-emails-if-appropriate/README.md) | 25 | [JSON](agents/send-follow-up-emails-if-appropriate/implementations/n8n/send-follow-up-emails-if-appropriate.json) |
+| [Extract personal data with a self-hosted LLM Mistral NeMo](agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/README.md) | 7 | [JSON](agents/extract-personal-data-with-a-self-hosted-llm-mistral-nemo/implementations/n8n/extract-personal-data-with-a-self-hosted-llm-mistral-nemo.json) |
+| [Translate](agents/translate/README.md) | 14 | [JSON](agents/translate/implementations/n8n/translate.json) |
+| [AI Agent to chat with Supabase/PostgreSQL DB](agents/ai-agent-to-chat-with-supabase-postgresql-db/README.md) | 6 | [JSON](agents/ai-agent-to-chat-with-supabase-postgresql-db/implementations/n8n/ai-agent-to-chat-with-supabase-postgresql-db.json) |
+| [Form with Dynamic Dropdown Field](agents/form-with-dynamic-dropdown-field/README.md) | 9 | [JSON](agents/form-with-dynamic-dropdown-field/implementations/n8n/form-with-dynamic-dropdown-field.json) |
+| [agente](agents/appointment-confirmation-assistant/README.md) | 31 | [JSON](agents/appointment-confirmation-assistant/implementations/n8n/appointment-confirmation-assistant.json) |
+| [webhook and http request](agents/webhook-and-http-request/README.md) | 5 | [JSON](agents/webhook-and-http-request/implementations/n8n/webhook-and-http-request.json) |
+| [receive schedule events and http request and get contact for deals](agents/receive-schedule-events-and-http-request-and-get-contact-for-deals/README.md) | 16 | [JSON](agents/receive-schedule-events-and-http-request-and-get-contact-for-deals/implementations/n8n/receive-schedule-events-and-http-request-and-get-contact-for-deals.json) |
+| [zoom and receive schedule events and update page wordpress](agents/zoom-and-receive-schedule-events-and-update-page-wordpress/README.md) | 4 | [JSON](agents/zoom-and-receive-schedule-events-and-update-page-wordpress/implementations/n8n/zoom-and-receive-schedule-events-and-update-page-wordpress.json) |
+| [CFP Selection 2](agents/cfp-selection-2/README.md) | 4 | [JSON](agents/cfp-selection-2/implementations/n8n/cfp-selection-2.json) |
+| [getallpeople n8n training customer datastore](agents/getallpeople-n8n-training-customer-datastore/README.md) | 3 | [JSON](agents/getallpeople-n8n-training-customer-datastore/implementations/n8n/getallpeople-n8n-training-customer-datastore.json) |
+| [sample data name language and sample data greeting language](agents/sample-data-name-language-and-sample-data-greeting-language/README.md) | 4 | [JSON](agents/sample-data-name-language-and-sample-data-greeting-language/implementations/n8n/sample-data-name-language-and-sample-data-greeting-language.json) |
+| [RAG:Context-Aware Chunking \\| Google Drive to Pinecone via OpenRouter &amp; Gemini](agents/rag-context-aware-chunking-google-drive-to-pinecone-via-openrouter-gemini/README.md) | 13 | [JSON](agents/rag-context-aware-chunking-google-drive-to-pinecone-via-openrouter-gemini/implementations/n8n/rag-context-aware-chunking-google-drive-to-pinecone-via-openrouter-gemini.json) |
+| [move binary data and http request and get workflow list](agents/move-binary-data-and-http-request-and-get-workflow-list/README.md) | 9 | [JSON](agents/move-binary-data-and-http-request-and-get-workflow-list/implementations/n8n/move-binary-data-and-http-request-and-get-workflow-list.json) |
+| [Daylight Saving Time Notification](agents/daylight-saving-time-notification/README.md) | 9 | [JSON](agents/daylight-saving-time-notification/implementations/n8n/daylight-saving-time-notification.json) |
+| [puq-docker-immich-deploy](agents/puq-docker-immich-deploy/README.md) | 34 | [JSON](agents/puq-docker-immich-deploy/implementations/n8n/puq-docker-immich-deploy.json) |
+| [YogiAI](agents/yogiai/README.md) | 25 | [JSON](agents/yogiai/implementations/n8n/yogiai.json) |
+| [Email Summary Agent](agents/email-summary-agent/README.md) | 5 | [JSON](agents/email-summary-agent/implementations/n8n/email-summary-agent.json) |
+| [Receive updates for events in Chargebee](agents/receive-updates-for-events-in-chargebee/README.md) | 1 | [JSON](agents/receive-updates-for-events-in-chargebee/implementations/n8n/receive-updates-for-events-in-chargebee.json) |
+| [AI Agent to chat with you Search Console Data, using OpenAI and Postgres](agents/ai-agent-to-chat-with-you-search-console-data-using-openai-and-postgres/README.md) | 16 | [JSON](agents/ai-agent-to-chat-with-you-search-console-data-using-openai-and-postgres/implementations/n8n/ai-agent-to-chat-with-you-search-console-data-using-openai-and-postgres.json) |
+| [On User created event in Intercom](agents/on-user-created-event-in-intercom/README.md) | 9 | [JSON](agents/on-user-created-event-in-intercom/implementations/n8n/on-user-created-event-in-intercom.json) |
+| [receive typeform events and append google sheets and email send](agents/receive-typeform-events-and-append-google-sheets-and-email-send/README.md) | 5 | [JSON](agents/receive-typeform-events-and-append-google-sheets-and-email-send/implementations/n8n/receive-typeform-events-and-append-google-sheets-and-email-send.json) |
+| [Get messages with a certain label, remove the label, and add a new one](agents/get-messages-with-a-certain-label-remove-the-label-and-add-a-new-one/README.md) | 4 | [JSON](agents/get-messages-with-a-certain-label-remove-the-label-and-add-a-new-one/implementations/n8n/get-messages-with-a-certain-label-remove-the-label-and-add-a-new-one.json) |
+| [Clockify to Syncro](agents/clockify-to-syncro/README.md) | 13 | [JSON](agents/clockify-to-syncro/implementations/n8n/clockify-to-syncro.json) |
+| [LinkedIn Web Scraping with Bright Data MCP Server &amp; Google Gemini](agents/linkedin-web-scraping-with-bright-data-mcp-server-google-gemini/README.md) | 18 | [JSON](agents/linkedin-web-scraping-with-bright-data-mcp-server-google-gemini/implementations/n8n/linkedin-web-scraping-with-bright-data-mcp-server-google-gemini.json) |
+| [Don't forget to connect a GMail account to this node!](agents/don-t-forget-to-connect-a-gmail-account-to-this-node/README.md) | 12 | [JSON](agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/n8n/don-t-forget-to-connect-a-gmail-account-to-this-node.json) |
+| [AI Document Assistant via Telegram + Supabase](agents/ai-document-assistant-via-telegram-supabase/README.md) | 25 | [JSON](agents/ai-document-assistant-via-telegram-supabase/implementations/n8n/ai-document-assistant-via-telegram-supabase.json) |
+| [receive schedule events and subtractfromdate date time and delete dropbox](agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/README.md) | 14 | [JSON](agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/n8n/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox.json) |
+| [Remove PII from CSV Files](agents/remove-pii-from-csv-files/README.md) | 9 | [JSON](agents/remove-pii-from-csv-files/implementations/n8n/remove-pii-from-csv-files.json) |
+| [receive chat events and agent and tool code](agents/receive-chat-events-and-agent-and-tool-code/README.md) | 6 | [JSON](agents/receive-chat-events-and-agent-and-tool-code/implementations/n8n/receive-chat-events-and-agent-and-tool-code.json) |
+| [report execution errors to telegram](agents/report-execution-errors-to-telegram/README.md) | 3 | [JSON](agents/report-execution-errors-to-telegram/implementations/n8n/report-execution-errors-to-telegram.json) |
+| [split out and http request and receive form events](agents/split-out-and-http-request-and-receive-form-events/README.md) | 16 | [JSON](agents/split-out-and-http-request-and-receive-form-events/implementations/n8n/split-out-and-http-request-and-receive-form-events.json) |
+| [Clone this spreadsheet](agents/clone-this-spreadsheet-2c27dcc7/README.md) | 11 | [JSON](agents/clone-this-spreadsheet-2c27dcc7/implementations/n8n/clone-this-spreadsheet-2c27dcc7.json) |
+| [receive calendly events](agents/receive-calendly-events/README.md) | 1 | [JSON](agents/receive-calendly-events/implementations/n8n/receive-calendly-events.json) |
+| [Steps to Use Filters Inside the Gmail Trigger Node:](agents/steps-to-use-filters-inside-the-gmail-trigger-node/README.md) | 10 | [JSON](agents/steps-to-use-filters-inside-the-gmail-trigger-node/implementations/n8n/steps-to-use-filters-inside-the-gmail-trigger-node.json) |
+| [Add a subscriber to a list and create and send a campaign](agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/README.md) | 3 | [JSON](agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/n8n/add-a-subscriber-to-a-list-and-create-and-send-a-campaign.json) |
+| [list mailbox help scout](agents/list-mailbox-help-scout/README.md) | 2 | [JSON](agents/list-mailbox-help-scout/implementations/n8n/list-mailbox-help-scout.json) |
+| [Syncro to Clockify](agents/syncro-to-clockify/README.md) | 2 | [JSON](agents/syncro-to-clockify/implementations/n8n/syncro-to-clockify.json) |
+| [Funding Intelligence Agent](agents/funding-intelligence-agent/README.md) | 16 | [JSON](agents/funding-intelligence-agent/implementations/n8n/funding-intelligence-agent.json) |
+| [Add your company details here!](agents/add-your-company-details-here/README.md) | 16 | [JSON](agents/add-your-company-details-here/implementations/n8n/add-your-company-details-here.json) |
+| [bash-dash telegram](agents/bash-dash-telegram/README.md) | 3 | [JSON](agents/bash-dash-telegram/implementations/n8n/bash-dash-telegram.json) |
+| [agent and appendorupdate google sheets and receive form events](agents/agent-and-appendorupdate-google-sheets-and-receive-form-events/README.md) | 9 | [JSON](agents/agent-and-appendorupdate-google-sheets-and-receive-form-events/implementations/n8n/agent-and-appendorupdate-google-sheets-and-receive-form-events.json) |
+| [MCP_GMAIL](agents/mcp-gmail/README.md) | 5 | [JSON](agents/mcp-gmail/implementations/n8n/mcp-gmail.json) |
+| [Market Sentiment Analysis - Part 1](agents/market-sentiment-analysis-part-1/README.md) | 11 | [JSON](agents/market-sentiment-analysis-part-1/implementations/n8n/market-sentiment-analysis-part-1.json) |
+| [typeform feedback workflow](agents/typeform-feedback-workflow/README.md) | 5 | [JSON](agents/typeform-feedback-workflow/implementations/n8n/typeform-feedback-workflow.json) |
+| [FLUX-fill standalone](agents/flux-fill-standalone/README.md) | 12 | [JSON](agents/flux-fill-standalone/implementations/n8n/flux-fill-standalone.json) |
+| [AI Email Filtering Automation](agents/ai-email-filtering-automation/README.md) | 12 | [JSON](agents/ai-email-filtering-automation/implementations/n8n/ai-email-filtering-automation.json) |
+| [Insert and retrieve documents](agents/insert-and-retrieve-documents/README.md) | 20 | [JSON](agents/insert-and-retrieve-documents/implementations/n8n/insert-and-retrieve-documents.json) |
+| [Receive updates for specified tasks in Flow](agents/receive-updates-for-specified-tasks-in-flow/README.md) | 1 | [JSON](agents/receive-updates-for-specified-tasks-in-flow/implementations/n8n/receive-updates-for-specified-tasks-in-flow.json) |
+| [Send customer feedback to OpenAI for sentiment analysis](agents/send-customer-feedback-to-openai-for-sentiment-analysis/README.md) | 4 | [JSON](agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/n8n/send-customer-feedback-to-openai-for-sentiment-analysis.json) |
+| [extract_swifts](agents/extract-swifts/README.md) | 23 | [JSON](agents/extract-swifts/implementations/n8n/extract-swifts.json) |
+| [Events Webhook Trigger](agents/events-webhook-trigger-bf43f4d8/README.md) | 13 | [JSON](agents/events-webhook-trigger-bf43f4d8/implementations/n8n/events-webhook-trigger-bf43f4d8.json) |
+| [default data loader and download google drive and receive chat events](agents/default-data-loader-and-download-google-drive-and-receive-chat-events/README.md) | 18 | [JSON](agents/default-data-loader-and-download-google-drive-and-receive-chat-events/implementations/n8n/default-data-loader-and-download-google-drive-and-receive-chat-events.json) |
+| [aws textract and receive telegram events and append airtable](agents/aws-textract-and-receive-telegram-events-and-append-airtable/README.md) | 4 | [JSON](agents/aws-textract-and-receive-telegram-events-and-append-airtable/implementations/n8n/aws-textract-and-receive-telegram-events-and-append-airtable.json) |
+| [receive keap events](agents/receive-keap-events/README.md) | 1 | [JSON](agents/receive-keap-events/implementations/n8n/receive-keap-events.json) |
+| [Comparing data with the Compare Datasets node](agents/comparing-data-with-the-compare-datasets-node/README.md) | 4 | [JSON](agents/comparing-data-with-the-compare-datasets-node/implementations/n8n/comparing-data-with-the-compare-datasets-node.json) |
+| [Streamline data from an n8n form into Google Sheet and Airtable](agents/streamline-data-from-an-n8n-form-into-google-sheet-and-airtable/README.md) | 7 | [JSON](agents/streamline-data-from-an-n8n-form-into-google-sheet-and-airtable/implementations/n8n/streamline-data-from-an-n8n-form-into-google-sheet-and-airtable.json) |
+| [Mycroft - Financial Intelligence Hub](agents/mycroft-financial-intelligence-hub/README.md) | 22 | [JSON](agents/mycroft-financial-intelligence-hub/implementations/n8n/mycroft-financial-intelligence-hub.json) |
+| [Send Daily Birthday Reminders from Google Contacts to Slack](agents/send-daily-birthday-reminders-from-google-contacts-to-slack/README.md) | 5 | [JSON](agents/send-daily-birthday-reminders-from-google-contacts-to-slack/implementations/n8n/send-daily-birthday-reminders-from-google-contacts-to-slack.json) |
+| [Check for valid Mautic contact email](agents/check-for-valid-mautic-contact-email/README.md) | 6 | [JSON](agents/check-for-valid-mautic-contact-email/implementations/n8n/check-for-valid-mautic-contact-email.json) |
+| [Receive updates from Telegram and send an image of a cocktail](agents/receive-updates-from-telegram-and-send-an-image-of-a-cocktail/README.md) | 3 | [JSON](agents/receive-updates-from-telegram-and-send-an-image-of-a-cocktail/implementations/n8n/receive-updates-from-telegram-and-send-an-image-of-a-cocktail.json) |
+| [Export Zammad Objects Users, Roles, Groups and Organizations to Excel](agents/export-zammad-objects-users-roles-groups-and-organizations-to-excel/README.md) | 18 | [JSON](agents/export-zammad-objects-users-roles-groups-and-organizations-to-excel/implementations/n8n/export-zammad-objects-users-roles-groups-and-organizations-to-excel.json) |
+| [Validate Seatable Webhooks with HMAC SHA256 Authentication](agents/validate-seatable-webhooks-with-hmac-sha256-authentication/README.md) | 6 | [JSON](agents/validate-seatable-webhooks-with-hmac-sha256-authentication/implementations/n8n/validate-seatable-webhooks-with-hmac-sha256-authentication.json) |
+| [Main workflow: AI agent using custom tool](agents/main-workflow-ai-agent-using-custom-tool-2000a697/README.md) | 10 | [JSON](agents/main-workflow-ai-agent-using-custom-tool-2000a697/implementations/n8n/main-workflow-ai-agent-using-custom-tool-2000a697.json) |
+| [Sync Youtube Video Urls with Google Sheets](agents/sync-youtube-video-urls-with-google-sheets/README.md) | 6 | [JSON](agents/sync-youtube-video-urls-with-google-sheets/implementations/n8n/sync-youtube-video-urls-with-google-sheets.json) |
+| [report execution errors to slack](agents/report-execution-errors-to-slack/README.md) | 2 | [JSON](agents/report-execution-errors-to-slack/implementations/n8n/report-execution-errors-to-slack.json) |
+| [Receive updates for changes in the specified list in Trello](agents/receive-updates-for-changes-in-the-specified-list-in-trello/README.md) | 1 | [JSON](agents/receive-updates-for-changes-in-the-specified-list-in-trello/implementations/n8n/receive-updates-for-changes-in-the-specified-list-in-trello.json) |
+| [🚨 Change Base URL here!](agents/change-base-url-here/README.md) | 15 | [JSON](agents/change-base-url-here/implementations/n8n/change-base-url-here.json) |
+| [receive notion events and webhook and update database page notion](agents/receive-notion-events-and-webhook-and-update-database-page-notion/README.md) | 13 | [JSON](agents/receive-notion-events-and-webhook-and-update-database-page-notion/implementations/n8n/receive-notion-events-and-webhook-and-update-database-page-notion.json) |
+| [Job Finder](agents/job-finder/README.md) | 5 | [JSON](agents/job-finder/implementations/n8n/job-finder.json) |
+| [Auto-create and publish AI social videos with Telegram, GPT-4 and Blotato](agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/README.md) | 37 | [JSON](agents/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato/implementations/n8n/auto-create-and-publish-ai-social-videos-with-telegram-gpt-4-and-blotato.json) |
+| [Mycroft - Patent Intelligence System](agents/mycroft-patent-intelligence-system/README.md) | 14 | [JSON](agents/mycroft-patent-intelligence-system/implementations/n8n/mycroft-patent-intelligence-system.json) |
+| [e-mail Chatbot with both semantic and structured RAG, using Telegram and Pgvector](agents/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector/README.md) | 16 | [JSON](agents/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector/implementations/n8n/e-mail-chatbot-with-both-semantic-and-structured-rag-using-telegram-and-pgvector.json) |
+| [🎦🚀 YouTube Video Comment Analysis Agent](agents/youtube-video-comment-analysis-agent/README.md) | 17 | [JSON](agents/youtube-video-comment-analysis-agent/implementations/n8n/youtube-video-comment-analysis-agent.json) |
+| [Receive updates when a form is submitted in Mautic, and send a confirmation SMS](agents/receive-updates-when-a-form-is-submitted-in-mautic-and-send-a-confirmation-sms/README.md) | 2 | [JSON](agents/receive-updates-when-a-form-is-submitted-in-mautic-and-send-a-confirmation-sms/implementations/n8n/receive-updates-when-a-form-is-submitted-in-mautic-and-send-a-confirmation-sms.json) |
+| [Multi-Agent Conversation](agents/multi-agent-conversation/README.md) | 13 | [JSON](agents/multi-agent-conversation/implementations/n8n/multi-agent-conversation.json) |
+| [Automate LinkedIn Posts with AI](agents/automate-linkedin-posts-with-ai/README.md) | 9 | [JSON](agents/automate-linkedin-posts-with-ai/implementations/n8n/automate-linkedin-posts-with-ai.json) |
+| [email send and cron and http request](agents/email-send-and-cron-and-http-request/README.md) | 7 | [JSON](agents/email-send-and-cron-and-http-request/implementations/n8n/email-send-and-cron-and-http-request.json) |
+| [OpenSea Marketplace Agent Tool](agents/opensea-marketplace-agent-tool/README.md) | 14 | [JSON](agents/opensea-marketplace-agent-tool/implementations/n8n/opensea-marketplace-agent-tool.json) |
+| [Send an SMS using the Mocean node](agents/send-an-sms-using-the-mocean-node/README.md) | 2 | [JSON](agents/send-an-sms-using-the-mocean-node/implementations/n8n/send-an-sms-using-the-mocean-node.json) |
+| [Dsp agent](agents/dsp-agent-a1f0c8bf/README.md) | 18 | [JSON](agents/dsp-agent-a1f0c8bf/implementations/n8n/dsp-agent-a1f0c8bf.json) |
+| [Push Multiple Files to Github Repo via Github REST API](agents/push-multiple-files-to-github-repo-via-github-rest-api/README.md) | 9 | [JSON](agents/push-multiple-files-to-github-repo-via-github-rest-api/implementations/n8n/push-multiple-files-to-github-repo-via-github-rest-api.json) |
+| [Perform Batch Processing of Email verifications with Icypeas](agents/perform-batch-processing-of-email-verifications-with-icypeas/README.md) | 4 | [JSON](agents/perform-batch-processing-of-email-verifications-with-icypeas/implementations/n8n/perform-batch-processing-of-email-verifications-with-icypeas.json) |
+| [Automated Image Metadata Tagging (Community Node)](agents/automated-image-metadata-tagging-community-node/README.md) | 6 | [JSON](agents/automated-image-metadata-tagging-community-node/implementations/n8n/automated-image-metadata-tagging-community-node.json) |
+| [list airtable and lemlist and get lead lemlist](agents/list-airtable-and-lemlist-and-get-lead-lemlist/README.md) | 3 | [JSON](agents/list-airtable-and-lemlist-and-get-lead-lemlist/implementations/n8n/list-airtable-and-lemlist-and-get-lead-lemlist.json) |
+| [Slack AI Chatbot with RAG for company staff](agents/slack-ai-chatbot-with-rag-for-company-staff/README.md) | 17 | [JSON](agents/slack-ai-chatbot-with-rag-for-company-staff/implementations/n8n/slack-ai-chatbot-with-rag-for-company-staff.json) |
+| [wekan and update wekan](agents/wekan-and-update-wekan/README.md) | 6 | [JSON](agents/wekan-and-update-wekan/implementations/n8n/wekan-and-update-wekan.json) |
+| [Needed pre-work: Add a Slack App](agents/needed-pre-work-add-a-slack-app-e63199cf/README.md) | 5 | [JSON](agents/needed-pre-work-add-a-slack-app-e63199cf/implementations/n8n/needed-pre-work-add-a-slack-app-e63199cf.json) |
+| [Entrypoint to use in other workflows](agents/entrypoint-to-use-in-other-workflows/README.md) | 13 | [JSON](agents/entrypoint-to-use-in-other-workflows/implementations/n8n/entrypoint-to-use-in-other-workflows.json) |
+| [receive schedule events and list database page notion and slack](agents/receive-schedule-events-and-list-database-page-notion-and-slack/README.md) | 6 | [JSON](agents/receive-schedule-events-and-list-database-page-notion-and-slack/implementations/n8n/receive-schedule-events-and-list-database-page-notion-and-slack.json) |
+| [http request and html extract and list news url](agents/http-request-and-html-extract-and-list-news-url/README.md) | 8 | [JSON](agents/http-request-and-html-extract-and-list-news-url/implementations/n8n/http-request-and-html-extract-and-list-news-url.json) |
+| [set and preserve opportunity close dates](agents/set-and-preserve-opportunity-close-dates/README.md) | 6 | [JSON](agents/set-and-preserve-opportunity-close-dates/implementations/n8n/set-and-preserve-opportunity-close-dates.json) |
+| [Refine/Split the jsons into multiple items](agents/refine-split-the-jsons-into-multiple-items/README.md) | 14 | [JSON](agents/refine-split-the-jsons-into-multiple-items/implementations/n8n/refine-split-the-jsons-into-multiple-items.json) |
+| [Post a message to a channel in RocketChat](agents/post-a-message-to-a-channel-in-rocketchat/README.md) | 2 | [JSON](agents/post-a-message-to-a-channel-in-rocketchat/implementations/n8n/post-a-message-to-a-channel-in-rocketchat.json) |
+| [Create a new member, update the information of the member, create a note and a post for the member in Orbit](agents/create-a-new-member-update-the-information-of-the-member-create-a-note-and-a-post-for-the-member-in-orbit/README.md) | 5 | [JSON](agents/create-a-new-member-update-the-information-of-the-member-create-a-note-and-a-post-for-the-member-in-orbit/implementations/n8n/create-a-new-member-update-the-information-of-the-member-create-a-note-and-a-post-for-the-member-in-orbit.json) |
+| [http request and generate french audio and translate text to english](agents/http-request-and-generate-french-audio-and-translate-text-to-english/README.md) | 8 | [JSON](agents/http-request-and-generate-french-audio-and-translate-text-to-english/implementations/n8n/http-request-and-generate-french-audio-and-translate-text-to-english.json) |
+| [subscribe subscriber klicktipp and receive jot form events and split out jotform tags](agents/subscribe-subscriber-klicktipp-and-receive-jot-form-events-and-split-out-jotform-tags/README.md) | 13 | [JSON](agents/subscribe-subscriber-klicktipp-and-receive-jot-form-events-and-split-out-jotform-tags/implementations/n8n/subscribe-subscriber-klicktipp-and-receive-jot-form-events-and-split-out-jotform-tags.json) |
+| [🔐 How to Get Your Product Hunt Token](agents/how-to-get-your-product-hunt-token/README.md) | 9 | [JSON](agents/how-to-get-your-product-hunt-token/implementations/n8n/how-to-get-your-product-hunt-token.json) |
+| [information edit image and resize edit image and multistep edit image](agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/README.md) | 11 | [JSON](agents/information-edit-image-and-resize-edit-image-and-multistep-edit-image/implementations/n8n/information-edit-image-and-resize-edit-image-and-multistep-edit-image.json) |
+| [(G) - Email Classification](agents/g-email-classification/README.md) | 9 | [JSON](agents/g-email-classification/implementations/n8n/g-email-classification.json) |
+| ["Hey Siri, Ask Agent" workflow](agents/hey-siri-ask-agent-workflow/README.md) | 4 | [JSON](agents/hey-siri-ask-agent-workflow/implementations/n8n/hey-siri-ask-agent-workflow.json) |
+| [Slack Webhook - Verify Signature](agents/slack-webhook-verify-signature/README.md) | 7 | [JSON](agents/slack-webhook-verify-signature/implementations/n8n/slack-webhook-verify-signature.json) |
+| [Aggregating data with the Merge node](agents/aggregating-data-with-the-merge-node/README.md) | 10 | [JSON](agents/aggregating-data-with-the-merge-node/implementations/n8n/aggregating-data-with-the-merge-node.json) |
+| [Send the Astronomy Picture of the day daily to a Telegram channel](agents/send-the-astronomy-picture-of-the-day-daily-to-a-telegram-channel/README.md) | 3 | [JSON](agents/send-the-astronomy-picture-of-the-day-daily-to-a-telegram-channel/implementations/n8n/send-the-astronomy-picture-of-the-day-daily-to-a-telegram-channel.json) |
+| [Generate 360° Virtual Try-on Videos for Clothing with Kling API](agents/generate-360-virtual-try-on-videos-for-clothing-with-kling-api/README.md) | 13 | [JSON](agents/generate-360-virtual-try-on-videos-for-clothing-with-kling-api/implementations/n8n/generate-360-virtual-try-on-videos-for-clothing-with-kling-api.json) |
+| [Automated Content Generation &amp; Publishing - Wordpress](agents/automated-content-generation-publishing-wordpress/README.md) | 9 | [JSON](agents/automated-content-generation-publishing-wordpress/implementations/n8n/automated-content-generation-publishing-wordpress.json) |
+| [Synchronize your Google Sheets with Postgres](agents/synchronize-your-google-sheets-with-postgres/README.md) | 7 | [JSON](agents/synchronize-your-google-sheets-with-postgres/implementations/n8n/synchronize-your-google-sheets-with-postgres.json) |
+| [slack and receive form events and score lead with madkudu](agents/slack-and-receive-form-events-and-score-lead-with-madkudu/README.md) | 8 | [JSON](agents/slack-and-receive-form-events-and-score-lead-with-madkudu/implementations/n8n/slack-and-receive-form-events-and-score-lead-with-madkudu.json) |
+| [webhook and execute command and respond to webhook1](agents/webhook-and-execute-command-and-respond-to-webhook1/README.md) | 7 | [JSON](agents/webhook-and-execute-command-and-respond-to-webhook1/implementations/n8n/webhook-and-execute-command-and-respond-to-webhook1.json) |
+| [Test Webhooks in n8n Without Changing WEBHOOK_URL (PostBin &amp; BambooHR Example)](agents/test-webhooks-in-n8n-without-changing-webhook-url-postbin-bamboohr-example/README.md) | 34 | [JSON](agents/test-webhooks-in-n8n-without-changing-webhook-url-postbin-bamboohr-example/implementations/n8n/test-webhooks-in-n8n-without-changing-webhook-url-postbin-bamboohr-example.json) |
+| [3D Figurine Orthographic Views with Midjourney and GPT-4o-Image API](agents/character-reference-consistency/README.md) | 10 | [JSON](agents/character-reference-consistency/implementations/n8n/character-reference-consistency.json) |
+| [getallpeople n8n training customer datastore and http request](agents/getallpeople-n8n-training-customer-datastore-and-http-request/README.md) | 4 | [JSON](agents/getallpeople-n8n-training-customer-datastore-and-http-request/implementations/n8n/getallpeople-n8n-training-customer-datastore-and-http-request.json) |
+| [http request and get urls to scrape and chain llm](agents/http-request-and-get-urls-to-scrape-and-chain-llm/README.md) | 10 | [JSON](agents/http-request-and-get-urls-to-scrape-and-chain-llm/implementations/n8n/http-request-and-get-urls-to-scrape-and-chain-llm.json) |
+| [get last execution timestamp and every day at 07 00 and set new last execution timestamp](agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/README.md) | 5 | [JSON](agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/n8n/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp.json) |
+| [``Aggregate `amount_captured` ``](agents/aggregate-amount-captured/README.md) | 15 | [JSON](agents/aggregate-amount-captured/implementations/n8n/aggregate-amount-captured.json) |
+| [Portfolio Price Fetcher](agents/portfolio-price-fetcher/README.md) | 5 | [JSON](agents/portfolio-price-fetcher/implementations/n8n/portfolio-price-fetcher.json) |
+| [N_01_Simple_Lead_Tracker_Automation_v4](agents/n-01-simple-lead-tracker-automation-v4/README.md) | 8 | [JSON](agents/n-01-simple-lead-tracker-automation-v4/implementations/n8n/n-01-simple-lead-tracker-automation-v4.json) |
+| [Jira Retrospective](agents/jira-retrospective/README.md) | 10 | [JSON](agents/jira-retrospective/implementations/n8n/jira-retrospective.json) |
+| [1/ Add Your credentials](agents/1-add-your-credentials-180acc32/README.md) | 10 | [JSON](agents/1-add-your-credentials-180acc32/implementations/n8n/1-add-your-credentials-180acc32.json) |
+| [telegram and google sheets](agents/telegram-and-google-sheets/README.md) | 5 | [JSON](agents/telegram-and-google-sheets/implementations/n8n/telegram-and-google-sheets.json) |
+| [Edit your own prompt ⬇️](agents/edit-your-own-prompt-d84ae6c5/README.md) | 10 | [JSON](agents/edit-your-own-prompt-d84ae6c5/implementations/n8n/edit-your-own-prompt-d84ae6c5.json) |
+| [Daily Cartoon (w/ AI Translate)](agents/daily-cartoon-w-ai-translate/README.md) | 7 | [JSON](agents/daily-cartoon-w-ai-translate/implementations/n8n/daily-cartoon-w-ai-translate.json) |
+| [v1 helper - Find params with affected expressions](agents/v1-helper-find-params-with-affected-expressions/README.md) | 3 | [JSON](agents/v1-helper-find-params-with-affected-expressions/implementations/n8n/v1-helper-find-params-with-affected-expressions.json) |
+| [update google sheets and google sheets and run every 5 minutes](agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/README.md) | 7 | [JSON](agents/update-google-sheets-and-google-sheets-and-run-every-5-minutes/implementations/n8n/update-google-sheets-and-google-sheets-and-run-every-5-minutes.json) |
+| [receive clockify events](agents/receive-clockify-events/README.md) | 1 | [JSON](agents/receive-clockify-events/implementations/n8n/receive-clockify-events.json) |
+| [getBible Query v1.0](agents/getbible-query-v1-0/README.md) | 4 | [JSON](agents/getbible-query-v1-0/implementations/n8n/getbible-query-v1-0.json) |
+| [My workflow 4](agents/webhook-and-analyze-with-ai-and-send-feedback-report/README.md) | 6 | [JSON](agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/n8n/webhook-and-analyze-with-ai-and-send-feedback-report.json) |
+| [Email mailbox as Todoist tasks](agents/email-mailbox-as-todoist-tasks/README.md) | 21 | [JSON](agents/email-mailbox-as-todoist-tasks/implementations/n8n/email-mailbox-as-todoist-tasks.json) |
+| [append airtable and receive get response events](agents/append-airtable-and-receive-get-response-events/README.md) | 3 | [JSON](agents/append-airtable-and-receive-get-response-events/implementations/n8n/append-airtable-and-receive-get-response-events.json) |
+| [agent and receive telegram events and google sheets](agents/agent-and-receive-telegram-events-and-google-sheets/README.md) | 7 | [JSON](agents/agent-and-receive-telegram-events-and-google-sheets/implementations/n8n/agent-and-receive-telegram-events-and-google-sheets.json) |
+| [LINE BOT - Google Sheets Record Receipt](agents/line-bot-google-sheets-record-receipt/README.md) | 7 | [JSON](agents/line-bot-google-sheets-record-receipt/implementations/n8n/line-bot-google-sheets-record-receipt.json) |
+| [webhook and jira and update jira](agents/webhook-and-jira-and-update-jira/README.md) | 14 | [JSON](agents/webhook-and-jira-and-update-jira/implementations/n8n/webhook-and-jira-and-update-jira.json) |
+| [Embed your Vector Store](agents/embed-your-vector-store/README.md) | 23 | [JSON](agents/embed-your-vector-store/implementations/n8n/embed-your-vector-store.json) |
+| [🐋DeepSeek V3 Chat &amp; R1 Reasoning Quick Start](agents/deepseek-v3-chat-r1-reasoning-quick-start/README.md) | 8 | [JSON](agents/deepseek-v3-chat-r1-reasoning-quick-start/implementations/n8n/deepseek-v3-chat-r1-reasoning-quick-start.json) |
+| [Available source and target languages`*`:](agents/available-source-and-target-languages/README.md) | 12 | [JSON](agents/available-source-and-target-languages/implementations/n8n/available-source-and-target-languages.json) |
+| [Save SQL table as a CSV file](agents/save-sql-table-as-a-csv-file/README.md) | 4 | [JSON](agents/save-sql-table-as-a-csv-file/implementations/n8n/save-sql-table-as-a-csv-file.json) |
+| [Ultimate Personal Assistant](agents/ultimate-personal-assistant/README.md) | 15 | [JSON](agents/ultimate-personal-assistant/implementations/n8n/ultimate-personal-assistant.json) |
+| [Chat with GitHub OpenAPI Specification using RAG (Pinecone and OpenAI)](agents/chat-with-github-openapi-specification-using-rag-pinecone-and-openai/README.md) | 14 | [JSON](agents/chat-with-github-openapi-specification-using-rag-pinecone-and-openai/implementations/n8n/chat-with-github-openapi-specification-using-rag-pinecone-and-openai.json) |
+| [Wait for file do be processed](agents/wait-for-file-do-be-processed/README.md) | 14 | [JSON](agents/wait-for-file-do-be-processed/implementations/n8n/wait-for-file-do-be-processed.json) |
+| [Enhance Chat Responses with Real-Time Search Data via Bright Data &amp; Gemini AI](agents/enhance-chat-responses-with-real-time-search-data-via-bright-data-gemini-ai/README.md) | 13 | [JSON](agents/enhance-chat-responses-with-real-time-search-data-via-bright-data-gemini-ai/implementations/n8n/enhance-chat-responses-with-real-time-search-data-via-bright-data-gemini-ai.json) |
+| [Podcast Digest](agents/podcast-digest/README.md) | 15 | [JSON](agents/podcast-digest/implementations/n8n/podcast-digest.json) |
+| [Gmail labelling agent](agents/gmail-labelling-agent/README.md) | 9 | [JSON](agents/gmail-labelling-agent/implementations/n8n/gmail-labelling-agent.json) |
+| [When clicking "Test workflow"](agents/when-clicking-test-workflow-d9d73c93/README.md) | 22 | [JSON](agents/when-clicking-test-workflow-d9d73c93/implementations/n8n/when-clicking-test-workflow-d9d73c93.json) |
+| [🔍 Indeed Jobs API – Parameter Guide](agents/indeed-jobs-api-parameter-guide/README.md) | 11 | [JSON](agents/indeed-jobs-api-parameter-guide/implementations/n8n/indeed-jobs-api-parameter-guide.json) |
+| [Analyze_Crowdstrike_Detections__search_for_IOCs_in_VirusTotal__create_a_ticket_in_Jira_and_post_a_message_in_Slack](agents/analyze-crowdstrike-detections-search-for-iocs-in-virustotal-create-a-ticket-in-jira-and-post-a-message-in-sla/README.md) | 13 | [JSON](agents/analyze-crowdstrike-detections-search-for-iocs-in-virustotal-create-a-ticket-in-jira-and-post-a-message-in-sla/implementations/n8n/analyze-crowdstrike-detections-search-for-iocs-in-virustotal-create-a-ticket-in-jira-and-post-a-message-in-sla.json) |
+| [get jobs from prusa connect and add row to google sheet](agents/get-jobs-from-prusa-connect-and-add-row-to-google-sheet/README.md) | 3 | [JSON](agents/get-jobs-from-prusa-connect-and-add-row-to-google-sheet/implementations/n8n/get-jobs-from-prusa-connect-and-add-row-to-google-sheet.json) |
+| [⚙️ Turn blocks into rich text](agents/turn-blocks-into-rich-text/README.md) | 24 | [JSON](agents/turn-blocks-into-rich-text/implementations/n8n/turn-blocks-into-rich-text.json) |
+| [Always Authenticate Your Server!](agents/always-authenticate-your-server-20dbcd39/README.md) | 13 | [JSON](agents/always-authenticate-your-server-20dbcd39/implementations/n8n/always-authenticate-your-server-20dbcd39.json) |
+| [Send an SMS when a workflow fails](agents/send-an-sms-when-a-workflow-fails/README.md) | 2 | [JSON](agents/send-an-sms-when-a-workflow-fails/implementations/n8n/send-an-sms-when-a-workflow-fails.json) |
+| [🚨Warning! Potentially Destructive Operations!](agents/warning-potentially-destructive-operations/README.md) | 11 | [JSON](agents/warning-potentially-destructive-operations/implementations/n8n/warning-potentially-destructive-operations.json) |
+| [Amadeus Flight Bargains](agents/amadeus-flight-bargains/README.md) | 11 | [JSON](agents/amadeus-flight-bargains/implementations/n8n/amadeus-flight-bargains.json) |
+| [tool serp api and receive chat events and agent](agents/tool-serp-api-and-receive-chat-events-and-agent/README.md) | 5 | [JSON](agents/tool-serp-api-and-receive-chat-events-and-agent/implementations/n8n/tool-serp-api-and-receive-chat-events-and-agent.json) |
+| [Receive Slack Webhook Slash Command](agents/receive-slack-webhook-slash-command/README.md) | 7 | [JSON](agents/receive-slack-webhook-slash-command/implementations/n8n/receive-slack-webhook-slash-command.json) |
+| [Youtube Video Transcript Extraction](agents/youtube-video-transcript-extraction/README.md) | 4 | [JSON](agents/youtube-video-transcript-extraction/implementations/n8n/youtube-video-transcript-extraction.json) |
+| [extract domain from email address](agents/extract-domain-from-email-address/README.md) | 3 | [JSON](agents/extract-domain-from-email-address/implementations/n8n/extract-domain-from-email-address.json) |
+| [Get the and Validate  New Email](agents/get-the-and-validate-new-email/README.md) | 11 | [JSON](agents/get-the-and-validate-new-email/implementations/n8n/get-the-and-validate-new-email.json) |
+| [Ahrefs Keyword Research Workflow](agents/ahrefs-keyword-research-workflow/README.md) | 9 | [JSON](agents/ahrefs-keyword-research-workflow/implementations/n8n/ahrefs-keyword-research-workflow.json) |
+| [Scrape Latest 20 TechCrunch Articles](agents/scrape-latest-20-techcrunch-articles/README.md) | 9 | [JSON](agents/scrape-latest-20-techcrunch-articles/implementations/n8n/scrape-latest-20-techcrunch-articles.json) |
+| [Mycroft - News Intelligence Agent](agents/mycroft-news-intelligence-agent-6178eb47/README.md) | 18 | [JSON](agents/mycroft-news-intelligence-agent-6178eb47/implementations/n8n/mycroft-news-intelligence-agent-6178eb47.json) |
+| [Extract &amp; Summarize Yelp Business Review with Bright Data and Google Gemini](agents/extract-summarize-yelp-business-review-with-bright-data-and-google-gemini/README.md) | 10 | [JSON](agents/extract-summarize-yelp-business-review-with-bright-data-and-google-gemini/implementations/n8n/extract-summarize-yelp-business-review-with-bright-data-and-google-gemini.json) |
+| [Trigger scan on Qualys agent](agents/trigger-scan-on-qualys-agent/README.md) | 19 | [JSON](agents/trigger-scan-on-qualys-agent/implementations/n8n/trigger-scan-on-qualys-agent.json) |
+| [Create, update and get a user from Iterable](agents/create-update-and-get-a-user-from-iterable/README.md) | 4 | [JSON](agents/create-update-and-get-a-user-from-iterable/implementations/n8n/create-update-and-get-a-user-from-iterable.json) |
+| [download example data and decompress example data](agents/download-example-data-and-decompress-example-data/README.md) | 4 | [JSON](agents/download-example-data-and-decompress-example-data/implementations/n8n/download-example-data-and-decompress-example-data.json) |
+| [&#91;hiroshidigital.com&#93; Send Message In Larksuite](agents/hiroshidigital-com-send-message-in-larksuite/README.md) | 4 | [JSON](agents/hiroshidigital-com-send-message-in-larksuite/implementations/n8n/hiroshidigital-com-send-message-in-larksuite.json) |
+| [langchain code](agents/langchain-code/README.md) | 4 | [JSON](agents/langchain-code/implementations/n8n/langchain-code.json) |
+| [Google Cal to Zoom meeting](agents/google-cal-to-zoom-meeting/README.md) | 6 | [JSON](agents/google-cal-to-zoom-meeting/implementations/n8n/google-cal-to-zoom-meeting.json) |
+| [The Easiest Way to Send SMS Worldwide](agents/the-easiest-way-to-send-sms-worldwide/README.md) | 3 | [JSON](agents/the-easiest-way-to-send-sms-worldwide/implementations/n8n/the-easiest-way-to-send-sms-worldwide.json) |
+| [Adding to GSheet-List, Creating a OTP / Verification Code](agents/adding-to-gsheet-list-creating-a-otp-verification-code/README.md) | 14 | [JSON](agents/adding-to-gsheet-list-creating-a-otp-verification-code/implementations/n8n/adding-to-gsheet-list-creating-a-otp-verification-code.json) |
+| [when clicking test workflow and http request update rank math meta](agents/when-clicking-test-workflow-and-http-request-update-rank-math-meta/README.md) | 3 | [JSON](agents/when-clicking-test-workflow-and-http-request-update-rank-math-meta/implementations/n8n/when-clicking-test-workflow-and-http-request-update-rank-math-meta.json) |
+| [discourse and update discourse and get discourse](agents/discourse-and-update-discourse-and-get-discourse/README.md) | 4 | [JSON](agents/discourse-and-update-discourse-and-get-discourse/implementations/n8n/discourse-and-update-discourse-and-get-discourse.json) |
+| [The Chain is connected to the Mistral-7B-Instruct-v0.1 model, but you can change this](agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/README.md) | 3 | [JSON](agents/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this/implementations/n8n/the-chain-is-connected-to-the-mistral-7b-instruct-v0-1-model-but-you-can-change-this.json) |
+| [💡 About the Example PDF](agents/about-the-example-pdf/README.md) | 12 | [JSON](agents/about-the-example-pdf/implementations/n8n/about-the-example-pdf.json) |
+| [Create Zendesk Ticket](agents/create-zendesk-ticket/README.md) | 29 | [JSON](agents/create-zendesk-ticket/implementations/n8n/create-zendesk-ticket.json) |
+| [Mycroft - Financial Regulatory Intelligence System - Enhanced](agents/mycroft-financial-regulatory-intelligence-system-enhanced/README.md) | 22 | [JSON](agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/n8n/mycroft-financial-regulatory-intelligence-system-enhanced.json) |
+| [Post RSS feed items from yesterday to Slack](agents/post-rss-feed-items-from-yesterday-to-slack/README.md) | 6 | [JSON](agents/post-rss-feed-items-from-yesterday-to-slack/implementations/n8n/post-rss-feed-items-from-yesterday-to-slack.json) |
+| [Dynamically Replace Images in Google Slides](agents/dynamically-replace-images-in-google-slides/README.md) | 7 | [JSON](agents/dynamically-replace-images-in-google-slides/implementations/n8n/dynamically-replace-images-in-google-slides.json) |
+| [graphql and webhook](agents/graphql-and-webhook/README.md) | 4 | [JSON](agents/graphql-and-webhook/implementations/n8n/graphql-and-webhook.json) |
+| [receive survey monkey events](agents/receive-survey-monkey-events/README.md) | 1 | [JSON](agents/receive-survey-monkey-events/implementations/n8n/receive-survey-monkey-events.json) |
+| [Send TTS (Text-to-speech) voice calls](agents/send-tts-text-to-speech-voice-calls/README.md) | 2 | [JSON](agents/send-tts-text-to-speech-voice-calls/implementations/n8n/send-tts-text-to-speech-voice-calls.json) |
+| [Umami analytics template](agents/umami-analytics-template/README.md) | 11 | [JSON](agents/umami-analytics-template/implementations/n8n/umami-analytics-template.json) |
+| [Create, update, and get a profile in Humantic AI](agents/create-update-and-get-a-profile-in-humantic-ai/README.md) | 5 | [JSON](agents/create-update-and-get-a-profile-in-humantic-ai/implementations/n8n/create-update-and-get-a-profile-in-humantic-ai.json) |
+| [Complete Youtube](agents/complete-youtube/README.md) | 13 | [JSON](agents/complete-youtube/implementations/n8n/complete-youtube.json) |
+| [Create a QuickBooks invoice on a new Onfleet Task creation](agents/create-a-quickbooks-invoice-on-a-new-onfleet-task-creation/README.md) | 2 | [JSON](agents/create-a-quickbooks-invoice-on-a-new-onfleet-task-creation/implementations/n8n/create-a-quickbooks-invoice-on-a-new-onfleet-task-creation.json) |
+| [My workflow 6](agents/extract-pages-from-pdf1-and-http-request/README.md) | 3 | [JSON](agents/extract-pages-from-pdf1-and-http-request/implementations/n8n/extract-pages-from-pdf1-and-http-request.json) |
+| [YouTube to X Post- AlexK1919](agents/youtube-to-x-post-alexk1919/README.md) | 20 | [JSON](agents/youtube-to-x-post-alexk1919/implementations/n8n/youtube-to-x-post-alexk1919.json) |
+| [receive calendly events and pipedrive and calculate date time](agents/receive-calendly-events-and-pipedrive-and-calculate-date-time/README.md) | 5 | [JSON](agents/receive-calendly-events-and-pipedrive-and-calculate-date-time/implementations/n8n/receive-calendly-events-and-pipedrive-and-calculate-date-time.json) |
+| [Turn YouTube Videos into Summaries, Transcripts, and Visual Insights](agents/turn-youtube-videos-into-summaries-transcripts-and-visual-insights/README.md) | 14 | [JSON](agents/turn-youtube-videos-into-summaries-transcripts-and-visual-insights/implementations/n8n/turn-youtube-videos-into-summaries-transcripts-and-visual-insights.json) |
+| [list gmail and tofile spreadsheet file and move binary data](agents/list-gmail-and-tofile-spreadsheet-file-and-move-binary-data/README.md) | 3 | [JSON](agents/list-gmail-and-tofile-spreadsheet-file-and-move-binary-data/implementations/n8n/list-gmail-and-tofile-spreadsheet-file-and-move-binary-data.json) |
+| [2. Refresh Pipedrive tokens](agents/get-token-from-pipedrive/README.md) | 20 | [JSON](agents/get-token-from-pipedrive/implementations/n8n/get-token-from-pipedrive.json) |
+| [receive form events and copy google drive and replace data in google doc](agents/receive-form-events-and-copy-google-drive-and-replace-data-in-google-doc/README.md) | 5 | [JSON](agents/receive-form-events-and-copy-google-drive-and-replace-data-in-google-doc/implementations/n8n/receive-form-events-and-copy-google-drive-and-replace-data-in-google-doc.json) |
+| [OpenAI Assistant workflow: uploa file, create an Assistant, chat with it!](agents/openai-assistant-workflow-uploa-file-create-an-assistant-chat-with-it/README.md) | 6 | [JSON](agents/openai-assistant-workflow-uploa-file-create-an-assistant-chat-with-it/implementations/n8n/openai-assistant-workflow-uploa-file-create-an-assistant-chat-with-it.json) |
+| [Scrape Trustpilot Reviews Using Bright Data for Winning Ad Insights](agents/scrape-trustpilot-reviews-using-bright-data-for-winning-ad-insights/README.md) | 12 | [JSON](agents/scrape-trustpilot-reviews-using-bright-data-for-winning-ad-insights/implementations/n8n/scrape-trustpilot-reviews-using-bright-data-for-winning-ad-insights.json) |
+| [send signl4 alert](agents/send-signl4-alert/README.md) | 2 | [JSON](agents/send-signl4-alert/implementations/n8n/send-signl4-alert.json) |
+| [receive calendly events and notion](agents/receive-calendly-events-and-notion/README.md) | 2 | [JSON](agents/receive-calendly-events-and-notion/implementations/n8n/receive-calendly-events-and-notion.json) |
+| [GitLab MR Auto-Review &amp; Risk Assessment](agents/gitlab-mr-auto-review-risk-assessment/README.md) | 14 | [JSON](agents/gitlab-mr-auto-review-risk-assessment/implementations/n8n/gitlab-mr-auto-review-risk-assessment.json) |
+| [Sell a Used Car](agents/sell-a-used-car/README.md) | 14 | [JSON](agents/sell-a-used-car/implementations/n8n/sell-a-used-car.json) |
+| [Get Google Search Results (SERPs) for SEO Research](agents/get-google-search-results-serps-for-seo-research/README.md) | 11 | [JSON](agents/get-google-search-results-serps-for-seo-research/implementations/n8n/get-google-search-results-serps-for-seo-research.json) |
+| [Figure out issue assignee and title (shortening if necessary)](agents/figure-out-issue-assignee-and-title-shortening-if-necessary/README.md) | 19 | [JSON](agents/figure-out-issue-assignee-and-title-shortening-if-necessary/implementations/n8n/figure-out-issue-assignee-and-title-shortening-if-necessary.json) |
+| [Post on X](agents/post-on-x/README.md) | 8 | [JSON](agents/post-on-x/implementations/n8n/post-on-x.json) |
+| [Email form](agents/email-form/README.md) | 5 | [JSON](agents/email-form/implementations/n8n/email-form.json) |
+| [Extract &amp; Summarize Indeed Company Info with Bright Data and Google Gemini](agents/extract-summarize-indeed-company-info-with-bright-data-and-google-gemini/README.md) | 13 | [JSON](agents/extract-summarize-indeed-company-info-with-bright-data-and-google-gemini/implementations/n8n/extract-summarize-indeed-company-info-with-bright-data-and-google-gemini.json) |
+| [list google calendar and date time and date time1](agents/list-google-calendar-and-date-time-and-date-time1/README.md) | 12 | [JSON](agents/list-google-calendar-and-date-time-and-date-time1/implementations/n8n/list-google-calendar-and-date-time-and-date-time1.json) |
+| [N8N Español - BOT](agents/n8n-espanol-bot/README.md) | 5 | [JSON](agents/n8n-espanol-bot/implementations/n8n/n8n-espanol-bot.json) |
+| [🐋🤖 DeepSeek AI Agent + Telegram + LONG TERM Memory 🧠](agents/deepseek-ai-agent-telegram-long-term-memory/README.md) | 15 | [JSON](agents/deepseek-ai-agent-telegram-long-term-memory/implementations/n8n/deepseek-ai-agent-telegram-long-term-memory.json) |
+| [Postgres Data Ingestion](agents/postgres-data-ingestion/README.md) | 3 | [JSON](agents/postgres-data-ingestion/implementations/n8n/postgres-data-ingestion.json) |
+| [Receive Call Data and standardize User Prompt](agents/receive-call-data-and-standardize-user-prompt/README.md) | 21 | [JSON](agents/receive-call-data-and-standardize-user-prompt/implementations/n8n/receive-call-data-and-standardize-user-prompt.json) |
+| [receive twilio events and search airtable tool and getschema base airtable tool](agents/receive-twilio-events-and-search-airtable-tool-and-getschema-base-airtable-tool/README.md) | 11 | [JSON](agents/receive-twilio-events-and-search-airtable-tool-and-getschema-base-airtable-tool/implementations/n8n/receive-twilio-events-and-search-airtable-tool-and-getschema-base-airtable-tool.json) |
+| [webhook and hmac crypto](agents/webhook-and-hmac-crypto/README.md) | 3 | [JSON](agents/webhook-and-hmac-crypto/implementations/n8n/webhook-and-hmac-crypto.json) |
+| [3.2: Fetch Last Email Correspondance](agents/3-2-fetch-last-email-correspondance/README.md) | 47 | [JSON](agents/3-2-fetch-last-email-correspondance/implementations/n8n/3-2-fetch-last-email-correspondance.json) |
+| [Addon for Workflow Nodes Update Check Template](agents/addon-for-workflow-nodes-update-check-template/README.md) | 8 | [JSON](agents/addon-for-workflow-nodes-update-check-template/implementations/n8n/addon-for-workflow-nodes-update-check-template.json) |
+| [💥AI Social Video Generator with GPT-4, Kling &amp; Blotato —Auto-Post to Instagram, Facebook,, TikTok, Twitter &amp; Pinterest - vide](agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/README.md) | 33 | [JSON](agents/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi/implementations/n8n/ai-social-video-generator-with-gpt-4-kling-blotato-auto-post-to-instagram-facebook-tiktok-twitter-pinterest-vi.json) |
+| [Receive updates for events in ClickUp](agents/receive-updates-for-events-in-clickup/README.md) | 1 | [JSON](agents/receive-updates-for-events-in-clickup/implementations/n8n/receive-updates-for-events-in-clickup.json) |
+| [extract yesterday records and extracthtmlcontent html and google tasks](agents/extract-yesterday-records-and-extracthtmlcontent-html-and-google-tasks/README.md) | 12 | [JSON](agents/extract-yesterday-records-and-extracthtmlcontent-html-and-google-tasks/implementations/n8n/extract-yesterday-records-and-extracthtmlcontent-html-and-google-tasks.json) |
+| [http request and receive execute workflow events and notif talk credits](agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/README.md) | 10 | [JSON](agents/http-request-and-receive-execute-workflow-events-and-notif-talk-credits/implementations/n8n/http-request-and-receive-execute-workflow-events-and-notif-talk-credits.json) |
+| [split out binary data](agents/split-out-binary-data/README.md) | 9 | [JSON](agents/split-out-binary-data/implementations/n8n/split-out-binary-data.json) |
+| [spreadsheet file and read binary file](agents/spreadsheet-file-and-read-binary-file/README.md) | 3 | [JSON](agents/spreadsheet-file-and-read-binary-file/implementations/n8n/spreadsheet-file-and-read-binary-file.json) |
+| [Needed pre-work: Add a Slack App](agents/needed-pre-work-add-a-slack-app-9a5534ff/README.md) | 7 | [JSON](agents/needed-pre-work-add-a-slack-app-9a5534ff/implementations/n8n/needed-pre-work-add-a-slack-app-9a5534ff.json) |
+| [AI Logo Sheet Extractor to Airtable](agents/ai-logo-sheet-extractor-to-airtable/README.md) | 33 | [JSON](agents/ai-logo-sheet-extractor-to-airtable/implementations/n8n/ai-logo-sheet-extractor-to-airtable.json) |
+| [Extract information from an image of a receipt](agents/extract-information-from-an-image-of-a-receipt/README.md) | 3 | [JSON](agents/extract-information-from-an-image-of-a-receipt/implementations/n8n/extract-information-from-an-image-of-a-receipt.json) |
+| [DSP Certificate w/ Google Forms](agents/dsp-certificate-w-google-forms/README.md) | 8 | [JSON](agents/dsp-certificate-w-google-forms/implementations/n8n/dsp-certificate-w-google-forms.json) |
+| [Payment Detials are Selected](agents/payment-detials-are-selected/README.md) | 9 | [JSON](agents/payment-detials-are-selected/implementations/n8n/payment-detials-are-selected.json) |
+| [executequery postgres and postgres](agents/executequery-postgres-and-postgres/README.md) | 4 | [JSON](agents/executequery-postgres-and-postgres/implementations/n8n/executequery-postgres-and-postgres.json) |
+| [Create, update, and get an issue on Taiga](agents/create-update-and-get-an-issue-on-taiga/README.md) | 4 | [JSON](agents/create-update-and-get-an-issue-on-taiga/implementations/n8n/create-update-and-get-an-issue-on-taiga.json) |
+| [NetSuite Rest API workflow](agents/netsuite-rest-api-workflow/README.md) | 3 | [JSON](agents/netsuite-rest-api-workflow/implementations/n8n/netsuite-rest-api-workflow.json) |
+| [Perform a domain search (single) with Icypeas](agents/perform-a-domain-search-single-with-icypeas/README.md) | 3 | [JSON](agents/perform-a-domain-search-single-with-icypeas/implementations/n8n/perform-a-domain-search-single-with-icypeas.json) |
+| [Convert the JSON data received from the CocktailDB API in XML](agents/convert-the-json-data-received-from-the-cocktaildb-api-in-xml/README.md) | 3 | [JSON](agents/convert-the-json-data-received-from-the-cocktaildb-api-in-xml/implementations/n8n/convert-the-json-data-received-from-the-cocktaildb-api-in-xml.json) |
+| [telegram and receive telegram events and sendphoto telegram](agents/telegram-and-receive-telegram-events-and-sendphoto-telegram/README.md) | 21 | [JSON](agents/telegram-and-receive-telegram-events-and-sendphoto-telegram/implementations/n8n/telegram-and-receive-telegram-events-and-sendphoto-telegram.json) |
+| [Key Sections of n8n Workflow](agents/key-sections-of-n8n-workflow/README.md) | 27 | [JSON](agents/key-sections-of-n8n-workflow/implementations/n8n/key-sections-of-n8n-workflow.json) |
+| [Update email addresses](agents/update-email-addresses-6682b576/README.md) | 7 | [JSON](agents/update-email-addresses-6682b576/implementations/n8n/update-email-addresses-6682b576.json) |
+| [Decide Whether to Create or Edit or Skip](agents/decide-whether-to-create-or-edit-or-skip/README.md) | 12 | [JSON](agents/decide-whether-to-create-or-edit-or-skip/implementations/n8n/decide-whether-to-create-or-edit-or-skip.json) |
+| [Sample Spotify](agents/sample-spotify/README.md) | 2 | [JSON](agents/sample-spotify/implementations/n8n/sample-spotify.json) |
+| [receive github events](agents/receive-github-events/README.md) | 1 | [JSON](agents/receive-github-events/implementations/n8n/receive-github-events.json) |
+| [2. Add Beehiiv newsletter subscribers from Gumroad sales](agents/trigger-on-a-new-gumroad-sale/README.md) | 6 | [JSON](agents/trigger-on-a-new-gumroad-sale/implementations/n8n/trigger-on-a-new-gumroad-sale.json) |
+| [google drive to instagram, tiktok and youtube](agents/google-drive-to-instagram-tiktok-and-youtube/README.md) | 14 | [JSON](agents/google-drive-to-instagram-tiktok-and-youtube/implementations/n8n/google-drive-to-instagram-tiktok-and-youtube.json) |
+| [Analyze the sentiment of feedback and send a message on Mattermost](agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/README.md) | 5 | [JSON](agents/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost/implementations/n8n/analyze-the-sentiment-of-feedback-and-send-a-message-on-mattermost.json) |
+| [Bitrix24 Task Form Widget Application Workflow example with Webhook Integration](agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/README.md) | 21 | [JSON](agents/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration/implementations/n8n/bitrix24-task-form-widget-application-workflow-example-with-webhook-integration.json) |
+| [Create Custom Presentations per Lead](agents/create-custom-presentations-per-lead/README.md) | 12 | [JSON](agents/create-custom-presentations-per-lead/implementations/n8n/create-custom-presentations-per-lead.json) |
+| [YouTube to Raindrop](agents/youtube-to-raindrop/README.md) | 6 | [JSON](agents/youtube-to-raindrop/implementations/n8n/youtube-to-raindrop.json) |
+| [timescale db and http request and cron](agents/timescale-db-and-http-request-and-cron/README.md) | 4 | [JSON](agents/timescale-db-and-http-request-and-cron/implementations/n8n/timescale-db-and-http-request-and-cron.json) |
+| [Generate Instagram Content from Top Trends with AI Image Generation](agents/generate-instagram-content-from-top-trends-with-ai-image-generation/README.md) | 27 | [JSON](agents/generate-instagram-content-from-top-trends-with-ai-image-generation/implementations/n8n/generate-instagram-content-from-top-trends-with-ai-image-generation.json) |
+| [外送記帳](agents/list-gmail-and-receive-gmail-events-and-send-to-slack-with-block/README.md) | 6 | [JSON](agents/list-gmail-and-receive-gmail-events-and-send-to-slack-with-block/implementations/n8n/list-gmail-and-receive-gmail-events-and-send-to-slack-with-block.json) |
+| [Get Long Lived Facebook User or Page Access Token](agents/get-long-lived-facebook-user-or-page-access-token/README.md) | 4 | [JSON](agents/get-long-lived-facebook-user-or-page-access-token/implementations/n8n/get-long-lived-facebook-user-or-page-access-token.json) |
+| [My workflow](agents/automatic-weekly-digital-pr-stories-suggestions/README.md) | 28 | [JSON](agents/automatic-weekly-digital-pr-stories-suggestions/implementations/n8n/automatic-weekly-digital-pr-stories-suggestions.json) |
+| [webhook and crypto and append airtable](agents/webhook-and-crypto-and-append-airtable/README.md) | 26 | [JSON](agents/webhook-and-crypto-and-append-airtable/implementations/n8n/webhook-and-crypto-and-append-airtable.json) |
+| [Generate Exam Questions](agents/generate-exam-questions/README.md) | 32 | [JSON](agents/generate-exam-questions/implementations/n8n/generate-exam-questions.json) |
+| [receive box events](agents/receive-box-events/README.md) | 1 | [JSON](agents/receive-box-events/implementations/n8n/receive-box-events.json) |
+| [Google Site Index - sitemap.xml example](agents/google-site-index-sitemap-xml-example/README.md) | 16 | [JSON](agents/google-site-index-sitemap-xml-example/implementations/n8n/google-site-index-sitemap-xml-example.json) |
+| [getslides google slides and getthumbnail page google slides](agents/getslides-google-slides-and-getthumbnail-page-google-slides/README.md) | 3 | [JSON](agents/getslides-google-slides-and-getthumbnail-page-google-slides/implementations/n8n/getslides-google-slides-and-getthumbnail-page-google-slides.json) |
+| [Intelligent Web Query and Semantic Re-Ranking Flow](agents/intelligent-web-query-and-semantic-re-ranking-flow/README.md) | 16 | [JSON](agents/intelligent-web-query-and-semantic-re-ranking-flow/implementations/n8n/intelligent-web-query-and-semantic-re-ranking-flow.json) |
+| [Set your data and your company's](agents/set-your-data-and-your-company-s/README.md) | 25 | [JSON](agents/set-your-data-and-your-company-s/implementations/n8n/set-your-data-and-your-company-s.json) |
+| [GoogleSheets MySQL Integration](agents/googlesheets-mysql-integration/README.md) | 13 | [JSON](agents/googlesheets-mysql-integration/implementations/n8n/googlesheets-mysql-integration.json) |
+| [Retry on fail except for known error Template](agents/retry-on-fail-except-for-known-error-template/README.md) | 10 | [JSON](agents/retry-on-fail-except-for-known-error-template/implementations/n8n/retry-on-fail-except-for-known-error-template.json) |
+| [WhatsApp business bot](agents/whatsapp-business-bot/README.md) | 12 | [JSON](agents/whatsapp-business-bot/implementations/n8n/whatsapp-business-bot.json) |
+| [Brand Content Extract, Summarize &amp; Sentiment Analysis with Bright Data](agents/brand-content-extract-summarize-sentiment-analysis-with-bright-data/README.md) | 18 | [JSON](agents/brand-content-extract-summarize-sentiment-analysis-with-bright-data/implementations/n8n/brand-content-extract-summarize-sentiment-analysis-with-bright-data.json) |
+| [transcribing bank statements to markdown using gemini vision ai](agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/README.md) | 18 | [JSON](agents/transcribing-bank-statements-to-markdown-using-gemini-vision-ai/implementations/n8n/transcribing-bank-statements-to-markdown-using-gemini-vision-ai.json) |
+| [receive chat events and qdrant vector store and retrieval qa chain](agents/receive-chat-events-and-qdrant-vector-store-and-retrieval-qa-chain/README.md) | 6 | [JSON](agents/receive-chat-events-and-qdrant-vector-store-and-retrieval-qa-chain/implementations/n8n/receive-chat-events-and-qdrant-vector-store-and-retrieval-qa-chain.json) |
+| [Job-App](agents/job-app/README.md) | 32 | [JSON](agents/job-app/implementations/n8n/job-app.json) |
+| [Create_Unique_Jira_tickets_from_Splunk_alerts](agents/create-unique-jira-tickets-from-splunk-alerts/README.md) | 6 | [JSON](agents/create-unique-jira-tickets-from-splunk-alerts/implementations/n8n/create-unique-jira-tickets-from-splunk-alerts.json) |
+| [RAG Workflow For Stock Earnings Report Analysis](agents/rag-workflow-for-stock-earnings-report-analysis/README.md) | 15 | [JSON](agents/rag-workflow-for-stock-earnings-report-analysis/implementations/n8n/rag-workflow-for-stock-earnings-report-analysis.json) |
+| [Workflow B — Synthesize &amp; Store Clusters](agents/workflow-b-synthesize-store-clusters/README.md) | 13 | [JSON](agents/workflow-b-synthesize-store-clusters/implementations/n8n/workflow-b-synthesize-store-clusters.json) |
+| [N8N Español - NocodeBot](agents/n8n-espanol-nocodebot/README.md) | 7 | [JSON](agents/n8n-espanol-nocodebot/implementations/n8n/n8n-espanol-nocodebot.json) |
+| [Google Doc Summarizer to Google Sheets](agents/google-doc-summarizer-to-google-sheets/README.md) | 6 | [JSON](agents/google-doc-summarizer-to-google-sheets/implementations/n8n/google-doc-summarizer-to-google-sheets.json) |
+| [Creating a meeting with the Zoom node](agents/creating-a-meeting-with-the-zoom-node/README.md) | 2 | [JSON](agents/creating-a-meeting-with-the-zoom-node/implementations/n8n/creating-a-meeting-with-the-zoom-node.json) |
+| [Make OpenAI Citation for File Retrieval RAG](agents/make-openai-citation-for-file-retrieval-rag/README.md) | 12 | [JSON](agents/make-openai-citation-for-file-retrieval-rag/implementations/n8n/make-openai-citation-for-file-retrieval-rag.json) |
+| [Integration Data Processing](agents/integration-data-processing/README.md) | 30 | [JSON](agents/integration-data-processing/implementations/n8n/integration-data-processing.json) |
+| [Real Estate Market Scanning](agents/real-estate-market-scanning/README.md) | 11 | [JSON](agents/real-estate-market-scanning/implementations/n8n/real-estate-market-scanning.json) |
+| [append google sheets tool and receive form events and completion form](agents/append-google-sheets-tool-and-receive-form-events-and-completion-form/README.md) | 12 | [JSON](agents/append-google-sheets-tool-and-receive-form-events-and-completion-form/implementations/n8n/append-google-sheets-tool-and-receive-form-events-and-completion-form.json) |
+| [Weekly failures report](agents/weekly-failures-report/README.md) | 6 | [JSON](agents/weekly-failures-report/implementations/n8n/weekly-failures-report.json) |
+| [Whisper Transkription copy](agents/whisper-transkription-copy/README.md) | 5 | [JSON](agents/whisper-transkription-copy/implementations/n8n/whisper-transkription-copy.json) |
+| [Filtering orders for fulfillment 👇](agents/filtering-orders-for-fulfillment/README.md) | 8 | [JSON](agents/filtering-orders-for-fulfillment/implementations/n8n/filtering-orders-for-fulfillment.json) |
+| [active campaign](agents/active-campaign/README.md) | 2 | [JSON](agents/active-campaign/implementations/n8n/active-campaign.json) |
+| [Process Telegram Request](agents/process-telegram-request/README.md) | 13 | [JSON](agents/process-telegram-request/implementations/n8n/process-telegram-request.json) |
+| [Get the price of BTC in EUR and send an SMS when the price is larger than EUR 9000](agents/get-the-price-of-btc-in-eur-and-send-an-sms-when-the-price-is-larger-than-eur-9000/README.md) | 5 | [JSON](agents/get-the-price-of-btc-in-eur-and-send-an-sms-when-the-price-is-larger-than-eur-9000/implementations/n8n/get-the-price-of-btc-in-eur-and-send-an-sms-when-the-price-is-larger-than-eur-9000.json) |
+| [Blog Automation TEMPLATE](agents/blog-automation-template/README.md) | 22 | [JSON](agents/blog-automation-template/implementations/n8n/blog-automation-template.json) |
+| [Monitor ProductHunt](agents/monitor-producthunt/README.md) | 5 | [JSON](agents/monitor-producthunt/implementations/n8n/monitor-producthunt.json) |
+| [medium and webhook and http request](agents/medium-and-webhook-and-http-request/README.md) | 3 | [JSON](agents/medium-and-webhook-and-http-request/implementations/n8n/medium-and-webhook-and-http-request.json) |
+| [Convert URL HTML to Markdown and Get Page Links](agents/convert-url-html-to-markdown-and-get-page-links/README.md) | 10 | [JSON](agents/convert-url-html-to-markdown-and-get-page-links/implementations/n8n/convert-url-html-to-markdown-and-get-page-links.json) |
+| [publish aws sns message](agents/publish-aws-sns-message/README.md) | 2 | [JSON](agents/publish-aws-sns-message/implementations/n8n/publish-aws-sns-message.json) |
+| [Independent "Async" Process](agents/independent-async-process/README.md) | 13 | [JSON](agents/independent-async-process/implementations/n8n/independent-async-process.json) |
+| [receive schedule events and list todoist and subtractfromdate date time](agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/README.md) | 15 | [JSON](agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/n8n/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time.json) |
+| [SEO Blog Generator with GPT-4o, Perplexity, and Telegram Integration](agents/seo-blog-generator-with-gpt-4o-perplexity-and-telegram-integration/README.md) | 18 | [JSON](agents/seo-blog-generator-with-gpt-4o-perplexity-and-telegram-integration/implementations/n8n/seo-blog-generator-with-gpt-4o-perplexity-and-telegram-integration.json) |
+| [report execution errors to gmail](agents/report-execution-errors-to-gmail/README.md) | 2 | [JSON](agents/report-execution-errors-to-gmail/implementations/n8n/report-execution-errors-to-gmail.json) |
+| [Get Gong Transcript and Call Details](agents/get-gong-transcript-and-call-details/README.md) | 9 | [JSON](agents/get-gong-transcript-and-call-details/implementations/n8n/get-gong-transcript-and-call-details.json) |
+| [interval and you tube and telegram](agents/interval-and-you-tube-and-telegram/README.md) | 5 | [JSON](agents/interval-and-you-tube-and-telegram/implementations/n8n/interval-and-you-tube-and-telegram.json) |
+| [🔐🦙🤖 Private &amp; Local Ollama Self-Hosted LLM Router](agents/private-local-ollama-self-hosted-llm-router/README.md) | 7 | [JSON](agents/private-local-ollama-self-hosted-llm-router/implementations/n8n/private-local-ollama-self-hosted-llm-router.json) |
+| [puq-docker-influxdb-deploy](agents/puq-docker-influxdb-deploy/README.md) | 32 | [JSON](agents/puq-docker-influxdb-deploy/implementations/n8n/puq-docker-influxdb-deploy.json) |
+| [Generate google meet links in slack](agents/generate-google-meet-links-in-slack/README.md) | 4 | [JSON](agents/generate-google-meet-links-in-slack/implementations/n8n/generate-google-meet-links-in-slack.json) |
+| [get zendesk and update zendesk and github](agents/get-zendesk-and-update-zendesk-and-github/README.md) | 7 | [JSON](agents/get-zendesk-and-update-zendesk-and-github/implementations/n8n/get-zendesk-and-update-zendesk-and-github.json) |
+| [Always Authenticate Your Server!](agents/always-authenticate-your-server-865df2b4/README.md) | 15 | [JSON](agents/always-authenticate-your-server-865df2b4/implementations/n8n/always-authenticate-your-server-865df2b4.json) |
+| [http request and split out and filter owned projects](agents/http-request-and-split-out-and-filter-owned-projects/README.md) | 31 | [JSON](agents/http-request-and-split-out-and-filter-owned-projects/implementations/n8n/http-request-and-split-out-and-filter-owned-projects.json) |
+| [Create, update and get a subscriber using the MailerLite node](agents/create-update-and-get-a-subscriber-using-the-mailerlite-node/README.md) | 4 | [JSON](agents/create-update-and-get-a-subscriber-using-the-mailerlite-node/implementations/n8n/create-update-and-get-a-subscriber-using-the-mailerlite-node.json) |
+| [receive schedule events and list google calendar and only follow ups](agents/receive-schedule-events-and-list-google-calendar-and-only-follow-ups/README.md) | 16 | [JSON](agents/receive-schedule-events-and-list-google-calendar-and-only-follow-ups/implementations/n8n/receive-schedule-events-and-list-google-calendar-and-only-follow-ups.json) |
+| [Hacker News to Video Template - AlexK1919](agents/hacker-news-to-video-template-alexk1919/README.md) | 39 | [JSON](agents/hacker-news-to-video-template-alexk1919/implementations/n8n/hacker-news-to-video-template-alexk1919.json) |
+| [dropcontact and google sheets and lemlist](agents/dropcontact-and-google-sheets-and-lemlist/README.md) | 4 | [JSON](agents/dropcontact-and-google-sheets-and-lemlist/implementations/n8n/dropcontact-and-google-sheets-and-lemlist.json) |
+| [append google sheets and get aws transcribe and aws transcribe 1](agents/append-google-sheets-and-get-aws-transcribe-and-aws-transcribe-1/README.md) | 8 | [JSON](agents/append-google-sheets-and-get-aws-transcribe-and-aws-transcribe-1/implementations/n8n/append-google-sheets-and-get-aws-transcribe-and-aws-transcribe-1.json) |
+| [webhook and notion and list database page notion](agents/webhook-and-notion-and-list-database-page-notion/README.md) | 12 | [JSON](agents/webhook-and-notion-and-list-database-page-notion/implementations/n8n/webhook-and-notion-and-list-database-page-notion.json) |
+| [Play with Spotify from Telegram](agents/play-with-spotify-from-telegram/README.md) | 13 | [JSON](agents/play-with-spotify-from-telegram/implementations/n8n/play-with-spotify-from-telegram.json) |
+| [💻 Schedule workflow activity time](agents/schedule-workflow-activity-time/README.md) | 7 | [JSON](agents/schedule-workflow-activity-time/implementations/n8n/schedule-workflow-activity-time.json) |
+| [Meeting booked - to newsletter and CRM](agents/meeting-booked-to-newsletter-and-crm/README.md) | 7 | [JSON](agents/meeting-booked-to-newsletter-and-crm/implementations/n8n/meeting-booked-to-newsletter-and-crm.json) |
+| [New tweets](agents/new-tweets/README.md) | 7 | [JSON](agents/new-tweets/implementations/n8n/new-tweets.json) |
+| [http request and linked in](agents/http-request-and-linked-in/README.md) | 3 | [JSON](agents/http-request-and-linked-in/implementations/n8n/http-request-and-linked-in.json) |
+| [create json items from mock data](agents/create-json-items-from-mock-data/README.md) | 2 | [JSON](agents/create-json-items-from-mock-data/implementations/n8n/create-json-items-from-mock-data.json) |
+| [Self-coded LLM Chain Node](agents/self-coded-llm-chain-node/README.md) | 8 | [JSON](agents/self-coded-llm-chain-node/implementations/n8n/self-coded-llm-chain-node.json) |
+| [Dialpad to Syncro](agents/dialpad-to-syncro/README.md) | 22 | [JSON](agents/dialpad-to-syncro/implementations/n8n/dialpad-to-syncro.json) |
+| [Notion to Clockify Sync Template](agents/notion-to-clockify-sync-template/README.md) | 56 | [JSON](agents/notion-to-clockify-sync-template/implementations/n8n/notion-to-clockify-sync-template.json) |
+| [Send updates about the position of the ISS every minute to a topic in ActiveMQ](agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/README.md) | 4 | [JSON](agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq/implementations/n8n/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-activemq.json) |
+| [getallpeople n8n training customer datastore and sort item lists and one item per template](agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/README.md) | 8 | [JSON](agents/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template/implementations/n8n/getallpeople-n8n-training-customer-datastore-and-sort-item-lists-and-one-item-per-template.json) |
+| [Local chatbot with retrieval augmented generation (RAG) Gemini](agents/local-chatbot-with-retrieval-augmented-generation-rag-gemini/README.md) | 13 | [JSON](agents/local-chatbot-with-retrieval-augmented-generation-rag-gemini/implementations/n8n/local-chatbot-with-retrieval-augmented-generation-rag-gemini.json) |
+| [receive copper events](agents/receive-copper-events/README.md) | 1 | [JSON](agents/receive-copper-events/implementations/n8n/receive-copper-events.json) |
+| [Spot Workplace Discrimination Patterns with AI](agents/spot-workplace-discrimination-patterns-with-ai/README.md) | 26 | [JSON](agents/spot-workplace-discrimination-patterns-with-ai/implementations/n8n/spot-workplace-discrimination-patterns-with-ai.json) |
+| [webhook and mattermost](agents/webhook-and-mattermost/README.md) | 3 | [JSON](agents/webhook-and-mattermost/implementations/n8n/webhook-and-mattermost.json) |
+| [Replace Images in Google Docs Documents and Download as PDF/Docx](agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/README.md) | 9 | [JSON](agents/replace-images-in-google-docs-documents-and-download-as-pdf-docx/implementations/n8n/replace-images-in-google-docs-documents-and-download-as-pdf-docx.json) |
+| [Youtube_Automation](agents/youtube-automation/README.md) | 25 | [JSON](agents/youtube-automation/implementations/n8n/youtube-automation.json) |
+| [Printify Automation - Update Title and Description - AlexK1919](agents/printify-automation-update-title-and-description-alexk1919/README.md) | 20 | [JSON](agents/printify-automation-update-title-and-description-alexk1919/implementations/n8n/printify-automation-update-title-and-description-alexk1919.json) |
+| [Gmail Integration and Data Extraction](agents/gmail-integration-and-data-extraction/README.md) | 13 | [JSON](agents/gmail-integration-and-data-extraction/implementations/n8n/gmail-integration-and-data-extraction.json) |
+| [tool http request and remove duplicates and results to list](agents/tool-http-request-and-remove-duplicates-and-results-to-list/README.md) | 30 | [JSON](agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/n8n/tool-http-request-and-remove-duplicates-and-results-to-list.json) |
+| [Automate PDF Image Extraction &amp; Analysis with GPT-4o and Google Drive](agents/automate-pdf-image-extraction-analysis-with-gpt-4o-and-google-drive/README.md) | 9 | [JSON](agents/automate-pdf-image-extraction-analysis-with-gpt-4o-and-google-drive/implementations/n8n/automate-pdf-image-extraction-analysis-with-gpt-4o-and-google-drive.json) |
+| [Add text to an image downloaded from the internet](agents/add-text-to-an-image-downloaded-from-the-internet/README.md) | 3 | [JSON](agents/add-text-to-an-image-downloaded-from-the-internet/implementations/n8n/add-text-to-an-image-downloaded-from-the-internet.json) |
+| [Expense Tracker App](agents/expense-tracker-app/README.md) | 5 | [JSON](agents/expense-tracker-app/implementations/n8n/expense-tracker-app.json) |
+| [Discord Agent](agents/discord-agent/README.md) | 8 | [JSON](agents/discord-agent/implementations/n8n/discord-agent.json) |
+| [receive schedule events and get auth token and get latest requests](agents/receive-schedule-events-and-get-auth-token-and-get-latest-requests/README.md) | 13 | [JSON](agents/receive-schedule-events-and-get-auth-token-and-get-latest-requests/implementations/n8n/receive-schedule-events-and-get-auth-token-and-get-latest-requests.json) |
+| [http request and update keap deliverable and update keap not deliverable](agents/http-request-and-update-keap-deliverable-and-update-keap-not-deliverable/README.md) | 6 | [JSON](agents/http-request-and-update-keap-deliverable-and-update-keap-not-deliverable/implementations/n8n/http-request-and-update-keap-deliverable-and-update-keap-not-deliverable.json) |
+| [Workflow A — Extract &amp; Store Raw Data](agents/workflow-a-extract-store-raw-data/README.md) | 20 | [JSON](agents/workflow-a-extract-store-raw-data/implementations/n8n/workflow-a-extract-store-raw-data.json) |
+| [XML Conversion](agents/xml-conversion/README.md) | 3 | [JSON](agents/xml-conversion/implementations/n8n/xml-conversion.json) |
+| [new](agents/getprofile-repository-github/README.md) | 2 | [JSON](agents/getprofile-repository-github/implementations/n8n/getprofile-repository-github.json) |
+| [Build an MCP server with Airtable](agents/build-an-mcp-server-with-airtable/README.md) | 11 | [JSON](agents/build-an-mcp-server-with-airtable/implementations/n8n/build-an-mcp-server-with-airtable.json) |
+| [Automated Research Report Generation with OpenAI, Wikipedia, Google Search, and Gmail/Telegram](agents/automated-research-report-generation-with-openai-wikipedia-google-search-and-gmail-telegram/README.md) | 25 | [JSON](agents/automated-research-report-generation-with-openai-wikipedia-google-search-and-gmail-telegram/implementations/n8n/automated-research-report-generation-with-openai-wikipedia-google-search-and-gmail-telegram.json) |
+| [sort item lists and markdown and email send](agents/sort-item-lists-and-markdown-and-email-send/README.md) | 10 | [JSON](agents/sort-item-lists-and-markdown-and-email-send/implementations/n8n/sort-item-lists-and-markdown-and-email-send.json) |
+| [search salesforce accounts and removeduplicates item lists and set account id for existing accounts 353b61b9](agents/search-salesforce-accounts-and-removeduplicates-item-lists-and-set-account-id-for-existing-accounts-353b61b9/README.md) | 12 | [JSON](agents/search-salesforce-accounts-and-removeduplicates-item-lists-and-set-account-id-for-existing-accounts-353b61b9/implementations/n8n/search-salesforce-accounts-and-removeduplicates-item-lists-and-set-account-id-for-existing-accounts-353b61b9.json) |
+| [Filemaker Workflow](agents/create-and-edit-filemaker-records/README.md) | 6 | [JSON](agents/create-and-edit-filemaker-records/implementations/n8n/create-and-edit-filemaker-records.json) |
+| [Notify_user_in_Slack_of_quarantined_email_and_create_Jira_ticket_if_opened](agents/notify-user-in-slack-of-quarantined-email-and-create-jira-ticket-if-opened/README.md) | 10 | [JSON](agents/notify-user-in-slack-of-quarantined-email-and-create-jira-ticket-if-opened/implementations/n8n/notify-user-in-slack-of-quarantined-email-and-create-jira-ticket-if-opened.json) |
+| [Fetch the Most Recent Document from Google Drive](agents/fetch-the-most-recent-document-from-google-drive/README.md) | 6 | [JSON](agents/fetch-the-most-recent-document-from-google-drive/implementations/n8n/fetch-the-most-recent-document-from-google-drive.json) |
+| [Create Google Creds](agents/create-google-creds/README.md) | 6 | [JSON](agents/create-google-creds/implementations/n8n/create-google-creds.json) |
+| [Receive updates when a billing plan is activated in PayPal](agents/receive-updates-when-a-billing-plan-is-activated-in-paypal/README.md) | 1 | [JSON](agents/receive-updates-when-a-billing-plan-is-activated-in-paypal/implementations/n8n/receive-updates-when-a-billing-plan-is-activated-in-paypal.json) |
+| [Receive updates when a form is submitted in Wufoo](agents/receive-updates-when-a-form-is-submitted-in-wufoo/README.md) | 1 | [JSON](agents/receive-updates-when-a-form-is-submitted-in-wufoo/implementations/n8n/receive-updates-when-a-form-is-submitted-in-wufoo.json) |
+| [Send new Clockify invoice to Notion database](agents/send-new-clockify-invoice-to-notion-database/README.md) | 2 | [JSON](agents/send-new-clockify-invoice-to-notion-database/implementations/n8n/send-new-clockify-invoice-to-notion-database.json) |
+| [SSH login credentials](agents/ssh-login-credentials/README.md) | 5 | [JSON](agents/ssh-login-credentials/implementations/n8n/ssh-login-credentials.json) |
+| [run python script and read binary files](agents/run-python-script-and-read-binary-files/README.md) | 4 | [JSON](agents/run-python-script-and-read-binary-files/implementations/n8n/run-python-script-and-read-binary-files.json) |
+| [Extract Business Leads from Google Maps with Dumpling AI to Google Sheets](agents/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets/README.md) | 4 | [JSON](agents/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets/implementations/n8n/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets.json) |
+| [Zammad Open Tickets](agents/zammad-open-tickets/README.md) | 5 | [JSON](agents/zammad-open-tickets/implementations/n8n/zammad-open-tickets.json) |
+| [webhook and lookup google sheets and http request](agents/webhook-and-lookup-google-sheets-and-http-request/README.md) | 6 | [JSON](agents/webhook-and-lookup-google-sheets-and-http-request/implementations/n8n/webhook-and-lookup-google-sheets-and-http-request.json) |
+| [Verify phone numbers](agents/verify-phone-numbers/README.md) | 4 | [JSON](agents/verify-phone-numbers/implementations/n8n/verify-phone-numbers.json) |
+| [Store Notion's Pages as Vector Documents into Supabase with OpenAI](agents/store-notion-s-pages-as-vector-documents-into-supabase-with-openai/README.md) | 8 | [JSON](agents/store-notion-s-pages-as-vector-documents-into-supabase-with-openai/implementations/n8n/store-notion-s-pages-as-vector-documents-into-supabase-with-openai.json) |
+| [Mycroft - Patent Intelligence System Enhanced](agents/mycroft-patent-intelligence-system-enhanced/README.md) | 23 | [JSON](agents/mycroft-patent-intelligence-system-enhanced/implementations/n8n/mycroft-patent-intelligence-system-enhanced.json) |
+| [Scrape latest Paul Graham essays](agents/scrape-latest-paul-graham-essays-49a09065/README.md) | 13 | [JSON](agents/scrape-latest-paul-graham-essays-49a09065/implementations/n8n/scrape-latest-paul-graham-essays-49a09065.json) |
+| [Telegram RAG pdf](agents/telegram-rag-pdf/README.md) | 18 | [JSON](agents/telegram-rag-pdf/implementations/n8n/telegram-rag-pdf.json) |
+| [Check email deliverability](agents/check-email-deliverability/README.md) | 5 | [JSON](agents/check-email-deliverability/implementations/n8n/check-email-deliverability.json) |
+| [Personal Portfolio Resume CV Chatbot](agents/personal-portfolio-resume-cv-chatbot/README.md) | 24 | [JSON](agents/personal-portfolio-resume-cv-chatbot/implementations/n8n/personal-portfolio-resume-cv-chatbot.json) |
+| [Daily Journal Reminder](agents/daily-journal-reminder/README.md) | 3 | [JSON](agents/daily-journal-reminder/implementations/n8n/daily-journal-reminder.json) |
+| [Import Productboard Notes, Companies and Features into Snowflake](agents/import-productboard-notes-companies-and-features-into-snowflake/README.md) | 33 | [JSON](agents/import-productboard-notes-companies-and-features-into-snowflake/implementations/n8n/import-productboard-notes-companies-and-features-into-snowflake.json) |
+| [Update all Zammad Roles to default values](agents/update-all-zammad-roles-to-default-values/README.md) | 10 | [JSON](agents/update-all-zammad-roles-to-default-values/implementations/n8n/update-all-zammad-roles-to-default-values.json) |
+| [ai agent that can scrape webpages](agents/ai-agent-that-can-scrape-webpages/README.md) | 9 | [JSON](agents/ai-agent-that-can-scrape-webpages/implementations/n8n/ai-agent-that-can-scrape-webpages.json) |
+| [HR-focused automation pipeline with AI](agents/hr-focused-automation-pipeline-with-ai/README.md) | 12 | [JSON](agents/hr-focused-automation-pipeline-with-ai/implementations/n8n/hr-focused-automation-pipeline-with-ai.json) |
+| [Prevent concurrent workflow runs using Redis](agents/prevent-concurrent-workflow-runs-using-redis/README.md) | 31 | [JSON](agents/prevent-concurrent-workflow-runs-using-redis/implementations/n8n/prevent-concurrent-workflow-runs-using-redis.json) |
+| [http request and graphql and call from baserow](agents/http-request-and-graphql-and-call-from-baserow/README.md) | 6 | [JSON](agents/http-request-and-graphql-and-call-from-baserow/implementations/n8n/http-request-and-graphql-and-call-from-baserow.json) |
+| [SearchApi Youtube Video Summary](agents/searchapi-youtube-video-summary/README.md) | 7 | [JSON](agents/searchapi-youtube-video-summary/implementations/n8n/searchapi-youtube-video-summary.json) |
+| [Auto categorize wordpress template](agents/auto-categorize-wordpress-template/README.md) | 5 | [JSON](agents/auto-categorize-wordpress-template/implementations/n8n/auto-categorize-wordpress-template.json) |
+| [Append, lookup, update, and read data from a Google Sheets spreadsheet](agents/append-lookup-update-and-read-data-from-a-google-sheets-spreadsheet/README.md) | 7 | [JSON](agents/append-lookup-update-and-read-data-from-a-google-sheets-spreadsheet/implementations/n8n/append-lookup-update-and-read-data-from-a-google-sheets-spreadsheet.json) |
+| [Mycroft Agent 5 — Research Footprint Monitor](agents/research-footprint-monitor/README.md) | 31 | [JSON](agents/research-footprint-monitor/implementations/n8n/research-footprint-monitor.json) |
+| [Create, update, and get a post in Ghost](agents/create-update-and-get-a-post-in-ghost/README.md) | 4 | [JSON](agents/create-update-and-get-a-post-in-ghost/implementations/n8n/create-update-and-get-a-post-in-ghost.json) |
+| [New OpenAI Image Generation](agents/new-openai-image-generation/README.md) | 5 | [JSON](agents/new-openai-image-generation/implementations/n8n/new-openai-image-generation.json) |
+| [Attachments Gmail to drive and google sheets](agents/attachments-gmail-to-drive-and-google-sheets/README.md) | 14 | [JSON](agents/attachments-gmail-to-drive-and-google-sheets/implementations/n8n/attachments-gmail-to-drive-and-google-sheets.json) |
+| [receive telegram events and google perspective and telegram](agents/receive-telegram-events-and-google-perspective-and-telegram/README.md) | 5 | [JSON](agents/receive-telegram-events-and-google-perspective-and-telegram/implementations/n8n/receive-telegram-events-and-google-perspective-and-telegram.json) |
+| [Telegram AI Langchain bot](agents/telegram-ai-langchain-bot/README.md) | 11 | [JSON](agents/telegram-ai-langchain-bot/implementations/n8n/telegram-ai-langchain-bot.json) |
+| [Very simple Human in the loop system email with AI e IMAP](agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/README.md) | 10 | [JSON](agents/very-simple-human-in-the-loop-system-email-with-ai-e-imap/implementations/n8n/very-simple-human-in-the-loop-system-email-with-ai-e-imap.json) |
+| [Analyze Screenshots with AI](agents/analyze-screenshots-with-ai/README.md) | 5 | [JSON](agents/analyze-screenshots-with-ai/implementations/n8n/analyze-screenshots-with-ai.json) |
+| [📬 You will receive one email for every company in your calendar. These emails will look something like this:](agents/you-will-receive-one-email-for-every-company-in-your-calendar-these-emails-will-look-something-like-this-d7de36bb/README.md) | 18 | [JSON](agents/you-will-receive-one-email-for-every-company-in-your-calendar-these-emails-will-look-something-like-this-d7de36bb/implementations/n8n/you-will-receive-one-email-for-every-company-in-your-calendar-these-emails-will-look-something-like-this-d7de36bb.json) |
+| [get overview page and html extract and removeduplicates item lists](agents/get-overview-page-and-html-extract-and-removeduplicates-item-lists/README.md) | 11 | [JSON](agents/get-overview-page-and-html-extract-and-removeduplicates-item-lists/implementations/n8n/get-overview-page-and-html-extract-and-removeduplicates-item-lists.json) |
+| [Telegram Chat with Buffering](agents/telegram-chat-with-buffering/README.md) | 13 | [JSON](agents/telegram-chat-with-buffering/implementations/n8n/telegram-chat-with-buffering.json) |
+| [News Monitoring Agent](agents/news-monitoring-agent/README.md) | 74 | [JSON](agents/news-monitoring-agent/implementations/n8n/news-monitoring-agent.json) |
+| [DigialOceanUpload](agents/digialoceanupload/README.md) | 3 | [JSON](agents/digialoceanupload/implementations/n8n/digialoceanupload.json) |
+| [Create a screenshot of a website and send it to a telegram channel](agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/README.md) | 3 | [JSON](agents/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel/implementations/n8n/create-a-screenshot-of-a-website-and-send-it-to-a-telegram-channel.json) |
+| [Sample of Raw CSV Data Send](agents/sample-of-raw-csv-data-send/README.md) | 13 | [JSON](agents/sample-of-raw-csv-data-send/implementations/n8n/sample-of-raw-csv-data-send.json) |
+| [Receive a Mattermost message when a user updates their profile on Facebook](agents/receive-a-mattermost-message-when-a-user-updates-their-profile-on-facebook/README.md) | 2 | [JSON](agents/receive-a-mattermost-message-when-a-user-updates-their-profile-on-facebook/implementations/n8n/receive-a-mattermost-message-when-a-user-updates-their-profile-on-facebook.json) |
+| [Simple indexing workflow using the Google Indexing API](agents/simple-indexing-workflow-using-the-google-indexing-api/README.md) | 11 | [JSON](agents/simple-indexing-workflow-using-the-google-indexing-api/implementations/n8n/simple-indexing-workflow-using-the-google-indexing-api.json) |
+| [Mycroft News Intelligence Agent](agents/mycroft-news-intelligence-agent/README.md) | 16 | [JSON](agents/mycroft-news-intelligence-agent/implementations/n8n/mycroft-news-intelligence-agent.json) |
+| [Send Slack message from Webflow form submission](agents/send-slack-message-from-webflow-form-submission/README.md) | 9 | [JSON](agents/send-slack-message-from-webflow-form-submission/implementations/n8n/send-slack-message-from-webflow-form-submission.json) |
+| [Google analytics template](agents/google-analytics-template/README.md) | 18 | [JSON](agents/google-analytics-template/implementations/n8n/google-analytics-template.json) |
+| [Agent Milvus tool](agents/agent-milvus-tool/README.md) | 16 | [JSON](agents/agent-milvus-tool/implementations/n8n/agent-milvus-tool.json) |
+| [line message api demo](agents/line-message-api-demo/README.md) | 6 | [JSON](agents/line-message-api-demo/implementations/n8n/line-message-api-demo.json) |
+| [Receive updates when a new account is added by an admin in ActiveCampaign](agents/receive-updates-when-a-new-account-is-added-by-an-admin-in-activecampaign/README.md) | 1 | [JSON](agents/receive-updates-when-a-new-account-is-added-by-an-admin-in-activecampaign/implementations/n8n/receive-updates-when-a-new-account-is-added-by-an-admin-in-activecampaign.json) |
+| [Working with Excel files](agents/working-with-excel-files/README.md) | 12 | [JSON](agents/working-with-excel-files/implementations/n8n/working-with-excel-files.json) |
+| [subscribe subscriber klicktipp and split out guest bookings and split out guest cancellations](agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/README.md) | 18 | [JSON](agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/n8n/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations.json) |
+| [basic llm chain and receive telegram events and fetch voice message](agents/basic-llm-chain-and-receive-telegram-events-and-fetch-voice-message/README.md) | 10 | [JSON](agents/basic-llm-chain-and-receive-telegram-events-and-fetch-voice-message/implementations/n8n/basic-llm-chain-and-receive-telegram-events-and-fetch-voice-message.json) |
+| [download the file and post to slack](agents/download-the-file-and-post-to-slack/README.md) | 3 | [JSON](agents/download-the-file-and-post-to-slack/implementations/n8n/download-the-file-and-post-to-slack.json) |
+| [My workflow](agents/http-request-and-write-read-write-file-943b534d/README.md) | 8 | [JSON](agents/http-request-and-write-read-write-file-943b534d/implementations/n8n/http-request-and-write-read-write-file-943b534d.json) |
+| [Standup Bot - Read Config](agents/standup-bot-read-config/README.md) | 3 | [JSON](agents/standup-bot-read-config/implementations/n8n/standup-bot-read-config.json) |
+| [receive gitlab events and http request](agents/receive-gitlab-events-and-http-request/README.md) | 3 | [JSON](agents/receive-gitlab-events-and-http-request/implementations/n8n/receive-gitlab-events-and-http-request.json) |
+| [Publish Image Post to Bluesky](agents/publish-image-post-to-bluesky/README.md) | 11 | [JSON](agents/publish-image-post-to-bluesky/implementations/n8n/publish-image-post-to-bluesky.json) |
+| [download google drive and http request and upload to drive](agents/download-google-drive-and-http-request-and-upload-to-drive/README.md) | 24 | [JSON](agents/download-google-drive-and-http-request-and-upload-to-drive/implementations/n8n/download-google-drive-and-http-request-and-upload-to-drive.json) |
+| [Generate Image Keywords](agents/generate-image-keywords/README.md) | 13 | [JSON](agents/generate-image-keywords/implementations/n8n/generate-image-keywords.json) |
+| [Publish Videos &amp; Images - Blotato](agents/publish-videos-images-blotato/README.md) | 21 | [JSON](agents/publish-videos-images-blotato/implementations/n8n/publish-videos-images-blotato.json) |
+| [&#91;2/2&#93; KNN classifier (lands dataset)](agents/2-2-knn-classifier-lands-dataset/README.md) | 10 | [JSON](agents/2-2-knn-classifier-lands-dataset/implementations/n8n/2-2-knn-classifier-lands-dataset.json) |
+| [Send a Telegram message](agents/send-a-telegram-message/README.md) | 15 | [JSON](agents/send-a-telegram-message/implementations/n8n/send-a-telegram-message.json) |
+| [create new contact and update lead stage and receive typeform events](agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/README.md) | 7 | [JSON](agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/n8n/create-new-contact-and-update-lead-stage-and-receive-typeform-events.json) |
+| [Either use the official Notion getAll: Blocks node](agents/either-use-the-official-notion-getall-blocks-node/README.md) | 8 | [JSON](agents/either-use-the-official-notion-getall-blocks-node/implementations/n8n/either-use-the-official-notion-getall-blocks-node.json) |
+| [text classifier and list message discord and removeitemsseeninpreviousexecutions remove duplicates](agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/README.md) | 23 | [JSON](agents/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/n8n/text-classifier-and-list-message-discord-and-removeitemsseeninpreviousexecutions-remove-duplicates.json) |
+| [Build a Chatbot, Voice Agent and Phone Agent with Voiceflow, Google Calendar and RAG](agents/build-a-chatbot-voice-agent-and-phone-agent-with-voiceflow-google-calendar-and-rag/README.md) | 28 | [JSON](agents/build-a-chatbot-voice-agent-and-phone-agent-with-voiceflow-google-calendar-and-rag/implementations/n8n/build-a-chatbot-voice-agent-and-phone-agent-with-voiceflow-google-calendar-and-rag.json) |
+| [report execution errors to monday com](agents/report-execution-errors-to-monday-com/README.md) | 5 | [JSON](agents/report-execution-errors-to-monday-com/implementations/n8n/report-execution-errors-to-monday-com.json) |
+| [Parse DMARC reports](agents/parse-dmarc-reports/README.md) | 15 | [JSON](agents/parse-dmarc-reports/implementations/n8n/parse-dmarc-reports.json) |
+| [Monitor_security_advisories](agents/monitor-security-advisories/README.md) | 11 | [JSON](agents/monitor-security-advisories/implementations/n8n/monitor-security-advisories.json) |
+| [receive sse events](agents/receive-sse-events/README.md) | 1 | [JSON](agents/receive-sse-events/implementations/n8n/receive-sse-events.json) |
+| [🚨 Warning! Potential destructive operations ahead!](agents/warning-potential-destructive-operations-ahead/README.md) | 10 | [JSON](agents/warning-potential-destructive-operations-ahead/implementations/n8n/warning-potential-destructive-operations-ahead.json) |
+| [http request and get all masked emails and create random masked email](agents/http-request-and-get-all-masked-emails-and-create-random-masked-email/README.md) | 10 | [JSON](agents/http-request-and-get-all-masked-emails-and-create-random-masked-email/implementations/n8n/http-request-and-get-all-masked-emails-and-create-random-masked-email.json) |
+| [Get Gong Calls and Supporting Data](agents/get-gong-calls-and-supporting-data/README.md) | 20 | [JSON](agents/get-gong-calls-and-supporting-data/implementations/n8n/get-gong-calls-and-supporting-data.json) |
+| [Build a Phone Agent to qualify outbound leads and inbound calls with RetellAI -vide](agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/README.md) | 14 | [JSON](agents/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide/implementations/n8n/build-a-phone-agent-to-qualify-outbound-leads-and-inbound-calls-with-retellai-vide.json) |
+| [Summarize Glassdoor Company Info with Google Gemini and Bright Data Web Scraper](agents/summarize-glassdoor-company-info-with-google-gemini-and-bright-data-web-scraper/README.md) | 12 | [JSON](agents/summarize-glassdoor-company-info-with-google-gemini-and-bright-data-web-scraper/implementations/n8n/summarize-glassdoor-company-info-with-google-gemini-and-bright-data-web-scraper.json) |
+| [Resume Screening &amp; Behavioral Interviews with Gemini, Elevenlabs, &amp; Notion ATS copy](agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/README.md) | 33 | [JSON](agents/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy/implementations/n8n/resume-screening-behavioral-interviews-with-gemini-elevenlabs-notion-ats-copy.json) |
+| [receive chat events and query workflow credentials database and workflow credentials helper agent](agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/README.md) | 9 | [JSON](agents/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent/implementations/n8n/receive-chat-events-and-query-workflow-credentials-database-and-workflow-credentials-helper-agent.json) |
+| [💥🛠️Automate Blog Content Creation with GPT-4, Perplexity &amp; WordPress](agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/README.md) | 13 | [JSON](agents/automate-blog-content-creation-with-gpt-4-perplexity-wordpress/implementations/n8n/automate-blog-content-creation-with-gpt-4-perplexity-wordpress.json) |
+| [Dynamically switch between LLMs Template](agents/dynamically-switch-between-llms-template/README.md) | 15 | [JSON](agents/dynamically-switch-between-llms-template/implementations/n8n/dynamically-switch-between-llms-template.json) |
+| [Property Lead Contact Enrichment from CRM](agents/property-lead-contact-enrichment-from-crm/README.md) | 11 | [JSON](agents/property-lead-contact-enrichment-from-crm/implementations/n8n/property-lead-contact-enrichment-from-crm.json) |
+| [Build an OpenAI Assistant with Google Drive Integration](agents/build-an-openai-assistant-with-google-drive-integration/README.md) | 8 | [JSON](agents/build-an-openai-assistant-with-google-drive-integration/implementations/n8n/build-an-openai-assistant-with-google-drive-integration.json) |
+| [Sync New Files From Google Drive with Airtable](agents/sync-new-files-from-google-drive-with-airtable/README.md) | 3 | [JSON](agents/sync-new-files-from-google-drive-with-airtable/implementations/n8n/sync-new-files-from-google-drive-with-airtable.json) |
+| [set new last execution timestamp and get last execution timestamp and getrecentlymodified company hubspot](agents/set-new-last-execution-timestamp-and-get-last-execution-timestamp-and-getrecentlymodified-company-hubspot/README.md) | 9 | [JSON](agents/set-new-last-execution-timestamp-and-get-last-execution-timestamp-and-getrecentlymodified-company-hubspot/implementations/n8n/set-new-last-execution-timestamp-and-get-last-execution-timestamp-and-getrecentlymodified-company-hubspot.json) |
+| [AI Automated TikTok/Youtube Shorts/Reels Generator](agents/ai-automated-tiktok-youtube-shorts-reels-generator/README.md) | 34 | [JSON](agents/ai-automated-tiktok-youtube-shorts-reels-generator/implementations/n8n/ai-automated-tiktok-youtube-shorts-reels-generator.json) |
+| [airflow dag_run](agents/airflow-dag-run/README.md) | 12 | [JSON](agents/airflow-dag-run/implementations/n8n/airflow-dag-run.json) |
+| [youtube chapter generator](agents/youtube-chapter-generator/README.md) | 10 | [JSON](agents/youtube-chapter-generator/implementations/n8n/youtube-chapter-generator.json) |
+| [Retrieve the Background Image and fetch Meta from the File](agents/retrieve-the-background-image-and-fetch-meta-from-the-file/README.md) | 12 | [JSON](agents/retrieve-the-background-image-and-fetch-meta-from-the-file/implementations/n8n/retrieve-the-background-image-and-fetch-meta-from-the-file.json) |
+| [list database page notion and notion and update database page notion](agents/list-database-page-notion-and-notion-and-update-database-page-notion/README.md) | 23 | [JSON](agents/list-database-page-notion-and-notion-and-update-database-page-notion/implementations/n8n/list-database-page-notion-and-notion-and-update-database-page-notion.json) |
+| [You will receive one email for every company in your calendar. These emails will look something like this:](agents/you-will-receive-one-email-for-every-company-in-your-calendar-these-emails-will-look-something-like-this/README.md) | 16 | [JSON](agents/you-will-receive-one-email-for-every-company-in-your-calendar-these-emails-will-look-something-like-this/implementations/n8n/you-will-receive-one-email-for-every-company-in-your-calendar-these-emails-will-look-something-like-this.json) |
+| [sendandwait telegram and set redis and get redis](agents/sendandwait-telegram-and-set-redis-and-get-redis/README.md) | 30 | [JSON](agents/sendandwait-telegram-and-set-redis-and-get-redis/implementations/n8n/sendandwait-telegram-and-set-redis-and-get-redis.json) |
+| [executequery my sql and my sql](agents/executequery-my-sql-and-my-sql/README.md) | 4 | [JSON](agents/executequery-my-sql-and-my-sql/implementations/n8n/executequery-my-sql-and-my-sql.json) |
+| [UTM Link Creator &amp; QR Code Generator with Scheduled Google Analytics Reports](agents/utm-link-creator-qr-code-generator-with-scheduled-google-analytics-reports/README.md) | 11 | [JSON](agents/utm-link-creator-qr-code-generator-with-scheduled-google-analytics-reports/implementations/n8n/utm-link-creator-qr-code-generator-with-scheduled-google-analytics-reports.json) |
+| [Real-time listening and processing of search results with Icypeas.](agents/real-time-listening-and-processing-of-search-results-with-icypeas/README.md) | 2 | [JSON](agents/real-time-listening-and-processing-of-search-results-with-icypeas/implementations/n8n/real-time-listening-and-processing-of-search-results-with-icypeas.json) |
+| [list xero](agents/list-xero/README.md) | 2 | [JSON](agents/list-xero/implementations/n8n/list-xero.json) |
+| [RAG](agents/rag/README.md) | 19 | [JSON](agents/rag/implementations/n8n/rag.json) |
+| [Example subworkflow for command WITHOUT Slack thread..](agents/example-subworkflow-for-command-without-slack-thread/README.md) | 30 | [JSON](agents/example-subworkflow-for-command-without-slack-thread/implementations/n8n/example-subworkflow-for-command-without-slack-thread.json) |
+| [It structures the script for direct use with the Hugging Face text-to-speech model.](agents/it-structures-the-script-for-direct-use-with-the-hugging-face-text-to-speech-model/README.md) | 16 | [JSON](agents/it-structures-the-script-for-direct-use-with-the-hugging-face-text-to-speech-model/implementations/n8n/it-structures-the-script-for-direct-use-with-the-hugging-face-text-to-speech-model.json) |
+| [Google Drive Automation](agents/google-drive-automation/README.md) | 14 | [JSON](agents/google-drive-automation/implementations/n8n/google-drive-automation.json) |
+| [ComparativeAnalysisAgent](agents/comparativeanalysisagent/README.md) | 16 | [JSON](agents/comparativeanalysisagent/implementations/n8n/comparativeanalysisagent.json) |
+| [upsert contact zoho crm and trello and gmail coupon](agents/upsert-contact-zoho-crm-and-trello-and-gmail-coupon/README.md) | 9 | [JSON](agents/upsert-contact-zoho-crm-and-trello-and-gmail-coupon/implementations/n8n/upsert-contact-zoho-crm-and-trello-and-gmail-coupon.json) |
+| [Save the data to Hubspot](agents/save-the-data-to-hubspot/README.md) | 9 | [JSON](agents/save-the-data-to-hubspot/implementations/n8n/save-the-data-to-hubspot.json) |
+| [⏳ Inactivity &amp; Threshold Check](agents/inactivity-threshold-check/README.md) | 27 | [JSON](agents/inactivity-threshold-check/implementations/n8n/inactivity-threshold-check.json) |
+| [Cloudflare Account Required](agents/cloudflare-account-required/README.md) | 12 | [JSON](agents/cloudflare-account-required/implementations/n8n/cloudflare-account-required.json) |
+| [Format Typeform inputs to Pipedrive](agents/format-typeform-inputs-to-pipedrive/README.md) | 7 | [JSON](agents/format-typeform-inputs-to-pipedrive/implementations/n8n/format-typeform-inputs-to-pipedrive.json) |
+| [Example - Backup n8n to Nextcloud](agents/example-backup-n8n-to-nextcloud/README.md) | 9 | [JSON](agents/example-backup-n8n-to-nextcloud/implementations/n8n/example-backup-n8n-to-nextcloud.json) |
+| [respond all items and respond asked item and incoming webhook trigger](agents/respond-all-items-and-respond-asked-item-and-incoming-webhook-trigger/README.md) | 8 | [JSON](agents/respond-all-items-and-respond-asked-item-and-incoming-webhook-trigger/implementations/n8n/respond-all-items-and-respond-asked-item-and-incoming-webhook-trigger.json) |
+| [🦜✨Use OpenAI to Transcribe Audio + Summarize with AI + Save to Google Drive](agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/README.md) | 25 | [JSON](agents/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive/implementations/n8n/use-openai-to-transcribe-audio-summarize-with-ai-save-to-google-drive.json) |
+| [mattermost and google sheets and execute every 45 mins](agents/mattermost-and-google-sheets-and-execute-every-45-mins/README.md) | 4 | [JSON](agents/mattermost-and-google-sheets-and-execute-every-45-mins/implementations/n8n/mattermost-and-google-sheets-and-execute-every-45-mins.json) |
+| [Send an SMS to a number whenever you go out](agents/send-an-sms-to-a-number-whenever-you-go-out/README.md) | 2 | [JSON](agents/send-an-sms-to-a-number-whenever-you-go-out/implementations/n8n/send-an-sms-to-a-number-whenever-you-go-out.json) |
+| [Sorting and Posting Incident Details to Slack](agents/sorting-and-posting-incident-details-to-slack/README.md) | 9 | [JSON](agents/sorting-and-posting-incident-details-to-slack/implementations/n8n/sorting-and-posting-incident-details-to-slack.json) |
+| [Cocktail Recipe Sharing](agents/cocktail-recipe-sharing/README.md) | 4 | [JSON](agents/cocktail-recipe-sharing/implementations/n8n/cocktail-recipe-sharing.json) |
+| [Send Discord message from Webflow form submission](agents/send-discord-message-from-webflow-form-submission/README.md) | 9 | [JSON](agents/send-discord-message-from-webflow-form-submission/implementations/n8n/send-discord-message-from-webflow-form-submission.json) |
+| [Summarize YouTube Videos &amp; Chat About Content with GPT-4o-mini via Telegram](agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/README.md) | 19 | [JSON](agents/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram/implementations/n8n/summarize-youtube-videos-chat-about-content-with-gpt-4o-mini-via-telegram.json) |
+| [Get the logo, icon, and information of a company and store it in Airtable](agents/get-the-logo-icon-and-information-of-a-company-and-store-it-in-airtable/README.md) | 5 | [JSON](agents/get-the-logo-icon-and-information-of-a-company-and-store-it-in-airtable/implementations/n8n/get-the-logo-icon-and-information-of-a-company-and-store-it-in-airtable.json) |
+| [Mycroft - SEC Filings Analysis Agent](agents/mycroft-sec-filings-analysis-agent/README.md) | 19 | [JSON](agents/mycroft-sec-filings-analysis-agent/implementations/n8n/mycroft-sec-filings-analysis-agent.json) |
+| [Dary](agents/receive-telegram-events-and-send-a-text-message-and-evolution-api/README.md) | 15 | [JSON](agents/receive-telegram-events-and-send-a-text-message-and-evolution-api/implementations/n8n/receive-telegram-events-and-send-a-text-message-and-evolution-api.json) |
+| [webhook and item lists and tofile spreadsheet file](agents/webhook-and-item-lists-and-tofile-spreadsheet-file/README.md) | 4 | [JSON](agents/webhook-and-item-lists-and-tofile-spreadsheet-file/implementations/n8n/webhook-and-item-lists-and-tofile-spreadsheet-file.json) |
+| [Create, update, and get activity in Strava](agents/create-update-and-get-activity-in-strava/README.md) | 4 | [JSON](agents/create-update-and-get-activity-in-strava/implementations/n8n/create-update-and-get-activity-in-strava.json) |
+| [route items with switch conditions](agents/route-items-with-switch-conditions/README.md) | 7 | [JSON](agents/route-items-with-switch-conditions/implementations/n8n/route-items-with-switch-conditions.json) |
+| [Mycroft - SEC_Filings_Analysis](agents/mycroft-sec-filings-analysis/README.md) | 15 | [JSON](agents/mycroft-sec-filings-analysis/implementations/n8n/mycroft-sec-filings-analysis.json) |
+| [receive n8n events and mattermost](agents/receive-n8n-events-and-mattermost/README.md) | 2 | [JSON](agents/receive-n8n-events-and-mattermost/implementations/n8n/receive-n8n-events-and-mattermost.json) |
+| [Retrieve all checkout sessions from the last 7 days.](agents/retrieve-all-checkout-sessions-from-the-last-7-days/README.md) | 4 | [JSON](agents/retrieve-all-checkout-sessions-from-the-last-7-days/implementations/n8n/retrieve-all-checkout-sessions-from-the-last-7-days.json) |
+| [OpenAI Assistant with custom n8n tools](agents/openai-assistant-with-custom-n8n-tools/README.md) | 12 | [JSON](agents/openai-assistant-with-custom-n8n-tools/implementations/n8n/openai-assistant-with-custom-n8n-tools.json) |
+| [Portfolio Intelligence Agent - Complete with RAG](agents/portfolio-intelligence-agent-complete-with-rag/README.md) | 23 | [JSON](agents/portfolio-intelligence-agent-complete-with-rag/implementations/n8n/portfolio-intelligence-agent-complete-with-rag.json) |
+| [Ask a human](agents/ask-a-human/README.md) | 10 | [JSON](agents/ask-a-human/implementations/n8n/ask-a-human.json) |
+| [rss-telegram](agents/rss-telegram/README.md) | 18 | [JSON](agents/rss-telegram/implementations/n8n/rss-telegram.json) |
+| [Generate Leads with Google Maps - AlexK1919](agents/generate-leads-with-google-maps-alexk1919/README.md) | 36 | [JSON](agents/generate-leads-with-google-maps-alexk1919/implementations/n8n/generate-leads-with-google-maps-alexk1919.json) |
+| [upload-post images](agents/upload-post-images/README.md) | 9 | [JSON](agents/upload-post-images/implementations/n8n/upload-post-images.json) |
+| [My workflow 2](agents/authentication-set-up/README.md) | 21 | [JSON](agents/authentication-set-up/implementations/n8n/authentication-set-up.json) |
+| [Github Releases](agents/github-releases/README.md) | 18 | [JSON](agents/github-releases/implementations/n8n/github-releases.json) |
+| [Post new Google Calendar events to Telegram](agents/post-new-google-calendar-events-to-telegram/README.md) | 2 | [JSON](agents/post-new-google-calendar-events-to-telegram/implementations/n8n/post-new-google-calendar-events-to-telegram.json) |
+| [My workflow 2](agents/google-sheet-database/README.md) | 15 | [JSON](agents/google-sheet-database/implementations/n8n/google-sheet-database.json) |
+| [Coffee Bot (Mattermost)](agents/coffee-bot-mattermost/README.md) | 6 | [JSON](agents/coffee-bot-mattermost/implementations/n8n/coffee-bot-mattermost.json) |
+| [Create, update and get records in Quick Base](agents/create-update-and-get-records-in-quick-base/README.md) | 6 | [JSON](agents/create-update-and-get-records-in-quick-base/implementations/n8n/create-update-and-get-records-in-quick-base.json) |
+| [receive execute workflow events and n8n and http request](agents/receive-execute-workflow-events-and-n8n-and-http-request/README.md) | 23 | [JSON](agents/receive-execute-workflow-events-and-n8n-and-http-request/implementations/n8n/receive-execute-workflow-events-and-n8n-and-http-request.json) |
+| [General 3D Presentation](agents/general-3d-presentation/README.md) | 14 | [JSON](agents/general-3d-presentation/implementations/n8n/general-3d-presentation.json) |
+| [receive typeform events and download next cloud and spreadsheet file](agents/receive-typeform-events-and-download-next-cloud-and-spreadsheet-file/README.md) | 6 | [JSON](agents/receive-typeform-events-and-download-next-cloud-and-spreadsheet-file/implementations/n8n/receive-typeform-events-and-download-next-cloud-and-spreadsheet-file.json) |
+| [receive mailchimp events](agents/receive-mailchimp-events/README.md) | 1 | [JSON](agents/receive-mailchimp-events/implementations/n8n/receive-mailchimp-events.json) |
+| [Scrape Today's Github Trend 13 Top Repositories](agents/scrape-today-s-github-trend-13-top-repositories/README.md) | 7 | [JSON](agents/scrape-today-s-github-trend-13-top-repositories/implementations/n8n/scrape-today-s-github-trend-13-top-repositories.json) |
+| [AI Social Media Publisher from WordPress](agents/ai-social-media-publisher-from-wordpress/README.md) | 16 | [JSON](agents/ai-social-media-publisher-from-wordpress/implementations/n8n/ai-social-media-publisher-from-wordpress.json) |
+| [read binary file and spreadsheet file and postgres](agents/read-binary-file-and-spreadsheet-file-and-postgres/README.md) | 3 | [JSON](agents/read-binary-file-and-spreadsheet-file-and-postgres/implementations/n8n/read-binary-file-and-spreadsheet-file-and-postgres.json) |
+| [Colombian Invoices Processing](agents/colombian-invoices-processing/README.md) | 22 | [JSON](agents/colombian-invoices-processing/implementations/n8n/colombian-invoices-processing.json) |
+| [MCP Client with Brave and Telegram](agents/mcp-client-with-brave-and-telegram/README.md) | 7 | [JSON](agents/mcp-client-with-brave-and-telegram/implementations/n8n/mcp-client-with-brave-and-telegram.json) |
+| [🎥 Analyze YouTube Video for Summaries, Transcripts &amp; Content + Google Gemini AI](agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/README.md) | 15 | [JSON](agents/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai/implementations/n8n/analyze-youtube-video-for-summaries-transcripts-content-google-gemini-ai.json) |
+| [Send daily weather updates via a message in Line](agents/send-daily-weather-updates-via-a-message-in-line/README.md) | 3 | [JSON](agents/send-daily-weather-updates-via-a-message-in-line/implementations/n8n/send-daily-weather-updates-via-a-message-in-line.json) |
+| [xml and respond to webhook and webhook](agents/xml-and-respond-to-webhook-and-webhook/README.md) | 4 | [JSON](agents/xml-and-respond-to-webhook-and-webhook/implementations/n8n/xml-and-respond-to-webhook-and-webhook.json) |
+| [Structured Data Extract, Data Mining with Bright Data &amp; Google Gemini](agents/structured-data-extract-data-mining-with-bright-data-google-gemini/README.md) | 16 | [JSON](agents/structured-data-extract-data-mining-with-bright-data-google-gemini/implementations/n8n/structured-data-extract-data-mining-with-bright-data-google-gemini.json) |
+| [Create new tasks to airtable from a slack command](agents/create-new-tasks-to-airtable-from-a-slack-command/README.md) | 4 | [JSON](agents/create-new-tasks-to-airtable-from-a-slack-command/implementations/n8n/create-new-tasks-to-airtable-from-a-slack-command.json) |
+| [read items from an rss feed](agents/read-items-from-an-rss-feed/README.md) | 6 | [JSON](agents/read-items-from-an-rss-feed/implementations/n8n/read-items-from-an-rss-feed.json) |
+| [Receive messages for an ActiveMQ queue via AMQP Trigger](agents/receive-messages-for-an-activemq-queue-via-amqp-trigger/README.md) | 1 | [JSON](agents/receive-messages-for-an-activemq-queue-via-amqp-trigger/implementations/n8n/receive-messages-for-an-activemq-queue-via-amqp-trigger.json) |
+| [write read write file and convert file to pdf](agents/write-read-write-file-and-convert-file-to-pdf/README.md) | 5 | [JSON](agents/write-read-write-file-and-convert-file-to-pdf/implementations/n8n/write-read-write-file-and-convert-file-to-pdf.json) |
+| [Create a project, tag, and time entry, and update the time entry in Clockify](agents/create-a-project-tag-and-time-entry-and-update-the-time-entry-in-clockify/README.md) | 5 | [JSON](agents/create-a-project-tag-and-time-entry-and-update-the-time-entry-in-clockify/implementations/n8n/create-a-project-tag-and-time-entry-and-update-the-time-entry-in-clockify.json) |
+| [Group K](agents/receive-telegram-events-and-extract-information-from-telegram-and-telegram/README.md) | 11 | [JSON](agents/receive-telegram-events-and-extract-information-from-telegram-and-telegram/implementations/n8n/receive-telegram-events-and-extract-information-from-telegram-and-telegram.json) |
+| [google sheets and cron and update google sheets](agents/google-sheets-and-cron-and-update-google-sheets/README.md) | 4 | [JSON](agents/google-sheets-and-cron-and-update-google-sheets/implementations/n8n/google-sheets-and-cron-and-update-google-sheets.json) |
+| [Example 1. Publicly Hosted Files](agents/example-1-publicly-hosted-files/README.md) | 17 | [JSON](agents/example-1-publicly-hosted-files/implementations/n8n/example-1-publicly-hosted-files.json) |
+| [http request and get photo for testing purposes](agents/http-request-and-get-photo-for-testing-purposes/README.md) | 6 | [JSON](agents/http-request-and-get-photo-for-testing-purposes/implementations/n8n/http-request-and-get-photo-for-testing-purposes.json) |
+| [receive gmail events and upload files to google drive](agents/receive-gmail-events-and-upload-files-to-google-drive/README.md) | 3 | [JSON](agents/receive-gmail-events-and-upload-files-to-google-drive/implementations/n8n/receive-gmail-events-and-upload-files-to-google-drive.json) |
+| [Events Webhook Trigger](agents/events-webhook-trigger-8e718da6/README.md) | 26 | [JSON](agents/events-webhook-trigger-8e718da6/implementations/n8n/events-webhook-trigger-8e718da6.json) |
+| [Orchestrator](agents/route-chat-requests-with-ollama/README.md) | 5 | [JSON](agents/route-chat-requests-with-ollama/implementations/n8n/route-chat-requests-with-ollama.json) |
+| [Automate Figma Versioning and Jira Updates with n8n Webhook Integration](agents/automate-figma-versioning-and-jira-updates-with-n8n-webhook-integration/README.md) | 3 | [JSON](agents/automate-figma-versioning-and-jira-updates-with-n8n-webhook-integration/implementations/n8n/automate-figma-versioning-and-jira-updates-with-n8n-webhook-integration.json) |
+| [Email](agents/email-read-imap-and-the-hive-and-promote-the-hive/README.md) | 15 | [JSON](agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/n8n/email-read-imap-and-the-hive-and-promote-the-hive.json) |
+| [HDW Lead Geländewagen](agents/hdw-lead-gelandewagen/README.md) | 71 | [JSON](agents/hdw-lead-gelandewagen/implementations/n8n/hdw-lead-gelandewagen.json) |
+| [Import CSV from URL to GoogleSheet](agents/import-csv-from-url-to-googlesheet/README.md) | 6 | [JSON](agents/import-csv-from-url-to-googlesheet/implementations/n8n/import-csv-from-url-to-googlesheet.json) |
+| [Parser which defines the output format and which gets used to validate the output](agents/parser-which-defines-the-output-format-and-which-gets-used-to-validate-the-output/README.md) | 7 | [JSON](agents/parser-which-defines-the-output-format-and-which-gets-used-to-validate-the-output/implementations/n8n/parser-which-defines-the-output-format-and-which-gets-used-to-validate-the-output.json) |
+| [AI-Driven WooCommerce Product Importer with SEO](agents/ai-driven-woocommerce-product-importer-with-seo/README.md) | 12 | [JSON](agents/ai-driven-woocommerce-product-importer-with-seo/implementations/n8n/ai-driven-woocommerce-product-importer-with-seo.json) |
+| [execute workflow and receive schedule events and get redis](agents/execute-workflow-and-receive-schedule-events-and-get-redis/README.md) | 10 | [JSON](agents/execute-workflow-and-receive-schedule-events-and-get-redis/implementations/n8n/execute-workflow-and-receive-schedule-events-and-get-redis.json) |
+| [list microsoft excel](agents/list-microsoft-excel/README.md) | 2 | [JSON](agents/list-microsoft-excel/implementations/n8n/list-microsoft-excel.json) |
+| [hubspot and slack and append airtable](agents/hubspot-and-slack-and-append-airtable/README.md) | 10 | [JSON](agents/hubspot-and-slack-and-append-airtable/implementations/n8n/hubspot-and-slack-and-append-airtable.json) |
+| [🤖 On-Page SEO Audit](agents/on-page-seo-audit/README.md) | 10 | [JSON](agents/on-page-seo-audit/implementations/n8n/on-page-seo-audit.json) |
+| [webhook and mautic and list mautic](agents/webhook-and-mautic-and-list-mautic/README.md) | 17 | [JSON](agents/webhook-and-mautic-and-list-mautic/implementations/n8n/webhook-and-mautic-and-list-mautic.json) |
+| [Generate Company Stories from LinkedIn with Bright Data &amp; Google Gemini](agents/generate-company-stories-from-linkedin-with-bright-data-google-gemini/README.md) | 17 | [JSON](agents/generate-company-stories-from-linkedin-with-bright-data-google-gemini/implementations/n8n/generate-company-stories-from-linkedin-with-bright-data-google-gemini.json) |
+| [for each user id and slack and search slack](agents/for-each-user-id-and-slack-and-search-slack/README.md) | 22 | [JSON](agents/for-each-user-id-and-slack-and-search-slack/implementations/n8n/for-each-user-id-and-slack-and-search-slack.json) |
+| [Forward Netflix emails to multiple email addresses with GMail and Mailjet](agents/forward-netflix-emails-to-multiple-email-addresses-with-gmail-and-mailjet/README.md) | 4 | [JSON](agents/forward-netflix-emails-to-multiple-email-addresses-with-gmail-and-mailjet/implementations/n8n/forward-netflix-emails-to-multiple-email-addresses-with-gmail-and-mailjet.json) |
+| [Automate Etsy Data Mining with Bright Data Scrape &amp; Google Gemini](agents/automate-etsy-data-mining-with-bright-data-scrape-google-gemini/README.md) | 15 | [JSON](agents/automate-etsy-data-mining-with-bright-data-scrape-google-gemini/implementations/n8n/automate-etsy-data-mining-with-bright-data-scrape-google-gemini.json) |
+| [The conversation history(last 20 messages) is stored in a buffer memory](agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/README.md) | 6 | [JSON](agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963/implementations/n8n/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-8c79c963.json) |
+| [AirQuality Scheduler](agents/airquality-scheduler/README.md) | 9 | [JSON](agents/airquality-scheduler/implementations/n8n/airquality-scheduler.json) |
+| [🔗 1. Webhook Entry &amp; Initial Decryption Block](agents/1-webhook-entry-initial-decryption-block/README.md) | 11 | [JSON](agents/1-webhook-entry-initial-decryption-block/implementations/n8n/1-webhook-entry-initial-decryption-block.json) |
+| [Track Working Time and Pauses](agents/track-working-time-and-pauses/README.md) | 24 | [JSON](agents/track-working-time-and-pauses/implementations/n8n/track-working-time-and-pauses.json) |
+| [Get a pipeline in CircleCI](agents/get-a-pipeline-in-circleci/README.md) | 2 | [JSON](agents/get-a-pipeline-in-circleci/implementations/n8n/get-a-pipeline-in-circleci.json) |
+| [Automated Content SEO Audit Report](agents/automated-content-seo-audit-report/README.md) | 20 | [JSON](agents/automated-content-seo-audit-report/implementations/n8n/automated-content-seo-audit-report.json) |
+| [Google Analytics: Weekly Report](agents/google-analytics-weekly-report/README.md) | 13 | [JSON](agents/google-analytics-weekly-report/implementations/n8n/google-analytics-weekly-report.json) |
+| [read from google sheets and tofile spreadsheet file and webhook](agents/read-from-google-sheets-and-tofile-spreadsheet-file-and-webhook/README.md) | 3 | [JSON](agents/read-from-google-sheets-and-tofile-spreadsheet-file-and-webhook/implementations/n8n/read-from-google-sheets-and-tofile-spreadsheet-file-and-webhook.json) |
+| [n8n_mysql_purge_history_greater_than_10_days](agents/n8n-mysql-purge-history-greater-than-10-days/README.md) | 3 | [JSON](agents/n8n-mysql-purge-history-greater-than-10-days/implementations/n8n/n8n-mysql-purge-history-greater-than-10-days.json) |
+| [mattermost and receive emelia events](agents/mattermost-and-receive-emelia-events/README.md) | 2 | [JSON](agents/mattermost-and-receive-emelia-events/implementations/n8n/mattermost-and-receive-emelia-events.json) |
+| [Check if the song is present in the database](agents/check-if-the-song-is-present-in-the-database/README.md) | 27 | [JSON](agents/check-if-the-song-is-present-in-the-database/implementations/n8n/check-if-the-song-is-present-in-the-database.json) |
+| [microsoft teams and update microsoft teams](agents/microsoft-teams-and-update-microsoft-teams/README.md) | 4 | [JSON](agents/microsoft-teams-and-update-microsoft-teams/implementations/n8n/microsoft-teams-and-update-microsoft-teams.json) |
+| [SSL Expiry Alert](agents/ssl-expiry-alert/README.md) | 6 | [JSON](agents/ssl-expiry-alert/implementations/n8n/ssl-expiry-alert.json) |
+| [ScenarioStressTestingAgent](agents/scenariostresstestingagent/README.md) | 16 | [JSON](agents/scenariostresstestingagent/implementations/n8n/scenariostresstestingagent.json) |
+| [Automating Posting content to WordPress and setting up the featured Image](agents/automating-posting-content-to-wordpress-and-setting-up-the-featured-image/README.md) | 11 | [JSON](agents/automating-posting-content-to-wordpress-and-setting-up-the-featured-image/implementations/n8n/automating-posting-content-to-wordpress-and-setting-up-the-featured-image.json) |
+| [Mattermost Webhook](agents/mattermost-webhook/README.md) | 3 | [JSON](agents/mattermost-webhook/implementations/n8n/mattermost-webhook.json) |
+| [CV Screening with OpenAI](agents/cv-screening-with-openai/README.md) | 6 | [JSON](agents/cv-screening-with-openai/implementations/n8n/cv-screening-with-openai.json) |
+| [Save SQL table as a binary XLSX file](agents/save-sql-table-as-a-binary-xlsx-file/README.md) | 4 | [JSON](agents/save-sql-table-as-a-binary-xlsx-file/implementations/n8n/save-sql-table-as-a-binary-xlsx-file.json) |
+| [Optimize Prompt](agents/optimize-prompt/README.md) | 6 | [JSON](agents/optimize-prompt/implementations/n8n/optimize-prompt.json) |
+| [list gmail and delete gmail and ai check email](agents/list-gmail-and-delete-gmail-and-ai-check-email/README.md) | 17 | [JSON](agents/list-gmail-and-delete-gmail-and-ai-check-email/implementations/n8n/list-gmail-and-delete-gmail-and-ai-check-email.json) |
+| [Setting Up Slack App Event Subscriptions](agents/setting-up-slack-app-event-subscriptions/README.md) | 11 | [JSON](agents/setting-up-slack-app-event-subscriptions/implementations/n8n/setting-up-slack-app-event-subscriptions.json) |
+| [Create, update, and get a user using the G Suite Admin node](agents/create-update-and-get-a-user-using-the-g-suite-admin-node/README.md) | 4 | [JSON](agents/create-update-and-get-a-user-using-the-g-suite-admin-node/implementations/n8n/create-update-and-get-a-user-using-the-g-suite-admin-node.json) |
+| [Upload attachments to Drive](agents/upload-attachments-to-drive/README.md) | 13 | [JSON](agents/upload-attachments-to-drive/implementations/n8n/upload-attachments-to-drive.json) |
+| [Replicate Line Items on New Deal in HubSpot Workflow](agents/replicate-line-items-on-new-deal-in-hubspot-workflow/README.md) | 7 | [JSON](agents/replicate-line-items-on-new-deal-in-hubspot-workflow/implementations/n8n/replicate-line-items-on-new-deal-in-hubspot-workflow.json) |
+| [receive linear events and only tickets that need to be classified and update linear](agents/receive-linear-events-and-only-tickets-that-need-to-be-classified-and-update-linear/README.md) | 10 | [JSON](agents/receive-linear-events-and-only-tickets-that-need-to-be-classified-and-update-linear/implementations/n8n/receive-linear-events-and-only-tickets-that-need-to-be-classified-and-update-linear.json) |
+| [Extract engaging moments from YouTube video](agents/extract-engaging-moments-from-youtube-video/README.md) | 14 | [JSON](agents/extract-engaging-moments-from-youtube-video/implementations/n8n/extract-engaging-moments-from-youtube-video.json) |
+| [Google Trend Data Extract, Summarization with Bright Data &amp; Google Gemini](agents/google-trend-data-extract-summarization-with-bright-data-google-gemini/README.md) | 14 | [JSON](agents/google-trend-data-extract-summarization-with-bright-data-google-gemini/implementations/n8n/google-trend-data-extract-summarization-with-bright-data-google-gemini.json) |
+| [Docsify example](agents/docsify-example/README.md) | 48 | [JSON](agents/docsify-example/implementations/n8n/docsify-example.json) |
+| [Qdrant Vector Database Embedding Pipeline](agents/qdrant-vector-database-embedding-pipeline/README.md) | 8 | [JSON](agents/qdrant-vector-database-embedding-pipeline/implementations/n8n/qdrant-vector-database-embedding-pipeline.json) |
+| [Scrape latest Paul Graham essays](agents/scrape-latest-paul-graham-essays/README.md) | 14 | [JSON](agents/scrape-latest-paul-graham-essays/implementations/n8n/scrape-latest-paul-graham-essays.json) |
+| [Training Feedback Automation](agents/training-feedback-automation/README.md) | 12 | [JSON](agents/training-feedback-automation/implementations/n8n/training-feedback-automation.json) |
+| [receive schedule events and list microsoft outlook and markdown](agents/receive-schedule-events-and-list-microsoft-outlook-and-markdown/README.md) | 8 | [JSON](agents/receive-schedule-events-and-list-microsoft-outlook-and-markdown/implementations/n8n/receive-schedule-events-and-list-microsoft-outlook-and-markdown.json) |
+| [Stage 1 - Research for API Documentation](agents/stage-1-research-for-api-documentation/README.md) | 82 | [JSON](agents/stage-1-research-for-api-documentation/implementations/n8n/stage-1-research-for-api-documentation.json) |
+| [Stripe Payment Order Sync – Auto Retrieve Customer &amp; Product Purchased](agents/stripe-payment-order-sync-auto-retrieve-customer-product-purchased/README.md) | 3 | [JSON](agents/stripe-payment-order-sync-auto-retrieve-customer-product-purchased/implementations/n8n/stripe-payment-order-sync-auto-retrieve-customer-product-purchased.json) |
+| [Remote IOT Sensor monitoring via MQTT and InfluxDB](agents/remote-iot-sensor-monitoring-via-mqtt-and-influxdb/README.md) | 3 | [JSON](agents/remote-iot-sensor-monitoring-via-mqtt-and-influxdb/implementations/n8n/remote-iot-sensor-monitoring-via-mqtt-and-influxdb.json) |
+| [Retrieves recent posts from specific Reddit community (subreddit)](agents/retrieves-recent-posts-from-specific-reddit-community-subreddit/README.md) | 14 | [JSON](agents/retrieves-recent-posts-from-specific-reddit-community-subreddit/implementations/n8n/retrieves-recent-posts-from-specific-reddit-community-subreddit.json) |
+| [Monitor Multiple Github Repos](agents/monitor-multiple-github-repos/README.md) | 13 | [JSON](agents/monitor-multiple-github-repos/implementations/n8n/monitor-multiple-github-repos.json) |
+| [send email with mailjet](agents/send-email-with-mailjet/README.md) | 2 | [JSON](agents/send-email-with-mailjet/implementations/n8n/send-email-with-mailjet.json) |
+| [respond to webhook and respond with error and upload s3](agents/respond-to-webhook-and-respond-with-error-and-upload-s3/README.md) | 12 | [JSON](agents/respond-to-webhook-and-respond-with-error-and-upload-s3/implementations/n8n/respond-to-webhook-and-respond-with-error-and-upload-s3.json) |
+| [Email search with Icypeas (bulk search)](agents/email-search-with-icypeas-bulk-search/README.md) | 4 | [JSON](agents/email-search-with-icypeas-bulk-search/implementations/n8n/email-search-with-icypeas-bulk-search.json) |
+| [Import Odoo Product Images from Google Drive](agents/import-odoo-product-images-from-google-drive/README.md) | 19 | [JSON](agents/import-odoo-product-images-from-google-drive/implementations/n8n/import-odoo-product-images-from-google-drive.json) |
+| [verify email](agents/verify-email/README.md) | 4 | [JSON](agents/verify-email/implementations/n8n/verify-email.json) |
+| [Academic Assistant Chatbot (Telegram + OpenAI)](agents/academic-assistant-chatbot-telegram-openai/README.md) | 5 | [JSON](agents/academic-assistant-chatbot-telegram-openai/implementations/n8n/academic-assistant-chatbot-telegram-openai.json) |
+| [Search console REPORTS](agents/search-console-reports/README.md) | 14 | [JSON](agents/search-console-reports/implementations/n8n/search-console-reports.json) |
+| [Create a ticket in Zendesk](agents/create-a-ticket-in-zendesk/README.md) | 2 | [JSON](agents/create-a-ticket-in-zendesk/implementations/n8n/create-a-ticket-in-zendesk.json) |
+| [receive telegram events and append google sheets and telegram](agents/receive-telegram-events-and-append-google-sheets-and-telegram/README.md) | 18 | [JSON](agents/receive-telegram-events-and-append-google-sheets-and-telegram/implementations/n8n/receive-telegram-events-and-append-google-sheets-and-telegram.json) |
+| [cron and telegram and webhook](agents/cron-and-telegram-and-webhook/README.md) | 7 | [JSON](agents/cron-and-telegram-and-webhook/implementations/n8n/cron-and-telegram-and-webhook.json) |
+| [xml extract from file and respond to webhook and webhook](agents/xml-extract-from-file-and-respond-to-webhook-and-webhook/README.md) | 9 | [JSON](agents/xml-extract-from-file-and-respond-to-webhook-and-webhook/implementations/n8n/xml-extract-from-file-and-respond-to-webhook-and-webhook.json) |
+| [receive github events and trigger travis ci](agents/receive-github-events-and-trigger-travis-ci/README.md) | 4 | [JSON](agents/receive-github-events-and-trigger-travis-ci/implementations/n8n/receive-github-events-and-trigger-travis-ci.json) |
+| [Chat with Postgresql Database](agents/chat-with-postgresql-database/README.md) | 7 | [JSON](agents/chat-with-postgresql-database/implementations/n8n/chat-with-postgresql-database.json) |
+| [Airtop Web Agent](agents/airtop-web-agent/README.md) | 17 | [JSON](agents/airtop-web-agent/implementations/n8n/airtop-web-agent.json) |
+| [Upload video, create playlist and add video to playlist](agents/upload-video-create-playlist-and-add-video-to-playlist/README.md) | 5 | [JSON](agents/upload-video-create-playlist-and-add-video-to-playlist/implementations/n8n/upload-video-create-playlist-and-add-video-to-playlist.json) |
+| [Perform an email search with Icypeas (single)](agents/perform-an-email-search-with-icypeas-single/README.md) | 3 | [JSON](agents/perform-an-email-search-with-icypeas-single/implementations/n8n/perform-an-email-search-with-icypeas-single.json) |
+| [Streamline Your Zoom Meetings with Secure, Automated Stripe Payments](agents/streamline-your-zoom-meetings-with-secure-automated-stripe-payments/README.md) | 16 | [JSON](agents/streamline-your-zoom-meetings-with-secure-automated-stripe-payments/implementations/n8n/streamline-your-zoom-meetings-with-secure-automated-stripe-payments.json) |
+| [Start Multiple Sub-Workflows Asynchronously](agents/start-multiple-sub-workflows-asynchronously/README.md) | 14 | [JSON](agents/start-multiple-sub-workflows-asynchronously/implementations/n8n/start-multiple-sub-workflows-asynchronously.json) |
+| [Receive updates for all changes in Pipedrive](agents/receive-updates-for-all-changes-in-pipedrive/README.md) | 1 | [JSON](agents/receive-updates-for-all-changes-in-pipedrive/implementations/n8n/receive-updates-for-all-changes-in-pipedrive.json) |
+| [AI agent: expense tracker in Google Sheets and n8n chat](agents/ai-agent-expense-tracker-in-google-sheets-and-n8n-chat/README.md) | 9 | [JSON](agents/ai-agent-expense-tracker-in-google-sheets-and-n8n-chat/implementations/n8n/ai-agent-expense-tracker-in-google-sheets-and-n8n-chat.json) |
+| [Media Narrative Tracker — Mycroft Agent 3 (Groq)](agents/media-narrative-novelty/README.md) | 21 | [JSON](agents/media-narrative-novelty/implementations/n8n/media-narrative-novelty.json) |
+| [Get Product Feedback](agents/get-product-feedback/README.md) | 6 | [JSON](agents/get-product-feedback/implementations/n8n/get-product-feedback.json) |
+| [Website check](agents/website-check/README.md) | 5 | [JSON](agents/website-check/implementations/n8n/website-check.json) |
+| [create playlist spotify and get liked tracks and aggregate](agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/README.md) | 17 | [JSON](agents/create-playlist-spotify-and-get-liked-tracks-and-aggregate/implementations/n8n/create-playlist-spotify-and-get-liked-tracks-and-aggregate.json) |
+| [Send Telegram Alerts for New WooCommerce Orders](agents/send-telegram-alerts-for-new-woocommerce-orders/README.md) | 4 | [JSON](agents/send-telegram-alerts-for-new-woocommerce-orders/implementations/n8n/send-telegram-alerts-for-new-woocommerce-orders.json) |
+| [xml and get xml data and dropbox](agents/xml-and-get-xml-data-and-dropbox/README.md) | 5 | [JSON](agents/xml-and-get-xml-data-and-dropbox/implementations/n8n/xml-and-get-xml-data-and-dropbox.json) |
+| [receive form events and split out and open ai](agents/receive-form-events-and-split-out-and-open-ai/README.md) | 15 | [JSON](agents/receive-form-events-and-split-out-and-open-ai/implementations/n8n/receive-form-events-and-split-out-and-open-ai.json) |
+| [Amazon keywords](agents/amazon-keywords/README.md) | 8 | [JSON](agents/amazon-keywords/implementations/n8n/amazon-keywords.json) |
+| [quick chart and google drive upload file](agents/quick-chart-and-google-drive-upload-file/README.md) | 4 | [JSON](agents/quick-chart-and-google-drive-upload-file/implementations/n8n/quick-chart-and-google-drive-upload-file.json) |
+| [Shopify order UTM to Baserow](agents/shopify-order-utm-to-baserow/README.md) | 8 | [JSON](agents/shopify-order-utm-to-baserow/implementations/n8n/shopify-order-utm-to-baserow.json) |
+| [Send a welcome private message to your new BlueSky followers](agents/send-a-welcome-private-message-to-your-new-bluesky-followers/README.md) | 15 | [JSON](agents/send-a-welcome-private-message-to-your-new-bluesky-followers/implementations/n8n/send-a-welcome-private-message-to-your-new-bluesky-followers.json) |
+| [Automated Daily Weather Data Fetcher and Storage](agents/automated-daily-weather-data-fetcher-and-storage/README.md) | 3 | [JSON](agents/automated-daily-weather-data-fetcher-and-storage/implementations/n8n/automated-daily-weather-data-fetcher-and-storage.json) |
+| [Credentials Transfer](agents/credentials-transfer/README.md) | 13 | [JSON](agents/credentials-transfer/implementations/n8n/credentials-transfer.json) |
+| [Create a task in ClickUp](agents/create-a-task-in-clickup/README.md) | 2 | [JSON](agents/create-a-task-in-clickup/implementations/n8n/create-a-task-in-clickup.json) |
+| [twitter api example](agents/twitter-api-example/README.md) | 4 | [JSON](agents/twitter-api-example/implementations/n8n/twitter-api-example.json) |
+| [read google sheet and search salesforce accounts and removeduplicates item lists](agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/README.md) | 12 | [JSON](agents/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists/implementations/n8n/read-google-sheet-and-search-salesforce-accounts-and-removeduplicates-item-lists.json) |
+| [Standup Bot - Worker](agents/standup-bot-worker/README.md) | 29 | [JSON](agents/standup-bot-worker/implementations/n8n/standup-bot-worker.json) |
+| [append google sheets and google sheets](agents/append-google-sheets-and-google-sheets/README.md) | 4 | [JSON](agents/append-google-sheets-and-google-sheets/implementations/n8n/append-google-sheets-and-google-sheets.json) |
+| [MongoDB Agent](agents/mongodb-agent/README.md) | 6 | [JSON](agents/mongodb-agent/implementations/n8n/mongodb-agent.json) |
+| [Get Airtable data in Obsidian Notes](agents/get-airtable-data-in-obsidian-notes/README.md) | 5 | [JSON](agents/get-airtable-data-in-obsidian-notes/implementations/n8n/get-airtable-data-in-obsidian-notes.json) |
+| [Create a room, invite members from a different room, and send a message in the room we created](agents/create-a-room-invite-members-from-a-different-room-and-send-a-message-in-the-room-we-created/README.md) | 8 | [JSON](agents/create-a-room-invite-members-from-a-different-room-and-send-a-message-in-the-room-we-created/implementations/n8n/create-a-room-invite-members-from-a-different-room-and-send-a-message-in-the-room-we-created.json) |
+| [get Google Drive folders](agents/get-google-drive-folders/README.md) | 23 | [JSON](agents/get-google-drive-folders/implementations/n8n/get-google-drive-folders.json) |
+| [Get a volume and add it to your bookshelf](agents/get-a-volume-and-add-it-to-your-bookshelf/README.md) | 4 | [JSON](agents/get-a-volume-and-add-it-to-your-bookshelf/implementations/n8n/get-a-volume-and-add-it-to-your-bookshelf.json) |
+| [Restore your workflows from GitHub](agents/restore-your-workflows-from-github/README.md) | 7 | [JSON](agents/restore-your-workflows-from-github/implementations/n8n/restore-your-workflows-from-github.json) |
+| [autopilot and list contact list autopilot](agents/autopilot-and-list-contact-list-autopilot/README.md) | 4 | [JSON](agents/autopilot-and-list-contact-list-autopilot/implementations/n8n/autopilot-and-list-contact-list-autopilot.json) |
+| [Sending an SMS with MessageBird](agents/sending-an-sms-with-messagebird/README.md) | 2 | [JSON](agents/sending-an-sms-with-messagebird/implementations/n8n/sending-an-sms-with-messagebird.json) |
+| [clearbit and list lead pipedrive and keep leads that match the criteria](agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/README.md) | 16 | [JSON](agents/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria/implementations/n8n/clearbit-and-list-lead-pipedrive-and-keep-leads-that-match-the-criteria.json) |
+| [Creates a folder in Google Drive to store the generated content and outline](agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/README.md) | 27 | [JSON](agents/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline/implementations/n8n/creates-a-folder-in-google-drive-to-store-the-generated-content-and-outline.json) |
+| [Gumroad sale trigger](agents/gumroad-sale-trigger/README.md) | 4 | [JSON](agents/gumroad-sale-trigger/implementations/n8n/gumroad-sale-trigger.json) |
+| [Chinese Translator](agents/chinese-translator/README.md) | 11 | [JSON](agents/chinese-translator/implementations/n8n/chinese-translator.json) |
+| [Send daily weather updates to a phone number using the Vonage node](agents/send-daily-weather-updates-to-a-phone-number-using-the-vonage-node/README.md) | 3 | [JSON](agents/send-daily-weather-updates-to-a-phone-number-using-the-vonage-node/implementations/n8n/send-daily-weather-updates-to-a-phone-number-using-the-vonage-node.json) |
+| [Sync New Shopify Products to Odoo Product](agents/sync-new-shopify-products-to-odoo-product/README.md) | 5 | [JSON](agents/sync-new-shopify-products-to-odoo-product/implementations/n8n/sync-new-shopify-products-to-odoo-product.json) |
+| [fetch source image and split out results only and filter score 0 9](agents/fetch-source-image-and-split-out-results-only-and-filter-score-0-9/README.md) | 10 | [JSON](agents/fetch-source-image-and-split-out-results-only-and-filter-score-0-9/implementations/n8n/fetch-source-image-and-split-out-results-only-and-filter-score-0-9.json) |
+| [send email with smtp](agents/send-email-with-smtp/README.md) | 2 | [JSON](agents/send-email-with-smtp/implementations/n8n/send-email-with-smtp.json) |
+| [respond to webhook and webhook](agents/respond-to-webhook-and-webhook/README.md) | 2 | [JSON](agents/respond-to-webhook-and-webhook/implementations/n8n/respond-to-webhook-and-webhook.json) |
+| [create webflow and update webflow and webflow](agents/create-webflow-and-update-webflow-and-webflow/README.md) | 4 | [JSON](agents/create-webflow-and-update-webflow-and-webflow/implementations/n8n/create-webflow-and-update-webflow-and-webflow.json) |
+| [Simple LinkedIn profile collector](agents/simple-linkedin-profile-collector/README.md) | 10 | [JSON](agents/simple-linkedin-profile-collector/implementations/n8n/simple-linkedin-profile-collector.json) |
+| [Create, update and get a contact in Google Contacts](agents/create-update-and-get-a-contact-in-google-contacts/README.md) | 4 | [JSON](agents/create-update-and-get-a-contact-in-google-contacts/implementations/n8n/create-update-and-get-a-contact-in-google-contacts.json) |
+| [OpenAI-model-examples](agents/openai-model-examples/README.md) | 17 | [JSON](agents/openai-model-examples/implementations/n8n/openai-model-examples.json) |
+| [🧹 Archive (delete) duplicate items from a Notion database](agents/archive-delete-duplicate-items-from-a-notion-database/README.md) | 7 | [JSON](agents/archive-delete-duplicate-items-from-a-notion-database/implementations/n8n/archive-delete-duplicate-items-from-a-notion-database.json) |
+| [AI Email processing autoresponder with approval (Yes/No)](agents/approval-gated-email/README.md) | 12 | [JSON](agents/approval-gated-email/implementations/n8n/approval-gated-email.json) |
+| [agent and fetch keywords from sheet and update google sheets](agents/agent-and-fetch-keywords-from-sheet-and-update-google-sheets/README.md) | 8 | [JSON](agents/agent-and-fetch-keywords-from-sheet-and-update-google-sheets/implementations/n8n/agent-and-fetch-keywords-from-sheet-and-update-google-sheets.json) |
+| [Turn on a light to a specific color on any update in GitHub repository](agents/turn-on-a-light-to-a-specific-color-on-any-update-in-github-repository/README.md) | 2 | [JSON](agents/turn-on-a-light-to-a-specific-color-on-any-update-in-github-repository/implementations/n8n/turn-on-a-light-to-a-specific-color-on-any-update-in-github-repository.json) |
+| [receive wise events and wise and append airtable](agents/receive-wise-events-and-wise-and-append-airtable/README.md) | 4 | [JSON](agents/receive-wise-events-and-wise-and-append-airtable/implementations/n8n/receive-wise-events-and-wise-and-append-airtable.json) |
+| [AI Agent : Google calendar assistant using OpenAI](agents/ai-agent-google-calendar-assistant-using-openai/README.md) | 6 | [JSON](agents/ai-agent-google-calendar-assistant-using-openai/implementations/n8n/ai-agent-google-calendar-assistant-using-openai.json) |
+| [Coffee Bot (Matrix)](agents/coffee-bot-matrix/README.md) | 5 | [JSON](agents/coffee-bot-matrix/implementations/n8n/coffee-bot-matrix.json) |
+| [OpenAI ImageGen1 Template](agents/openai-imagegen1-template/README.md) | 4 | [JSON](agents/openai-imagegen1-template/implementations/n8n/openai-imagegen1-template.json) |
+| [Create Atlassian Confluence page from template](agents/create-atlassian-confluence-page-from-template/README.md) | 5 | [JSON](agents/create-atlassian-confluence-page-from-template/implementations/n8n/create-atlassian-confluence-page-from-template.json) |
+| [1/ Add Your credentials](agents/1-add-your-credentials/README.md) | 5 | [JSON](agents/1-add-your-credentials/implementations/n8n/1-add-your-credentials.json) |
+| [puq-docker-minio-deploy](agents/puq-docker-minio-deploy/README.md) | 32 | [JSON](agents/puq-docker-minio-deploy/implementations/n8n/puq-docker-minio-deploy.json) |
+| [http request and at 17h image jokes and tweet image jokes](agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/README.md) | 4 | [JSON](agents/http-request-and-at-17h-image-jokes-and-tweet-image-jokes/implementations/n8n/http-request-and-at-17h-image-jokes-and-tweet-image-jokes.json) |
+| [create emelia and addcontact emelia and emelia](agents/create-emelia-and-addcontact-emelia-and-emelia/README.md) | 3 | [JSON](agents/create-emelia-and-addcontact-emelia-and-emelia/implementations/n8n/create-emelia-and-addcontact-emelia-and-emelia.json) |
+| [LinkedIn Content Automation (RSS + Gemini)](agents/linkedin-content-automation-rss-gemini/README.md) | 13 | [JSON](agents/linkedin-content-automation-rss-gemini/implementations/n8n/linkedin-content-automation-rss-gemini.json) |
+| [Plex Automatic Throttler](agents/plex-automatic-throttler/README.md) | 21 | [JSON](agents/plex-automatic-throttler/implementations/n8n/plex-automatic-throttler.json) |
+| [Import multiple Manufacturers from Google Sheets to Shopware 6](agents/import-multiple-manufacturers-from-google-sheets-to-shopware-6/README.md) | 8 | [JSON](agents/import-multiple-manufacturers-from-google-sheets-to-shopware-6/implementations/n8n/import-multiple-manufacturers-from-google-sheets-to-shopware-6.json) |
+| [executequery my sql and receive schedule events and microsoft outlook](agents/executequery-my-sql-and-receive-schedule-events-and-microsoft-outlook/README.md) | 6 | [JSON](agents/executequery-my-sql-and-receive-schedule-events-and-microsoft-outlook/implementations/n8n/executequery-my-sql-and-receive-schedule-events-and-microsoft-outlook.json) |
+| [Create Email Campaign From LinkedIn Post Interactions](agents/create-email-campaign-from-linkedin-post-interactions/README.md) | 16 | [JSON](agents/create-email-campaign-from-linkedin-post-interactions/implementations/n8n/create-email-campaign-from-linkedin-post-interactions.json) |
+| [Summarize emails with A.I. then send to messenger](agents/summarize-emails-with-a-i-then-send-to-messenger/README.md) | 3 | [JSON](agents/summarize-emails-with-a-i-then-send-to-messenger/implementations/n8n/summarize-emails-with-a-i-then-send-to-messenger.json) |
+| [Create, update and get a case in TheHive](agents/create-update-and-get-a-case-in-thehive/README.md) | 4 | [JSON](agents/create-update-and-get-a-case-in-thehive/implementations/n8n/create-update-and-get-a-case-in-thehive.json) |
+| [Flow starts when receiving a get http call](agents/flow-starts-when-receiving-a-get-http-call/README.md) | 5 | [JSON](agents/flow-starts-when-receiving-a-get-http-call/implementations/n8n/flow-starts-when-receiving-a-get-http-call.json) |
+| [Standup Bot - Initialize](agents/standup-bot-initialize/README.md) | 4 | [JSON](agents/standup-bot-initialize/implementations/n8n/standup-bot-initialize.json) |
+| [get local date and time](agents/get-local-date-and-time/README.md) | 2 | [JSON](agents/get-local-date-and-time/implementations/n8n/get-local-date-and-time.json) |
+| [aws sqs and http request and cron](agents/aws-sqs-and-http-request-and-cron/README.md) | 4 | [JSON](agents/aws-sqs-and-http-request-and-cron/implementations/n8n/aws-sqs-and-http-request-and-cron.json) |
+| [unleashed software](agents/unleashed-software/README.md) | 2 | [JSON](agents/unleashed-software/implementations/n8n/unleashed-software.json) |
+| [n8n update](agents/n8n-update/README.md) | 14 | [JSON](agents/n8n-update/implementations/n8n/n8n-update.json) |
+| [Always Authenticate Your Server!](agents/always-authenticate-your-server-d0d8bb72/README.md) | 15 | [JSON](agents/always-authenticate-your-server-d0d8bb72/implementations/n8n/always-authenticate-your-server-d0d8bb72.json) |
+| [🏢 Company Decision Maker Discovery](agents/company-decision-maker-discovery/README.md) | 25 | [JSON](agents/company-decision-maker-discovery/implementations/n8n/company-decision-maker-discovery.json) |
+| [PUQ Docker NextCloud deploy](agents/puq-docker-nextcloud-deploy/README.md) | 43 | [JSON](agents/puq-docker-nextcloud-deploy/implementations/n8n/puq-docker-nextcloud-deploy.json) |
+| [n8n_check](agents/n8n-check/README.md) | 7 | [JSON](agents/n8n-check/implementations/n8n/n8n-check.json) |
+| [&#91;1/3 - anomaly detection&#93; &#91;1/2 - KNN classification&#93; Batch upload dataset to Qdrant (crops dataset)](agents/1-3-anomaly-detection-1-2-knn-classification-batch-upload-dataset-to-qdrant-crops-dataset/README.md) | 13 | [JSON](agents/1-3-anomaly-detection-1-2-knn-classification-batch-upload-dataset-to-qdrant-crops-dataset/implementations/n8n/1-3-anomaly-detection-1-2-knn-classification-batch-upload-dataset-to-qdrant-crops-dataset.json) |
+| [Edit your own prompt ⬇️](agents/edit-your-own-prompt/README.md) | 10 | [JSON](agents/edit-your-own-prompt/implementations/n8n/edit-your-own-prompt.json) |
+| [Send a message on Mattermost when an order is created in WooCommerce](agents/send-a-message-on-mattermost-when-an-order-is-created-in-woocommerce/README.md) | 2 | [JSON](agents/send-a-message-on-mattermost-when-an-order-is-created-in-woocommerce/implementations/n8n/send-a-message-on-mattermost-when-an-order-is-created-in-woocommerce.json) |
+| [🚨Ensure Qdrant collection exists!](agents/ensure-qdrant-collection-exists/README.md) | 24 | [JSON](agents/ensure-qdrant-collection-exists/implementations/n8n/ensure-qdrant-collection-exists.json) |
+| [update postgres and exclude default error false tagged workflows and receive schedule events](agents/update-postgres-and-exclude-default-error-false-tagged-workflows-and-receive-schedule-events/README.md) | 6 | [JSON](agents/update-postgres-and-exclude-default-error-false-tagged-workflows-and-receive-schedule-events/implementations/n8n/update-postgres-and-exclude-default-error-false-tagged-workflows-and-receive-schedule-events.json) |
+| [Send DingTalk message on new Azure DevOps Pull Request](agents/send-dingtalk-message-on-new-azure-devops-pull-request/README.md) | 4 | [JSON](agents/send-dingtalk-message-on-new-azure-devops-pull-request/implementations/n8n/send-dingtalk-message-on-new-azure-devops-pull-request.json) |
+| [Lead Qualification with BatchData](agents/lead-qualification-with-batchdata/README.md) | 8 | [JSON](agents/lead-qualification-with-batchdata/implementations/n8n/lead-qualification-with-batchdata.json) |
+| [Scrape Trustpilot Reviews to Google Sheets](agents/scrape-trustpilot-reviews-to-google-sheets/README.md) | 10 | [JSON](agents/scrape-trustpilot-reviews-to-google-sheets/implementations/n8n/scrape-trustpilot-reviews-to-google-sheets.json) |
+| [write binary file and read binary file and http request](agents/write-binary-file-and-read-binary-file-and-http-request/README.md) | 11 | [JSON](agents/write-binary-file-and-read-binary-file-and-http-request/implementations/n8n/write-binary-file-and-read-binary-file-and-http-request.json) |
+| [Threads](agents/threads/README.md) | 6 | [JSON](agents/threads/implementations/n8n/threads.json) |
+| [basic llm chain and receive schedule events and split out](agents/basic-llm-chain-and-receive-schedule-events-and-split-out/README.md) | 13 | [JSON](agents/basic-llm-chain-and-receive-schedule-events-and-split-out/implementations/n8n/basic-llm-chain-and-receive-schedule-events-and-split-out.json) |
+| [📦 New Email ➔ Create Google Task](agents/new-email-create-google-task/README.md) | 2 | [JSON](agents/new-email-create-google-task/implementations/n8n/new-email-create-google-task.json) |
+| [Auto - Resume Disabled Workflows](agents/auto-resume-disabled-workflows/README.md) | 5 | [JSON](agents/auto-resume-disabled-workflows/implementations/n8n/auto-resume-disabled-workflows.json) |
+| [Execute a command that gives the hard disk memory used on the host machine](agents/execute-a-command-that-gives-the-hard-disk-memory-used-on-the-host-machine/README.md) | 5 | [JSON](agents/execute-a-command-that-gives-the-hard-disk-memory-used-on-the-host-machine/implementations/n8n/execute-a-command-that-gives-the-hard-disk-memory-used-on-the-host-machine.json) |
+| [receive linear events and filter and slack](agents/receive-linear-events-and-filter-and-slack/README.md) | 6 | [JSON](agents/receive-linear-events-and-filter-and-slack/implementations/n8n/receive-linear-events-and-filter-and-slack.json) |
+| [send invoice quickbooks and create invoice quickbooks and create quickbooks](agents/send-invoice-quickbooks-and-create-invoice-quickbooks-and-create-quickbooks/README.md) | 3 | [JSON](agents/send-invoice-quickbooks-and-create-invoice-quickbooks-and-create-quickbooks/implementations/n8n/send-invoice-quickbooks-and-create-invoice-quickbooks-and-create-quickbooks.json) |
+| [Monitor Competitor Pricing](agents/monitor-competitor-pricing/README.md) | 8 | [JSON](agents/monitor-competitor-pricing/implementations/n8n/monitor-competitor-pricing.json) |
+| [get portfolio from sheets and fetch live prices and call groq api](agents/get-portfolio-from-sheets-and-fetch-live-prices-and-call-groq-api/README.md) | 8 | [JSON](agents/get-portfolio-from-sheets-and-fetch-live-prices-and-call-groq-api/implementations/n8n/get-portfolio-from-sheets-and-fetch-live-prices-and-call-groq-api.json) |
+| [Google Calendar to Slack Status &amp; Philips Hue](agents/google-calendar-to-slack-status-philips-hue/README.md) | 9 | [JSON](agents/google-calendar-to-slack-status-philips-hue/implementations/n8n/google-calendar-to-slack-status-philips-hue.json) |
+| [BambooHR AI-Powered Company Policies and Benefits Chatbot](agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/README.md) | 39 | [JSON](agents/bamboohr-ai-powered-company-policies-and-benefits-chatbot/implementations/n8n/bamboohr-ai-powered-company-policies-and-benefits-chatbot.json) |
+| [Receive updates when a new list is created in Affinity](agents/receive-updates-when-a-new-list-is-created-in-affinity/README.md) | 1 | [JSON](agents/receive-updates-when-a-new-list-is-created-in-affinity/implementations/n8n/receive-updates-when-a-new-list-is-created-in-affinity.json) |
+| [Load Prompts from Github Repo and auto populate n8n expressions](agents/load-prompts-from-github-repo-and-auto-populate-n8n-expressions/README.md) | 13 | [JSON](agents/load-prompts-from-github-repo-and-auto-populate-n8n-expressions/implementations/n8n/load-prompts-from-github-repo-and-auto-populate-n8n-expressions.json) |
+| [Agent with custom HTTP Request](agents/agent-with-custom-http-request/README.md) | 16 | [JSON](agents/agent-with-custom-http-request/implementations/n8n/agent-with-custom-http-request.json) |
+| [Discard found Google Apps documents](agents/discard-found-google-apps-documents/README.md) | 14 | [JSON](agents/discard-found-google-apps-documents/implementations/n8n/discard-found-google-apps-documents.json) |
+| [list wordpress](agents/list-wordpress/README.md) | 2 | [JSON](agents/list-wordpress/implementations/n8n/list-wordpress.json) |
+| [Click the `Execute Workflow` button and double click on the nodes to see the input and output items.](agents/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items-b41f2eba/README.md) | 10 | [JSON](agents/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items-b41f2eba/implementations/n8n/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items-b41f2eba.json) |
+| [Get analytics of a website and store it Airtable](agents/get-analytics-of-a-website-and-store-it-airtable/README.md) | 4 | [JSON](agents/get-analytics-of-a-website-and-store-it-airtable/implementations/n8n/get-analytics-of-a-website-and-store-it-airtable.json) |
+| [Scrape Books from URL with Dumpling AI, Clean HTML, Save to Sheets, Email as CSV](agents/scrape-books-from-url-with-dumpling-ai-clean-html-save-to-sheets-email-as-csv/README.md) | 8 | [JSON](agents/scrape-books-from-url-with-dumpling-ai-clean-html-save-to-sheets-email-as-csv/implementations/n8n/scrape-books-from-url-with-dumpling-ai-clean-html-save-to-sheets-email-as-csv.json) |
+| [webhook and youtube transcripter and split out](agents/webhook-and-youtube-transcripter-and-split-out/README.md) | 12 | [JSON](agents/webhook-and-youtube-transcripter-and-split-out/implementations/n8n/webhook-and-youtube-transcripter-and-split-out.json) |
+| [start and http request](agents/start-and-http-request/README.md) | 4 | [JSON](agents/start-and-http-request/implementations/n8n/start-and-http-request.json) |
+| [Youtube Discord Bot](agents/youtube-discord-bot/README.md) | 6 | [JSON](agents/youtube-discord-bot/implementations/n8n/youtube-discord-bot.json) |
+| [WordPress Contact Form (CF7) Responses and Classification](agents/wordpress-contact-form-cf7-responses-and-classification/README.md) | 19 | [JSON](agents/wordpress-contact-form-cf7-responses-and-classification/implementations/n8n/wordpress-contact-form-cf7-responses-and-classification.json) |
+| [subscribe subscriber klicktipp and receive typeform events and get list of all existing tags](agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/README.md) | 13 | [JSON](agents/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags/implementations/n8n/subscribe-subscriber-klicktipp-and-receive-typeform-events-and-get-list-of-all-existing-tags.json) |
+| [template-demo-chatgpt-image-1-with-drive-and-sheet copy](agents/template-demo-chatgpt-image-1-with-drive-and-sheet-copy/README.md) | 12 | [JSON](agents/template-demo-chatgpt-image-1-with-drive-and-sheet-copy/implementations/n8n/template-demo-chatgpt-image-1-with-drive-and-sheet-copy.json) |
+| [post to slack and receive hubspot events and get company hubspot](agents/post-to-slack-and-receive-hubspot-events-and-get-company-hubspot/README.md) | 5 | [JSON](agents/post-to-slack-and-receive-hubspot-events-and-get-company-hubspot/implementations/n8n/post-to-slack-and-receive-hubspot-events-and-get-company-hubspot.json) |
+| [build your own image search using ai object detection cdn and elasticsearch](agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/README.md) | 7 | [JSON](agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/n8n/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch.json) |
+| [rag grader](agents/rag-answer-evaluation/README.md) | 12 | [JSON](agents/rag-answer-evaluation/implementations/n8n/rag-answer-evaluation.json) |
+| [Telegram Weather Workflow](agents/telegram-weather-workflow/README.md) | 3 | [JSON](agents/telegram-weather-workflow/implementations/n8n/telegram-weather-workflow.json) |
+| [Githubtrigger Workflow](agents/receive-github-events-and-edit-github-and-createcomment-github/README.md) | 12 | [JSON](agents/receive-github-events-and-edit-github-and-createcomment-github/implementations/n8n/receive-github-events-and-edit-github-and-createcomment-github.json) |
+| [CalcsLive Demo Workflow Template](agents/calcslive-demo-workflow-template/README.md) | 6 | [JSON](agents/calcslive-demo-workflow-template/implementations/n8n/calcslive-demo-workflow-template.json) |
+| [http request and receive google calendar events and filter out myself](agents/http-request-and-receive-google-calendar-events-and-filter-out-myself/README.md) | 14 | [JSON](agents/http-request-and-receive-google-calendar-events-and-filter-out-myself/implementations/n8n/http-request-and-receive-google-calendar-events-and-filter-out-myself.json) |
+| [💥workflow n8n d'Auto-Post sur les réseaux sociaux - vide](agents/workflow-n8n-d-auto-post-sur-les-reseaux-sociaux-vide/README.md) | 14 | [JSON](agents/workflow-n8n-d-auto-post-sur-les-reseaux-sociaux-vide/implementations/n8n/workflow-n8n-d-auto-post-sur-les-reseaux-sociaux-vide.json) |
+| [Send daily weather updates via a push notification using the Pushcut node](agents/send-daily-weather-updates-via-a-push-notification-using-the-pushcut-node/README.md) | 3 | [JSON](agents/send-daily-weather-updates-via-a-push-notification-using-the-pushcut-node/implementations/n8n/send-daily-weather-updates-via-a-push-notification-using-the-pushcut-node.json) |
+| [Create an Onfleet task when a file in Google Drive is updated](agents/create-an-onfleet-task-when-a-file-in-google-drive-is-updated/README.md) | 2 | [JSON](agents/create-an-onfleet-task-when-a-file-in-google-drive-is-updated/implementations/n8n/create-an-onfleet-task-when-a-file-in-google-drive-is-updated.json) |
+| [Testing Email Header Analysis Workflow](agents/testing-email-header-analysis-workflow/README.md) | 34 | [JSON](agents/testing-email-header-analysis-workflow/implementations/n8n/testing-email-header-analysis-workflow.json) |
+| [query for upwork job posts and receive schedule events and find existing entries](agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/README.md) | 8 | [JSON](agents/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries/implementations/n8n/query-for-upwork-job-posts-and-receive-schedule-events-and-find-existing-entries.json) |
+| [Code Review workflow](agents/code-review-workflow/README.md) | 8 | [JSON](agents/code-review-workflow/implementations/n8n/code-review-workflow.json) |
+| [post to mattermost v2](agents/post-to-mattermost-v2/README.md) | 6 | [JSON](agents/post-to-mattermost-v2/implementations/n8n/post-to-mattermost-v2.json) |
+| [receive typeform events and slack and list airtable](agents/receive-typeform-events-and-slack-and-list-airtable/README.md) | 10 | [JSON](agents/receive-typeform-events-and-slack-and-list-airtable/implementations/n8n/receive-typeform-events-and-slack-and-list-airtable.json) |
+| [Use XMLRPC via HttpRequest-node to post on Wordpress.com](agents/use-xmlrpc-via-httprequest-node-to-post-on-wordpress-com/README.md) | 8 | [JSON](agents/use-xmlrpc-via-httprequest-node-to-post-on-wordpress-com/implementations/n8n/use-xmlrpc-via-httprequest-node-to-post-on-wordpress-com.json) |
+| [Google Maps FULL](agents/google-maps-full/README.md) | 14 | [JSON](agents/google-maps-full/implementations/n8n/google-maps-full.json) |
+| [email read imap](agents/email-read-imap/README.md) | 1 | [JSON](agents/email-read-imap/implementations/n8n/email-read-imap.json) |
+| [graphql](agents/graphql/README.md) | 2 | [JSON](agents/graphql/implementations/n8n/graphql.json) |
+| [xSend and check TTS (Text-to-speech) voice calls end email verification](agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/README.md) | 13 | [JSON](agents/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification/implementations/n8n/xsend-and-check-tts-text-to-speech-voice-calls-end-email-verification.json) |
+| [receive chat events and n8n research ai agent and n8n assistant tool lookup](agents/receive-chat-events-and-n8n-research-ai-agent-and-n8n-assistant-tool-lookup/README.md) | 5 | [JSON](agents/receive-chat-events-and-n8n-research-ai-agent-and-n8n-assistant-tool-lookup/implementations/n8n/receive-chat-events-and-n8n-research-ai-agent-and-n8n-assistant-tool-lookup.json) |
+| [Check for valid Hubspot contact email](agents/check-for-valid-hubspot-contact-email/README.md) | 5 | [JSON](agents/check-for-valid-hubspot-contact-email/implementations/n8n/check-for-valid-hubspot-contact-email.json) |
+| [Put this node in any workflow.](agents/put-this-node-in-any-workflow/README.md) | 31 | [JSON](agents/put-this-node-in-any-workflow/implementations/n8n/put-this-node-in-any-workflow.json) |
+| [Convert YouTube Videos into SEO Blog Posts](agents/convert-youtube-videos-into-seo-blog-posts/README.md) | 8 | [JSON](agents/convert-youtube-videos-into-seo-blog-posts/implementations/n8n/convert-youtube-videos-into-seo-blog-posts.json) |
+| [Daily poems in Telegram](agents/daily-poems-in-telegram/README.md) | 4 | [JSON](agents/daily-poems-in-telegram/implementations/n8n/daily-poems-in-telegram.json) |
+| [Create spreadsheet and populate with headers and deal information](agents/create-spreadsheet-and-populate-with-headers-and-deal-information/README.md) | 40 | [JSON](agents/create-spreadsheet-and-populate-with-headers-and-deal-information/implementations/n8n/create-spreadsheet-and-populate-with-headers-and-deal-information.json) |
+| [stackby and list stackby](agents/stackby-and-list-stackby/README.md) | 4 | [JSON](agents/stackby-and-list-stackby/implementations/n8n/stackby-and-list-stackby.json) |
+| [Notion to Linkedin](agents/notion-to-linkedin/README.md) | 9 | [JSON](agents/notion-to-linkedin/implementations/n8n/notion-to-linkedin.json) |
+| [spy tool](agents/spy-tool/README.md) | 9 | [JSON](agents/spy-tool/implementations/n8n/spy-tool.json) |
+| [Automate assigning GitHub issues](agents/automate-assigning-github-issues/README.md) | 10 | [JSON](agents/automate-assigning-github-issues/implementations/n8n/automate-assigning-github-issues.json) |
+| [Create, update and get a product from WooCommerce](agents/create-update-and-get-a-product-from-woocommerce/README.md) | 4 | [JSON](agents/create-update-and-get-a-product-from-woocommerce/implementations/n8n/create-update-and-get-a-product-from-woocommerce.json) |
+| [AI T-Shirt Redesign Workflow from any Mockup Image](agents/ai-t-shirt-redesign-workflow-from-any-mockup-image/README.md) | 9 | [JSON](agents/ai-t-shirt-redesign-workflow-from-any-mockup-image/implementations/n8n/ai-t-shirt-redesign-workflow-from-any-mockup-image.json) |
+| [Google calendar to Outlook](agents/google-calendar-to-outlook/README.md) | 7 | [JSON](agents/google-calendar-to-outlook/implementations/n8n/google-calendar-to-outlook.json) |
+| [Weather via Slack](agents/weather-via-slack/README.md) | 5 | [JSON](agents/weather-via-slack/implementations/n8n/weather-via-slack.json) |
+| [Bitrix24 Chatbot Application Workflow example with Webhook Integration](agents/bitrix24-chatbot-application-workflow-example-with-webhook-integration/README.md) | 13 | [JSON](agents/bitrix24-chatbot-application-workflow-example-with-webhook-integration/implementations/n8n/bitrix24-chatbot-application-workflow-example-with-webhook-integration.json) |
+| [Main workflow: AI agent using custom tool](agents/main-workflow-ai-agent-using-custom-tool-79ad24f8/README.md) | 8 | [JSON](agents/main-workflow-ai-agent-using-custom-tool-79ad24f8/implementations/n8n/main-workflow-ai-agent-using-custom-tool-79ad24f8.json) |
+| [YouTube to Airtable Anonym](agents/youtube-to-airtable-anonym/README.md) | 10 | [JSON](agents/youtube-to-airtable-anonym/implementations/n8n/youtube-to-airtable-anonym.json) |
+| [create strapi and every 30 minutes and search twitter](agents/create-strapi-and-every-30-minutes-and-search-twitter/README.md) | 14 | [JSON](agents/create-strapi-and-every-30-minutes-and-search-twitter/implementations/n8n/create-strapi-and-every-30-minutes-and-search-twitter.json) |
+| [gmail and fetch github repo releases and split out content](agents/gmail-and-fetch-github-repo-releases-and-split-out-content/README.md) | 5 | [JSON](agents/gmail-and-fetch-github-repo-releases-and-split-out-content/implementations/n8n/gmail-and-fetch-github-repo-releases-and-split-out-content.json) |
+| [Automatically store Retell transcripts in Google Sheets/Airtable/Notion from webhook](agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/README.md) | 6 | [JSON](agents/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook/implementations/n8n/automatically-store-retell-transcripts-in-google-sheets-airtable-notion-from-webhook.json) |
+| [Personal Assistant MCP server](agents/personal-assistant-mcp-server/README.md) | 15 | [JSON](agents/personal-assistant-mcp-server/implementations/n8n/personal-assistant-mcp-server.json) |
+| [http request and search person pipedrive and pipedrive](agents/http-request-and-search-person-pipedrive-and-pipedrive/README.md) | 6 | [JSON](agents/http-request-and-search-person-pipedrive-and-pipedrive/implementations/n8n/http-request-and-search-person-pipedrive-and-pipedrive.json) |
+| [Store the output of a phantom in Airtable](agents/store-the-output-of-a-phantom-in-airtable/README.md) | 4 | [JSON](agents/store-the-output-of-a-phantom-in-airtable/implementations/n8n/store-the-output-of-a-phantom-in-airtable.json) |
+| [Image to license plate number](agents/image-to-license-plate-number/README.md) | 5 | [JSON](agents/image-to-license-plate-number/implementations/n8n/image-to-license-plate-number.json) |
+| [Orlen](agents/cron-and-list-google-drive-and-list-message-gmail/README.md) | 10 | [JSON](agents/cron-and-list-google-drive-and-list-message-gmail/implementations/n8n/cron-and-list-google-drive-and-list-message-gmail.json) |
+| [ERP AI chatbot for Odoo sales module](agents/erp-ai-chatbot-for-odoo-sales-module/README.md) | 15 | [JSON](agents/erp-ai-chatbot-for-odoo-sales-module/implementations/n8n/erp-ai-chatbot-for-odoo-sales-module.json) |
+| [AI Voice Chat using Webhook, Memory Manager, OpenAI, Google Gemini &amp; ElevenLabs](agents/ai-voice-chat-using-webhook-memory-manager-openai-google-gemini-elevenlabs/README.md) | 11 | [JSON](agents/ai-voice-chat-using-webhook-memory-manager-openai-google-gemini-elevenlabs/implementations/n8n/ai-voice-chat-using-webhook-memory-manager-openai-google-gemini-elevenlabs.json) |
+| [Suspicious_login_detection](agents/suspicious-login-detection/README.md) | 33 | [JSON](agents/suspicious-login-detection/implementations/n8n/suspicious-login-detection.json) |
+| [ai control tower agent and call query tool and google big query](agents/ai-control-tower-agent-and-call-query-tool-and-google-big-query/README.md) | 8 | [JSON](agents/ai-control-tower-agent-and-call-query-tool-and-google-big-query/implementations/n8n/ai-control-tower-agent-and-call-query-tool-and-google-big-query.json) |
+| [Create, update, and get a document in Google Cloud Firestore](agents/create-update-and-get-a-document-in-google-cloud-firestore/README.md) | 6 | [JSON](agents/create-update-and-get-a-document-in-google-cloud-firestore/implementations/n8n/create-update-and-get-a-document-in-google-cloud-firestore.json) |
+| [Default Error Handler](agents/default-error-handler/README.md) | 8 | [JSON](agents/default-error-handler/implementations/n8n/default-error-handler.json) |
+| [http request and cron and discord](agents/http-request-and-cron-and-discord/README.md) | 6 | [JSON](agents/http-request-and-cron-and-discord/implementations/n8n/http-request-and-cron-and-discord.json) |
+| [Telegram AI multi-format chatbot](agents/telegram-ai-multi-format-chatbot/README.md) | 12 | [JSON](agents/telegram-ai-multi-format-chatbot/implementations/n8n/telegram-ai-multi-format-chatbot.json) |
+| [Adding data to notion](agents/adding-data-to-notion/README.md) | 2 | [JSON](agents/adding-data-to-notion/implementations/n8n/adding-data-to-notion.json) |
+| [Analyze_email_headers_for_IPs_and_spoofing__3](agents/analyze-email-headers-for-ips-and-spoofing-3/README.md) | 27 | [JSON](agents/analyze-email-headers-for-ips-and-spoofing-3/implementations/n8n/analyze-email-headers-for-ips-and-spoofing-3.json) |
+| [get last execution timestamp and set new last execution timestamp and get zendesk comments for tickets](agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-get-zendesk-comments-for-tickets/README.md) | 21 | [JSON](agents/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-get-zendesk-comments-for-tickets/implementations/n8n/get-last-execution-timestamp-and-set-new-last-execution-timestamp-and-get-zendesk-comments-for-tickets.json) |
+| [Line_Chatbot_Extract_Text_from_Pay_Slip_with_Gemini](agents/line-chatbot-extract-text-from-pay-slip-with-gemini/README.md) | 12 | [JSON](agents/line-chatbot-extract-text-from-pay-slip-with-gemini/implementations/n8n/line-chatbot-extract-text-from-pay-slip-with-gemini.json) |
+| [Contradiction_detection_agent](agents/contradiction-detection/README.md) | 26 | [JSON](agents/contradiction-detection/implementations/n8n/contradiction-detection.json) |
+| [report execution errors to mailgun](agents/report-execution-errors-to-mailgun/README.md) | 2 | [JSON](agents/report-execution-errors-to-mailgun/implementations/n8n/report-execution-errors-to-mailgun.json) |
+| [item lists and html extract and http request](agents/item-lists-and-html-extract-and-http-request/README.md) | 12 | [JSON](agents/item-lists-and-html-extract-and-http-request/implementations/n8n/item-lists-and-html-extract-and-http-request.json) |
+| [Gmail MCP Server](agents/gmail-mcp-server/README.md) | 22 | [JSON](agents/gmail-mcp-server/implementations/n8n/gmail-mcp-server.json) |
+| [HN Who is Hiring Scrape](agents/hn-who-is-hiring-scrape/README.md) | 15 | [JSON](agents/hn-who-is-hiring-scrape/implementations/n8n/hn-who-is-hiring-scrape.json) |
+| [receive telegram events and monday com and telegram](agents/receive-telegram-events-and-monday-com-and-telegram/README.md) | 8 | [JSON](agents/receive-telegram-events-and-monday-com-and-telegram/implementations/n8n/receive-telegram-events-and-monday-com-and-telegram.json) |
+| [DSP Agent](agents/dsp-agent/README.md) | 17 | [JSON](agents/dsp-agent/implementations/n8n/dsp-agent.json) |
+| [execute workflow](agents/execute-workflow/README.md) | 2 | [JSON](agents/execute-workflow/implementations/n8n/execute-workflow.json) |
+| [🔍🛠️Perplexity Researcher to HTML Web Page](agents/perplexity-researcher-to-html-web-page/README.md) | 38 | [JSON](agents/perplexity-researcher-to-html-web-page/implementations/n8n/perplexity-researcher-to-html-web-page.json) |
+| [Send updates about the position of the ISS every minute to a topic in Kafka](agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-kafka/README.md) | 4 | [JSON](agents/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-kafka/implementations/n8n/send-updates-about-the-position-of-the-iss-every-minute-to-a-topic-in-kafka.json) |
+| [Flux Dev Image Generation Fal.ai](agents/flux-dev-image-generation-fal-ai/README.md) | 9 | [JSON](agents/flux-dev-image-generation-fal-ai/implementations/n8n/flux-dev-image-generation-fal-ai.json) |
+| [create object arrays from mock data](agents/create-object-arrays-from-mock-data/README.md) | 2 | [JSON](agents/create-object-arrays-from-mock-data/implementations/n8n/create-object-arrays-from-mock-data.json) |
+| [AutoQoutesV2_template](agents/autoqoutesv2-template/README.md) | 22 | [JSON](agents/autoqoutesv2-template/implementations/n8n/autoqoutesv2-template.json) |
+| [convert web page to pdf and write read write file](agents/convert-web-page-to-pdf-and-write-read-write-file/README.md) | 3 | [JSON](agents/convert-web-page-to-pdf-and-write-read-write-file/implementations/n8n/convert-web-page-to-pdf-and-write-read-write-file.json) |
+| [&#91;Check the Tutorial&#93;({{ $env.WEBHOOK_URL }}](agents/check-the-tutorial-env-webhook-url/README.md) | 16 | [JSON](agents/check-the-tutorial-env-webhook-url/implementations/n8n/check-the-tutorial-env-webhook-url.json) |
+| [Portfolio Dashboard](agents/portfolio-dashboard/README.md) | 4 | [JSON](agents/portfolio-dashboard/implementations/n8n/portfolio-dashboard.json) |
+| [Get your lemlist API key](agents/get-your-lemlist-api-key/README.md) | 10 | [JSON](agents/get-your-lemlist-api-key/implementations/n8n/get-your-lemlist-api-key.json) |
+| [TechStackComparativeAgentWorkflow](agents/techstackcomparativeagentworkflow/README.md) | 18 | [JSON](agents/techstackcomparativeagentworkflow/implementations/n8n/techstackcomparativeagentworkflow.json) |
+| [My workflow 4](agents/executequery-postgres-and-message-a-model-and-email-send/README.md) | 9 | [JSON](agents/executequery-postgres-and-message-a-model-and-email-send/implementations/n8n/executequery-postgres-and-message-a-model-and-email-send.json) |
+| [N8N Español - Ejemplos](agents/n8n-espanol-ejemplos/README.md) | 7 | [JSON](agents/n8n-espanol-ejemplos/implementations/n8n/n8n-espanol-ejemplos.json) |
+| [Updating Shopify tags on Onfleet events](agents/updating-shopify-tags-on-onfleet-events/README.md) | 2 | [JSON](agents/updating-shopify-tags-on-onfleet-events/implementations/n8n/updating-shopify-tags-on-onfleet-events.json) |
+| [report execution errors to twilio](agents/report-execution-errors-to-twilio/README.md) | 3 | [JSON](agents/report-execution-errors-to-twilio/implementations/n8n/report-execution-errors-to-twilio.json) |
+| [Twitter notifications](agents/twitter-notifications/README.md) | 5 | [JSON](agents/twitter-notifications/implementations/n8n/twitter-notifications.json) |
+| [Agentic Telegram AI bot with LangChain nodes and new tools](agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/README.md) | 7 | [JSON](agents/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools/implementations/n8n/agentic-telegram-ai-bot-with-langchain-nodes-and-new-tools.json) |
+| [Madison_Content_Agent_MVP copy 1](agents/brand-content-governance/README.md) | 26 | [JSON](agents/brand-content-governance/implementations/n8n/brand-content-governance.json) |
+| [&#91;AI/LangChain&#93; Output Parser 4](agents/ai-langchain-output-parser-4/README.md) | 7 | [JSON](agents/ai-langchain-output-parser-4/implementations/n8n/ai-langchain-output-parser-4.json) |
+| [Some questions to try](agents/some-questions-to-try/README.md) | 14 | [JSON](agents/some-questions-to-try/implementations/n8n/some-questions-to-try.json) |
+| [MCP_SUPABASE_AGENT](agents/mcp-supabase-agent/README.md) | 23 | [JSON](agents/mcp-supabase-agent/implementations/n8n/mcp-supabase-agent.json) |
+| [receive netlify events and append airtable](agents/receive-netlify-events-and-append-airtable/README.md) | 3 | [JSON](agents/receive-netlify-events-and-append-airtable/implementations/n8n/receive-netlify-events-and-append-airtable.json) |
+| [receive schedule events and get all your team s tickets and get next page](agents/receive-schedule-events-and-get-all-your-team-s-tickets-and-get-next-page/README.md) | 9 | [JSON](agents/receive-schedule-events-and-get-all-your-team-s-tickets-and-get-next-page/implementations/n8n/receive-schedule-events-and-get-all-your-team-s-tickets-and-get-next-page.json) |
+| [iterate batches and route results](agents/iterate-batches-and-route-results/README.md) | 5 | [JSON](agents/iterate-batches-and-route-results/implementations/n8n/iterate-batches-and-route-results.json) |
+| [google translate and agent and receive google sheets events](agents/google-translate-and-agent-and-receive-google-sheets-events/README.md) | 17 | [JSON](agents/google-translate-and-agent-and-receive-google-sheets-events/implementations/n8n/google-translate-and-agent-and-receive-google-sheets-events.json) |
+| [Dynamically generate HTML page from user request using OpenAI Structured Output](agents/dynamically-generate-html-page-from-user-request-using-openai-structured-output/README.md) | 5 | [JSON](agents/dynamically-generate-html-page-from-user-request-using-openai-structured-output/implementations/n8n/dynamically-generate-html-page-from-user-request-using-openai-structured-output.json) |
+| [🤓 Conversion Rate Optimizer](agents/conversion-rate-optimizer/README.md) | 4 | [JSON](agents/conversion-rate-optimizer/implementations/n8n/conversion-rate-optimizer.json) |
+| [Save Telegram reply to journal spreadsheet](agents/save-telegram-reply-to-journal-spreadsheet/README.md) | 3 | [JSON](agents/save-telegram-reply-to-journal-spreadsheet/implementations/n8n/save-telegram-reply-to-journal-spreadsheet.json) |
+| [JSON to Google Sheets](agents/json-to-google-sheets/README.md) | 5 | [JSON](agents/json-to-google-sheets/implementations/n8n/json-to-google-sheets.json) |
+| [Create Onfleet tasks from Spreadsheets](agents/create-onfleet-tasks-from-spreadsheets/README.md) | 3 | [JSON](agents/create-onfleet-tasks-from-spreadsheets/implementations/n8n/create-onfleet-tasks-from-spreadsheets.json) |
+| [Needed pre-work: Add a Slack App](agents/needed-pre-work-add-a-slack-app/README.md) | 5 | [JSON](agents/needed-pre-work-add-a-slack-app/implementations/n8n/needed-pre-work-add-a-slack-app.json) |
+| [receive form events and score lead with madkudu and emailverifier hunter ca6dd455](agents/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter-ca6dd455/README.md) | 8 | [JSON](agents/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter-ca6dd455/implementations/n8n/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter-ca6dd455.json) |
+| [Realtime Notion Todoist 2-way Sync Template](agents/realtime-notion-todoist-2-way-sync-template/README.md) | 174 | [JSON](agents/realtime-notion-todoist-2-way-sync-template/implementations/n8n/realtime-notion-todoist-2-way-sync-template.json) |
+| [Shopify + Mautic](agents/shopify-mautic/README.md) | 20 | [JSON](agents/shopify-mautic/implementations/n8n/shopify-mautic.json) |
+| [Email body parser by aprenden8n.com](agents/email-body-parser-by-aprenden8n-com/README.md) | 3 | [JSON](agents/email-body-parser-by-aprenden8n-com/implementations/n8n/email-body-parser-by-aprenden8n-com.json) |
+| [http request and next cloud and list folder next cloud](agents/http-request-and-next-cloud-and-list-folder-next-cloud/README.md) | 5 | [JSON](agents/http-request-and-next-cloud-and-list-folder-next-cloud/implementations/n8n/http-request-and-next-cloud-and-list-folder-next-cloud.json) |
+| [AccountCraft WhatsApp Automation - Infridet](agents/accountcraft-whatsapp-automation-infridet/README.md) | 6 | [JSON](agents/accountcraft-whatsapp-automation-infridet/implementations/n8n/accountcraft-whatsapp-automation-infridet.json) |
+| [tapfiliate api example](agents/tapfiliate-api-example/README.md) | 4 | [JSON](agents/tapfiliate-api-example/implementations/n8n/tapfiliate-api-example.json) |
+| [invoke an aws lambda function](agents/invoke-an-aws-lambda-function/README.md) | 2 | [JSON](agents/invoke-an-aws-lambda-function/implementations/n8n/invoke-an-aws-lambda-function.json) |
+| [fetch github repo releases and receive schedule events and slack](agents/fetch-github-repo-releases-and-receive-schedule-events-and-slack/README.md) | 5 | [JSON](agents/fetch-github-repo-releases-and-receive-schedule-events-and-slack/implementations/n8n/fetch-github-repo-releases-and-receive-schedule-events-and-slack.json) |
+| [MLOps Pipeline EN-PT](agents/mlops-pipeline-en-pt/README.md) | 16 | [JSON](agents/mlops-pipeline-en-pt/implementations/n8n/mlops-pipeline-en-pt.json) |
+| [Template - SSL Expiry Alert System](agents/template-ssl-expiry-alert-system/README.md) | 11 | [JSON](agents/template-ssl-expiry-alert-system/implementations/n8n/template-ssl-expiry-alert-system.json) |
+| [Add task to tasklist](agents/add-task-to-tasklist/README.md) | 2 | [JSON](agents/add-task-to-tasklist/implementations/n8n/add-task-to-tasklist.json) |
+| [Unique QRcode coupon assignment and validation for Lead Generation system](agents/unique-qrcode-coupon-assignment-and-validation-for-lead-generation-system/README.md) | 21 | [JSON](agents/unique-qrcode-coupon-assignment-and-validation-for-lead-generation-system/implementations/n8n/unique-qrcode-coupon-assignment-and-validation-for-lead-generation-system.json) |
+| [Luma AI - Webhook Response v1 - AK](agents/luma-ai-webhook-response-v1-ak/README.md) | 6 | [JSON](agents/luma-ai-webhook-response-v1-ak/implementations/n8n/luma-ai-webhook-response-v1-ak.json) |
+| [Financial Literacy Bot - Knowledge Base](agents/financial-literacy-bot-knowledge-base/README.md) | 7 | [JSON](agents/financial-literacy-bot-knowledge-base/implementations/n8n/financial-literacy-bot-knowledge-base.json) |
+| [rundeck job api example](agents/rundeck-job-api-example/README.md) | 2 | [JSON](agents/rundeck-job-api-example/implementations/n8n/rundeck-job-api-example.json) |
+| [search slack and receive schedule events and list linear](agents/search-slack-and-receive-schedule-events-and-list-linear/README.md) | 12 | [JSON](agents/search-slack-and-receive-schedule-events-and-list-linear/implementations/n8n/search-slack-and-receive-schedule-events-and-list-linear.json) |
+| [Automated Form Submission Data Storage in Airtable](agents/automated-form-submission-data-storage-in-airtable/README.md) | 2 | [JSON](agents/automated-form-submission-data-storage-in-airtable/implementations/n8n/automated-form-submission-data-storage-in-airtable.json) |
+| [receive schedule events and http request and appendorupdate google sheets](agents/receive-schedule-events-and-http-request-and-appendorupdate-google-sheets/README.md) | 9 | [JSON](agents/receive-schedule-events-and-http-request-and-appendorupdate-google-sheets/implementations/n8n/receive-schedule-events-and-http-request-and-appendorupdate-google-sheets.json) |
+| [Load data into database](agents/load-data-into-database-871ea973/README.md) | 13 | [JSON](agents/load-data-into-database-871ea973/implementations/n8n/load-data-into-database-871ea973.json) |
+| [🤖 Telegram Messaging Agent for Text/Audio/Images](agents/telegram-messaging-agent-for-text-audio-images/README.md) | 29 | [JSON](agents/telegram-messaging-agent-for-text-audio-images/implementations/n8n/telegram-messaging-agent-for-text-audio-images.json) |
+| [Scrape latest Paul Graham essays](agents/scrape-latest-paul-graham-essays-6f58a52c/README.md) | 17 | [JSON](agents/scrape-latest-paul-graham-essays-6f58a52c/implementations/n8n/scrape-latest-paul-graham-essays-6f58a52c.json) |
+| [Extract text from PDF and image using Vertex AI (Gemini) into CSV](agents/extract-text-from-pdf-and-image-using-vertex-ai-gemini-into-csv/README.md) | 12 | [JSON](agents/extract-text-from-pdf-and-image-using-vertex-ai-gemini-into-csv/implementations/n8n/extract-text-from-pdf-and-image-using-vertex-ai-gemini-into-csv.json) |
+| [HR Job Posting and Evaluation with AI](agents/hr-job-posting-and-evaluation-with-ai/README.md) | 30 | [JSON](agents/hr-job-posting-and-evaluation-with-ai/implementations/n8n/hr-job-posting-and-evaluation-with-ai.json) |
+| [generate french audio and translate text to english and translate english text to speech](agents/generate-french-audio-and-translate-text-to-english-and-translate-english-text-to-speech/README.md) | 7 | [JSON](agents/generate-french-audio-and-translate-text-to-english-and-translate-english-text-to-speech/implementations/n8n/generate-french-audio-and-translate-text-to-english-and-translate-english-text-to-speech.json) |
+| [Error Handler send Telegram](agents/error-handler-send-telegram/README.md) | 3 | [JSON](agents/error-handler-send-telegram/implementations/n8n/error-handler-send-telegram.json) |
+| [receive typeform events and google cloud natural language and notion](agents/receive-typeform-events-and-google-cloud-natural-language-and-notion/README.md) | 6 | [JSON](agents/receive-typeform-events-and-google-cloud-natural-language-and-notion/implementations/n8n/receive-typeform-events-and-google-cloud-natural-language-and-notion.json) |
+| [item lists and function item](agents/item-lists-and-function-item/README.md) | 3 | [JSON](agents/item-lists-and-function-item/implementations/n8n/item-lists-and-function-item.json) |
+| [read from file and convert to spreadsheet and insert into mysql](agents/read-from-file-and-convert-to-spreadsheet-and-insert-into-mysql/README.md) | 4 | [JSON](agents/read-from-file-and-convert-to-spreadsheet-and-insert-into-mysql/implementations/n8n/read-from-file-and-convert-to-spreadsheet-and-insert-into-mysql.json) |
+| [send file to kindle through telegram bot](agents/send-file-to-kindle-through-telegram-bot/README.md) | 6 | [JSON](agents/send-file-to-kindle-through-telegram-bot/implementations/n8n/send-file-to-kindle-through-telegram-bot.json) |
+| [Daily Podcast Summary](agents/daily-podcast-summary/README.md) | 16 | [JSON](agents/daily-podcast-summary/implementations/n8n/daily-podcast-summary.json) |
+| [list shopify](agents/list-shopify/README.md) | 2 | [JSON](agents/list-shopify/implementations/n8n/list-shopify.json) |
+| [n8n workflow deployer](agents/n8n-workflow-deployer/README.md) | 12 | [JSON](agents/n8n-workflow-deployer/implementations/n8n/n8n-workflow-deployer.json) |
+| [http request and append google sheets and tofile spreadsheet file](agents/http-request-and-append-google-sheets-and-tofile-spreadsheet-file/README.md) | 4 | [JSON](agents/http-request-and-append-google-sheets-and-tofile-spreadsheet-file/implementations/n8n/http-request-and-append-google-sheets-and-tofile-spreadsheet-file.json) |
+| [On User created in HubSpot](agents/on-user-created-in-hubspot/README.md) | 7 | [JSON](agents/on-user-created-in-hubspot/implementations/n8n/on-user-created-in-hubspot.json) |
+| [My workflow](agents/receive-form-events-and-update-google-sheets-and-gmail/README.md) | 7 | [JSON](agents/receive-form-events-and-update-google-sheets-and-gmail/implementations/n8n/receive-form-events-and-update-google-sheets-and-gmail.json) |
+| [Check for Bot Responses](agents/check-for-bot-responses/README.md) | 11 | [JSON](agents/check-for-bot-responses/implementations/n8n/check-for-bot-responses.json) |
+| [(Not published) Three-View Orthographic Projection to Dynamic Video Conversion](agents/not-published-three-view-orthographic-projection-to-dynamic-video-conversion/README.md) | 13 | [JSON](agents/not-published-three-view-orthographic-projection-to-dynamic-video-conversion/implementations/n8n/not-published-three-view-orthographic-projection-to-dynamic-video-conversion.json) |
+| [Summarize Google Sheets form feedback via OpenAI's GPT-4](agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/README.md) | 6 | [JSON](agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/n8n/summarize-google-sheets-form-feedback-via-openai-s-gpt-4.json) |
+| [Set receiving email account](agents/set-receiving-email-account/README.md) | 9 | [JSON](agents/set-receiving-email-account/implementations/n8n/set-receiving-email-account.json) |
+| [google sheets and webhook](agents/google-sheets-and-webhook/README.md) | 2 | [JSON](agents/google-sheets-and-webhook/implementations/n8n/google-sheets-and-webhook.json) |
+| [Switch depending on content](agents/switch-depending-on-content/README.md) | 9 | [JSON](agents/switch-depending-on-content/implementations/n8n/switch-depending-on-content.json) |
+| [download google drive and write binary file](agents/download-google-drive-and-write-binary-file/README.md) | 3 | [JSON](agents/download-google-drive-and-write-binary-file/implementations/n8n/download-google-drive-and-write-binary-file.json) |
+| [The conversation history (last 20 messages) is stored in a buffer memory](agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory/README.md) | 6 | [JSON](agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory/implementations/n8n/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory.json) |
+| [New WooCommerce Product to Twitter and Telegram](agents/new-woocommerce-product-to-twitter-and-telegram/README.md) | 3 | [JSON](agents/new-woocommerce-product-to-twitter-and-telegram/implementations/n8n/new-woocommerce-product-to-twitter-and-telegram.json) |
+| [AI-Powered Information Monitoring with OpenAI, Google Sheets, Jina AI and Slack](agents/ai-powered-information-monitoring-with-openai-google-sheets-jina-ai-and-slack/README.md) | 18 | [JSON](agents/ai-powered-information-monitoring-with-openai-google-sheets-jina-ai-and-slack/implementations/n8n/ai-powered-information-monitoring-with-openai-google-sheets-jina-ai-and-slack.json) |
+| [Youtube Meta Generator](agents/youtube-meta-generator/README.md) | 9 | [JSON](agents/youtube-meta-generator/implementations/n8n/youtube-meta-generator.json) |
+| [Voice RAG Chatbot with ElevenLabs and OpenAI](agents/voice-rag-chatbot-with-elevenlabs-and-openai/README.md) | 18 | [JSON](agents/voice-rag-chatbot-with-elevenlabs-and-openai/implementations/n8n/voice-rag-chatbot-with-elevenlabs-and-openai.json) |
+| [search person pipedrive and get person pipedrive and open ai](agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/README.md) | 10 | [JSON](agents/search-person-pipedrive-and-get-person-pipedrive-and-open-ai/implementations/n8n/search-person-pipedrive-and-get-person-pipedrive-and-open-ai.json) |
+| [report execution errors to get execution n8n](agents/report-execution-errors-to-get-execution-n8n/README.md) | 3 | [JSON](agents/report-execution-errors-to-get-execution-n8n/implementations/n8n/report-execution-errors-to-get-execution-n8n.json) |
+| [Create AI-Ready Vector Datasets for LLMs with Bright Data, Gemini &amp; Pinecone](agents/create-ai-ready-vector-datasets-for-llms-with-bright-data-gemini-pinecone/README.md) | 16 | [JSON](agents/create-ai-ready-vector-datasets-for-llms-with-bright-data-gemini-pinecone/implementations/n8n/create-ai-ready-vector-datasets-for-llms-with-bright-data-gemini-pinecone.json) |
+| [Q&amp;A on data returned from a workflow](agents/q-a-on-data-returned-from-a-workflow/README.md) | 5 | [JSON](agents/q-a-on-data-returned-from-a-workflow/implementations/n8n/q-a-on-data-returned-from-a-workflow.json) |
+| [generate report security scorecard and security scorecard and download report security scorecard](agents/generate-report-security-scorecard-and-security-scorecard-and-download-report-security-scorecard/README.md) | 4 | [JSON](agents/generate-report-security-scorecard-and-security-scorecard-and-download-report-security-scorecard/implementations/n8n/generate-report-security-scorecard-and-security-scorecard-and-download-report-security-scorecard.json) |
+| [notion and humantic ai and receive calendly events](agents/notion-and-humantic-ai-and-receive-calendly-events/README.md) | 4 | [JSON](agents/notion-and-humantic-ai-and-receive-calendly-events/implementations/n8n/notion-and-humantic-ai-and-receive-calendly-events.json) |
+| [Scans von PDF zu Nextcloud](agents/scans-von-pdf-zu-nextcloud/README.md) | 4 | [JSON](agents/scans-von-pdf-zu-nextcloud/implementations/n8n/scans-von-pdf-zu-nextcloud.json) |
+| [receive slash command and respond to webhook and wrong command error](agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/README.md) | 16 | [JSON](agents/receive-slash-command-and-respond-to-webhook-and-wrong-command-error/implementations/n8n/receive-slash-command-and-respond-to-webhook-and-wrong-command-error.json) |
+| [Scenario 1: Transcribe Call with AssemblyAI](agents/scenario-1-transcribe-call-with-assemblyai/README.md) | 9 | [JSON](agents/scenario-1-transcribe-call-with-assemblyai/implementations/n8n/scenario-1-transcribe-call-with-assemblyai.json) |
+| [telegram and send assign alert and webhook](agents/telegram-and-send-assign-alert-and-webhook/README.md) | 8 | [JSON](agents/telegram-and-send-assign-alert-and-webhook/implementations/n8n/telegram-and-send-assign-alert-and-webhook.json) |
+| [AI-Powered Research with Jina AI Deep Search](agents/ai-powered-research-with-jina-ai-deep-search/README.md) | 3 | [JSON](agents/ai-powered-research-with-jina-ai-deep-search/implementations/n8n/ai-powered-research-with-jina-ai-deep-search.json) |
+| [LangChain - Example - Code Node Example](agents/langchain-example-code-node-example/README.md) | 8 | [JSON](agents/langchain-example-code-node-example/implementations/n8n/langchain-example-code-node-example.json) |
+| [LinkedIn Profile Finder via Form using Bright Data &amp; GPT-4o-mini](agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/README.md) | 19 | [JSON](agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/n8n/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini.json) |
+| [Create a channel, add a member, and post a message to the channel](agents/create-a-channel-add-a-member-and-post-a-message-to-the-channel/README.md) | 4 | [JSON](agents/create-a-channel-add-a-member-and-post-a-message-to-the-channel/implementations/n8n/create-a-channel-add-a-member-and-post-a-message-to-the-channel.json) |
+| [🚨 Change your Base ID and Table ID here!](agents/change-your-base-id-and-table-id-here/README.md) | 26 | [JSON](agents/change-your-base-id-and-table-id-here/implementations/n8n/change-your-base-id-and-table-id-here.json) |
+| [receive chat events and executequery postgres tool and agent](agents/receive-chat-events-and-executequery-postgres-tool-and-agent/README.md) | 5 | [JSON](agents/receive-chat-events-and-executequery-postgres-tool-and-agent/implementations/n8n/receive-chat-events-and-executequery-postgres-tool-and-agent.json) |
+| [🌐🪛 AI Agent Chatbot with Jina.ai Webpage Scraper](agents/ai-agent-chatbot-with-jina-ai-webpage-scraper/README.md) | 5 | [JSON](agents/ai-agent-chatbot-with-jina-ai-webpage-scraper/implementations/n8n/ai-agent-chatbot-with-jina-ai-webpage-scraper.json) |
+| [New WooCommerce Customer to Mautic](agents/new-woocommerce-customer-to-mautic/README.md) | 5 | [JSON](agents/new-woocommerce-customer-to-mautic/implementations/n8n/new-woocommerce-customer-to-mautic.json) |
+| [Line Chatbot Handling AI Responses with Groq and Llama3](agents/line-chatbot-handling-ai-responses-with-groq-and-llama3/README.md) | 4 | [JSON](agents/line-chatbot-handling-ai-responses-with-groq-and-llama3/implementations/n8n/line-chatbot-handling-ai-responses-with-groq-and-llama3.json) |
+| [Create a new task in Todoist](agents/create-a-new-task-in-todoist/README.md) | 2 | [JSON](agents/create-a-new-task-in-todoist/implementations/n8n/create-a-new-task-in-todoist.json) |
+| [The conversation history(last 20 messages) is stored in a buffer memory](agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-0fb8e07f/README.md) | 6 | [JSON](agents/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-0fb8e07f/implementations/n8n/the-conversation-history-last-20-messages-is-stored-in-a-buffer-memory-0fb8e07f.json) |
+| [cron and mysql insert and google sheets read](agents/cron-and-mysql-insert-and-google-sheets-read/README.md) | 3 | [JSON](agents/cron-and-mysql-insert-and-google-sheets-read/implementations/n8n/cron-and-mysql-insert-and-google-sheets-read.json) |
+| [Spotify Sync Liked Songs to Playlist](agents/spotify-sync-liked-songs-to-playlist/README.md) | 24 | [JSON](agents/spotify-sync-liked-songs-to-playlist/implementations/n8n/spotify-sync-liked-songs-to-playlist.json) |
+| [Create a new contact in Agile CRM](agents/create-a-new-contact-in-agile-crm/README.md) | 2 | [JSON](agents/create-a-new-contact-in-agile-crm/implementations/n8n/create-a-new-contact-in-agile-crm.json) |
+| [Create a release and get all releases](agents/create-a-release-and-get-all-releases/README.md) | 3 | [JSON](agents/create-a-release-and-get-all-releases/implementations/n8n/create-a-release-and-get-all-releases.json) |
+| [📄🛠️PDF2Blog](agents/pdf2blog/README.md) | 9 | [JSON](agents/pdf2blog/implementations/n8n/pdf2blog.json) |
+| [get redis](agents/get-redis/README.md) | 2 | [JSON](agents/get-redis/implementations/n8n/get-redis.json) |
+| [Tech Radar](agents/tech-radar/README.md) | 37 | [JSON](agents/tech-radar/implementations/n8n/tech-radar.json) |
+| [Conversation history is stored in memory using the body token as the chatsession id](agents/conversation-history-is-stored-in-memory-using-the-body-token-as-the-chatsession-id/README.md) | 5 | [JSON](agents/conversation-history-is-stored-in-memory-using-the-body-token-as-the-chatsession-id/implementations/n8n/conversation-history-is-stored-in-memory-using-the-body-token-as-the-chatsession-id.json) |
+| [Automated PDF to HTML Conversion](agents/automated-pdf-to-html-conversion/README.md) | 5 | [JSON](agents/automated-pdf-to-html-conversion/implementations/n8n/automated-pdf-to-html-conversion.json) |
+| [executequery postgres](agents/executequery-postgres/README.md) | 2 | [JSON](agents/executequery-postgres/implementations/n8n/executequery-postgres.json) |
+| [Match Spotify Tracks to YouTube Videos](agents/match-spotify-tracks-to-youtube-videos/README.md) | 45 | [JSON](agents/match-spotify-tracks-to-youtube-videos/implementations/n8n/match-spotify-tracks-to-youtube-videos.json) |
+| [Get all orders in Squarespace to Google Sheets](agents/get-all-orders-in-squarespace-to-google-sheets/README.md) | 6 | [JSON](agents/get-all-orders-in-squarespace-to-google-sheets/implementations/n8n/get-all-orders-in-squarespace-to-google-sheets.json) |
+| [📌 Daily Crypto Market Summary Bot](agents/daily-crypto-market-summary-bot/README.md) | 4 | [JSON](agents/daily-crypto-market-summary-bot/implementations/n8n/daily-crypto-market-summary-bot.json) |
+| [ICP Company Scoring](agents/icp-company-scoring/README.md) | 5 | [JSON](agents/icp-company-scoring/implementations/n8n/icp-company-scoring.json) |
+| [receive schedule events and list jira and label prioritize rewrite](agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/README.md) | 22 | [JSON](agents/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite/implementations/n8n/receive-schedule-events-and-list-jira-and-label-prioritize-rewrite.json) |
+| [Notion knowledge base assistant &#91;v1&#93;](agents/notion-knowledge-base-assistant-v1/README.md) | 8 | [JSON](agents/notion-knowledge-base-assistant-v1/implementations/n8n/notion-knowledge-base-assistant-v1.json) |
+| [transform mock data with javascript](agents/transform-mock-data-with-javascript/README.md) | 2 | [JSON](agents/transform-mock-data-with-javascript/implementations/n8n/transform-mock-data-with-javascript.json) |
+| [Fine-tuning with OpenAI models](agents/fine-tuning-with-openai-models/README.md) | 7 | [JSON](agents/fine-tuning-with-openai-models/implementations/n8n/fine-tuning-with-openai-models.json) |
+| [Marketing Insights Processing](agents/marketing-insights-processing/README.md) | 19 | [JSON](agents/marketing-insights-processing/implementations/n8n/marketing-insights-processing.json) |
+| [Send labeled email to a Notion database](agents/send-labeled-email-to-a-notion-database/README.md) | 13 | [JSON](agents/send-labeled-email-to-a-notion-database/implementations/n8n/send-labeled-email-to-a-notion-database.json) |
+| [News Extraction](agents/news-extraction/README.md) | 18 | [JSON](agents/news-extraction/implementations/n8n/news-extraction.json) |
+| [list invoice ninja](agents/list-invoice-ninja/README.md) | 2 | [JSON](agents/list-invoice-ninja/implementations/n8n/list-invoice-ninja.json) |
+| [Translate cocktail instructions using LingvaNex](agents/translate-cocktail-instructions-using-lingvanex/README.md) | 3 | [JSON](agents/translate-cocktail-instructions-using-lingvanex/implementations/n8n/translate-cocktail-instructions-using-lingvanex.json) |
+| [Opportunity Matcher v2](agents/opportunity-matcher/README.md) | 10 | [JSON](agents/opportunity-matcher/implementations/n8n/opportunity-matcher.json) |
+| [Sync Todoist tasks to Notion](agents/sync-todoist-tasks-to-notion/README.md) | 4 | [JSON](agents/sync-todoist-tasks-to-notion/implementations/n8n/sync-todoist-tasks-to-notion.json) |
+| [receive local file events and default data loader and recursive character text splitter](agents/receive-local-file-events-and-default-data-loader-and-recursive-character-text-splitter/README.md) | 35 | [JSON](agents/receive-local-file-events-and-default-data-loader-and-recursive-character-text-splitter/implementations/n8n/receive-local-file-events-and-default-data-loader-and-recursive-character-text-splitter.json) |
+| [receive gitlab events](agents/receive-gitlab-events/README.md) | 1 | [JSON](agents/receive-gitlab-events/implementations/n8n/receive-gitlab-events.json) |
+| [Send a private message on Zulip](agents/send-a-private-message-on-zulip/README.md) | 2 | [JSON](agents/send-a-private-message-on-zulip/implementations/n8n/send-a-private-message-on-zulip.json) |
+| [OCR receipts from Google Drive](agents/ocr-receipts-from-google-drive/README.md) | 9 | [JSON](agents/ocr-receipts-from-google-drive/implementations/n8n/ocr-receipts-from-google-drive.json) |
+| [Create a new list, add a new contact to the list, update the contact, and get all contacts in the list](agents/create-a-new-list-add-a-new-contact-to-the-list-update-the-contact-and-get-all-contacts-in-the-list/README.md) | 5 | [JSON](agents/create-a-new-list-add-a-new-contact-to-the-list-update-the-contact-and-get-all-contacts-in-the-list/implementations/n8n/create-a-new-list-add-a-new-contact-to-the-list-update-the-contact-and-get-all-contacts-in-the-list.json) |
+| [fetch github repo releases and split out content and convert markdown to html](agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/README.md) | 6 | [JSON](agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/n8n/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html.json) |
+| [CoinMarketCap_Exchange_and_Community_Agent_Tool](agents/coinmarketcap-exchange-and-community-agent-tool/README.md) | 9 | [JSON](agents/coinmarketcap-exchange-and-community-agent-tool/implementations/n8n/coinmarketcap-exchange-and-community-agent-tool.json) |
+| [clearbit and hubspot and update company hubspot](agents/clearbit-and-hubspot-and-update-company-hubspot/README.md) | 12 | [JSON](agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/n8n/clearbit-and-hubspot-and-update-company-hubspot.json) |
+| [Create an deal in Pipedrive](agents/create-an-deal-in-pipedrive/README.md) | 2 | [JSON](agents/create-an-deal-in-pipedrive/implementations/n8n/create-an-deal-in-pipedrive.json) |
+| [receive telegram events and github](agents/receive-telegram-events-and-github/README.md) | 5 | [JSON](agents/receive-telegram-events-and-github/implementations/n8n/receive-telegram-events-and-github.json) |
+| [Luma AI Dream Machine - Simple v1 - AK](agents/luma-ai-dream-machine-simple-v1-ak/README.md) | 6 | [JSON](agents/luma-ai-dream-machine-simple-v1-ak/implementations/n8n/luma-ai-dream-machine-simple-v1-ak.json) |
+| [⚠️ When and how to use this workflow](agents/when-and-how-to-use-this-workflow/README.md) | 5 | [JSON](agents/when-and-how-to-use-this-workflow/implementations/n8n/when-and-how-to-use-this-workflow.json) |
+| [Stock Q&amp;A Workflow](agents/stock-q-a-workflow/README.md) | 14 | [JSON](agents/stock-q-a-workflow/implementations/n8n/stock-q-a-workflow.json) |
+| [Execute an SQL query in Microsoft SQL](agents/execute-an-sql-query-in-microsoft-sql/README.md) | 2 | [JSON](agents/execute-an-sql-query-in-microsoft-sql/implementations/n8n/execute-an-sql-query-in-microsoft-sql.json) |
+| [OpenAI Security Analysis](agents/openai-security-analysis/README.md) | 12 | [JSON](agents/openai-security-analysis/implementations/n8n/openai-security-analysis.json) |
+| [Replace Google Drive connection](agents/replace-google-drive-connection/README.md) | 9 | [JSON](agents/replace-google-drive-connection/implementations/n8n/replace-google-drive-connection.json) |
+| [Extract Amazon Best Seller Electronic Information with Bright Data and Google Gemini](agents/extract-amazon-best-seller-electronic-information-with-bright-data-and-google-gemini/README.md) | 6 | [JSON](agents/extract-amazon-best-seller-electronic-information-with-bright-data-and-google-gemini/implementations/n8n/extract-amazon-best-seller-electronic-information-with-bright-data-and-google-gemini.json) |
+| [USDT TRC20 Wallet Tracker](agents/usdt-trc20-wallet-tracker/README.md) | 7 | [JSON](agents/usdt-trc20-wallet-tracker/implementations/n8n/usdt-trc20-wallet-tracker.json) |
+| [New WooCommerce refund to Slack](agents/new-woocommerce-refund-to-slack/README.md) | 3 | [JSON](agents/new-woocommerce-refund-to-slack/implementations/n8n/new-woocommerce-refund-to-slack.json) |
+| [Get Comments from Facebook Page](agents/get-comments-from-facebook-page/README.md) | 10 | [JSON](agents/get-comments-from-facebook-page/implementations/n8n/get-comments-from-facebook-page.json) |
+| [Create, update and get a contact using the SendGrid node](agents/create-update-and-get-a-contact-using-the-sendgrid-node/README.md) | 4 | [JSON](agents/create-update-and-get-a-contact-using-the-sendgrid-node/implementations/n8n/create-update-and-get-a-contact-using-the-sendgrid-node.json) |
+| [Receive Query from Parent Workflow](agents/receive-query-from-parent-workflow/README.md) | 3 | [JSON](agents/receive-query-from-parent-workflow/implementations/n8n/receive-query-from-parent-workflow.json) |
+| [on get request and fetch binary file and respond with attachment](agents/on-get-request-and-fetch-binary-file-and-respond-with-attachment/README.md) | 3 | [JSON](agents/on-get-request-and-fetch-binary-file-and-respond-with-attachment/implementations/n8n/on-get-request-and-fetch-binary-file-and-respond-with-attachment.json) |
+| [receive shopify events and create contact in zendesk and update user zendesk](agents/receive-shopify-events-and-create-contact-in-zendesk-and-update-user-zendesk/README.md) | 9 | [JSON](agents/receive-shopify-events-and-create-contact-in-zendesk-and-update-user-zendesk/implementations/n8n/receive-shopify-events-and-create-contact-in-zendesk-and-update-user-zendesk.json) |
+| [💡🌐 Essential Multipage Website Scraper with Jina.ai](agents/essential-multipage-website-scraper-with-jina-ai/README.md) | 12 | [JSON](agents/essential-multipage-website-scraper-with-jina-ai/implementations/n8n/essential-multipage-website-scraper-with-jina-ai.json) |
+| [Use Config Bot to setup your telegram details, like:](agents/use-config-bot-to-setup-your-telegram-details-like/README.md) | 31 | [JSON](agents/use-config-bot-to-setup-your-telegram-details-like/implementations/n8n/use-config-bot-to-setup-your-telegram-details-like.json) |
+| [Technical Analysis Tool](agents/technical-analysis-tool/README.md) | 33 | [JSON](agents/technical-analysis-tool/implementations/n8n/technical-analysis-tool.json) |
+| [read binary file and http request](agents/read-binary-file-and-http-request/README.md) | 2 | [JSON](agents/read-binary-file-and-http-request/implementations/n8n/read-binary-file-and-http-request.json) |
+| [🤖Email Agent](agents/email-agent/README.md) | 12 | [JSON](agents/email-agent/implementations/n8n/email-agent.json) |
+| [SERPBear analytics template](agents/serpbear-analytics-template/README.md) | 6 | [JSON](agents/serpbear-analytics-template/implementations/n8n/serpbear-analytics-template.json) |
+| [Adaptive RAG](agents/adaptive-rag/README.md) | 30 | [JSON](agents/adaptive-rag/implementations/n8n/adaptive-rag.json) |
+| [🙋‍♂️ Optimise your images!](agents/optimise-your-images/README.md) | 7 | [JSON](agents/optimise-your-images/implementations/n8n/optimise-your-images.json) |
+| [mails2notion V2](agents/mails2notion-v2/README.md) | 25 | [JSON](agents/mails2notion-v2/implementations/n8n/mails2notion-v2.json) |
+| [My workflow 3](agents/receive-form-events-and-aggregate-and-parsing-the-document/README.md) | 33 | [JSON](agents/receive-form-events-and-aggregate-and-parsing-the-document/implementations/n8n/receive-form-events-and-aggregate-and-parsing-the-document.json) |
+| [MONDAY GET FULL ITEM](agents/monday-get-full-item/README.md) | 21 | [JSON](agents/monday-get-full-item/implementations/n8n/monday-get-full-item.json) |
+| [Main Function to Receive and Send Telegram Messages](agents/main-function-to-receive-and-send-telegram-messages/README.md) | 19 | [JSON](agents/main-function-to-receive-and-send-telegram-messages/implementations/n8n/main-function-to-receive-and-send-telegram-messages.json) |
+| [Store the data received from the CocktailDB API in JSON](agents/store-the-data-received-from-the-cocktaildb-api-in-json/README.md) | 4 | [JSON](agents/store-the-data-received-from-the-cocktaildb-api-in-json/implementations/n8n/store-the-data-received-from-the-cocktaildb-api-in-json.json) |
+| [n8n and n8n list execution and receive schedule events](agents/n8n-and-n8n-list-execution-and-receive-schedule-events/README.md) | 7 | [JSON](agents/n8n-and-n8n-list-execution-and-receive-schedule-events/implementations/n8n/n8n-and-n8n-list-execution-and-receive-schedule-events.json) |
+| [sort and split pdf into images and extract zip file](agents/sort-and-split-pdf-into-images-and-extract-zip-file/README.md) | 39 | [JSON](agents/sort-and-split-pdf-into-images-and-extract-zip-file/implementations/n8n/sort-and-split-pdf-into-images-and-extract-zip-file.json) |
+| [Generate SEO Keyword Search Volume Data using Google API](agents/generate-seo-keyword-search-volume-data-using-google-api/README.md) | 5 | [JSON](agents/generate-seo-keyword-search-volume-data-using-google-api/implementations/n8n/generate-seo-keyword-search-volume-data-using-google-api.json) |
+| [Resume Screener from Gmail to Sheets](agents/resume-screener-from-gmail-to-sheets/README.md) | 6 | [JSON](agents/resume-screener-from-gmail-to-sheets/implementations/n8n/resume-screener-from-gmail-to-sheets.json) |
+| [google drive list files1 and executequery postgres and download google drive](agents/google-drive-list-files1-and-executequery-postgres-and-download-google-drive/README.md) | 11 | [JSON](agents/google-drive-list-files1-and-executequery-postgres-and-download-google-drive/implementations/n8n/google-drive-list-files1-and-executequery-postgres-and-download-google-drive.json) |
+| [push redis and receive twilio events and get redis](agents/push-redis-and-receive-twilio-events-and-get-redis/README.md) | 13 | [JSON](agents/push-redis-and-receive-twilio-events-and-get-redis/implementations/n8n/push-redis-and-receive-twilio-events-and-get-redis.json) |
+| [Sync Zendesk tickets to Slack threads](agents/sync-zendesk-tickets-to-slack-threads/README.md) | 8 | [JSON](agents/sync-zendesk-tickets-to-slack-threads/implementations/n8n/sync-zendesk-tickets-to-slack-threads.json) |
+| [Receive updates when a subscriber is added through a form in ConvertKit](agents/receive-updates-when-a-subscriber-is-added-through-a-form-in-convertkit/README.md) | 1 | [JSON](agents/receive-updates-when-a-subscriber-is-added-through-a-form-in-convertkit/implementations/n8n/receive-updates-when-a-subscriber-is-added-through-a-form-in-convertkit.json) |
+| [salesforce and update salesforce and addnote salesforce](agents/salesforce-and-update-salesforce-and-addnote-salesforce/README.md) | 4 | [JSON](agents/salesforce-and-update-salesforce-and-addnote-salesforce/implementations/n8n/salesforce-and-update-salesforce-and-addnote-salesforce.json) |
+| [Hugging Face  to Notion](agents/hugging-face-to-notion/README.md) | 11 | [JSON](agents/hugging-face-to-notion/implementations/n8n/hugging-face-to-notion.json) |
+| [Adjust frequency to your own needs](agents/adjust-frequency-to-your-own-needs/README.md) | 15 | [JSON](agents/adjust-frequency-to-your-own-needs/implementations/n8n/adjust-frequency-to-your-own-needs.json) |
+| [receive telegram events and addlabels gmail tool and removelabels gmail tool](agents/receive-telegram-events-and-addlabels-gmail-tool-and-removelabels-gmail-tool/README.md) | 12 | [JSON](agents/receive-telegram-events-and-addlabels-gmail-tool-and-removelabels-gmail-tool/implementations/n8n/receive-telegram-events-and-addlabels-gmail-tool-and-removelabels-gmail-tool.json) |
+| [ImapEmail, XmlToJson, POST-HTTP-Request](agents/imapemail-xmltojson-post-http-request/README.md) | 5 | [JSON](agents/imapemail-xmltojson-post-http-request/implementations/n8n/imapemail-xmltojson-post-http-request.json) |
+| [Automating Betting Data Retrieval with TheOddsAPI and Airtable](agents/automating-betting-data-retrieval-with-theoddsapi-and-airtable/README.md) | 7 | [JSON](agents/automating-betting-data-retrieval-with-theoddsapi-and-airtable/implementations/n8n/automating-betting-data-retrieval-with-theoddsapi-and-airtable.json) |
+| [Self-hosted N8N users only:](agents/self-hosted-n8n-users-only/README.md) | 3 | [JSON](agents/self-hosted-n8n-users-only/implementations/n8n/self-hosted-n8n-users-only.json) |
+| [Coinmarketcap Price Agent](agents/coinmarketcap-price-agent/README.md) | 7 | [JSON](agents/coinmarketcap-price-agent/implementations/n8n/coinmarketcap-price-agent.json) |
+| [split out and http request and write read write file](agents/split-out-and-http-request-and-write-read-write-file/README.md) | 7 | [JSON](agents/split-out-and-http-request-and-write-read-write-file/implementations/n8n/split-out-and-http-request-and-write-read-write-file.json) |
+| [notion and dropcontact and receive calendly events](agents/notion-and-dropcontact-and-receive-calendly-events/README.md) | 3 | [JSON](agents/notion-and-dropcontact-and-receive-calendly-events/implementations/n8n/notion-and-dropcontact-and-receive-calendly-events.json) |
+| [Automate Google Analytics Reporting - AlexK1919](agents/automate-google-analytics-reporting-alexk1919/README.md) | 19 | [JSON](agents/automate-google-analytics-reporting-alexk1919/implementations/n8n/automate-google-analytics-reporting-alexk1919.json) |
+| [Email Body Screenshot Creation](agents/email-body-screenshot-creation/README.md) | 19 | [JSON](agents/email-body-screenshot-creation/implementations/n8n/email-body-screenshot-creation.json) |
+| [YouTube Videos with AI Summaries on Discord](agents/youtube-videos-with-ai-summaries-on-discord/README.md) | 7 | [JSON](agents/youtube-videos-with-ai-summaries-on-discord/implementations/n8n/youtube-videos-with-ai-summaries-on-discord.json) |
+| [CoinMarketCap_Crypto_Agent_Tool](agents/coinmarketcap-crypto-agent-tool/README.md) | 10 | [JSON](agents/coinmarketcap-crypto-agent-tool/implementations/n8n/coinmarketcap-crypto-agent-tool.json) |
+| [download xml file and parse xml content and create new spreadsheet file](agents/download-xml-file-and-parse-xml-content-and-create-new-spreadsheet-file/README.md) | 9 | [JSON](agents/download-xml-file-and-parse-xml-content-and-create-new-spreadsheet-file/implementations/n8n/download-xml-file-and-parse-xml-content-and-create-new-spreadsheet-file.json) |
+| [Click the `Execute Workflow` button and double click on the nodes to see the input and output items.](agents/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items-6890efd5/README.md) | 10 | [JSON](agents/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items-6890efd5/implementations/n8n/click-the-execute-workflow-button-and-double-click-on-the-nodes-to-see-the-input-and-output-items-6890efd5.json) |
+| [receive google drive events and create database page](agents/receive-google-drive-events-and-create-database-page/README.md) | 2 | [JSON](agents/receive-google-drive-events-and-create-database-page/implementations/n8n/receive-google-drive-events-and-create-database-page.json) |
+| [reach out via email to new form submissions that meet a certain criteria](agents/reach-out-via-email-to-new-form-submissions-that-meet-a-certain-criteria/README.md) | 7 | [JSON](agents/reach-out-via-email-to-new-form-submissions-that-meet-a-certain-criteria/implementations/n8n/reach-out-via-email-to-new-form-submissions-that-meet-a-certain-criteria.json) |
+| [Daily AI News Translation &amp; Summary with GPT-4 and Telegram Delivery](agents/daily-ai-news-translation-summary-with-gpt-4-and-telegram-delivery/README.md) | 9 | [JSON](agents/daily-ai-news-translation-summary-with-gpt-4-and-telegram-delivery/implementations/n8n/daily-ai-news-translation-summary-with-gpt-4-and-telegram-delivery.json) |
+| [Backup n8n Workflows to Bitbucket](agents/backup-n8n-workflows-to-bitbucket/README.md) | 9 | [JSON](agents/backup-n8n-workflows-to-bitbucket/implementations/n8n/backup-n8n-workflows-to-bitbucket.json) |
+| [facebook graph api](agents/facebook-graph-api/README.md) | 2 | [JSON](agents/facebook-graph-api/implementations/n8n/facebook-graph-api.json) |
+| [executequery crate db and crate db](agents/executequery-crate-db-and-crate-db/README.md) | 4 | [JSON](agents/executequery-crate-db-and-crate-db/implementations/n8n/executequery-crate-db-and-crate-db.json) |
+| [Example Webhook Request](agents/example-webhook-request/README.md) | 13 | [JSON](agents/example-webhook-request/implementations/n8n/example-webhook-request.json) |
+| [Create a table and insert data into it](agents/create-a-table-and-insert-data-into-it/README.md) | 4 | [JSON](agents/create-a-table-and-insert-data-into-it/implementations/n8n/create-a-table-and-insert-data-into-it.json) |
+| [receive telegram events and connect to graph api and tofile spreadsheet file](agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/README.md) | 10 | [JSON](agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/n8n/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file.json) |
+| [get zendesk and asana and update zendesk](agents/get-zendesk-and-asana-and-update-zendesk/README.md) | 7 | [JSON](agents/get-zendesk-and-asana-and-update-zendesk/implementations/n8n/get-zendesk-and-asana-and-update-zendesk.json) |
+| [n8n and http request and create new file 53093cc6](agents/n8n-and-http-request-and-create-new-file-53093cc6/README.md) | 21 | [JSON](agents/n8n-and-http-request-and-create-new-file-53093cc6/implementations/n8n/n8n-and-http-request-and-create-new-file-53093cc6.json) |
+| [... or watch set up video &#91;13 min&#93;](agents/or-watch-set-up-video-13-min/README.md) | 22 | [JSON](agents/or-watch-set-up-video-13-min/implementations/n8n/or-watch-set-up-video-13-min.json) |
+| [Turn on a light and set its brightness](agents/turn-on-a-light-and-set-its-brightness/README.md) | 2 | [JSON](agents/turn-on-a-light-and-set-its-brightness/implementations/n8n/turn-on-a-light-and-set-its-brightness.json) |
+| [receive bitbucket events](agents/receive-bitbucket-events/README.md) | 1 | [JSON](agents/receive-bitbucket-events/implementations/n8n/receive-bitbucket-events.json) |
+| [YouTube Comment Sentiment Analyzer](agents/youtube-comment-sentiment-analyzer/README.md) | 14 | [JSON](agents/youtube-comment-sentiment-analyzer/implementations/n8n/youtube-comment-sentiment-analyzer.json) |
+| [get_a_web_page](agents/get-a-web-page/README.md) | 3 | [JSON](agents/get-a-web-page/implementations/n8n/get-a-web-page.json) |
+| [receive form events and score lead with madkudu and emailverifier hunter](agents/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter/README.md) | 8 | [JSON](agents/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter/implementations/n8n/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter.json) |
+| [Finance Literacy Bot - Chatbot w/ Memory](agents/finance-literacy-bot-chatbot-w-memory/README.md) | 13 | [JSON](agents/finance-literacy-bot-chatbot-w-memory/implementations/n8n/finance-literacy-bot-chatbot-w-memory.json) |
+| [Chat with local LLMs using n8n and Ollama](agents/chat-with-local-llms-using-n8n-and-ollama/README.md) | 3 | [JSON](agents/chat-with-local-llms-using-n8n-and-ollama/implementations/n8n/chat-with-local-llms-using-n8n-and-ollama.json) |
+| [list contact keap](agents/list-contact-keap/README.md) | 2 | [JSON](agents/list-contact-keap/implementations/n8n/list-contact-keap.json) |
+| [✨🔪 Advanced AI Powered Document Parsing &amp; Text Extraction with Llama Parse](agents/advanced-ai-powered-document-parsing-text-extraction-with-llama-parse/README.md) | 36 | [JSON](agents/advanced-ai-powered-document-parsing-text-extraction-with-llama-parse/implementations/n8n/advanced-ai-powered-document-parsing-text-extraction-with-llama-parse.json) |
+| [Content to 9:16 Aspect Image Generator v1](agents/content-to-9-16-aspect-image-generator-v1/README.md) | 27 | [JSON](agents/content-to-9-16-aspect-image-generator-v1/implementations/n8n/content-to-9-16-aspect-image-generator-v1.json) |
+| [Activity Encouragement](agents/activity-encouragement/README.md) | 6 | [JSON](agents/activity-encouragement/implementations/n8n/activity-encouragement.json) |
+| [TechCrunch &amp; VentureBeat](agents/techcrunch-venturebeat/README.md) | 35 | [JSON](agents/techcrunch-venturebeat/implementations/n8n/techcrunch-venturebeat.json) |
+| [talk to your sqlite database with a langchain ai agent](agents/talk-to-your-sqlite-database-with-a-langchain-ai-agent/README.md) | 14 | [JSON](agents/talk-to-your-sqlite-database-with-a-langchain-ai-agent/implementations/n8n/talk-to-your-sqlite-database-with-a-langchain-ai-agent.json) |
+| [list airtable and mailcheck and update airtable](agents/list-airtable-and-mailcheck-and-update-airtable/README.md) | 4 | [JSON](agents/list-airtable-and-mailcheck-and-update-airtable/implementations/n8n/list-airtable-and-mailcheck-and-update-airtable.json) |
+| [receive schedule events and get hash of contents and notify of change](agents/receive-schedule-events-and-get-hash-of-contents-and-notify-of-change/README.md) | 10 | [JSON](agents/receive-schedule-events-and-get-hash-of-contents-and-notify-of-change/implementations/n8n/receive-schedule-events-and-get-hash-of-contents-and-notify-of-change.json) |
+| [get monitor uptime robot and create monitor uptime robot and update monitor uptime robot](agents/get-monitor-uptime-robot-and-create-monitor-uptime-robot-and-update-monitor-uptime-robot/README.md) | 3 | [JSON](agents/get-monitor-uptime-robot-and-create-monitor-uptime-robot-and-update-monitor-uptime-robot/implementations/n8n/get-monitor-uptime-robot-and-create-monitor-uptime-robot-and-update-monitor-uptime-robot.json) |
+| [Testing Mulitple Local LLM with LM Studio](agents/testing-mulitple-local-llm-with-lm-studio/README.md) | 12 | [JSON](agents/testing-mulitple-local-llm-with-lm-studio/implementations/n8n/testing-mulitple-local-llm-with-lm-studio.json) |
+| [Onfleet Driver signup message in Slack](agents/onfleet-driver-signup-message-in-slack/README.md) | 2 | [JSON](agents/onfleet-driver-signup-message-in-slack/implementations/n8n/onfleet-driver-signup-message-in-slack.json) |
+| [Create Mailchimp contact based on Squarespace newsletter](agents/create-mailchimp-contact-based-on-squarespace-newsletter/README.md) | 5 | [JSON](agents/create-mailchimp-contact-based-on-squarespace-newsletter/implementations/n8n/create-mailchimp-contact-based-on-squarespace-newsletter.json) |
+| [clearbit and receive hubspot events and get contact hubspot](agents/clearbit-and-receive-hubspot-events-and-get-contact-hubspot/README.md) | 4 | [JSON](agents/clearbit-and-receive-hubspot-events-and-get-contact-hubspot/implementations/n8n/clearbit-and-receive-hubspot-events-and-get-contact-hubspot.json) |
+| [Gmail AI auto-responder: create draft replies to incoming emails](agents/gmail-ai-auto-responder-create-draft-replies-to-incoming-emails/README.md) | 8 | [JSON](agents/gmail-ai-auto-responder-create-draft-replies-to-incoming-emails/implementations/n8n/gmail-ai-auto-responder-create-draft-replies-to-incoming-emails.json) |
+| [get content ideas and generate post with openai and post to twitter](agents/get-content-ideas-and-generate-post-with-openai-and-post-to-twitter/README.md) | 5 | [JSON](agents/get-content-ideas-and-generate-post-with-openai-and-post-to-twitter/implementations/n8n/get-content-ideas-and-generate-post-with-openai-and-post-to-twitter.json) |
+| [🎥 Gemini AI Video Analysis](agents/gemini-ai-video-analysis/README.md) | 7 | [JSON](agents/gemini-ai-video-analysis/implementations/n8n/gemini-ai-video-analysis.json) |
+| [👆🏽 Set target email here](agents/set-target-email-here/README.md) | 2 | [JSON](agents/set-target-email-here/implementations/n8n/set-target-email-here.json) |
+| [create folder microsoft one drive](agents/create-folder-microsoft-one-drive/README.md) | 2 | [JSON](agents/create-folder-microsoft-one-drive/implementations/n8n/create-folder-microsoft-one-drive.json) |
+| [Noco Kanban Board with AI Prioritization](agents/noco-kanban-board-with-ai-prioritization/README.md) | 22 | [JSON](agents/noco-kanban-board-with-ai-prioritization/implementations/n8n/noco-kanban-board-with-ai-prioritization.json) |
+| [GROQ LLAVA V1.5 7B](agents/groq-llava-v1-5-7b/README.md) | 6 | [JSON](agents/groq-llava-v1-5-7b/implementations/n8n/groq-llava-v1-5-7b.json) |
+| [unsubscribe lead lemlist and follow up task and lemlist mark as interested](agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/README.md) | 12 | [JSON](agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/n8n/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested.json) |
+| [open ai assistant and tool calculator and aggregate](agents/open-ai-assistant-and-tool-calculator-and-aggregate/README.md) | 9 | [JSON](agents/open-ai-assistant-and-tool-calculator-and-aggregate/implementations/n8n/open-ai-assistant-and-tool-calculator-and-aggregate.json) |
+| [Mailchimp](agents/mailchimp-api-example/README.md) | 2 | [JSON](agents/mailchimp-api-example/implementations/n8n/mailchimp-api-example.json) |
+| [My workflow](agents/oauth2-settings-finder-with-openrouter-chat-model-and-llama-3-3/README.md) | 5 | [JSON](agents/oauth2-settings-finder-with-openrouter-chat-model-and-llama-3-3/implementations/n8n/oauth2-settings-finder-with-openrouter-chat-model-and-llama-3-3.json) |
+| [agent and reply gmail and text extract from file](agents/agent-and-reply-gmail-and-text-extract-from-file/README.md) | 10 | [JSON](agents/agent-and-reply-gmail-and-text-extract-from-file/implementations/n8n/agent-and-reply-gmail-and-text-extract-from-file.json) |
+| [Upload video to drive via google script](agents/upload-video-to-drive-via-google-script/README.md) | 3 | [JSON](agents/upload-video-to-drive-via-google-script/implementations/n8n/upload-video-to-drive-via-google-script.json) |
+| [n8n and activate n8n](agents/n8n-and-activate-n8n/README.md) | 4 | [JSON](agents/n8n-and-activate-n8n/implementations/n8n/n8n-and-activate-n8n.json) |
+| [Sub-workflow: Return the capitals of fictional countries](agents/sub-workflow-return-the-capitals-of-fictional-countries/README.md) | 13 | [JSON](agents/sub-workflow-return-the-capitals-of-fictional-countries/implementations/n8n/sub-workflow-return-the-capitals-of-fictional-countries.json) |
+| [CFP Selection 1](agents/cfp-selection-1/README.md) | 2 | [JSON](agents/cfp-selection-1/implementations/n8n/cfp-selection-1.json) |
+| [cron and http request and mqtt](agents/cron-and-http-request-and-mqtt/README.md) | 4 | [JSON](agents/cron-and-http-request-and-mqtt/implementations/n8n/cron-and-http-request-and-mqtt.json) |
+| [send email with aws ses](agents/send-email-with-aws-ses/README.md) | 2 | [JSON](agents/send-email-with-aws-ses/implementations/n8n/send-email-with-aws-ses.json) |
+| [Motion-illustration Workflow Generated with Midjourney and Kling API](agents/motion-illustration-workflow-generated-with-midjourney-and-kling-api/README.md) | 11 | [JSON](agents/motion-illustration-workflow-generated-with-midjourney-and-kling-api/implementations/n8n/motion-illustration-workflow-generated-with-midjourney-and-kling-api.json) |
+| [Receive updates when an event occurs in Taiga](agents/receive-updates-when-an-event-occurs-in-taiga/README.md) | 1 | [JSON](agents/receive-updates-when-an-event-occurs-in-taiga/implementations/n8n/receive-updates-when-an-event-occurs-in-taiga.json) |
+| [Search for all contacts that last contact date for is known](agents/search-for-all-contacts-that-last-contact-date-for-is-known/README.md) | 8 | [JSON](agents/search-for-all-contacts-that-last-contact-date-for-is-known/implementations/n8n/search-for-all-contacts-that-last-contact-date-for-is-known.json) |
+| [List existing Snapshots](agents/list-existing-snapshots/README.md) | 22 | [JSON](agents/list-existing-snapshots/implementations/n8n/list-existing-snapshots.json) |
+| [Setting Up a Workflow for "AI-Powered Children's English Storytelling on Telegram"](agents/setting-up-a-workflow-for-ai-powered-children-s-english-storytelling-on-telegram/README.md) | 12 | [JSON](agents/setting-up-a-workflow-for-ai-powered-children-s-english-storytelling-on-telegram/implementations/n8n/setting-up-a-workflow-for-ai-powered-children-s-english-storytelling-on-telegram.json) |
+| [React to PDFMonkey Callback](agents/react-to-pdfmonkey-callback/README.md) | 3 | [JSON](agents/react-to-pdfmonkey-callback/implementations/n8n/react-to-pdfmonkey-callback.json) |
+| [http request and aws rekognition and append google sheets](agents/http-request-and-aws-rekognition-and-append-google-sheets/README.md) | 4 | [JSON](agents/http-request-and-aws-rekognition-and-append-google-sheets/implementations/n8n/http-request-and-aws-rekognition-and-append-google-sheets.json) |
+| [LINE Assistant with Google Calendar and Gmail Integration](agents/line-assistant-with-google-calendar-and-gmail-integration/README.md) | 14 | [JSON](agents/line-assistant-with-google-calendar-and-gmail-integration/implementations/n8n/line-assistant-with-google-calendar-and-gmail-integration.json) |
+| [💡Criteria For Follow Up Candidates](agents/criteria-for-follow-up-candidates/README.md) | 24 | [JSON](agents/criteria-for-follow-up-candidates/implementations/n8n/criteria-for-follow-up-candidates.json) |
+| [Patent Filing Velocity Tracker — Mycroft Agent](agents/patent-filing-velocity-tracker-mycroft-agent/README.md) | 38 | [JSON](agents/patent-filing-velocity-tracker-mycroft-agent/implementations/n8n/patent-filing-velocity-tracker-mycroft-agent.json) |
+| [write read write file and http request and file conversion to pdf](agents/write-read-write-file-and-http-request-and-file-conversion-to-pdf/README.md) | 4 | [JSON](agents/write-read-write-file-and-http-request-and-file-conversion-to-pdf/implementations/n8n/write-read-write-file-and-http-request-and-file-conversion-to-pdf.json) |
+| [n8n Subworkflow Dependency Graph &amp; Auto-Tagging](agents/workflow-dependency-graph/README.md) | 27 | [JSON](agents/workflow-dependency-graph/implementations/n8n/workflow-dependency-graph.json) |
+| [PREPARATION (in Supabase)](agents/preparation-in-supabase/README.md) | 16 | [JSON](agents/preparation-in-supabase/implementations/n8n/preparation-in-supabase.json) |
+| [receive schedule events and list channelmessage microsoft teams and team member weekly report agent](agents/receive-schedule-events-and-list-channelmessage-microsoft-teams-and-team-member-weekly-report-agent/README.md) | 12 | [JSON](agents/receive-schedule-events-and-list-channelmessage-microsoft-teams-and-team-member-weekly-report-agent/implementations/n8n/receive-schedule-events-and-list-channelmessage-microsoft-teams-and-team-member-weekly-report-agent.json) |
+| [route items with if conditions](agents/route-items-with-if-conditions/README.md) | 5 | [JSON](agents/route-items-with-if-conditions/implementations/n8n/route-items-with-if-conditions.json) |
+| [A workflow with the Twilio node](agents/a-workflow-with-the-twilio-node/README.md) | 2 | [JSON](agents/a-workflow-with-the-twilio-node/implementations/n8n/a-workflow-with-the-twilio-node.json) |
+| [Extranet Releases](agents/extranet-releases/README.md) | 2 | [JSON](agents/extranet-releases/implementations/n8n/extranet-releases.json) |
+| [YT New Video Upload](agents/yt-new-video-upload/README.md) | 12 | [JSON](agents/yt-new-video-upload/implementations/n8n/yt-new-video-upload.json) |
+| [Receive messages from a queue via RabbitMQ and send an SMS](agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/README.md) | 4 | [JSON](agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/n8n/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms.json) |
+| [receive execute workflow events and get mcp tagged workflows and filter matching ids](agents/receive-execute-workflow-events-and-get-mcp-tagged-workflows-and-filter-matching-ids/README.md) | 38 | [JSON](agents/receive-execute-workflow-events-and-get-mcp-tagged-workflows-and-filter-matching-ids/implementations/n8n/receive-execute-workflow-events-and-get-mcp-tagged-workflows-and-filter-matching-ids.json) |
+| [🔥📈🤖 AI Agent for n8n Creators Leaderboard - Find Popular Workflows](agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/README.md) | 27 | [JSON](agents/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows/implementations/n8n/ai-agent-for-n8n-creators-leaderboard-find-popular-workflows.json) |
+| [Build your first AI MCP Server](agents/build-your-first-ai-mcp-server/README.md) | 22 | [JSON](agents/build-your-first-ai-mcp-server/implementations/n8n/build-your-first-ai-mcp-server.json) |
+| [edit file github and get file github and github](agents/edit-file-github-and-get-file-github-and-github/README.md) | 11 | [JSON](agents/edit-file-github-and-get-file-github-and-github/implementations/n8n/edit-file-github-and-get-file-github-and-github.json) |
+| [Always Authenticate Your Server!](agents/always-authenticate-your-server-c381ff68/README.md) | 11 | [JSON](agents/always-authenticate-your-server-c381ff68/implementations/n8n/always-authenticate-your-server-c381ff68.json) |
+| [split out and execute command and receive schedule events](agents/split-out-and-execute-command-and-receive-schedule-events/README.md) | 7 | [JSON](agents/split-out-and-execute-command-and-receive-schedule-events/implementations/n8n/split-out-and-execute-command-and-receive-schedule-events.json) |
+| [Merge](agents/write-read-write-file-and-download-first-remote-pdf-file-and-download-second-pdf-file/README.md) | 5 | [JSON](agents/write-read-write-file-and-download-first-remote-pdf-file-and-download-second-pdf-file/implementations/n8n/write-read-write-file-and-download-first-remote-pdf-file-and-download-second-pdf-file.json) |
+| [Discord MCP Server](agents/discord-mcp-server/README.md) | 10 | [JSON](agents/discord-mcp-server/implementations/n8n/discord-mcp-server.json) |
+| [webhook and mattermost and receive workflow events](agents/webhook-and-mattermost-and-receive-workflow-events/README.md) | 4 | [JSON](agents/webhook-and-mattermost-and-receive-workflow-events/implementations/n8n/webhook-and-mattermost-and-receive-workflow-events.json) |
+| [create group bitwarden and list member bitwarden and update members group bitwarden](agents/create-group-bitwarden-and-list-member-bitwarden-and-update-members-group-bitwarden/README.md) | 4 | [JSON](agents/create-group-bitwarden-and-list-member-bitwarden-and-update-members-group-bitwarden/implementations/n8n/create-group-bitwarden-and-list-member-bitwarden-and-update-members-group-bitwarden.json) |
+| [Loop over calls for analysis and Create Parent](agents/loop-over-calls-for-analysis-and-create-parent/README.md) | 18 | [JSON](agents/loop-over-calls-for-analysis-and-create-parent/implementations/n8n/loop-over-calls-for-analysis-and-create-parent.json) |
+| [Easily Compare LLMs Using OpenAI and Google Sheets](agents/easily-compare-llms-using-openai-and-google-sheets/README.md) | 14 | [JSON](agents/easily-compare-llms-using-openai-and-google-sheets/implementations/n8n/easily-compare-llms-using-openai-and-google-sheets.json) |
+| [Mycroft - Forecasting Agent](agents/mycroft-forecasting-agent/README.md) | 14 | [JSON](agents/mycroft-forecasting-agent/implementations/n8n/mycroft-forecasting-agent.json) |
+| [read binary file and move binary data and execute command](agents/read-binary-file-and-move-binary-data-and-execute-command/README.md) | 7 | [JSON](agents/read-binary-file-and-move-binary-data-and-execute-command/implementations/n8n/read-binary-file-and-move-binary-data-and-execute-command.json) |
+| [Auth0 User Login](agents/auth0-user-login/README.md) | 9 | [JSON](agents/auth0-user-login/implementations/n8n/auth0-user-login.json) |
+| [Deep Research Report Generation Using Open Router, Google Search, Webhook/Telegram and Notion](agents/deep-research-report-generation-using-open-router-google-search-webhook-telegram-and-notion/README.md) | 37 | [JSON](agents/deep-research-report-generation-using-open-router-google-search-webhook-telegram-and-notion/implementations/n8n/deep-research-report-generation-using-open-router-google-search-webhook-telegram-and-notion.json) |
+| [Generate AI-Ready llms.txt Files from Screaming Frog Website Crawls](agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/README.md) | 12 | [JSON](agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/n8n/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls.json) |
+| [Workflow: Text automations using Apple Shortcuts](agents/workflow-text-automations-using-apple-shortcuts/README.md) | 8 | [JSON](agents/workflow-text-automations-using-apple-shortcuts/implementations/n8n/workflow-text-automations-using-apple-shortcuts.json) |
+| [Export WordPress Posts to CSV and Upload to Google Drive](agents/export-wordpress-posts-to-csv-and-upload-to-google-drive/README.md) | 5 | [JSON](agents/export-wordpress-posts-to-csv-and-upload-to-google-drive/implementations/n8n/export-wordpress-posts-to-csv-and-upload-to-google-drive.json) |
+| [Summarize Google Drive Documents with Mistral AI and Send via Gmail](agents/summarize-google-drive-documents-with-mistral-ai-and-send-via-gmail/README.md) | 5 | [JSON](agents/summarize-google-drive-documents-with-mistral-ai-and-send-via-gmail/implementations/n8n/summarize-google-drive-documents-with-mistral-ai-and-send-via-gmail.json) |
+| [Create, add an attachment, and send a draft using the Microsoft Outlook node](agents/create-add-an-attachment-and-send-a-draft-using-the-microsoft-outlook-node/README.md) | 5 | [JSON](agents/create-add-an-attachment-and-send-a-draft-using-the-microsoft-outlook-node/implementations/n8n/create-add-an-attachment-and-send-a-draft-using-the-microsoft-outlook-node.json) |
+| [delete google sheets and append google sheets and google sheets](agents/delete-google-sheets-and-append-google-sheets-and-google-sheets/README.md) | 14 | [JSON](agents/delete-google-sheets-and-append-google-sheets-and-google-sheets/implementations/n8n/delete-google-sheets-and-append-google-sheets-and-google-sheets.json) |
+| [GitHub Commit Velocity Tracker](agents/github-activity-monitor/README.md) | 22 | [JSON](agents/github-activity-monitor/implementations/n8n/github-activity-monitor.json) |
+| [Save new Files received on Telegram to Google Drive](agents/save-new-files-received-on-telegram-to-google-drive/README.md) | 3 | [JSON](agents/save-new-files-received-on-telegram-to-google-drive/implementations/n8n/save-new-files-received-on-telegram-to-google-drive.json) |
+| [list contact hubspot and list person pipedrive and hubspot](agents/list-contact-hubspot-and-list-person-pipedrive-and-hubspot/README.md) | 5 | [JSON](agents/list-contact-hubspot-and-list-person-pipedrive-and-hubspot/implementations/n8n/list-contact-hubspot-and-list-person-pipedrive-and-hubspot.json) |
+| [&#91;📺Complete Tutorial&#93;({{ $env.WEBHOOK_URL }}](agents/complete-tutorial-env-webhook-url/README.md) | 10 | [JSON](agents/complete-tutorial-env-webhook-url/implementations/n8n/complete-tutorial-env-webhook-url.json) |
+| [Create Nextcloud Deck card from email](agents/create-nextcloud-deck-card-from-email/README.md) | 3 | [JSON](agents/create-nextcloud-deck-card-from-email/implementations/n8n/create-nextcloud-deck-card-from-email.json) |
+| [when clicking test workflow](agents/when-clicking-test-workflow/README.md) | 4 | [JSON](agents/when-clicking-test-workflow/implementations/n8n/when-clicking-test-workflow.json) |
+| [AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets &amp; Slack](agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/README.md) | 21 | [JSON](agents/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack/implementations/n8n/ai-generated-summary-block-for-wordpress-posts-with-openai-wordpress-google-sheets-slack.json) |
+| [search salesforce accounts and removeduplicates item lists and set account id for existing accounts](agents/search-salesforce-accounts-and-removeduplicates-item-lists-and-set-account-id-for-existing-accounts/README.md) | 13 | [JSON](agents/search-salesforce-accounts-and-removeduplicates-item-lists-and-set-account-id-for-existing-accounts/implementations/n8n/search-salesforce-accounts-and-removeduplicates-item-lists-and-set-account-id-for-existing-accounts.json) |
+| [Microsoft Outlook AI Email Assistant](agents/microsoft-outlook-ai-email-assistant/README.md) | 20 | [JSON](agents/microsoft-outlook-ai-email-assistant/implementations/n8n/microsoft-outlook-ai-email-assistant.json) |
+| [MAIA - Health Check](agents/maia-health-check/README.md) | 5 | [JSON](agents/maia-health-check/implementations/n8n/maia-health-check.json) |
+| [post to wallabag](agents/post-to-wallabag/README.md) | 10 | [JSON](agents/post-to-wallabag/implementations/n8n/post-to-wallabag.json) |
+| [read binary file](agents/read-binary-file/README.md) | 2 | [JSON](agents/read-binary-file/implementations/n8n/read-binary-file.json) |
+| [Update Roles by Excel](agents/update-roles-by-excel/README.md) | 8 | [JSON](agents/update-roles-by-excel/implementations/n8n/update-roles-by-excel.json) |
+| [New member or Member left](agents/new-member-or-member-left/README.md) | 21 | [JSON](agents/new-member-or-member-left/implementations/n8n/new-member-or-member-left.json) |
+| [Very often your data is not in the right format to insert in a node. you can use the set node to fix it.](agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/README.md) | 4 | [JSON](agents/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it/implementations/n8n/very-often-your-data-is-not-in-the-right-format-to-insert-in-a-node-you-can-use-the-set-node-to-fix-it.json) |
+| [Main workflow: AI agent using custom tool](agents/main-workflow-ai-agent-using-custom-tool-49809ec1/README.md) | 8 | [JSON](agents/main-workflow-ai-agent-using-custom-tool-49809ec1/implementations/n8n/main-workflow-ai-agent-using-custom-tool-49809ec1.json) |
+| [Parents smart bot](agents/parents-smart-bot/README.md) | 27 | [JSON](agents/parents-smart-bot/implementations/n8n/parents-smart-bot.json) |
+| [TopSourcer - Finds LinkedIn Profiles using natural language](agents/topsourcer-finds-linkedin-profiles-using-natural-language/README.md) | 12 | [JSON](agents/topsourcer-finds-linkedin-profiles-using-natural-language/implementations/n8n/topsourcer-finds-linkedin-profiles-using-natural-language.json) |
+| [🔍🛠️Generate SEO-Optimized WordPress Content with Perplexity Research](agents/generate-seo-optimized-wordpress-content-with-perplexity-research/README.md) | 18 | [JSON](agents/generate-seo-optimized-wordpress-content-with-perplexity-research/implementations/n8n/generate-seo-optimized-wordpress-content-with-perplexity-research.json) |
+| [MarketMind - Run Analysis (Webhook)](agents/marketmind-run-analysis-webhook/README.md) | 5 | [JSON](agents/marketmind-run-analysis-webhook/implementations/n8n/marketmind-run-analysis-webhook.json) |
+| [n8n Community Topic Tracker by Keyword](agents/n8n-community-topic-tracker-by-keyword/README.md) | 7 | [JSON](agents/n8n-community-topic-tracker-by-keyword/implementations/n8n/n8n-community-topic-tracker-by-keyword.json) |
+| [Mycroft - Patent Intelligence Agent](agents/mycroft-patent-intelligence-agent/README.md) | 15 | [JSON](agents/mycroft-patent-intelligence-agent/implementations/n8n/mycroft-patent-intelligence-agent.json) |
+| [🤖Calendar Agent](agents/calendar-agent/README.md) | 10 | [JSON](agents/calendar-agent/implementations/n8n/calendar-agent.json) |
+| [Monthly Spotify Track Archiving and Playlist Classification](agents/monthly-spotify-track-archiving-and-playlist-classification/README.md) | 30 | [JSON](agents/monthly-spotify-track-archiving-and-playlist-classification/implementations/n8n/monthly-spotify-track-archiving-and-playlist-classification.json) |
+| [list zoho crm](agents/list-zoho-crm/README.md) | 2 | [JSON](agents/list-zoho-crm/implementations/n8n/list-zoho-crm.json) |
+| [Complete Guide to Setting Up and Generating TOTP Codes in n8n 🔐](agents/complete-guide-to-setting-up-and-generating-totp-codes-in-n8n/README.md) | 2 | [JSON](agents/complete-guide-to-setting-up-and-generating-totp-codes-in-n8n/implementations/n8n/complete-guide-to-setting-up-and-generating-totp-codes-in-n8n.json) |
+| [SQL agent with memory](agents/sql-agent-with-memory/README.md) | 10 | [JSON](agents/sql-agent-with-memory/implementations/n8n/sql-agent-with-memory.json) |
+| [Use this to get all your contacts 👉](agents/use-this-to-get-all-your-contacts/README.md) | 7 | [JSON](agents/use-this-to-get-all-your-contacts/implementations/n8n/use-this-to-get-all-your-contacts.json) |
+| [AI Talent Intelligence Agent](agents/ai-talent-intelligence-agent/README.md) | 16 | [JSON](agents/ai-talent-intelligence-agent/implementations/n8n/ai-talent-intelligence-agent.json) |
+| [Auto-Tag Blog Posts in WordPress with AI](agents/auto-tag-blog-posts-in-wordpress-with-ai/README.md) | 22 | [JSON](agents/auto-tag-blog-posts-in-wordpress-with-ai/implementations/n8n/auto-tag-blog-posts-in-wordpress-with-ai.json) |
+| [Enrich new Discourse members then notify in Slack for high value leads](agents/enrich-new-discourse-members-then-notify-in-slack-for-high-value-leads/README.md) | 7 | [JSON](agents/enrich-new-discourse-members-then-notify-in-slack-for-high-value-leads/implementations/n8n/enrich-new-discourse-members-then-notify-in-slack-for-high-value-leads.json) |
+| [WooCommerce AI Chatbot Workflow for Post-Sales Support](agents/woocommerce-ai-chatbot-workflow-for-post-sales-support/README.md) | 26 | [JSON](agents/woocommerce-ai-chatbot-workflow-for-post-sales-support/implementations/n8n/woocommerce-ai-chatbot-workflow-for-post-sales-support.json) |
+| [OpenAI Personal Shopper with RAG and WooCommerce](agents/openai-personal-shopper-with-rag-and-woocommerce/README.md) | 21 | [JSON](agents/openai-personal-shopper-with-rag-and-woocommerce/implementations/n8n/openai-personal-shopper-with-rag-and-woocommerce.json) |
+| [read binary files](agents/read-binary-files/README.md) | 2 | [JSON](agents/read-binary-files/implementations/n8n/read-binary-files.json) |
+| [What-If Simulation Agent](agents/what-if-simulation-agent/README.md) | 13 | [JSON](agents/what-if-simulation-agent/implementations/n8n/what-if-simulation-agent.json) |
+| [Create Google Drive Folders by Path](agents/create-google-drive-folders-by-path/README.md) | 11 | [JSON](agents/create-google-drive-folders-by-path/implementations/n8n/create-google-drive-folders-by-path.json) |
+| [receive aws sns events](agents/receive-aws-sns-events/README.md) | 1 | [JSON](agents/receive-aws-sns-events/implementations/n8n/receive-aws-sns-events.json) |
+| [Restaurant Agent](agents/restaurant-agent/README.md) | 12 | [JSON](agents/restaurant-agent/implementations/n8n/restaurant-agent.json) |
+| [Automated Work Attendance with Location Triggers](agents/automated-work-attendance-with-location-triggers/README.md) | 7 | [JSON](agents/automated-work-attendance-with-location-triggers/implementations/n8n/automated-work-attendance-with-location-triggers.json) |
+| [Gmail PDF Invoice/Receipt Classifier &amp; Google Drive Uploader (via n8n &amp; OpenAI)](agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/README.md) | 18 | [JSON](agents/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai/implementations/n8n/gmail-pdf-invoice-receipt-classifier-google-drive-uploader-via-n8n-openai.json) |
+| [Invite users to n8n from Google sheets](agents/invite-users-to-n8n-from-google-sheets/README.md) | 9 | [JSON](agents/invite-users-to-n8n-from-google-sheets/implementations/n8n/invite-users-to-n8n-from-google-sheets.json) |
+| [Get all scaleway server info copy](agents/get-all-scaleway-server-info-copy/README.md) | 21 | [JSON](agents/get-all-scaleway-server-info-copy/implementations/n8n/get-all-scaleway-server-info-copy.json) |
+| [🗨️Ollama Chat](agents/ollama-chat/README.md) | 6 | [JSON](agents/ollama-chat/implementations/n8n/ollama-chat.json) |
+| [Upload a file and get a list of all the files in a bucket](agents/upload-a-file-and-get-a-list-of-all-the-files-in-a-bucket/README.md) | 4 | [JSON](agents/upload-a-file-and-get-a-list-of-all-the-files-in-a-bucket/implementations/n8n/upload-a-file-and-get-a-list-of-all-the-files-in-a-bucket.json) |
+| [Custom Branded n8n Chatbot](agents/custom-branded-n8n-chatbot/README.md) | 17 | [JSON](agents/custom-branded-n8n-chatbot/implementations/n8n/custom-branded-n8n-chatbot.json) |
+| [create database page and list database page notion and update database page notion](agents/create-database-page-and-list-database-page-notion-and-update-database-page-notion/README.md) | 10 | [JSON](agents/create-database-page-and-list-database-page-notion-and-update-database-page-notion/implementations/n8n/create-database-page-and-list-database-page-notion-and-update-database-page-notion.json) |
+| [Create a table, and insert and update data in the table in Snowflake](agents/create-a-table-and-insert-and-update-data-in-the-table-in-snowflake/README.md) | 6 | [JSON](agents/create-a-table-and-insert-and-update-data-in-the-table-in-snowflake/implementations/n8n/create-a-table-and-insert-and-update-data-in-the-table-in-snowflake.json) |
+| [x402](agents/x402/README.md) | 10 | [JSON](agents/x402/implementations/n8n/x402.json) |
+| [Chunk the transcript into several parts, and refine-summarize it](agents/chunk-the-transcript-into-several-parts-and-refine-summarize-it/README.md) | 14 | [JSON](agents/chunk-the-transcript-into-several-parts-and-refine-summarize-it/implementations/n8n/chunk-the-transcript-into-several-parts-and-refine-summarize-it.json) |
+| [Telegram Tron Wallet Blacklist Checker](agents/telegram-tron-wallet-blacklist-checker/README.md) | 6 | [JSON](agents/telegram-tron-wallet-blacklist-checker/implementations/n8n/telegram-tron-wallet-blacklist-checker.json) |
+| [backup n8n workflows to google drive](agents/backup-n8n-workflows-to-google-drive/README.md) | 18 | [JSON](agents/backup-n8n-workflows-to-google-drive/implementations/n8n/backup-n8n-workflows-to-google-drive.json) |
+| [get user zendesk and update ticket hubspot and update zendesk](agents/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk/README.md) | 13 | [JSON](agents/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk/implementations/n8n/get-user-zendesk-and-update-ticket-hubspot-and-update-zendesk.json) |
+| [email read imap and next cloud](agents/email-read-imap-and-next-cloud/README.md) | 3 | [JSON](agents/email-read-imap-and-next-cloud/implementations/n8n/email-read-imap-and-next-cloud.json) |
+| [Insert and update data in Airtable](agents/insert-and-update-data-in-airtable/README.md) | 6 | [JSON](agents/insert-and-update-data-in-airtable/implementations/n8n/insert-and-update-data-in-airtable.json) |
+| [Part1 -Investor_ Agent](agents/part1-investor-agent/README.md) | 9 | [JSON](agents/part1-investor-agent/implementations/n8n/part1-investor-agent.json) |
+| [write read write file and http request](agents/write-read-write-file-and-http-request/README.md) | 4 | [JSON](agents/write-read-write-file-and-http-request/implementations/n8n/write-read-write-file-and-http-request.json) |
+| [Create a company in Salesmate](agents/create-a-company-in-salesmate/README.md) | 2 | [JSON](agents/create-a-company-in-salesmate/implementations/n8n/create-a-company-in-salesmate.json) |
+| [RSS to Telegram](agents/rss-to-telegram/README.md) | 7 | [JSON](agents/rss-to-telegram/implementations/n8n/rss-to-telegram.json) |
+| [... or watch set up video &#91;10 min&#93;](agents/or-watch-set-up-video-10-min/README.md) | 9 | [JSON](agents/or-watch-set-up-video-10-min/implementations/n8n/or-watch-set-up-video-10-min.json) |
+| [👆🏽 Adjust error message here](agents/adjust-error-message-here/README.md) | 3 | [JSON](agents/adjust-error-message-here/implementations/n8n/adjust-error-message-here.json) |
+| [rss feed read](agents/rss-feed-read/README.md) | 2 | [JSON](agents/rss-feed-read/implementations/n8n/rss-feed-read.json) |
+| [URL Pinger](agents/url-pinger/README.md) | 4 | [JSON](agents/url-pinger/implementations/n8n/url-pinger.json) |
+| [send email via gmail on workflow error](agents/send-email-via-gmail-on-workflow-error/README.md) | 8 | [JSON](agents/send-email-via-gmail-on-workflow-error/implementations/n8n/send-email-via-gmail-on-workflow-error.json) |
+| [Analyze a URL and get the job details using the Cortex node](agents/analyze-a-url-and-get-the-job-details-using-the-cortex-node/README.md) | 3 | [JSON](agents/analyze-a-url-and-get-the-job-details-using-the-cortex-node/implementations/n8n/analyze-a-url-and-get-the-job-details-using-the-cortex-node.json) |
+| [Business WhatsApp AI RAG Chatbot](agents/business-whatsapp-ai-rag-chatbot/README.md) | 18 | [JSON](agents/business-whatsapp-ai-rag-chatbot/implementations/n8n/business-whatsapp-ai-rag-chatbot.json) |
+| [Sync Discord scheduled events to Google Calendar](agents/sync-discord-scheduled-events-to-google-calendar/README.md) | 7 | [JSON](agents/sync-discord-scheduled-events-to-google-calendar/implementations/n8n/sync-discord-scheduled-events-to-google-calendar.json) |
+| [Send financial metrics monthly to Mattermost](agents/send-financial-metrics-monthly-to-mattermost/README.md) | 3 | [JSON](agents/send-financial-metrics-monthly-to-mattermost/implementations/n8n/send-financial-metrics-monthly-to-mattermost.json) |
+| [Gmail API Credentials](agents/gmail-api-credentials/README.md) | 9 | [JSON](agents/gmail-api-credentials/implementations/n8n/gmail-api-credentials.json) |
+| [Search &amp; Summarize Web Data with Perplexity, Gemini AI &amp; Bright Data to Webhooks](agents/search-summarize-web-data-with-perplexity-gemini-ai-bright-data-to-webhooks/README.md) | 15 | [JSON](agents/search-summarize-web-data-with-perplexity-gemini-ai-bright-data-to-webhooks/implementations/n8n/search-summarize-web-data-with-perplexity-gemini-ai-bright-data-to-webhooks.json) |
+| [Events Webhook Trigger](agents/events-webhook-trigger-3d11dc3b/README.md) | 45 | [JSON](agents/events-webhook-trigger-3d11dc3b/implementations/n8n/events-webhook-trigger-3d11dc3b.json) |
+| [http request and deep l](agents/http-request-and-deep-l/README.md) | 2 | [JSON](agents/http-request-and-deep-l/implementations/n8n/http-request-and-deep-l.json) |
+| [Dynamic Form with AI](agents/dynamic-form-with-ai/README.md) | 11 | [JSON](agents/dynamic-form-with-ai/implementations/n8n/dynamic-form-with-ai.json) |
+| [Discord AI bot](agents/discord-ai-bot/README.md) | 9 | [JSON](agents/discord-ai-bot/implementations/n8n/discord-ai-bot.json) |
+| [Youtube Searcher](agents/youtube-searcher/README.md) | 19 | [JSON](agents/youtube-searcher/implementations/n8n/youtube-searcher.json) |
+| [on clicking execute](agents/on-clicking-execute/README.md) | 4 | [JSON](agents/on-clicking-execute/implementations/n8n/on-clicking-execute.json) |
+| [CoinMarketCap_DEXScan_Agent_Tool](agents/coinmarketcap-dexscan-agent-tool/README.md) | 12 | [JSON](agents/coinmarketcap-dexscan-agent-tool/implementations/n8n/coinmarketcap-dexscan-agent-tool.json) |
+| [Error Alert and Summarizer](agents/error-alert-and-summarizer/README.md) | 11 | [JSON](agents/error-alert-and-summarizer/implementations/n8n/error-alert-and-summarizer.json) |
+| [Replace API key for Fireflies](agents/replace-api-key-for-fireflies/README.md) | 10 | [JSON](agents/replace-api-key-for-fireflies/implementations/n8n/replace-api-key-for-fireflies.json) |
+| [Pyragogy AI Village - Orchestrazione Master (Architettura Profonda V2)](agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2-d7ff69e3/README.md) | 36 | [JSON](agents/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2-d7ff69e3/implementations/n8n/pyragogy-ai-village-orchestrazione-master-architettura-profonda-v2-d7ff69e3.json) |
+| [N8N Workflow: AI-Enhanced Image Processing and Communication](agents/n8n-workflow-ai-enhanced-image-processing-and-communication/README.md) | 5 | [JSON](agents/n8n-workflow-ai-enhanced-image-processing-and-communication/implementations/n8n/n8n-workflow-ai-enhanced-image-processing-and-communication.json) |
+| [format and transform date time](agents/format-and-transform-date-time/README.md) | 2 | [JSON](agents/format-and-transform-date-time/implementations/n8n/format-and-transform-date-time.json) |
+| [subtract date time and 1st of every month at 8am and list google calendar](agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/README.md) | 13 | [JSON](agents/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar/implementations/n8n/subtract-date-time-and-1st-of-every-month-at-8am-and-list-google-calendar.json) |
+| [New WooCommerce product to Slack](agents/new-woocommerce-product-to-slack/README.md) | 2 | [JSON](agents/new-woocommerce-product-to-slack/implementations/n8n/new-woocommerce-product-to-slack.json) |
+| [&#91;3/3&#93; Anomaly detection tool (crops dataset)](agents/3-3-anomaly-detection-tool-crops-dataset/README.md) | 9 | [JSON](agents/3-3-anomaly-detection-tool-crops-dataset/implementations/n8n/3-3-anomaly-detection-tool-crops-dataset.json) |
+| [Handle Retell's Inbound call webhooks](agents/handle-retell-s-inbound-call-webhooks/README.md) | 3 | [JSON](agents/handle-retell-s-inbound-call-webhooks/implementations/n8n/handle-retell-s-inbound-call-webhooks.json) |
+| [Github Workflow](agents/list-release-github-and-cron-and-gitlab/README.md) | 7 | [JSON](agents/list-release-github-and-cron-and-gitlab/implementations/n8n/list-release-github-and-cron-and-gitlab.json) |
+| [DeepSeek v3.1](agents/deepseek-v3-1/README.md) | 8 | [JSON](agents/deepseek-v3-1/implementations/n8n/deepseek-v3-1.json) |
+| [Student Assistant Automation System](agents/student-assistant-automation-system/README.md) | 16 | [JSON](agents/student-assistant-automation-system/implementations/n8n/student-assistant-automation-system.json) |
+| [Product Data Processing](agents/product-data-processing/README.md) | 14 | [JSON](agents/product-data-processing/implementations/n8n/product-data-processing.json) |
+| [Daily meetings summarization with Gemini AI](agents/daily-meetings-summarization-with-gemini-ai/README.md) | 5 | [JSON](agents/daily-meetings-summarization-with-gemini-ai/implementations/n8n/daily-meetings-summarization-with-gemini-ai.json) |
+| [Create a new issue in Jira](agents/create-a-new-issue-in-jira/README.md) | 2 | [JSON](agents/create-a-new-issue-in-jira/implementations/n8n/create-a-new-issue-in-jira.json) |
+| [Default frequency: every hour](agents/default-frequency-every-hour/README.md) | 12 | [JSON](agents/default-frequency-every-hour/implementations/n8n/default-frequency-every-hour.json) |
+| [Material Issue Request and Approval](agents/material-issue-request-and-approval/README.md) | 48 | [JSON](agents/material-issue-request-and-approval/implementations/n8n/material-issue-request-and-approval.json) |
+| [crypto market alert system with binance and telegram integration](agents/crypto-market-alert-system-with-binance-and-telegram-integration/README.md) | 6 | [JSON](agents/crypto-market-alert-system-with-binance-and-telegram-integration/implementations/n8n/crypto-market-alert-system-with-binance-and-telegram-integration.json) |
+| [Calculate the Centroid of a Set of Vectors](agents/calculate-the-centroid-of-a-set-of-vectors/README.md) | 4 | [JSON](agents/calculate-the-centroid-of-a-set-of-vectors/implementations/n8n/calculate-the-centroid-of-a-set-of-vectors.json) |
+| [list mautic](agents/list-mautic/README.md) | 2 | [JSON](agents/list-mautic/implementations/n8n/list-mautic.json) |
+| [BillBot](agents/billbot/README.md) | 6 | [JSON](agents/billbot/implementations/n8n/billbot.json) |
+| [cron and baserow and fetch tradegate stock page](agents/cron-and-baserow-and-fetch-tradegate-stock-page/README.md) | 9 | [JSON](agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/n8n/cron-and-baserow-and-fetch-tradegate-stock-page.json) |
+| [The incoming message from the webhook is queried from the Supabase Vector Store.  The response is provided in the response webhook.](agents/the-incoming-message-from-the-webhook-is-queried-from-the-supabase-vector-store-the-response-is-provided-in-th/README.md) | 14 | [JSON](agents/the-incoming-message-from-the-webhook-is-queried-from-the-supabase-vector-store-the-response-is-provided-in-th/implementations/n8n/the-incoming-message-from-the-webhook-is-queried-from-the-supabase-vector-store-the-response-is-provided-in-th.json) |
+| [📬 Workflow: Transparent Tracking Pixel for Email Open Detection](agents/workflow-transparent-tracking-pixel-for-email-open-detection/README.md) | 5 | [JSON](agents/workflow-transparent-tracking-pixel-for-email-open-detection/implementations/n8n/workflow-transparent-tracking-pixel-for-email-open-detection.json) |
+| [Workflow dashboard with mermaid.js](agents/workflow-dashboard-with-mermaid-js/README.md) | 11 | [JSON](agents/workflow-dashboard-with-mermaid-js/implementations/n8n/workflow-dashboard-with-mermaid-js.json) |
+| [open weather map and webhook 6920b5f5](agents/open-weather-map-and-webhook-6920b5f5/README.md) | 4 | [JSON](agents/open-weather-map-and-webhook-6920b5f5/implementations/n8n/open-weather-map-and-webhook-6920b5f5.json) |
+| [Type a Keyword and Discover What People Search on Google](agents/type-a-keyword-and-discover-what-people-search-on-google/README.md) | 8 | [JSON](agents/type-a-keyword-and-discover-what-people-search-on-google/implementations/n8n/type-a-keyword-and-discover-what-people-search-on-google.json) |
+| [Automate Content Generator for WordPress with DeepSeek R1](agents/automate-content-generator-for-wordpress-with-deepseek-r1/README.md) | 10 | [JSON](agents/automate-content-generator-for-wordpress-with-deepseek-r1/implementations/n8n/automate-content-generator-for-wordpress-with-deepseek-r1.json) |
+| [receive schedule events and list issuecomment jira and update jira](agents/receive-schedule-events-and-list-issuecomment-jira-and-update-jira/README.md) | 29 | [JSON](agents/receive-schedule-events-and-list-issuecomment-jira-and-update-jira/implementations/n8n/receive-schedule-events-and-list-issuecomment-jira-and-update-jira.json) |
+| [Here you can modify the prompt](agents/here-you-can-modify-the-prompt/README.md) | 13 | [JSON](agents/here-you-can-modify-the-prompt/implementations/n8n/here-you-can-modify-the-prompt.json) |
+| [🤖Contact Agent](agents/contact-agent/README.md) | 7 | [JSON](agents/contact-agent/implementations/n8n/contact-agent.json) |
+| [receive eventbrite events](agents/receive-eventbrite-events/README.md) | 1 | [JSON](agents/receive-eventbrite-events/implementations/n8n/receive-eventbrite-events.json) |
+| [http request and get mailbox ids and split out](agents/http-request-and-get-mailbox-ids-and-split-out/README.md) | 9 | [JSON](agents/http-request-and-get-mailbox-ids-and-split-out/implementations/n8n/http-request-and-get-mailbox-ids-and-split-out.json) |
+| [Amazon Product Price Tracker](agents/amazon-product-price-tracker/README.md) | 14 | [JSON](agents/amazon-product-price-tracker/implementations/n8n/amazon-product-price-tracker.json) |
+| [Slack POSTs to Webhook on every message so we need to filter-out bot messages](agents/slack-posts-to-webhook-on-every-message-so-we-need-to-filter-out-bot-messages/README.md) | 9 | [JSON](agents/slack-posts-to-webhook-on-every-message-so-we-need-to-filter-out-bot-messages/implementations/n8n/slack-posts-to-webhook-on-every-message-so-we-need-to-filter-out-bot-messages.json) |
+| [AI powered SEO Keyword Research Automation - The vibe Marketer](agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/README.md) | 26 | [JSON](agents/ai-powered-seo-keyword-research-automation-the-vibe-marketer/implementations/n8n/ai-powered-seo-keyword-research-automation-the-vibe-marketer.json) |
+| [Read RSS feed from two different sources](agents/read-rss-feed-from-two-different-sources/README.md) | 4 | [JSON](agents/read-rss-feed-from-two-different-sources/implementations/n8n/read-rss-feed-from-two-different-sources.json) |
+| [Generate SQL queries from schema only - AI-powered](agents/generate-sql-queries-from-schema-only-ai-powered/README.md) | 20 | [JSON](agents/generate-sql-queries-from-schema-only-ai-powered/implementations/n8n/generate-sql-queries-from-schema-only-ai-powered.json) |
+| [Create a new customer in Chargebee](agents/create-a-new-customer-in-chargebee/README.md) | 2 | [JSON](agents/create-a-new-customer-in-chargebee/implementations/n8n/create-a-new-customer-in-chargebee.json) |
+| [request youtube transcript and summarization of a youtube script and receive form events](agents/request-youtube-transcript-and-summarization-of-a-youtube-script-and-receive-form-events/README.md) | 5 | [JSON](agents/request-youtube-transcript-and-summarization-of-a-youtube-script-and-receive-form-events/implementations/n8n/request-youtube-transcript-and-summarization-of-a-youtube-script-and-receive-form-events.json) |
+| [Crypto News &amp; Sentiment](agents/crypto-news-sentiment/README.md) | 20 | [JSON](agents/crypto-news-sentiment/implementations/n8n/crypto-news-sentiment.json) |
+| [api to check existing merge request and create new merge request and api to close existing merge request](agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/README.md) | 10 | [JSON](agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/n8n/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request.json) |
+| [Retry Execution Hourly](agents/retry-execution-hourly/README.md) | 9 | [JSON](agents/retry-execution-hourly/implementations/n8n/retry-execution-hourly.json) |
+| [insert mongo db](agents/insert-mongo-db/README.md) | 3 | [JSON](agents/insert-mongo-db/implementations/n8n/insert-mongo-db.json) |
+| [Extract &amp; Summarize Wikipedia Data with Bright Data and Gemini AI](agents/extract-summarize-wikipedia-data-with-bright-data-and-gemini-ai/README.md) | 8 | [JSON](agents/extract-summarize-wikipedia-data-with-bright-data-and-gemini-ai/implementations/n8n/extract-summarize-wikipedia-data-with-bright-data-and-gemini-ai.json) |
+| [http request and get file github and n8n workflow detail](agents/http-request-and-get-file-github-and-n8n-workflow-detail/README.md) | 16 | [JSON](agents/http-request-and-get-file-github-and-n8n-workflow-detail/implementations/n8n/http-request-and-get-file-github-and-n8n-workflow-detail.json) |
+| [Build an MCP Server with Google Calendar](agents/build-an-mcp-server-with-google-calendar/README.md) | 10 | [JSON](agents/build-an-mcp-server-with-google-calendar/implementations/n8n/build-an-mcp-server-with-google-calendar.json) |
+| [💫 To setup this template](agents/to-setup-this-template/README.md) | 7 | [JSON](agents/to-setup-this-template/implementations/n8n/to-setup-this-template.json) |
+| [Q. Do I need to analyse Brand Voice for every article?](agents/q-do-i-need-to-analyse-brand-voice-for-every-article/README.md) | 18 | [JSON](agents/q-do-i-need-to-analyse-brand-voice-for-every-article/implementations/n8n/q-do-i-need-to-analyse-brand-voice-for-every-article.json) |
+| [Email verification with Icypeas (single)](agents/email-verification-with-icypeas-single/README.md) | 3 | [JSON](agents/email-verification-with-icypeas-single/implementations/n8n/email-verification-with-icypeas-single.json) |
+| [when clicking execute workflow](agents/when-clicking-execute-workflow/README.md) | 4 | [JSON](agents/when-clicking-execute-workflow/implementations/n8n/when-clicking-execute-workflow.json) |
+| [&#91;n8n&#93; YouTube Channel Advanced RSS Feeds Generator](agents/n8n-youtube-channel-advanced-rss-feeds-generator/README.md) | 18 | [JSON](agents/n8n-youtube-channel-advanced-rss-feeds-generator/implementations/n8n/n8n-youtube-channel-advanced-rss-feeds-generator.json) |
+| [Write a WordPress post with AI (starting from a few keywords)](agents/write-a-wordpress-post-with-ai-starting-from-a-few-keywords/README.md) | 15 | [JSON](agents/write-a-wordpress-post-with-ai-starting-from-a-few-keywords/implementations/n8n/write-a-wordpress-post-with-ai-starting-from-a-few-keywords.json) |
+| [agent and receive telegram events and telegram](agents/agent-and-receive-telegram-events-and-telegram/README.md) | 4 | [JSON](agents/agent-and-receive-telegram-events-and-telegram/implementations/n8n/agent-and-receive-telegram-events-and-telegram.json) |
+| [(G) LineChatBot + Google Sheets (as a memory)](agents/g-linechatbot-google-sheets-as-a-memory/README.md) | 9 | [JSON](agents/g-linechatbot-google-sheets-as-a-memory/implementations/n8n/g-linechatbot-google-sheets-as-a-memory.json) |
+| [Telegram channel to Readeck &amp; Hoarder](agents/telegram-channel-to-readeck-hoarder/README.md) | 12 | [JSON](agents/telegram-channel-to-readeck-hoarder/implementations/n8n/telegram-channel-to-readeck-hoarder.json) |
+| [All-in-One Telegram/Baserow AI Assistant 🤖🧠 Voice/Photo/Save Notes/Long Term Mem](agents/all-in-one-telegram-baserow-ai-assistant-voice-photo-save-notes-long-term-mem/README.md) | 28 | [JSON](agents/all-in-one-telegram-baserow-ai-assistant-voice-photo-save-notes-long-term-mem/implementations/n8n/all-in-one-telegram-baserow-ai-assistant-voice-photo-save-notes-long-term-mem.json) |
+| [Generate SEO Seed Keywords Using AI](agents/generate-seo-seed-keywords-using-ai/README.md) | 7 | [JSON](agents/generate-seo-seed-keywords-using-ai/implementations/n8n/generate-seo-seed-keywords-using-ai.json) |
+| [Linkedin Chrome Extensions](agents/linkedin-chrome-extensions/README.md) | 8 | [JSON](agents/linkedin-chrome-extensions/implementations/n8n/linkedin-chrome-extensions.json) |
+| [Send a message on Twake](agents/send-a-message-on-twake/README.md) | 2 | [JSON](agents/send-a-message-on-twake/implementations/n8n/send-a-message-on-twake.json) |
+| [PG&amp;E Daily Cost Tracker](agents/pg-e-daily-cost-tracker/README.md) | 14 | [JSON](agents/pg-e-daily-cost-tracker/implementations/n8n/pg-e-daily-cost-tracker.json) |
+| [On new Stripe Invoice Payment update Hubspot and notify the team in Slack](agents/on-new-stripe-invoice-payment-update-hubspot-and-notify-the-team-in-slack/README.md) | 8 | [JSON](agents/on-new-stripe-invoice-payment-update-hubspot-and-notify-the-team-in-slack/implementations/n8n/on-new-stripe-invoice-payment-update-hubspot-and-notify-the-team-in-slack.json) |
+| [Triggered from Slack Parent Workflow](agents/triggered-from-slack-parent-workflow/README.md) | 14 | [JSON](agents/triggered-from-slack-parent-workflow/implementations/n8n/triggered-from-slack-parent-workflow.json) |
+| [Latest company news before a call](agents/latest-company-news-before-a-call/README.md) | 9 | [JSON](agents/latest-company-news-before-a-call/implementations/n8n/latest-company-news-before-a-call.json) |
+| [receive google drive events and list aws s3 and upload aws s3](agents/receive-google-drive-events-and-list-aws-s3-and-upload-aws-s3/README.md) | 4 | [JSON](agents/receive-google-drive-events-and-list-aws-s3-and-upload-aws-s3/implementations/n8n/receive-google-drive-events-and-list-aws-s3-and-upload-aws-s3.json) |
+| [&#91;2/3&#93; Set up medoids (2 types) for anomaly detection (crops dataset)](agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/README.md) | 26 | [JSON](agents/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset/implementations/n8n/2-3-set-up-medoids-2-types-for-anomaly-detection-crops-dataset.json) |
+| [pdf extract from file and create airtable and text classifier](agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/README.md) | 11 | [JSON](agents/pdf-extract-from-file-and-create-airtable-and-text-classifier/implementations/n8n/pdf-extract-from-file-and-create-airtable-and-text-classifier.json) |
+| [cockpit api example](agents/cockpit-api-example/README.md) | 2 | [JSON](agents/cockpit-api-example/implementations/n8n/cockpit-api-example.json) |
+| [&#91;n8n&#93; - Shopify Orders to D365 Business Central Sales Orders / Sales Invoices](agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/README.md) | 31 | [JSON](agents/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices/implementations/n8n/n8n-shopify-orders-to-d365-business-central-sales-orders-sales-invoices.json) |
+| [Rapid ETL: HTTP -&gt; Transform -&gt; Deliver](agents/rapid-etl-http-transform-deliver/README.md) | 4 | [JSON](agents/rapid-etl-http-transform-deliver/implementations/n8n/rapid-etl-http-transform-deliver.json) |
+| [Get SSL Certificate](agents/get-ssl-certificate/README.md) | 5 | [JSON](agents/get-ssl-certificate/implementations/n8n/get-ssl-certificate.json) |
+| [Sync Jira issues with subsequent comments to Notion database](agents/sync-jira-issues-with-subsequent-comments-to-notion-database/README.md) | 9 | [JSON](agents/sync-jira-issues-with-subsequent-comments-to-notion-database/implementations/n8n/sync-jira-issues-with-subsequent-comments-to-notion-database.json) |
+| [Get PDF with JSReport](agents/get-pdf-with-jsreport/README.md) | 3 | [JSON](agents/get-pdf-with-jsreport/implementations/n8n/get-pdf-with-jsreport.json) |
+| [receive postgres events and filter and appendorupdate google sheets](agents/receive-postgres-events-and-filter-and-appendorupdate-google-sheets/README.md) | 5 | [JSON](agents/receive-postgres-events-and-filter-and-appendorupdate-google-sheets/implementations/n8n/receive-postgres-events-and-filter-and-appendorupdate-google-sheets.json) |
+| [webhook and http request and html extract](agents/webhook-and-http-request-and-html-extract/README.md) | 7 | [JSON](agents/webhook-and-http-request-and-html-extract/implementations/n8n/webhook-and-http-request-and-html-extract.json) |
+| [🙋‍♂️ Why not just use the built-in PDF convertor?](agents/why-not-just-use-the-built-in-pdf-convertor/README.md) | 17 | [JSON](agents/why-not-just-use-the-built-in-pdf-convertor/implementations/n8n/why-not-just-use-the-built-in-pdf-convertor.json) |
+| [Lead Generation System (Template)](agents/lead-generation-system-template/README.md) | 5 | [JSON](agents/lead-generation-system-template/implementations/n8n/lead-generation-system-template.json) |
+| [Receive updates when a sale is made in Gumroad](agents/receive-updates-when-a-sale-is-made-in-gumroad/README.md) | 1 | [JSON](agents/receive-updates-when-a-sale-is-made-in-gumroad/implementations/n8n/receive-updates-when-a-sale-is-made-in-gumroad.json) |
+| [Slack-GitHub User Info](agents/slack-github-user-info/README.md) | 4 | [JSON](agents/slack-github-user-info/implementations/n8n/slack-github-user-info.json) |
+| [Merge PDFs](agents/merge-pdfs/README.md) | 7 | [JSON](agents/merge-pdfs/implementations/n8n/merge-pdfs.json) |
+| [http request and receive form events and append google sheets](agents/http-request-and-receive-form-events-and-append-google-sheets/README.md) | 11 | [JSON](agents/http-request-and-receive-form-events-and-append-google-sheets/implementations/n8n/http-request-and-receive-form-events-and-append-google-sheets.json) |
+| [Congratulations Workflow](agents/cron-and-google-sheets-and-twilio/README.md) | 8 | [JSON](agents/cron-and-google-sheets-and-twilio/implementations/n8n/cron-and-google-sheets-and-twilio.json) |
+| [sum numeric item values](agents/sum-numeric-item-values/README.md) | 3 | [JSON](agents/sum-numeric-item-values/implementations/n8n/sum-numeric-item-values.json) |
+| [Generate Text-to-Speech Using Elevenlabs via API](agents/generate-text-to-speech-using-elevenlabs-via-api/README.md) | 5 | [JSON](agents/generate-text-to-speech-using-elevenlabs-via-api/implementations/n8n/generate-text-to-speech-using-elevenlabs-via-api.json) |
+| [receive telegram events and telegram and return no sticker found](agents/receive-telegram-events-and-telegram-and-return-no-sticker-found/README.md) | 4 | [JSON](agents/receive-telegram-events-and-telegram-and-return-no-sticker-found/implementations/n8n/receive-telegram-events-and-telegram-and-return-no-sticker-found.json) |
+| [MiniBear Webhook](agents/minibear-webhook/README.md) | 27 | [JSON](agents/minibear-webhook/implementations/n8n/minibear-webhook.json) |
+| [receive chat events and tool serp api and agent](agents/receive-chat-events-and-tool-serp-api-and-agent/README.md) | 5 | [JSON](agents/receive-chat-events-and-tool-serp-api-and-agent/implementations/n8n/receive-chat-events-and-tool-serp-api-and-agent.json) |
+| [Create/update Mautic contact on a new Calendly event](agents/create-update-mautic-contact-on-a-new-calendly-event/README.md) | 2 | [JSON](agents/create-update-mautic-contact-on-a-new-calendly-event/implementations/n8n/create-update-mautic-contact-on-a-new-calendly-event.json) |
+| [reddit and get reddit](agents/reddit-and-get-reddit/README.md) | 4 | [JSON](agents/reddit-and-get-reddit/implementations/n8n/reddit-and-get-reddit.json) |
+| [Airtable markdown to html](agents/airtable-markdown-to-html/README.md) | 8 | [JSON](agents/airtable-markdown-to-html/implementations/n8n/airtable-markdown-to-html.json) |
+| [telegram and transcribe audio open ai and receive gmail events](agents/telegram-and-transcribe-audio-open-ai-and-receive-gmail-events/README.md) | 17 | [JSON](agents/telegram-and-transcribe-audio-open-ai-and-receive-gmail-events/implementations/n8n/telegram-and-transcribe-audio-open-ai-and-receive-gmail-events.json) |
+| [Fan-Out Broadcast and Merge](agents/fan-out-broadcast-and-merge/README.md) | 6 | [JSON](agents/fan-out-broadcast-and-merge/implementations/n8n/fan-out-broadcast-and-merge.json) |
+| [Unnamed Workflow](agents/manual-trigger-starter/README.md) | 2 | [JSON](agents/manual-trigger-starter/implementations/n8n/manual-trigger-starter.json) |
+| [go to webinar and update webinar go to webinar and create webinar go to webinar](agents/go-to-webinar-and-update-webinar-go-to-webinar-and-create-webinar-go-to-webinar/README.md) | 3 | [JSON](agents/go-to-webinar-and-update-webinar-go-to-webinar-and-create-webinar-go-to-webinar/implementations/n8n/go-to-webinar-and-update-webinar-go-to-webinar-and-create-webinar-go-to-webinar.json) |
+| [Send daily weather updates via a message using the Gotify node](agents/send-daily-weather-updates-via-a-message-using-the-gotify-node/README.md) | 3 | [JSON](agents/send-daily-weather-updates-via-a-message-using-the-gotify-node/implementations/n8n/send-daily-weather-updates-via-a-message-using-the-gotify-node.json) |
+| [Get and prepare Dummy Data](agents/get-and-prepare-dummy-data/README.md) | 16 | [JSON](agents/get-and-prepare-dummy-data/implementations/n8n/get-and-prepare-dummy-data.json) |
+| [Check if incoming email is about appointment](agents/check-if-incoming-email-is-about-appointment/README.md) | 8 | [JSON](agents/check-if-incoming-email-is-about-appointment/implementations/n8n/check-if-incoming-email-is-about-appointment.json) |
+| [monday com and receive mautic events](agents/monday-com-and-receive-mautic-events/README.md) | 2 | [JSON](agents/monday-com-and-receive-mautic-events/implementations/n8n/monday-com-and-receive-mautic-events.json) |
+| [puq-docker-n8n-deploy](agents/puq-docker-n8n-deploy/README.md) | 33 | [JSON](agents/puq-docker-n8n-deploy/implementations/n8n/puq-docker-n8n-deploy.json) |
+| [OpenSea Analytics Agent Tool](agents/opensea-analytics-agent-tool/README.md) | 9 | [JSON](agents/opensea-analytics-agent-tool/implementations/n8n/opensea-analytics-agent-tool.json) |
+| [mattermost and detectsentiment aws comprehend and receive typeform events](agents/mattermost-and-detectsentiment-aws-comprehend-and-receive-typeform-events/README.md) | 5 | [JSON](agents/mattermost-and-detectsentiment-aws-comprehend-and-receive-typeform-events/implementations/n8n/mattermost-and-detectsentiment-aws-comprehend-and-receive-typeform-events.json) |
+| [Syncro Status Update Clockify](agents/syncro-status-update-clockify/README.md) | 6 | [JSON](agents/syncro-status-update-clockify/implementations/n8n/syncro-status-update-clockify.json) |
+| [modelo do chatbot](agents/modelo-do-chatbot/README.md) | 11 | [JSON](agents/modelo-do-chatbot/implementations/n8n/modelo-do-chatbot.json) |
+| [webhook and function item and http request](agents/webhook-and-function-item-and-http-request/README.md) | 8 | [JSON](agents/webhook-and-function-item-and-http-request/implementations/n8n/webhook-and-function-item-and-http-request.json) |
+| [receive typeform events and api template io](agents/receive-typeform-events-and-api-template-io/README.md) | 2 | [JSON](agents/receive-typeform-events-and-api-template-io/implementations/n8n/receive-typeform-events-and-api-template-io.json) |
+| [aws transcribe and list aws s3](agents/aws-transcribe-and-list-aws-s3/README.md) | 3 | [JSON](agents/aws-transcribe-and-list-aws-s3/implementations/n8n/aws-transcribe-and-list-aws-s3.json) |
+| [Automate instagram posts with Google Drive, AI Captions &amp; Facebook Graph API Agent (Easy to Set-Up)](agents/automate-instagram-posts-with-google-drive-ai-captions-facebook-graph-api-agent-easy-to-set-up/README.md) | 6 | [JSON](agents/automate-instagram-posts-with-google-drive-ai-captions-facebook-graph-api-agent-easy-to-set-up/implementations/n8n/automate-instagram-posts-with-google-drive-ai-captions-facebook-graph-api-agent-easy-to-set-up.json) |
+| [append google sheets and read json file and move binary data 2](agents/append-google-sheets-and-read-json-file-and-move-binary-data-2/README.md) | 3 | [JSON](agents/append-google-sheets-and-read-json-file-and-move-binary-data-2/implementations/n8n/append-google-sheets-and-read-json-file-and-move-binary-data-2.json) |
+| [Trigger workflow every 48 hours](agents/trigger-workflow-every-48-hours/README.md) | 6 | [JSON](agents/trigger-workflow-every-48-hours/implementations/n8n/trigger-workflow-every-48-hours.json) |
+| [upload ftp and list ftp and http request](agents/upload-ftp-and-list-ftp-and-http-request/README.md) | 4 | [JSON](agents/upload-ftp-and-list-ftp-and-http-request/implementations/n8n/upload-ftp-and-list-ftp-and-http-request.json) |
+| [Hacker News AI Tracker](agents/hacker-news-ai-tracker/README.md) | 13 | [JSON](agents/hacker-news-ai-tracker/implementations/n8n/hacker-news-ai-tracker.json) |
+| [Check To Do on Notion and send message on Slack](agents/check-to-do-on-notion-and-send-message-on-slack/README.md) | 6 | [JSON](agents/check-to-do-on-notion-and-send-message-on-slack/implementations/n8n/check-to-do-on-notion-and-send-message-on-slack.json) |
+| [cron and list airtable and sendphoto telegram](agents/cron-and-list-airtable-and-sendphoto-telegram/README.md) | 15 | [JSON](agents/cron-and-list-airtable-and-sendphoto-telegram/implementations/n8n/cron-and-list-airtable-and-sendphoto-telegram.json) |
+| [RAG on living data](agents/rag-on-living-data/README.md) | 19 | [JSON](agents/rag-on-living-data/implementations/n8n/rag-on-living-data.json) |
+| [Live link checker](agents/live-link-checker/README.md) | 9 | [JSON](agents/live-link-checker/implementations/n8n/live-link-checker.json) |
+| [n8napi-check-workflow-which-model-is-using](agents/n8napi-check-workflow-which-model-is-using/README.md) | 9 | [JSON](agents/n8napi-check-workflow-which-model-is-using/implementations/n8n/n8napi-check-workflow-which-model-is-using.json) |
+| [Bitrix24 Open Chanel RAG Chatbot Application Workflow example with Webhook Integration](agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/README.md) | 33 | [JSON](agents/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration/implementations/n8n/bitrix24-open-chanel-rag-chatbot-application-workflow-example-with-webhook-integration.json) |
+| [clearbit and searchbydomain company hubspot and hubspot](agents/clearbit-and-searchbydomain-company-hubspot-and-hubspot/README.md) | 12 | [JSON](agents/clearbit-and-searchbydomain-company-hubspot-and-hubspot/implementations/n8n/clearbit-and-searchbydomain-company-hubspot-and-hubspot.json) |
+| [Get all the stories starting with `release` and publish them](agents/get-all-the-stories-starting-with-release-and-publish-them/README.md) | 3 | [JSON](agents/get-all-the-stories-starting-with-release-and-publish-them/implementations/n8n/get-all-the-stories-starting-with-release-and-publish-them.json) |
+| [Get companies from database](agents/get-companies-from-database/README.md) | 28 | [JSON](agents/get-companies-from-database/implementations/n8n/get-companies-from-database.json) |
+| [Customer Experience Agent (AI)](agents/customer-experience-agent-ai/README.md) | 16 | [JSON](agents/customer-experience-agent-ai/implementations/n8n/customer-experience-agent-ai.json) |
+| [Find a different ideal buyer:](agents/find-a-different-ideal-buyer/README.md) | 9 | [JSON](agents/find-a-different-ideal-buyer/implementations/n8n/find-a-different-ideal-buyer.json) |
+| [webhook and create grist and grist](agents/webhook-and-create-grist-and-grist/README.md) | 5 | [JSON](agents/webhook-and-create-grist-and-grist/implementations/n8n/webhook-and-create-grist-and-grist.json) |
+| [SHEETS RAG](agents/sheets-rag/README.md) | 20 | [JSON](agents/sheets-rag/implementations/n8n/sheets-rag.json) |
+| [Retrieve the playlists you want to synchronise](agents/retrieve-the-playlists-you-want-to-synchronise/README.md) | 9 | [JSON](agents/retrieve-the-playlists-you-want-to-synchronise/implementations/n8n/retrieve-the-playlists-you-want-to-synchronise.json) |
+| [cron and google sheets and mattermost](agents/cron-and-google-sheets-and-mattermost/README.md) | 3 | [JSON](agents/cron-and-google-sheets-and-mattermost/implementations/n8n/cron-and-google-sheets-and-mattermost.json) |
+| [New WooCommerce order to Slack](agents/new-woocommerce-order-to-slack/README.md) | 3 | [JSON](agents/new-woocommerce-order-to-slack/implementations/n8n/new-woocommerce-order-to-slack.json) |
+| [Simple conversion to XML](agents/simple-conversion-to-xml/README.md) | 11 | [JSON](agents/simple-conversion-to-xml/implementations/n8n/simple-conversion-to-xml.json) |
+| [Create a customer and add them to a segment in Customer.io](agents/create-a-customer-and-add-them-to-a-segment-in-customer-io/README.md) | 3 | [JSON](agents/create-a-customer-and-add-them-to-a-segment-in-customer-io/implementations/n8n/create-a-customer-and-add-them-to-a-segment-in-customer-io.json) |
+| [NeurochainAI Basic API Integration](agents/neurochainai-basic-api-integration/README.md) | 20 | [JSON](agents/neurochainai-basic-api-integration/implementations/n8n/neurochainai-basic-api-integration.json) |
+| [Linkedin to Airtable](agents/linkedin-to-airtable/README.md) | 7 | [JSON](agents/linkedin-to-airtable/implementations/n8n/linkedin-to-airtable.json) |
+| [form and join beta testers and receive form events](agents/form-and-join-beta-testers-and-receive-form-events/README.md) | 8 | [JSON](agents/form-and-join-beta-testers-and-receive-form-events/implementations/n8n/form-and-join-beta-testers-and-receive-form-events.json) |
+| [receive form events and emailverifier hunter and clearbit](agents/receive-form-events-and-emailverifier-hunter-and-clearbit/README.md) | 13 | [JSON](agents/receive-form-events-and-emailverifier-hunter-and-clearbit/implementations/n8n/receive-form-events-and-emailverifier-hunter-and-clearbit.json) |
+| [Add subscriber to form, create tag and subscriber to the tag](agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/README.md) | 4 | [JSON](agents/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag/implementations/n8n/add-subscriber-to-form-create-tag-and-subscriber-to-the-tag.json) |
+| [Auto Categorise Outlook Emails with AI](agents/auto-categorise-outlook-emails-with-ai/README.md) | 26 | [JSON](agents/auto-categorise-outlook-emails-with-ai/implementations/n8n/auto-categorise-outlook-emails-with-ai.json) |
+| [HR &amp; IT Helpdesk Chatbot with Audio Transcription](agents/hr-it-helpdesk-chatbot-with-audio-transcription/README.md) | 21 | [JSON](agents/hr-it-helpdesk-chatbot-with-audio-transcription/implementations/n8n/hr-it-helpdesk-chatbot-with-audio-transcription.json) |
+| [receive schedule events and markdown and removeitemsseeninpreviousexecutions remove duplicates](agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/README.md) | 8 | [JSON](agents/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates/implementations/n8n/receive-schedule-events-and-markdown-and-removeitemsseeninpreviousexecutions-remove-duplicates.json) |
+| [AI Social Media Caption Creator](agents/ai-social-media-caption-creator/README.md) | 9 | [JSON](agents/ai-social-media-caption-creator/implementations/n8n/ai-social-media-caption-creator.json) |
+| [Telegram AI-bot](agents/telegram-ai-bot/README.md) | 12 | [JSON](agents/telegram-ai-bot/implementations/n8n/telegram-ai-bot.json) |
+| [Always Authenticate Your Server!](agents/always-authenticate-your-server-4f28d5b3/README.md) | 11 | [JSON](agents/always-authenticate-your-server-4f28d5b3/implementations/n8n/always-authenticate-your-server-4f28d5b3.json) |
+| [chrome extension backend with AI](agents/chrome-extension-backend-with-ai/README.md) | 3 | [JSON](agents/chrome-extension-backend-with-ai/implementations/n8n/chrome-extension-backend-with-ai.json) |
+| [receive shopify events and create new deal and search hubspot](agents/receive-shopify-events-and-create-new-deal-and-search-hubspot/README.md) | 8 | [JSON](agents/receive-shopify-events-and-create-new-deal-and-search-hubspot/implementations/n8n/receive-shopify-events-and-create-new-deal-and-search-hubspot.json) |
+| [Thie workflow showcases how you can build a simple website monitoring service using Scheduled Triggers and the HTTP Requests node.](agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/README.md) | 10 | [JSON](agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/n8n/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the.json) |
+| [post sales receipt and get quickbooks customer and get stripe customer](agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/README.md) | 10 | [JSON](agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/n8n/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer.json) |
+| [Retail Investor Anxiety Index](agents/investor-sentiment-dashboard/README.md) | 30 | [JSON](agents/investor-sentiment-dashboard/implementations/n8n/investor-sentiment-dashboard.json) |
+| [get node types and split out and aggregate](agents/get-node-types-and-split-out-and-aggregate/README.md) | 12 | [JSON](agents/get-node-types-and-split-out-and-aggregate/implementations/n8n/get-node-types-and-split-out-and-aggregate.json) |
+| [Receive updates when a customer is created in HelpScout](agents/receive-updates-when-a-customer-is-created-in-helpscout/README.md) | 1 | [JSON](agents/receive-updates-when-a-customer-is-created-in-helpscout/implementations/n8n/receive-updates-when-a-customer-is-created-in-helpscout.json) |
+| [Wordpress-to-csv](agents/wordpress-to-csv/README.md) | 4 | [JSON](agents/wordpress-to-csv/implementations/n8n/wordpress-to-csv.json) |
+| [📄✨ Easy Wordpress Content Creation from PDF Document + Human In The Loop with Gmail Approval](agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/README.md) | 19 | [JSON](agents/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval/implementations/n8n/easy-wordpress-content-creation-from-pdf-document-human-in-the-loop-with-gmail-approval.json) |
+| [write read write file and download xlsx file and file conversion to pdf](agents/write-read-write-file-and-download-xlsx-file-and-file-conversion-to-pdf/README.md) | 4 | [JSON](agents/write-read-write-file-and-download-xlsx-file-and-file-conversion-to-pdf/implementations/n8n/write-read-write-file-and-download-xlsx-file-and-file-conversion-to-pdf.json) |
+| [Grab recent drink data](agents/grab-recent-drink-data/README.md) | 16 | [JSON](agents/grab-recent-drink-data/implementations/n8n/grab-recent-drink-data.json) |
+| [Porxmox Custom AI Agent](agents/porxmox-custom-ai-agent/README.md) | 27 | [JSON](agents/porxmox-custom-ai-agent/implementations/n8n/porxmox-custom-ai-agent.json) |
+| [Confirm the key names and column references](agents/confirm-the-key-names-and-column-references/README.md) | 12 | [JSON](agents/confirm-the-key-names-and-column-references/implementations/n8n/confirm-the-key-names-and-column-references.json) |
+| [aws rekognition and http request and append google sheets](agents/aws-rekognition-and-http-request-and-append-google-sheets/README.md) | 6 | [JSON](agents/aws-rekognition-and-http-request-and-append-google-sheets/implementations/n8n/aws-rekognition-and-http-request-and-append-google-sheets.json) |
+| [Send daily weather updates via a push notification using Spontit](agents/send-daily-weather-updates-via-a-push-notification-using-spontit/README.md) | 3 | [JSON](agents/send-daily-weather-updates-via-a-push-notification-using-spontit/implementations/n8n/send-daily-weather-updates-via-a-push-notification-using-spontit.json) |
+| [Building RAG Chatbot for Movie Recommendations with Qdrant and Open AI](agents/building-rag-chatbot-for-movie-recommendations-with-qdrant-and-open-ai/README.md) | 25 | [JSON](agents/building-rag-chatbot-for-movie-recommendations-with-qdrant-and-open-ai/implementations/n8n/building-rag-chatbot-for-movie-recommendations-with-qdrant-and-open-ai.json) |
+| [Web Server Monitor.](agents/web-server-monitor/README.md) | 6 | [JSON](agents/web-server-monitor/implementations/n8n/web-server-monitor.json) |
+| [google sheets and limit and analyze image open ai](agents/google-sheets-and-limit-and-analyze-image-open-ai/README.md) | 11 | [JSON](agents/google-sheets-and-limit-and-analyze-image-open-ai/implementations/n8n/google-sheets-and-limit-and-analyze-image-open-ai.json) |
+| [Automate Event Creation in Google Calendar from Google Sheets](agents/automate-event-creation-in-google-calendar-from-google-sheets/README.md) | 3 | [JSON](agents/automate-event-creation-in-google-calendar-from-google-sheets/implementations/n8n/automate-event-creation-in-google-calendar-from-google-sheets.json) |
+| [extracthtmlcontent html and http request and item lists](agents/extracthtmlcontent-html-and-http-request-and-item-lists/README.md) | 9 | [JSON](agents/extracthtmlcontent-html-and-http-request-and-item-lists/implementations/n8n/extracthtmlcontent-html-and-http-request-and-item-lists.json) |
+| [i cal and email send](agents/i-cal-and-email-send/README.md) | 3 | [JSON](agents/i-cal-and-email-send/implementations/n8n/i-cal-and-email-send.json) |
+| [FORECASTING](agents/market-data-and-sentiment-forecast-review/README.md) | 14 | [JSON](agents/market-data-and-sentiment-forecast-review/implementations/n8n/market-data-and-sentiment-forecast-review.json) |
+| [If time available Respond](agents/if-time-available-respond/README.md) | 55 | [JSON](agents/if-time-available-respond/implementations/n8n/if-time-available-respond.json) |
+| [Search LinkedIn companies and add them to Airtable CRM](agents/search-linkedin-companies-and-add-them-to-airtable-crm/README.md) | 10 | [JSON](agents/search-linkedin-companies-and-add-them-to-airtable-crm/implementations/n8n/search-linkedin-companies-and-add-them-to-airtable-crm.json) |
+| [✨🩷Automated Social Media Content Publishing Factory + System Prompt Composition](agents/automated-social-media-content-publishing-factory-system-prompt-composition/README.md) | 57 | [JSON](agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/n8n/automated-social-media-content-publishing-factory-system-prompt-composition.json) |
+| [Keep discord clean](agents/keep-discord-clean/README.md) | 10 | [JSON](agents/keep-discord-clean/implementations/n8n/keep-discord-clean.json) |
+| [YouTube Video Transcriber](agents/youtube-video-transcriber/README.md) | 9 | [JSON](agents/youtube-video-transcriber/implementations/n8n/youtube-video-transcriber.json) |
+| [Compare 2 SQL datasets](agents/compare-2-sql-datasets/README.md) | 5 | [JSON](agents/compare-2-sql-datasets/implementations/n8n/compare-2-sql-datasets.json) |
+| [Create a post and update the post in WordPress](agents/create-a-post-and-update-the-post-in-wordpress/README.md) | 3 | [JSON](agents/create-a-post-and-update-the-post-in-wordpress/implementations/n8n/create-a-post-and-update-the-post-in-wordpress.json) |
+| [Domain scan with Icypeas (bulk search)](agents/domain-scan-with-icypeas-bulk-search/README.md) | 4 | [JSON](agents/domain-scan-with-icypeas-bulk-search/implementations/n8n/domain-scan-with-icypeas-bulk-search.json) |
+| [Google Calendar Event Reminder](agents/google-calendar-event-reminder/README.md) | 6 | [JSON](agents/google-calendar-event-reminder/implementations/n8n/google-calendar-event-reminder.json) |
+| [PostgreSQL export to CSV](agents/postgresql-export-to-csv/README.md) | 4 | [JSON](agents/postgresql-export-to-csv/implementations/n8n/postgresql-export-to-csv.json) |
+| [My workflow 4](agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/README.md) | 7 | [JSON](agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/n8n/rss-feed-times-of-india-and-list-gmail-and-list-todoist.json) |
+| [🔍🛠️ Tavily Search &amp; Extract - Template](agents/tavily-search-extract-template/README.md) | 10 | [JSON](agents/tavily-search-extract-template/implementations/n8n/tavily-search-extract-template.json) |
+| [My workflow](agents/email-send-and-read-binary-file-and-spreadsheet-file/README.md) | 6 | [JSON](agents/email-send-and-read-binary-file-and-spreadsheet-file/implementations/n8n/email-send-and-read-binary-file-and-spreadsheet-file.json) |
+| [dropbox and http request and list folder dropbox](agents/dropbox-and-http-request-and-list-folder-dropbox/README.md) | 5 | [JSON](agents/dropbox-and-http-request-and-list-folder-dropbox/implementations/n8n/dropbox-and-http-request-and-list-folder-dropbox.json) |
+| [receive typeform events and register demio](agents/receive-typeform-events-and-register-demio/README.md) | 2 | [JSON](agents/receive-typeform-events-and-register-demio/implementations/n8n/receive-typeform-events-and-register-demio.json) |
+| [HUBSPOT LIFECYCLESTAGE (LEAD STATUS)](agents/hubspot-lifecyclestage-lead-status/README.md) | 18 | [JSON](agents/hubspot-lifecyclestage-lead-status/implementations/n8n/hubspot-lifecyclestage-lead-status.json) |
+| [My workflow](agents/get-financial-overview1-and-get-income-statement1-and-google-search-patent/README.md) | 12 | [JSON](agents/get-financial-overview1-and-get-income-statement1-and-google-search-patent/implementations/n8n/get-financial-overview1-and-get-income-statement1-and-google-search-patent.json) |
+| [Remove Advanced Background from Google Drive Images](agents/remove-advanced-background-from-google-drive-images/README.md) | 12 | [JSON](agents/remove-advanced-background-from-google-drive-images/implementations/n8n/remove-advanced-background-from-google-drive-images.json) |
+| [Test the workflow with this email!](agents/test-the-workflow-with-this-email/README.md) | 7 | [JSON](agents/test-the-workflow-with-this-email/implementations/n8n/test-the-workflow-with-this-email.json) |
+| [Configure influencer profile](agents/configure-influencer-profile/README.md) | 6 | [JSON](agents/configure-influencer-profile/implementations/n8n/configure-influencer-profile.json) |
+| [AI Telegram Bot with Supabase memory](agents/ai-telegram-bot-with-supabase-memory/README.md) | 10 | [JSON](agents/ai-telegram-bot-with-supabase-memory/implementations/n8n/ai-telegram-bot-with-supabase-memory.json) |
+| [Clone this spreadsheet](agents/clone-this-spreadsheet/README.md) | 9 | [JSON](agents/clone-this-spreadsheet/implementations/n8n/clone-this-spreadsheet.json) |
+| [Workflow Importer](agents/workflow-importer/README.md) | 37 | [JSON](agents/workflow-importer/implementations/n8n/workflow-importer.json) |
+| [Way 1 - We call the subworklow for each file in the specified folder](agents/way-1-we-call-the-subworklow-for-each-file-in-the-specified-folder/README.md) | 14 | [JSON](agents/way-1-we-call-the-subworklow-for-each-file-in-the-specified-folder/implementations/n8n/way-1-we-call-the-subworklow-for-each-file-in-the-specified-folder.json) |
+| [telegram and list noco db and receive telegram events](agents/telegram-and-list-noco-db-and-receive-telegram-events/README.md) | 17 | [JSON](agents/telegram-and-list-noco-db-and-receive-telegram-events/implementations/n8n/telegram-and-list-noco-db-and-receive-telegram-events.json) |
+| [Integrating AI with Open-Meteo API for Enhanced Weather Forecasting](agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/README.md) | 6 | [JSON](agents/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting/implementations/n8n/integrating-ai-with-open-meteo-api-for-enhanced-weather-forecasting.json) |
+| [Perplexity Researcher](agents/perplexity-researcher/README.md) | 4 | [JSON](agents/perplexity-researcher/implementations/n8n/perplexity-researcher.json) |
+| [receive autopilot events and append airtable](agents/receive-autopilot-events-and-append-airtable/README.md) | 3 | [JSON](agents/receive-autopilot-events-and-append-airtable/implementations/n8n/receive-autopilot-events-and-append-airtable.json) |
+| [webhook and append airtable and open weather map](agents/webhook-and-append-airtable-and-open-weather-map/README.md) | 5 | [JSON](agents/webhook-and-append-airtable-and-open-weather-map/implementations/n8n/webhook-and-append-airtable-and-open-weather-map.json) |
+| [MISCELLANEOUS AI TOOLS](agents/miscellaneous-ai-tools/README.md) | 97 | [JSON](agents/miscellaneous-ai-tools/implementations/n8n/miscellaneous-ai-tools.json) |
+| [Google Page Entity Extraction Template](agents/google-page-entity-extraction-template/README.md) | 5 | [JSON](agents/google-page-entity-extraction-template/implementations/n8n/google-page-entity-extraction-template.json) |
+| [Create a new card in Trello](agents/create-a-new-card-in-trello/README.md) | 2 | [JSON](agents/create-a-new-card-in-trello/implementations/n8n/create-a-new-card-in-trello.json) |
+| [AI CV Screening Workflow](agents/ai-cv-screening-workflow/README.md) | 7 | [JSON](agents/ai-cv-screening-workflow/implementations/n8n/ai-cv-screening-workflow.json) |
+| [High-Level Service Page SEO Blueprint Report](agents/high-level-service-page-seo-blueprint-report/README.md) | 32 | [JSON](agents/high-level-service-page-seo-blueprint-report/implementations/n8n/high-level-service-page-seo-blueprint-report.json) |
+| [Tools / Backup Gitlab](agents/tools-backup-gitlab/README.md) | 7 | [JSON](agents/tools-backup-gitlab/implementations/n8n/tools-backup-gitlab.json) |
+| [Backup workflows to git repository](agents/backup-workflows-to-git-repository/README.md) | 10 | [JSON](agents/backup-workflows-to-git-repository/implementations/n8n/backup-workflows-to-git-repository.json) |
+| [POC - Chatbot Order by Sheet Data](agents/poc-chatbot-order-by-sheet-data/README.md) | 8 | [JSON](agents/poc-chatbot-order-by-sheet-data/implementations/n8n/poc-chatbot-order-by-sheet-data.json) |
+| [RAG AI Agent with Milvus and Cohere](agents/rag-ai-agent-with-milvus-and-cohere/README.md) | 13 | [JSON](agents/rag-ai-agent-with-milvus-and-cohere/implementations/n8n/rag-ai-agent-with-milvus-and-cohere.json) |
+| [Send Emails from Obsidian](agents/send-emails-from-obsidian/README.md) | 13 | [JSON](agents/send-emails-from-obsidian/implementations/n8n/send-emails-from-obsidian.json) |
+| [html extract and cron and function item](agents/html-extract-and-cron-and-function-item/README.md) | 25 | [JSON](agents/html-extract-and-cron-and-function-item/implementations/n8n/html-extract-and-cron-and-function-item.json) |
+| [OpenSea AI-Powered Insights via Telegram](agents/opensea-ai-powered-insights-via-telegram/README.md) | 10 | [JSON](agents/opensea-ai-powered-insights-via-telegram/implementations/n8n/opensea-ai-powered-insights-via-telegram.json) |
+| [RAG &amp; GenAI App With WordPress Content](agents/rag-genai-app-with-wordpress-content/README.md) | 45 | [JSON](agents/rag-genai-app-with-wordpress-content/implementations/n8n/rag-genai-app-with-wordpress-content.json) |
+| [receive lemlist events and mattermost](agents/receive-lemlist-events-and-mattermost/README.md) | 2 | [JSON](agents/receive-lemlist-events-and-mattermost/implementations/n8n/receive-lemlist-events-and-mattermost.json) |
+| [AI-Powered Short-Form Video Generator with OpenAI, Flux, Kling, and ElevenLabs and upload to all social networks](agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/README.md) | 43 | [JSON](agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/n8n/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks.json) |
+| [Replace Mapbox public key - &lt;your_public_key&gt; in code](agents/replace-mapbox-public-key-your-public-key-in-code/README.md) | 30 | [JSON](agents/replace-mapbox-public-key-your-public-key-in-code/implementations/n8n/replace-mapbox-public-key-your-public-key-in-code.json) |
+| [hacker news and split out and qdrant vector store](agents/hacker-news-and-split-out-and-qdrant-vector-store/README.md) | 23 | [JSON](agents/hacker-news-and-split-out-and-qdrant-vector-store/implementations/n8n/hacker-news-and-split-out-and-qdrant-vector-store.json) |
+| [Look up a person using their email in Clearbit](agents/look-up-a-person-using-their-email-in-clearbit/README.md) | 2 | [JSON](agents/look-up-a-person-using-their-email-in-clearbit/implementations/n8n/look-up-a-person-using-their-email-in-clearbit.json) |
+| [Capture Website Screenshots with Bright Data Web Unlocker and Save to Disk](agents/capture-website-screenshots-with-bright-data-web-unlocker-and-save-to-disk/README.md) | 4 | [JSON](agents/capture-website-screenshots-with-bright-data-web-unlocker-and-save-to-disk/implementations/n8n/capture-website-screenshots-with-bright-data-web-unlocker-and-save-to-disk.json) |
+| [Send log entries to BetterStack](agents/send-log-entries-to-betterstack/README.md) | 4 | [JSON](agents/send-log-entries-to-betterstack/implementations/n8n/send-log-entries-to-betterstack.json) |
+| [Schedule Mon - Friday @ 09:00am](agents/schedule-mon-friday-09-00am/README.md) | 11 | [JSON](agents/schedule-mon-friday-09-00am/implementations/n8n/schedule-mon-friday-09-00am.json) |
+| [Convert the query string into JSON, apply the limit for a page length](agents/convert-the-query-string-into-json-apply-the-limit-for-a-page-length/README.md) | 16 | [JSON](agents/convert-the-query-string-into-json-apply-the-limit-for-a-page-length/implementations/n8n/convert-the-query-string-into-json-apply-the-limit-for-a-page-length.json) |
+| [execute command and to flow data](agents/execute-command-and-to-flow-data/README.md) | 3 | [JSON](agents/execute-command-and-to-flow-data/implementations/n8n/execute-command-and-to-flow-data.json) |
+| [Always Authenticate Your Server!](agents/always-authenticate-your-server/README.md) | 10 | [JSON](agents/always-authenticate-your-server/implementations/n8n/always-authenticate-your-server.json) |
+| [receive jot form events](agents/receive-jot-form-events/README.md) | 1 | [JSON](agents/receive-jot-form-events/implementations/n8n/receive-jot-form-events.json) |
+| [subscribe subscriber klicktipp and tag contact directly in klicktipp and aggregate tags to add to contact](agents/subscribe-subscriber-klicktipp-and-tag-contact-directly-in-klicktipp-and-aggregate-tags-to-add-to-contact/README.md) | 13 | [JSON](agents/subscribe-subscriber-klicktipp-and-tag-contact-directly-in-klicktipp-and-aggregate-tags-to-add-to-contact/implementations/n8n/subscribe-subscriber-klicktipp-and-tag-contact-directly-in-klicktipp-and-aggregate-tags-to-add-to-contact.json) |
+| [Fetch Squarespace Blog &amp; Event Collections to Google Sheets  ](agents/fetch-squarespace-blog-event-collections-to-google-sheets/README.md) | 5 | [JSON](agents/fetch-squarespace-blog-event-collections-to-google-sheets/implementations/n8n/fetch-squarespace-blog-event-collections-to-google-sheets.json) |
+| [send daily news and html and aggregate](agents/send-daily-news-and-html-and-aggregate/README.md) | 19 | [JSON](agents/send-daily-news-and-html-and-aggregate/implementations/n8n/send-daily-news-and-html-and-aggregate.json) |
+| [Calling a Sub-workflow](agents/calling-a-sub-workflow/README.md) | 36 | [JSON](agents/calling-a-sub-workflow/implementations/n8n/calling-a-sub-workflow.json) |
+| [n8n get all executions and convert to csv](agents/n8n-get-all-executions-and-convert-to-csv/README.md) | 4 | [JSON](agents/n8n-get-all-executions-and-convert-to-csv/implementations/n8n/n8n-get-all-executions-and-convert-to-csv.json) |
+| [OIDC client workflow](agents/oidc-client-workflow/README.md) | 12 | [JSON](agents/oidc-client-workflow/implementations/n8n/oidc-client-workflow.json) |
+| [Import multiple CSV to GoogleSheet](agents/import-multiple-csv-to-googlesheet/README.md) | 9 | [JSON](agents/import-multiple-csv-to-googlesheet/implementations/n8n/import-multiple-csv-to-googlesheet.json) |
+| [get elastic alert and send email notification and receive schedule events](agents/get-elastic-alert-and-send-email-notification-and-receive-schedule-events/README.md) | 7 | [JSON](agents/get-elastic-alert-and-send-email-notification-and-receive-schedule-events/implementations/n8n/get-elastic-alert-and-send-email-notification-and-receive-schedule-events.json) |
+| [Shopify to Google Sheets Product Sync Automation](agents/shopify-to-google-sheets-product-sync-automation/README.md) | 16 | [JSON](agents/shopify-to-google-sheets-product-sync-automation/implementations/n8n/shopify-to-google-sheets-product-sync-automation.json) |
+| [Telegram echo-bot](agents/telegram-echo-bot/README.md) | 2 | [JSON](agents/telegram-echo-bot/implementations/n8n/telegram-echo-bot.json) |
+| [New order is sent to the Webhook via POST with params {orderID, orderPrice}](agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/README.md) | 8 | [JSON](agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/n8n/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice.json) |
+| [Googlesheets Workflow](agents/gs-read-data2-1-and-mautic-and-gs-read-data2-2/README.md) | 5 | [JSON](agents/gs-read-data2-1-and-mautic-and-gs-read-data2-2/implementations/n8n/gs-read-data2-1-and-mautic-and-gs-read-data2-2.json) |
+| [Monitoring and alerting](agents/monitoring-and-alerting/README.md) | 5 | [JSON](agents/monitoring-and-alerting/implementations/n8n/monitoring-and-alerting.json) |
+| [Email AI Auto-responder. Summerize and send email](agents/email-ai-auto-responder-summerize-and-send-email/README.md) | 23 | [JSON](agents/email-ai-auto-responder-summerize-and-send-email/implementations/n8n/email-ai-auto-responder-summerize-and-send-email.json) |
+| [🤖Content Creator Agent](agents/content-creator-agent/README.md) | 6 | [JSON](agents/content-creator-agent/implementations/n8n/content-creator-agent.json) |
+| [A/B Split Testing](agents/a-b-split-testing/README.md) | 9 | [JSON](agents/a-b-split-testing/implementations/n8n/a-b-split-testing.json) |
+| [read from google sheets and respond to webhook and webhook](agents/read-from-google-sheets-and-respond-to-webhook-and-webhook/README.md) | 4 | [JSON](agents/read-from-google-sheets-and-respond-to-webhook-and-webhook/implementations/n8n/read-from-google-sheets-and-respond-to-webhook-and-webhook.json) |
+| [lemlist add lead to campaign and hubspot follow up task and lonescale new job intent](agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/README.md) | 18 | [JSON](agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/n8n/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent.json) |
+| [generate an image with bannerbear](agents/generate-an-image-with-bannerbear/README.md) | 2 | [JSON](agents/generate-an-image-with-bannerbear/implementations/n8n/generate-an-image-with-bannerbear.json) |
+| [Create a user profile in Vero](agents/create-a-user-profile-in-vero/README.md) | 2 | [JSON](agents/create-a-user-profile-in-vero/implementations/n8n/create-a-user-profile-in-vero.json) |
+| [Unsubscribe Mautic contacts from automated unsubscribe emails](agents/unsubscribe-mautic-contacts-from-automated-unsubscribe-emails/README.md) | 11 | [JSON](agents/unsubscribe-mautic-contacts-from-automated-unsubscribe-emails/implementations/n8n/unsubscribe-mautic-contacts-from-automated-unsubscribe-emails.json) |
+| [add git and commit git and git](agents/add-git-and-commit-git-and-git/README.md) | 5 | [JSON](agents/add-git-and-commit-git-and-git/implementations/n8n/add-git-and-commit-git-and-git.json) |
+| [Prerequisite: Setup Qdrant Collection](agents/prerequisite-setup-qdrant-collection/README.md) | 37 | [JSON](agents/prerequisite-setup-qdrant-collection/implementations/n8n/prerequisite-setup-qdrant-collection.json) |
+| [Gratitude Jar Reminder](agents/gratitude-jar-reminder/README.md) | 5 | [JSON](agents/gratitude-jar-reminder/implementations/n8n/gratitude-jar-reminder.json) |
+| [post hog and webhook](agents/post-hog-and-webhook/README.md) | 2 | [JSON](agents/post-hog-and-webhook/implementations/n8n/post-hog-and-webhook.json) |
+| [receive netlify events and slack](agents/receive-netlify-events-and-slack/README.md) | 2 | [JSON](agents/receive-netlify-events-and-slack/implementations/n8n/receive-netlify-events-and-slack.json) |
+| [cron and list shopify and append google sheets](agents/cron-and-list-shopify-and-append-google-sheets/README.md) | 9 | [JSON](agents/cron-and-list-shopify-and-append-google-sheets/implementations/n8n/cron-and-list-shopify-and-append-google-sheets.json) |
+| [AI Phone Agent with RetellAI](agents/ai-phone-agent-with-retellai/README.md) | 29 | [JSON](agents/ai-phone-agent-with-retellai/implementations/n8n/ai-phone-agent-with-retellai.json) |
+| [search airtable and get url content and extracthtmlcontent html](agents/search-airtable-and-get-url-content-and-extracthtmlcontent-html/README.md) | 5 | [JSON](agents/search-airtable-and-get-url-content-and-extracthtmlcontent-html/implementations/n8n/search-airtable-and-get-url-content-and-extracthtmlcontent-html.json) |
+| [Send an SMS using MSG91](agents/send-an-sms-using-msg91/README.md) | 2 | [JSON](agents/send-an-sms-using-msg91/implementations/n8n/send-an-sms-using-msg91.json) |
+| [Get DNS entries](agents/get-dns-entries/README.md) | 3 | [JSON](agents/get-dns-entries/implementations/n8n/get-dns-entries.json) |
+| [getrecentlycreatedupdated company hubspot and notify sales rep and receive schedule events](agents/getrecentlycreatedupdated-company-hubspot-and-notify-sales-rep-and-receive-schedule-events/README.md) | 4 | [JSON](agents/getrecentlycreatedupdated-company-hubspot-and-notify-sales-rep-and-receive-schedule-events/implementations/n8n/getrecentlycreatedupdated-company-hubspot-and-notify-sales-rep-and-receive-schedule-events.json) |
+| [YouTube Video Analyzer with AI](agents/youtube-video-analyzer-with-ai/README.md) | 13 | [JSON](agents/youtube-video-analyzer-with-ai/implementations/n8n/youtube-video-analyzer-with-ai.json) |
+| [rename item fields](agents/rename-item-fields/README.md) | 3 | [JSON](agents/rename-item-fields/implementations/n8n/rename-item-fields.json) |
+| [Google Search Engine Results Page Extraction with Bright Data](agents/google-search-engine-results-page-extraction-with-bright-data/README.md) | 10 | [JSON](agents/google-search-engine-results-page-extraction-with-bright-data/implementations/n8n/google-search-engine-results-page-extraction-with-bright-data.json) |
+| [read binary file and read pdf](agents/read-binary-file-and-read-pdf/README.md) | 3 | [JSON](agents/read-binary-file-and-read-pdf/implementations/n8n/read-binary-file-and-read-pdf.json) |
+| [Investor agent - part 2](agents/investor-agent-part-2/README.md) | 9 | [JSON](agents/investor-agent-part-2/implementations/n8n/investor-agent-part-2.json) |
+| [Translate questions about e-mails into SQL queries and run them](agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/README.md) | 23 | [JSON](agents/translate-questions-about-e-mails-into-sql-queries-and-run-them/implementations/n8n/translate-questions-about-e-mails-into-sql-queries-and-run-them.json) |
+| [My workflow 5](agents/survey-evidence-dashboard/README.md) | 21 | [JSON](agents/survey-evidence-dashboard/implementations/n8n/survey-evidence-dashboard.json) |
+| [Gender Inclusive Language](agents/gender-inclusive-language/README.md) | 4 | [JSON](agents/gender-inclusive-language/implementations/n8n/gender-inclusive-language.json) |
+| [👆 Set instance url instead of `{{ $vars.instance_url }}` (or set the env variable if you have that feature)](agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/README.md) | 8 | [JSON](agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/n8n/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature.json) |
+| [qdrant](agents/ingest-pdf-documents-into-qdrant-with-ollama/README.md) | 9 | [JSON](agents/ingest-pdf-documents-into-qdrant-with-ollama/implementations/n8n/ingest-pdf-documents-into-qdrant-with-ollama.json) |
+| [Extract &amp; Summarize Bing Copilot Search Results with Gemini AI and Bright Data](agents/extract-summarize-bing-copilot-search-results-with-gemini-ai-and-bright-data/README.md) | 17 | [JSON](agents/extract-summarize-bing-copilot-search-results-with-gemini-ai-and-bright-data/implementations/n8n/extract-summarize-bing-copilot-search-results-with-gemini-ai-and-bright-data.json) |
+| [Add more fields to Mautic](agents/add-more-fields-to-mautic/README.md) | 2 | [JSON](agents/add-more-fields-to-mautic/implementations/n8n/add-more-fields-to-mautic.json) |
+| [history channel slack and split out and slack](agents/history-channel-slack-and-split-out-and-slack/README.md) | 40 | [JSON](agents/history-channel-slack-and-split-out-and-slack/implementations/n8n/history-channel-slack-and-split-out-and-slack.json) |
+| [receive schedule events and list database page notion and create database page](agents/receive-schedule-events-and-list-database-page-notion-and-create-database-page/README.md) | 9 | [JSON](agents/receive-schedule-events-and-list-database-page-notion-and-create-database-page/implementations/n8n/receive-schedule-events-and-list-database-page-notion-and-create-database-page.json) |
+| [Text to Speech (OpenAI)](agents/text-to-speech-openai/README.md) | 3 | [JSON](agents/text-to-speech-openai/implementations/n8n/text-to-speech-openai.json) |
+| [Replace Storage name, database ID and credentials.](agents/replace-storage-name-database-id-and-credentials/README.md) | 22 | [JSON](agents/replace-storage-name-database-id-and-credentials/implementations/n8n/replace-storage-name-database-id-and-credentials.json) |
+| [Query List of Sign-in IPs](agents/query-list-of-sign-in-ips/README.md) | 11 | [JSON](agents/query-list-of-sign-in-ips/implementations/n8n/query-list-of-sign-in-ips.json) |
+| [AI Concierge](agents/ai-concierge/README.md) | 7 | [JSON](agents/ai-concierge/implementations/n8n/ai-concierge.json) |
+| [comentarios automaticos](agents/comentarios-automaticos/README.md) | 9 | [JSON](agents/comentarios-automaticos/implementations/n8n/comentarios-automaticos.json) |
+| [ai data extraction with dynamic prompts and baserow](agents/ai-data-extraction-with-dynamic-prompts-and-baserow/README.md) | 36 | [JSON](agents/ai-data-extraction-with-dynamic-prompts-and-baserow/implementations/n8n/ai-data-extraction-with-dynamic-prompts-and-baserow.json) |
+| [Workflow stats](agents/workflow-stats/README.md) | 28 | [JSON](agents/workflow-stats/implementations/n8n/workflow-stats.json) |
+| [Dashboard](agents/cron-and-retrieve-docker-data-and-http-request/README.md) | 24 | [JSON](agents/cron-and-retrieve-docker-data-and-http-request/implementations/n8n/cron-and-retrieve-docker-data-and-http-request.json) |
+| [http request and html extract](agents/http-request-and-html-extract/README.md) | 4 | [JSON](agents/http-request-and-html-extract/implementations/n8n/http-request-and-html-extract.json) |
+| [Format US Phone Number](agents/format-us-phone-number/README.md) | 7 | [JSON](agents/format-us-phone-number/implementations/n8n/format-us-phone-number.json) |
+| [Sub-Agent for scheduling calendar events](agents/sub-agent-for-scheduling-calendar-events/README.md) | 24 | [JSON](agents/sub-agent-for-scheduling-calendar-events/implementations/n8n/sub-agent-for-scheduling-calendar-events.json) |
+| [Write a file to the host machine](agents/write-a-file-to-the-host-machine/README.md) | 3 | [JSON](agents/write-a-file-to-the-host-machine/implementations/n8n/write-a-file-to-the-host-machine.json) |
+| [Receive_and_analyze_emails_with_rules_in_Sublime_Security](agents/receive-and-analyze-emails-with-rules-in-sublime-security/README.md) | 9 | [JSON](agents/receive-and-analyze-emails-with-rules-in-sublime-security/implementations/n8n/receive-and-analyze-emails-with-rules-in-sublime-security.json) |
+| [Import CSV from URL to Excel](agents/import-csv-from-url-to-excel/README.md) | 4 | [JSON](agents/import-csv-from-url-to-excel/implementations/n8n/import-csv-from-url-to-excel.json) |
+| [merge transformed datasets by key](agents/merge-transformed-datasets-by-key/README.md) | 5 | [JSON](agents/merge-transformed-datasets-by-key/implementations/n8n/merge-transformed-datasets-by-key.json) |
+| [Automate Pinterest Analysis &amp; AI-Powered Content Suggestions With Pinterest API](agents/automate-pinterest-analysis-ai-powered-content-suggestions-with-pinterest-api/README.md) | 10 | [JSON](agents/automate-pinterest-analysis-ai-powered-content-suggestions-with-pinterest-api/implementations/n8n/automate-pinterest-analysis-ai-powered-content-suggestions-with-pinterest-api.json) |
+| [Prod: Notion to Vector Store - Dimension 768](agents/prod-notion-to-vector-store-dimension-768/README.md) | 8 | [JSON](agents/prod-notion-to-vector-store-dimension-768/implementations/n8n/prod-notion-to-vector-store-dimension-768.json) |
+| [AI Customer-Support Assistant · WhatsApp Ready · Works for Any Business](agents/ai-customer-support-assistant-whatsapp-ready-works-for-any-business/README.md) | 11 | [JSON](agents/ai-customer-support-assistant-whatsapp-ready-works-for-any-business/implementations/n8n/ai-customer-support-assistant-whatsapp-ready-works-for-any-business.json) |
+| [receive google drive events and email send](agents/receive-google-drive-events-and-email-send/README.md) | 2 | [JSON](agents/receive-google-drive-events-and-email-send/implementations/n8n/receive-google-drive-events-and-email-send.json) |
+| [rss feed read and cron and telegram](agents/rss-feed-read-and-cron-and-telegram/README.md) | 11 | [JSON](agents/rss-feed-read-and-cron-and-telegram/implementations/n8n/rss-feed-read-and-cron-and-telegram.json) |
+| [webhook and respond to webhook and html to pdf](agents/webhook-and-respond-to-webhook-and-html-to-pdf/README.md) | 3 | [JSON](agents/webhook-and-respond-to-webhook-and-html-to-pdf/implementations/n8n/webhook-and-respond-to-webhook-and-html-to-pdf.json) |
+| [open ai and tool calculator and receive chat events](agents/open-ai-and-tool-calculator-and-receive-chat-events/README.md) | 4 | [JSON](agents/open-ai-and-tool-calculator-and-receive-chat-events/implementations/n8n/open-ai-and-tool-calculator-and-receive-chat-events.json) |
+| [Find Top Keywords](agents/find-top-keywords/README.md) | 28 | [JSON](agents/find-top-keywords/implementations/n8n/find-top-keywords.json) |
+| [receive facebook lead ads events and subscribe subscriber klicktipp](agents/receive-facebook-lead-ads-events-and-subscribe-subscriber-klicktipp/README.md) | 2 | [JSON](agents/receive-facebook-lead-ads-events-and-subscribe-subscriber-klicktipp/implementations/n8n/receive-facebook-lead-ads-events-and-subscribe-subscriber-klicktipp.json) |
+| [Workflow management](agents/workflow-management/README.md) | 19 | [JSON](agents/workflow-management/implementations/n8n/workflow-management.json) |
+| [Automated Image Analysis and Response via Telegram](agents/automated-image-analysis-and-response-via-telegram/README.md) | 6 | [JSON](agents/automated-image-analysis-and-response-via-telegram/implementations/n8n/automated-image-analysis-and-response-via-telegram.json) |
+| [pipedrive and receive github events and create note with github url](agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/README.md) | 8 | [JSON](agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/n8n/pipedrive-and-receive-github-events-and-create-note-with-github-url.json) |
+| [Auto Knowledge Base Article Generator](agents/auto-knowledge-base-article-generator/README.md) | 19 | [JSON](agents/auto-knowledge-base-article-generator/implementations/n8n/auto-knowledge-base-article-generator.json) |
+| [Prepare data in Google Sheets](agents/prepare-data-in-google-sheets/README.md) | 29 | [JSON](agents/prepare-data-in-google-sheets/implementations/n8n/prepare-data-in-google-sheets.json) |
+| [html to pdf and convert pdf into png1 and convert pdf into png](agents/html-to-pdf-and-convert-pdf-into-png1-and-convert-pdf-into-png/README.md) | 5 | [JSON](agents/html-to-pdf-and-convert-pdf-into-png1-and-convert-pdf-into-png/implementations/n8n/html-to-pdf-and-convert-pdf-into-png1-and-convert-pdf-into-png.json) |
+| [Read sitemap and filter URLs](agents/read-sitemap-and-filter-urls/README.md) | 6 | [JSON](agents/read-sitemap-and-filter-urls/implementations/n8n/read-sitemap-and-filter-urls.json) |
+| [receive form events and score lead with madkudu and emailverifier hunter 59e5a108](agents/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter-59e5a108/README.md) | 11 | [JSON](agents/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter-59e5a108/implementations/n8n/receive-form-events-and-score-lead-with-madkudu-and-emailverifier-hunter-59e5a108.json) |
+| [google sheets and tofile spreadsheet file and dropbox](agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/README.md) | 4 | [JSON](agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/n8n/google-sheets-and-tofile-spreadsheet-file-and-dropbox.json) |
+| [Outlook](agents/outlook/README.md) | 4 | [JSON](agents/outlook/implementations/n8n/outlook.json) |
+| [receive form events and clearbit and gmail](agents/receive-form-events-and-clearbit-and-gmail/README.md) | 8 | [JSON](agents/receive-form-events-and-clearbit-and-gmail/implementations/n8n/receive-form-events-and-clearbit-and-gmail.json) |
+| [⚡AI-Powered YouTube Playlist &amp; Video Summarization and Analysis v2](agents/ai-powered-youtube-playlist-video-summarization-and-analysis-v2/README.md) | 60 | [JSON](agents/ai-powered-youtube-playlist-video-summarization-and-analysis-v2/implementations/n8n/ai-powered-youtube-playlist-video-summarization-and-analysis-v2.json) |
+| [Create, update, and get an incident on PagerDuty](agents/create-update-and-get-an-incident-on-pagerduty/README.md) | 4 | [JSON](agents/create-update-and-get-an-incident-on-pagerduty/implementations/n8n/create-update-and-get-an-incident-on-pagerduty.json) |
+| [Walkthrough and Overview](agents/walkthrough-and-overview/README.md) | 10 | [JSON](agents/walkthrough-and-overview/implementations/n8n/walkthrough-and-overview.json) |
+| [Find contact information for linkedin profile URLs stored in a Google Sheet](agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/README.md) | 8 | [JSON](agents/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet/implementations/n8n/find-contact-information-for-linkedin-profile-urls-stored-in-a-google-sheet.json) |
+| [&#91;OPS&#93; Restore workflows from GitHub to n8n](agents/ops-restore-workflows-from-github-to-n8n/README.md) | 12 | [JSON](agents/ops-restore-workflows-from-github-to-n8n/implementations/n8n/ops-restore-workflows-from-github-to-n8n.json) |
+| [webhook and respond to webhook](agents/webhook-and-respond-to-webhook/README.md) | 5 | [JSON](agents/webhook-and-respond-to-webhook/implementations/n8n/webhook-and-respond-to-webhook.json) |
+| [Backup workflows to git repository on Gitea](agents/backup-workflows-to-git-repository-on-gitea/README.md) | 13 | [JSON](agents/backup-workflows-to-git-repository-on-gitea/implementations/n8n/backup-workflows-to-git-repository-on-gitea.json) |
+| [receive pipedrive events and set item to only current product data and create product in stripe](agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/README.md) | 7 | [JSON](agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/n8n/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe.json) |
+| [receive notion events and update click up and receive click up events](agents/receive-notion-events-and-update-click-up-and-receive-click-up-events/README.md) | 5 | [JSON](agents/receive-notion-events-and-update-click-up-and-receive-click-up-events/implementations/n8n/receive-notion-events-and-update-click-up-and-receive-click-up-events.json) |
+| [WhatsApp starter workflow](agents/whatsapp-starter-workflow/README.md) | 5 | [JSON](agents/whatsapp-starter-workflow/implementations/n8n/whatsapp-starter-workflow.json) |
+| [Trigger a build using the TravisCI node](agents/trigger-a-build-using-the-travisci-node/README.md) | 2 | [JSON](agents/trigger-a-build-using-the-travisci-node/implementations/n8n/trigger-a-build-using-the-travisci-node.json) |
+| [update database page notion and notion and get asana](agents/update-database-page-notion-and-notion-and-get-asana/README.md) | 10 | [JSON](agents/update-database-page-notion-and-notion-and-get-asana/implementations/n8n/update-database-page-notion-and-notion-and-get-asana.json) |
+| [Social Media AI Agent - Telegram](agents/social-media-ai-agent-telegram/README.md) | 19 | [JSON](agents/social-media-ai-agent-telegram/implementations/n8n/social-media-ai-agent-telegram.json) |
+| [Account qualification](agents/account-qualification/README.md) | 7 | [JSON](agents/account-qualification/implementations/n8n/account-qualification.json) |
+| [Send Typeforms leads via Whatsapp (Twilio)](agents/send-typeforms-leads-via-whatsapp-twilio/README.md) | 3 | [JSON](agents/send-typeforms-leads-via-whatsapp-twilio/implementations/n8n/send-typeforms-leads-via-whatsapp-twilio.json) |
+| [How to automatically import CSV files into postgres](agents/how-to-automatically-import-csv-files-into-postgres/README.md) | 4 | [JSON](agents/how-to-automatically-import-csv-files-into-postgres/implementations/n8n/how-to-automatically-import-csv-files-into-postgres.json) |
+| [n8n Error Report to Line](agents/n8n-error-report-to-line/README.md) | 2 | [JSON](agents/n8n-error-report-to-line/implementations/n8n/n8n-error-report-to-line.json) |
+| [Compress Pages from PDF](agents/compress-pages-from-pdf/README.md) | 5 | [JSON](agents/compress-pages-from-pdf/implementations/n8n/compress-pages-from-pdf.json) |
+| [Daily Language Learning](agents/daily-language-learning/README.md) | 8 | [JSON](agents/daily-language-learning/implementations/n8n/daily-language-learning.json) |
+| [crm webhook trigger and http request and update highlevel deliverable](agents/crm-webhook-trigger-and-http-request-and-update-highlevel-deliverable/README.md) | 6 | [JSON](agents/crm-webhook-trigger-and-http-request-and-update-highlevel-deliverable/implementations/n8n/crm-webhook-trigger-and-http-request-and-update-highlevel-deliverable.json) |
+
+## Original agents
+
+[Lectern job search](agents/lectern-job-search/README.md) — five native n8n workflows, preserved fixtures and reported parity evidence.

@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "slug": "email-body-screenshot-creation",
+  "title": "Email Body Screenshot Creation",
+  "purpose": "Adapt the published “Email Body Screenshot Creation” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Gmail Trigger",
+    "Microsoft Outlook Trigger"
+  ],
+  "terminal_nodes": [
+    "Upload Email Body to Jira"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "httpBasicAuth",
+    "jiraSoftwareCloudApi",
+    "microsoftOutlookOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Gmail Trigger",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft Outlook Trigger",
+        "type": "n8n-nodes-base.microsoftOutlookTrigger",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "Screenshot HTML",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Screenshot",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Outlook Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Set Gmail Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Headers of Email",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Format Headers",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Analyze Email with ChatGPT",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Create Potentially Malicious Ticket",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Potentially Benign Ticket",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Rename Screenshot",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set Jira ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Upload Screenshot of Email to Jira",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload Email Body to Jira",
+        "type": "n8n-nodes-base.jira",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Email Body to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Email Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Rename Email Body Screenshot",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check if Malicious",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set Jira ID",
+        "to": "Rename Screenshot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail Trigger",
+        "to": "Set Gmail Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Headers",
+        "to": "Set Outlook Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Screenshot HTML",
+        "to": "Retrieve Screenshot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename Screenshot",
+        "to": "Upload Screenshot of Email to Jira",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Malicious",
+        "to": "Create Potentially Malicious Ticket",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Malicious",
+        "to": "Create Potentially Benign Ticket",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Screenshot",
+        "to": "Analyze Email with ChatGPT",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Email Variables",
+        "to": "Convert Email Body to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Gmail Variables",
+        "to": "Set Email Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Outlook Variables",
+        "to": "Set Email Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Microsoft Outlook Trigger",
+        "to": "Retrieve Headers of Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Headers of Email",
+        "to": "Format Headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyze Email with ChatGPT",
+        "to": "Check if Malicious",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Email Body to File",
+        "to": "Screenshot HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename Email Body Screenshot",
+        "to": "Upload Email Body to Jira",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Potentially Benign Ticket",
+        "to": "Set Jira ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Screenshot of Email to Jira",
+        "to": "Rename Email Body Screenshot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Potentially Malicious Ticket",
+        "to": "Set Jira ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/email-body-screenshot-creation/implementations/n8n",
+      "files": [
+        "agents/email-body-screenshot-creation/implementations/n8n/email-body-screenshot-creation.json"
+      ],
+      "sha256": "08c31c182b5edcbaba4002374cd254ef168e6d0b53741305c60dfb50854648e4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/email-body-screenshot-creation/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/email-body-screenshot-creation/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/email-body-screenshot-creation/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/email-body-screenshot-creation/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/email-body-screenshot-creation/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/email-body-screenshot-creation/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/email-body-screenshot-creation/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/email-body-screenshot-creation/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/email-body-screenshot-creation/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/email-body-screenshot-creation/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/email-body-screenshot-creation/implementations/n8n/provenance.json"
+}

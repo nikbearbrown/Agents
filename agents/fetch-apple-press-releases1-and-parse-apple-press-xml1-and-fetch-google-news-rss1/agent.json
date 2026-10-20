@@ -1,0 +1,764 @@
+{
+  "schema_version": 1,
+  "slug": "fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1",
+  "title": "fetch apple press releases1 and parse apple press xml1 and fetch google news rss1",
+  "purpose": "Adapt the published “fetch apple press releases1 and parse apple press xml1 and fetch google news rss1” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 47 executable nodes and 52 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook Trigger"
+  ],
+  "terminal_nodes": [
+    "Save to Compliance Sheet",
+    "Alert Trigger",
+    "Save Drift Metrics1",
+    "Save to Google Sheets",
+    "Respond with JSON",
+    "Respond No New Items",
+    "Save Knowledge Graph to Sheets",
+    "Save Competitor Analysis to Sheets"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Fetch Apple Press Releases1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Apple Press XML1",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Apple Press1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Google News RSS1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Google News XML1",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Google News1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge All News2",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Read Processed Links1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Combine Data1",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Deduplicate with Sheets1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Multi-Brand Config1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split In Batches1",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Subreddits",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Reddit Posts",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract & Format Reddit Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split In Batches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Webhook Trigger",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Parse XML1",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter Source Type",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Regulatory News1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Regulatory Sources Config1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Merge Data Streams",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Save to Compliance Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract Content1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Read Existing Articles1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Deduplicate Articles1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check New Articles1",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Sentiment",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Analysis Results1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Baseline Metrics",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Build Knowledge Graph",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Multi-Brand Competitor Analysis",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Detect Anomalies",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format Drift Metrics",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Alert Trigger",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format Knowledge Graph for Sheets",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format Competitor Analysis for Sheets",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check New Items",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Sentiment2",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Save Drift Metrics1",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Save to Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Create JSON1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Respond with JSON",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Respond No New Items",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Save Knowledge Graph to Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Save Competitor Analysis to Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Fetch Apple Press Releases1",
+        "to": "Parse Apple Press XML1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Apple Press XML1",
+        "to": "Extract Apple Press1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Apple Press1",
+        "to": "Merge All News2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Google News RSS1",
+        "to": "Parse Google News XML1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Google News XML1",
+        "to": "Extract Google News1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Google News1",
+        "to": "Split In Batches1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge All News2",
+        "to": "Combine Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge All News2",
+        "to": "Read Processed Links1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Processed Links1",
+        "to": "Combine Data1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Combine Data1",
+        "to": "Deduplicate with Sheets1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Deduplicate with Sheets1",
+        "to": "Check New Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Multi-Brand Config1",
+        "to": "Split In Batches1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Multi-Brand Config1",
+        "to": "Split In Batches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Multi-Brand Config1",
+        "to": "Fetch Apple Press Releases1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split In Batches1",
+        "to": "Merge All News2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Split In Batches1",
+        "to": "Fetch Google News RSS1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Prepare Subreddits",
+        "to": "Fetch Reddit Posts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Reddit Posts",
+        "to": "Extract & Format Reddit Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract & Format Reddit Data",
+        "to": "Split In Batches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split In Batches",
+        "to": "Merge All News2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Split In Batches",
+        "to": "Prepare Subreddits",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Webhook Trigger",
+        "to": "Regulatory Sources Config1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook Trigger",
+        "to": "Read Existing Articles1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook Trigger",
+        "to": "Multi-Brand Config1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse XML1",
+        "to": "Extract Content1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Source Type",
+        "to": "Fetch Regulatory News1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Fetch Regulatory News1",
+        "to": "Parse XML1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Regulatory Sources Config1",
+        "to": "Filter Source Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Data Streams",
+        "to": "Deduplicate Articles1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Content1",
+        "to": "Merge Data Streams",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Existing Articles1",
+        "to": "Merge Data Streams",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Deduplicate Articles1",
+        "to": "Check New Articles1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check New Articles1",
+        "to": "OpenAI Sentiment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Sentiment",
+        "to": "Merge Analysis Results1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Analysis Results1",
+        "to": "Save to Compliance Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Baseline Metrics",
+        "to": "Detect Anomalies",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Knowledge Graph",
+        "to": "Format Knowledge Graph for Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Multi-Brand Competitor Analysis",
+        "to": "Format Competitor Analysis for Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Detect Anomalies",
+        "to": "Format Drift Metrics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Detect Anomalies",
+        "to": "Alert Trigger",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Drift Metrics",
+        "to": "Save Drift Metrics1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Knowledge Graph for Sheets",
+        "to": "Save Knowledge Graph to Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Competitor Analysis for Sheets",
+        "to": "Save Competitor Analysis to Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check New Items",
+        "to": "OpenAI Sentiment2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check New Items",
+        "to": "Respond No New Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Sentiment2",
+        "to": "Combine Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Data",
+        "to": "Calculate Baseline Metrics",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Data",
+        "to": "Save to Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Data",
+        "to": "Create JSON1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Data",
+        "to": "Multi-Brand Competitor Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Data",
+        "to": "Build Knowledge Graph",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create JSON1",
+        "to": "Respond with JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/n8n",
+      "files": [
+        "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/n8n/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1.json"
+      ],
+      "sha256": "dc9a4de6a76a78c2f0f7e94794064ef695bc75c955248a4f2b31ca2f3f137914",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/fetch-apple-press-releases1-and-parse-apple-press-xml1-and-fetch-google-news-rss1/implementations/n8n/provenance.json"
+}

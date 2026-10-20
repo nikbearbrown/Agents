@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "slug": "receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms",
+  "title": "Receive messages from a queue via RabbitMQ and send an SMS",
+  "purpose": "Adapt the published “Receive messages from a queue via RabbitMQ and send an SMS” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "RabbitMQ"
+  ],
+  "terminal_nodes": [
+    "Vonage",
+    "NoOp"
+  ],
+  "credential_types": [
+    "rabbitmq",
+    "vonageApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "RabbitMQ",
+        "type": "n8n-nodes-base.rabbitmqTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Vonage",
+        "type": "n8n-nodes-base.vonage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "NoOp",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "IF",
+        "to": "Vonage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "NoOp",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "RabbitMQ",
+        "to": "IF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/n8n",
+      "files": [
+        "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/n8n/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms.json"
+      ],
+      "sha256": "3209fafbf6883965e20af90b686f249d76e8d830069173cee7b80988651140ba",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-messages-from-a-queue-via-rabbitmq-and-send-an-sms/implementations/n8n/provenance.json"
+}

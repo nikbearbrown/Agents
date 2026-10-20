@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "slug": "google-sheets-and-tofile-spreadsheet-file-and-dropbox",
+  "title": "google sheets and tofile spreadsheet file and dropbox",
+  "purpose": "Adapt the published “google sheets and tofile spreadsheet file and dropbox” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 3 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Upload Dropbox"
+  ],
+  "credential_types": [
+    "dropboxApi",
+    "googleApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Read Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert to XLS",
+        "type": "n8n-nodes-base.spreadsheetFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload Dropbox",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Trigger all 15 min",
+        "type": "n8n-nodes-base.interval",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Read Sheet",
+        "to": "Convert to XLS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert to XLS",
+        "to": "Upload Dropbox",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger all 15 min",
+        "to": "Read Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/n8n",
+      "files": [
+        "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/n8n/google-sheets-and-tofile-spreadsheet-file-and-dropbox.json"
+      ],
+      "sha256": "bb1e2a4f402aac51e451e1eb702e1a7a6b9d2db75d6a3b0ce3abc0fa022e46dd",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/google-sheets-and-tofile-spreadsheet-file-and-dropbox/implementations/n8n/provenance.json"
+}

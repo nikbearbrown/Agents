@@ -1,0 +1,24 @@
+flowchart LR
+  n0["if company does not exist on CRM"]
+  n1["Enrich company"]
+  n2["Create company"]
+  n3["Upsert contact"]
+  n4["Update company"]
+  n5["Contact not found, do nothing"]
+  n6["Enrich email"]
+  n7["Filter out personal emails"]
+  n8["Search company"]
+  n9["Upsert lead"]
+  n10["If person has a company"]
+  n11["Calendly Trigger"]
+  n6 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 1 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n0
+  n11 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 0"| n1
+  n10 -->|"main out 1 to in 0"| n9
+  n7 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 1 to in 0"| n4

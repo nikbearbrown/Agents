@@ -1,0 +1,486 @@
+{
+  "schema_version": 1,
+  "slug": "workflow-stats",
+  "title": "Workflow stats",
+  "purpose": "Adapt the published “Workflow stats” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 28 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test workflow\"",
+    "Execute Workflow Trigger",
+    "Request HTML dashboard",
+    "Request xsl template"
+  ],
+  "terminal_nodes": [
+    "Respond to Webhook",
+    "Respond to Webhook2",
+    "Final-json"
+  ],
+  "credential_types": [
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "nodes-section",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "workflows-section",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "tags-section",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "globals-section",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert to XML",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create HTML",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Move Binary Data",
+        "type": "n8n-nodes-base.moveBinaryData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook2",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Final template",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Template elements",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Sort-workflows",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sort-nodes",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sort-tags",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate-workflows",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate-nodes",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate-tags",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "n8n-get-workflows",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare JSON object",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "get-nodes-via-jmespath",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Request HTML dashboard",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Request xsl template",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Final-json",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "webhook-section",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Sort-whooks",
+        "type": "n8n-nodes-base.sort",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate-whooks",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Sort-tags",
+        "to": "Aggregate-tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort-nodes",
+        "to": "Aggregate-nodes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create HTML",
+        "to": "Move Binary Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort-whooks",
+        "to": "Aggregate-whooks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "tags-section",
+        "to": "Sort-tags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "nodes-section",
+        "to": "Sort-nodes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate-tags",
+        "to": "Final-json",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Convert to XML",
+        "to": "Create HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final template",
+        "to": "Respond to Webhook2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sort-workflows",
+        "to": "Aggregate-workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate-nodes",
+        "to": "Final-json",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "globals-section",
+        "to": "Final-json",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "webhook-section",
+        "to": "Sort-whooks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate-whooks",
+        "to": "Final-json",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Move Binary Data",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Template elements",
+        "to": "Final template",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "n8n-get-workflows",
+        "to": "get-nodes-via-jmespath",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "workflows-section",
+        "to": "nodes-section",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "workflows-section",
+        "to": "tags-section",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "workflows-section",
+        "to": "globals-section",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "workflows-section",
+        "to": "Sort-workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "workflows-section",
+        "to": "webhook-section",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate-workflows",
+        "to": "Final-json",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Prepare JSON object",
+        "to": "Convert to XML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Request xsl template",
+        "to": "Template elements",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Request HTML dashboard",
+        "to": "Prepare JSON object",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get-nodes-via-jmespath",
+        "to": "workflows-section",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Execute Workflow Trigger",
+        "to": "n8n-get-workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "n8n-get-workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/workflow-stats/implementations/n8n",
+      "files": [
+        "agents/workflow-stats/implementations/n8n/workflow-stats.json"
+      ],
+      "sha256": "cc2cefbb73bef4fb9b02c3ad44118671ef7cc1fbb86f5825f9be5caf87689837",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/workflow-stats/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/workflow-stats/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/workflow-stats/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/workflow-stats/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/workflow-stats/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/workflow-stats/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/workflow-stats/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/workflow-stats/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/workflow-stats/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/workflow-stats/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/workflow-stats/implementations/n8n/provenance.json"
+}

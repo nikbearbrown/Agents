@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "slug": "unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested",
+  "title": "unsubscribe lead lemlist and follow up task and lemlist mark as interested",
+  "purpose": "Adapt the published “unsubscribe lead lemlist and follow up task and lemlist mark as interested” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Lemlist - Lead Replied"
+  ],
+  "terminal_nodes": [
+    "Lemlist - Unsubscribe",
+    "follow up task",
+    "lemlist - Mark as interested",
+    "Slack",
+    "Slack1"
+  ],
+  "credential_types": [
+    "hubspotOAuth2Api",
+    "lemlistApi",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Lemlist - Unsubscribe",
+        "type": "n8n-nodes-base.lemlist",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "follow up task",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "lemlist - Mark as interested",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot - Create Deal",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot - Get contact ID",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot - Get contact ID1",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack1",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Lemlist - Lead Replied",
+        "type": "n8n-nodes-base.lemlistTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Lemlist - Unsubscribe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "lemlist - Mark as interested",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "HubSpot - Get contact ID",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "HubSpot - Get contact ID1",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Slack1",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "HubSpot - Create Deal",
+        "to": "Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Lemlist - Lead Replied",
+        "to": "OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Lemlist - Lead Replied",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "HubSpot - Get contact ID",
+        "to": "HubSpot - Create Deal",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot - Get contact ID1",
+        "to": "follow up task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/n8n",
+      "files": [
+        "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/n8n/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested.json"
+      ],
+      "sha256": "54f18222af369a86566b7f3044a28fb839ee2251e61e11ba927473a08aff28c0",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/unsubscribe-lead-lemlist-and-follow-up-task-and-lemlist-mark-as-interested/implementations/n8n/provenance.json"
+}

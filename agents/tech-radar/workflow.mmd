@@ -1,0 +1,70 @@
+flowchart LR
+  n0["Download Doc File From Google Drive"]
+  n1["Doc File Data Loader"]
+  n2["Cron"]
+  n3["MySQL -delete all data"]
+  n4["MySQL - insert all from sheets"]
+  n5["Google Sheets - Tech Radar"]
+  n6["Code - Transform table into rows"]
+  n7["Google Docs - Update GDoc"]
+  n8["Google Drive - Doc File Updated"]
+  n9["Content - Recursive Character Text Splitter"]
+  n10["Google Sheets - Read TechRadar"]
+  n11["Code - Simplify Mapping to Original Query"]
+  n12["Codes - Simplify Mapping to Original Query"]
+  n13["Execute Workflow - Sql Agent"]
+  n14["Execute Workflow - RAG Agent"]
+  n15["AI Agent - Output Guardrail"]
+  n16["LLM - Determine - Agent Input Router"]
+  n17["When Executed by Another Workflow"]
+  n18["1_Get DB Schema and Tables List"]
+  n19["2_Get Table Definition"]
+  n20["3_Execute actual query"]
+  n21["AI Agent -DB Sql Agent"]
+  n22["Pinecone Vector Store #40;Retrieval#41;"]
+  n23["4_RagTool"]
+  n24["AI Agent - RAG"]
+  n25["Embeddings - Tech Radar Data Embedding"]
+  n26["Pinecone - Vector Store for Embedding Content"]
+  n27["Retrieve Embeddings - Tech Radar Vector DB"]
+  n28["AI Agent - Retrieval"]
+  n29["AI Chat Model - Claude 3.5 Sonnet"]
+  n30["AI Chat Model - QwQ 32b"]
+  n31["AI Chatmodel - Deepseek 32B"]
+  n32["AI Chat Model - llama3-8b"]
+  n33["API Response - Respond to Webhook"]
+  n34["API Request - Webhook"]
+  n35["Determine if is #39;RAG#39;"]
+  n36["User Conversation history"]
+  n2 -->|"main out 0 to in 0"| n3
+  n23 -->|"ai_tool out 0 to in 0"| n24
+  n28 -->|"ai_languageModel out 0 to in 0"| n23
+  n1 -->|"ai_document out 0 to in 0"| n26
+  n34 -->|"main out 0 to in 0"| n16
+  n19 -->|"ai_tool out 0 to in 0"| n21
+  n20 -->|"ai_tool out 0 to in 0"| n21
+  n35 -->|"main out 0 to in 0"| n11
+  n35 -->|"main out 1 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n10
+  n30 -->|"ai_languageModel out 0 to in 0"| n24
+  n32 -->|"ai_languageModel out 0 to in 0"| n15
+  n36 -->|"ai_memory out 0 to in 0"| n15
+  n5 -->|"main out 0 to in 0"| n6
+  n15 -->|"main out 0 to in 0"| n33
+  n31 -->|"ai_languageModel out 0 to in 0"| n16
+  n14 -->|"main out 0 to in 0"| n15
+  n13 -->|"main out 0 to in 0"| n15
+  n10 -->|"main out 0 to in 0"| n4
+  n18 -->|"ai_tool out 0 to in 0"| n21
+  n8 -->|"main out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n7
+  n29 -->|"ai_languageModel out 0 to in 0"| n21
+  n22 -->|"ai_vectorStore out 0 to in 0"| n23
+  n17 -->|"main out 0 to in 0"| n21
+  n0 -->|"main out 0 to in 0"| n26
+  n16 -->|"main out 0 to in 0"| n35
+  n25 -->|"ai_embedding out 0 to in 0"| n26
+  n11 -->|"main out 0 to in 0"| n14
+  n12 -->|"main out 0 to in 0"| n13
+  n27 -->|"ai_embedding out 0 to in 0"| n22
+  n9 -->|"ai_textSplitter out 0 to in 0"| n1

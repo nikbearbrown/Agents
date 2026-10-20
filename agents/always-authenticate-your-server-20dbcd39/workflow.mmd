@@ -1,0 +1,25 @@
+flowchart LR
+  n0["When Executed by Another Workflow"]
+  n1["Google Drive MCP Server"]
+  n2["Download File1"]
+  n3["FileType"]
+  n4["Operation"]
+  n5["Extract from PDF"]
+  n6["Extract from CSV"]
+  n7["Get PDF Response"]
+  n8["Get CSV Response"]
+  n9["Read File From GDrive"]
+  n10["Search Files from Gdrive"]
+  n11["Analyse Image"]
+  n12["Transcribe Audio"]
+  n3 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 1 to in 0"| n6
+  n3 -->|"main out 2 to in 0"| n11
+  n3 -->|"main out 3 to in 0"| n12
+  n4 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n6 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n7
+  n9 -->|"ai_tool out 0 to in 0"| n1
+  n10 -->|"ai_tool out 0 to in 0"| n1
+  n0 -->|"main out 0 to in 0"| n4

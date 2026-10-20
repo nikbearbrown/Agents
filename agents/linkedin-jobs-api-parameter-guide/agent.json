@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "slug": "linkedin-jobs-api-parameter-guide",
+  "title": "🔍 LinkedIn Jobs API – Parameter Guide",
+  "purpose": "Adapt the published “🔍 LinkedIn Jobs API – Parameter Guide” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission - Discover Jobs"
+  ],
+  "terminal_nodes": [
+    "Google Sheets - Adding All Job Posts"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Snapshot Progress",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "On form submission - Discover Jobs",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request- Post API call to Bright Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait - Polling Bright Data",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "If - Checking status of Snapshot - if data is ready or not",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request - Getting data from Bright Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Code - Cleaning Up",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets - Adding All Job Posts",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Edit Fields",
+        "to": "HTTP Request- Post API call to Bright Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Snapshot Progress",
+        "to": "If - Checking status of Snapshot - if data is ready or not",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code - Cleaning Up",
+        "to": "Google Sheets - Adding All Job Posts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait - Polling Bright Data",
+        "to": "Snapshot Progress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission - Discover Jobs",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request- Post API call to Bright Data",
+        "to": "Wait - Polling Bright Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request - Getting data from Bright Data",
+        "to": "Code - Cleaning Up",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If - Checking status of Snapshot - if data is ready or not",
+        "to": "Wait - Polling Bright Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If - Checking status of Snapshot - if data is ready or not",
+        "to": "HTTP Request - Getting data from Bright Data",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/linkedin-jobs-api-parameter-guide/implementations/n8n",
+      "files": [
+        "agents/linkedin-jobs-api-parameter-guide/implementations/n8n/linkedin-jobs-api-parameter-guide.json"
+      ],
+      "sha256": "53a8e7a10c7c260ccb94015dea13b1027b65e8462fe228f6acc81182e384e84e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/linkedin-jobs-api-parameter-guide/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/linkedin-jobs-api-parameter-guide/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/linkedin-jobs-api-parameter-guide/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/linkedin-jobs-api-parameter-guide/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/linkedin-jobs-api-parameter-guide/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/linkedin-jobs-api-parameter-guide/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/linkedin-jobs-api-parameter-guide/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/linkedin-jobs-api-parameter-guide/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/linkedin-jobs-api-parameter-guide/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/linkedin-jobs-api-parameter-guide/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/linkedin-jobs-api-parameter-guide/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,928 @@
+{
+  "schema_version": 1,
+  "slug": "notion-to-clockify-sync-template",
+  "title": "Notion to Clockify Sync Template",
+  "purpose": "Adapt the published “Notion to Clockify Sync Template” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 56 executable nodes and 68 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Stop and Error",
+    "Stop and Error1",
+    "Update Task in Clockify",
+    "Structure output2",
+    "Stop and Error2"
+  ],
+  "credential_types": [
+    "clockifyApi",
+    "notionApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get first workspace ID",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structure output",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Map values",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Map values1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "No Operation",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get active Clients from Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get active Clients from Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If unmapped in Notion",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set new values",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Update Client in Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get archived Client from Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Client in Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store Clockify ID in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Remove Client from Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get active Projects from Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get active Projects from Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Project in Clockify",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get completed Project from Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Project in Clockify",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Remove Project from Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structure output1",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation1",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Map values2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Map values3",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets1",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "If unmapped in Notion1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set new values1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Store Clockify ID in Notion1",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error1",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing2",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get active Tasks from Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get active Tasks from Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Task in Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get completed Task from Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Task in Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remove Task from Clockify",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structure output2",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No Operation2",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Map values4",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Map values5",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get active Projects from Clockify1",
+        "type": "n8n-nodes-base.clockify",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Compare Datasets2",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "If unmapped in Notion2",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Set new values2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Store Clockify ID in Notion2",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error2",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Limit",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Limit1",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Limit",
+        "to": "No Operation1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Limit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit1",
+        "to": "No Operation2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge1",
+        "to": "Limit1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Globals",
+        "to": "No Operation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Get first workspace ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map values",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map values1",
+        "to": "Compare Datasets",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Map values2",
+        "to": "Compare Datasets1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map values3",
+        "to": "Compare Datasets1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Map values4",
+        "to": "Compare Datasets2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map values5",
+        "to": "Compare Datasets2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "No Operation",
+        "to": "Get active Clients from Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation",
+        "to": "Get active Clients from Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation1",
+        "to": "Get active Projects from Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation1",
+        "to": "Get active Projects from Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation2",
+        "to": "Get active Projects from Clockify1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation2",
+        "to": "Get active Tasks from Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set new values",
+        "to": "Update Client in Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set new values1",
+        "to": "Update Project in Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set new values2",
+        "to": "Update Task in Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "If unmapped in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Structure output",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Update Client in Clockify",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets",
+        "to": "Get archived Client from Notion",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get first workspace ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structure output",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Compare Datasets1",
+        "to": "If unmapped in Notion1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets1",
+        "to": "Structure output1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets1",
+        "to": "Update Project in Clockify",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets1",
+        "to": "Get completed Project from Notion",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets2",
+        "to": "If unmapped in Notion2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets2",
+        "to": "Structure output2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets2",
+        "to": "Update Task in Clockify",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Compare Datasets2",
+        "to": "Get completed Task from Notion",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Structure output1",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "If unmapped in Notion",
+        "to": "Create Client in Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If unmapped in Notion",
+        "to": "Update Client in Clockify",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get first workspace ID",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If unmapped in Notion1",
+        "to": "Create Project in Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If unmapped in Notion1",
+        "to": "Update Project in Clockify",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If unmapped in Notion2",
+        "to": "Create Task in Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If unmapped in Notion2",
+        "to": "Update Task in Clockify",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create Task in Clockify",
+        "to": "Store Clockify ID in Notion2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation, do nothing",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Client in Clockify",
+        "to": "Store Clockify ID in Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Operation, do nothing2",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Task from Clockify",
+        "to": "Stop and Error2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Client in Clockify",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Create Project in Clockify",
+        "to": "Store Clockify ID in Notion1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Project in Clockify",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Remove Client from Clockify",
+        "to": "Stop and Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Clockify ID in Notion",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Clockify ID in Notion",
+        "to": "Remove Client from Clockify",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get active Tasks from Notion",
+        "to": "Map values4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Project from Clockify",
+        "to": "Stop and Error1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Clockify ID in Notion1",
+        "to": "No Operation, do nothing2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Store Clockify ID in Notion1",
+        "to": "Remove Project from Clockify",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Store Clockify ID in Notion2",
+        "to": "Remove Task from Clockify",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get active Clients from Notion",
+        "to": "Map values",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get active Tasks from Clockify",
+        "to": "Map values5",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get completed Task from Notion",
+        "to": "Set new values2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get active Projects from Notion",
+        "to": "Map values2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get archived Client from Notion",
+        "to": "Set new values",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get active Clients from Clockify",
+        "to": "Map values1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get active Projects from Clockify",
+        "to": "Map values3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get completed Project from Notion",
+        "to": "Set new values1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get active Projects from Clockify1",
+        "to": "Get active Tasks from Clockify",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/notion-to-clockify-sync-template/implementations/n8n",
+      "files": [
+        "agents/notion-to-clockify-sync-template/implementations/n8n/notion-to-clockify-sync-template.json"
+      ],
+      "sha256": "49f8395ae869ed7fe255f6a1e342a16e76d6fbbdfdb8d1655c6d2a1e0ea918f4",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/notion-to-clockify-sync-template/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/notion-to-clockify-sync-template/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/notion-to-clockify-sync-template/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/notion-to-clockify-sync-template/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/notion-to-clockify-sync-template/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/notion-to-clockify-sync-template/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/notion-to-clockify-sync-template/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/notion-to-clockify-sync-template/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/notion-to-clockify-sync-template/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/notion-to-clockify-sync-template/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/notion-to-clockify-sync-template/implementations/n8n/provenance.json"
+}

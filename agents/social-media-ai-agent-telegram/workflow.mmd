@@ -1,0 +1,40 @@
+flowchart LR
+  n0["Crawl HN Home"]
+  n1["Extract Meta"]
+  n2["Filter Unposted Items"]
+  n3["Visit GH Page"]
+  n4["Convert HTML To Markdown"]
+  n5["Filter Errored"]
+  n6["No Operation, do nothing"]
+  n7["Update X Status"]
+  n8["LinkedIn"]
+  n9["Update L Status"]
+  n10["Search Item"]
+  n11["Create Item"]
+  n12["X"]
+  n13["Validate Generate Content"]
+  n14["Schedule Trigger"]
+  n15["Merge"]
+  n16["Generate Content"]
+  n17["Ping Me"]
+  n18["Wait for 5 mins before posting"]
+  n12 -->|"main out 0 to in 0"| n7
+  n15 -->|"main out 0 to in 0"| n2
+  n17 -->|"main out 0 to in 0"| n18
+  n8 -->|"main out 0 to in 0"| n9
+  n11 -->|"main out 0 to in 0"| n17
+  n10 -->|"main out 0 to in 0"| n15
+  n1 -->|"main out 0 to in 0"| n10
+  n1 -->|"main out 0 to in 1"| n15
+  n0 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n6
+  n16 -->|"main out 0 to in 0"| n13
+  n14 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 0 to in 0"| n16
+  n13 -->|"main out 0 to in 0"| n5
+  n18 -->|"main out 0 to in 0"| n12
+  n18 -->|"main out 0 to in 0"| n8

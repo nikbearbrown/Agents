@@ -1,0 +1,54 @@
+flowchart LR
+  n0["HTTP Request1"]
+  n1["Proxmox API Documentation"]
+  n2["Auto-fixing Output Parser"]
+  n3["Google Gemini Chat Model1"]
+  n4["Structured Output Parser"]
+  n5["Proxmox"]
+  n6["HTTP Request"]
+  n7["Google Gemini Chat Model2"]
+  n8["When chat message received"]
+  n9["Telegram Trigger"]
+  n10["Gmail Trigger"]
+  n11["Webhook"]
+  n12["Proxmox API Wiki"]
+  n13["Structure Response"]
+  n14["Structgure Response from Proxmox"]
+  n15["Format Response and Hide Sensitive Data"]
+  n16["If"]
+  n17["HTTP Request2"]
+  n18["Merge"]
+  n19["HTTP Request3"]
+  n20["Google Gemini Chat Model"]
+  n21["AI Agent1"]
+  n22["If1"]
+  n23["HTTP Request4"]
+  n24["Merge1"]
+  n25["AI Agent"]
+  n26["Switch"]
+  n16 -->|"main out 0 to in 0"| n0
+  n16 -->|"main out 1 to in 0"| n17
+  n22 -->|"main out 0 to in 0"| n19
+  n22 -->|"main out 1 to in 0"| n23
+  n18 -->|"main out 0 to in 0"| n14
+  n24 -->|"main out 0 to in 0"| n14
+  n26 -->|"main out 0 to in 0"| n6
+  n26 -->|"main out 1 to in 0"| n16
+  n26 -->|"main out 4 to in 0"| n22
+  n5 -->|"ai_tool out 0 to in 0"| n25
+  n25 -->|"main out 0 to in 0"| n26
+  n6 -->|"main out 0 to in 0"| n13
+  n0 -->|"main out 0 to in 0"| n18
+  n17 -->|"main out 0 to in 1"| n18
+  n19 -->|"main out 0 to in 0"| n24
+  n23 -->|"main out 0 to in 1"| n24
+  n12 -->|"ai_tool out 0 to in 0"| n25
+  n13 -->|"main out 0 to in 0"| n21
+  n20 -->|"ai_languageModel out 0 to in 0"| n25
+  n4 -->|"ai_outputParser out 0 to in 0"| n2
+  n2 -->|"ai_outputParser out 0 to in 0"| n25
+  n3 -->|"ai_languageModel out 0 to in 0"| n2
+  n7 -->|"ai_languageModel out 0 to in 0"| n21
+  n1 -->|"ai_tool out 0 to in 0"| n25
+  n8 -->|"main out 0 to in 0"| n25
+  n14 -->|"main out 0 to in 0"| n15

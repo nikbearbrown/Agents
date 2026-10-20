@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "slug": "namecheap-dynamic-dns-ddns",
+  "title": "NameCheap Dynamic DNS (DDNS)",
+  "purpose": "Adapt the published “NameCheap Dynamic DNS (DDNS)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "Send data to Namecheap"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Checks IP if new",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "subdomains",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loops trough Subdomain list",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send data to Namecheap",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Public IP address",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "yourdomain.com",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron",
+        "to": "Get Public IP address",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "subdomains",
+        "to": "Loops trough Subdomain list",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "yourdomain.com",
+        "to": "subdomains",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Checks IP if new",
+        "to": "yourdomain.com",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Public IP address",
+        "to": "Checks IP if new",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loops trough Subdomain list",
+        "to": "Send data to Namecheap",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/namecheap-dynamic-dns-ddns/implementations/n8n",
+      "files": [
+        "agents/namecheap-dynamic-dns-ddns/implementations/n8n/namecheap-dynamic-dns-ddns.json"
+      ],
+      "sha256": "ed908299b469b94f26542012e02fd2ceb5173864e3bd910da7eadbc5187bc7c1",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/namecheap-dynamic-dns-ddns/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/namecheap-dynamic-dns-ddns/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/namecheap-dynamic-dns-ddns/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/namecheap-dynamic-dns-ddns/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/namecheap-dynamic-dns-ddns/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/namecheap-dynamic-dns-ddns/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/namecheap-dynamic-dns-ddns/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/namecheap-dynamic-dns-ddns/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/namecheap-dynamic-dns-ddns/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/namecheap-dynamic-dns-ddns/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/namecheap-dynamic-dns-ddns/implementations/n8n/provenance.json"
+}

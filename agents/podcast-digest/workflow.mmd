@@ -1,0 +1,30 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Podcast Episode Transcript"]
+  n2["Workflow Input to JSON Document"]
+  n3["Recursive Character Text Splitter"]
+  n4["Topics"]
+  n5["Summarize Transcript"]
+  n6["GPT 4 - Extract"]
+  n7["Wikipedia1"]
+  n8["Send Digest"]
+  n9["Format topic text #38; title"]
+  n10["Structured Output Parser"]
+  n11["Extract Topics #38; Questions"]
+  n12["GPT3.5 - Research"]
+  n13["GPT3.5 - Summarize"]
+  n14["Research #38; Explain Topics"]
+  n4 -->|"main out 0 to in 0"| n14
+  n7 -->|"ai_tool out 0 to in 0"| n14
+  n6 -->|"ai_languageModel out 0 to in 0"| n11
+  n12 -->|"ai_languageModel out 0 to in 0"| n14
+  n13 -->|"ai_languageModel out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n11
+  n10 -->|"ai_outputParser out 0 to in 0"| n11
+  n9 -->|"main out 0 to in 0"| n8
+  n14 -->|"main out 0 to in 0"| n9
+  n11 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n5
+  n2 -->|"ai_document out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n1
+  n3 -->|"ai_textSplitter out 0 to in 0"| n2

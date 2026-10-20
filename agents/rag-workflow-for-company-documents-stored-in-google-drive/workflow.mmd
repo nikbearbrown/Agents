@@ -1,0 +1,29 @@
+flowchart LR
+  n0["Pinecone Vector Store"]
+  n1["Embeddings Google Gemini"]
+  n2["Default Data Loader"]
+  n3["Recursive Character Text Splitter"]
+  n4["AI Agent"]
+  n5["Vector Store Tool"]
+  n6["Pinecone Vector Store #40;Retrieval#41;"]
+  n7["Embeddings Google Gemini #40;retrieval#41;"]
+  n8["Download File From Google Drive"]
+  n9["Google Drive File Updated"]
+  n10["Google Drive File Created"]
+  n11["Window Buffer Memory"]
+  n12["When chat message received"]
+  n13["Google Gemini Chat Model"]
+  n14["Google Gemini Chat Model #40;retrieval#41;"]
+  n5 -->|"ai_tool out 0 to in 0"| n4
+  n2 -->|"ai_document out 0 to in 0"| n0
+  n11 -->|"ai_memory out 0 to in 0"| n4
+  n1 -->|"ai_embedding out 0 to in 0"| n0
+  n13 -->|"ai_languageModel out 0 to in 0"| n4
+  n10 -->|"main out 0 to in 0"| n8
+  n9 -->|"main out 0 to in 0"| n8
+  n12 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n0
+  n6 -->|"ai_vectorStore out 0 to in 0"| n5
+  n3 -->|"ai_textSplitter out 0 to in 0"| n2
+  n7 -->|"ai_embedding out 0 to in 0"| n6
+  n14 -->|"ai_languageModel out 0 to in 0"| n5

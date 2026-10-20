@@ -1,57 +1,9 @@
 # Edit your own prompt ⬇️
 
-This folder contains the **Edit your own prompt ⬇️** workflow. Its executable nodes use `chainLlm`, `code`, `httpRequest`, `if`, `lmChatOpenAi`, `splitOut`, `webhook`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/edit-your-own-prompt](../../agents/edit-your-own-prompt/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/edit-your-own-prompt/implementations/n8n/README.md)
+- [Importable JSON](../../agents/edit-your-own-prompt/implementations/n8n/edit-your-own-prompt.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/edit-your-own-prompt)
 
-## Files
-
-- [`edit-your-own-prompt.json`](edit-your-own-prompt.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** `openAiApi`
-
-**Entry nodes:** Webhook
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| Need Review | `if` | Inspect parameters |
-| Get Changes | `httpRequest` | Inspect parameters |
-| Split Out | `splitOut` | Inspect parameters |
-| Skip File Changes | `if` | Inspect parameters |
-| Parse Last Diff Line | `code` | Inspect parameters |
-| Basic LLM Chain | `chainLlm` | Inspect parameters |
-| OpenAI Chat Model | `lmChatOpenAi` | Inspect parameters |
-| Webhook | `webhook` | Inspect parameters |
-| Code | `code` | Inspect parameters |
-| Post Discussions | `httpRequest` | POST |
-
-## Connection map
-
-- Code → Basic LLM Chain (`main`, output 0, input 0)
-- Webhook → Need Review (`main`, output 0, input 0)
-- Split Out → Skip File Changes (`main`, output 0, input 0)
-- Get Changes → Split Out (`main`, output 0, input 0)
-- Need Review → Get Changes (`main`, output 0, input 0)
-- Basic LLM Chain → Post Discussions (`main`, output 0, input 0)
-- OpenAI Chat Model → Basic LLM Chain (`ai_languageModel`, output 0, input 0)
-- Skip File Changes → Parse Last Diff Line (`main`, output 0, input 0)
-- Parse Last Diff Line → Code (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Splitout/0459_Splitout_Webhook_Update_Webhook.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Splitout/0459_Splitout_Webhook_Update_Webhook.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

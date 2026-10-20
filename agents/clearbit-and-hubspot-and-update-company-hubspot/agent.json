@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "slug": "clearbit-and-hubspot-and-update-company-hubspot",
+  "title": "clearbit and hubspot and update company hubspot",
+  "purpose": "Adapt the published “clearbit and hubspot and update company hubspot” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Calendly Trigger"
+  ],
+  "terminal_nodes": [
+    "Upsert contact",
+    "Update company",
+    "Contact not found, do nothing",
+    "Upsert lead"
+  ],
+  "credential_types": [
+    "calendlyApi",
+    "clearbitApi",
+    "hubspotOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "if company does not exist on CRM",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Enrich company",
+        "type": "n8n-nodes-base.clearbit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create company",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Upsert contact",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Update company",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Contact not found, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Enrich email",
+        "type": "n8n-nodes-base.clearbit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter out personal emails",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Search company",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Upsert lead",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If person has a company",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Calendly Trigger",
+        "type": "n8n-nodes-base.calendlyTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Enrich email",
+        "to": "If person has a company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Enrich email",
+        "to": "Contact not found, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create company",
+        "to": "Upsert contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Enrich company",
+        "to": "Search company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search company",
+        "to": "if company does not exist on CRM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calendly Trigger",
+        "to": "Filter out personal emails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If person has a company",
+        "to": "Enrich company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If person has a company",
+        "to": "Upsert lead",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Filter out personal emails",
+        "to": "Enrich email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if company does not exist on CRM",
+        "to": "Create company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if company does not exist on CRM",
+        "to": "Update company",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/n8n",
+      "files": [
+        "agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/n8n/clearbit-and-hubspot-and-update-company-hubspot.json"
+      ],
+      "sha256": "b5ec335d13a6779c03d5d47ed97bd395ee367c8972d376ac484737bfee9161e5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/clearbit-and-hubspot-and-update-company-hubspot/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/clearbit-and-hubspot-and-update-company-hubspot/implementations/n8n/provenance.json"
+}

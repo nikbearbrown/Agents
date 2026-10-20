@@ -1,0 +1,43 @@
+flowchart LR
+  n0["Set Fields"]
+  n1["When clicking #8216;Start#8217;"]
+  n2["Check Task Status"]
+  n3["Create Task"]
+  n4["If"]
+  n5["Wait"]
+  n6["Get RAW Audit Data"]
+  n7["Extract URLs"]
+  n8["Loop Over Items"]
+  n9["Query GSC API"]
+  n10["Wait1"]
+  n11["Map GSC Data to URL"]
+  n12["Merge GSC Data with RAW Data"]
+  n13["Build Report Structure"]
+  n14["Generate HTML Report"]
+  n15["Extract 404 #38; 301"]
+  n16["Loop Over Items1"]
+  n17["Map URLs Data"]
+  n18["Get Source URLs Data"]
+  n19["Download Report"]
+  n4 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 1 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n2
+  n10 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n8
+  n17 -->|"main out 0 to in 0"| n16
+  n9 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n12
+  n8 -->|"main out 1 to in 0"| n9
+  n16 -->|"main out 0 to in 0"| n13
+  n16 -->|"main out 1 to in 0"| n18
+  n2 -->|"main out 0 to in 0"| n4
+  n15 -->|"main out 0 to in 0"| n16
+  n6 -->|"main out 0 to in 0"| n7
+  n11 -->|"main out 0 to in 0"| n8
+  n14 -->|"main out 0 to in 0"| n19
+  n18 -->|"main out 0 to in 0"| n17
+  n13 -->|"main out 0 to in 0"| n14
+  n1 -->|"main out 0 to in 0"| n0
+  n12 -->|"main out 0 to in 0"| n15

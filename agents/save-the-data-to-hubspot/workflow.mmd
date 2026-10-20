@@ -1,0 +1,19 @@
+flowchart LR
+  n0["HubSpot"]
+  n1["HubSpot1"]
+  n2["Router Agent"]
+  n3["Summarization"]
+  n4["Enter Client Transcript"]
+  n5["Form"]
+  n6["OpenAI Chat Model"]
+  n7["Define routing emails here"]
+  n8["Gmail"]
+  n8 -->|"ai_tool out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n1
+  n6 -->|"ai_languageModel out 0 to in 0"| n3
+  n6 -->|"ai_languageModel out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n3

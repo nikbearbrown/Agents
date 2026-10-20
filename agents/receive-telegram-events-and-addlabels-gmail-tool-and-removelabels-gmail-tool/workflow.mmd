@@ -1,0 +1,24 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["OpenRouter Chat Model"]
+  n2["Telegram Trigger"]
+  n3["mail_label_setter"]
+  n4["mail_archiver"]
+  n5["Aggregate"]
+  n6["Telegram"]
+  n7["OpenRouter Chat Model1"]
+  n8["Reporter"]
+  n9["Get mails in INBOX"]
+  n10["Filter processed"]
+  n11["Categoriser"]
+  n8 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n8
+  n11 -->|"main out 0 to in 0"| n5
+  n4 -->|"ai_tool out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n11
+  n2 -->|"main out 0 to in 0"| n9
+  n3 -->|"ai_tool out 0 to in 0"| n11
+  n9 -->|"main out 0 to in 0"| n10
+  n1 -->|"ai_languageModel out 0 to in 0"| n11
+  n7 -->|"ai_languageModel out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n9

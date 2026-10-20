@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "slug": "summarize-google-sheets-form-feedback-via-openai-s-gpt-4",
+  "title": "Summarize Google Sheets form feedback via OpenAI's GPT-4",
+  "purpose": "Adapt the published “Summarize Google Sheets form feedback via OpenAI's GPT-4” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test workflow\""
+  ],
+  "terminal_nodes": [
+    "Send via Gmail"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Google Sheets records",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate responses into arrays",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Summarize via GPT model",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Convet from Markdown to HTML",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send via Gmail",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Summarize via GPT model",
+        "to": "Convet from Markdown to HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Google Sheets records",
+        "to": "Aggregate responses into arrays",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convet from Markdown to HTML",
+        "to": "Send via Gmail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Get Google Sheets records",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate responses into arrays",
+        "to": "Summarize via GPT model",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/n8n",
+      "files": [
+        "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/n8n/summarize-google-sheets-form-feedback-via-openai-s-gpt-4.json"
+      ],
+      "sha256": "d9d961e27c9d0a39b177d03d6dcfb1cf896092cfafea60d31bf059411a69ff3b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/summarize-google-sheets-form-feedback-via-openai-s-gpt-4/implementations/n8n/provenance.json"
+}

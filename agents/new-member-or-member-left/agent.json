@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "slug": "new-member-or-member-left",
+  "title": "New member or Member left",
+  "purpose": "Adapt the published “New member or Member left” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 21 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger"
+  ],
+  "terminal_nodes": [
+    "Telegram1",
+    "Telegram2",
+    "Telegram4",
+    "Telegram5",
+    "Telegram6",
+    "Menu",
+    "Change status",
+    "Register",
+    "Payment Handler",
+    "Send Invoice"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Trigger",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Global data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Telegram1",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram2",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram3",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram4",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram5",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Switch_MessageType",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Telegram6",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Menu",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Command?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Change status",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.4,
+        "disabled": false
+      },
+      {
+        "name": "Start bot?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Register",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Payment Handler",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Trigger Data for Payment",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Trigger Data for Register",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Data for Invoice",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send Invoice",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Switch_Commands",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Switch",
+        "to": "Switch_MessageType",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Telegram3",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Start bot?",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Trigger Data for Payment",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Trigger",
+        "to": "Global data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Command?",
+        "to": "Switch_Commands",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Command?",
+        "to": "Telegram4",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Telegram3",
+        "to": "Menu",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start bot?",
+        "to": "Trigger Data for Register",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start bot?",
+        "to": "Change status",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Global data",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch_Commands",
+        "to": "Data for Invoice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch_Commands",
+        "to": "Telegram6",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Data for Invoice",
+        "to": "Send Invoice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch_MessageType",
+        "to": "Command?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch_MessageType",
+        "to": "Telegram1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch_MessageType",
+        "to": "Telegram2",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch_MessageType",
+        "to": "Telegram5",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Trigger Data for Payment",
+        "to": "Payment Handler",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger Data for Register",
+        "to": "Register",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/new-member-or-member-left/implementations/n8n",
+      "files": [
+        "agents/new-member-or-member-left/implementations/n8n/new-member-or-member-left.json"
+      ],
+      "sha256": "538640da3573d450b0262a021c402e3b52755aa9d4acc4771238c468ab22347c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/new-member-or-member-left/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/new-member-or-member-left/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/new-member-or-member-left/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/new-member-or-member-left/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/new-member-or-member-left/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/new-member-or-member-left/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/new-member-or-member-left/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/new-member-or-member-left/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/new-member-or-member-left/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/new-member-or-member-left/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/new-member-or-member-left/implementations/n8n/provenance.json"
+}

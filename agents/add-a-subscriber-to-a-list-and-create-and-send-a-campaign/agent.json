@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "slug": "add-a-subscriber-to-a-list-and-create-and-send-a-campaign",
+  "title": "Add a subscriber to a list and create and send a campaign",
+  "purpose": "Adapt the published “Add a subscriber to a list and create and send a campaign” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'"
+  ],
+  "terminal_nodes": [
+    "Sendy1"
+  ],
+  "credential_types": [
+    "sendyApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sendy",
+        "type": "n8n-nodes-base.sendy",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sendy1",
+        "type": "n8n-nodes-base.sendy",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Sendy",
+        "to": "Sendy1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Sendy",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/n8n",
+      "files": [
+        "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/n8n/add-a-subscriber-to-a-list-and-create-and-send-a-campaign.json"
+      ],
+      "sha256": "2982870816552fee65cbf1766df3b56260ce6df1eaa0b39e2d77f5965bbb16ab",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/add-a-subscriber-to-a-list-and-create-and-send-a-campaign/implementations/n8n/provenance.json"
+}

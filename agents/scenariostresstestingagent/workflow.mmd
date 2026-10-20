@@ -1,0 +1,35 @@
+flowchart LR
+  n0["Webhook Trigger"]
+  n1["Parse Input"]
+  n2["Edit Fields"]
+  n3["Validate Portfolio"]
+  n4["Custom Scenario#63;"]
+  n5["Load_Template_Scenario"]
+  n6["When chat message received"]
+  n7["Basic LLM Chain"]
+  n8["Groq Chat Model"]
+  n9["Parse_LLM_Response"]
+  n10["Stress_Test_Engine"]
+  n11["Respond to Webhook"]
+  n12["Fetch_Data"]
+  n13["Merge"]
+  n14["Merge1"]
+  n15["Save_Portfolio_Before_LLM"]
+  n0 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n12
+  n3 -->|"main out 0 to in 1"| n13
+  n4 -->|"main out 0 to in 0"| n15
+  n4 -->|"main out 1 to in 0"| n5
+  n8 -->|"ai_languageModel out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n14
+  n5 -->|"main out 0 to in 1"| n14
+  n10 -->|"main out 0 to in 0"| n11
+  n12 -->|"main out 0 to in 0"| n13
+  n13 -->|"main out 0 to in 0"| n4
+  n14 -->|"main out 0 to in 0"| n10
+  n15 -->|"main out 0 to in 0"| n7
+  n15 -->|"main out 0 to in 0"| n9

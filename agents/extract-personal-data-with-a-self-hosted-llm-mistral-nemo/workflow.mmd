@@ -1,0 +1,15 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["Ollama Chat Model"]
+  n2["Auto-fixing Output Parser"]
+  n3["Structured Output Parser"]
+  n4["Basic LLM Chain"]
+  n5["On Error"]
+  n6["Extract JSON Output"]
+  n4 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 1 to in 0"| n5
+  n1 -->|"ai_languageModel out 0 to in 0"| n2
+  n1 -->|"ai_languageModel out 0 to in 0"| n4
+  n3 -->|"ai_outputParser out 0 to in 0"| n2
+  n2 -->|"ai_outputParser out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n4

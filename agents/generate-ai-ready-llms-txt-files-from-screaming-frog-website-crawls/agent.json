@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "slug": "generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls",
+  "title": "Generate AI-Ready llms.txt Files from Screaming Frog Website Crawls",
+  "purpose": "Adapt the published “Generate AI-Ready llms.txt Files from Screaming Frog Website Crawls” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Form - Screaming frog internal_html.csv upload"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "No Operation, do nothing",
+    "upload file anywhere",
+    "Generate llms.txt file"
+  ],
+  "credential_types": [
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Set useful fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Text Classifier",
+        "type": "@n8n/n8n-nodes-langchain.textClassifier",
+        "version": 1,
+        "disabled": true
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Filter URLs",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Summarize - Concatenate",
+        "type": "n8n-nodes-base.summarize",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Fields - llms.txt Content",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "upload file anywhere",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Field - llms.txt Row",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Form - Screaming frog internal_html.csv upload",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract data from Screaming Frog file",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate llms.txt file",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Filter URLs",
+        "to": "Text Classifier",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "Set Field - llms.txt Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Text Classifier",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Text Classifier",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set useful fields",
+        "to": "Filter URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Summarize - Concatenate",
+        "to": "Set Fields - llms.txt Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Field - llms.txt Row",
+        "to": "Summarize - Concatenate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Fields - llms.txt Content",
+        "to": "Generate llms.txt file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract data from Screaming Frog file",
+        "to": "Set useful fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Form - Screaming frog internal_html.csv upload",
+        "to": "Extract data from Screaming Frog file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/n8n",
+      "files": [
+        "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/n8n/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls.json"
+      ],
+      "sha256": "3174473628e33059077bd35cd96e8e1cb435ef4d531c4bc9bfa00a8fd8bb5ca3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/generate-ai-ready-llms-txt-files-from-screaming-frog-website-crawls/implementations/n8n/provenance.json"
+}

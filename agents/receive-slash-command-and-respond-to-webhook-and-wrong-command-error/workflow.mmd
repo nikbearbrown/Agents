@@ -1,0 +1,32 @@
+flowchart LR
+  n0["Receive Slash Command"]
+  n1["Reject"]
+  n2["Set"]
+  n3["Read Command"]
+  n4["Wrong Command Error"]
+  n5["Acknowledge"]
+  n6["Empty Email#63;"]
+  n7["Missing Email Error"]
+  n8["Valid Token#63;"]
+  n9["Paddle Data Deletion"]
+  n10["Customer.io Data Deletion"]
+  n11["Zendesk Data Deletion"]
+  n12["Airtable"]
+  n13["Prepare Log Entry"]
+  n14["Crypto"]
+  n15["Respond to Slack"]
+  n2 -->|"main out 0 to in 0"| n3
+  n14 -->|"main out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n15
+  n5 -->|"main out 0 to in 0"| n9
+  n6 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 1 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 3 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 1 to in 0"| n1
+  n13 -->|"main out 0 to in 0"| n14
+  n9 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n8
+  n11 -->|"main out 0 to in 0"| n13
+  n10 -->|"main out 0 to in 0"| n11

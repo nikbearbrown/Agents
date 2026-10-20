@@ -1,0 +1,74 @@
+flowchart LR
+  n0["Extract relevant data"]
+  n1["New /login event"]
+  n2["Unknown threat#63;"]
+  n3["Get last 10 logins from the same user"]
+  n4["Query IP API1"]
+  n5["New location#63;"]
+  n6["Parse User Agent"]
+  n7["Merge"]
+  n8["New Device/Browser#63;"]
+  n9["Complete login info"]
+  n10["Query user by ID"]
+  n11["New Location"]
+  n12["New Device/Browser"]
+  n13["User has email#63;"]
+  n14["HTML"]
+  n15["Inform user"]
+  n16["noise#63;"]
+  n17["Slack"]
+  n18["Check trust level"]
+  n19["Check classification"]
+  n20["riot#63;"]
+  n21["#128308; Priority: HIGH"]
+  n22["#128993; Priority: MEDIUM"]
+  n23["#128994; Priority: LOW"]
+  n24["GreyNoise"]
+  n25["IP API"]
+  n26["UserParser"]
+  n27["When clicking #34;Execute Workflow#34;"]
+  n28["Example event"]
+  n29["Known, Do Nothing"]
+  n30["Known Location"]
+  n31["Old Device/Browser"]
+  n32["Not Riot"]
+  n14 -->|"main out 0 to in 0"| n15
+  n7 -->|"main out 0 to in 1"| n9
+  n20 -->|"main out 0 to in 0"| n18
+  n20 -->|"main out 1 to in 0"| n32
+  n25 -->|"main out 0 to in 0"| n7
+  n16 -->|"main out 0 to in 0"| n19
+  n16 -->|"main out 1 to in 0"| n20
+  n24 -->|"main out 0 to in 0"| n9
+  n24 -->|"main out 0 to in 0"| n16
+  n26 -->|"main out 0 to in 1"| n7
+  n11 -->|"main out 0 to in 0"| n10
+  n28 -->|"main out 0 to in 0"| n0
+  n5 -->|"main out 0 to in 0"| n11
+  n5 -->|"main out 1 to in 0"| n30
+  n4 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 1 to in 0"| n29
+  n13 -->|"main out 0 to in 0"| n14
+  n1 -->|"main out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n13
+  n18 -->|"main out 1 to in 0"| n21
+  n18 -->|"main out 2 to in 0"| n22
+  n18 -->|"main out 3 to in 0"| n23
+  n12 -->|"main out 0 to in 0"| n10
+  n23 -->|"main out 0 to in 0"| n17
+  n9 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n12
+  n8 -->|"main out 1 to in 0"| n31
+  n21 -->|"main out 0 to in 0"| n17
+  n19 -->|"main out 0 to in 0"| n21
+  n19 -->|"main out 1 to in 0"| n22
+  n19 -->|"main out 2 to in 0"| n23
+  n0 -->|"main out 0 to in 0"| n24
+  n0 -->|"main out 0 to in 0"| n26
+  n0 -->|"main out 0 to in 0"| n25
+  n22 -->|"main out 0 to in 0"| n17
+  n27 -->|"main out 0 to in 0"| n28
+  n3 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n6

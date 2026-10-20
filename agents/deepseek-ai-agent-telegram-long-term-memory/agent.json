@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "slug": "deepseek-ai-agent-telegram-long-term-memory",
+  "title": "🐋🤖 DeepSeek AI Agent + Telegram + LONG TERM Memory 🧠",
+  "purpose": "Adapt the published “🐋🤖 DeepSeek AI Agent + Telegram + LONG TERM Memory 🧠” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Listen for Telegram Events",
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "Error message",
+    "Window Buffer Memory",
+    "When chat message received",
+    "Telegram Response",
+    "Save Long Term Memories",
+    "Response Error message",
+    "DeepSeek-R1 Reasoning",
+    "DeepSeek-V3 Chat"
+  ],
+  "credential_types": [
+    "googleDocsOAuth2Api",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Check User & Chat ID",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Error message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Listen for Telegram Events",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Validation",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Message Router",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": true
+      },
+      {
+        "name": "Telegram Response",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Save Long Term Memories",
+        "type": "n8n-nodes-base.googleDocsTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Long Term Memories",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Response Error message",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "DeepSeek-R1 Reasoning",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "DeepSeek-V3 Chat",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Telegram Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Response Error message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Validation",
+        "to": "Check User & Chat ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Message Router",
+        "to": "Merge",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Message Router",
+        "to": "Retrieve Long Term Memories",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Message Router",
+        "to": "Error message",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "DeepSeek-V3 Chat",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check User & Chat ID",
+        "to": "Message Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check User & Chat ID",
+        "to": "Error message",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Save Long Term Memories",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Listen for Telegram Events",
+        "to": "Validation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Long Term Memories",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/implementations/n8n",
+      "files": [
+        "agents/deepseek-ai-agent-telegram-long-term-memory/implementations/n8n/deepseek-ai-agent-telegram-long-term-memory.json"
+      ],
+      "sha256": "03fc555ec65ea053454d11224a40946d659281e05d0382ec3c325d43b365b676",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/deepseek-ai-agent-telegram-long-term-memory/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/deepseek-ai-agent-telegram-long-term-memory/implementations/n8n/provenance.json"
+}

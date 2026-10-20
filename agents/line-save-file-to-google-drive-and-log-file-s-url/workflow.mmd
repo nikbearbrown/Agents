@@ -1,0 +1,52 @@
+flowchart LR
+  n0["Get Config"]
+  n1["Create Date Folder"]
+  n2["Set Date Folder ID"]
+  n3["Create File Type Folder"]
+  n4["Upload File to Google Drive"]
+  n5["Determine Folder Info"]
+  n6["Search Date Folder"]
+  n7["Merge Event and Config Data"]
+  n8["Check Existing Date Folder"]
+  n9["Check Existing File Type Folder"]
+  n10["Merge Final Parent Folder Data"]
+  n11["Search File Type Folder"]
+  n12["Set File Type Folder ID"]
+  n13["Configure Final Parent Folder ID"]
+  n14["Process Event and Config Data"]
+  n15["Get File Binary Content"]
+  n16["Log File Details to Google Sheet"]
+  n17["Check Reply Enabled Flag"]
+  n18["Check if Store by Date is Enabled"]
+  n19["Check if Store by File Type is Enabled"]
+  n20["LINE Webhook Listener"]
+  n21["Send LINE Reply Message"]
+  n22["Validate File Type"]
+  n0 -->|"main out 0 to in 1"| n7
+  n1 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n11
+  n2 -->|"main out 0 to in 0"| n10
+  n22 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n6
+  n20 -->|"main out 0 to in 0"| n7
+  n20 -->|"main out 0 to in 0"| n0
+  n3 -->|"main out 0 to in 0"| n12
+  n15 -->|"main out 0 to in 0"| n22
+  n11 -->|"main out 0 to in 0"| n9
+  n12 -->|"main out 0 to in 1"| n10
+  n17 -->|"main out 0 to in 0"| n21
+  n8 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 1 to in 0"| n18
+  n7 -->|"main out 0 to in 0"| n14
+  n4 -->|"main out 0 to in 0"| n16
+  n14 -->|"main out 0 to in 0"| n5
+  n10 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n12
+  n9 -->|"main out 1 to in 0"| n19
+  n13 -->|"main out 0 to in 0"| n15
+  n16 -->|"main out 0 to in 0"| n17
+  n18 -->|"main out 0 to in 0"| n1
+  n18 -->|"main out 1 to in 0"| n2
+  n19 -->|"main out 0 to in 0"| n3
+  n19 -->|"main out 1 to in 0"| n12

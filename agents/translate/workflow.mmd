@@ -1,0 +1,28 @@
+flowchart LR
+  n0["Split Out"]
+  n1["Google Translate"]
+  n2["Aggregate"]
+  n3["Edit Fields"]
+  n4["Convert to File"]
+  n5["Split SRT Lines"]
+  n6["Generate Binary"]
+  n7["Prep Parts for Translate"]
+  n8["Clean Translations #38; Group Titles"]
+  n9["Join completed text with double new line"]
+  n10["Respond with file"]
+  n11["Receive SRT File to Translate"]
+  n12["Extract text from Binary File"]
+  n13["Expose Binary"]
+  n2 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n6
+  n13 -->|"main out 0 to in 0"| n12
+  n4 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n0
+  n1 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n1
+  n12 -->|"main out 0 to in 0"| n5
+  n11 -->|"main out 0 to in 0"| n13
+  n8 -->|"main out 0 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n3

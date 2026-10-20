@@ -1,0 +1,19 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Loop Over Items"]
+  n2["Edit Fields-set_model_data"]
+  n3["Google Sheets-Clear Sheet Data"]
+  n4["n8n-get all workflow"]
+  n5["Filter-get workflow contain modelid"]
+  n6["Split Out-nodes"]
+  n7["Filter-node contain modelId"]
+  n8["Google Sheets-Save node and workflow data"]
+  n1 -->|"main out 1 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n1

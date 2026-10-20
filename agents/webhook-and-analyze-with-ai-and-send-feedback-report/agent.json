@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "slug": "webhook-and-analyze-with-ai-and-send-feedback-report",
+  "title": "My workflow 4",
+  "purpose": "Adapt the published “My workflow 4” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Receive Feedback"
+  ],
+  "terminal_nodes": [
+    "Send Feedback Report",
+    "Send Social Draft"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Receive Feedback",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare AI Prompt",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Analyze with AI",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format AI Output",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Feedback Report",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Social Draft",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Analyze with AI",
+        "to": "Format AI Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format AI Output",
+        "to": "Send Feedback Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format AI Output",
+        "to": "Send Social Draft",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Receive Feedback",
+        "to": "Prepare AI Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare AI Prompt",
+        "to": "Analyze with AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/n8n",
+      "files": [
+        "agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/n8n/webhook-and-analyze-with-ai-and-send-feedback-report.json"
+      ],
+      "sha256": "ad4d0c3bf0fa937782638373ecd9a4dba1c415ead130318821b0f0559e8fb0d2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/webhook-and-analyze-with-ai-and-send-feedback-report/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,27 @@
+flowchart LR
+  n0["Embeddings OpenAI1"]
+  n1["On new manual Chat Message"]
+  n2["Retrieval QA Chain"]
+  n3["Respond to Webhook"]
+  n4["Vector Store Retriever"]
+  n5["Webhook1"]
+  n6["When clicking #34;Execute Workflow#34;"]
+  n7["Google Drive"]
+  n8["Binary to Document"]
+  n9["Recursive Character Text Splitter"]
+  n10["Embeddings OpenAI"]
+  n11["Qdrant Vector Store"]
+  n12["Qdrant Vector Store1"]
+  n13["OpenAI Chat Model"]
+  n5 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n11
+  n10 -->|"ai_embedding out 0 to in 0"| n11
+  n13 -->|"ai_languageModel out 0 to in 0"| n2
+  n8 -->|"ai_document out 0 to in 0"| n11
+  n0 -->|"ai_embedding out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n3
+  n12 -->|"ai_vectorStore out 0 to in 0"| n4
+  n4 -->|"ai_retriever out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n7
+  n9 -->|"ai_textSplitter out 0 to in 0"| n8

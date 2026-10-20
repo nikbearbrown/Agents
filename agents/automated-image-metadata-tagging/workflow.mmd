@@ -1,0 +1,17 @@
+flowchart LR
+  n0["Extract from File"]
+  n1["Convert to File"]
+  n2["Analyze Image Content"]
+  n3["Download Image File"]
+  n4["Trigger: New file added to Google Drive Folder"]
+  n5["Write Metadata to Base64 Code"]
+  n6["Update Image File"]
+  n7["Merge Metadata and Base64 Code"]
+  n1 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 1"| n7
+  n3 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n1
+  n7 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n3

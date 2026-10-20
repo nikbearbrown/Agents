@@ -1,0 +1,33 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Create Asset"]
+  n2["Execute Workflow Trigger"]
+  n3["Adobe API Query"]
+  n4["Load a test pdf file"]
+  n5["Query #43; File"]
+  n6["Query #43; File #43; Asset information"]
+  n7["Process Query"]
+  n8["Wait 5 second"]
+  n9["Try to download the result"]
+  n10["Switch"]
+  n11["Forward response to origin workflow"]
+  n12["Authenticartion #40;get token#41;"]
+  n13["Upload PDF File #40;asset#41;"]
+  n10 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 1 to in 0"| n11
+  n10 -->|"main out 2 to in 0"| n11
+  n1 -->|"main out 0 to in 1"| n6
+  n5 -->|"main out 0 to in 0"| n12
+  n5 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 1"| n5
+  n13 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n10
+  n12 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n13
+  n0 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n3

@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "slug": "sync-new-files-from-google-drive-with-airtable",
+  "title": "Sync New Files From Google Drive with Airtable",
+  "purpose": "Adapt the published “Sync New Files From Google Drive with Airtable” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Google Drive"
+  ],
+  "terminal_nodes": [
+    " Log File Metadata"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "googleDriveOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Share File with Recipient",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": " Log File Metadata",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Google Drive",
+        "to": "Share File with Recipient",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Share File with Recipient",
+        "to": " Log File Metadata",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/implementations/n8n",
+      "files": [
+        "agents/sync-new-files-from-google-drive-with-airtable/implementations/n8n/sync-new-files-from-google-drive-with-airtable.json"
+      ],
+      "sha256": "ac850dcd3d7354d647473ee519fd1aecd5eabab1619cccc873cbc19ece6cda50",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/sync-new-files-from-google-drive-with-airtable/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/sync-new-files-from-google-drive-with-airtable/implementations/n8n/provenance.json"
+}

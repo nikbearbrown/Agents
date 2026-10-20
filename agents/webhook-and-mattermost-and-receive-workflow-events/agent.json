@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "slug": "webhook-and-mattermost-and-receive-workflow-events",
+  "title": "webhook and mattermost and receive workflow events",
+  "purpose": "Adapt the published “webhook and mattermost and receive workflow events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook",
+    "Workflow Trigger"
+  ],
+  "terminal_nodes": [
+    "Set",
+    "Mattermost"
+  ],
+  "credential_types": [
+    "mattermostApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Mattermost",
+        "type": "n8n-nodes-base.mattermost",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Workflow Trigger",
+        "type": "n8n-nodes-base.workflowTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Webhook",
+        "to": "Set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Workflow Trigger",
+        "to": "Mattermost",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/implementations/n8n",
+      "files": [
+        "agents/webhook-and-mattermost-and-receive-workflow-events/implementations/n8n/webhook-and-mattermost-and-receive-workflow-events.json"
+      ],
+      "sha256": "9deefcc96f28d212e377ffbb138777e8bf11fbc48a14a22bd0ee378b21ff9d3d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/webhook-and-mattermost-and-receive-workflow-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/webhook-and-mattermost-and-receive-workflow-events/implementations/n8n/provenance.json"
+}

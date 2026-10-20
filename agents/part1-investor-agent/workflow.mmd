@@ -1,0 +1,21 @@
+flowchart LR
+  n0["Webhook - Chat Interface"]
+  n1["Parse User Question"]
+  n2["DB - Get Recent Deals"]
+  n3["Format Chatbot Response"]
+  n4["Send Response"]
+  n5["Get top investor"]
+  n6["Route by Query Type"]
+  n7["Investor Profile SQL node"]
+  n8["Startup Investors SQL node"]
+  n0 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n3
+  n6 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 1 to in 0"| n2
+  n6 -->|"main out 2 to in 0"| n7
+  n6 -->|"main out 3 to in 0"| n8
+  n7 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n3

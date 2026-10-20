@@ -1,0 +1,17 @@
+flowchart LR
+  n0["On order updated"]
+  n1["Keep only userId"]
+  n2["New Order, deal not found"]
+  n3["Do Nothing"]
+  n4["Create new deal"]
+  n5["Find if order already exists as deal"]
+  n6["Add Hubspot userId to data"]
+  n7["Create or update contact"]
+  n1 -->|"main out 0 to in 1"| n6
+  n0 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 1 to in 0"| n3
+  n6 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n2

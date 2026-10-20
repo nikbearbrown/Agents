@@ -1,0 +1,30 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["GET - Workflows"]
+  n2["CREATE - Workflow"]
+  n3["n8n - GET - Projects"]
+  n4["SET Project ID"]
+  n5["PUT - Workflow in Project"]
+  n6["Loop Over Items"]
+  n7["GET - Destination Workflows"]
+  n8["Code"]
+  n9["Split Out Workflows"]
+  n10["Split Out Workflows1"]
+  n11["Merge Workflows"]
+  n12["Split Out Projects"]
+  n13["Filter Project"]
+  n8 -->|"main out 0 to in 0"| n6
+  n13 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n9
+  n6 -->|"main out 1 to in 0"| n2
+  n11 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n3
+  n12 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 1"| n11
+  n3 -->|"main out 0 to in 0"| n12
+  n5 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n1
+  n0 -->|"main out 0 to in 0"| n7

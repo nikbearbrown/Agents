@@ -1,0 +1,49 @@
+flowchart LR
+  n0["Webhook"]
+  n1["Try Again"]
+  n2["Success"]
+  n3["Calendar Agent"]
+  n4["Create Event with Attendee"]
+  n5["Create Event"]
+  n6["Get Events"]
+  n7["Delete Event"]
+  n8["Update Event"]
+  n9["When Executed by Another Workflow"]
+  n10["OpenAI Chat Model2"]
+  n11["calendarAgent"]
+  n12["Structured Output Parser"]
+  n13["Get list of owners"]
+  n14["Split Out owners"]
+  n15["Get current owner"]
+  n16["HubSpot Trigger"]
+  n17["Enter your company data here"]
+  n18["If a contact is created"]
+  n19["Get all info about the contact"]
+  n20["Write a personalized message"]
+  n21["Send the message"]
+  n22["Set owner to contact"]
+  n23["Transforms markdown to HTML"]
+  n24["OpenAI Model"]
+  n0 -->|"main out 0 to in 0"| n17
+  n6 -->|"ai_tool out 0 to in 0"| n3
+  n5 -->|"ai_tool out 0 to in 0"| n3
+  n7 -->|"ai_tool out 0 to in 0"| n3
+  n24 -->|"ai_languageModel out 0 to in 0"| n3
+  n8 -->|"ai_tool out 0 to in 0"| n3
+  n11 -->|"ai_tool out 0 to in 0"| n20
+  n3 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 1 to in 0"| n1
+  n16 -->|"main out 0 to in 0"| n17
+  n21 -->|"main out 0 to in 0"| n22
+  n14 -->|"main out 0 to in 0"| n15
+  n15 -->|"main out 0 to in 0"| n18
+  n13 -->|"main out 0 to in 0"| n14
+  n10 -->|"ai_languageModel out 0 to in 0"| n20
+  n18 -->|"main out 0 to in 0"| n19
+  n12 -->|"ai_outputParser out 0 to in 0"| n20
+  n4 -->|"ai_tool out 0 to in 0"| n3
+  n23 -->|"main out 0 to in 0"| n21
+  n17 -->|"main out 0 to in 0"| n13
+  n20 -->|"main out 0 to in 0"| n23
+  n19 -->|"main out 0 to in 0"| n20
+  n9 -->|"main out 0 to in 0"| n3

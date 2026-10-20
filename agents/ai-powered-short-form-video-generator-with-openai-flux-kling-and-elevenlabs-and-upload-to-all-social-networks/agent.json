@@ -1,0 +1,705 @@
+{
+  "schema_version": 1,
+  "slug": "ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks",
+  "title": "AI-Powered Short-Form Video Generator with OpenAI, Flux, Kling, and ElevenLabs and upload to all social networks",
+  "purpose": "Adapt the published “AI-Powered Short-Form Video Generator with OpenAI, Flux, Kling, and ElevenLabs and upload to all social networks” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 43 executable nodes and 47 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Once Per Day"
+  ],
+  "terminal_nodes": [
+    "Notify me on Discord",
+    "Upload Video and Description to Tiktok",
+    "Upload Video and Description to Instagram",
+    "Upload Video and Description to Youtube",
+    "Upload Video and Description to Facebook",
+    "Upload Video and Description to Linkedin"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "httpHeaderAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Image-to-Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "List Elements",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Wait 10min",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 3min",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 5min",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate voice",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "List Elements1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Fail check",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait to retry",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Image Prompts",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Token Usage",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check for failures",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Video Captions",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Match captions with videos",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Generate Script",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Upload Voice Audio",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Set Access Permissions",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Pair Videos with Audio",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Render Final Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Notify me on Discord",
+        "type": "n8n-nodes-base.discord",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Once Per Day",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Load Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Create List",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Wait1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Final Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Final Video",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get Raw File",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Permissions",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Update Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Set API Keys",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Validate list formatting",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Audio from Video",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Description for Videos  in Tiktok and Instagram",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Upload Video and Description to Tiktok",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Video and Description to Instagram",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Video and Description to Youtube",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Video and Description to Facebook",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Upload Video and Description to Linkedin",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Read Video from Google Drive",
+        "type": "n8n-nodes-base.readBinaryFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Write video",
+        "type": "n8n-nodes-base.writeBinaryFile",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait1",
+        "to": "Get Final Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Video",
+        "to": "Fail check",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get image",
+        "to": "Check for failures",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait 3min",
+        "to": "Get image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait 5min",
+        "to": "Generate Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fail check",
+        "to": "Wait to retry",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fail check",
+        "to": "Match captions with videos",
+        "kind": "main",
+        "output": 1,
+        "input": 1
+      },
+      {
+        "from": "Wait 10min",
+        "to": "Get Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create List",
+        "to": "Validate list formatting",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Write video",
+        "to": "Get Audio from Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Raw File",
+        "to": "Upload Final Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Raw File",
+        "to": "Write video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Once Per Day",
+        "to": "Set API Keys",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set API Keys",
+        "to": "Load Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List Elements",
+        "to": "Pair Videos with Audio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait to retry",
+        "to": "Image-to-Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Image",
+        "to": "Wait 3min",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate voice",
+        "to": "Upload Voice Audio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Image-to-Video",
+        "to": "Wait 10min",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List Elements1",
+        "to": "Pair Videos with Audio",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Generate Script",
+        "to": "Generate voice",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Final Video",
+        "to": "Get Raw File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Permissions",
+        "to": "Update Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Load Google Sheet",
+        "to": "Generate Video Captions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for failures",
+        "to": "Wait 5min",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check for failures",
+        "to": "Image-to-Video",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Render Final Video",
+        "to": "Wait1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Final Video",
+        "to": "Set Permissions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Voice Audio",
+        "to": "Set Access Permissions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Google Sheet",
+        "to": "Notify me on Discord",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Audio from Video",
+        "to": "Generate Description for Videos  in Tiktok and Instagram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate Token Usage",
+        "to": "Generate Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Image Prompts",
+        "to": "Calculate Token Usage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Pair Videos with Audio",
+        "to": "Render Final Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Access Permissions",
+        "to": "List Elements1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Video Captions",
+        "to": "Create List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate list formatting",
+        "to": "Generate Image Prompts",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate list formatting",
+        "to": "Match captions with videos",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate list formatting",
+        "to": "Generate Script",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Validate list formatting",
+        "to": "Generate Video Captions",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Match captions with videos",
+        "to": "List Elements",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Video from Google Drive",
+        "to": "Upload Video and Description to Tiktok",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Video from Google Drive",
+        "to": "Upload Video and Description to Instagram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Video from Google Drive",
+        "to": "Upload Video and Description to Youtube",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Video from Google Drive",
+        "to": "Upload Video and Description to Facebook",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read Video from Google Drive",
+        "to": "Upload Video and Description to Linkedin",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Description for Videos  in Tiktok and Instagram",
+        "to": "Read Video from Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/n8n",
+      "files": [
+        "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/n8n/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks.json"
+      ],
+      "sha256": "96539d564c9e32baec3a1203861e25872c628e634e5b76cc17a888facdd12e78",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/ai-powered-short-form-video-generator-with-openai-flux-kling-and-elevenlabs-and-upload-to-all-social-networks/implementations/n8n/provenance.json"
+}

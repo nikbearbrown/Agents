@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "slug": "receive-gmail-events-and-split-out-and-only-keep-invoice-link",
+  "title": "receive gmail events and split out and only keep invoice link",
+  "purpose": "Adapt the published “receive gmail events and split out and only keep invoice link” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Gmail Trigger"
+  ],
+  "terminal_nodes": [
+    "Do nothing on other emails",
+    "Move to the correct folder"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDriveOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Gmail Trigger",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Only n8n Paddle invoice mails",
+        "type": "n8n-nodes-base.if",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Only keep invoice link",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Do nothing on other emails",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Setup",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Download Invoice PDF from URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Rename file",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Move to the correct folder",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Upload PDF to Drive",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Extract \"a-tags\" from email",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Setup",
+        "to": "Only n8n Paddle invoice mails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Only keep invoice link",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rename file",
+        "to": "Move to the correct folder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail Trigger",
+        "to": "Setup",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload PDF to Drive",
+        "to": "Rename file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only keep invoice link",
+        "to": "Download Invoice PDF from URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract \"a-tags\" from email",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Invoice PDF from URL",
+        "to": "Upload PDF to Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only n8n Paddle invoice mails",
+        "to": "Extract \"a-tags\" from email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Only n8n Paddle invoice mails",
+        "to": "Do nothing on other emails",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/n8n",
+      "files": [
+        "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/n8n/receive-gmail-events-and-split-out-and-only-keep-invoice-link.json"
+      ],
+      "sha256": "11c78cc9f8f67ec1b54fddd43d3e04b2a30e8d20756517245ef02ef6c7c5002a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-gmail-events-and-split-out-and-only-keep-invoice-link/implementations/n8n/provenance.json"
+}

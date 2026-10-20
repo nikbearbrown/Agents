@@ -1,0 +1,30 @@
+flowchart LR
+  n0["OpenAI1"]
+  n1["Webhook GET Note"]
+  n2["Webhook GET Podcast Feed"]
+  n3["Upload Audio to Cloudinary"]
+  n4["OpenAI"]
+  n5["Merge"]
+  n6["Aggregate"]
+  n7["Give Audio Unique Name"]
+  n8["Send Audio to Obsidian"]
+  n9["Rename Fields"]
+  n10["Append Item to Google Sheet"]
+  n11["Get Items from Google Sheets"]
+  n12["Write RSS Feed"]
+  n13["Return Podcast Feed to Webhook"]
+  n14["Manually Enter Other Data for Podcast Feed"]
+  n5 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 1"| n5
+  n0 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n10
+  n12 -->|"main out 0 to in 0"| n13
+  n1 -->|"main out 0 to in 0"| n0
+  n1 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n5
+  n11 -->|"main out 0 to in 0"| n14
+  n14 -->|"main out 0 to in 0"| n12

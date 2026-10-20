@@ -1,0 +1,25 @@
+flowchart LR
+  n0["Split results"]
+  n1["Piloterr - Get Recent Fundraise - Serie A"]
+  n2["Piloterr - Get Recent Fundraise - Serie B"]
+  n3["Google Sheets"]
+  n4["Piloterr - Get Recent Fundraise - Seed"]
+  n5["Prepare data"]
+  n6["Piloterr - Enrich company"]
+  n7["Merge"]
+  n8["Schedule Trigger - Run Workflow Every Day"]
+  n9["Prepare data before importing to Gsheets"]
+  n10["Get Linkedin URL from object"]
+  n7 -->|"main out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 0 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n0
+  n9 -->|"main out 0 to in 1"| n7
+  n1 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n0
+  n8 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n4

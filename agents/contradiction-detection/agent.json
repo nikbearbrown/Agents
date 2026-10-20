@@ -1,0 +1,452 @@
+{
+  "schema_version": 1,
+  "slug": "contradiction-detection",
+  "title": "Contradiction_detection_agent",
+  "purpose": "Adapt the published “Contradiction_detection_agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 26 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Manual Trigger"
+  ],
+  "terminal_nodes": [
+    "Build Final Report",
+    "Execute a SQL query",
+    "Execute a SQL query1",
+    "Execute a SQL query2",
+    "Execute a SQL query3"
+  ],
+  "credential_types": [
+    "postgres"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Company Input",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "DB: Fetch Earnings Guidance Signals",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "DB: Fetch Risk Admissions",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "DB: Fetch QA Pressure Map",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "DB: Fetch News Signals",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "DB: Fetch Tech Stack Signals",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate All Signals",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Run Pattern Detection Engine",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Build Groq Prompt",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "LLM Needed?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Groq: Analyse Contradictions",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Process Groq Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "No-Flag Passthrough",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DB: Insert Contradiction Report",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Fan Out Flags",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DB: Insert Contradiction Flag",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.5,
+        "disabled": false
+      },
+      {
+        "name": "Build Final Report",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Execute a SQL query",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": true
+      },
+      {
+        "name": "Execute a SQL query1",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": true
+      },
+      {
+        "name": "Execute a SQL query2",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": true
+      },
+      {
+        "name": "Execute a SQL query3",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": true
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Process News Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DB: Save News Signals",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Manual Trigger",
+        "to": "Set Company Input",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Company Input",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Company Input",
+        "to": "DB: Fetch Earnings Guidance Signals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Company Input",
+        "to": "DB: Fetch Tech Stack Signals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Company Input",
+        "to": "DB: Fetch Risk Admissions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Company Input",
+        "to": "DB: Fetch QA Pressure Map",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Fetch Earnings Guidance Signals",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "DB: Fetch Risk Admissions",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "DB: Fetch QA Pressure Map",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Fetch News Signals",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "DB: Fetch Tech Stack Signals",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Aggregate All Signals",
+        "to": "Run Pattern Detection Engine",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Run Pattern Detection Engine",
+        "to": "Build Groq Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Groq Prompt",
+        "to": "LLM Needed?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LLM Needed?",
+        "to": "Groq: Analyse Contradictions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LLM Needed?",
+        "to": "No-Flag Passthrough",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Groq: Analyse Contradictions",
+        "to": "Process Groq Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Groq Response",
+        "to": "DB: Insert Contradiction Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No-Flag Passthrough",
+        "to": "DB: Insert Contradiction Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Insert Contradiction Report",
+        "to": "Fan Out Flags",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fan Out Flags",
+        "to": "DB: Insert Contradiction Flag",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Insert Contradiction Flag",
+        "to": "Build Final Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Process News Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process News Response",
+        "to": "DB: Save News Signals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DB: Save News Signals",
+        "to": "DB: Fetch News Signals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Aggregate All Signals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/contradiction-detection/implementations/n8n",
+      "files": [
+        "agents/contradiction-detection/implementations/n8n/contradiction-detection.json"
+      ],
+      "sha256": "185904b0a4425229c79f6244c90fc592efdbb314c41adec28b2445ae59a1be19",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/contradiction-detection/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/contradiction-detection/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/contradiction-detection/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/contradiction-detection/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/contradiction-detection/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/contradiction-detection/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/contradiction-detection/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/contradiction-detection/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/contradiction-detection/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/contradiction-detection/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/contradiction-detection/implementations/n8n/provenance.json"
+}

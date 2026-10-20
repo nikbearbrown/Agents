@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "slug": "cron-and-baserow-and-fetch-tradegate-stock-page",
+  "title": "cron and baserow and fetch tradegate stock page",
+  "purpose": "Adapt the published “cron and baserow and fetch tradegate stock page” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On clicking 'execute'",
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "SendGrid"
+  ],
+  "credential_types": [
+    "baserowApi",
+    "sendGridApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On clicking 'execute'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Baserow",
+        "type": "n8n-nodes-base.baserow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Fetch tradegate stock page",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse tradegate stock page",
+        "type": "n8n-nodes-base.htmlExtract",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Build HTML",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format result",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calculate change",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SendGrid",
+        "type": "n8n-nodes-base.sendGrid",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron",
+        "to": "Baserow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Baserow",
+        "to": "Fetch tradegate stock page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build HTML",
+        "to": "SendGrid",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format result",
+        "to": "Calculate change",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calculate change",
+        "to": "Build HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On clicking 'execute'",
+        "to": "Baserow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch tradegate stock page",
+        "to": "Parse tradegate stock page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse tradegate stock page",
+        "to": "Format result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/n8n",
+      "files": [
+        "agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/n8n/cron-and-baserow-and-fetch-tradegate-stock-page.json"
+      ],
+      "sha256": "3a0081057736b4a2c50fd58d6a38ceef5da6d0845a0896f8d1bcdd45d391a56a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/cron-and-baserow-and-fetch-tradegate-stock-page/implementations/n8n/provenance.json"
+}

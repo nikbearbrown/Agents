@@ -1,0 +1,29 @@
+flowchart LR
+  n0["Global Variables"]
+  n1["Fetch Report IDs"]
+  n2["Convert XML To JSON"]
+  n3["Launch Report"]
+  n4["Loop Over Items"]
+  n5["Wait 1 Minute"]
+  n6["Check Status of Report"]
+  n7["Is Report Finished#63;"]
+  n8["Download Report"]
+  n9["Slack"]
+  n10["Convert Report Launch XML to JSON"]
+  n11["Convert Report List to JSON"]
+  n12["Execute Workflow Trigger"]
+  n13["Demo Data"]
+  n13 -->|"main out 0 to in 0"| n0
+  n3 -->|"main out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 1 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n8
+  n7 -->|"main out 1 to in 0"| n4
+  n6 -->|"main out 0 to in 0"| n11
+  n12 -->|"main out 0 to in 0"| n13
+  n11 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 0"| n4

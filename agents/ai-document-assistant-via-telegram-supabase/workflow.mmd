@@ -1,0 +1,52 @@
+flowchart LR
+  n0["Google Gemini Chat Model"]
+  n1["OpenWeatherMap"]
+  n2["AI Agent"]
+  n3["Telegram Trigger"]
+  n4["Telegram"]
+  n5["Think"]
+  n6["Embeddings Google Gemini"]
+  n7["Default Data Loader"]
+  n8["Recursive Character Text Splitter"]
+  n9["Extract from File"]
+  n10["Answer questions with a vector store"]
+  n11["Supabase Vector Store"]
+  n12["Telegram - Embedding Complete"]
+  n13["Supabase - Save Embeddings"]
+  n14["Command Router"]
+  n15["Telegram - Download file"]
+  n16["Aggregate"]
+  n17["Fallback- No formatting"]
+  n18["Split Out"]
+  n19["Simple Memory"]
+  n20["Handle formatting and split"]
+  n21["Manual Mapping"]
+  n22["Unsupported message"]
+  n23["Send processing document message"]
+  n24["Send embedding Started message"]
+  n5 -->|"ai_tool out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n20
+  n4 -->|"main out 1 to in 0"| n17
+  n16 -->|"main out 0 to in 0"| n12
+  n18 -->|"main out 0 to in 0"| n21
+  n19 -->|"ai_memory out 0 to in 0"| n2
+  n14 -->|"main out 0 to in 0"| n15
+  n14 -->|"main out 1 to in 0"| n2
+  n14 -->|"main out 2 to in 0"| n22
+  n21 -->|"main out 0 to in 0"| n4
+  n1 -->|"ai_tool out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n14
+  n9 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n24
+  n7 -->|"ai_document out 0 to in 0"| n13
+  n11 -->|"ai_vectorStore out 0 to in 0"| n10
+  n6 -->|"ai_embedding out 0 to in 0"| n13
+  n6 -->|"ai_embedding out 0 to in 0"| n11
+  n0 -->|"ai_languageModel out 0 to in 0"| n2
+  n0 -->|"ai_languageModel out 0 to in 0"| n10
+  n15 -->|"main out 0 to in 0"| n9
+  n15 -->|"main out 0 to in 0"| n23
+  n13 -->|"main out 0 to in 0"| n16
+  n20 -->|"main out 0 to in 0"| n18
+  n8 -->|"ai_textSplitter out 0 to in 0"| n7
+  n10 -->|"ai_tool out 0 to in 0"| n2

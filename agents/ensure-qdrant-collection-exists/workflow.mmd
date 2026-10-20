@@ -1,0 +1,47 @@
+flowchart LR
+  n0["When clicking #34;Test workflow#34;"]
+  n1["Get This Week#39;s Menu"]
+  n2["Extract Available Courses"]
+  n3["Extract Server Data"]
+  n4["Get Course Metadata"]
+  n5["Get Recipe"]
+  n6["Embeddings Mistral Cloud"]
+  n7["Default Data Loader"]
+  n8["Merge Course #38; Recipe"]
+  n9["Prepare Documents"]
+  n10["Recursive Character Text Splitter"]
+  n11["Chat Trigger"]
+  n12["Extract Recipe Details"]
+  n13["Qdrant Recommend API"]
+  n14["Execute Workflow Trigger"]
+  n15["Mistral Cloud Chat Model"]
+  n16["Get Tool Response"]
+  n17["Wait for Rate Limits"]
+  n18["Get Mistral Embeddings"]
+  n19["Use Qdrant Recommend API"]
+  n20["Get Recipes From DB"]
+  n21["Save Recipes to DB"]
+  n22["AI Agent"]
+  n23["Qdrant Vector Store"]
+  n5 -->|"main out 0 to in 0"| n12
+  n11 -->|"main out 0 to in 0"| n22
+  n9 -->|"main out 0 to in 0"| n23
+  n9 -->|"main out 0 to in 0"| n21
+  n7 -->|"ai_document out 0 to in 0"| n23
+  n3 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n8
+  n20 -->|"main out 0 to in 0"| n16
+  n1 -->|"main out 0 to in 0"| n3
+  n13 -->|"ai_tool out 0 to in 0"| n22
+  n17 -->|"main out 0 to in 0"| n18
+  n8 -->|"main out 0 to in 0"| n9
+  n12 -->|"main out 0 to in 1"| n8
+  n18 -->|"main out 0 to in 0"| n19
+  n6 -->|"ai_embedding out 0 to in 0"| n23
+  n14 -->|"main out 0 to in 0"| n17
+  n15 -->|"ai_languageModel out 0 to in 0"| n22
+  n19 -->|"main out 0 to in 0"| n20
+  n2 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n1
+  n10 -->|"ai_textSplitter out 0 to in 0"| n7

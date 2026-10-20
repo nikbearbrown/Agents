@@ -1,0 +1,61 @@
+flowchart LR
+  n0["Get current date"]
+  n1["Get last 10 liked tracks"]
+  n2["Check if track is saved"]
+  n3["Is not saved"]
+  n4["Create song entry"]
+  n5["Get all user playlist"]
+  n6["Get monthly playlist"]
+  n7["Get playlist in DB"]
+  n8["Monthly playlist exist in Spotify #63;"]
+  n9["Playlist exist in DB #63;"]
+  n10["Create playlist in Spotify"]
+  n11["Create playlist in DB1"]
+  n12["Create playlist in DB"]
+  n13["Merge"]
+  n14["Clean op"]
+  n15["Clean op2"]
+  n16["Get this month playlist in DB"]
+  n17["Get this month tracks in DB"]
+  n18["Add song to the playlist"]
+  n19["For each tracks in liked song"]
+  n20["For each monthly tracks in DB"]
+  n21["Get this month tracks in Spotify"]
+  n22["Filter1"]
+  n23["Song is not present in the playlist #63;"]
+  n24["Clean op1"]
+  n25["Schedule Trigger"]
+  n26["End"]
+  n13 -->|"main out 0 to in 0"| n16
+  n22 -->|"main out 0 to in 0"| n23
+  n14 -->|"main out 0 to in 0"| n13
+  n24 -->|"main out 0 to in 0"| n20
+  n15 -->|"main out 0 to in 0"| n19
+  n3 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 1 to in 0"| n15
+  n0 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n1
+  n25 -->|"main out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n15
+  n7 -->|"main out 0 to in 0"| n9
+  n6 -->|"main out 0 to in 0"| n8
+  n12 -->|"main out 0 to in 0"| n14
+  n5 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 0 to in 0"| n14
+  n2 -->|"main out 0 to in 0"| n3
+  n9 -->|"main out 0 to in 0"| n14
+  n9 -->|"main out 1 to in 0"| n12
+  n18 -->|"main out 0 to in 0"| n24
+  n1 -->|"main out 0 to in 0"| n19
+  n10 -->|"main out 0 to in 0"| n11
+  n17 -->|"main out 0 to in 0"| n20
+  n20 -->|"main out 0 to in 0"| n26
+  n20 -->|"main out 1 to in 0"| n21
+  n19 -->|"main out 0 to in 1"| n13
+  n19 -->|"main out 1 to in 0"| n2
+  n16 -->|"main out 0 to in 0"| n17
+  n21 -->|"main out 0 to in 0"| n22
+  n8 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 1 to in 0"| n10
+  n23 -->|"main out 0 to in 0"| n18
+  n23 -->|"main out 1 to in 0"| n24

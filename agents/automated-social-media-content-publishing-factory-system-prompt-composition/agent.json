@@ -1,0 +1,902 @@
+{
+  "schema_version": 1,
+  "slug": "automated-social-media-content-publishing-factory-system-prompt-composition",
+  "title": "✨🩷Automated Social Media Content Publishing Factory + System Prompt Composition",
+  "purpose": "Adapt the published “✨🩷Automated Social Media Content Publishing Factory + System Prompt Composition” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 57 executable nodes and 60 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received",
+    "When Executed by Another Workflow"
+  ],
+  "terminal_nodes": [
+    "X-Twiter",
+    "Instagram",
+    "Window Buffer Memory",
+    "Facebook",
+    "LinkedIn",
+    "Short",
+    "YouTube Short",
+    "Gmail",
+    "gpt-40-mini",
+    "gpt-40-mini1",
+    "gpt-4o-mini",
+    "Respond with Google Drive Id",
+    "Telegram Success Message (Optional)",
+    "Telegram Error Message (Optional)",
+    "Implement Threads Here",
+    "Implement YouTube Shorts Here",
+    "X Response",
+    "Instagram Response",
+    "Facebook Response",
+    "LinkedIn Response",
+    "SerpAPI",
+    "gpt-4o"
+  ],
+  "credential_types": [
+    "facebookGraphApi",
+    "gmailOAuth2",
+    "googleDocsOAuth2Api",
+    "googleDriveOAuth2Api",
+    "linkedInOAuth2Api",
+    "openAiApi",
+    "serpApi",
+    "telegramApi",
+    "twitterOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "X-Twiter",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Instagram",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Facebook",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "LinkedIn",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Short",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "YouTube Short",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "pollinations.ai1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Save Image to imgbb.com",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Social Media Schema",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Social Media System Prompt",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "gpt-40-mini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Instagram Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "X Post",
+        "type": "n8n-nodes-base.twitter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Instragram Post",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Facebook Post",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "LinkedIn Post",
+        "type": "n8n-nodes-base.linkedIn",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail User for Approval",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Social Post Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "gpt-40-mini1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o-mini",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Schema",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "System Prompt",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Parse Schema",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse System Prompt",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Compose Prompt & Schema",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Social Media Content Creator",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Merge Prompts and Schema",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Social Content",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Save Image to Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Save Social Post to Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive Image Meta",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Social Post JSON",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Respond with Google Drive Id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Success Message (Optional)",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Error Message (Optional)",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Social Media Publishing Router",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Email Contents",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Is Approved?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "File Id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Social Post from Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Extract as JSON",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Image and Post Contents",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Implement Threads Here",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Implement YouTube Shorts Here",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "X Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Instagram Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Facebook Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "LinkedIn Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "🤖Social Media Router Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "SerpAPI",
+        "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Social Media Email Contents",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "gpt-4o",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Prepare Social Media Email Contents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge",
+        "to": "Google Drive Image Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Short",
+        "to": "🤖Social Media Router Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schema",
+        "to": "Parse Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "X Post",
+        "to": "X Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-4o",
+        "to": "🤖Social Media Router Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File Id",
+        "to": "Get Social Post from Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SerpAPI",
+        "to": "Social Media Content Creator",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Facebook",
+        "to": "🤖Social Media Router Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LinkedIn",
+        "to": "🤖Social Media Router Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "X-Twiter",
+        "to": "🤖Social Media Router Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Instagram",
+        "to": "🤖Social Media Router Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-40-mini",
+        "to": "Prepare Social Media Email Contents",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-4o-mini",
+        "to": "Social Media Content Creator",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Approved?",
+        "to": "Get Social Post Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Schema",
+        "to": "Merge Prompts and Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gpt-40-mini1",
+        "to": "Prepare Email Contents",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Facebook Post",
+        "to": "Facebook Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LinkedIn Post",
+        "to": "LinkedIn Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "System Prompt",
+        "to": "Parse System Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "YouTube Short",
+        "to": "🤖Social Media Router Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Social Content",
+        "to": "pollinations.ai1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract as JSON",
+        "to": "Merge Image and Post Contents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract as JSON",
+        "to": "Prepare Email Contents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Instagram Image",
+        "to": "Instragram Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Instragram Post",
+        "to": "Instagram Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Social Post JSON",
+        "to": "Save Social Post to Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "pollinations.ai1",
+        "to": "Telegram Success Message (Optional)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "pollinations.ai1",
+        "to": "Save Image to imgbb.com",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "pollinations.ai1",
+        "to": "Save Image to Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "pollinations.ai1",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "pollinations.ai1",
+        "to": "Telegram Error Message (Optional)",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Parse System Prompt",
+        "to": "Merge Prompts and Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Social Media Schema",
+        "to": "Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Window Buffer Memory",
+        "to": "🤖Social Media Router Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Social Post Image",
+        "to": "Merge Image and Post Contents",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Prepare Email Contents",
+        "to": "Gmail User for Approval",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compose Prompt & Schema",
+        "to": "Social Media Content Creator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail User for Approval",
+        "to": "Is Approved?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Drive Image Meta",
+        "to": "Social Post JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Image to imgbb.com",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Prompts and Schema",
+        "to": "Compose Prompt & Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Image to Google Drive",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Social Media System Prompt",
+        "to": "System Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When chat message received",
+        "to": "🤖Social Media Router Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Social Media Content Creator",
+        "to": "Social Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Image and Post Contents",
+        "to": "Social Media Publishing Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🤖Social Media Router Agent",
+        "to": "File Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Social Media Publishing Router",
+        "to": "X Post",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Social Media Publishing Router",
+        "to": "Instagram Image",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Social Media Publishing Router",
+        "to": "Facebook Post",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Social Media Publishing Router",
+        "to": "LinkedIn Post",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Social Media Publishing Router",
+        "to": "Implement Threads Here",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Social Media Publishing Router",
+        "to": "Implement YouTube Shorts Here",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Save Social Post to Google Drive",
+        "to": "Respond with Google Drive Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Social Post from Google Drive",
+        "to": "Extract as JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Social Media System Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Social Media Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Merge Prompts and Schema",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Prepare Social Media Email Contents",
+        "to": "Gmail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/n8n",
+      "files": [
+        "agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/n8n/automated-social-media-content-publishing-factory-system-prompt-composition.json"
+      ],
+      "sha256": "ed4a2b4af1cf226f25e8dbf6b866f2a21e0cfecc4509a5d58d23abebba6b6f85",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/automated-social-media-content-publishing-factory-system-prompt-composition/implementations/n8n/provenance.json"
+}

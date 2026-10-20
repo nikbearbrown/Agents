@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "slug": "post-new-google-calendar-events-to-telegram",
+  "title": "Post new Google Calendar events to Telegram",
+  "purpose": "Adapt the published “Post new Google Calendar events to Telegram” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 2 executable nodes and 1 connection. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Google Calendar Trigger"
+  ],
+  "terminal_nodes": [
+    "Telegram"
+  ],
+  "credential_types": [
+    "googleCalendarOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Google Calendar Trigger",
+        "type": "n8n-nodes-base.googleCalendarTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Google Calendar Trigger",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/post-new-google-calendar-events-to-telegram/implementations/n8n",
+      "files": [
+        "agents/post-new-google-calendar-events-to-telegram/implementations/n8n/post-new-google-calendar-events-to-telegram.json"
+      ],
+      "sha256": "419a3f3c407d321407c8328e848686acb1d96d8861850cb36d0928ba9be7742f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/post-new-google-calendar-events-to-telegram/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/post-new-google-calendar-events-to-telegram/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/post-new-google-calendar-events-to-telegram/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/post-new-google-calendar-events-to-telegram/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/post-new-google-calendar-events-to-telegram/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/post-new-google-calendar-events-to-telegram/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/post-new-google-calendar-events-to-telegram/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/post-new-google-calendar-events-to-telegram/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/post-new-google-calendar-events-to-telegram/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/post-new-google-calendar-events-to-telegram/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/post-new-google-calendar-events-to-telegram/implementations/n8n/provenance.json"
+}

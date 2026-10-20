@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "slug": "nostr-damus-ai-powered-reporting-gmail-telegram",
+  "title": "#️⃣Nostr #damus AI Powered Reporting + Gmail + Telegram",
+  "purpose": "Adapt the published “#️⃣Nostr #damus AI Powered Reporting + Gmail + Telegram” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Gmail Themes",
+    "gemini-2.0-flash-lite-preview",
+    "gemini-2.0-flash-lite-preview1",
+    "gemini-2.0-flash-lite-preview2",
+    "Gmail Report",
+    "Telegram Themes",
+    "Telegram Themes & Threads"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googlePalmApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get HTML",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail Themes",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get HTML Report",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "#damus Themes List",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "#damus Thread Themes",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "#damus Themes & Threads Report",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "gemini-2.0-flash-lite-preview",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "gemini-2.0-flash-lite-preview1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "gemini-2.0-flash-lite-preview2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail Report",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate #damus Content",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Themes and Content",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Themes",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Telegram Themes & Threads",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Nostr Read #damus",
+        "type": "n8n-nodes-nostrobots.nostrobotsread",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get HTML",
+        "to": "Gmail Themes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get HTML Report",
+        "to": "Gmail Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Nostr Read #damus",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Nostr Read #damus",
+        "to": "Aggregate #damus Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "#damus Themes List",
+        "to": "Merge Themes and Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "#damus Thread Themes",
+        "to": "Get HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "#damus Thread Themes",
+        "to": "#damus Themes List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "#damus Thread Themes",
+        "to": "Telegram Themes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate #damus Content",
+        "to": "#damus Thread Themes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate #damus Content",
+        "to": "Merge Themes and Content",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge Themes and Content",
+        "to": "#damus Themes & Threads Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gemini-2.0-flash-lite-preview",
+        "to": "#damus Thread Themes",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "#damus Themes & Threads Report",
+        "to": "Get HTML Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "#damus Themes & Threads Report",
+        "to": "Telegram Themes & Threads",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gemini-2.0-flash-lite-preview1",
+        "to": "#damus Themes List",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "gemini-2.0-flash-lite-preview2",
+        "to": "#damus Themes & Threads Report",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Nostr Read #damus",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/n8n",
+      "files": [
+        "agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/n8n/nostr-damus-ai-powered-reporting-gmail-telegram.json"
+      ],
+      "sha256": "3c2b2816f2e3b61270ce5513c2491e142c44ffd4144f1769c692a7309307e306",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/nostr-damus-ai-powered-reporting-gmail-telegram/implementations/n8n/provenance.json"
+}

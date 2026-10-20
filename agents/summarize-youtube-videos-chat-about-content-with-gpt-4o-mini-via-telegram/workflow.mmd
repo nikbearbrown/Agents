@@ -1,0 +1,36 @@
+flowchart LR
+  n0["Split Transcript into Segments"]
+  n1["Extract YouTube URL from Input"]
+  n2["Extract Video ID from URL"]
+  n3["gpt-4o-mini"]
+  n4["Generate Summary with GPT-4o-mini"]
+  n5["Concatenate Transcript Segments"]
+  n6["Trigger on Telegram Message"]
+  n7["Extract YouTube Transcript"]
+  n8["Send Summary via Telegram"]
+  n9["Receive YouTube URL via Webhook"]
+  n10["Send Response to Webhook"]
+  n11["Telegram Trigger"]
+  n12["Retrieve Transcript from Google Docs"]
+  n13["Update Transcript in Google Docs"]
+  n14["Handle User Questions via AI"]
+  n15["OpenAI Chat Model"]
+  n16["Window Buffer Memory"]
+  n17["Google Docs2"]
+  n18["Send AI Response via Telegram"]
+  n3 -->|"ai_languageModel out 0 to in 0"| n4
+  n17 -->|"ai_tool out 0 to in 0"| n14
+  n11 -->|"main out 0 to in 0"| n14
+  n15 -->|"ai_languageModel out 0 to in 0"| n14
+  n2 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n1
+  n14 -->|"main out 0 to in 0"| n18
+  n1 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n12
+  n9 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n8
+  n12 -->|"main out 0 to in 0"| n13

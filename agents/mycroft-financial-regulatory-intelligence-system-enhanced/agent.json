@@ -1,0 +1,420 @@
+{
+  "schema_version": 1,
+  "slug": "mycroft-financial-regulatory-intelligence-system-enhanced",
+  "title": "Mycroft - Financial Regulatory Intelligence System - Enhanced",
+  "purpose": "Adapt the published “Mycroft - Financial Regulatory Intelligence System - Enhanced” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 22 executable nodes and 25 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Every Day"
+  ],
+  "terminal_nodes": [
+    "Read/Write Files from Disk",
+    "Send email",
+    "Mark email sent"
+  ],
+  "credential_types": [
+    "postgres",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Federal Register - Securities",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SEC Press Releases",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "FINRA Enforcement News",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CFTC Regulations",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Investment Advisor Rules",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge All Sources",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Normalize Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Filter Valid Content",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate HTML Report",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "High Priority Filter",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email Alert",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Read/Write Files from Disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Send email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Every Day",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Email",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Mark email sent",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Keyword Analysis & Urgency Scoring",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Insert data into DB",
+        "type": "n8n-nodes-base.postgres",
+        "version": 2.6,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Code in JavaScript",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If2",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Federal Register - Securities",
+        "to": "Merge All Sources",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SEC Press Releases",
+        "to": "Merge All Sources",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "FINRA Enforcement News",
+        "to": "Merge All Sources",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "CFTC Regulations",
+        "to": "Merge All Sources",
+        "kind": "main",
+        "output": 0,
+        "input": 3
+      },
+      {
+        "from": "Investment Advisor Rules",
+        "to": "Merge All Sources",
+        "kind": "main",
+        "output": 0,
+        "input": 4
+      },
+      {
+        "from": "Merge All Sources",
+        "to": "Normalize Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Normalize Data",
+        "to": "Filter Valid Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Valid Content",
+        "to": "Keyword Analysis & Urgency Scoring",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "High Priority Filter",
+        "to": "Generate Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Email Alert",
+        "to": "Mark email sent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate HTML Report",
+        "to": "Read/Write Files from Disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "Send Email Alert",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Every Day",
+        "to": "Federal Register - Securities",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Every Day",
+        "to": "SEC Press Releases",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Every Day",
+        "to": "FINRA Enforcement News",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Every Day",
+        "to": "CFTC Regulations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Every Day",
+        "to": "Investment Advisor Rules",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Email",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keyword Analysis & Urgency Scoring",
+        "to": "Prepare Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Data",
+        "to": "Insert data into DB",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Insert data into DB",
+        "to": "Code in JavaScript",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Code in JavaScript",
+        "to": "If2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If2",
+        "to": "High Priority Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If2",
+        "to": "Generate HTML Report",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If2",
+        "to": "Send email",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/n8n",
+      "files": [
+        "agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/n8n/mycroft-financial-regulatory-intelligence-system-enhanced.json"
+      ],
+      "sha256": "d7befc9f5ff7e49857da38f4c3ddb6d98a3b3b0f72a172ffa170491dc0813605",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/mycroft-financial-regulatory-intelligence-system-enhanced/implementations/n8n/provenance.json"
+}

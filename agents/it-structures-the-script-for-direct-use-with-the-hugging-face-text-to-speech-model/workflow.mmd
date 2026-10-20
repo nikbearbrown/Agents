@@ -1,0 +1,33 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Split Out"]
+  n2["Extract News Block"]
+  n3["Extract News Content"]
+  n4["Aggregate"]
+  n5["Fetch BBC News Detail"]
+  n6["Extract Detail"]
+  n7["Filter Empty Detail"]
+  n8["If script exists"]
+  n9["Basic Podcast LLM Chain"]
+  n10["Gemini"]
+  n11["Output Parser"]
+  n12["News Classifier"]
+  n13["Fetch BBC News Page"]
+  n14["Limit 10 Items"]
+  n15["Hugging Face Text-to-Speech."]
+  n10 -->|"ai_languageModel out 0 to in 0"| n12
+  n10 -->|"ai_languageModel out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n3
+  n11 -->|"ai_outputParser out 0 to in 0"| n9
+  n6 -->|"main out 0 to in 0"| n7
+  n14 -->|"main out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n5
+  n8 -->|"main out 0 to in 0"| n15
+  n2 -->|"main out 0 to in 0"| n1
+  n13 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n14
+  n5 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n13

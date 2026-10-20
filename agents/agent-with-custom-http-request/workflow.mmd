@@ -1,0 +1,32 @@
+flowchart LR
+  n0["On new manual Chat Message"]
+  n1["OpenAI Chat Model"]
+  n2["HTTP Request"]
+  n3["Exctract HTML Body"]
+  n4["Is error#63;"]
+  n5["Stringify error message"]
+  n6["Execute Workflow Trigger"]
+  n7["Remove extra tags"]
+  n8["Simplify output"]
+  n9["Simplify#63;"]
+  n10["QUERY_PARAMS"]
+  n11["CONFIG"]
+  n12["ReAct AI Agent"]
+  n13["Convert to Markdown"]
+  n14["Send Page Content"]
+  n15["HTTP_Request_Tool"]
+  n11 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 1 to in 0"| n3
+  n9 -->|"main out 0 to in 0"| n8
+  n9 -->|"main out 1 to in 0"| n13
+  n2 -->|"main out 0 to in 0"| n4
+  n10 -->|"main out 0 to in 0"| n11
+  n8 -->|"main out 0 to in 0"| n13
+  n15 -->|"ai_tool out 0 to in 0"| n12
+  n1 -->|"ai_languageModel out 0 to in 0"| n12
+  n7 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n7
+  n13 -->|"main out 0 to in 0"| n14
+  n6 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n12

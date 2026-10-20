@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "slug": "aggregate-amount-captured",
+  "title": "``Aggregate `amount_captured` ``",
+  "purpose": "Adapt the published “``Aggregate `amount_captured` ``” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On schedule"
+  ],
+  "terminal_nodes": [
+    "Aggregate `amount_captured`",
+    "Create or update customer",
+    "Do nothing"
+  ],
+  "credential_types": [
+    "hubspotOAuth2Api",
+    "stripeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "If charge has customer",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get customer",
+        "type": "n8n-nodes-base.stripe",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "On schedule",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remove duplicate customers",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate `amount_captured`",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate totals",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create or update customer",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge data",
+        "type": "n8n-nodes-base.merge",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get all charges",
+        "type": "n8n-nodes-base.stripe",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get HubSpot field",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Create field in HubSpot",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Configure",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Skip field checking",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If field exists",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Configure",
+        "to": "Skip field checking",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge data",
+        "to": "Aggregate totals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On schedule",
+        "to": "Configure",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get customer",
+        "to": "Merge data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all charges",
+        "to": "If charge has customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all charges",
+        "to": "Merge data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "If field exists",
+        "to": "Get all charges",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If field exists",
+        "to": "Create field in HubSpot",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Aggregate totals",
+        "to": "Create or update customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get HubSpot field",
+        "to": "If field exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Skip field checking",
+        "to": "Get all charges",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Skip field checking",
+        "to": "Get HubSpot field",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If charge has customer",
+        "to": "Remove duplicate customers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If charge has customer",
+        "to": "Aggregate `amount_captured`",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If charge has customer",
+        "to": "Do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Create field in HubSpot",
+        "to": "Get all charges",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove duplicate customers",
+        "to": "Get customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/aggregate-amount-captured/implementations/n8n",
+      "files": [
+        "agents/aggregate-amount-captured/implementations/n8n/aggregate-amount-captured.json"
+      ],
+      "sha256": "afd73f6cc17513c2e520b9ca1bd42f8e99a3f5c0a20f89750636edadbe33ca0c",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/aggregate-amount-captured/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/aggregate-amount-captured/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/aggregate-amount-captured/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/aggregate-amount-captured/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/aggregate-amount-captured/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/aggregate-amount-captured/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/aggregate-amount-captured/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/aggregate-amount-captured/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/aggregate-amount-captured/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/aggregate-amount-captured/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/aggregate-amount-captured/implementations/n8n/provenance.json"
+}

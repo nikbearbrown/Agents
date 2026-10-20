@@ -1,47 +1,9 @@
 # fetch github repo releases and receive schedule events and slack
 
-This folder contains the **fetch github repo releases and receive schedule events and slack** workflow. Its executable nodes use `code`, `httpRequest`, `if`, `scheduleTrigger`, `slack`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/fetch-github-repo-releases-and-receive-schedule-events-and-slack](../../agents/fetch-github-repo-releases-and-receive-schedule-events-and-slack/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/fetch-github-repo-releases-and-receive-schedule-events-and-slack/implementations/n8n/README.md)
+- [Importable JSON](../../agents/fetch-github-repo-releases-and-receive-schedule-events-and-slack/implementations/n8n/fetch-github-repo-releases-and-receive-schedule-events-and-slack.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/fetch-github-repo-releases-and-receive-schedule-events-and-slack)
 
-## Files
-
-- [`fetch-github-repo-releases-and-receive-schedule-events-and-slack.json`](fetch-github-repo-releases-and-receive-schedule-events-and-slack.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** None declared. HTTP requests or Code nodes may still require configuration.
-
-**Entry nodes:** Daily Trigger
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| Fetch Github Repo Releases | `httpRequest` | Inspect parameters |
-| Daily Trigger | `scheduleTrigger` | Inspect parameters |
-| RepoConfig | `code` | Inspect parameters |
-| Wether Release is new | `if` | Inspect parameters |
-| Send Message | `slack` | Inspect parameters |
-
-## Connection map
-
-- RepoConfig → Fetch Github Repo Releases (`main`, output 0, input 0)
-- Daily Trigger → RepoConfig (`main`, output 0, input 0)
-- Wether Release is new → Send Message (`main`, output 0, input 0)
-- Fetch Github Repo Releases → Wether Release is new (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Code/0546_Code_Schedule_Create_Scheduled.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Code/0546_Code_Schedule_Create_Scheduled.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

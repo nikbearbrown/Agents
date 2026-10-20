@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "slug": "criteria-for-follow-up-candidates",
+  "title": "💡Criteria For Follow Up Candidates",
+  "purpose": "Adapt the published “💡Criteria For Follow Up Candidates” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 24 executable nodes and 22 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Twilio Trigger",
+    "Every 24hrs"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model1",
+    "Send Follow Up Message",
+    "Send Reply",
+    "Send Confirmation",
+    "Structured Output Parser",
+    "Auto-fixing Output Parser",
+    "OpenAI Chat Model2",
+    "OpenAI Chat Model3",
+    "Get Availability",
+    "Get Existing Booking",
+    "Find Existing Booking",
+    "Reschedule Booking",
+    "Cancel Booking",
+    "Create a Booking"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "calApi",
+    "httpHeaderAuth",
+    "openAiApi",
+    "twilioApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Twilio Trigger",
+        "type": "n8n-nodes-base.twilioTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find Follow-Up Candidates",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Follow Up Message",
+        "type": "n8n-nodes-base.twilio",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Follow-Up Count and Date",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Create/Update Session",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Existing Chat Session",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Every 24hrs",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Reply",
+        "type": "n8n-nodes-base.twilio",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Send Confirmation",
+        "type": "n8n-nodes-base.twilio",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "User Request STOP",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Check For Command  Words",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Auto-fixing Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Generate Follow Up Message",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model3",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Availability",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Existing Booking",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find Existing Booking",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Reschedule Booking",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cancel Booking",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create a Booking",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Appointment Scheduling Agent1",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Every 24hrs",
+        "to": "Find Follow-Up Candidates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cancel Booking",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Twilio Trigger",
+        "to": "Check For Command  Words",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create a Booking",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Availability",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "User Request STOP",
+        "to": "Send Confirmation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Generate Follow Up Message",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model3",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Reschedule Booking",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Existing Booking",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create/Update Session",
+        "to": "Send Reply",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Existing Booking",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check For Command  Words",
+        "to": "User Request STOP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check For Command  Words",
+        "to": "Get Existing Chat Session",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Auto-fixing Output Parser",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Auto-fixing Output Parser",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Follow-Up Candidates",
+        "to": "Generate Follow Up Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Existing Chat Session",
+        "to": "Appointment Scheduling Agent1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Follow Up Message",
+        "to": "Update Follow-Up Count and Date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Appointment Scheduling Agent1",
+        "to": "Create/Update Session",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Follow-Up Count and Date",
+        "to": "Send Follow Up Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/criteria-for-follow-up-candidates/implementations/n8n",
+      "files": [
+        "agents/criteria-for-follow-up-candidates/implementations/n8n/criteria-for-follow-up-candidates.json"
+      ],
+      "sha256": "6b83a2fc5fe6e24422ac7e74498b612a6dd5804de7d9c2fa79dd96e1f13be653",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/criteria-for-follow-up-candidates/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/criteria-for-follow-up-candidates/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/criteria-for-follow-up-candidates/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/criteria-for-follow-up-candidates/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/criteria-for-follow-up-candidates/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/criteria-for-follow-up-candidates/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/criteria-for-follow-up-candidates/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/criteria-for-follow-up-candidates/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/criteria-for-follow-up-candidates/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/criteria-for-follow-up-candidates/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/criteria-for-follow-up-candidates/implementations/n8n/provenance.json"
+}

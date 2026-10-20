@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "slug": "mycroft-financial-intelligence-hub",
+  "title": "Mycroft - Financial Intelligence Hub",
+  "purpose": "Adapt the published “Mycroft - Financial Intelligence Hub” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 22 executable nodes and 24 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When chat message received"
+  ],
+  "terminal_nodes": [
+    "Ollama Chat Model",
+    "Log: Results Aggregated",
+    "Ollama Analyst Model",
+    "Log: Complete",
+    "Structured Output Parser"
+  ],
+  "credential_types": [
+    "ollamaApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Initialize Hub",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Initialize Logging",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "LLM Chain Router",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Ollama Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Call SEC?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Call Patent?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Call SEC Workflow",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Call Patent Workflow",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Log: SEC Called",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Log: Patent Called",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate Results",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Log: Results Aggregated",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "LLM Chain Analyst",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.4,
+        "disabled": false
+      },
+      {
+        "name": "Ollama Analyst Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Log: Analysis Complete",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Format Chat Response",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Log: Complete",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "No Tools Needed",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Read/Write Files from Disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "When chat message received",
+        "to": "Initialize Hub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Initialize Hub",
+        "to": "Initialize Logging",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Initialize Logging",
+        "to": "LLM Chain Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LLM Chain Router",
+        "to": "Call SEC?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LLM Chain Router",
+        "to": "Call Patent?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call SEC?",
+        "to": "Call SEC Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call SEC?",
+        "to": "No Tools Needed",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Call Patent?",
+        "to": "Call Patent Workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Patent?",
+        "to": "No Tools Needed",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Call SEC Workflow",
+        "to": "Log: SEC Called",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call Patent Workflow",
+        "to": "Log: Patent Called",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Log: SEC Called",
+        "to": "Aggregate Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Log: Patent Called",
+        "to": "Aggregate Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "No Tools Needed",
+        "to": "Aggregate Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Results",
+        "to": "Log: Results Aggregated",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate Results",
+        "to": "Read/Write Files from Disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LLM Chain Analyst",
+        "to": "Log: Analysis Complete",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Log: Analysis Complete",
+        "to": "Format Chat Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Chat Response",
+        "to": "Log: Complete",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ollama Chat Model",
+        "to": "LLM Chain Router",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "LLM Chain Router",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ollama Analyst Model",
+        "to": "LLM Chain Analyst",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read/Write Files from Disk",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "LLM Chain Analyst",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/mycroft-financial-intelligence-hub/implementations/n8n",
+      "files": [
+        "agents/mycroft-financial-intelligence-hub/implementations/n8n/mycroft-financial-intelligence-hub.json"
+      ],
+      "sha256": "d0121bf57cad7e0a6b64fd82b105a16051a882102bbe03ebfca680909f70c3c9",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/mycroft-financial-intelligence-hub/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/mycroft-financial-intelligence-hub/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/mycroft-financial-intelligence-hub/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/mycroft-financial-intelligence-hub/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/mycroft-financial-intelligence-hub/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/mycroft-financial-intelligence-hub/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/mycroft-financial-intelligence-hub/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/mycroft-financial-intelligence-hub/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/mycroft-financial-intelligence-hub/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/mycroft-financial-intelligence-hub/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/mycroft-financial-intelligence-hub/implementations/n8n/provenance.json"
+}

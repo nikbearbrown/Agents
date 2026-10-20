@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "slug": "build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch",
+  "title": "build your own image search using ai object detection cdn and elasticsearch",
+  "purpose": "Adapt the published “build your own image search using ai object detection cdn and elasticsearch” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Draw Bounding Boxes"
+  ],
+  "credential_types": [
+    "googlePalmApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Variables",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Test Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Gemini 2.0 Object Detection",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Scale Normalised Coords",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Draw Bounding Boxes",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Image Info",
+        "type": "n8n-nodes-base.editImage",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Variables",
+        "to": "Scale Normalised Coords",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image Info",
+        "to": "Gemini 2.0 Object Detection",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Test Image",
+        "to": "Get Image Info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scale Normalised Coords",
+        "to": "Draw Bounding Boxes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gemini 2.0 Object Detection",
+        "to": "Get Variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get Test Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/n8n",
+      "files": [
+        "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/n8n/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch.json"
+      ],
+      "sha256": "d9a017c335d8480a0b015444d3460888c653197964c3d361c5f0a796ace81858",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/build-your-own-image-search-using-ai-object-detection-cdn-and-elasticsearch/implementations/n8n/provenance.json"
+}

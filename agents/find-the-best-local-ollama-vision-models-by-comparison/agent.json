@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "slug": "find-the-best-local-ollama-vision-models-by-comparison",
+  "title": "🦙👁️👁️ Find the Best Local Ollama Vision Models by Comparison",
+  "purpose": "Adapt the published “🦙👁️👁️ Find the Best Local Ollama Vision Models by Comparison” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 13 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "Real Estate Spreadsheet Prompt",
+    "Save Image Descriptions to Google Docs"
+  ],
+  "credential_types": [
+    "googleDocsOAuth2Api",
+    "googleDriveOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Ollama LLM Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Create Request Body",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Ollama Models",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Create Result Objects",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "General Image Prompt",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Real Estate Spreadsheet Prompt",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": true
+      },
+      {
+        "name": "List of Vision Models",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Base64 String",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download Image File from Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Split List of Vision Models for Looping",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Doc Image Id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Save Image Descriptions to Google Docs",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Base64 String",
+        "to": "List of Vision Models",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ollama LLM Request",
+        "to": "Loop Over Ollama Models",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Request Body",
+        "to": "Ollama LLM Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Doc Image Id",
+        "to": "Download Image File from Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "General Image Prompt",
+        "to": "Create Request Body",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Result Objects",
+        "to": "Save Image Descriptions to Google Docs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List of Vision Models",
+        "to": "Split List of Vision Models for Looping",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Ollama Models",
+        "to": "Create Result Objects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Ollama Models",
+        "to": "General Image Prompt",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Google Doc Image Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Image File from Google Drive",
+        "to": "Get Base64 String",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split List of Vision Models for Looping",
+        "to": "Loop Over Ollama Models",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/n8n",
+      "files": [
+        "agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/n8n/find-the-best-local-ollama-vision-models-by-comparison.json"
+      ],
+      "sha256": "e1963577204866d8f088cc0f6dbd9bb95b45f5c6d76f7f1b1f619ae2d7837ae1",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/find-the-best-local-ollama-vision-models-by-comparison/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/find-the-best-local-ollama-vision-models-by-comparison/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,31 @@
+flowchart LR
+  n0["Webhook - Iniciar Pipeline"]
+  n1["Preparar Parametros"]
+  n2["Validar Parametros"]
+  n3["Preparar Dados - Container"]
+  n4["Treinar Modelo - Container"]
+  n5["Extrair Run ID e Metricas"]
+  n6["Validar Threshold de Qualidade"]
+  n7["Publicar Artefatos - Container"]
+  n8["Consolidar Publicacao"]
+  n9["Recarregar Modelo Publicado"]
+  n10["Resposta - Sucesso"]
+  n11["Resposta - Modelo Rejeitado"]
+  n12["Error Trigger - Capturar Falhas"]
+  n13["Registrar Incidente"]
+  n14["Verificar Backend de Artefatos"]
+  n15["Resposta - Publicacao Local"]
+  n0 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 1 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n14
+  n9 -->|"main out 0 to in 0"| n10
+  n12 -->|"main out 0 to in 0"| n13
+  n14 -->|"main out 0 to in 0"| n15
+  n14 -->|"main out 1 to in 0"| n9

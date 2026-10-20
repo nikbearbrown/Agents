@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "slug": "youtube-comment-sentiment-analyzer",
+  "title": "YouTube Comment Sentiment Analyzer",
+  "purpose": "Adapt the published “YouTube Comment Sentiment Analyzer” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 16 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "No Operation, do nothing",
+    "Update last fetched time and next_fetch_time",
+    "No Operation, do nothing1"
+  ],
+  "credential_types": [
+    "googleApi",
+    "httpQueryAuth",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Video Urls from Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "check next fetch time is available or not",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "check next fetch time is before the current time",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Comments for video urls",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Analyze sentiment of every comment",
+        "type": "@n8n/n8n-nodes-langchain.sentimentAnalysis",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Format fields as required to save in google sheet",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Insert and update comment in google sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Update last fetched time and next_fetch_time",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "No Operation, do nothing1",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Success Response",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split Out",
+        "to": "Analyze sentiment of every comment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Analyze sentiment of every comment",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Success Response",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Success Response",
+        "to": "No Operation, do nothing1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Comments for video urls",
+        "to": "Check Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Video Urls from Google Sheet",
+        "to": "check next fetch time is available or not",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Get Video Urls from Google Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyze sentiment of every comment",
+        "to": "Format fields as required to save in google sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyze sentiment of every comment",
+        "to": "Format fields as required to save in google sheet",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Analyze sentiment of every comment",
+        "to": "Format fields as required to save in google sheet",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Insert and update comment in google sheet",
+        "to": "Update last fetched time and next_fetch_time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check next fetch time is available or not",
+        "to": "Get Comments for video urls",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check next fetch time is available or not",
+        "to": "check next fetch time is before the current time",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "check next fetch time is before the current time",
+        "to": "Get Comments for video urls",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check next fetch time is before the current time",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Format fields as required to save in google sheet",
+        "to": "Insert and update comment in google sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/youtube-comment-sentiment-analyzer/implementations/n8n",
+      "files": [
+        "agents/youtube-comment-sentiment-analyzer/implementations/n8n/youtube-comment-sentiment-analyzer.json"
+      ],
+      "sha256": "5c2a5d450a3fd4eb15f4b69a821b26f7e48c37454c3dabd730006a695377746e",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/youtube-comment-sentiment-analyzer/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/youtube-comment-sentiment-analyzer/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/youtube-comment-sentiment-analyzer/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/youtube-comment-sentiment-analyzer/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/youtube-comment-sentiment-analyzer/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/youtube-comment-sentiment-analyzer/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/youtube-comment-sentiment-analyzer/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/youtube-comment-sentiment-analyzer/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/youtube-comment-sentiment-analyzer/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/youtube-comment-sentiment-analyzer/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/youtube-comment-sentiment-analyzer/implementations/n8n/provenance.json"
+}

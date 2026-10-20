@@ -1,0 +1,29 @@
+flowchart LR
+  n0["Simplify Result"]
+  n1["Store in Strapi"]
+  n2["Every 30 Minutes"]
+  n3["Is Retweet or Old#63;"]
+  n4["Search Tweets"]
+  n5["Webhook"]
+  n6["Simplify Webhook Result"]
+  n7["Analyze Form Submission"]
+  n8["Analyze Tweet"]
+  n9["Merge Form Sentiment with Source"]
+  n10["Merge Tweet Sentiment with Source"]
+  n11["Positive Form Sentiment#63;"]
+  n12["Store Form Submission in Strapi"]
+  n13["Positive Tweet Sentiment#63;"]
+  n5 -->|"main out 0 to in 0"| n6
+  n8 -->|"main out 0 to in 1"| n10
+  n4 -->|"main out 0 to in 0"| n0
+  n0 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 1 to in 0"| n8
+  n3 -->|"main out 1 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n9
+  n6 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 1"| n9
+  n11 -->|"main out 0 to in 0"| n12
+  n13 -->|"main out 0 to in 0"| n1
+  n9 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n13

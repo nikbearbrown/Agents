@@ -1,45 +1,9 @@
 # Extract Business Leads from Google Maps with Dumpling AI to Google Sheets
 
-This folder contains the **Extract Business Leads from Google Maps with Dumpling AI to Google Sheets** workflow. Its executable nodes use `googleSheets`, `httpRequest`, `manualTrigger`, `splitOut`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+This agent moved to [agents/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets](../../agents/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets/README.md).
 
-**Status:** Published sanitized source; not runtime-tested.
+- [Current n8n implementation](../../agents/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets/implementations/n8n/README.md)
+- [Importable JSON](../../agents/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets/implementations/n8n/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets.json)
+- [Original folder at migration commit](https://github.com/nikbearbrown/Agents/tree/a9d1be0cf7a1925c7e307af716912147458c4a84/workflows/extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets)
 
-## Files
-
-- [`extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets.json`](extract-business-leads-from-google-maps-with-dumpling-ai-to-google-sheets.json): sanitized, inactive import copy with an overview sticky note.
-- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
-- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
-
-## Setup
-
-1. Import the JSON into an isolated n8n instance, leaving it inactive.
-2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
-3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
-4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
-
-**Credential types referenced by the source:** `googleSheetsOAuth2Api`, `httpHeaderAuth`
-
-**Entry nodes:** Trigger: Manual Test Run
-
-## Configured nodes
-
-| Node | Type | Resource / operation |
-|---|---|---|
-| Trigger: Manual Test Run | `manualTrigger` | Inspect parameters |
-| Search Google Maps via Dumpling AI | `httpRequest` | POST |
-| Split Places List for Processing | `splitOut` | Inspect parameters |
-| Save Results to Google Sheet (Place Info) | `googleSheets` | append |
-
-## Connection map
-
-- Trigger: Manual Test Run → Search Google Maps via Dumpling AI (`main`, output 0, input 0)
-- Split Places List for Processing → Save Results to Google Sheet (Place Info) (`main`, output 0, input 0)
-- Search Google Maps via Dumpling AI → Split Places List for Processing (`main`, output 0, input 0)
-
-## Verification and provenance
-
-Selected from 4 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
-
-Source: [https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Splitout/1774_Splitout_Manual_Automation_Webhook.json](https://github.com/Zie619/n8n-workflows/blob/94007c1445d9258a7da116646b79473e7c7c3282/workflows/Splitout/1774_Splitout_Manual_Automation_Webhook.json). License: **MIT**; preserve [the notice](../../licenses/zie619-mit.txt) and embedded attribution. Matching source filename and node-name lineage; original nodes may precede upstream transformations.
-
-Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.
+This is a compatibility landing page, not a second agent.

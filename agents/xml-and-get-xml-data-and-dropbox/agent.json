@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "slug": "xml-and-get-xml-data-and-dropbox",
+  "title": "xml and get xml data and dropbox",
+  "purpose": "Adapt the published “xml and get xml data and dropbox” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Dropbox"
+  ],
+  "credential_types": [
+    "dropboxApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "To JSON",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Change title",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get XML Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Dropbox",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "To XML",
+        "type": "n8n-nodes-base.xml",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "To XML",
+        "to": "Dropbox",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "To JSON",
+        "to": "Change title",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Change title",
+        "to": "To XML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get XML Data",
+        "to": "To JSON",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/implementations/n8n",
+      "files": [
+        "agents/xml-and-get-xml-data-and-dropbox/implementations/n8n/xml-and-get-xml-data-and-dropbox.json"
+      ],
+      "sha256": "e14e5e6440e117e57981915f2df9a36e8b3b625eb2bec9fe8dd612638a6759de",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/xml-and-get-xml-data-and-dropbox/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/xml-and-get-xml-data-and-dropbox/implementations/n8n/provenance.json"
+}

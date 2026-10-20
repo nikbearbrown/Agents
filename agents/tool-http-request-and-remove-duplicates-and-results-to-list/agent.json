@@ -1,0 +1,518 @@
+{
+  "schema_version": 1,
+  "slug": "tool-http-request-and-remove-duplicates-and-results-to-list",
+  "title": "tool http request and remove duplicates and results to list",
+  "purpose": "Adapt the published “tool http request and remove duplicates and results to list” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 30 executable nodes and 30 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model1",
+    "Search Crunchbase",
+    "Search WellFound",
+    "Search LinkedIn",
+    "Structured Output Parser1",
+    "Webscraper Tool1",
+    "Check Company Profiles Exist",
+    "Webscraper Tool",
+    "Search Company Website",
+    "Structured Output Parser",
+    "OpenAI Chat Model",
+    "Search Product Review Sites",
+    "Webscraper Tool2",
+    "Structured Output Parser2",
+    "OpenAI Chat Model2",
+    "Get Company News"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "notionApi",
+    "openAiApi",
+    "serpApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search Crunchbase",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search WellFound",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search LinkedIn",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser1",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Webscraper Tool1",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Remove Duplicates",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Domain",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Results to List",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check Company Profiles Exist",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webscraper Tool",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search Company Website",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Search Product Review Sites",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webscraper Tool2",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser2",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Insert Into Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Limit",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Competitor Search via Exa.ai",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Company News",
+        "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Source Company",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Collect Results",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "2sec",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Company Overview Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Company Product Offering Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "Company Product Reviews Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.6,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "2sec",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Domain",
+        "to": "Remove Duplicates",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Collect Results",
+        "to": "Insert Into Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "Company Overview Agent",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Results to List",
+        "to": "Extract Domain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search LinkedIn",
+        "to": "Company Overview Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webscraper Tool",
+        "to": "Company Product Offering Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Company News",
+        "to": "Company Overview Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search WellFound",
+        "to": "Company Overview Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webscraper Tool1",
+        "to": "Company Overview Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webscraper Tool2",
+        "to": "Company Product Reviews Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Company Product Offering Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Duplicates",
+        "to": "Limit",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Crunchbase",
+        "to": "Company Overview Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Insert Into Notion",
+        "to": "2sec",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model1",
+        "to": "Company Overview Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Company Product Reviews Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Source Company",
+        "to": "Competitor Search via Exa.ai",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Company Overview Agent",
+        "to": "Company Product Offering Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Company Website",
+        "to": "Company Product Offering Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "Company Product Offering Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser1",
+        "to": "Company Overview Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser2",
+        "to": "Company Product Reviews Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search Product Review Sites",
+        "to": "Company Product Reviews Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Company Profiles Exist",
+        "to": "Company Overview Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Competitor Search via Exa.ai",
+        "to": "Results to List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Company Product Reviews Agent",
+        "to": "Collect Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Company Product Offering Agent",
+        "to": "Company Product Reviews Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Set Source Company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/n8n",
+      "files": [
+        "agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/n8n/tool-http-request-and-remove-duplicates-and-results-to-list.json"
+      ],
+      "sha256": "3077ef9a89873a2807d5d0d04f4ad2716beae487a80bb601fe403e38e555dc8f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/tool-http-request-and-remove-duplicates-and-results-to-list/implementations/n8n/provenance.json"
+}

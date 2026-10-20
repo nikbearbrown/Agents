@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "slug": "subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations",
+  "title": "subscribe subscriber klicktipp and split out guest bookings and split out guest cancellations",
+  "purpose": "Adapt the published “subscribe subscriber klicktipp and split out guest bookings and split out guest cancellations” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "New Calendly event"
+  ],
+  "terminal_nodes": [
+    "Subscribe guest booking in KlickTipp",
+    "Subscribe invitee to empty guest addresses field",
+    "Invitee did not add guests to the booking",
+    "Event was rescheduled",
+    "No guest email addresses found"
+  ],
+  "credential_types": [
+    "calendlyApi",
+    "klickTippApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Subscribe invitee booking in KlickTipp",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Subscribe guest booking in KlickTipp",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Subscribe guest cancellation in KlickTipp",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Subscribe invitee cancellation in KlickTipp",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out guest bookings",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out guest cancellations",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Guests booking check",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Subscribe invitee to empty guest addresses field",
+        "type": "n8n-nodes-klicktipp.klicktipp",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "New Calendly event",
+        "type": "n8n-nodes-base.calendlyTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert data for KlickTipp",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Check event - booking or cancellation?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "List guests for booking",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "List guests for cancellation",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Guests cancellation check",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Rescheduling check",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Invitee did not add guests to the booking",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Event was rescheduled",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "No guest email addresses found",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "New Calendly event",
+        "to": "Convert data for KlickTipp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rescheduling check",
+        "to": "Event was rescheduled",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Rescheduling check",
+        "to": "Subscribe invitee to empty guest addresses field",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Guests booking check",
+        "to": "List guests for booking",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Guests booking check",
+        "to": "Invitee did not add guests to the booking",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "List guests for booking",
+        "to": "Split Out guest bookings",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out guest bookings",
+        "to": "Subscribe guest booking in KlickTipp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Guests cancellation check",
+        "to": "List guests for cancellation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Guests cancellation check",
+        "to": "No guest email addresses found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Convert data for KlickTipp",
+        "to": "Check event - booking or cancellation?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List guests for cancellation",
+        "to": "Split Out guest cancellations",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out guest cancellations",
+        "to": "Subscribe guest cancellation in KlickTipp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check event - booking or cancellation?",
+        "to": "Subscribe invitee booking in KlickTipp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check event - booking or cancellation?",
+        "to": "Subscribe invitee cancellation in KlickTipp",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Subscribe invitee booking in KlickTipp",
+        "to": "Guests booking check",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Subscribe guest cancellation in KlickTipp",
+        "to": "Rescheduling check",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Subscribe invitee cancellation in KlickTipp",
+        "to": "Guests cancellation check",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/n8n",
+      "files": [
+        "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/n8n/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations.json"
+      ],
+      "sha256": "45b2da0dcb9b9299f5433eba510b08bae592d36b161004cc7022aef352eb49b3",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/subscribe-subscriber-klicktipp-and-split-out-guest-bookings-and-split-out-guest-cancellations/implementations/n8n/provenance.json"
+}

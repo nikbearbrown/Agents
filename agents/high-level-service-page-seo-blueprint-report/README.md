@@ -1,0 +1,102 @@
+# High-Level Service Page SEO Blueprint Report
+
+Adapt the published “High-Level Service Page SEO Blueprint Report” workflow to other implementations while preserving its documented behavior.
+
+**Specification: source-derived draft.** The source contains 32 executable nodes and 32 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.
+
+[Specification](specification.md) · [Machine-readable record](agent.json) · [Schemas](schemas/README.md) · [Fixtures](fixtures/README.md) · [Evidence](evaluations/README.md)
+
+## Workflow
+
+This initial Mermaid map preserves the source graph, including non-main connections and port numbers. It is an implementation-derived starting point for the shared design; it does not execute the workflow or prove its behavior. Disabled-node details and exact expressions remain in the source.
+
+```mermaid
+flowchart LR
+  n0["Convert URLs to Items"]
+  n1["Start"]
+  n2["Loop Over Items"]
+  n3["Get URL HTML"]
+  n4["Extract HTML Elements"]
+  n5["Set URL Data"]
+  n6["Code"]
+  n7["Edit Fields1"]
+  n8["Google Gemini Chat Model"]
+  n9["Wait"]
+  n10["Google Gemini Chat Model1"]
+  n11["Set Competitor Analysis"]
+  n12["Set User Intent Analysis"]
+  n13["Wait1"]
+  n14["Google Gemini Chat Model2"]
+  n15["Competitors Analysis"]
+  n16["User Intent Analysis"]
+  n17["Synthesis #38; Gap Analysis"]
+  n18["Set Synthesis #38; Gap Analysis"]
+  n19["Wait2"]
+  n20["Google Gemini Chat Model3"]
+  n21["Ideal Page Outline Generation"]
+  n22["Set Page Outline"]
+  n23["Wait3"]
+  n24["Google Gemini Chat Model4"]
+  n25["UX, Conversion #38; Copywriting Enhancement"]
+  n26["Set UX #38; Conversions Enhancements"]
+  n27["Google Gemini Chat Model5"]
+  n28["Final Service Page Blueprint"]
+  n29["Edit Fields2"]
+  n30["Convert to File"]
+  n31["Edit Fields"]
+  n6 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n16
+  n1 -->|"main out 0 to in 0"| n31
+  n13 -->|"main out 0 to in 0"| n17
+  n19 -->|"main out 0 to in 0"| n21
+  n23 -->|"main out 0 to in 0"| n25
+  n31 -->|"main out 0 to in 0"| n0
+  n7 -->|"main out 0 to in 0"| n15
+  n29 -->|"main out 0 to in 0"| n30
+  n3 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 1 to in 0"| n3
+  n22 -->|"main out 0 to in 0"| n23
+  n15 -->|"main out 0 to in 0"| n11
+  n16 -->|"main out 0 to in 0"| n12
+  n0 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n5
+  n11 -->|"main out 0 to in 0"| n9
+  n8 -->|"ai_languageModel out 0 to in 0"| n15
+  n12 -->|"main out 0 to in 0"| n13
+  n17 -->|"main out 0 to in 0"| n18
+  n10 -->|"ai_languageModel out 0 to in 0"| n16
+  n14 -->|"ai_languageModel out 0 to in 0"| n17
+  n20 -->|"ai_languageModel out 0 to in 0"| n21
+  n24 -->|"ai_languageModel out 0 to in 0"| n25
+  n27 -->|"ai_languageModel out 0 to in 0"| n28
+  n28 -->|"main out 0 to in 0"| n29
+  n18 -->|"main out 0 to in 0"| n19
+  n21 -->|"main out 0 to in 0"| n22
+  n26 -->|"main out 0 to in 0"| n28
+  n25 -->|"main out 0 to in 0"| n26
+```
+
+[Diagram source](workflow.mmd)
+
+## Implementations
+
+| Implementation | Status |
+|---|---|
+| [n8n](implementations/n8n/README.md) | Sanitized source available; not runtime-tested |
+| [Plain Python](implementations/python/README.md) | Planned |
+| [Pydantic AI](implementations/pydantic-ai/README.md) | Planned |
+| [CrewAI Flow](implementations/crewai-flow/README.md) | Planned |
+| [CrewAI Crew](implementations/crewai-crew/README.md) | Planned |
+| [LangGraph](implementations/langgraph/README.md) | Planned |
+
+## Build or operate with an assistant
+
+[Claude](prompts/claude.md) · [Codex](prompts/codex.md) · [Grok Bot](prompts/grok-bot.md) · [Muse](prompts/muse.md) · [Dots](prompts/dots.md)
+
+Build instructions and operating instructions are separate. These are untested prompts, not additional working implementations.
+
+## Attribution
+
+Curated by Nik Bear Brown. Preserve the [n8n source provenance](implementations/n8n/provenance.json), [configuration record](implementations/n8n/configuration.json), and [license notice](../../licenses/zie619-mit.txt). Ported implementations must retain applicable upstream attribution; the repository has no blanket license replacing source licenses.

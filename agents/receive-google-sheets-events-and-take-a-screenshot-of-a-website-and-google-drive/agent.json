@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "slug": "receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive",
+  "title": "receive google sheets events and take a screenshot of a website and google drive",
+  "purpose": "Adapt the published “receive google sheets events and take a screenshot of a website and google drive” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Google Sheets Trigger"
+  ],
+  "terminal_nodes": [
+    "Store Screenshots"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Google Sheets Trigger",
+        "type": "n8n-nodes-base.googleSheetsTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Take a screenshot of a website",
+        "type": "@custom-js/n8n-nodes-pdf-toolkit.websiteScreenshot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store Screenshots",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Google Sheets Trigger",
+        "to": "Take a screenshot of a website",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Take a screenshot of a website",
+        "to": "Store Screenshots",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/n8n",
+      "files": [
+        "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/n8n/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive.json"
+      ],
+      "sha256": "da6858a86b16432df65f28d6e9d1603c83155b76263ef4a34ec207877da4d5a1",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-google-sheets-events-and-take-a-screenshot-of-a-website-and-google-drive/implementations/n8n/provenance.json"
+}

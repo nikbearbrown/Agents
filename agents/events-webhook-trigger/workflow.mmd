@@ -1,0 +1,46 @@
+flowchart LR
+  n0["Parse Webhook"]
+  n1["Close Modal Popup"]
+  n2["Idea Selector Modal"]
+  n3["Route Message"]
+  n4["Route Message1"]
+  n5["Create Folder"]
+  n6["Select Folder"]
+  n7["Loop Over Items"]
+  n8["Success Response"]
+  n9["Check if uploaded successfully"]
+  n10["move on to next"]
+  n11["No Operation, do nothing"]
+  n12["Aggregate"]
+  n13["Route Action"]
+  n14["Webhook"]
+  n15["Failure Response"]
+  n16["Respond to Slack Webhook - Success"]
+  n17["Respond to Slack Webhook - No Action"]
+  n18["Download File Binary"]
+  n19["Upload to S3 Bucket"]
+  n20["Post Image to Channel"]
+  n21["Split Out Files"]
+  n14 -->|"main out 0 to in 0"| n0
+  n12 -->|"main out 0 to in 0"| n20
+  n13 -->|"main out 0 to in 0"| n21
+  n0 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n16
+  n3 -->|"main out 1 to in 0"| n17
+  n3 -->|"main out 2 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 1 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n11
+  n7 -->|"main out 1 to in 0"| n18
+  n21 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 0"| n7
+  n15 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n10
+  n1 -->|"main out 0 to in 0"| n13
+  n19 -->|"main out 0 to in 0"| n9
+  n18 -->|"main out 0 to in 0"| n19
+  n11 -->|"main out 0 to in 0"| n12
+  n9 -->|"main out 0 to in 0"| n8
+  n9 -->|"main out 1 to in 0"| n15
+  n16 -->|"main out 0 to in 0"| n2
+  n17 -->|"main out 0 to in 0"| n4

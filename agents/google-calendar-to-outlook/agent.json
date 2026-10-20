@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "slug": "google-calendar-to-outlook",
+  "title": "Google calendar to Outlook",
+  "purpose": "Adapt the published “Google calendar to Outlook” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Incoming Event Trigger",
+    "Cancel Event Trigger"
+  ],
+  "terminal_nodes": [
+    "Create Outlook Event",
+    "Send E-mail with details"
+  ],
+  "credential_types": [
+    "googleCalendarOAuth2Api",
+    "microsoftOutlookOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Incoming Event Trigger",
+        "type": "n8n-nodes-base.googleCalendarTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cancel Event Trigger",
+        "type": "n8n-nodes-base.googleCalendarTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Outlook Event",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Event to Cancel",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Delete Event",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send E-mail with details",
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Send E-mail with details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete Event",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Get Event to Cancel",
+        "to": "Delete Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Event to Cancel",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cancel Event Trigger",
+        "to": "Get Event to Cancel",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Incoming Event Trigger",
+        "to": "Create Outlook Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/google-calendar-to-outlook/implementations/n8n",
+      "files": [
+        "agents/google-calendar-to-outlook/implementations/n8n/google-calendar-to-outlook.json"
+      ],
+      "sha256": "bc8b77be68517d0d172fb2dcdd3b8bf246ebe5a10f25b9b5bf9d6abcdc1fdb44",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/google-calendar-to-outlook/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/google-calendar-to-outlook/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/google-calendar-to-outlook/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/google-calendar-to-outlook/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/google-calendar-to-outlook/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/google-calendar-to-outlook/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/google-calendar-to-outlook/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/google-calendar-to-outlook/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/google-calendar-to-outlook/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/google-calendar-to-outlook/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/google-calendar-to-outlook/implementations/n8n/provenance.json"
+}

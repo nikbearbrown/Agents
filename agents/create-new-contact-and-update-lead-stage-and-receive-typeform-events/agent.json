@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "slug": "create-new-contact-and-update-lead-stage-and-receive-typeform-events",
+  "title": "create new contact and update lead stage and receive typeform events",
+  "purpose": "Adapt the published “create new contact and update lead stage and receive typeform events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Typeform Trigger"
+  ],
+  "terminal_nodes": [
+    "NoOp",
+    "send information"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "hubspotApi",
+    "typeformApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "create new contact",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "update lead stage",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "NoOp",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set values",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Typeform Trigger",
+        "type": "n8n-nodes-base.typeformTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "lead interested",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "send information",
+        "type": "n8n-nodes-base.gmail",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Set values",
+        "to": "create new contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "lead interested",
+        "to": "update lead stage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "lead interested",
+        "to": "NoOp",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Typeform Trigger",
+        "to": "Set values",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "update lead stage",
+        "to": "send information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "create new contact",
+        "to": "lead interested",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/n8n",
+      "files": [
+        "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/n8n/create-new-contact-and-update-lead-stage-and-receive-typeform-events.json"
+      ],
+      "sha256": "7582427422a046ff4e97fa972ae5716b8af74e867215ae70db6b676f4041b8c1",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-new-contact-and-update-lead-stage-and-receive-typeform-events/implementations/n8n/provenance.json"
+}

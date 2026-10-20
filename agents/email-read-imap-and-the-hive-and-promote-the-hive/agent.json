@@ -1,0 +1,300 @@
+{
+  "schema_version": 1,
+  "slug": "email-read-imap-and-the-hive-and-promote-the-hive",
+  "title": "Email",
+  "purpose": "Adapt the published “Email” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Email Reputation",
+    "OTX IP",
+    "OTX DOMAIN"
+  ],
+  "credential_types": [
+    "cortexApi",
+    "imap",
+    "theHiveApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "IMAP Email",
+        "type": "n8n-nodes-base.emailReadImap",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "TheHive",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create Case",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Case",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Observable",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Analyzer Email",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Cortex",
+        "type": "n8n-nodes-base.cortex",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Case Domain",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Case Email",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Case Ip",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Email Reputation",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OTX IP",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OTX DOMAIN",
+        "type": "n8n-nodes-base.theHive",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "IF",
+        "to": "Update Case Domain",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "Update Case Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "Update Case Ip",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Case",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait",
+        "to": "Observable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Cortex",
+        "to": "IF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "TheHive",
+        "to": "Create Case",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IMAP Email",
+        "to": "TheHive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Observable",
+        "to": "Analyzer Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Case",
+        "to": "Case",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyzer Email",
+        "to": "Cortex",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Case Ip",
+        "to": "OTX IP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Case Email",
+        "to": "Email Reputation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Case Domain",
+        "to": "OTX DOMAIN",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/n8n",
+      "files": [
+        "agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/n8n/email-read-imap-and-the-hive-and-promote-the-hive.json"
+      ],
+      "sha256": "7e14cb88d6df4bb3c2efee61bac48ee93ebe3d8ea370e6233a36d643c85ef3fc",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/email-read-imap-and-the-hive-and-promote-the-hive/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/email-read-imap-and-the-hive-and-promote-the-hive/implementations/n8n/provenance.json"
+}

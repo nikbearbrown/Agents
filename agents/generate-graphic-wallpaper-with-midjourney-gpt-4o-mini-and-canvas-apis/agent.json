@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "slug": "generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis",
+  "title": "Generate Graphic Wallpaper with Midjourney, GPT-4o-mini and Canvas APIs",
+  "purpose": "Adapt the published “Generate Graphic Wallpaper with Midjourney, GPT-4o-mini and Canvas APIs” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 11 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking Test workflow"
+  ],
+  "terminal_nodes": [
+    "Design in Canvas"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Midjourney Generator",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "When clicking Test workflow",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Prompt",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Midjourney Task",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Midjourney Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Determine Whether the Image URL was Fetched",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Check Image  Generation Status",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Design in Canvas",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Image Url",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Gpt-4o-mini API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Basic Params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Prompt",
+        "to": "Midjourney Generator",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic Params",
+        "to": "Gpt-4o-mini API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image Url",
+        "to": "Design in Canvas",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gpt-4o-mini API",
+        "to": "Get Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Midjourney Task",
+        "to": "Determine Whether the Image URL was Fetched",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Midjourney Generator",
+        "to": "Wait for Midjourney Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking Test workflow",
+        "to": "Basic Params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Image  Generation Status",
+        "to": "Get Image Url",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Midjourney Generation",
+        "to": "Get Midjourney Task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine Whether the Image URL was Fetched",
+        "to": "Check Image  Generation Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Determine Whether the Image URL was Fetched",
+        "to": "Wait for Midjourney Generation",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/n8n",
+      "files": [
+        "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/n8n/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis.json"
+      ],
+      "sha256": "f4923da1576ce2a1c47f3aab48d06331baa565f3b3ba2fa7c8e926f2e7f28b90",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/generate-graphic-wallpaper-with-midjourney-gpt-4o-mini-and-canvas-apis/implementations/n8n/provenance.json"
+}

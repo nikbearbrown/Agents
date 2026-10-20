@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "slug": "search-news-using-perplexity-ai-and-post-to-x-twitter",
+  "title": "Search news using Perplexity AI and post to X (Twitter)",
+  "purpose": "Adapt the published “Search news using Perplexity AI and post to X (Twitter)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Post to X"
+  ],
+  "credential_types": [
+    "twitterOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "searchQuery",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Perplexity",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "set API key",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Post to X",
+        "type": "n8n-nodes-base.twitter",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Perplexity",
+        "to": "Post to X",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "searchQuery",
+        "to": "set API key",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set API key",
+        "to": "Perplexity",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "searchQuery",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/n8n",
+      "files": [
+        "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/n8n/search-news-using-perplexity-ai-and-post-to-x-twitter.json"
+      ],
+      "sha256": "78686eb7de831b1bca21ed732cf0a3fcd30c367f7f07d6e1aefa7856cf5965e2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/search-news-using-perplexity-ai-and-post-to-x-twitter/implementations/n8n/provenance.json"
+}

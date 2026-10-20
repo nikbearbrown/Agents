@@ -1,0 +1,21 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["MongoDB Chat Memory"]
+  n2["Google Gemini Chat Model"]
+  n3["MongoDB Atlas Vector Store"]
+  n4["Embeddings OpenAI"]
+  n5["AI Traveling Planner Agent"]
+  n6["Webhook"]
+  n7["Default Data Loader"]
+  n8["Recursive Character Text Splitter"]
+  n9["MongoDB Atlas Vector Store1"]
+  n10["Embeddings OpenAI1"]
+  n6 -->|"main out 0 to in 0"| n9
+  n4 -->|"ai_embedding out 0 to in 0"| n3
+  n10 -->|"ai_embedding out 0 to in 0"| n9
+  n7 -->|"ai_document out 0 to in 0"| n9
+  n1 -->|"ai_memory out 0 to in 0"| n5
+  n2 -->|"ai_languageModel out 0 to in 0"| n5
+  n3 -->|"ai_tool out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n5
+  n8 -->|"ai_textSplitter out 0 to in 0"| n7

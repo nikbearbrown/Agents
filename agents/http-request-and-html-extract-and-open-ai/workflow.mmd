@@ -1,0 +1,24 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["HTTP Request"]
+  n2["HTML Extract"]
+  n3["OpenAI"]
+  n4["Merge"]
+  n5["Clean Content"]
+  n6["Update Google Sheets"]
+  n7["Parse JSON"]
+  n8["Read Google Sheets"]
+  n9["Split In Batches"]
+  n10["Wait"]
+  n10 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 1"| n4
+  n2 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 0"| n3
+  n9 -->|"main out 0 to in 0"| n1
+  n9 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 0"| n9
+  n6 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n8

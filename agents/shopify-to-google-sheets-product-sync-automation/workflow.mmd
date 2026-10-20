@@ -1,0 +1,34 @@
+flowchart LR
+  n0["Wait1"]
+  n1["No Operation, do nothing"]
+  n2["Shopify get products"]
+  n3["Split output"]
+  n4["Check if there is next page"]
+  n5["writing first product details"]
+  n6["Set cursor"]
+  n7["writing remaning product info to google sheets"]
+  n8["Schedule Trigger"]
+  n9["update Curser"]
+  n10["If"]
+  n11["Code"]
+  n12["BatchSize"]
+  n13["LastCursor"]
+  n14["shopify-initial"]
+  n15["Check cursor is not empty"]
+  n10 -->|"main out 0 to in 0"| n14
+  n10 -->|"main out 1 to in 0"| n11
+  n11 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n6
+  n12 -->|"main out 0 to in 0"| n13
+  n13 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n7
+  n14 -->|"main out 0 to in 0"| n5
+  n8 -->|"main out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n15
+  n15 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 1 to in 0"| n0
+  n5 -->|"main out 0 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n4

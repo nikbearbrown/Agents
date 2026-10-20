@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "slug": "pipedrive-and-receive-github-events-and-create-note-with-github-url",
+  "title": "pipedrive and receive github events and create note with github url",
+  "purpose": "Adapt the published “pipedrive and receive github events and create note with github url” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On fork"
+  ],
+  "terminal_nodes": [
+    "Create note with github url"
+  ],
+  "credential_types": [
+    "githubApi",
+    "pipedriveApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "person exists",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set person Id",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create lead",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "On fork",
+        "type": "n8n-nodes-base.githubTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create person",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create note with github url",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Github user information",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Search forkee in Pipedrive by email",
+        "type": "n8n-nodes-base.pipedrive",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "On fork",
+        "to": "Get Github user information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create lead",
+        "to": "Create note with github url",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create person",
+        "to": "Set person Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set person Id",
+        "to": "Create lead",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "person exists",
+        "to": "Set person Id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "person exists",
+        "to": "Create person",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Github user information",
+        "to": "Search forkee in Pipedrive by email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search forkee in Pipedrive by email",
+        "to": "person exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/n8n",
+      "files": [
+        "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/n8n/pipedrive-and-receive-github-events-and-create-note-with-github-url.json"
+      ],
+      "sha256": "e14be5265247fe0ff3c70262b76e588b0379ab9b84515e8622b8e3a696562b2f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/pipedrive-and-receive-github-events-and-create-note-with-github-url/implementations/n8n/provenance.json"
+}

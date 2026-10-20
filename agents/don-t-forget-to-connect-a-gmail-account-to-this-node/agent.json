@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "slug": "don-t-forget-to-connect-a-gmail-account-to-this-node",
+  "title": "Don't forget to connect a GMail account to this node!",
+  "purpose": "Adapt the published “Don't forget to connect a GMail account to this node!” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 12 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "🤖 Each month"
+  ],
+  "terminal_nodes": [
+    "✉️ Send it"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get events page",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Last page?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all events from the page",
+        "type": "n8n-nodes-base.htmlExtract",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get each event data",
+        "type": "n8n-nodes-base.htmlExtract",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Limit to one",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 3s",
+        "type": "n8n-nodes-base.wait",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split events",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Collect all results",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "🤖 Each month",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Setup location and email",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "💄 Lick the stamp",
+        "type": "n8n-nodes-base.code",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "✉️ Send it",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait 3s",
+        "to": "Limit to one",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Last page?",
+        "to": "Collect all results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Last page?",
+        "to": "Wait 3s",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Limit to one",
+        "to": "Setup location and email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split events",
+        "to": "Last page?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get events page",
+        "to": "Get all events from the page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🤖 Each month",
+        "to": "Setup location and email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Collect all results",
+        "to": "Get each event data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get each event data",
+        "to": "💄 Lick the stamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "💄 Lick the stamp",
+        "to": "✉️ Send it",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Setup location and email",
+        "to": "Get events page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all events from the page",
+        "to": "Split events",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/n8n",
+      "files": [
+        "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/n8n/don-t-forget-to-connect-a-gmail-account-to-this-node.json"
+      ],
+      "sha256": "6759dc1433c8657620324906f98ad34600de86d5ce92b775632dd6730bb9fff0",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/don-t-forget-to-connect-a-gmail-account-to-this-node/implementations/n8n/provenance.json"
+}

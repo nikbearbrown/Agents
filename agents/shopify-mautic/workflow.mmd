@@ -1,0 +1,40 @@
+flowchart LR
+  n0["Shopify Trigger"]
+  n1["Accepts Marketing#63;"]
+  n2["Accepts Marketing#63;1"]
+  n3["No Operation, do nothing"]
+  n4["Add to confirmed segment"]
+  n5["Remove from confirmed segment"]
+  n6["Webhook"]
+  n7["Crypto"]
+  n8["If"]
+  n9["No Operation, do nothing1"]
+  n10["GraphQL"]
+  n11["Marketing Consent - subscribed"]
+  n12["Marketing Consent - unsubscribed"]
+  n13["Mautic - Accepts Marketing#63;"]
+  n14["Customer exists#63;"]
+  n15["No Operation, do nothing2"]
+  n16["Set Shopify Subdomain"]
+  n17["Search for Contact by Email"]
+  n18["Contact exists#63;"]
+  n19["Create a new contact"]
+  n8 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 1 to in 0"| n9
+  n7 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n14
+  n6 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n16
+  n18 -->|"main out 0 to in 0"| n1
+  n18 -->|"main out 1 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n17
+  n14 -->|"main out 0 to in 0"| n13
+  n14 -->|"main out 1 to in 0"| n15
+  n1 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 1 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n19
+  n2 -->|"main out 1 to in 0"| n3
+  n19 -->|"main out 0 to in 0"| n4
+  n13 -->|"main out 0 to in 0"| n11
+  n13 -->|"main out 1 to in 0"| n12
+  n17 -->|"main out 0 to in 0"| n18

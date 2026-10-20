@@ -1,0 +1,35 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Get Groups from Entra"]
+  n2["Remove outer Array"]
+  n3["Select Entra Zammad default Group"]
+  n4["Remove outer Array from Entra User"]
+  n5["Zammad Univeral User Object"]
+  n6["Get Zammad Users"]
+  n7["Merge"]
+  n8["Get Members of the default group"]
+  n9["Find new Zammad Users"]
+  n10["Update Zammad User"]
+  n11["Create Zammad User"]
+  n12["Deactivate Zammad User"]
+  n13["Find removed Users"]
+  n14["If"]
+  n15["Select only active Users and entra_obect_type#61;#34;user#34;"]
+  n14 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n15
+  n13 -->|"main out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n3
+  n9 -->|"main out 3 to in 0"| n11
+  n1 -->|"main out 0 to in 0"| n2
+  n5 -->|"main out 0 to in 1"| n7
+  n5 -->|"main out 0 to in 1"| n9
+  n5 -->|"main out 0 to in 1"| n13
+  n8 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 0 to in 0"| n14
+  n15 -->|"main out 0 to in 0"| n7
+  n15 -->|"main out 0 to in 0"| n9
+  n15 -->|"main out 0 to in 0"| n13

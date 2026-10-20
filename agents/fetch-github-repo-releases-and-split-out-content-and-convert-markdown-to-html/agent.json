@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "slug": "fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html",
+  "title": "fetch github repo releases and split out content and convert markdown to html",
+  "purpose": "Adapt the published “fetch github repo releases and split out content and convert markdown to html” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Daily Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Email"
+  ],
+  "credential_types": [
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Fetch Github Repo Releases",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Content",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Markdown to HTML",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Daily Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "If new release in the last day",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Daily Trigger",
+        "to": "Fetch Github Repo Releases",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Content",
+        "to": "Convert Markdown to HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Markdown to HTML",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Github Repo Releases",
+        "to": "If new release in the last day",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If new release in the last day",
+        "to": "Split Out Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/n8n",
+      "files": [
+        "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/n8n/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html.json"
+      ],
+      "sha256": "1179718565359238955b536117d4246437da09f56d7ae830b8a123502a7bfb43",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/fetch-github-repo-releases-and-split-out-content-and-convert-markdown-to-html/implementations/n8n/provenance.json"
+}

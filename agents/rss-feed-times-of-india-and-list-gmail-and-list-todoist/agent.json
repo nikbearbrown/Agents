@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "slug": "rss-feed-times-of-india-and-list-gmail-and-list-todoist",
+  "title": "My workflow 4",
+  "purpose": "Adapt the published “My workflow 4” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Gmail: Send Digest"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "todoistApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "RSS Feed: Times of India",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Gmail: Fetch Emails",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "TodoList: Fetch Tasks",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Format Digest: Merge & Style Data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Gmail: Send Digest",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Format Digest: Merge & Style Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "RSS Feed: Times of India",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Gmail: Fetch Emails",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "TodoList: Fetch Tasks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Gmail: Fetch Emails",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "TodoList: Fetch Tasks",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "RSS Feed: Times of India",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format Digest: Merge & Style Data",
+        "to": "Gmail: Send Digest",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/n8n",
+      "files": [
+        "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/n8n/rss-feed-times-of-india-and-list-gmail-and-list-todoist.json"
+      ],
+      "sha256": "bd0b7c5bfbd66412f113bcd7c376a44cac1a579106c1008a300b9b1640ee01f5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/rss-feed-times-of-india-and-list-gmail-and-list-todoist/implementations/n8n/provenance.json"
+}

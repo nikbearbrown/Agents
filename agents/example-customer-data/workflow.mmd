@@ -1,0 +1,25 @@
+flowchart LR
+  n0["Scheduled Start: Daily Churn Check"]
+  n1["Fetch Customer Data from Sheet"]
+  n2["Filter High Churn Risk #38; No Campaign Customers"]
+  n3["Check if Eligible Customers Found"]
+  n4["Process Each Eligible Customer"]
+  n5["Generate Win-Back Offer"]
+  n6["#40;LLM Model for Offer Generation#41;"]
+  n7["#40;Parse Offer JSON#41;"]
+  n8["Log Sent Offer in System Log"]
+  n9["Send Win-Back Offer via Email"]
+  n10["Set #39;Not Found#39; Status"]
+  n11["Log #39;Not Found#39; in System Log"]
+  n7 -->|"ai_outputParser out 0 to in 0"| n5
+  n10 -->|"main out 0 to in 0"| n11
+  n5 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 1 to in 0"| n5
+  n6 -->|"ai_languageModel out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 1 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 0 to in 0"| n3

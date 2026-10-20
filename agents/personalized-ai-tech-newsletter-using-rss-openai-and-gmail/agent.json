@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "slug": "personalized-ai-tech-newsletter-using-rss-openai-and-gmail",
+  "title": "Personalized AI Tech Newsletter Using RSS, OpenAI and Gmail",
+  "purpose": "Adapt the published “Personalized AI Tech Newsletter Using RSS, OpenAI and Gmail” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Get Articles Daily",
+    "Send Weekly Summary"
+  ],
+  "terminal_nodes": [
+    "Embeddings OpenAI",
+    "Default Data Loader",
+    "Recursive Character Text Splitter",
+    "OpenAI Chat Model",
+    "Send Newsletter",
+    "Store News Articles",
+    "Get News Articles",
+    "Embeddings OpenAI2"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Normalize Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Articles Daily",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Weekly Summary",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "News reader AI",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.9,
+        "disabled": false
+      },
+      {
+        "name": "Send Newsletter",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Convert Response to an Email-Friendly Format",
+        "type": "n8n-nodes-base.markdown",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Your topics of interest",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Store News Articles",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Set Tech News RSS Feeds",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Read RSS News Feeds",
+        "type": "n8n-nodes-base.rssFeedRead",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get News Articles",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Embeddings OpenAI2",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Split Out",
+        "to": "Read RSS News Feeds",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "News reader AI",
+        "to": "Convert Response to an Email-Friendly Format",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Normalize Fields",
+        "to": "Store News Articles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI",
+        "to": "Store News Articles",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get News Articles",
+        "to": "News reader AI",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "News reader AI",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Embeddings OpenAI2",
+        "to": "Get News Articles",
+        "kind": "ai_embedding",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Articles Daily",
+        "to": "Set Tech News RSS Feeds",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Default Data Loader",
+        "to": "Store News Articles",
+        "kind": "ai_document",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Read RSS News Feeds",
+        "to": "Normalize Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Weekly Summary",
+        "to": "Your topics of interest",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Tech News RSS Feeds",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Your topics of interest",
+        "to": "News reader AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Recursive Character Text Splitter",
+        "to": "Default Data Loader",
+        "kind": "ai_textSplitter",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert Response to an Email-Friendly Format",
+        "to": "Send Newsletter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/n8n",
+      "files": [
+        "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/n8n/personalized-ai-tech-newsletter-using-rss-openai-and-gmail.json"
+      ],
+      "sha256": "2d22198d3c5ca49894540d485643df49b377d9496bbfb2b1fa3e27d1795767f8",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/personalized-ai-tech-newsletter-using-rss-openai-and-gmail/implementations/n8n/provenance.json"
+}

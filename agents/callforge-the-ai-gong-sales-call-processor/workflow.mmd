@@ -1,0 +1,39 @@
+flowchart LR
+  n0["Execute Workflow Trigger"]
+  n1["Retrieve detailed call data"]
+  n2["Get transcript"]
+  n3["Join Transcript to String"]
+  n4["Isolate Notion Data"]
+  n5["Join Affiliation"]
+  n6["Join conversation"]
+  n7["Extract SF Opp Data"]
+  n8["Extract SF Opp Data1"]
+  n9["Get Opp Data"]
+  n10["Get account data"]
+  n11["Extract Call Data"]
+  n12["Merge call and transcript Data"]
+  n13["Aggregate Gong Call Transcript"]
+  n14["Get External Attendees Emails"]
+  n15["Combine Salesforce Opp Data"]
+  n16["Aggregate Salesforce data"]
+  n17["Merge Enriched Transcript Data"]
+  n9 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n10
+  n2 -->|"main out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 0 to in 1"| n12
+  n6 -->|"main out 0 to in 0"| n14
+  n6 -->|"main out 0 to in 0"| n13
+  n7 -->|"main out 0 to in 0"| n15
+  n8 -->|"main out 0 to in 1"| n15
+  n0 -->|"main out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n1
+  n16 -->|"main out 0 to in 1"| n17
+  n3 -->|"main out 0 to in 0"| n12
+  n15 -->|"main out 0 to in 0"| n16
+  n1 -->|"main out 0 to in 0"| n11
+  n14 -->|"main out 0 to in 0"| n9
+  n13 -->|"main out 0 to in 0"| n17
+  n17 -->|"main out 0 to in 0"| n4
+  n12 -->|"main out 0 to in 0"| n5

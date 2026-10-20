@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "slug": "airflow-dag-run",
+  "title": "airflow dag_run",
+  "purpose": "Adapt the published “airflow dag_run” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "in data"
+  ],
+  "terminal_nodes": [
+    "dag run fail",
+    "dag run wait too long",
+    "Airflow: dag_run - get result"
+  ],
+  "credential_types": [
+    "httpBasicAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Airflow: dag_run",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Airflow: dag_run - state",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "count",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "dag run fail",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "if state == queued",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "dag run wait too long",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airflow: dag_run - get result",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Switch: state",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "in data",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "If count > wait_time",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "airflow-api",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "Airflow: dag_run - state",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "count",
+        "to": "If count > wait_time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "in data",
+        "to": "airflow-api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "airflow-api",
+        "to": "Airflow: dag_run",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch: state",
+        "to": "Airflow: dag_run - get result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch: state",
+        "to": "count",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch: state",
+        "to": "count",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch: state",
+        "to": "dag run fail",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Airflow: dag_run",
+        "to": "if state == queued",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if state == queued",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if state == queued",
+        "to": "dag run fail",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If count > wait_time",
+        "to": "dag run wait too long",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If count > wait_time",
+        "to": "Wait",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Airflow: dag_run - state",
+        "to": "Switch: state",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/airflow-dag-run/implementations/n8n",
+      "files": [
+        "agents/airflow-dag-run/implementations/n8n/airflow-dag-run.json"
+      ],
+      "sha256": "e8d58be97bc9421c36c884a9645f6eb15ec651e22ad47a63157bbf28c14bec56",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/airflow-dag-run/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/airflow-dag-run/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/airflow-dag-run/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/airflow-dag-run/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/airflow-dag-run/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/airflow-dag-run/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/airflow-dag-run/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/airflow-dag-run/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/airflow-dag-run/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/airflow-dag-run/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/airflow-dag-run/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,428 @@
+{
+  "schema_version": 1,
+  "slug": "cron-and-retrieve-docker-data-and-http-request",
+  "title": "Dashboard",
+  "purpose": "Adapt the published “Dashboard” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 24 executable nodes and 23 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Cron"
+  ],
+  "terminal_nodes": [
+    "Docker Pulls",
+    "Docker Stars",
+    "GitHub Watchers",
+    "GitHub Forks",
+    "GitHub Open Issues ",
+    "GitHub Stars",
+    "npm Maintenance",
+    "npm Popularity",
+    "npm Quality",
+    "npm Final",
+    "Product Hunt Rating",
+    "Product Hunt Reviews",
+    "Product Hunt Votes",
+    "Product Hunt Comments"
+  ],
+  "credential_types": [
+    "githubApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Cron",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Dashboard Configuration",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Docker Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Docker Pulls",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Docker Stars",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve npm Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub Watchers",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub Forks",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub Open Issues ",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub Stars",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "npm Maintenance",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "npm Popularity",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "npm Quality",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "npm Final",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Product Hunt Rating",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Product Hunt Reviews",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Product Hunt Votes",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Product Hunt Comments",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GitHub",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Product Hunt Data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Massage npm Data",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Massage Product Hunt Data",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Massage Docker Data",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Massage GitHub Data",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Cron",
+        "to": "Dashboard Configuration",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GitHub",
+        "to": "Massage GitHub Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage npm Data",
+        "to": "npm Maintenance",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage npm Data",
+        "to": "npm Quality",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage npm Data",
+        "to": "npm Popularity",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage npm Data",
+        "to": "npm Final",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve npm Data",
+        "to": "Massage npm Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage Docker Data",
+        "to": "Docker Stars",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage Docker Data",
+        "to": "Docker Pulls",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage GitHub Data",
+        "to": "GitHub Stars",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage GitHub Data",
+        "to": "GitHub Watchers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage GitHub Data",
+        "to": "GitHub Forks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage GitHub Data",
+        "to": "GitHub Open Issues ",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Docker Data",
+        "to": "Massage Docker Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dashboard Configuration",
+        "to": "Retrieve Product Hunt Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dashboard Configuration",
+        "to": "Retrieve npm Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dashboard Configuration",
+        "to": "Retrieve Docker Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dashboard Configuration",
+        "to": "GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage Product Hunt Data",
+        "to": "Product Hunt Rating",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage Product Hunt Data",
+        "to": "Product Hunt Reviews",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage Product Hunt Data",
+        "to": "Product Hunt Votes",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Massage Product Hunt Data",
+        "to": "Product Hunt Comments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Product Hunt Data",
+        "to": "Massage Product Hunt Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/implementations/n8n",
+      "files": [
+        "agents/cron-and-retrieve-docker-data-and-http-request/implementations/n8n/cron-and-retrieve-docker-data-and-http-request.json"
+      ],
+      "sha256": "f36723ed090ed7b2679b1355adf9244007ce070c923f9b4e57570b4c0e9b4911",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/cron-and-retrieve-docker-data-and-http-request/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/cron-and-retrieve-docker-data-and-http-request/implementations/n8n/provenance.json"
+}

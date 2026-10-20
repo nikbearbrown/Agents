@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "slug": "thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the",
+  "title": "Thie workflow showcases how you can build a simple website monitoring service using Scheduled Triggers and the HTTP Requests node.",
+  "purpose": "Adapt the published “Thie workflow showcases how you can build a simple website monitoring service using Scheduled Triggers and the HTTP Requests node.” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Chat Alert"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleSheetsOAuth2Api",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Calculate Status",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Get Sites",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "Send Chat Alert",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email Alert",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Log Uptime Event",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Site Status",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "Perform Site Test",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "For Each Site...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Status Router",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get Sites",
+        "to": "For Each Site...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status Router",
+        "to": "Log Uptime Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status Router",
+        "to": "Send Email Alert",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Status Router",
+        "to": "Log Uptime Event",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Status Router",
+        "to": "Log Uptime Event",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Status Router",
+        "to": "Send Email Alert",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Status Router",
+        "to": "Send Email Alert",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Status Router",
+        "to": "Log Uptime Event",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Calculate Status",
+        "to": "Status Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Site...",
+        "to": "Perform Site Test",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Log Uptime Event",
+        "to": "Update Site Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get Sites",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Email Alert",
+        "to": "Send Chat Alert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Perform Site Test",
+        "to": "Calculate Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Site Status",
+        "to": "For Each Site...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/n8n",
+      "files": [
+        "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/n8n/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the.json"
+      ],
+      "sha256": "5054ae848caba0ad8c20a0342a410ff2a069f4c1fd23241a5144b11086f6b4c0",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/thie-workflow-showcases-how-you-can-build-a-simple-website-monitoring-service-using-scheduled-triggers-and-the/implementations/n8n/provenance.json"
+}

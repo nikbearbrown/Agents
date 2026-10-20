@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "slug": "set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature",
+  "title": "👆 Set instance url instead of `{{ $vars.instance_url }}` (or set the env variable if you have that feature)",
+  "purpose": "Adapt the published “👆 Set instance url instead of `{{ $vars.instance_url }}` (or set the env variable if you have that feature)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Every 15 minutes"
+  ],
+  "terminal_nodes": [
+    "Add to Notion",
+    "Update in Notion"
+  ],
+  "credential_types": [
+    "n8nApi",
+    "notionApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Every 15 minutes",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get all workflows with tag",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Get notion page with workflow id",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Map fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "if newly added workflow",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Add to Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Update in Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Map fields",
+        "to": "if newly added workflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set fields",
+        "to": "Get notion page with workflow id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Every 15 minutes",
+        "to": "Get all workflows with tag",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if newly added workflow",
+        "to": "Add to Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if newly added workflow",
+        "to": "Update in Notion",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get all workflows with tag",
+        "to": "Set fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get notion page with workflow id",
+        "to": "Map fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/n8n",
+      "files": [
+        "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/n8n/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature.json"
+      ],
+      "sha256": "b73aaf54044fc4f349d30a9aaec544ff5e7c16df812c0fafbabaa2c08b60e2b5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/set-instance-url-instead-of-vars-instance-url-or-set-the-env-variable-if-you-have-that-feature/implementations/n8n/provenance.json"
+}

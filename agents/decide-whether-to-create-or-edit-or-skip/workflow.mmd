@@ -1,0 +1,24 @@
+flowchart LR
+  n0["Backup Now - Manual Trigger"]
+  n1["n8n"]
+  n2["Globals"]
+  n3["Create New File#40;s#41;"]
+  n4["Edit Existing File#40;s#41;"]
+  n5["Derive Filename From Workflow Name"]
+  n6["Fetch Existing File Content"]
+  n7["Skip Unchanged Files"]
+  n8["Schedule Trigger"]
+  n9["Fetch List of Existing Files"]
+  n10["Combine Gitlab Existing Files as Single List Item"]
+  n11["File Exists in Gitlab#63;"]
+  n1 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n4
+  n11 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 1 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n1

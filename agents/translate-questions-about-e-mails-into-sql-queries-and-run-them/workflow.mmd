@@ -1,0 +1,49 @@
+flowchart LR
+  n0["Add table name to output"]
+  n1["Convert data to binary"]
+  n2["Save file locally"]
+  n3["Extract data from file"]
+  n4["Chat Trigger"]
+  n5["When clicking #34;Test workflow#34;"]
+  n6["Combine schema data and chat input"]
+  n7["Load the schema from the local file"]
+  n8["Extract SQL query"]
+  n9["Check if query exists"]
+  n10["Format query results"]
+  n11["Combine query result and chat answer"]
+  n12["List all columns in a table"]
+  n13["List all tables in a database"]
+  n14["Ollama Chat Model"]
+  n15["Postgres"]
+  n16["Add trailing semicolon"]
+  n17["Check for trailing semicolon"]
+  n18["WorkflowTrigger"]
+  n19["If ran manually"]
+  n20["If file exists or already retried generating it"]
+  n21["AI Agent"]
+  n22["Format empty output"]
+  n21 -->|"main out 0 to in 0"| n8
+  n15 -->|"main out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n7
+  n19 -->|"main out 1 to in 0"| n7
+  n18 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n17
+  n14 -->|"ai_languageModel out 0 to in 0"| n21
+  n2 -->|"main out 0 to in 0"| n19
+  n10 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 0 to in 1"| n11
+  n9 -->|"main out 0 to in 0"| n15
+  n9 -->|"main out 1 to in 0"| n22
+  n16 -->|"main out 0 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n1
+  n12 -->|"main out 0 to in 0"| n0
+  n17 -->|"main out 0 to in 0"| n16
+  n17 -->|"main out 1 to in 0"| n9
+  n13 -->|"main out 0 to in 0"| n12
+  n5 -->|"main out 0 to in 0"| n13
+  n6 -->|"main out 0 to in 0"| n21
+  n7 -->|"main out 0 to in 0"| n20
+  n20 -->|"main out 0 to in 0"| n3
+  n20 -->|"main out 1 to in 0"| n13

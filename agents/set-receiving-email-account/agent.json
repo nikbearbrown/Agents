@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "slug": "set-receiving-email-account",
+  "title": "Set receiving email account",
+  "purpose": "Adapt the published “Set receiving email account” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 9 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [],
+  "terminal_nodes": [
+    "Creates an email engagement",
+    "OpenAI Chat Model",
+    "Set the output Json"
+  ],
+  "credential_types": [
+    "hubspotOAuth2Api",
+    "imap",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Creates an email engagement",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Search for the contact via email",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Parse the mail with AI",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "When an email is received",
+        "type": "n8n-nodes-base.emailReadImap",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set the output Json",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "contact exists?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Creates contact",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Edit Fields",
+        "to": "Creates an email engagement",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Creates contact",
+        "to": "Creates an email engagement",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "contact exists?",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "contact exists?",
+        "to": "Creates contact",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Parse the mail with AI",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set the output Json",
+        "to": "Parse the mail with AI",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse the mail with AI",
+        "to": "Search for the contact via email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When an email is received",
+        "to": "Parse the mail with AI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Search for the contact via email",
+        "to": "contact exists?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/set-receiving-email-account/implementations/n8n",
+      "files": [
+        "agents/set-receiving-email-account/implementations/n8n/set-receiving-email-account.json"
+      ],
+      "sha256": "04f3c1cb34740c0dcb0162204378e2d1039f7a25b6a0dbd51e1e7fc81ad7a933",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/set-receiving-email-account/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/set-receiving-email-account/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/set-receiving-email-account/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/set-receiving-email-account/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/set-receiving-email-account/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/set-receiving-email-account/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/set-receiving-email-account/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/set-receiving-email-account/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/set-receiving-email-account/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/set-receiving-email-account/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/set-receiving-email-account/implementations/n8n/provenance.json"
+}

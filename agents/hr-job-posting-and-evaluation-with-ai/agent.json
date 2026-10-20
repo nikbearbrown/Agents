@@ -1,0 +1,507 @@
+{
+  "schema_version": 1,
+  "slug": "hr-job-posting-and-evaluation-with-ai",
+  "title": "HR Job Posting and Evaluation with AI",
+  "purpose": "Adapt the published “HR Job Posting and Evaluation with AI” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 30 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On form submission"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Airtable1",
+    "Structured Output Parser",
+    "Rejected",
+    "Airtable2",
+    "job_posting",
+    "candidate_insights",
+    "Google Calendar",
+    "job_posting1",
+    "candidate_insights1",
+    "screening questions"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "googleCalendarOAuth2Api",
+    "googleDriveOAuth2Api",
+    "openAiApi",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Airtable",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Upload CV to google drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "applicant details",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "download CV",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable1",
+        "type": "n8n-nodes-base.airtableTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "shortlisted?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Rejected",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Potential Hire",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable2",
+        "type": "n8n-nodes-base.airtableTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "generate questionnaires",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "questionnaires",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "update questionnaires",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "job_posting",
+        "type": "n8n-nodes-base.airtableTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "candidate_insights",
+        "type": "n8n-nodes-base.airtableTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Personalize email",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Book Meeting",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "Google Calendar",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "update phone meeting time",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Screening Questions",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "job_posting1",
+        "type": "n8n-nodes-base.airtableTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "candidate_insights1",
+        "type": "n8n-nodes-base.airtableTool",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "screening questions",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "AI Agent",
+        "to": "shortlisted?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable",
+        "to": "download CV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable1",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable2",
+        "to": "generate questionnaires",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Email",
+        "to": "Book Meeting",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "download CV",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "job_posting",
+        "to": "Personalize email",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Book Meeting",
+        "to": "update phone meeting time",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields1",
+        "to": "screening questions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "job_posting1",
+        "to": "Screening Questions",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "shortlisted?",
+        "to": "Potential Hire",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "shortlisted?",
+        "to": "Rejected",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Potential Hire",
+        "to": "generate questionnaires",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "questionnaires",
+        "to": "update questionnaires",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Calendar",
+        "to": "Book Meeting",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Personalize email",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "applicant details",
+        "to": "Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On form submission",
+        "to": "Upload CV to google drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "candidate_insights",
+        "to": "Personalize email",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Screening Questions",
+        "to": "Edit Fields1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "candidate_insights1",
+        "to": "Screening Questions",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "update questionnaires",
+        "to": "Personalize email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "generate questionnaires",
+        "to": "questionnaires",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "AI Agent",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload CV to google drive",
+        "to": "applicant details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "update phone meeting time",
+        "to": "Screening Questions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/implementations/n8n",
+      "files": [
+        "agents/hr-job-posting-and-evaluation-with-ai/implementations/n8n/hr-job-posting-and-evaluation-with-ai.json"
+      ],
+      "sha256": "4be8892aac76f517d40fe1c11ae7cfc6ff36f7e85dd3cf6434760d9c3dd271ba",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/hr-job-posting-and-evaluation-with-ai/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/hr-job-posting-and-evaluation-with-ai/implementations/n8n/provenance.json"
+}

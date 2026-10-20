@@ -1,0 +1,23 @@
+flowchart LR
+  n0["Get Chat"]
+  n1["Insert Chat"]
+  n2["Aggregate"]
+  n3["Window Buffer Memory"]
+  n4["Google Gemini Chat Model"]
+  n5["Respond to Webhook"]
+  n6["ElevenLabs - Generate Audio"]
+  n7["Limit"]
+  n8["Basic LLM Chain"]
+  n9["Webhook"]
+  n10["OpenAI - Speech to Text"]
+  n7 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n10
+  n0 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n8
+  n1 -->|"main out 0 to in 0"| n7
+  n8 -->|"main out 0 to in 0"| n1
+  n3 -->|"ai_memory out 0 to in 0"| n1
+  n3 -->|"ai_memory out 0 to in 0"| n0
+  n10 -->|"main out 0 to in 0"| n0
+  n4 -->|"ai_languageModel out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n5

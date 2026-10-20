@@ -1,0 +1,23 @@
+flowchart LR
+  n0["Extract from File"]
+  n1["Structured Output Parser"]
+  n2["Save to Airtable"]
+  n3["Classify Document"]
+  n4["Upload File to Record"]
+  n5["Application Suitability Agent"]
+  n6["File Upload Retry"]
+  n7["Google Gemini Chat Model1"]
+  n8["Google Gemini Chat Model"]
+  n9["Step 1 of 2 - Upload Document"]
+  n10["Split Files"]
+  n0 -->|"main out 0 to in 0"| n3
+  n1 -->|"ai_outputParser out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 1 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n10
+  n7 -->|"ai_languageModel out 0 to in 0"| n3
+  n8 -->|"ai_languageModel out 0 to in 0"| n5
+  n9 -->|"main out 0 to in 0"| n10
+  n10 -->|"main out 0 to in 0"| n0

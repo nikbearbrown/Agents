@@ -1,0 +1,23 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Schedule Trigger"]
+  n2["loop"]
+  n3["sitemap_set"]
+  n4["sitemap_convert"]
+  n5["sitemap_parse"]
+  n6["url_set"]
+  n7["url_index"]
+  n8["index_check"]
+  n9["wait"]
+  n10["Stop and Error"]
+  n2 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 1 to in 0"| n10
+  n3 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n3

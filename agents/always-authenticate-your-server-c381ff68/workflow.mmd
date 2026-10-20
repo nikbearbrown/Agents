@@ -1,0 +1,21 @@
+flowchart LR
+  n0["GetTableSchema"]
+  n1["ListTables"]
+  n2["When Executed by Another Workflow"]
+  n3["CreateTableRecords"]
+  n4["ReadTableRecord"]
+  n5["Operation"]
+  n6["UpdateTableRecord"]
+  n7["UpdateTableRecords"]
+  n8["CreateTableRecord"]
+  n9["ReadTableRows"]
+  n10["PostgreSQL MCP Server"]
+  n5 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 1 to in 0"| n8
+  n5 -->|"main out 2 to in 0"| n6
+  n1 -->|"ai_tool out 0 to in 0"| n10
+  n9 -->|"ai_tool out 0 to in 0"| n10
+  n0 -->|"ai_tool out 0 to in 0"| n10
+  n3 -->|"ai_tool out 0 to in 0"| n10
+  n7 -->|"ai_tool out 0 to in 0"| n10
+  n2 -->|"main out 0 to in 0"| n5

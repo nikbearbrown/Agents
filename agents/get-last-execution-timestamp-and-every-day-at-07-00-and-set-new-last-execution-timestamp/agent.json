@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "slug": "get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp",
+  "title": "get last execution timestamp and every day at 07 00 and set new last execution timestamp",
+  "purpose": "Adapt the published “get last execution timestamp and every day at 07 00 and set new last execution timestamp” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Every day at 07:00"
+  ],
+  "terminal_nodes": [
+    "Set new last execution timestamp"
+  ],
+  "credential_types": [
+    "hubspotAppToken",
+    "mailchimpApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get last execution timestamp",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Every day at 07:00",
+        "type": "n8n-nodes-base.cron",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set new last execution timestamp",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create/Update contact",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get changed members",
+        "type": "n8n-nodes-base.mailchimp",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Every day at 07:00",
+        "to": "Get last execution timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get changed members",
+        "to": "Create/Update contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create/Update contact",
+        "to": "Set new last execution timestamp",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get last execution timestamp",
+        "to": "Get changed members",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/n8n",
+      "files": [
+        "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/n8n/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp.json"
+      ],
+      "sha256": "20b357f75ac9ad18a92ac21d0e94d2124a6e0180c7827dc1bcd1c8309ed50d26",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-last-execution-timestamp-and-every-day-at-07-00-and-set-new-last-execution-timestamp/implementations/n8n/provenance.json"
+}

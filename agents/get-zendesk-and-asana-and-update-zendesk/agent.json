@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "slug": "get-zendesk-and-asana-and-update-zendesk",
+  "title": "get zendesk and asana and update zendesk",
+  "purpose": "Adapt the published “get zendesk and asana and update zendesk” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On new Zendesk ticket"
+  ],
+  "terminal_nodes": [
+    "Update ticket",
+    "Create comment on existing task"
+  ],
+  "credential_types": [
+    "asanaApi",
+    "zendeskApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get ticket",
+        "type": "n8n-nodes-base.zendesk",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create task",
+        "type": "n8n-nodes-base.asana",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IF",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update ticket",
+        "type": "n8n-nodes-base.zendesk",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Determine",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create comment on existing task",
+        "type": "n8n-nodes-base.asana",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "On new Zendesk ticket",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "IF",
+        "to": "Create comment on existing task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF",
+        "to": "Create task",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Determine",
+        "to": "IF",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get ticket",
+        "to": "Determine",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create task",
+        "to": "Update ticket",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "On new Zendesk ticket",
+        "to": "Get ticket",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/implementations/n8n",
+      "files": [
+        "agents/get-zendesk-and-asana-and-update-zendesk/implementations/n8n/get-zendesk-and-asana-and-update-zendesk.json"
+      ],
+      "sha256": "8d6f1f9f3ca0c69952a6a41ec4f0ce094e111ff4f2269268de7e2b674065d7a6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-zendesk-and-asana-and-update-zendesk/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-zendesk-and-asana-and-update-zendesk/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,29 @@
+flowchart LR
+  n0["Gmail Trigger1"]
+  n1["Setup1"]
+  n2["Upload PDF to Drive1"]
+  n3["Rename file1"]
+  n4["Move to the correct folder1"]
+  n5["Gmail"]
+  n6["Extract from File2"]
+  n7["Google Drive"]
+  n8["OpenAI Model"]
+  n9["Structured Output Parser"]
+  n10["Append to Reconciliation Sheet"]
+  n11["Map Output"]
+  n12["Apply Data Extraction Rules"]
+  n13["Only invoice mails with attachments"]
+  n1 -->|"main out 0 to in 0"| n13
+  n11 -->|"main out 0 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n6
+  n8 -->|"ai_languageModel out 0 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n3
+  n9 -->|"ai_outputParser out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n11
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n7
+  n13 -->|"main out 0 to in 0"| n2
+  n13 -->|"main out 1 to in 0"| n5

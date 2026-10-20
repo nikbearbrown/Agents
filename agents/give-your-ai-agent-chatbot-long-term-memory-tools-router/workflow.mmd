@@ -1,0 +1,43 @@
+flowchart LR
+  n0["When Executed by Another Workflow"]
+  n1["Save Long Term Memories"]
+  n2["Saved response"]
+  n3["Respond with long term memories"]
+  n4["Retrieve Long Term Memories3"]
+  n5["Send Success Message to Telegram"]
+  n6["Email Workflow Stats"]
+  n7["OpenAI Chat Model2"]
+  n8["OpenAI Chat Model3"]
+  n9["#128228;Send Memories to Telegram"]
+  n10["#128235;Send Memories to Gmail"]
+  n11["#129504;Save Memories"]
+  n12["#128270;Retrieve Memories"]
+  n13["#129327;Window Buffer Memory"]
+  n14["#129504; AI Agent w/Long Term Memory"]
+  n15["#129302;OpenAI Chat Model"]
+  n16["#9410;#65039; When chat message received"]
+  n17["Prepare Telegram Message"]
+  n18["Prepare Gmail Message"]
+  n19["Retrieve Long Term Memories"]
+  n20["Memory Tool Router"]
+  n21["Retrieve Long Term Memories2"]
+  n11 -->|"ai_tool out 0 to in 0"| n14
+  n20 -->|"main out 0 to in 0"| n1
+  n20 -->|"main out 1 to in 0"| n19
+  n20 -->|"main out 2 to in 0"| n21
+  n20 -->|"main out 3 to in 0"| n4
+  n7 -->|"ai_languageModel out 0 to in 0"| n17
+  n8 -->|"ai_languageModel out 0 to in 0"| n18
+  n18 -->|"main out 0 to in 0"| n6
+  n12 -->|"ai_tool out 0 to in 0"| n14
+  n15 -->|"ai_languageModel out 0 to in 0"| n14
+  n1 -->|"main out 0 to in 0"| n2
+  n17 -->|"main out 0 to in 0"| n5
+  n13 -->|"ai_memory out 0 to in 0"| n14
+  n10 -->|"ai_tool out 0 to in 0"| n14
+  n19 -->|"main out 0 to in 0"| n3
+  n21 -->|"main out 0 to in 0"| n17
+  n4 -->|"main out 0 to in 0"| n18
+  n9 -->|"ai_tool out 0 to in 0"| n14
+  n0 -->|"main out 0 to in 0"| n20
+  n16 -->|"main out 0 to in 0"| n14

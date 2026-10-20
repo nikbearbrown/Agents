@@ -1,0 +1,26 @@
+flowchart LR
+  n0["Reply"]
+  n1["Receive Message"]
+  n2["Wait 10 Seconds"]
+  n3["Add to Queued Messages"]
+  n4["No Operation, do nothing"]
+  n5["Aggregate"]
+  n6["Delete Queued Messages"]
+  n7["OpenAI Chat Model"]
+  n8["Sort by Message ID"]
+  n9["Get Queued Messages"]
+  n10["Check Most Recent Message"]
+  n11["AI Agent"]
+  n12["Postgres Chat Memory"]
+  n11 -->|"main out 0 to in 0"| n0
+  n5 -->|"main out 0 to in 0"| n11
+  n1 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 0"| n9
+  n7 -->|"ai_languageModel out 0 to in 0"| n11
+  n8 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n8
+  n12 -->|"ai_memory out 0 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n5
+  n10 -->|"main out 0 to in 0"| n6
+  n10 -->|"main out 1 to in 0"| n4

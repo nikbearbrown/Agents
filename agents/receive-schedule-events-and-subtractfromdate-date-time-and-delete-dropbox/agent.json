@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "slug": "receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox",
+  "title": "receive schedule events and subtractfromdate date time and delete dropbox",
+  "purpose": "Adapt the published “receive schedule events and subtractfromdate date time and delete dropbox” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "DELETE OLD BACKUPS",
+    "UPLOAD WORKFLOWS"
+  ],
+  "credential_types": [
+    "dropboxOAuth2Api",
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "PURGE DAYS",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "DELETE OLD BACKUPS",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET WORKFLOWS",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MAKE JSON FILES",
+        "type": "n8n-nodes-base.moveBinaryData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "UPLOAD WORKFLOWS",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "DESTINATION FOLDER",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "WAIT FOR MOVE TO FINISH",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "GET CURRENT BACKUPS",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "IGNORE FOLDERS",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "MOVE INTO OLD FOLDER",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "LIST OLD BACKUPS",
+        "type": "n8n-nodes-base.dropbox",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CHECK DATES",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "GET CURRENT DATE",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "PURGE DAYS",
+        "to": "LIST OLD BACKUPS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CHECK DATES",
+        "to": "DELETE OLD BACKUPS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET WORKFLOWS",
+        "to": "MAKE JSON FILES",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IGNORE FOLDERS",
+        "to": "MOVE INTO OLD FOLDER",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MAKE JSON FILES",
+        "to": "UPLOAD WORKFLOWS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET CURRENT DATE",
+        "to": "GET CURRENT BACKUPS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LIST OLD BACKUPS",
+        "to": "CHECK DATES",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "DESTINATION FOLDER",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DESTINATION FOLDER",
+        "to": "GET CURRENT DATE",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DESTINATION FOLDER",
+        "to": "WAIT FOR MOVE TO FINISH",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "DESTINATION FOLDER",
+        "to": "PURGE DAYS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET CURRENT BACKUPS",
+        "to": "IGNORE FOLDERS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MOVE INTO OLD FOLDER",
+        "to": "WAIT FOR MOVE TO FINISH",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "WAIT FOR MOVE TO FINISH",
+        "to": "GET WORKFLOWS",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/n8n",
+      "files": [
+        "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/n8n/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox.json"
+      ],
+      "sha256": "2dda22bef8e8ab3eee23cf3c016c8aa7e6b5f24cf3e52e9db4d007c35bbd7018",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-schedule-events-and-subtractfromdate-date-time-and-delete-dropbox/implementations/n8n/provenance.json"
+}

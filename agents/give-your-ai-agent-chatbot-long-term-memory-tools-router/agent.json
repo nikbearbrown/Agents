@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "slug": "give-your-ai-agent-chatbot-long-term-memory-tools-router",
+  "title": "🧠 Give Your AI Agent Chatbot Long Term Memory Tools Router",
+  "purpose": "Adapt the published “🧠 Give Your AI Agent Chatbot Long Term Memory Tools Router” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 22 executable nodes and 20 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When Executed by Another Workflow",
+    "Ⓜ️ When chat message received"
+  ],
+  "terminal_nodes": [
+    "Saved response",
+    "Respond with long term memories",
+    "Send Success Message to Telegram",
+    "Email Workflow Stats",
+    "OpenAI Chat Model2",
+    "OpenAI Chat Model3",
+    "📤Send Memories to Telegram",
+    "📫Send Memories to Gmail",
+    "🧠Save Memories",
+    "🔎Retrieve Memories",
+    "🤯Window Buffer Memory",
+    "🧠 AI Agent w/Long Term Memory",
+    "🤖OpenAI Chat Model"
+  ],
+  "credential_types": [
+    "gmailOAuth2",
+    "googleDocsOAuth2Api",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Save Long Term Memories",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Saved response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Respond with long term memories",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Long Term Memories3",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send Success Message to Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Email Workflow Stats",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model3",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "📤Send Memories to Telegram",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "📫Send Memories to Gmail",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "🧠Save Memories",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "🔎Retrieve Memories",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "🤯Window Buffer Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "🧠 AI Agent w/Long Term Memory",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.7,
+        "disabled": false
+      },
+      {
+        "name": "🤖OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Ⓜ️ When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Telegram Message",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Gmail Message",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Long Term Memories",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Memory Tool Router",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Long Term Memories2",
+        "type": "n8n-nodes-base.googleDocs",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "🧠Save Memories",
+        "to": "🧠 AI Agent w/Long Term Memory",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Memory Tool Router",
+        "to": "Save Long Term Memories",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Memory Tool Router",
+        "to": "Retrieve Long Term Memories",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Memory Tool Router",
+        "to": "Retrieve Long Term Memories2",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Memory Tool Router",
+        "to": "Retrieve Long Term Memories3",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model2",
+        "to": "Prepare Telegram Message",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model3",
+        "to": "Prepare Gmail Message",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Gmail Message",
+        "to": "Email Workflow Stats",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🔎Retrieve Memories",
+        "to": "🧠 AI Agent w/Long Term Memory",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🤖OpenAI Chat Model",
+        "to": "🧠 AI Agent w/Long Term Memory",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Long Term Memories",
+        "to": "Saved response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Telegram Message",
+        "to": "Send Success Message to Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "🤯Window Buffer Memory",
+        "to": "🧠 AI Agent w/Long Term Memory",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📫Send Memories to Gmail",
+        "to": "🧠 AI Agent w/Long Term Memory",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Long Term Memories",
+        "to": "Respond with long term memories",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Long Term Memories2",
+        "to": "Prepare Telegram Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Long Term Memories3",
+        "to": "Prepare Gmail Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "📤Send Memories to Telegram",
+        "to": "🧠 AI Agent w/Long Term Memory",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Memory Tool Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Ⓜ️ When chat message received",
+        "to": "🧠 AI Agent w/Long Term Memory",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/n8n",
+      "files": [
+        "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/n8n/give-your-ai-agent-chatbot-long-term-memory-tools-router.json"
+      ],
+      "sha256": "52f392a222079f4b8152c392e45fa8c990273de63c10461b75403478e1397113",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/give-your-ai-agent-chatbot-long-term-memory-tools-router/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "slug": "mcp-calendar",
+  "title": "MCP_CALENDAR",
+  "purpose": "Adapt the published “MCP_CALENDAR” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "MCP_CALENDAR"
+  ],
+  "terminal_nodes": [
+    "MCP_CALENDAR",
+    "GET_CALENDAR",
+    "GET_ALL_CALENDAR",
+    "DELETE_CALENDAR",
+    "UPDATE_CALENDAR",
+    "AVALIABILITY_CALENDAR",
+    "CREATE_CALENDAR"
+  ],
+  "credential_types": [
+    "googleCalendarOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "MCP_CALENDAR",
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GET_CALENDAR",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "GET_ALL_CALENDAR",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "DELETE_CALENDAR",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "UPDATE_CALENDAR",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "AVALIABILITY_CALENDAR",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "CREATE_CALENDAR",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "version": 1.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "GET_CALENDAR",
+        "to": "MCP_CALENDAR",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CREATE_CALENDAR",
+        "to": "MCP_CALENDAR",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "DELETE_CALENDAR",
+        "to": "MCP_CALENDAR",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "UPDATE_CALENDAR",
+        "to": "MCP_CALENDAR",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET_ALL_CALENDAR",
+        "to": "MCP_CALENDAR",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AVALIABILITY_CALENDAR",
+        "to": "MCP_CALENDAR",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/mcp-calendar/implementations/n8n",
+      "files": [
+        "agents/mcp-calendar/implementations/n8n/mcp-calendar.json"
+      ],
+      "sha256": "8b0a3b89c94713e299a67aec610e7bbd99944f15702c877884db02b9758f8dcb",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/mcp-calendar/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/mcp-calendar/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/mcp-calendar/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/mcp-calendar/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/mcp-calendar/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/mcp-calendar/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/mcp-calendar/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/mcp-calendar/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/mcp-calendar/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/mcp-calendar/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/mcp-calendar/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "slug": "get-file-gitlab-and-gitlab-and-fromjson-extract-from-file",
+  "title": "get file gitlab and gitlab and fromjson extract from file",
+  "purpose": "Adapt the published “get file gitlab and gitlab and fromjson extract from file” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 25 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test Workflow\""
+  ],
+  "terminal_nodes": [
+    "Result"
+  ],
+  "credential_types": [
+    "gitlabApi",
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Result",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Current workflow",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Workflows",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get file",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "File status",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Status error",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "End Loop",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create file",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract From File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "New file version",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Error output to normal output",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Status new",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Status diff",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Status same",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve all workflows",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Save each version in a different field",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Switch",
+        "to": "Create file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Status same",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "New file version",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Status error",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Globals",
+        "to": "Retrieve all workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "End Loop",
+        "to": "Loop Over Workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get file",
+        "to": "Extract From File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get file",
+        "to": "Error output to normal output",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Status new",
+        "to": "End Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create file",
+        "to": "Status new",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create file",
+        "to": "Status error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "File status",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status diff",
+        "to": "End Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status same",
+        "to": "End Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status error",
+        "to": "End Loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Current workflow",
+        "to": "Get file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New file version",
+        "to": "Status diff",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New file version",
+        "to": "Status error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Extract From File",
+        "to": "Save each version in a different field",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Workflows",
+        "to": "Result",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Workflows",
+        "to": "Current workflow",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Retrieve all workflows",
+        "to": "Loop Over Workflows",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Error output to normal output",
+        "to": "File status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test Workflow\"",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save each version in a different field",
+        "to": "File status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/n8n",
+      "files": [
+        "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/n8n/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file.json"
+      ],
+      "sha256": "d5f2ef80dfa771fb7a7d77ab51cf16f5389cfb3b69ddba21ec6194571cf7c273",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-file-gitlab-and-gitlab-and-fromjson-extract-from-file/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,30 @@
+flowchart LR
+  n0["SendTyping"]
+  n1["SetResponse"]
+  n2["Settings"]
+  n3["Schedule"]
+  n4["ScheduleToMarkdown"]
+  n5["ScheduleBot"]
+  n6["n8nChatSettings"]
+  n7["telegramChatSettings"]
+  n8["telegramInput"]
+  n9["n8nInput"]
+  n10["Switch"]
+  n11["telegramResponse"]
+  n12["n8nResponse"]
+  n13["LLM"]
+  n14["Memory"]
+  n13 -->|"ai_languageModel out 0 to in 0"| n5
+  n14 -->|"ai_memory out 0 to in 0"| n5
+  n10 -->|"main out 0 to in 0"| n12
+  n10 -->|"main out 1 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n3
+  n9 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n1
+  n1 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n2

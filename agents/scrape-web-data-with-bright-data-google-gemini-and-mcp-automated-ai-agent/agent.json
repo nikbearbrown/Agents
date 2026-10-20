@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "slug": "scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent",
+  "title": "Scrape Web Data with Bright Data, Google Gemini and MCP Automated AI Agent",
+  "purpose": "Adapt the published “Scrape Web Data with Bright Data, Google Gemini and MCP Automated AI Agent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 14 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’"
+  ],
+  "terminal_nodes": [
+    "MCP Client List all tools",
+    "Webhook for web scraper",
+    "MCP Client to Scrape as Markdown",
+    "MCP Client to Scrape as HTML",
+    "Google Gemini Chat Model for AI Agent",
+    "Simple Memory",
+    "Webhook for Web Scraper AI Agent",
+    "Write the scraped content to disk"
+  ],
+  "credential_types": [
+    "googlePalmApi",
+    "mcpClientApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MCP Client list all tools for Bright Data",
+        "type": "n8n-nodes-mcp.mcpClient",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MCP Client List all tools",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MCP Client Bright Data Web Scraper",
+        "type": "n8n-nodes-mcp.mcpClient",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook for web scraper",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set the URLs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "MCP Client to Scrape as Markdown",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "MCP Client to Scrape as HTML",
+        "type": "n8n-nodes-mcp.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Gemini Chat Model for AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Webhook for Web Scraper AI Agent",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Set the URL with the Webhook URL and data format",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Create a binary data",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Write the scraped content to disk",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "AI Agent",
+        "to": "Webhook for Web Scraper AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "Create a binary data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set the URLs",
+        "to": "MCP Client Bright Data Web Scraper",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory",
+        "to": "AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create a binary data",
+        "to": "Write the scraped content to disk",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MCP Client List all tools",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MCP Client to Scrape as HTML",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MCP Client to Scrape as Markdown",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "MCP Client list all tools for Bright Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Set the URL with the Webhook URL and data format",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MCP Client Bright Data Web Scraper",
+        "to": "Webhook for web scraper",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Gemini Chat Model for AI Agent",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MCP Client list all tools for Bright Data",
+        "to": "Set the URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set the URL with the Webhook URL and data format",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/n8n",
+      "files": [
+        "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/n8n/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent.json"
+      ],
+      "sha256": "a9fc4b05528917b5c85b497bda24d9326696e018e897fa6404bc6067fbe2d0ef",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/scrape-web-data-with-bright-data-google-gemini-and-mcp-automated-ai-agent/implementations/n8n/provenance.json"
+}

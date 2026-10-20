@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "slug": "form-and-join-beta-testers-and-receive-form-events",
+  "title": "form and join beta testers and receive form events",
+  "purpose": "Adapt the published “form and join beta testers and receive form events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Sign Up Form"
+  ],
+  "terminal_nodes": [
+    "Show Completion Screen"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "About You",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Your Interests",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Join Beta Testers",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sign Up Form",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Capture More Info",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Capture Email",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Show Completion Screen",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Notify New Signup!",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "About You",
+        "to": "Your Interests",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sign Up Form",
+        "to": "Capture Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Capture Email",
+        "to": "Notify New Signup!",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Your Interests",
+        "to": "Join Beta Testers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Capture More Info",
+        "to": "Show Completion Screen",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Join Beta Testers",
+        "to": "Capture More Info",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notify New Signup!",
+        "to": "About You",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/implementations/n8n",
+      "files": [
+        "agents/form-and-join-beta-testers-and-receive-form-events/implementations/n8n/form-and-join-beta-testers-and-receive-form-events.json"
+      ],
+      "sha256": "5cafbd0542bc40b680cc310139364e36d26e4b71f7706b29852b3b45f877fa9a",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/form-and-join-beta-testers-and-receive-form-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/form-and-join-beta-testers-and-receive-form-events/implementations/n8n/provenance.json"
+}

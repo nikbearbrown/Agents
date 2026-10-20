@@ -1,0 +1,16 @@
+flowchart LR
+  n0["Slack"]
+  n1["n8n Form Trigger"]
+  n2["Check if the email is valid"]
+  n3["Email is not valid, do nothing"]
+  n4["Score lead with MadKudu"]
+  n5["Verify email with Hunter"]
+  n6["Not interesting enough"]
+  n7["if customer fit score #62; 60"]
+  n1 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n0
+  n7 -->|"main out 1 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 1 to in 0"| n3

@@ -1,0 +1,532 @@
+{
+  "schema_version": 1,
+  "slug": "airtable-batch-processing",
+  "title": "↔️ Airtable Batch Processing",
+  "purpose": "Adapt the published “↔️ Airtable Batch Processing” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 29 executable nodes and 35 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Airtable Subprocess"
+  ],
+  "terminal_nodes": [
+    "random data",
+    "Airtable Batch",
+    "return merged output"
+  ],
+  "credential_types": [
+    "airtableTokenApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "upsert",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "random data",
+        "type": "n8n-nodes-base.debugHelper",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "batch 10",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Airtable Subprocess",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "insert",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "rate limit?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait 0.2s to prevent rate limits",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "retry request",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "rate limit?1",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "retry request1",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "rate limit?2",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "retry request2",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate3",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields4",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate2",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate1",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "update",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Airtable Batch",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 5s2",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 5s",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait 5s1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "return merged output",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Switch",
+        "to": "Edit Fields4",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Edit Fields1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Edit Fields2",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "insert",
+        "to": "rate limit?1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "update",
+        "to": "rate limit?2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "upsert",
+        "to": "rate limit?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait 5s",
+        "to": "retry request",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Wait 5s1",
+        "to": "retry request1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Wait 5s2",
+        "to": "retry request2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "batch 10",
+        "to": "return merged output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "batch 10",
+        "to": "Switch",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Aggregate",
+        "to": "Airtable Batch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "batch 10",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate1",
+        "to": "upsert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate1",
+        "to": "retry request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate2",
+        "to": "insert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate2",
+        "to": "retry request1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate3",
+        "to": "update",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Aggregate3",
+        "to": "retry request2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Fields",
+        "to": "Aggregate",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "rate limit?",
+        "to": "Wait 5s",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "rate limit?",
+        "to": "Wait 0.2s to prevent rate limits",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields1",
+        "to": "Aggregate1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields2",
+        "to": "Aggregate2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields4",
+        "to": "Aggregate3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "rate limit?1",
+        "to": "Wait 5s1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "rate limit?1",
+        "to": "Wait 0.2s to prevent rate limits",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "rate limit?2",
+        "to": "Wait 5s2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "rate limit?2",
+        "to": "Wait 0.2s to prevent rate limits",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "retry request",
+        "to": "upsert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "retry request1",
+        "to": "insert",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "retry request2",
+        "to": "update",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable Subprocess",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait 0.2s to prevent rate limits",
+        "to": "batch 10",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "random data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/airtable-batch-processing/implementations/n8n",
+      "files": [
+        "agents/airtable-batch-processing/implementations/n8n/airtable-batch-processing.json"
+      ],
+      "sha256": "5595de1ae04fbf927daf0dad6744f06175c76e8d1cf8304520b691b3dc5426d5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/airtable-batch-processing/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/airtable-batch-processing/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/airtable-batch-processing/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/airtable-batch-processing/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/airtable-batch-processing/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/airtable-batch-processing/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/airtable-batch-processing/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/airtable-batch-processing/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/airtable-batch-processing/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/airtable-batch-processing/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/airtable-batch-processing/implementations/n8n/provenance.json"
+}

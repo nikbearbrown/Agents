@@ -1,0 +1,21 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Find Company in SIREN database"]
+  n2["Request all data from SIREN database"]
+  n3["FilterOut all Company that have the ReadOnly Key set"]
+  n4["Set Insee API Key"]
+  n5["Schedule Trigger"]
+  n6["clean_route"]
+  n7["Get all Compagnies from Agile CRM"]
+  n8["Enrich CRM with INSEE Data"]
+  n9["Merge data from CRM and SIREN database with enriched for the CRM"]
+  n6 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 1"| n9
+  n3 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n8

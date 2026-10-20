@@ -1,0 +1,821 @@
+{
+  "schema_version": 1,
+  "slug": "if-time-available-respond",
+  "title": "If time available Respond",
+  "purpose": "Adapt the published “If time available Respond” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 55 executable nodes and 53 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Getslot_tool",
+    "bookslots_tool",
+    "Updateslots_tool",
+    "CancelSlots_tool",
+    "call_results"
+  ],
+  "terminal_nodes": [
+    "Respond with Error",
+    "Response",
+    "Response to Vapi",
+    "Logs the confirmed booking details",
+    "Response with Error",
+    "Respond to Vapi about Updating slots",
+    "Respond with Error to Vapi",
+    "Respond to Vapi about cancelation",
+    "Save all information"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Input Arguments",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Format response",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Sort",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Available Start Times & Ranges",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Flatten Slots",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Enrich Date",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Build Response Payload",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Booking Payload",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Success Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Add Friendly Error",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Error Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Escape Json",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Has all information",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Respond with Error",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Build Error Response Payload",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Build Error Response Payload2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Getslot_tool",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check Availability",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Check if time is available or not",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Time available (true) & Call_id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get All Calendar Events",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract start, end and name",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Convert into Json format for Vapi",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Response to Vapi",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "bookslots_tool",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Input Arguments from booking tools",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Convert time to CST America / Chicago",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create Event",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Vapi",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "If the booking is confirmed then true",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Information to be Saved in Airtable",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Logs the confirmed booking details",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Updateslots_tool",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Input Arguments from updateslot tool",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Checks if required info is provided.",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Finds original appointment",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Response with Error",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Update Event",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Updates Airtable record",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Response & call_id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Vapi about Updating slots",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "CancelSlots_tool",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Input Arguments from cancelslot tool",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Checks if required info is provided for cancelation",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Finds the appointment record",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Build Error Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Respond with Error to Vapi",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Delete Event",
+        "type": "n8n-nodes-base.googleCalendar",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Airtable record",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Call_id & Response",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Vapi about cancelation",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "call_results",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "All Input Arguments",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Save all information",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Sort",
+        "to": "Format response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Enrich Date",
+        "to": "Build Response Payload",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Escape Json",
+        "to": "Convert time to CST America / Chicago",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Event",
+        "to": "Booking Payload",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create Event",
+        "to": "Add Friendly Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Delete Event",
+        "to": "Update Airtable record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Delete Event",
+        "to": "Call_id & Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Getslot_tool",
+        "to": "Input Arguments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Event",
+        "to": "Updates Airtable record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Event",
+        "to": "Response & call_id",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "call_results",
+        "to": "All Input Arguments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Flatten Slots",
+        "to": "Enrich Date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Error Response",
+        "to": "Respond to Vapi",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "bookslots_tool",
+        "to": "Input Arguments from booking tools",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Booking Payload",
+        "to": "Success Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Format response",
+        "to": "Available Start Times & Ranges",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Input Arguments",
+        "to": "Check Availability",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Respond to Vapi",
+        "to": "If the booking is confirmed then true",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CancelSlots_tool",
+        "to": "Input Arguments from cancelslot tool",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Success Response",
+        "to": "Respond to Vapi",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Updateslots_tool",
+        "to": "Input Arguments from updateslot tool",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Friendly Error",
+        "to": "Error Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Call_id & Response",
+        "to": "Respond to Vapi about cancelation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Availability",
+        "to": "Check if time is available or not",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Response & call_id",
+        "to": "Respond to Vapi about Updating slots",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "All Input Arguments",
+        "to": "Save all information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has all information",
+        "to": "Escape Json",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Has all information",
+        "to": "Build Error Response Payload",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Build Error Response",
+        "to": "Respond with Error to Vapi",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Response Payload",
+        "to": "Convert into Json format for Vapi",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Airtable record",
+        "to": "Call_id & Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get All Calendar Events",
+        "to": "Extract start, end and name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Updates Airtable record",
+        "to": "Response & call_id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Finds original appointment",
+        "to": "Update Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract start, end and name",
+        "to": "Sort",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Error Response Payload",
+        "to": "Respond with Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Finds the appointment record",
+        "to": "Delete Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Error Response Payload2",
+        "to": "Response with Error",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Available Start Times & Ranges",
+        "to": "Flatten Slots",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Time available (true) & Call_id",
+        "to": "Response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if time is available or not",
+        "to": "Time available (true) & Call_id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if time is available or not",
+        "to": "Get All Calendar Events",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Convert into Json format for Vapi",
+        "to": "Response to Vapi",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Input Arguments from booking tools",
+        "to": "Has all information",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Information to be Saved in Airtable",
+        "to": "Logs the confirmed booking details",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Checks if required info is provided.",
+        "to": "Finds original appointment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Checks if required info is provided.",
+        "to": "Build Error Response Payload2",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Input Arguments from cancelslot tool",
+        "to": "Checks if required info is provided for cancelation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Input Arguments from updateslot tool",
+        "to": "Checks if required info is provided.",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Convert time to CST America / Chicago",
+        "to": "Create Event",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If the booking is confirmed then true",
+        "to": "Information to be Saved in Airtable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Checks if required info is provided for cancelation",
+        "to": "Finds the appointment record",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Checks if required info is provided for cancelation",
+        "to": "Build Error Response",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/if-time-available-respond/implementations/n8n",
+      "files": [
+        "agents/if-time-available-respond/implementations/n8n/if-time-available-respond.json"
+      ],
+      "sha256": "13b0574c656c72fbb9dfe3835f70b79916e67939224633b654fc30336c282823",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/if-time-available-respond/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/if-time-available-respond/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/if-time-available-respond/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/if-time-available-respond/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/if-time-available-respond/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/if-time-available-respond/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/if-time-available-respond/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/if-time-available-respond/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/if-time-available-respond/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/if-time-available-respond/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/if-time-available-respond/implementations/n8n/provenance.json"
+}

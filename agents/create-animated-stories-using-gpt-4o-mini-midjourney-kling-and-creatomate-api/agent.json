@@ -1,0 +1,728 @@
+{
+  "schema_version": 1,
+  "slug": "create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api",
+  "title": "Create Animated Stories using GPT-4o-mini, Midjourney, Kling and Creatomate API",
+  "purpose": "Adapt the published “Create Animated Stories using GPT-4o-mini, Midjourney, Kling and Creatomate API” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 45 executable nodes and 50 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking Test workflow"
+  ],
+  "terminal_nodes": [
+    "Final Video Combination"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "output1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "output2",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Prompt",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Basic Params",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Task ID of the First Image",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Midjourney Generator of the First Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for the First Image Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Verify the first image generation status",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the First Image URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Midjourney Generator of the Second Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Midjourney Generator of the Third Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the First Image Generation Status",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Second Image Generation Status",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Third Image Generation Status",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Second Image URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get the Third Image URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Wait for the Second Image Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get Task of the First Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Task of the Second Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Verify the second image generation status",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Verify the third image generation status",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Task of the Third Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for the Third Image Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get three Image URLs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Generate the First Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate the Second Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate the Third Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Final Video Combination",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Third Video URL",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get Video Task IDs",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Get the First Video Task",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Verify the First Video Generation",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Verify the Second Video Generation",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Verify the Third Video Generation",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait for Video Generation for at Least 4 min",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait for the First Video Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait for the Second Video Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait for the Third Video Generation",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get the First Video Generation",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Second Video Generation",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Third Video Generation",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Second Video Task",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get the Third Video Task",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "When clicking Test workflow",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "GPT-4o-mini Generate Image Scenario Prompt",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "output1",
+        "to": "Get the Second Video Task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "output2",
+        "to": "Get the Third Video Task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Prompt",
+        "to": "Midjourney Generator of the First Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Basic Params",
+        "to": "GPT-4o-mini Generate Image Scenario Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Video Task IDs",
+        "to": "Wait for Video Generation for at Least 4 min",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get three Image URLs",
+        "to": "Generate the First Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the First Image URL",
+        "to": "Midjourney Generator of the Second Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Third Image URL",
+        "to": "Get three Image URLs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Third Video URL",
+        "to": "Final Video Combination",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate the First Video",
+        "to": "Generate the Second Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate the Third Video",
+        "to": "Get Video Task IDs",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the First Video Task",
+        "to": "Verify the First Video Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Second Image URL",
+        "to": "Midjourney Generator of the Third Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Third Video Task",
+        "to": "Verify the Third Video Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate the Second Video",
+        "to": "Generate the Third Video",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Second Video Task",
+        "to": "Verify the Second Video Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Task of the First Image",
+        "to": "Verify the first image generation status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Task of the Third Image",
+        "to": "Verify the third image generation status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking Test workflow",
+        "to": "Basic Params",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Task of the Second Image",
+        "to": "Verify the second image generation status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Task ID of the First Image",
+        "to": "Wait for the First Image Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the First Video Generation",
+        "to": "output1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Third Video Generation",
+        "to": "Get the Third Video URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Second Video Generation",
+        "to": "output2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify the First Video Generation",
+        "to": "Get the First Video Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify the First Video Generation",
+        "to": "Wait for the First Video Generation",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Verify the Third Video Generation",
+        "to": "Get the Third Video Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify the Third Video Generation",
+        "to": "Wait for the Third Video Generation",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Verify the Second Video Generation",
+        "to": "Get the Second Video Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify the Second Video Generation",
+        "to": "Wait for the Second Video Generation",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Wait for the First Image Generation",
+        "to": "Get Task of the First Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for the First Video Generation",
+        "to": "Get the First Video Task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for the Third Image Generation",
+        "to": "Get Task of the Third Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for the Third Video Generation",
+        "to": "Get the Third Video Task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for the Second Image Generation",
+        "to": "Get Task of the Second Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for the Second Video Generation",
+        "to": "Get the Second Video Task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the First Image Generation Status",
+        "to": "Get the First Image URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Third Image Generation Status",
+        "to": "Get the Third Image URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get the Second Image Generation Status",
+        "to": "Get the Second Image URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Midjourney Generator of the First Image",
+        "to": "Get Task ID of the First Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Midjourney Generator of the Third Image",
+        "to": "Wait for the Third Image Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Midjourney Generator of the Second Image",
+        "to": "Wait for the Second Image Generation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify the first image generation status",
+        "to": "Get the First Image Generation Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify the first image generation status",
+        "to": "Wait for the First Image Generation",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Verify the third image generation status",
+        "to": "Get the Third Image Generation Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify the third image generation status",
+        "to": "Wait for the Third Image Generation",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Verify the second image generation status",
+        "to": "Get the Second Image Generation Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Verify the second image generation status",
+        "to": "Wait for the Second Image Generation",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "GPT-4o-mini Generate Image Scenario Prompt",
+        "to": "Get Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait for Video Generation for at Least 4 min",
+        "to": "Get the First Video Task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/n8n",
+      "files": [
+        "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/n8n/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api.json"
+      ],
+      "sha256": "3b0d2288003c2aed3fd3dfc5d6d21b5700bca1e99602efaa9328a660da32a835",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/create-animated-stories-using-gpt-4o-mini-midjourney-kling-and-creatomate-api/implementations/n8n/provenance.json"
+}

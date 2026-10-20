@@ -1,0 +1,35 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Embeddings OpenAI"]
+  n2["Default Data Loader"]
+  n3["Set file URL in Google Drive"]
+  n4["Add in metadata"]
+  n5["Download file"]
+  n6["Chat Trigger"]
+  n7["Prepare chunks"]
+  n8["Embeddings OpenAI2"]
+  n9["OpenAI Chat Model"]
+  n10["Set max chunks to send to model"]
+  n11["Structured Output Parser"]
+  n12["Compose citations"]
+  n13["Generate response"]
+  n14["Answer the query based on chunks"]
+  n15["Get top chunks matching query"]
+  n16["Add to Pinecone vector store"]
+  n17["Recursive Character Text Splitter"]
+  n6 -->|"main out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n4
+  n7 -->|"main out 0 to in 0"| n14
+  n4 -->|"main out 0 to in 0"| n16
+  n12 -->|"main out 0 to in 0"| n13
+  n1 -->|"ai_embedding out 0 to in 0"| n16
+  n9 -->|"ai_languageModel out 0 to in 0"| n14
+  n8 -->|"ai_embedding out 0 to in 0"| n15
+  n2 -->|"ai_document out 0 to in 0"| n16
+  n11 -->|"ai_outputParser out 0 to in 0"| n14
+  n3 -->|"main out 0 to in 0"| n5
+  n15 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 0"| n15
+  n14 -->|"main out 0 to in 0"| n12
+  n0 -->|"main out 0 to in 0"| n3
+  n17 -->|"ai_textSplitter out 0 to in 0"| n2

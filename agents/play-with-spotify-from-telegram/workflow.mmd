@@ -1,0 +1,32 @@
+flowchart LR
+  n0["Telegram Trigger"]
+  n1["OpenAI - Ask about a track"]
+  n2["Search track"]
+  n3["Add song"]
+  n4["Next Song"]
+  n5["Resume play"]
+  n6["Currently Playing"]
+  n7["Merge"]
+  n8["If"]
+  n9["Message parser"]
+  n10["Not found error message"]
+  n11["Return message to Telegram"]
+  n12["Define Now Playing"]
+  n8 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 1 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 1 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 1 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n6
+  n2 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 1 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n1
+  n0 -->|"main out 0 to in 1"| n7
+  n6 -->|"main out 0 to in 0"| n12
+  n6 -->|"main out 1 to in 0"| n9
+  n12 -->|"main out 0 to in 0"| n9
+  n10 -->|"main out 0 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n2

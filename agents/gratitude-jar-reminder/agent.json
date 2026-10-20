@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "slug": "gratitude-jar-reminder",
+  "title": "Gratitude Jar Reminder",
+  "purpose": "Adapt the published “Gratitude Jar Reminder” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 5 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger 2100 Bear Gratitude Jar Notice"
+  ],
+  "terminal_nodes": [
+    "Azure OpenAI Chat Model",
+    "Line Push Message"
+  ],
+  "credential_types": [
+    "azureOpenAiApi",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Trigger 2100 Bear Gratitude Jar Notice",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "WriteReminder",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "Reformat Output from Chat Model",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Azure OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAzureOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Line Push Message",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "WriteReminder",
+        "to": "Reformat Output from Chat Model",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Azure OpenAI Chat Model",
+        "to": "WriteReminder",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Reformat Output from Chat Model",
+        "to": "Line Push Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger 2100 Bear Gratitude Jar Notice",
+        "to": "WriteReminder",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/gratitude-jar-reminder/implementations/n8n",
+      "files": [
+        "agents/gratitude-jar-reminder/implementations/n8n/gratitude-jar-reminder.json"
+      ],
+      "sha256": "e6d8248b8018c8e89f7ad98faf5a37c0b35be6f91a1aafefe6423c70533b08bd",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/gratitude-jar-reminder/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/gratitude-jar-reminder/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/gratitude-jar-reminder/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/gratitude-jar-reminder/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/gratitude-jar-reminder/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/gratitude-jar-reminder/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/gratitude-jar-reminder/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/gratitude-jar-reminder/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/gratitude-jar-reminder/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/gratitude-jar-reminder/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/gratitude-jar-reminder/implementations/n8n/provenance.json"
+}

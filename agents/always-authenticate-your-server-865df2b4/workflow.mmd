@@ -1,0 +1,29 @@
+flowchart LR
+  n0["When Executed by Another Workflow"]
+  n1["Operation"]
+  n2["Github MCP Server"]
+  n3["Get Latest Issues"]
+  n4["Add Issue Comment"]
+  n5["Simplify Issues"]
+  n6["Aggregate Results"]
+  n7["Get Issue Comments"]
+  n8["Get Comments"]
+  n9["Simplify Comments"]
+  n10["Aggregate Comments"]
+  n11["Get Many Issues"]
+  n12["Get Single Issue"]
+  n13["Create Comment"]
+  n14["Get Response"]
+  n1 -->|"main out 0 to in 0"| n11
+  n1 -->|"main out 1 to in 0"| n12
+  n1 -->|"main out 2 to in 0"| n13
+  n8 -->|"main out 0 to in 0"| n9
+  n13 -->|"main out 0 to in 0"| n14
+  n11 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n6
+  n12 -->|"main out 0 to in 0"| n8
+  n4 -->|"ai_tool out 0 to in 0"| n2
+  n3 -->|"ai_tool out 0 to in 0"| n2
+  n9 -->|"main out 0 to in 0"| n10
+  n7 -->|"ai_tool out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n1

@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "slug": "workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash",
+  "title": "Workflow: Extract data from PDF with Claude 3.5 Sonnet or Gemini 2.0 Flash",
+  "purpose": "Adapt the published “Workflow: Extract data from PDF with Claude 3.5 Sonnet or Gemini 2.0 Flash” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking 'Test workflow'"
+  ],
+  "terminal_nodes": [
+    "Call Gemini 2.0 Flash with PDF Capabilities",
+    "Call Claude 3.5 Sonnet with PDF Capabilities"
+  ],
+  "credential_types": [
+    "anthropicApi",
+    "googleDriveOAuth2Api",
+    "googlePalmApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking 'Test workflow'",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract from File",
+        "type": "n8n-nodes-base.extractFromFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Call Gemini 2.0 Flash with PDF Capabilities",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Call Claude 3.5 Sonnet with PDF Capabilities",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Define Prompt",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Google Drive",
+        "to": "Extract from File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Define Prompt",
+        "to": "Google Drive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "Call Claude 3.5 Sonnet with PDF Capabilities",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract from File",
+        "to": "Call Gemini 2.0 Flash with PDF Capabilities",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking 'Test workflow'",
+        "to": "Define Prompt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/n8n",
+      "files": [
+        "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/n8n/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash.json"
+      ],
+      "sha256": "2e31d6c37fdfe23b3d80380317a0cb62712853140c5f4d86e31b627985609a69",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/workflow-extract-data-from-pdf-with-claude-3-5-sonnet-or-gemini-2-0-flash/implementations/n8n/provenance.json"
+}

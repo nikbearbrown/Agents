@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "slug": "discord-mcp-server",
+  "title": "Discord MCP Server",
+  "purpose": "Adapt the published “Discord MCP Server” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Discord MCP Server Trigger"
+  ],
+  "terminal_nodes": [
+    "Send Discord Message to Channel",
+    "Add Role To Member",
+    "Remove Role from member",
+    "Discord MCP Server Trigger",
+    "Get channels of server by server ID",
+    "Get members of server by server ID",
+    "Send DM and Wait for reply",
+    "Send to Channel and Wait for Reply",
+    "Send DM to User",
+    "Get Discord Server IDs"
+  ],
+  "credential_types": [
+    "discordBotApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Send Discord Message to Channel",
+        "type": "n8n-nodes-base.discordTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Add Role To Member",
+        "type": "n8n-nodes-base.discordTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Remove Role from member",
+        "type": "n8n-nodes-base.discordTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Discord MCP Server Trigger",
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get channels of server by server ID",
+        "type": "n8n-nodes-base.discordTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get members of server by server ID",
+        "type": "n8n-nodes-base.discordTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send DM and Wait for reply",
+        "type": "n8n-nodes-base.discordTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send to Channel and Wait for Reply",
+        "type": "n8n-nodes-base.discordTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send DM to User",
+        "type": "n8n-nodes-base.discordTool",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Discord Server IDs",
+        "type": "n8n-nodes-base.httpRequestTool",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Send DM to User",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Role To Member",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Discord Server IDs",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Remove Role from member",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send DM and Wait for reply",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send Discord Message to Channel",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get members of server by server ID",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Send to Channel and Wait for Reply",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get channels of server by server ID",
+        "to": "Discord MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/discord-mcp-server/implementations/n8n",
+      "files": [
+        "agents/discord-mcp-server/implementations/n8n/discord-mcp-server.json"
+      ],
+      "sha256": "d69e0e2870186bac89beae9b133e9850fccce5ea552ee6d141d425b3649decd7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/discord-mcp-server/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/discord-mcp-server/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/discord-mcp-server/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/discord-mcp-server/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/discord-mcp-server/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/discord-mcp-server/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/discord-mcp-server/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/discord-mcp-server/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/discord-mcp-server/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/discord-mcp-server/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/discord-mcp-server/implementations/n8n/provenance.json"
+}

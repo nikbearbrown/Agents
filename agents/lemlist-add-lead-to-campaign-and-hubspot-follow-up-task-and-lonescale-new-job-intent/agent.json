@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "slug": "lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent",
+  "title": "lemlist add lead to campaign and hubspot follow up task and lonescale new job intent",
+  "purpose": "Adapt the published “lemlist add lead to campaign and hubspot follow up task and lonescale new job intent” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Lonescale - New  Job Intent"
+  ],
+  "terminal_nodes": [
+    "Lemlist - Add lead to campaign",
+    "HubSpot - Follow up task",
+    "Slack - Notify CS team on Slack1",
+    "Slack - Notify sales team on Slack",
+    "HubSpot - Linkedin Outreach"
+  ],
+  "credential_types": [
+    "dropcontactApi",
+    "hubspotOAuth2Api",
+    "lemlistApi",
+    "slackOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Lemlist - Add lead to campaign",
+        "type": "n8n-nodes-base.lemlist",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot - Follow up task",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Attempted to contact?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Lonescale - New  Job Intent",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Dropcontact",
+        "type": "n8n-nodes-base.dropcontact",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot - Search company",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "New Company?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is Customer?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack - Notify CS team on Slack1",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot Update Account",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot Create Account",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Is Account in Hubspot",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot - Create/Update Contact",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Slack - Notify sales team on Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Open Deal?",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "email found",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HubSpot - Linkedin Outreach",
+        "type": "n8n-nodes-base.hubspot",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "HubSpot",
+        "to": "HubSpot - Create/Update Contact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Open Deal?",
+        "to": "Slack - Notify sales team on Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Dropcontact",
+        "to": "HubSpot - Search company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "email found",
+        "to": "Lemlist - Add lead to campaign",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "email found",
+        "to": "HubSpot - Linkedin Outreach",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Is Customer?",
+        "to": "Slack - Notify CS team on Slack1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Company?",
+        "to": "email found",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Attempted to contact?",
+        "to": "HubSpot - Follow up task",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Account in Hubspot",
+        "to": "HubSpot Update Account",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Account in Hubspot",
+        "to": "HubSpot Create Account",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "HubSpot Create Account",
+        "to": "HubSpot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot Update Account",
+        "to": "HubSpot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot - Search company",
+        "to": "Is Account in Hubspot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Lonescale - New  Job Intent",
+        "to": "Dropcontact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot - Create/Update Contact",
+        "to": "New Company?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot - Create/Update Contact",
+        "to": "Is Customer?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot - Create/Update Contact",
+        "to": "Attempted to contact?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HubSpot - Create/Update Contact",
+        "to": "Open Deal?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/n8n",
+      "files": [
+        "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/n8n/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent.json"
+      ],
+      "sha256": "924ccfe42b2c27b135a2304656f670da13304a31d662397795a0643bdb9ebf8b",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/lemlist-add-lead-to-campaign-and-hubspot-follow-up-task-and-lonescale-new-job-intent/implementations/n8n/provenance.json"
+}

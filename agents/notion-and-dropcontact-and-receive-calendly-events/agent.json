@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "slug": "notion-and-dropcontact-and-receive-calendly-events",
+  "title": "notion and dropcontact and receive calendly events",
+  "purpose": "Adapt the published “notion and dropcontact and receive calendly events” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Calendly Trigger"
+  ],
+  "terminal_nodes": [
+    "Notion"
+  ],
+  "credential_types": [
+    "dropcontactApi",
+    "notionApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Notion",
+        "type": "n8n-nodes-base.notion",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Dropcontact",
+        "type": "n8n-nodes-base.dropcontact",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Calendly Trigger",
+        "type": "n8n-nodes-base.calendlyTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Dropcontact",
+        "to": "Notion",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Calendly Trigger",
+        "to": "Dropcontact",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/implementations/n8n",
+      "files": [
+        "agents/notion-and-dropcontact-and-receive-calendly-events/implementations/n8n/notion-and-dropcontact-and-receive-calendly-events.json"
+      ],
+      "sha256": "865991eb5aed925dc771a25b67ecb3a0e395b1b678502aabfc80967e7ba18a46",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/notion-and-dropcontact-and-receive-calendly-events/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/notion-and-dropcontact-and-receive-calendly-events/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,36 @@
+flowchart LR
+  n0["Telegram Trigger"]
+  n1["Embeddings OpenAI"]
+  n2["Default Data Loader"]
+  n3["Recursive Character Text Splitter"]
+  n4["Stop and Error"]
+  n5["Question and Answer Chain"]
+  n6["Vector Store Retriever"]
+  n7["Pinecone Vector Store1"]
+  n8["Groq Chat Model"]
+  n9["Check If is a document"]
+  n10["Change to application/pdf"]
+  n11["Telegram get File"]
+  n12["Embeddings"]
+  n13["Telegram Response"]
+  n14["Telegram Response about Database"]
+  n15["Stop and Error1"]
+  n16["Pinecone Vector Store"]
+  n17["Limit to 1"]
+  n12 -->|"ai_embedding out 0 to in 0"| n7
+  n17 -->|"main out 0 to in 0"| n14
+  n8 -->|"ai_languageModel out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n9
+  n1 -->|"ai_embedding out 0 to in 0"| n16
+  n13 -->|"main out 1 to in 0"| n4
+  n11 -->|"main out 0 to in 0"| n10
+  n2 -->|"ai_document out 0 to in 0"| n16
+  n16 -->|"main out 0 to in 0"| n17
+  n9 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 1 to in 0"| n5
+  n7 -->|"ai_vectorStore out 0 to in 0"| n6
+  n6 -->|"ai_retriever out 0 to in 0"| n5
+  n10 -->|"main out 0 to in 0"| n16
+  n5 -->|"main out 0 to in 0"| n13
+  n14 -->|"main out 1 to in 0"| n15
+  n3 -->|"ai_textSplitter out 0 to in 0"| n2

@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "slug": "autoclip-automatically-generate-video-clips-and-upload-to-youtube",
+  "title": "AutoClip – Automatically Generate Video Clips and Upload to YouTube",
+  "purpose": "Adapt the published “AutoClip – Automatically Generate Video Clips and Upload to YouTube” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 20 executable nodes and 21 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Start AutoClip Workflow"
+  ],
+  "terminal_nodes": [
+    "Mark Background as Used"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "googleSheetsOAuth2Api",
+    "youTubeOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Start AutoClip Workflow",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Video Background Data",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Quote Data",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "List Video Background Files",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Configure Music Background Folder ID",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "List Music Background Files",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Retrieve Music Background Data",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Merge File Selection Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Select Random Video, Music & Quote",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Download Selected Video Background",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Download Selected Music Background",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Save Video Background Locally",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Save Music Background Locally",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare Overlay Text (Quote & Author)",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Generate Final Video Clip",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Initiate YouTube Resumable Upload",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Read output file",
+        "type": "n8n-nodes-base.readWriteFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Upload Video to YouTube",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Update Quote Upload Status",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "Mark Background as Used",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Read output file",
+        "to": "Upload Video to YouTube",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Quote Data",
+        "to": "Merge File Selection Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start AutoClip Workflow",
+        "to": "Retrieve Quote Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start AutoClip Workflow",
+        "to": "List Video Background Files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Start AutoClip Workflow",
+        "to": "Configure Music Background Folder ID",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Upload Video to YouTube",
+        "to": "Update Quote Upload Status",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate Final Video Clip",
+        "to": "Initiate YouTube Resumable Upload",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge File Selection Data",
+        "to": "Select Random Video, Music & Quote",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Quote Upload Status",
+        "to": "Mark Background as Used",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List Music Background Files",
+        "to": "Retrieve Music Background Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List Video Background Files",
+        "to": "Retrieve Video Background Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Music Background Locally",
+        "to": "Prepare Overlay Text (Quote & Author)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Save Video Background Locally",
+        "to": "Download Selected Music Background",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Retrieve Music Background Data",
+        "to": "Merge File Selection Data",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "Retrieve Video Background Data",
+        "to": "Merge File Selection Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Initiate YouTube Resumable Upload",
+        "to": "Read output file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Selected Music Background",
+        "to": "Save Music Background Locally",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Selected Video Background",
+        "to": "Save Video Background Locally",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Select Random Video, Music & Quote",
+        "to": "Download Selected Video Background",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Configure Music Background Folder ID",
+        "to": "List Music Background Files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare Overlay Text (Quote & Author)",
+        "to": "Generate Final Video Clip",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/n8n",
+      "files": [
+        "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/n8n/autoclip-automatically-generate-video-clips-and-upload-to-youtube.json"
+      ],
+      "sha256": "b7b80d300bc4ecaa44d98a6a1c61608e504af098ec359291e3463c22829a506d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/autoclip-automatically-generate-video-clips-and-upload-to-youtube/implementations/n8n/provenance.json"
+}

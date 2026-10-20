@@ -1,0 +1,24 @@
+flowchart LR
+  n0["Get video details"]
+  n1["Schedule Trigger"]
+  n2["Filter out shorts"]
+  n3["Get latest 15 videos of each channel"]
+  n4["Get my subscriptions"]
+  n5["Check for errors"]
+  n6["Only keep channels with unwatched videos"]
+  n7["Keep only videos published since last run"]
+  n8["Send an email for each new video"]
+  n9["If the HTTP request failed, throw the error"]
+  n10["Split out subscriptions to process individually"]
+  n11["Filter out channels"]
+  n5 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 1 to in 0"| n10
+  n1 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n2
+  n11 -->|"main out 0 to in 0"| n3
+  n4 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n11
+  n7 -->|"main out 0 to in 0"| n0
+  n10 -->|"main out 0 to in 0"| n6

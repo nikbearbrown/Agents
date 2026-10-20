@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "slug": "main-function-to-receive-and-send-telegram-messages",
+  "title": "Main Function to Receive and Send Telegram Messages",
+  "purpose": "Adapt the published “Main Function to Receive and Send Telegram Messages” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Incoming Message",
+    "MCP Server Trigger"
+  ],
+  "terminal_nodes": [
+    "MCP Server Trigger",
+    "MCP Client",
+    "OpenAI Chat Model",
+    "Simple Memory",
+    "create_todays_task",
+    "sendMessage",
+    "create_upcoming_task",
+    "complete_task",
+    "get_todays_tasks",
+    "get_upcoming_tasks"
+  ],
+  "credential_types": [
+    "googleTasksOAuth2Api",
+    "openAiApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Incoming Message",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "MCP Server Trigger",
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "AI Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "MCP Client",
+        "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Simple Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "chatInput",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "create_todays_task",
+        "type": "n8n-nodes-base.googleTasksTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "chatOutput",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "sendMessage",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "create_upcoming_task",
+        "type": "n8n-nodes-base.googleTasksTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "complete_task",
+        "type": "n8n-nodes-base.googleTasksTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "get_todays_tasks",
+        "type": "n8n-nodes-base.googleTasksTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "get_upcoming_tasks",
+        "type": "n8n-nodes-base.googleTasksTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "audio_id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "download_audio",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "transcribeAudio",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "audioInput",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Switch",
+        "to": "audio_id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "chatInput",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "AI Agent",
+        "to": "chatOutput",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "audio_id",
+        "to": "download_audio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "chatInput",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "MCP Client",
+        "to": "AI Agent",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "audioInput",
+        "to": "AI Agent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "chatOutput",
+        "to": "sendMessage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Simple Memory",
+        "to": "AI Agent",
+        "kind": "ai_memory",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "complete_task",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "download_audio",
+        "to": "transcribeAudio",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "transcribeAudio",
+        "to": "audioInput",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Incoming Message",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_todays_tasks",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "AI Agent",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "create_todays_task",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get_upcoming_tasks",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "create_upcoming_task",
+        "to": "MCP Server Trigger",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/implementations/n8n",
+      "files": [
+        "agents/main-function-to-receive-and-send-telegram-messages/implementations/n8n/main-function-to-receive-and-send-telegram-messages.json"
+      ],
+      "sha256": "bf3aaa8592c90f6585cb3dd7963b0454e2561dc0da4b4fe3e6327be4e33b7901",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/main-function-to-receive-and-send-telegram-messages/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/main-function-to-receive-and-send-telegram-messages/implementations/n8n/provenance.json"
+}

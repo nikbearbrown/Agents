@@ -1,0 +1,30 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Set Esty Search Query"]
+  n2["Perform Esty Web Request"]
+  n3["Google Gemini Chat Model"]
+  n4["Loop Over Items"]
+  n5["Perform Esty web request over the loop"]
+  n6["Initiate a Webhook Notification for the extracted data"]
+  n7["Extract Item List with the Product Info"]
+  n8["Google Gemini Chat Model for product info"]
+  n9["Extract Paginated Resultset"]
+  n10["Write the scraped content to disk"]
+  n11["Create a binary data"]
+  n12["Split Out"]
+  n13["Extract Paginated Resultset With OpenAI"]
+  n14["OpenAI Chat Model"]
+  n12 -->|"main out 0 to in 0"| n4
+  n4 -->|"main out 1 to in 0"| n5
+  n14 -->|"ai_languageModel out 0 to in 0"| n13
+  n11 -->|"main out 0 to in 0"| n10
+  n1 -->|"main out 0 to in 0"| n2
+  n3 -->|"ai_languageModel out 0 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n12
+  n0 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n6
+  n7 -->|"main out 0 to in 0"| n11
+  n8 -->|"ai_languageModel out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n4

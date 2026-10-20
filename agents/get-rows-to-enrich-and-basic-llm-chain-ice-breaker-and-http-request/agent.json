@@ -1,0 +1,300 @@
+{
+  "schema_version": 1,
+  "slug": "get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request",
+  "title": "get rows to enrich and basic llm chain ice breaker and http request",
+  "purpose": "Adapt the published “get rows to enrich and basic llm chain ice breaker and http request” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking \"Test workflow\"",
+    "Run Workflow on a certain Schedule"
+  ],
+  "terminal_nodes": [
+    "Anthropic Chat Model"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get rows to enrich",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "Anthropic Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+        "version": 1.3,
+        "disabled": false
+      },
+      {
+        "name": "Basic LLM Chain- Ice Breaker",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.6,
+        "disabled": false
+      },
+      {
+        "name": "BrightData_Get_Linkedin",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Adjust_input_for_loop",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "HTTP_Request_Post_Request_BrightData",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Wait_For_API_Call_Results",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "API_Call_Snapshot_Progress",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "IF-Checking_Status_API_Call",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets - Update Row with data From API",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "Google Sheets - Update Row with Ice Breaker",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.3,
+        "disabled": false
+      },
+      {
+        "name": "Run Workflow on a certain Schedule",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items- All Prospects",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get rows to enrich",
+        "to": "Adjust_input_for_loop",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Anthropic Chat Model",
+        "to": "Basic LLM Chain- Ice Breaker",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Adjust_input_for_loop",
+        "to": "Loop Over Items- All Prospects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "BrightData_Get_Linkedin",
+        "to": "Google Sheets - Update Row with data From API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait_For_API_Call_Results",
+        "to": "API_Call_Snapshot_Progress",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "API_Call_Snapshot_Progress",
+        "to": "IF-Checking_Status_API_Call",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF-Checking_Status_API_Call",
+        "to": "Wait_For_API_Call_Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF-Checking_Status_API_Call",
+        "to": "BrightData_Get_Linkedin",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Basic LLM Chain- Ice Breaker",
+        "to": "Google Sheets - Update Row with Ice Breaker",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking \"Test workflow\"",
+        "to": "Get rows to enrich",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items- All Prospects",
+        "to": "HTTP_Request_Post_Request_BrightData",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Run Workflow on a certain Schedule",
+        "to": "Get rows to enrich",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP_Request_Post_Request_BrightData",
+        "to": "Wait_For_API_Call_Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets - Update Row with Ice Breaker",
+        "to": "Loop Over Items- All Prospects",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Google Sheets - Update Row with data From API",
+        "to": "Basic LLM Chain- Ice Breaker",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/n8n",
+      "files": [
+        "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/n8n/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request.json"
+      ],
+      "sha256": "9e8a02d1c4fbb83e5473d203c5f4727ede638750d7cc7c4f1842f8beddf39db1",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-rows-to-enrich-and-basic-llm-chain-ice-breaker-and-http-request/implementations/n8n/provenance.json"
+}

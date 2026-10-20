@@ -1,0 +1,32 @@
+flowchart LR
+  n0["When clicking #34;Test workflow#34;"]
+  n1["Global Variables"]
+  n2["Fetch Reports from Qualys"]
+  n3["Remove Already Processed Reports"]
+  n4["Any Reports to Process#63;"]
+  n5["Loop Over Items"]
+  n6["Wait"]
+  n7["Update Timestamp"]
+  n8["Get Last Timestamp"]
+  n9["XML"]
+  n10["Split Out"]
+  n11["Create Case"]
+  n12["Download Report"]
+  n13["Add Report As Attachment"]
+  n14["Schedule Trigger"]
+  n9 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n3
+  n11 -->|"main out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n13
+  n5 -->|"main out 0 to in 0"| n7
+  n5 -->|"main out 1 to in 0"| n6
+  n1 -->|"main out 0 to in 0"| n8
+  n14 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n5
+  n4 -->|"main out 1 to in 0"| n7
+  n13 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n4

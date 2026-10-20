@@ -1,0 +1,27 @@
+flowchart LR
+  n0["Get RFP Data"]
+  n1["Item List Output Parser"]
+  n2["For Each Question..."]
+  n3["Set Variables"]
+  n4["Create new RFP Response Document"]
+  n5["OpenAI Chat Model"]
+  n6["Send Chat Notification"]
+  n7["Send Email Notification"]
+  n8["Add Metadata to Response Doc"]
+  n9["Record Question #38; Answer in Response Doc"]
+  n10["Answer Question with Context"]
+  n11["Wait for Request"]
+  n12["Extract Questions From RFP"]
+  n0 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n11 -->|"main out 0 to in 0"| n0
+  n5 -->|"ai_languageModel out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 1 to in 0"| n10
+  n1 -->|"ai_outputParser out 0 to in 0"| n12
+  n7 -->|"main out 0 to in 0"| n6
+  n12 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n12
+  n10 -->|"main out 0 to in 0"| n9
+  n4 -->|"main out 0 to in 0"| n8
+  n9 -->|"main out 0 to in 0"| n2

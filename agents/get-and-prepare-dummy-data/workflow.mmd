@@ -1,0 +1,36 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Extract from File"]
+  n2["Some Options for the Campaign"]
+  n3["Information Extractor"]
+  n4["OpenAI Chat Model1"]
+  n5["AI did fail us1"]
+  n6["Fake coupon"]
+  n7["Download dummy data"]
+  n8["AI Output #43; Prev Data"]
+  n9["Is the result valid#63;"]
+  n10["Coupon them or not to Coupon them"]
+  n11["Html Template for our Email"]
+  n12["The composed E-Mail #43; Prev Data"]
+  n13["Html Template for our Email with a Coupon"]
+  n14["The composed E-Mail with Coupon #43; Prev Data"]
+  n15["Send Email"]
+  n6 -->|"main out 0 to in 0"| n13
+  n1 -->|"main out 0 to in 0"| n2
+  n4 -->|"ai_languageModel out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n1
+  n9 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 1 to in 0"| n5
+  n8 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 0"| n8
+  n11 -->|"main out 0 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n3
+  n2 -->|"main out 0 to in 1"| n8
+  n12 -->|"main out 0 to in 0"| n15
+  n0 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 1"| n12
+  n10 -->|"main out 1 to in 0"| n6
+  n10 -->|"main out 1 to in 0"| n14
+  n13 -->|"main out 0 to in 1"| n14
+  n14 -->|"main out 0 to in 0"| n15

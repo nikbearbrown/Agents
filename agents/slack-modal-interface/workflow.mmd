@@ -1,0 +1,43 @@
+flowchart LR
+  n0["Parse Webhook"]
+  n1["Close Modal Popup"]
+  n2["Route Message"]
+  n3["ServiceNow Modal"]
+  n4["Webhook"]
+  n5["Send 200"]
+  n6["ServiceNow"]
+  n7["Channel - Notify User no Incidents Matched"]
+  n8["DM - Notify User no Incidents Matched"]
+  n9["Were Incidents Found#63;"]
+  n10["No Matches - Was a Channel Selected#63;"]
+  n11["Sort by Most Recent"]
+  n12["Retain First 5 Incidents"]
+  n13["Loop Over Items"]
+  n14["Format Incident Details"]
+  n15["Format Slack Message"]
+  n16["Concatenate Incident Details"]
+  n17["DM - Send Matching Incidents"]
+  n18["Channel - Send Matching Incidents"]
+  n19["Was a Channel Selected#63;"]
+  n20["Respond to Slack Webhook"]
+  n4 -->|"main out 0 to in 0"| n0
+  n6 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n20
+  n2 -->|"main out 1 to in 0"| n1
+  n2 -->|"main out 2 to in 0"| n5
+  n13 -->|"main out 0 to in 0"| n16
+  n13 -->|"main out 1 to in 0"| n14
+  n1 -->|"main out 0 to in 0"| n6
+  n11 -->|"main out 0 to in 0"| n12
+  n15 -->|"main out 0 to in 0"| n19
+  n9 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 1 to in 0"| n10
+  n14 -->|"main out 0 to in 0"| n13
+  n19 -->|"main out 0 to in 0"| n18
+  n19 -->|"main out 1 to in 0"| n17
+  n20 -->|"main out 0 to in 0"| n3
+  n12 -->|"main out 0 to in 0"| n13
+  n16 -->|"main out 0 to in 0"| n15
+  n10 -->|"main out 0 to in 0"| n7
+  n10 -->|"main out 1 to in 0"| n8

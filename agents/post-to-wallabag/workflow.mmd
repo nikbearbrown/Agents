@@ -1,0 +1,20 @@
+flowchart LR
+  n0["On clicking #39;execute#39;"]
+  n1["HTTP Request"]
+  n2["Cron"]
+  n3["Function"]
+  n4["IF"]
+  n5["NoOp"]
+  n6["Auth Wallabag"]
+  n7["Merge"]
+  n8["Get stared articles"]
+  n9["Auth TTRss"]
+  n4 -->|"main out 0 to in 0"| n1
+  n4 -->|"main out 1 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n9
+  n7 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 1"| n7
+  n8 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n9

@@ -1,0 +1,28 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Default Data Loader"]
+  n2["OpenAI Chat Model"]
+  n3["AI Agent"]
+  n4["Wikipedia"]
+  n5["Podcast Episode Transcript"]
+  n6["Summarize Transcript"]
+  n7["Recursive Character Text Splitter"]
+  n8["Extract Topics #38; Questions"]
+  n9["OpenAI Chat Model3"]
+  n10["Topics"]
+  n11["OpenAI Chat Model1"]
+  n12["Format topic text #38; title"]
+  n13["Send Digest"]
+  n10 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n12
+  n4 -->|"ai_tool out 0 to in 0"| n3
+  n2 -->|"ai_languageModel out 0 to in 0"| n6
+  n11 -->|"ai_languageModel out 0 to in 0"| n3
+  n9 -->|"ai_languageModel out 0 to in 0"| n8
+  n1 -->|"ai_document out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n8
+  n12 -->|"main out 0 to in 0"| n13
+  n8 -->|"main out 0 to in 0"| n10
+  n5 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n5
+  n7 -->|"ai_textSplitter out 0 to in 0"| n1

@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "slug": "address-validation",
+  "title": "address validation",
+  "purpose": "Adapt the published “address validation” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 21 executable nodes and 21 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "set billbee tag",
+    "Filter",
+    "set billbee tag manual check",
+    "set billbee success"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "get order data",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Order Data",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set Address Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Check Address endereco api",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Split Out Corrected Address",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "set new delivery address to billbee",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Wait1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "check if new address is not empty",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "set billbee tag",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "check if housenumer is not empty",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "check if addressline 2 contains number",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Filter",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "set value of addressline2 as housenumber",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Filter Out PickUpShops",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "check if addressline 2 contains number and letter",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "set billbee tag manual check",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "set value of addressline2 as housenumber number+letter",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "set billbee success",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "ConfigNode",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Wait",
+        "to": "get order data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Wait1",
+        "to": "set new delivery address to billbee",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "ConfigNode",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ConfigNode",
+        "to": "Wait",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "get order data",
+        "to": "Split Out Order Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Address Fields",
+        "to": "Filter Out PickUpShops",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Order Data",
+        "to": "Set Address Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Filter Out PickUpShops",
+        "to": "check if housenumer is not empty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Address endereco api",
+        "to": "check if new address is not empty",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out Corrected Address",
+        "to": "Wait1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if housenumer is not empty",
+        "to": "Check Address endereco api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if housenumer is not empty",
+        "to": "check if addressline 2 contains number",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "check if new address is not empty",
+        "to": "Split Out Corrected Address",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if new address is not empty",
+        "to": "set billbee tag",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "set new delivery address to billbee",
+        "to": "set billbee success",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if addressline 2 contains number",
+        "to": "set value of addressline2 as housenumber",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if addressline 2 contains number",
+        "to": "check if addressline 2 contains number and letter",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "set value of addressline2 as housenumber",
+        "to": "Check Address endereco api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if addressline 2 contains number and letter",
+        "to": "set value of addressline2 as housenumber number+letter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check if addressline 2 contains number and letter",
+        "to": "set billbee tag manual check",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "set value of addressline2 as housenumber number+letter",
+        "to": "Check Address endereco api",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/address-validation/implementations/n8n",
+      "files": [
+        "agents/address-validation/implementations/n8n/address-validation.json"
+      ],
+      "sha256": "af080f1dcdf542c69c2b881bc67bc420210c8862ff35c828cc305139dc39a508",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/address-validation/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/address-validation/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/address-validation/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/address-validation/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/address-validation/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/address-validation/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/address-validation/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/address-validation/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/address-validation/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/address-validation/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/address-validation/implementations/n8n/provenance.json"
+}

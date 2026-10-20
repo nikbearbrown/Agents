@@ -1,0 +1,24 @@
+flowchart LR
+  n0["Gmail Trigger"]
+  n1["Text Classifier"]
+  n2["Google Gemini Chat Model"]
+  n3["GuestPost Inquiry"]
+  n4["Youtube Video Inquiry"]
+  n5["Send Email"]
+  n6["Mark as Read"]
+  n7["Apply Label"]
+  n8["Create Contact in Brevo"]
+  n9["Emails from Existing Contracts"]
+  n10["Reply"]
+  n10 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n9
+  n1 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 1 to in 0"| n4
+  n1 -->|"main out 2 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n6
+  n2 -->|"ai_languageModel out 0 to in 0"| n1
+  n9 -->|"main out 1 to in 0"| n10

@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "slug": "new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice",
+  "title": "New order is sent to the Webhook via POST with params {orderID, orderPrice}",
+  "purpose": "Adapt the published “New order is sent to the Webhook via POST with params {orderID, orderPrice}” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Everyday at 7PM",
+    "Webhook"
+  ],
+  "terminal_nodes": [
+    "Send to Gmail",
+    "Store Order"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "gmailOAuth2"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Everyday at 7PM",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Airtable Get Today's Orders",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Yesterday Date",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "HTML",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Set Order Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Send to Gmail",
+        "type": "n8n-nodes-base.gmail",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Store Order",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "HTML",
+        "to": "Send to Gmail",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Webhook",
+        "to": "Set Order Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Yesterday Date",
+        "to": "Airtable Get Today's Orders",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Everyday at 7PM",
+        "to": "Yesterday Date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Order Fields",
+        "to": "Store Order",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable Get Today's Orders",
+        "to": "HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/n8n",
+      "files": [
+        "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/n8n/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice.json"
+      ],
+      "sha256": "52bdbc81a50d7901f4c66e0bf2cc5acd373420b89d91d31312e8f2e5bead9999",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/new-order-is-sent-to-the-webhook-via-post-with-params-orderid-orderprice/implementations/n8n/provenance.json"
+}

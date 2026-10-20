@@ -1,0 +1,25 @@
+flowchart LR
+  n0["Order Information"]
+  n1["Return Orders"]
+  n2["Outbound Orders"]
+  n3["Order Type"]
+  n4["Email Trigger"]
+  n5["Subject includes EDI"]
+  n6["Extract Body"]
+  n7["Get Email"]
+  n8["Parse EDI Message"]
+  n9["Order Info #43; Orderlines"]
+  n10["Flatten Data to Orderlines"]
+  n11["Split Out by Line"]
+  n7 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 1 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n8
+  n4 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n0
+  n8 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 0 to in 1"| n9
+  n5 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n11

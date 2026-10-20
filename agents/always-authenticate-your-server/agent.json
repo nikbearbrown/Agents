@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "slug": "always-authenticate-your-server",
+  "title": "Always Authenticate Your Server!",
+  "purpose": "Adapt the published “Always Authenticate Your Server!” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 8 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "FileSystem MCP Server",
+    "When Executed by Another Workflow"
+  ],
+  "terminal_nodes": [
+    "FileSystem MCP Server",
+    "ListDirectory",
+    "CreateDirectory",
+    "readOneOrMultipleFiles",
+    "ReadFiles",
+    "WriteFiles",
+    "writeOneOrMultipleFiles",
+    "SearchDirectory"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "FileSystem MCP Server",
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ListDirectory",
+        "type": "n8n-nodes-base.executeCommandTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "CreateDirectory",
+        "type": "n8n-nodes-base.executeCommandTool",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Operation",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "readOneOrMultipleFiles",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "ReadFiles",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "WriteFiles",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "writeOneOrMultipleFiles",
+        "type": "n8n-nodes-base.executeCommand",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "SearchDirectory",
+        "type": "n8n-nodes-base.executeCommandTool",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Operation",
+        "to": "writeOneOrMultipleFiles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Operation",
+        "to": "readOneOrMultipleFiles",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "ReadFiles",
+        "to": "FileSystem MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "WriteFiles",
+        "to": "FileSystem MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "ListDirectory",
+        "to": "FileSystem MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CreateDirectory",
+        "to": "FileSystem MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "SearchDirectory",
+        "to": "FileSystem MCP Server",
+        "kind": "ai_tool",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When Executed by Another Workflow",
+        "to": "Operation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/always-authenticate-your-server/implementations/n8n",
+      "files": [
+        "agents/always-authenticate-your-server/implementations/n8n/always-authenticate-your-server.json"
+      ],
+      "sha256": "86e8735c5f9bc0ee83f282384bfc9934788452e89cbfb892b9344aac02aaa5d0",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/always-authenticate-your-server/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/always-authenticate-your-server/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/always-authenticate-your-server/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/always-authenticate-your-server/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/always-authenticate-your-server/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/always-authenticate-your-server/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/always-authenticate-your-server/implementations/n8n/provenance.json"
+}

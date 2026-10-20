@@ -1,0 +1,723 @@
+{
+  "schema_version": 1,
+  "slug": "events-webhook-trigger-3d11dc3b",
+  "title": "Events Webhook Trigger",
+  "purpose": "Adapt the published “Events Webhook Trigger” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 45 executable nodes and 48 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "TheHive Trigger",
+    "Receive Button Press"
+  ],
+  "terminal_nodes": [
+    "Task Modal",
+    "Update Message with new Assignee",
+    "No Action Needed",
+    "Post New Case To Slack",
+    "Respond 204 to Slack",
+    "Add a task to TheHive"
+  ],
+  "credential_types": [
+    "slackApi",
+    "theHiveProjectApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "TheHive Trigger",
+        "type": "n8n-nodes-base.theHiveProjectTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Task Modal",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Formatting Dictionaries",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Prep Fields For Slack",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Message with new Assignee",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Check if Case Options",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Case Slack Block Rebuild",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Close Case Block Rebuild",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Severity Case Block Rebuild1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "PAP Case Block Rebuild",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Prep Fields For PAP Slack",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Map Actions",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Build Final Block",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Prep Fields For TLP Slack",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Prep Fields For Status Slack",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Status in TheHive",
+        "type": "n8n-nodes-base.theHiveProject",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Close Case as False Positive",
+        "type": "n8n-nodes-base.theHiveProject",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Status Case Block Rebuild",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "TLP Case Block Rebuild",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "No Action Needed",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Post New Case To Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Prep Fields For Slack - Close",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Prep Fields For Slack - Assign",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Prep Fields For Slack - Severity",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Update Case Severity",
+        "type": "n8n-nodes-base.theHiveProject",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Case PAP",
+        "type": "n8n-nodes-base.theHiveProject",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Case TLP",
+        "type": "n8n-nodes-base.theHiveProject",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Acknowledge Close Case to Slack",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Acknowledge Severity Update to Slack",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Acknowledge PAP Update to Slack",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Acknowledge TLP Update to Slack",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Acknowledge Status Update to Slack",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Acknowledge Modal Request to Slack",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Message Type",
+        "type": "n8n-nodes-base.switch",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Respond positive to Slack when someone clicks a link",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond 204 to Slack",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Close Modal with 204 response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Slack User's Email From Slack",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Update TheHive Case with new Assignee",
+        "type": "n8n-nodes-base.theHiveProject",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Slack with 200 response",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Email From Slack to assign the task to in TheHive",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Add a task to TheHive",
+        "type": "n8n-nodes-base.theHiveProject",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Receive Button Press",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Edit Fields",
+        "to": "Parse Message Type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Map Actions",
+        "to": "Build Final Block",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "HTTP Request",
+        "to": "Prep Fields For Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "TheHive Trigger",
+        "to": "Formatting Dictionaries",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Case PAP",
+        "to": "PAP Case Block Rebuild",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Case TLP",
+        "to": "TLP Case Block Rebuild",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Build Final Block",
+        "to": "Update Message with new Assignee",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Respond to Slack with 200 response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Acknowledge Close Case to Slack",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Acknowledge Severity Update to Slack",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Acknowledge Modal Request to Slack",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Check if Case Options",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Acknowledge PAP Update to Slack",
+        "kind": "main",
+        "output": 5,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Acknowledge Status Update to Slack",
+        "kind": "main",
+        "output": 6,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Acknowledge TLP Update to Slack",
+        "kind": "main",
+        "output": 7,
+        "input": 0
+      },
+      {
+        "from": "Parse Message Type",
+        "to": "Respond positive to Slack when someone clicks a link",
+        "kind": "main",
+        "output": 8,
+        "input": 0
+      },
+      {
+        "from": "Receive Button Press",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Case Severity",
+        "to": "Severity Case Block Rebuild1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Case Options",
+        "to": "Close Modal with 204 response",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check if Case Options",
+        "to": "Respond 204 to Slack",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Prep Fields For Slack",
+        "to": "Post New Case To Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "PAP Case Block Rebuild",
+        "to": "Map Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "TLP Case Block Rebuild",
+        "to": "Map Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Formatting Dictionaries",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Case Slack Block Rebuild",
+        "to": "Map Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Close Case Block Rebuild",
+        "to": "Map Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update Status in TheHive",
+        "to": "Status Case Block Rebuild",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Fields For PAP Slack",
+        "to": "Update Case PAP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Fields For TLP Slack",
+        "to": "Update Case TLP",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Status Case Block Rebuild",
+        "to": "Map Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Close Case as False Positive",
+        "to": "Close Case Block Rebuild",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Fields For Status Slack",
+        "to": "Update Status in TheHive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Severity Case Block Rebuild1",
+        "to": "Map Actions",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Close Modal with 204 response",
+        "to": "Get Email From Slack to assign the task to in TheHive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Fields For Slack - Close",
+        "to": "Close Case as False Positive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Fields For Slack - Assign",
+        "to": "Get Slack User's Email From Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Acknowledge Close Case to Slack",
+        "to": "Prep Fields For Slack - Close",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Acknowledge PAP Update to Slack",
+        "to": "Prep Fields For PAP Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Acknowledge TLP Update to Slack",
+        "to": "Prep Fields For TLP Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prep Fields For Slack - Severity",
+        "to": "Update Case Severity",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Slack User's Email From Slack",
+        "to": "Update TheHive Case with new Assignee",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Acknowledge Modal Request to Slack",
+        "to": "Task Modal",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Acknowledge Status Update to Slack",
+        "to": "Prep Fields For Status Slack",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Respond to Slack with 200 response",
+        "to": "Prep Fields For Slack - Assign",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Acknowledge Severity Update to Slack",
+        "to": "Prep Fields For Slack - Severity",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update TheHive Case with new Assignee",
+        "to": "Case Slack Block Rebuild",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Respond positive to Slack when someone clicks a link",
+        "to": "No Action Needed",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Email From Slack to assign the task to in TheHive",
+        "to": "Add a task to TheHive",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/events-webhook-trigger-3d11dc3b/implementations/n8n",
+      "files": [
+        "agents/events-webhook-trigger-3d11dc3b/implementations/n8n/events-webhook-trigger-3d11dc3b.json"
+      ],
+      "sha256": "8eab3ac02c11a8065e19e00ae5fd5c3586ab92ea39df3713821f6fefe504ebb6",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-3d11dc3b/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-3d11dc3b/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-3d11dc3b/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-3d11dc3b/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/events-webhook-trigger-3d11dc3b/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/events-webhook-trigger-3d11dc3b/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/events-webhook-trigger-3d11dc3b/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/events-webhook-trigger-3d11dc3b/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/events-webhook-trigger-3d11dc3b/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/events-webhook-trigger-3d11dc3b/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/events-webhook-trigger-3d11dc3b/implementations/n8n/provenance.json"
+}

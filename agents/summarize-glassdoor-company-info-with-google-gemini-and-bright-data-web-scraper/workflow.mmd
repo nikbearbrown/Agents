@@ -1,0 +1,25 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Google Gemini Chat Model"]
+  n2["Default Data Loader"]
+  n3["Recursive Character Text Splitter"]
+  n4["If"]
+  n5["Set Snapshot Id"]
+  n6["Check Snapshot Status"]
+  n7["Download the Snapshot Response"]
+  n8["Wait for 30 seconds"]
+  n9["Summarization of Glassdoor Response"]
+  n10["Configure Webhook Notification"]
+  n11["HTTP Request to Glassdoor"]
+  n4 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 1 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n6
+  n2 -->|"ai_document out 0 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n4
+  n1 -->|"ai_languageModel out 0 to in 0"| n9
+  n11 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n9
+  n3 -->|"ai_textSplitter out 0 to in 0"| n2
+  n0 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 0 to in 0"| n10

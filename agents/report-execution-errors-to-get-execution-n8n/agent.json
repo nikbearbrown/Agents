@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "slug": "report-execution-errors-to-get-execution-n8n",
+  "title": "report execution errors to get execution n8n",
+  "purpose": "Adapt the published “report execution errors to get execution n8n” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Error Trigger"
+  ],
+  "terminal_nodes": [
+    "Extract webhook data"
+  ],
+  "credential_types": [
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Error Trigger",
+        "type": "n8n-nodes-base.errorTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract webhook data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get execution data",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Error Trigger",
+        "to": "Get execution data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get execution data",
+        "to": "Extract webhook data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/implementations/n8n",
+      "files": [
+        "agents/report-execution-errors-to-get-execution-n8n/implementations/n8n/report-execution-errors-to-get-execution-n8n.json"
+      ],
+      "sha256": "274bb1b10a2ec2ac4531d2dbda50b61571f0311716bf40940ba0427a36ec1a13",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/report-execution-errors-to-get-execution-n8n/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/report-execution-errors-to-get-execution-n8n/implementations/n8n/provenance.json"
+}

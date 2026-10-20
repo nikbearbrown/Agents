@@ -1,0 +1,34 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Get Meraki Organizations"]
+  n2["Get Network IDs"]
+  n3["Get Org Name #38; ID"]
+  n4["Combine latency to its respective Network"]
+  n5["Makes Latency and Loss Filterable"]
+  n6["Filters Problematic sites"]
+  n7["Average Latency #38; Loss over 5m"]
+  n8["Get Uplink Loss and Latency"]
+  n9["Schedule Trigger"]
+  n10["Sets Network Variables"]
+  n11["Merge"]
+  n12["Check if Alert Exists"]
+  n13["Create Response"]
+  n14["Message Techs"]
+  n15["Log the Alert"]
+  n11 -->|"main out 0 to in 0"| n14
+  n14 -->|"main out 0 to in 0"| n15
+  n13 -->|"main out 0 to in 0"| n11
+  n2 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n2
+  n12 -->|"main out 0 to in 0"| n13
+  n10 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n3
+  n1 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n12
+  n6 -->|"main out 0 to in 1"| n11
+  n8 -->|"main out 0 to in 1"| n4
+  n7 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n7
+  n4 -->|"main out 0 to in 0"| n5

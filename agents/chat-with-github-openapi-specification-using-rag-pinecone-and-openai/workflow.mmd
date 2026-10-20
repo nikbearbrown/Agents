@@ -1,0 +1,27 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["HTTP Request"]
+  n2["Pinecone Vector Store"]
+  n3["Default Data Loader"]
+  n4["Recursive Character Text Splitter"]
+  n5["When chat message received"]
+  n6["AI Agent"]
+  n7["OpenAI Chat Model"]
+  n8["Window Buffer Memory"]
+  n9["Vector Store Tool"]
+  n10["OpenAI Chat Model1"]
+  n11["Generate User Query Embedding"]
+  n12["Pinecone Vector Store #40;Querying#41;"]
+  n13["Generate Embeddings"]
+  n1 -->|"main out 0 to in 0"| n2
+  n7 -->|"ai_languageModel out 0 to in 0"| n6
+  n9 -->|"ai_tool out 0 to in 0"| n6
+  n10 -->|"ai_languageModel out 0 to in 0"| n9
+  n3 -->|"ai_document out 0 to in 0"| n2
+  n13 -->|"ai_embedding out 0 to in 0"| n2
+  n8 -->|"ai_memory out 0 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n6
+  n11 -->|"ai_embedding out 0 to in 0"| n12
+  n12 -->|"ai_vectorStore out 0 to in 0"| n9
+  n4 -->|"ai_textSplitter out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n1

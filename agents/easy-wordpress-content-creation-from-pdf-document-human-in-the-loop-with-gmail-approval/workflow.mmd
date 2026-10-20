@@ -1,0 +1,39 @@
+flowchart LR
+  n0["Upload PDF"]
+  n1["Extract Text"]
+  n2["gpt-4o-mini"]
+  n3["pollinations.ai"]
+  n4["Create Wordpress Post"]
+  n5["Upload Image to Wordpress"]
+  n6["Set Image on Wordpress Post"]
+  n7["Send Error Message"]
+  n8["Is there Title #38; Content#63;"]
+  n9["Merge"]
+  n10["Markdown"]
+  n11["Human In The Loop Approve Blog Post"]
+  n12["Is Approved#63;"]
+  n13["Gmail Final Blog"]
+  n14["Telegram Partial Blog"]
+  n15["Get Blog Post"]
+  n16["Write Blog Post"]
+  n17["Get Base64"]
+  n18["Save Image to imgbb.com"]
+  n9 -->|"main out 0 to in 0"| n14
+  n9 -->|"main out 0 to in 0"| n13
+  n10 -->|"main out 0 to in 0"| n9
+  n17 -->|"main out 0 to in 0"| n18
+  n0 -->|"main out 0 to in 0"| n1
+  n2 -->|"ai_languageModel out 0 to in 0"| n16
+  n1 -->|"main out 0 to in 0"| n16
+  n12 -->|"main out 0 to in 0"| n4
+  n15 -->|"main out 0 to in 0"| n8
+  n16 -->|"main out 0 to in 0"| n15
+  n3 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 1"| n9
+  n3 -->|"main out 0 to in 0"| n17
+  n4 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n11
+  n8 -->|"main out 1 to in 0"| n7
+  n5 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 0 to in 0"| n12

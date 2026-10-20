@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "slug": "minibear-webhook",
+  "title": "MiniBear Webhook",
+  "purpose": "Adapt the published “MiniBear Webhook” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 27 executable nodes and 26 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Line Webhook"
+  ],
+  "terminal_nodes": [
+    "Line Reply (image)",
+    "Line Reply (Text)",
+    "Line Reply (Not Supported 2)",
+    "Line Reply (Not Supported 1)",
+    "OpenRouter Chat Model",
+    "Line Reply (Text)1",
+    "OpenRouter Chat Model2",
+    "HTTP Request",
+    "OpenRouter Chat Model3",
+    "Structured Output Parser"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "microsoftOneDriveOAuth2Api",
+    "microsoftTeamsOAuth2Api",
+    "microsoftToDoOAuth2Api",
+    "openRouterApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Line Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Line Loading Animation",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Line Reply (image)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Line Reply (Text)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Line Reply (Not Supported 2)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Line Reply (Not Supported 1)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenRouter Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Image Router",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft Teams",
+        "type": "n8n-nodes-base.microsoftTeams",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft To Do",
+        "type": "n8n-nodes-base.microsoftToDo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Line Reply (Text)1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "If namecard",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Other Images",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft Teams1",
+        "type": "n8n-nodes-base.microsoftTeams",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "OpenRouter Chat Model2",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft OneDrive",
+        "type": "n8n-nodes-base.microsoftOneDrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft OneDrive1",
+        "type": "n8n-nodes-base.microsoftOneDrive",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Image2",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Microsoft To Do1",
+        "type": "n8n-nodes-base.microsoftToDo",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "OpenRouter Chat Model3",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "NamecardExtract",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Line Reply Namecard",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Image3",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Switch",
+        "to": "Microsoft To Do",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Microsoft Teams",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Get Image",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Line Reply (Not Supported 1)",
+        "kind": "main",
+        "output": 3,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Line Reply (Not Supported 2)",
+        "kind": "main",
+        "output": 4,
+        "input": 0
+      },
+      {
+        "from": "Get Image",
+        "to": "Image Router",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image2",
+        "to": "Other Images",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Image3",
+        "to": "NamecardExtract",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If namecard",
+        "to": "Get Image3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If namecard",
+        "to": "Microsoft OneDrive",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Image Router",
+        "to": "If namecard",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Line Webhook",
+        "to": "Line Loading Animation",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Other Images",
+        "to": "Microsoft Teams1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Microsoft Teams",
+        "to": "Line Reply (Text)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Microsoft To Do",
+        "to": "Line Reply (Text)1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "NamecardExtract",
+        "to": "Microsoft To Do1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Microsoft Teams1",
+        "to": "Line Reply (image)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Microsoft To Do1",
+        "to": "Line Reply Namecard",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Microsoft OneDrive",
+        "to": "Microsoft OneDrive1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Line Reply Namecard",
+        "to": "HTTP Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Microsoft OneDrive1",
+        "to": "Get Image2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenRouter Chat Model",
+        "to": "Image Router",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Line Loading Animation",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenRouter Chat Model2",
+        "to": "Other Images",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenRouter Chat Model3",
+        "to": "NamecardExtract",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Structured Output Parser",
+        "to": "NamecardExtract",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/minibear-webhook/implementations/n8n",
+      "files": [
+        "agents/minibear-webhook/implementations/n8n/minibear-webhook.json"
+      ],
+      "sha256": "48ab46ee665b8afee38286501dd5bc182f83bc57827b6155e18b2841b2a20b18",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/minibear-webhook/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/minibear-webhook/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/minibear-webhook/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/minibear-webhook/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/minibear-webhook/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/minibear-webhook/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/minibear-webhook/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/minibear-webhook/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/minibear-webhook/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/minibear-webhook/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/minibear-webhook/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "slug": "new-woocommerce-product-to-twitter-and-telegram",
+  "title": "New WooCommerce Product to Twitter and Telegram",
+  "purpose": "Adapt the published “New WooCommerce Product to Twitter and Telegram” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 3 executable nodes and 2 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "WooCommerce Trigger"
+  ],
+  "terminal_nodes": [
+    "Twitter",
+    "Telegram"
+  ],
+  "credential_types": [
+    "telegramApi",
+    "twitterOAuth1Api",
+    "wooCommerceApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Twitter",
+        "type": "n8n-nodes-base.twitter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "WooCommerce Trigger",
+        "type": "n8n-nodes-base.wooCommerceTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "WooCommerce Trigger",
+        "to": "Twitter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "WooCommerce Trigger",
+        "to": "Telegram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/implementations/n8n",
+      "files": [
+        "agents/new-woocommerce-product-to-twitter-and-telegram/implementations/n8n/new-woocommerce-product-to-twitter-and-telegram.json"
+      ],
+      "sha256": "1b459dee20bd33af2021b4577b781973644676db5c9818e421583929b7c87cc2",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/new-woocommerce-product-to-twitter-and-telegram/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/new-woocommerce-product-to-twitter-and-telegram/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,21 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["Google Gemini Chat Model"]
+  n2["Webhook"]
+  n3["Default Data Loader"]
+  n4["Recursive Character Text Splitter"]
+  n5["Simple Memory"]
+  n6["AI Travel Agent"]
+  n7["Retrieve docs with Couchbase Search Vector"]
+  n8["Insert docs with Couchbase Search Vector"]
+  n9["Generate OpenAI Embeddings using text-embedding-3-small"]
+  n10["Generate OpenAI Embeddings using text-embedding-3-small1"]
+  n2 -->|"main out 0 to in 0"| n8
+  n5 -->|"ai_memory out 0 to in 0"| n6
+  n3 -->|"ai_document out 0 to in 0"| n8
+  n1 -->|"ai_languageModel out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n6
+  n4 -->|"ai_textSplitter out 0 to in 0"| n3
+  n7 -->|"ai_tool out 0 to in 0"| n6
+  n9 -->|"ai_embedding out 0 to in 0"| n7
+  n10 -->|"ai_embedding out 0 to in 0"| n8

@@ -1,0 +1,805 @@
+{
+  "schema_version": 1,
+  "slug": "n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration",
+  "title": "[n8n] Advanced URL Parsing and Shortening Workflow - Switchy.io Integration",
+  "purpose": "Adapt the published “[n8n] Advanced URL Parsing and Shortening Workflow - Switchy.io Integration” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 47 executable nodes and 59 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "n8n Form Trigger"
+  ],
+  "terminal_nodes": [
+    "Stop and Error",
+    "Stop And Error",
+    "Respond to Webhook"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Split In Batches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get Headers",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "OpenGraph API",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Meta tags Scraper - dub.sh",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "IF OpenGraph invaild",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Parse headers",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If - Enable ScreenShots (yes to enable)",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "API Auth",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Method 1 - META",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Convert to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Final Data",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "CREATE",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "UPDATE",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "IF Slug available",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Final Meta",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Host Screenshot",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Host OGImage",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Host Favicon",
+        "type": "n8n-nodes-base.github",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Download final OG",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Download Favicon",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Method 2 - META",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Stop and Error",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Method 3 - META1",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Method 1 - SCR",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Method 2 - SCR",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Final SCR",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Stop And Error",
+        "type": "n8n-nodes-base.stopAndError",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Shortened URL",
+        "type": "n8n-nodes-base.set",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "n8n Form Trigger",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Scan URL (Community)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "If",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "If1",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Check Reviews (Community)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Norton",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "bitdefender",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "HTML",
+        "type": "n8n-nodes-base.html",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "(Fraud Check)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "(Others)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "If2",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "set unsafe",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "If3",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "PhishTank",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "IF GH invaild",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Method 4 - META",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "IF dub invaild",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "If",
+        "to": "PhishTank",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If",
+        "to": "If1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "Check Reviews (Community)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If1",
+        "to": "Norton",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If2",
+        "to": "OpenGraph API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If2",
+        "to": "set unsafe",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If3",
+        "to": "Scan URL (Community)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If3",
+        "to": "OpenGraph API",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "HTML",
+        "to": "bitdefender",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CREATE",
+        "to": "IF Slug available",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Norton",
+        "to": "PhishTank",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "UPDATE",
+        "to": "Shortened URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "(Others)",
+        "to": "HTML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "API Auth",
+        "to": "If3",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final SCR",
+        "to": "Host Screenshot",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "PhishTank",
+        "to": "(Fraud Check)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Data",
+        "to": "CREATE",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Meta",
+        "to": "If - Enable ScreenShots (yes to enable)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "set unsafe",
+        "to": "Split In Batches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Fields",
+        "to": "Download final OG",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Headers",
+        "to": "Parse headers",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Headers",
+        "to": "Meta tags Scraper - dub.sh",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "bitdefender",
+        "to": "If2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Host Favicon",
+        "to": "Final Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Host OGImage",
+        "to": "Download Favicon",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "(Fraud Check)",
+        "to": "(Others)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF GH invaild",
+        "to": "Meta tags Scraper - dub.sh",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF GH invaild",
+        "to": "Final Meta",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenGraph API",
+        "to": "IF OpenGraph invaild",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "OpenGraph API",
+        "to": "Get Headers",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Parse headers",
+        "to": "Method 2 - META",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Shortened URL",
+        "to": "Split In Batches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF dub invaild",
+        "to": "Method 4 - META",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF dub invaild",
+        "to": "Method 3 - META1",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Method 1 - SCR",
+        "to": "Final SCR",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Method 1 - SCR",
+        "to": "Method 2 - SCR",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Method 2 - SCR",
+        "to": "Convert to File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Method 2 - SCR",
+        "to": "Stop And Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Convert to File",
+        "to": "Final SCR",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Host Screenshot",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Method 1 - META",
+        "to": "Final Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Method 2 - META",
+        "to": "IF GH invaild",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Method 4 - META",
+        "to": "Final Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Favicon",
+        "to": "Host Favicon",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Method 3 - META1",
+        "to": "Final Meta",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split In Batches",
+        "to": "API Auth",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split In Batches",
+        "to": "Respond to Webhook",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "n8n Form Trigger",
+        "to": "Split In Batches",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download final OG",
+        "to": "Host OGImage",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF Slug available",
+        "to": "Shortened URL",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF Slug available",
+        "to": "UPDATE",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "IF OpenGraph invaild",
+        "to": "Method 1 - META",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "IF OpenGraph invaild",
+        "to": "Get Headers",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Scan URL (Community)",
+        "to": "If",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check Reviews (Community)",
+        "to": "Norton",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Meta tags Scraper - dub.sh",
+        "to": "IF dub invaild",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Meta tags Scraper - dub.sh",
+        "to": "Stop and Error",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "If - Enable ScreenShots (yes to enable)",
+        "to": "Method 1 - SCR",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If - Enable ScreenShots (yes to enable)",
+        "to": "Edit Fields",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/n8n",
+      "files": [
+        "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/n8n/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration.json"
+      ],
+      "sha256": "0ee91f33e61c06e3e8ddbdc7683e6903e6c881cbf2bdf9e5f449e9243c557697",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/n8n-advanced-url-parsing-and-shortening-workflow-switchy-io-integration/implementations/n8n/provenance.json"
+}

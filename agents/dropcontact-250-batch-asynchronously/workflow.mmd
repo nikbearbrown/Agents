@@ -1,0 +1,23 @@
+flowchart LR
+  n0["Aggregate"]
+  n1["PROFILES QUERY"]
+  n2["BULK DROPCONTACT REQUESTS"]
+  n3["Loop Over Items2"]
+  n4["Split Out"]
+  n5["Postgres"]
+  n6["BULK DROPCONTACT DOWNLOAD"]
+  n7["Wait2"]
+  n8["DATA TRANSFORMATION"]
+  n9["Slack"]
+  n10["Schedule Trigger"]
+  n7 -->|"main out 0 to in 0"| n6
+  n5 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n8
+  n4 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 1 to in 0"| n0
+  n10 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 0 to in 0"| n4
+  n6 -->|"main out 1 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n7

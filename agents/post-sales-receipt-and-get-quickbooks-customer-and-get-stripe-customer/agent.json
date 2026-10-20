@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "slug": "post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer",
+  "title": "post sales receipt and get quickbooks customer and get stripe customer",
+  "purpose": "Adapt the published “post sales receipt and get quickbooks customer and get stripe customer” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "New Payment"
+  ],
+  "terminal_nodes": [
+    "POST Sales Receipt",
+    "POST Sales Receipt To QuickBooks"
+  ],
+  "credential_types": [
+    "httpCustomAuth",
+    "quickBooksOAuth2Api",
+    "stripeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "POST Sales Receipt",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "GET Quickbooks Customer",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Stripe Customer",
+        "type": "n8n-nodes-base.stripe",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "New Payment",
+        "type": "n8n-nodes-base.stripeTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If Customer Exists",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Use Stripe Customer",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Create QuickBooks Customer",
+        "type": "n8n-nodes-base.quickbooks",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge Stripe and QuickBooks Data",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Merge Payment and QuickBooks Customer",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "POST Sales Receipt To QuickBooks",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "New Payment",
+        "to": "Get Stripe Customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Payment",
+        "to": "Merge Stripe and QuickBooks Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "New Payment",
+        "to": "Merge Payment and QuickBooks Customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If Customer Exists",
+        "to": "Merge Stripe and QuickBooks Data",
+        "kind": "main",
+        "output": 0,
+        "input": 2
+      },
+      {
+        "from": "If Customer Exists",
+        "to": "Use Stripe Customer",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get Stripe Customer",
+        "to": "GET Quickbooks Customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Stripe Customer",
+        "to": "Use Stripe Customer",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Use Stripe Customer",
+        "to": "Create QuickBooks Customer",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET Quickbooks Customer",
+        "to": "If Customer Exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "GET Quickbooks Customer",
+        "to": "Merge Stripe and QuickBooks Data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Create QuickBooks Customer",
+        "to": "Merge Payment and QuickBooks Customer",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Merge Stripe and QuickBooks Data",
+        "to": "POST Sales Receipt",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Payment and QuickBooks Customer",
+        "to": "POST Sales Receipt To QuickBooks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/n8n",
+      "files": [
+        "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/n8n/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer.json"
+      ],
+      "sha256": "3f56b6c55b13e67c3b949b19314b197136ae6a29db9d45d13f8ad60fc4402fef",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/post-sales-receipt-and-get-quickbooks-customer-and-get-stripe-customer/implementations/n8n/provenance.json"
+}

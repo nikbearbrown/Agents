@@ -1,0 +1,49 @@
+flowchart LR
+  n0["When clicking #34;Execute Workflow#34;"]
+  n1["Whether type is file"]
+  n2["Set new path for subfolder"]
+  n3["Set new path for file"]
+  n4["Webhook"]
+  n5["Execute Workflow Trigger"]
+  n6["Set folder-paths for from and to"]
+  n7["Create to folder if necessary"]
+  n8["Get all folders/files in from-folder"]
+  n9["Loop over files and folders"]
+  n10["Consolidate all files and folders found"]
+  n11["Create subfolder in to-folder"]
+  n12["Get all folders/files in found subfolder"]
+  n13["Whether there is are more files or subfolders found"]
+  n14["Consolidate all found files"]
+  n15["Loop Over all files"]
+  n16["Move file to destination"]
+  n17["Delete from-folder"]
+  n18["Set paths"]
+  n19["Whether the request is valid"]
+  n20["Stop and Error: request not valid"]
+  n21["Whether the request is valid1"]
+  n22["Stop and Error: request not valid1"]
+  n4 -->|"main out 0 to in 0"| n19
+  n18 -->|"main out 0 to in 0"| n6
+  n15 -->|"main out 0 to in 0"| n17
+  n15 -->|"main out 1 to in 0"| n16
+  n1 -->|"main out 0 to in 0"| n10
+  n1 -->|"main out 1 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n15
+  n5 -->|"main out 0 to in 0"| n21
+  n16 -->|"main out 0 to in 0"| n15
+  n2 -->|"main out 0 to in 0"| n11
+  n14 -->|"main out 0 to in 0"| n3
+  n9 -->|"main out 1 to in 0"| n1
+  n19 -->|"main out 0 to in 0"| n6
+  n19 -->|"main out 1 to in 0"| n20
+  n11 -->|"main out 0 to in 0"| n12
+  n7 -->|"main out 0 to in 0"| n8
+  n21 -->|"main out 0 to in 0"| n6
+  n21 -->|"main out 1 to in 0"| n22
+  n6 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n18
+  n8 -->|"main out 0 to in 0"| n9
+  n10 -->|"main out 0 to in 0"| n13
+  n12 -->|"main out 0 to in 0"| n10
+  n13 -->|"main out 0 to in 0"| n14
+  n13 -->|"main out 1 to in 0"| n9

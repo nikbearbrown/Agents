@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "slug": "http-request-and-get-reddit-ml-and-groq-llm-sentiment",
+  "title": "http request and get reddit ml and groq llm sentiment",
+  "purpose": "Adapt the published “http request and get reddit ml and groq llm sentiment” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 17 executable nodes and 18 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Manual Trigger"
+  ],
+  "terminal_nodes": [
+    "Store in Google Sheets"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "groqApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Process StackOverflow",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get StackOverflow",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine All Data",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Process Reddit ML",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get Reddit ML",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Process GitHub",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Groq LLM Sentiment",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Process Groq Sentiment",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Groq Topic Classification",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Topic Clustering Engine",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Signal-to-Noise Filter",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Social Sentiment Output",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Enhanced Data Export",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Prepare for Google Sheets",
+        "type": "n8n-nodes-base.function",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Store in Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Process StackOverflow",
+        "to": "Combine All Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get StackOverflow",
+        "to": "Process StackOverflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Trigger",
+        "to": "Get StackOverflow",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Trigger",
+        "to": "Get Reddit ML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Trigger",
+        "to": "Get GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine All Data",
+        "to": "Groq LLM Sentiment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Reddit ML",
+        "to": "Combine All Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Reddit ML",
+        "to": "Process Reddit ML",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process GitHub",
+        "to": "Combine All Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get GitHub",
+        "to": "Process GitHub",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq LLM Sentiment",
+        "to": "Process Groq Sentiment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Process Groq Sentiment",
+        "to": "Groq Topic Classification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Groq Topic Classification",
+        "to": "Topic Clustering Engine",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Topic Clustering Engine",
+        "to": "Signal-to-Noise Filter",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Signal-to-Noise Filter",
+        "to": "Social Sentiment Output",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Social Sentiment Output",
+        "to": "Enhanced Data Export",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Enhanced Data Export",
+        "to": "Prepare for Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Prepare for Google Sheets",
+        "to": "Store in Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/n8n",
+      "files": [
+        "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/n8n/http-request-and-get-reddit-ml-and-groq-llm-sentiment.json"
+      ],
+      "sha256": "8d7f73c1cea3984f928adf3b5d98fba993559514206e4df73af8312318e1277f",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/http-request-and-get-reddit-ml-and-groq-llm-sentiment/implementations/n8n/provenance.json"
+}

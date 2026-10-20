@@ -1,0 +1,18 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Run Every 5 Minutes"]
+  n2["Get 5 Minute Ago Timestamp"]
+  n3["Get Incidents from ServiceNow"]
+  n4["Check if New Incidents"]
+  n5["Post Error Message if Error with ServiceNow"]
+  n6["Sort Incidents in Ascending Order"]
+  n7["Post Incident Details to Slack Channel"]
+  n8["No Incidents, Do Nothing"]
+  n1 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 1 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 1 to in 0"| n5
+  n6 -->|"main out 0 to in 0"| n7
+  n0 -->|"main out 0 to in 0"| n2

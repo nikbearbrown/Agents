@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "slug": "receive-schedule-events-and-google-sheets-and-chain-llm",
+  "title": "receive schedule events and google sheets and chain llm",
+  "purpose": "Adapt the published “receive schedule events and google sheets and chain llm” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 18 executable nodes and 17 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Scheduled Start: Check for New Posts"
+  ],
+  "terminal_nodes": [
+    "(LLM Model for Concept)",
+    "(Parse Concept JSON)",
+    "(LLM Model for Prompts)",
+    "(Parse Prompts JSON)",
+    "(LLM Model for Caption)",
+    "(Parse Caption JSON)",
+    "7. Update Post Status in Sheet"
+  ],
+  "credential_types": [
+    "facebookGraphApi",
+    "googlePalmApi",
+    "googleSheetsOAuth2Api",
+    "httpHeaderAuth"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Scheduled Start: Check for New Posts",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "1. Get Next Post Idea from Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      },
+      {
+        "name": "2. Prepare Input Variables (Topic, Audience, etc.)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "3a. Generate Content Concept (Gemini)",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "(LLM Model for Concept)",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "(Parse Concept JSON)",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "3b. Generate Image Prompt Options (Gemini)",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "(LLM Model for Prompts)",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "(Parse Prompts JSON)",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "3c. Generate Post Caption (Gemini)",
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "version": 1.5,
+        "disabled": false
+      },
+      {
+        "name": "(LLM Model for Caption)",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "(Parse Caption JSON)",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "4. Generate Image using Prompt 1 (Replicate Flux)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "5. Prepare Data for Instagram API",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "6a. Create Instagram Media Container",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "6b. Wait for Container Processing",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "6c. Publish Post to Instagram",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "7. Update Post Status in Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.5,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "(Parse Caption JSON)",
+        "to": "3c. Generate Post Caption (Gemini)",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "(Parse Concept JSON)",
+        "to": "3a. Generate Content Concept (Gemini)",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "(Parse Prompts JSON)",
+        "to": "3b. Generate Image Prompt Options (Gemini)",
+        "kind": "ai_outputParser",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "(LLM Model for Caption)",
+        "to": "3c. Generate Post Caption (Gemini)",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "(LLM Model for Concept)",
+        "to": "3a. Generate Content Concept (Gemini)",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "(LLM Model for Prompts)",
+        "to": "3b. Generate Image Prompt Options (Gemini)",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "6c. Publish Post to Instagram",
+        "to": "7. Update Post Status in Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "1. Get Next Post Idea from Sheet",
+        "to": "2. Prepare Input Variables (Topic, Audience, etc.)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "5. Prepare Data for Instagram API",
+        "to": "6a. Create Instagram Media Container",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "6b. Wait for Container Processing",
+        "to": "6c. Publish Post to Instagram",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "3c. Generate Post Caption (Gemini)",
+        "to": "4. Generate Image using Prompt 1 (Replicate Flux)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "6a. Create Instagram Media Container",
+        "to": "6b. Wait for Container Processing",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Scheduled Start: Check for New Posts",
+        "to": "1. Get Next Post Idea from Sheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "3a. Generate Content Concept (Gemini)",
+        "to": "3b. Generate Image Prompt Options (Gemini)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "3b. Generate Image Prompt Options (Gemini)",
+        "to": "3c. Generate Post Caption (Gemini)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "4. Generate Image using Prompt 1 (Replicate Flux)",
+        "to": "5. Prepare Data for Instagram API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "2. Prepare Input Variables (Topic, Audience, etc.)",
+        "to": "3a. Generate Content Concept (Gemini)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/n8n",
+      "files": [
+        "agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/n8n/receive-schedule-events-and-google-sheets-and-chain-llm.json"
+      ],
+      "sha256": "cdf5f0197097be491153fcad5afc5c840e60a5f396c7c8c35f8e04edfdb7effb",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-schedule-events-and-google-sheets-and-chain-llm/implementations/n8n/provenance.json"
+}

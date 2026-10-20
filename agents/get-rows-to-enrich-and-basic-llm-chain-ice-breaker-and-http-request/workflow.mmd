@@ -1,0 +1,30 @@
+flowchart LR
+  n0["When clicking #34;Test workflow#34;"]
+  n1["Get rows to enrich"]
+  n2["Anthropic Chat Model"]
+  n3["Basic LLM Chain- Ice Breaker"]
+  n4["BrightData_Get_Linkedin"]
+  n5["Adjust_input_for_loop"]
+  n6["HTTP_Request_Post_Request_BrightData"]
+  n7["Wait_For_API_Call_Results"]
+  n8["API_Call_Snapshot_Progress"]
+  n9["IF-Checking_Status_API_Call"]
+  n10["Google Sheets - Update Row with data From API"]
+  n11["Google Sheets - Update Row with Ice Breaker"]
+  n12["Run Workflow on a certain Schedule"]
+  n13["Loop Over Items- All Prospects"]
+  n1 -->|"main out 0 to in 0"| n5
+  n2 -->|"ai_languageModel out 0 to in 0"| n3
+  n5 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 0 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 1 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 0"| n1
+  n13 -->|"main out 1 to in 0"| n6
+  n12 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n7
+  n11 -->|"main out 0 to in 0"| n13
+  n10 -->|"main out 0 to in 0"| n3

@@ -1,0 +1,18 @@
+flowchart LR
+  n0["Email Trigger #40;IMAP#41;"]
+  n1["Move Binary Data"]
+  n2["IF email has attachment"]
+  n3["Split to matched and unmatched"]
+  n4["When clicking #34;Execute Workflow#34;"]
+  n5["Slack"]
+  n6["Format the message"]
+  n7["Notify about missing attachment"]
+  n8["Analyze email with Sublime Security"]
+  n1 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 0 to in 0"| n5
+  n0 -->|"main out 0 to in 0"| n2
+  n2 -->|"main out 0 to in 0"| n1
+  n2 -->|"main out 1 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n3

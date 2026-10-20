@@ -1,0 +1,16 @@
+flowchart LR
+  n0["Baserow"]
+  n1["No Operation, do nothing"]
+  n2["Set Shopify Subdomain"]
+  n3["Get orders from Shopify"]
+  n4["Every day at 00:00"]
+  n5["Split Shopify data into n8n items"]
+  n6["Transform incoming data structure"]
+  n7["Check if #34;Campaign#34; is present"]
+  n4 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n0
+  n7 -->|"main out 1 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n7

@@ -1,0 +1,459 @@
+{
+  "schema_version": 1,
+  "slug": "turn-blocks-into-rich-text",
+  "title": "⚙️ Turn blocks into rich text",
+  "purpose": "Adapt the published “⚙️ Turn blocks into rich text” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 24 executable nodes and 29 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Success message1"
+  ],
+  "credential_types": [
+    "notionApi",
+    "slackOAuth2Api",
+    "webflowOAuth2Api"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get simple page data",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get all page data",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Take cover url",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "Merge1",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Data transporter1",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all blog posts1",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Is sync checked?1",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "For each blog post1",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Create post1",
+        "type": "n8n-nodes-base.webflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update slug on posts1",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Slug uniqueness checker and differentiator1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Success message1",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Merge2",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Compare by slug1",
+        "type": "n8n-nodes-base.compareDatasets",
+        "version": 2.3,
+        "disabled": false
+      },
+      {
+        "name": "Add slug to posts1",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get all collection posts1",
+        "type": "n8n-nodes-base.webflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Data transporter, Notion posts to sync1",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Craft the rich text element1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Turn blocks into HTML1",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get blocks1",
+        "type": "n8n-nodes-base.notion",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Update in \"Blog Posts\"",
+        "type": "n8n-nodes-base.webflow",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Add Webflow item id to Notion data",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Final Notion post data",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge1",
+        "to": "Final Notion post data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge1",
+        "to": "Get blocks1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge2",
+        "to": "Add slug to posts1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get blocks1",
+        "to": "Turn blocks into HTML1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create post1",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Take cover url",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Compare by slug1",
+        "to": "Create post1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Compare by slug1",
+        "to": "Merge2",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Compare by slug1",
+        "to": "Add Webflow item id to Notion data",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Get all blog posts1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Data transporter1",
+        "to": "For each blog post1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all page data",
+        "to": "Take cover url",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is sync checked?1",
+        "to": "Slug uniqueness checker and differentiator1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add slug to posts1",
+        "to": "Data transporter1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For each blog post1",
+        "to": "Success message1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For each blog post1",
+        "to": "Get simple page data",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "For each blog post1",
+        "to": "Get all page data",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get all blog posts1",
+        "to": "Is sync checked?1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get simple page data",
+        "to": "Merge1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update slug on posts1",
+        "to": "Data transporter1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Notion post data",
+        "to": "Data transporter, Notion posts to sync1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Final Notion post data",
+        "to": "Get all collection posts1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Turn blocks into HTML1",
+        "to": "Craft the rich text element1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Update in \"Blog Posts\"",
+        "to": "Update slug on posts1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all collection posts1",
+        "to": "Compare by slug1",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Craft the rich text element1",
+        "to": "Final Notion post data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Add Webflow item id to Notion data",
+        "to": "Update in \"Blog Posts\"",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Data transporter, Notion posts to sync1",
+        "to": "Compare by slug1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Slug uniqueness checker and differentiator1",
+        "to": "For each blog post1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/turn-blocks-into-rich-text/implementations/n8n",
+      "files": [
+        "agents/turn-blocks-into-rich-text/implementations/n8n/turn-blocks-into-rich-text.json"
+      ],
+      "sha256": "7b8e74eb50e496bb4c2e0739cc1e2d88ca90dc58f03ab4eff6a9aaebebca0396",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/turn-blocks-into-rich-text/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/turn-blocks-into-rich-text/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/turn-blocks-into-rich-text/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/turn-blocks-into-rich-text/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/turn-blocks-into-rich-text/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/turn-blocks-into-rich-text/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/turn-blocks-into-rich-text/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/turn-blocks-into-rich-text/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/turn-blocks-into-rich-text/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/turn-blocks-into-rich-text/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/turn-blocks-into-rich-text/implementations/n8n/provenance.json"
+}

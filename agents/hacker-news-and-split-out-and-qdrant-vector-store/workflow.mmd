@@ -1,0 +1,45 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Hacker News"]
+  n2["Split Out"]
+  n3["Get Comments"]
+  n4["Qdrant Vector Store"]
+  n5["Embeddings OpenAI"]
+  n6["Default Data Loader"]
+  n7["Recursive Character Text Splitter"]
+  n8["Set Variables"]
+  n9["Clear Existing Comments"]
+  n10["Get Payload of Points"]
+  n11["Clusters To List"]
+  n12["OpenAI Chat Model"]
+  n13["Only Clusters With 3#43; points"]
+  n14["Set Variables1"]
+  n15["Prep Output For Export"]
+  n16["Export To Sheets"]
+  n17["Execute Workflow Trigger"]
+  n18["Trigger Insights"]
+  n19["Prep Values For Trigger"]
+  n20["Find Comments"]
+  n21["Apply K-means Clustering Algorithm"]
+  n22["Information Extractor"]
+  n2 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n2
+  n20 -->|"main out 0 to in 0"| n21
+  n8 -->|"main out 0 to in 0"| n9
+  n14 -->|"main out 0 to in 0"| n20
+  n11 -->|"main out 0 to in 0"| n13
+  n5 -->|"ai_embedding out 0 to in 0"| n4
+  n12 -->|"ai_languageModel out 0 to in 0"| n22
+  n6 -->|"ai_document out 0 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n19
+  n10 -->|"main out 0 to in 0"| n22
+  n22 -->|"main out 0 to in 0"| n15
+  n15 -->|"main out 0 to in 0"| n16
+  n9 -->|"main out 0 to in 0"| n1
+  n19 -->|"main out 0 to in 0"| n18
+  n17 -->|"main out 0 to in 0"| n14
+  n13 -->|"main out 0 to in 0"| n10
+  n7 -->|"ai_textSplitter out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n8
+  n21 -->|"main out 0 to in 0"| n11

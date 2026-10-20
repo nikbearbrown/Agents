@@ -1,0 +1,32 @@
+flowchart LR
+  n0["Extract Purchase Order Details"]
+  n1["Is Excel Document#63;"]
+  n2["Run Checks"]
+  n3["Is Valid Purchase Order#63;"]
+  n4["Extract from File"]
+  n5["XLSX to Markdown Table"]
+  n6["OpenAI Chat Model"]
+  n7["Reply Invalid Format"]
+  n8["Outlook Trigger"]
+  n9["Reply Rejection"]
+  n10["Reply Accepted"]
+  n11["Do Something with Purchase Order"]
+  n12["Fix Excel Dates"]
+  n13["Is Submitting a Purchase Order#63;"]
+  n14["Do Nothing"]
+  n15["OpenAI Chat Model1"]
+  n2 -->|"main out 0 to in 0"| n3
+  n10 -->|"main out 0 to in 0"| n11
+  n12 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 0 to in 0"| n5
+  n6 -->|"ai_languageModel out 0 to in 0"| n0
+  n1 -->|"main out 0 to in 0"| n4
+  n1 -->|"main out 1 to in 0"| n7
+  n15 -->|"ai_languageModel out 0 to in 0"| n13
+  n5 -->|"main out 0 to in 0"| n0
+  n3 -->|"main out 0 to in 0"| n10
+  n3 -->|"main out 1 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n12
+  n13 -->|"main out 0 to in 0"| n1
+  n13 -->|"main out 1 to in 0"| n14

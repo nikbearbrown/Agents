@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "slug": "receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe",
+  "title": "receive pipedrive events and set item to only current product data and create product in stripe",
+  "purpose": "Adapt the published “receive pipedrive events and set item to only current product data and create product in stripe” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 7 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "On product created"
+  ],
+  "terminal_nodes": [
+    "Create price records in Stripe"
+  ],
+  "credential_types": [
+    "pipedriveApi",
+    "stripeApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "On product created",
+        "type": "n8n-nodes-base.pipedriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set item to only current product data",
+        "type": "n8n-nodes-base.functionItem",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create product in Stripe",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Add created product Id to data",
+        "type": "n8n-nodes-base.merge",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Keep only productId of created product",
+        "type": "n8n-nodes-base.set",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create price records in Stripe",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split prices to seperate items",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "On product created",
+        "to": "Set item to only current product data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create product in Stripe",
+        "to": "Keep only productId of created product",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add created product Id to data",
+        "to": "Split prices to seperate items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split prices to seperate items",
+        "to": "Create price records in Stripe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set item to only current product data",
+        "to": "Create product in Stripe",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set item to only current product data",
+        "to": "Add created product Id to data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Keep only productId of created product",
+        "to": "Add created product Id to data",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/n8n",
+      "files": [
+        "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/n8n/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe.json"
+      ],
+      "sha256": "74494d4cbce82683f32d90055c7beb42811867e7e4db76ee87b48199af1ec441",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-pipedrive-events-and-set-item-to-only-current-product-data-and-create-product-in-stripe/implementations/n8n/provenance.json"
+}

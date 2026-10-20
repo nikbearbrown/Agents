@@ -1,0 +1,30 @@
+flowchart LR
+  n0["Execute Workflow Trigger"]
+  n1["Check if Product Data Found"]
+  n2["Create Product Data Object1"]
+  n3["Create Product Feedback Data Object"]
+  n4["Check if AI Use Case Data Found"]
+  n5["Check if AI Mentioned On Call"]
+  n6["Wait for rate limiting - AI Use Case"]
+  n7["Wait for rate limiting - Product Data"]
+  n8["Split Out Product Data"]
+  n9["Bundle AI Use Case Data to 1 object"]
+  n10["Bundle Product Feedback Data to 1 object"]
+  n11["Merge AI Use Case Thread"]
+  n12["Merge Product Feedback Thread"]
+  n13["Update Call with AI Data Summary"]
+  n8 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n1
+  n0 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 1 to in 0"| n12
+  n2 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 1 to in 0"| n11
+  n9 -->|"main out 0 to in 0"| n11
+  n3 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n2
+  n7 -->|"main out 0 to in 0"| n8
+  n10 -->|"main out 0 to in 0"| n12

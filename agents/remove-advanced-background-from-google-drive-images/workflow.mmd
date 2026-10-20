@@ -1,0 +1,27 @@
+flowchart LR
+  n0["Config"]
+  n1["remove background"]
+  n2["Split Out"]
+  n3["Upload Picture to Google Drive"]
+  n4["remove background fixed size"]
+  n5["Merge"]
+  n6["Upload Picture to Google Drive1"]
+  n7["Download Image"]
+  n8["Get Image Size"]
+  n9["Watch for new images"]
+  n10["check which output size method is used"]
+  n11["loop all over your images"]
+  n5 -->|"main out 0 to in 0"| n11
+  n0 -->|"main out 0 to in 1"| n5
+  n2 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n6
+  n9 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 0 to in 0"| n0
+  n11 -->|"main out 1 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n11
+  n10 -->|"main out 0 to in 0"| n4
+  n10 -->|"main out 1 to in 0"| n1

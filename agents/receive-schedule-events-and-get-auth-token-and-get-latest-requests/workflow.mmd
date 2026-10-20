@@ -1,0 +1,28 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["Get Auth Token"]
+  n2["Unprocessed Requests"]
+  n3["Get Latest Requests"]
+  n4["POST to n8n"]
+  n5["Merge"]
+  n6["Local Webhook Address"]
+  n7["Latest Update Time"]
+  n8["Store Auth Token"]
+  n9["Store Last Processed"]
+  n10["Retrieve Auth Token"]
+  n11["Retrieve Last Processed"]
+  n12["If Auth Token Exists"]
+  n5 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n6
+  n0 -->|"main out 0 to in 0"| n11
+  n8 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n9
+  n3 -->|"main out 0 to in 1"| n5
+  n10 -->|"main out 0 to in 0"| n12
+  n12 -->|"main out 0 to in 0"| n3
+  n12 -->|"main out 1 to in 0"| n1
+  n9 -->|"main out 0 to in 0"| n4
+  n2 -->|"main out 0 to in 0"| n7
+  n6 -->|"main out 0 to in 0"| n10
+  n11 -->|"main out 0 to in 0"| n5

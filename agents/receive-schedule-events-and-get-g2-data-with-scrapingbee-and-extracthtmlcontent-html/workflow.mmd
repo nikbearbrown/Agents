@@ -1,0 +1,23 @@
+flowchart LR
+  n0["Add your competitors here"]
+  n1["Execute workflow every day"]
+  n2["Get G2 data with ScrapingBee"]
+  n3["Get review section HTML"]
+  n4["Iterate on reviews"]
+  n5["Extract structured data"]
+  n6["Convert Review HTML to Markdown"]
+  n7["Get all past reviews"]
+  n8["Continue only if review is new"]
+  n9["Send new review to Slack"]
+  n10["Add new review to Google Sheets"]
+  n4 -->|"main out 0 to in 0"| n5
+  n7 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 0 to in 0"| n7
+  n1 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n10
+  n8 -->|"main out 0 to in 0"| n9
+  n6 -->|"main out 0 to in 1"| n8

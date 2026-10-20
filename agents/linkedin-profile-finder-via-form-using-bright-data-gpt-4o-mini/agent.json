@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "slug": "linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini",
+  "title": "LinkedIn Profile Finder via Form using Bright Data & GPT-4o-mini",
+  "purpose": "Adapt the published “LinkedIn Profile Finder via Form using Bright Data & GPT-4o-mini” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 19 executable nodes and 19 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When User Completes Form"
+  ],
+  "terminal_nodes": [
+    "Form Not Found",
+    "Form Email Sent"
+  ],
+  "credential_types": [
+    "brightdataApi",
+    "openAiApi",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Extract Body and Title from Website",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "When User Completes Form",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Get LinkedIn Entry on Google",
+        "type": "n8n-nodes-brightdata.brightData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Google Results",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Form Not Found",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get only Matching Profiles",
+        "type": "n8n-nodes-base.filter",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Limit to 1 Profile",
+        "type": "n8n-nodes-base.limit",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Parsed Results",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "LinkedIn Profile is Found?",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Edit Url LinkedIn",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Edit Company Search",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Extract Body and Title from Website1",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Get Company on Google",
+        "type": "n8n-nodes-brightdata.brightData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Parse Google Results for Company",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create a Followup for Company and Person",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Form Email Sent",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Merge",
+        "to": "Create a Followup for Company and Person",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Out",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Send Email",
+        "to": "Form Email Sent",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Url LinkedIn",
+        "to": "Get LinkedIn Entry on Google",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Limit to 1 Profile",
+        "to": "LinkedIn Profile is Found?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Edit Company Search",
+        "to": "Get Company on Google",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Google Results",
+        "to": "Extract Parsed Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Company on Google",
+        "to": "Extract Body and Title from Website1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Parsed Results",
+        "to": "Get only Matching Profiles",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When User Completes Form",
+        "to": "Edit Url LinkedIn",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When User Completes Form",
+        "to": "Edit Company Search",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get only Matching Profiles",
+        "to": "Limit to 1 Profile",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LinkedIn Profile is Found?",
+        "to": "Merge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "LinkedIn Profile is Found?",
+        "to": "Form Not Found",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Get LinkedIn Entry on Google",
+        "to": "Extract Body and Title from Website",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Parse Google Results for Company",
+        "to": "Split Out",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Body and Title from Website",
+        "to": "Parse Google Results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Body and Title from Website1",
+        "to": "Parse Google Results for Company",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create a Followup for Company and Person",
+        "to": "Send Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/n8n",
+      "files": [
+        "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/n8n/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini.json"
+      ],
+      "sha256": "b600f9e086c24871e1d0bb815b45f740d5b0a8f6103eaaca9a318d4bd554adea",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/linkedin-profile-finder-via-form-using-bright-data-gpt-4o-mini/implementations/n8n/provenance.json"
+}

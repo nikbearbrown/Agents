@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "slug": "insee-enrichment-for-agile-crm",
+  "title": "INSEE Enrichment for Agile CRM",
+  "purpose": "Adapt the published “INSEE Enrichment for Agile CRM” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 10 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When clicking ‘Test workflow’",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Enrich CRM with INSEE Data"
+  ],
+  "credential_types": [
+    "agileCrmApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Find Company in SIREN database",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Request all data from SIREN database",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "FilterOut all Company that have the ReadOnly Key set",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set Insee API Key",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "clean_route",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get all Compagnies from Agile CRM",
+        "type": "n8n-nodes-base.agileCrm",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Enrich CRM with INSEE Data",
+        "type": "n8n-nodes-base.agileCrm",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge data from CRM and SIREN database with enriched for the CRM",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "clean_route",
+        "to": "Merge data from CRM and SIREN database with enriched for the CRM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Set Insee API Key",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set Insee API Key",
+        "to": "Get all Compagnies from Agile CRM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Find Company in SIREN database",
+        "to": "Request all data from SIREN database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get all Compagnies from Agile CRM",
+        "to": "FilterOut all Company that have the ReadOnly Key set",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When clicking ‘Test workflow’",
+        "to": "Set Insee API Key",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Request all data from SIREN database",
+        "to": "Merge data from CRM and SIREN database with enriched for the CRM",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "FilterOut all Company that have the ReadOnly Key set",
+        "to": "Find Company in SIREN database",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "FilterOut all Company that have the ReadOnly Key set",
+        "to": "clean_route",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge data from CRM and SIREN database with enriched for the CRM",
+        "to": "Enrich CRM with INSEE Data",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/insee-enrichment-for-agile-crm/implementations/n8n",
+      "files": [
+        "agents/insee-enrichment-for-agile-crm/implementations/n8n/insee-enrichment-for-agile-crm.json"
+      ],
+      "sha256": "aa93cb7b9f69a28c7fb49b1dacd71159a93325e0f34d4185e7d6bd518f3af670",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/insee-enrichment-for-agile-crm/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/insee-enrichment-for-agile-crm/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/insee-enrichment-for-agile-crm/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/insee-enrichment-for-agile-crm/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/insee-enrichment-for-agile-crm/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/insee-enrichment-for-agile-crm/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/insee-enrichment-for-agile-crm/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/insee-enrichment-for-agile-crm/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/insee-enrichment-for-agile-crm/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/insee-enrichment-for-agile-crm/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/insee-enrichment-for-agile-crm/implementations/n8n/provenance.json"
+}

@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "slug": "api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request",
+  "title": "api to check existing merge request and create new merge request and api to close existing merge request",
+  "purpose": "Adapt the published “api to check existing merge request and create new merge request and api to close existing merge request” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Merge When Pipeline Succeeds"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "API to Check existing merge request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Is Exists",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "Create New Merge Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "API to CLOSE existing Merge Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "Add Custom Notes To Merge Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "30 secs wait to approve merge request and pipeline to finish1",
+        "type": "n8n-nodes-base.wait",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge When Pipeline Succeeds",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.2,
+        "disabled": false
+      },
+      {
+        "name": "setValueForMerge",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Is Exists",
+        "to": "Create New Merge Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Is Exists",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "API to Check existing merge request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Loop Over Items",
+        "to": "API to CLOSE existing Merge Request",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "API to Check existing merge request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "setValueForMerge",
+        "to": "Merge When Pipeline Succeeds",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create New Merge Request",
+        "to": "Add Custom Notes To Merge Request",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Add Custom Notes To Merge Request",
+        "to": "30 secs wait to approve merge request and pipeline to finish1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "API to CLOSE existing Merge Request",
+        "to": "Loop Over Items",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "API to Check existing merge request",
+        "to": "Is Exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "30 secs wait to approve merge request and pipeline to finish1",
+        "to": "setValueForMerge",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/n8n",
+      "files": [
+        "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/n8n/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request.json"
+      ],
+      "sha256": "c0ce57edf3ce49e959c1b9e11849975224611af641fec30a37005849983d0ad7",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/api-to-check-existing-merge-request-and-create-new-merge-request-and-api-to-close-existing-merge-request/implementations/n8n/provenance.json"
+}

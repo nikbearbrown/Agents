@@ -1,0 +1,45 @@
+flowchart LR
+  n0["NoOp"]
+  n1["Get last execution timestamp"]
+  n2["Set new last execution timestamp"]
+  n3["Pipedrive person Id found"]
+  n4["NoOp1"]
+  n5["Get Zendesk comments for tickets"]
+  n6["Add comments to tickets"]
+  n7["Add Pipedrive person Id to Zendesk tickets"]
+  n8["Get tickets updated after last execution"]
+  n9["Channel is email"]
+  n10["Rename fields and keep only needed fields"]
+  n11["Search persons by email"]
+  n12["Remove duplicates to make search efficient"]
+  n13["Set search email"]
+  n14["Process commenst per ticket"]
+  n15["New comment"]
+  n16["Split comments to seperate items"]
+  n17["Add comment as a note in Pipedrive"]
+  n18["NoOp2"]
+  n19["Every day at 09:00"]
+  n20["Done processing"]
+  n15 -->|"main out 0 to in 0"| n17
+  n15 -->|"main out 1 to in 0"| n18
+  n20 -->|"main out 0 to in 0"| n2
+  n20 -->|"main out 1 to in 0"| n14
+  n9 -->|"main out 0 to in 0"| n13
+  n9 -->|"main out 0 to in 0"| n7
+  n9 -->|"main out 1 to in 0"| n0
+  n13 -->|"main out 0 to in 0"| n12
+  n19 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n14
+  n11 -->|"main out 0 to in 0"| n10
+  n3 -->|"main out 0 to in 0"| n5
+  n3 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 1 to in 0"| n4
+  n14 -->|"main out 0 to in 0"| n16
+  n1 -->|"main out 0 to in 0"| n8
+  n5 -->|"main out 0 to in 1"| n6
+  n16 -->|"main out 0 to in 0"| n15
+  n17 -->|"main out 0 to in 0"| n20
+  n8 -->|"main out 0 to in 0"| n9
+  n10 -->|"main out 0 to in 1"| n7
+  n7 -->|"main out 0 to in 0"| n3
+  n12 -->|"main out 0 to in 0"| n11

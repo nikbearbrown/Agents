@@ -1,0 +1,20 @@
+flowchart LR
+  n0["When clicking #8216;Test workflow#8217;"]
+  n1["Get Caption ID"]
+  n2["Get Captions"]
+  n3["Extract Captions"]
+  n4["Structured Captions"]
+  n5["Get Video Meta Data"]
+  n6["Google Gemini Chat Model"]
+  n7["Set Video ID"]
+  n8["Update Chapters"]
+  n9["Tag Chapters in Description"]
+  n2 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n5
+  n1 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n9
+  n5 -->|"main out 0 to in 0"| n1
+  n4 -->|"ai_outputParser out 0 to in 0"| n9
+  n6 -->|"ai_languageModel out 0 to in 0"| n9
+  n9 -->|"main out 0 to in 0"| n8
+  n0 -->|"main out 0 to in 0"| n7

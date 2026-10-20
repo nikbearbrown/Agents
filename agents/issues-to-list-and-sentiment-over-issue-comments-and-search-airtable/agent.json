@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "slug": "issues-to-list-and-sentiment-over-issue-comments-and-search-airtable",
+  "title": "issues to list and sentiment over issue comments and search airtable",
+  "purpose": "Adapt the published “issues to list and sentiment over issue comments and search airtable” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 14 executable nodes and 13 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Airtable Trigger",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "OpenAI Chat Model",
+    "Report Issue Negative Transition"
+  ],
+  "credential_types": [
+    "airtableTokenApi",
+    "httpHeaderAuth",
+    "openAiApi",
+    "slackApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Issues to List",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine Sentiment Analysis",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Sentiment over Issue Comments",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Copy of Issue",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "For Each Issue...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Get Existing Sentiment",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Update Row",
+        "type": "n8n-nodes-base.airtable",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Airtable Trigger",
+        "type": "n8n-nodes-base.airtableTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Sentiment Transition",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Active Linear Issues",
+        "type": "n8n-nodes-base.graphql",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Deduplicate Notifications",
+        "type": "n8n-nodes-base.removeDuplicates",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Report Issue Negative Transition",
+        "type": "n8n-nodes-base.slack",
+        "version": 2.3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Update Row",
+        "to": "For Each Issue...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Copy of Issue",
+        "to": "Get Existing Sentiment",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Issues to List",
+        "to": "Sentiment over Issue Comments",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Airtable Trigger",
+        "to": "Sentiment Transition",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Fetch Active Linear Issues",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "For Each Issue...",
+        "to": "Copy of Issue",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "OpenAI Chat Model",
+        "to": "Sentiment over Issue Comments",
+        "kind": "ai_languageModel",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sentiment Transition",
+        "to": "Deduplicate Notifications",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get Existing Sentiment",
+        "to": "Update Row",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Deduplicate Notifications",
+        "to": "Report Issue Negative Transition",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Sentiment Analysis",
+        "to": "For Each Issue...",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Active Linear Issues",
+        "to": "Issues to List",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Sentiment over Issue Comments",
+        "to": "Combine Sentiment Analysis",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/n8n",
+      "files": [
+        "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/n8n/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable.json"
+      ],
+      "sha256": "a2c475b6b215c17586e6f6096bdabda42f5e22a1daec4035295d898907e3ce28",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/issues-to-list-and-sentiment-over-issue-comments-and-search-airtable/implementations/n8n/provenance.json"
+}

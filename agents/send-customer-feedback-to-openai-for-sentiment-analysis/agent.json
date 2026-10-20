@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "slug": "send-customer-feedback-to-openai-for-sentiment-analysis",
+  "title": "Send customer feedback to OpenAI for sentiment analysis",
+  "purpose": "Adapt the published “Send customer feedback to OpenAI for sentiment analysis” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 4 executable nodes and 4 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Submit form with customer feedback"
+  ],
+  "terminal_nodes": [
+    "Add customer feedback to Google Sheets"
+  ],
+  "credential_types": [
+    "googleSheetsOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Add customer feedback to Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Merge sentiment with form content",
+        "type": "n8n-nodes-base.merge",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Classify feedback with OpenAI",
+        "type": "n8n-nodes-base.openAi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Submit form with customer feedback",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Classify feedback with OpenAI",
+        "to": "Merge sentiment with form content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge sentiment with form content",
+        "to": "Add customer feedback to Google Sheets",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Submit form with customer feedback",
+        "to": "Classify feedback with OpenAI",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Submit form with customer feedback",
+        "to": "Merge sentiment with form content",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/n8n",
+      "files": [
+        "agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/n8n/send-customer-feedback-to-openai-for-sentiment-analysis.json"
+      ],
+      "sha256": "d2e020be75eb5c16ab94ebeb70719fedc51422ef55dbd4687b6ec29911cb3a72",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/send-customer-feedback-to-openai-for-sentiment-analysis/implementations/n8n/provenance.json"
+}

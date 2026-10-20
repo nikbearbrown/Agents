@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "slug": "get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results",
+  "title": "get mediamarkt offers website and create html for email and extract items from results",
+  "purpose": "Adapt the published “get mediamarkt offers website and create html for email and extract items from results” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "When User Completes Form"
+  ],
+  "terminal_nodes": [
+    "Show Form Results Page"
+  ],
+  "credential_types": [
+    "brightdataApi",
+    "openAiApi",
+    "smtp"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Get MediaMarkt Offers Website",
+        "type": "n8n-nodes-brightdata.brightData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Create HTML for Email",
+        "type": "n8n-nodes-document-generator.documentGenerator",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract items from results",
+        "type": "n8n-nodes-base.splitOut",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Notify End User by Email",
+        "type": "n8n-nodes-base.emailSend",
+        "version": 2.1,
+        "disabled": false
+      },
+      {
+        "name": "Show Form Results Page",
+        "type": "n8n-nodes-base.form",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract Body and Title from Website",
+        "type": "n8n-nodes-base.html",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate List of Deals by Category",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "When User Completes Form",
+        "type": "n8n-nodes-base.formTrigger",
+        "version": 2.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Create HTML for Email",
+        "to": "Notify End User by Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Notify End User by Email",
+        "to": "Show Form Results Page",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "When User Completes Form",
+        "to": "Get MediaMarkt Offers Website",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract items from results",
+        "to": "Create HTML for Email",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get MediaMarkt Offers Website",
+        "to": "Extract Body and Title from Website",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate List of Deals by Category",
+        "to": "Extract items from results",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract Body and Title from Website",
+        "to": "Generate List of Deals by Category",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/n8n",
+      "files": [
+        "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/n8n/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results.json"
+      ],
+      "sha256": "27939520e0756d7d13f474b87b0f6664e09691d15f62fbbee2005a163ac0eddd",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/get-mediamarkt-offers-website-and-create-html-for-email-and-extract-items-from-results/implementations/n8n/provenance.json"
+}

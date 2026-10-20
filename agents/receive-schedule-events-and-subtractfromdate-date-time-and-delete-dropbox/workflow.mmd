@@ -1,0 +1,29 @@
+flowchart LR
+  n0["Schedule Trigger"]
+  n1["PURGE DAYS"]
+  n2["DELETE OLD BACKUPS"]
+  n3["GET WORKFLOWS"]
+  n4["MAKE JSON FILES"]
+  n5["UPLOAD WORKFLOWS"]
+  n6["DESTINATION FOLDER"]
+  n7["WAIT FOR MOVE TO FINISH"]
+  n8["GET CURRENT BACKUPS"]
+  n9["IGNORE FOLDERS"]
+  n10["MOVE INTO OLD FOLDER"]
+  n11["LIST OLD BACKUPS"]
+  n12["CHECK DATES"]
+  n13["GET CURRENT DATE"]
+  n1 -->|"main out 0 to in 0"| n11
+  n12 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n10
+  n4 -->|"main out 0 to in 0"| n5
+  n13 -->|"main out 0 to in 0"| n8
+  n11 -->|"main out 0 to in 0"| n12
+  n0 -->|"main out 0 to in 0"| n6
+  n6 -->|"main out 0 to in 0"| n13
+  n6 -->|"main out 0 to in 1"| n7
+  n6 -->|"main out 0 to in 0"| n1
+  n8 -->|"main out 0 to in 0"| n9
+  n10 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n3

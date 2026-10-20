@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "slug": "delete-nm-of-kv-by-name-serach",
+  "title": "Delete NM of KV (By Name Serach)",
+  "purpose": "Adapt the published “Delete NM of KV (By Name Serach)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 31 executable nodes and 28 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Manual Trigger"
+  ],
+  "terminal_nodes": [
+    "Delete KV",
+    "Delete KV1",
+    "Delete KVs inside NM",
+    "Create KV-NM",
+    "Write KVs inside NM",
+    "-Get Keys inside NM",
+    "Delete KV inside NM",
+    "Read Value Of KV In NM",
+    "Write V & MD of KV In NM",
+    "List KV-NMs (10)",
+    "Read MD from Key"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Delete KV",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Delete KV1",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "KV to Rename",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Account Path",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Delete KVs inside NM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Create KV-NM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Write KVs inside NM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "-Get Keys inside NM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Delete KV inside NM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Read Value Of KV In NM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (1)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set KV-NM Name (2)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Set KV-NM Name (1)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Set KV-NM Name (3)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (2)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (3)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set KV-NM Name (4)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Write V & MD of KV In NM",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set KV-NM Name (5)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Set KV-NM Name (6)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (4)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (5)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (6)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (7)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (8)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (9)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "List KV-NMs (10)",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set KV-NM Name (7)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Set KV-NM Name (8)",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Read MD from Key",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Account Path",
+        "to": "Set KV-NM Name (1)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Account Path",
+        "to": "Create KV-NM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Account Path",
+        "to": "Set KV-NM Name (6)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Account Path",
+        "to": "Set KV-NM Name (2)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Account Path",
+        "to": "KV to Rename",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Account Path",
+        "to": "Set KV-NM Name (7)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Account Path",
+        "to": "Set KV-NM Name (3)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Account Path",
+        "to": "Set KV-NM Name (5)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Account Path",
+        "to": "Set KV-NM Name (8)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "KV to Rename",
+        "to": "List KV-NMs (5)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Manual Trigger",
+        "to": "Account Path",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (1)",
+        "to": "Delete KV inside NM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (2)",
+        "to": "Delete KV",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (3)",
+        "to": "Delete KVs inside NM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (4)",
+        "to": "Write V & MD of KV In NM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (5)",
+        "to": "Delete KV1",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (6)",
+        "to": "Write KVs inside NM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (7)",
+        "to": "Read Value Of KV In NM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (8)",
+        "to": "Read MD from Key",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "List KV-NMs (9)",
+        "to": "-Get Keys inside NM",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set KV-NM Name (1)",
+        "to": "List KV-NMs (1)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set KV-NM Name (2)",
+        "to": "List KV-NMs (2)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set KV-NM Name (3)",
+        "to": "List KV-NMs (3)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set KV-NM Name (4)",
+        "to": "List KV-NMs (4)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set KV-NM Name (5)",
+        "to": "List KV-NMs (6)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set KV-NM Name (6)",
+        "to": "List KV-NMs (7)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set KV-NM Name (7)",
+        "to": "List KV-NMs (8)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set KV-NM Name (8)",
+        "to": "List KV-NMs (9)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/delete-nm-of-kv-by-name-serach/implementations/n8n",
+      "files": [
+        "agents/delete-nm-of-kv-by-name-serach/implementations/n8n/delete-nm-of-kv-by-name-serach.json"
+      ],
+      "sha256": "1b3159d92192bed16cc8c9e7d835803b208d9805a8ca8f6511b71b78056fc9f5",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/delete-nm-of-kv-by-name-serach/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/delete-nm-of-kv-by-name-serach/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/delete-nm-of-kv-by-name-serach/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/delete-nm-of-kv-by-name-serach/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/delete-nm-of-kv-by-name-serach/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/delete-nm-of-kv-by-name-serach/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/delete-nm-of-kv-by-name-serach/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/delete-nm-of-kv-by-name-serach/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/delete-nm-of-kv-by-name-serach/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/delete-nm-of-kv-by-name-serach/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/delete-nm-of-kv-by-name-serach/implementations/n8n/provenance.json"
+}

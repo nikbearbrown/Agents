@@ -1,0 +1,19 @@
+flowchart LR
+  n0["When chat message received"]
+  n1["AI Agent"]
+  n2["Check If Session Exists"]
+  n3["If Session Does Exist"]
+  n4["Assign Path To Session"]
+  n5["Define Path Values"]
+  n6["OpenAI Chat Model"]
+  n7["Postgres Chat Memory"]
+  n8["Get Correct Prompt"]
+  n6 -->|"ai_languageModel out 0 to in 0"| n1
+  n5 -->|"main out 0 to in 0"| n2
+  n8 -->|"main out 0 to in 0"| n1
+  n7 -->|"ai_memory out 0 to in 0"| n1
+  n3 -->|"main out 0 to in 0"| n8
+  n3 -->|"main out 1 to in 0"| n4
+  n4 -->|"main out 0 to in 0"| n8
+  n2 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n5

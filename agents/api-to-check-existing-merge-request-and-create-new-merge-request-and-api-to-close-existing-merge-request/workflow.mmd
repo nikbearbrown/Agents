@@ -1,0 +1,22 @@
+flowchart LR
+  n0["API to Check existing merge request"]
+  n1["Is Exists"]
+  n2["Create New Merge Request"]
+  n3["Loop Over Items"]
+  n4["API to CLOSE existing Merge Request"]
+  n5["Add Custom Notes To Merge Request"]
+  n6["30 secs wait to approve merge request and pipeline to finish1"]
+  n7["Merge When Pipeline Succeeds"]
+  n8["setValueForMerge"]
+  n9["Schedule Trigger"]
+  n1 -->|"main out 0 to in 0"| n2
+  n1 -->|"main out 1 to in 0"| n3
+  n3 -->|"main out 0 to in 0"| n0
+  n3 -->|"main out 1 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n0
+  n8 -->|"main out 0 to in 0"| n7
+  n2 -->|"main out 0 to in 0"| n5
+  n5 -->|"main out 0 to in 0"| n6
+  n4 -->|"main out 0 to in 0"| n3
+  n0 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n8

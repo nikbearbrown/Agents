@@ -1,0 +1,34 @@
+flowchart LR
+  n0["Embeddings Ollama"]
+  n1["Default Data Loader"]
+  n2["Recursive Character Text Splitter"]
+  n3["Gmail Trigger"]
+  n4["Loop Over Items"]
+  n5["Split Out"]
+  n6["Was manually triggered#63;"]
+  n7["Manual Trigger"]
+  n8["No Operation, do nothing"]
+  n9["Set before and after dates"]
+  n10["Extract email fields"]
+  n11["Store structured"]
+  n12["Store vectorized"]
+  n13["Create the table"]
+  n14["Explode interval into weeks"]
+  n15["Get a batch of messages"]
+  n5 -->|"main out 0 to in 0"| n4
+  n3 -->|"main out 0 to in 0"| n10
+  n7 -->|"main out 0 to in 0"| n13
+  n4 -->|"main out 1 to in 0"| n9
+  n13 -->|"main out 0 to in 0"| n14
+  n11 -->|"main out 0 to in 0"| n12
+  n11 -->|"main out 1 to in 0"| n4
+  n12 -->|"main out 0 to in 0"| n6
+  n0 -->|"ai_embedding out 0 to in 0"| n12
+  n1 -->|"ai_document out 0 to in 0"| n12
+  n10 -->|"main out 0 to in 0"| n11
+  n15 -->|"main out 0 to in 0"| n10
+  n6 -->|"main out 0 to in 0"| n8
+  n6 -->|"main out 1 to in 0"| n4
+  n9 -->|"main out 0 to in 0"| n15
+  n14 -->|"main out 0 to in 0"| n5
+  n2 -->|"ai_textSplitter out 0 to in 0"| n1

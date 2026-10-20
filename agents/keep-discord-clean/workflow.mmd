@@ -1,0 +1,22 @@
+flowchart LR
+  n0["Loop Over Channels"]
+  n1["Loop Over Messages"]
+  n2["Every day at 9pm"]
+  n3["Cool down Discord API rate limits"]
+  n4["Get all Discord channels"]
+  n5["Cool down Message deletion API rate limits"]
+  n6["Cool down Get messages API rate limits"]
+  n7["Get messages from Channel"]
+  n8["Delete Message"]
+  n9["Filter Messages older than 7 days"]
+  n8 -->|"main out 0 to in 0"| n5
+  n2 -->|"main out 0 to in 0"| n4
+  n0 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 1 to in 0"| n7
+  n1 -->|"main out 1 to in 0"| n8
+  n4 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n0
+  n9 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n0
+  n5 -->|"main out 0 to in 0"| n1

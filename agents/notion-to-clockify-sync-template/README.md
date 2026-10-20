@@ -1,0 +1,162 @@
+# Notion to Clockify Sync Template
+
+Adapt the published “Notion to Clockify Sync Template” workflow to other implementations while preserving its documented behavior.
+
+**Specification: source-derived draft.** The source contains 56 executable nodes and 68 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.
+
+[Specification](specification.md) · [Machine-readable record](agent.json) · [Schemas](schemas/README.md) · [Fixtures](fixtures/README.md) · [Evidence](evaluations/README.md)
+
+## Workflow
+
+This initial Mermaid map preserves the source graph, including non-main connections and port numbers. It is an implementation-derived starting point for the shared design; it does not execute the workflow or prove its behavior. Disabled-node details and exact expressions remain in the source.
+
+```mermaid
+flowchart LR
+  n0["Webhook"]
+  n1["Globals"]
+  n2["Schedule Trigger"]
+  n3["Get first workspace ID"]
+  n4["Compare Datasets"]
+  n5["Stop and Error"]
+  n6["Structure output"]
+  n7["Map values"]
+  n8["Map values1"]
+  n9["No Operation"]
+  n10["Get active Clients from Notion"]
+  n11["Get active Clients from Clockify"]
+  n12["If unmapped in Notion"]
+  n13["Set new values"]
+  n14["Update Client in Clockify"]
+  n15["Get archived Client from Notion"]
+  n16["Create Client in Clockify"]
+  n17["Store Clockify ID in Notion"]
+  n18["Remove Client from Clockify"]
+  n19["Merge"]
+  n20["No Operation, do nothing"]
+  n21["Get active Projects from Notion"]
+  n22["Get active Projects from Clockify"]
+  n23["Update Project in Clockify"]
+  n24["Get completed Project from Notion"]
+  n25["Create Project in Clockify"]
+  n26["Remove Project from Clockify"]
+  n27["Structure output1"]
+  n28["No Operation1"]
+  n29["Map values2"]
+  n30["Map values3"]
+  n31["Compare Datasets1"]
+  n32["If unmapped in Notion1"]
+  n33["Set new values1"]
+  n34["Store Clockify ID in Notion1"]
+  n35["Stop and Error1"]
+  n36["Merge1"]
+  n37["No Operation, do nothing2"]
+  n38["Get active Tasks from Notion"]
+  n39["Get active Tasks from Clockify"]
+  n40["Update Task in Clockify"]
+  n41["Get completed Task from Notion"]
+  n42["Create Task in Clockify"]
+  n43["Remove Task from Clockify"]
+  n44["Structure output2"]
+  n45["No Operation2"]
+  n46["Map values4"]
+  n47["Map values5"]
+  n48["Get active Projects from Clockify1"]
+  n49["Compare Datasets2"]
+  n50["If unmapped in Notion2"]
+  n51["Set new values2"]
+  n52["Store Clockify ID in Notion2"]
+  n53["Stop and Error2"]
+  n54["Limit"]
+  n55["Limit1"]
+  n54 -->|"main out 0 to in 0"| n28
+  n19 -->|"main out 0 to in 0"| n54
+  n55 -->|"main out 0 to in 0"| n45
+  n36 -->|"main out 0 to in 0"| n55
+  n1 -->|"main out 0 to in 0"| n9
+  n0 -->|"main out 0 to in 0"| n3
+  n7 -->|"main out 0 to in 0"| n4
+  n8 -->|"main out 0 to in 1"| n4
+  n29 -->|"main out 0 to in 0"| n31
+  n30 -->|"main out 0 to in 1"| n31
+  n46 -->|"main out 0 to in 0"| n49
+  n47 -->|"main out 0 to in 1"| n49
+  n9 -->|"main out 0 to in 0"| n10
+  n9 -->|"main out 0 to in 0"| n11
+  n28 -->|"main out 0 to in 0"| n21
+  n28 -->|"main out 0 to in 0"| n22
+  n45 -->|"main out 0 to in 0"| n48
+  n45 -->|"main out 0 to in 0"| n38
+  n13 -->|"main out 0 to in 0"| n14
+  n33 -->|"main out 0 to in 0"| n23
+  n51 -->|"main out 0 to in 0"| n40
+  n4 -->|"main out 0 to in 0"| n12
+  n4 -->|"main out 1 to in 0"| n6
+  n4 -->|"main out 2 to in 0"| n14
+  n4 -->|"main out 3 to in 0"| n15
+  n2 -->|"main out 0 to in 0"| n3
+  n6 -->|"main out 0 to in 1"| n19
+  n31 -->|"main out 0 to in 0"| n32
+  n31 -->|"main out 1 to in 0"| n27
+  n31 -->|"main out 2 to in 0"| n23
+  n31 -->|"main out 3 to in 0"| n24
+  n49 -->|"main out 0 to in 0"| n50
+  n49 -->|"main out 1 to in 0"| n44
+  n49 -->|"main out 2 to in 0"| n40
+  n49 -->|"main out 3 to in 0"| n41
+  n27 -->|"main out 0 to in 1"| n36
+  n12 -->|"main out 0 to in 0"| n16
+  n12 -->|"main out 1 to in 0"| n14
+  n3 -->|"main out 0 to in 0"| n1
+  n32 -->|"main out 0 to in 0"| n25
+  n32 -->|"main out 1 to in 0"| n23
+  n50 -->|"main out 0 to in 0"| n42
+  n50 -->|"main out 1 to in 0"| n40
+  n42 -->|"main out 0 to in 0"| n52
+  n20 -->|"main out 0 to in 0"| n19
+  n16 -->|"main out 0 to in 0"| n17
+  n37 -->|"main out 0 to in 0"| n36
+  n43 -->|"main out 0 to in 0"| n53
+  n14 -->|"main out 0 to in 2"| n19
+  n25 -->|"main out 0 to in 0"| n34
+  n23 -->|"main out 0 to in 2"| n36
+  n18 -->|"main out 0 to in 0"| n5
+  n17 -->|"main out 0 to in 0"| n20
+  n17 -->|"main out 1 to in 0"| n18
+  n38 -->|"main out 0 to in 0"| n46
+  n26 -->|"main out 0 to in 0"| n35
+  n34 -->|"main out 0 to in 0"| n37
+  n34 -->|"main out 1 to in 0"| n26
+  n52 -->|"main out 1 to in 0"| n43
+  n10 -->|"main out 0 to in 0"| n7
+  n39 -->|"main out 0 to in 0"| n47
+  n41 -->|"main out 0 to in 0"| n51
+  n21 -->|"main out 0 to in 0"| n29
+  n15 -->|"main out 0 to in 0"| n13
+  n11 -->|"main out 0 to in 0"| n8
+  n22 -->|"main out 0 to in 0"| n30
+  n24 -->|"main out 0 to in 0"| n33
+  n48 -->|"main out 0 to in 0"| n39
+```
+
+[Diagram source](workflow.mmd)
+
+## Implementations
+
+| Implementation | Status |
+|---|---|
+| [n8n](implementations/n8n/README.md) | Sanitized source available; not runtime-tested |
+| [Plain Python](implementations/python/README.md) | Planned |
+| [Pydantic AI](implementations/pydantic-ai/README.md) | Planned |
+| [CrewAI Flow](implementations/crewai-flow/README.md) | Planned |
+| [CrewAI Crew](implementations/crewai-crew/README.md) | Planned |
+| [LangGraph](implementations/langgraph/README.md) | Planned |
+
+## Build or operate with an assistant
+
+[Claude](prompts/claude.md) · [Codex](prompts/codex.md) · [Grok Bot](prompts/grok-bot.md) · [Muse](prompts/muse.md) · [Dots](prompts/dots.md)
+
+Build instructions and operating instructions are separate. These are untested prompts, not additional working implementations.
+
+## Attribution
+
+Curated by Nik Bear Brown. Preserve the [n8n source provenance](implementations/n8n/provenance.json), [configuration record](implementations/n8n/configuration.json), and [license notice](../../licenses/zie619-mit.txt). Ported implementations must retain applicable upstream attribution; the repository has no blanket license replacing source licenses.

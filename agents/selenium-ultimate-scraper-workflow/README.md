@@ -1,0 +1,160 @@
+# Selenium Ultimate Scraper Workflow
+
+Adapt the published “Selenium Ultimate Scraper Workflow” workflow to other implementations while preserving its documented behavior.
+
+**Specification: source-derived draft.** The source contains 56 executable nodes and 66 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.
+
+[Specification](specification.md) · [Machine-readable record](agent.json) · [Schemas](schemas/README.md) · [Fixtures](fixtures/README.md) · [Evidence](evaluations/README.md)
+
+## Workflow
+
+This initial Mermaid map preserves the source graph, including non-main connections and port numbers. It is an implementation-derived starting point for the shared design; it does not execute the workflow or prove its behavior. Disabled-node details and exact expressions remain in the source.
+
+```mermaid
+flowchart LR
+  n0["Extract First Url Match"]
+  n1["OpenAI Chat Model"]
+  n2["Clean Webdriver"]
+  n3["Delete Session"]
+  n4["Delete Session2"]
+  n5["If Block1"]
+  n6["Delete Session3"]
+  n7["Limit"]
+  n8["Delete Session1"]
+  n9["Delete Session4"]
+  n10["Success with cookie"]
+  n11["Respond to Webhook2"]
+  n12["Code"]
+  n13["Delete Session5"]
+  n14["Error"]
+  n15["Error1"]
+  n16["Error2"]
+  n17["If"]
+  n18["Inject Cookie"]
+  n19["Respond to Webhook3"]
+  n20["Success"]
+  n21["Go on url"]
+  n22["Delete Session6"]
+  n23["Error3"]
+  n24["Information Extractor"]
+  n25["Check if empty of NA"]
+  n26["If Block"]
+  n27["Google search Query"]
+  n28["Create Selenium Session"]
+  n29["Get ScreenShot 1"]
+  n30["Refresh browser"]
+  n31["Get ScreenShot"]
+  n32["Convert to File"]
+  n33["Convert to File1"]
+  n34["Delete Session7"]
+  n35["Edit Fields #40;For testing prupose #41;"]
+  n36["Get ScreenShot 2"]
+  n37["Convert to File2"]
+  n38["Go on ip-api.com"]
+  n39["Delete Session8"]
+  n40["Error can#39;t find url"]
+  n41["Resize browser window"]
+  n42["OpenAI"]
+  n43["OpenAI1"]
+  n44["Information Extractor1"]
+  n45["OpenAI Chat Model1"]
+  n46["Information Extractor2"]
+  n47["OpenAI Chat Model2"]
+  n48["Webhook"]
+  n49["If Target Url"]
+  n50["If1"]
+  n51["Go on url1"]
+  n52["If2"]
+  n53["Go on url2"]
+  n54["If3"]
+  n55["Go on url3"]
+  n17 -->|"main out 0 to in 0"| n54
+  n17 -->|"main out 1 to in 0"| n13
+  n50 -->|"main out 0 to in 0"| n21
+  n50 -->|"main out 1 to in 0"| n51
+  n52 -->|"main out 0 to in 0"| n17
+  n52 -->|"main out 1 to in 0"| n50
+  n54 -->|"main out 0 to in 0"| n53
+  n54 -->|"main out 1 to in 0"| n55
+  n12 -->|"main out 0 to in 0"| n18
+  n7 -->|"main out 0 to in 0"| n30
+  n42 -->|"main out 0 to in 0"| n5
+  n43 -->|"main out 0 to in 0"| n26
+  n43 -->|"main out 1 to in 0"| n22
+  n48 -->|"main out 0 to in 0"| n35
+  n26 -->|"main out 0 to in 0"| n8
+  n26 -->|"main out 1 to in 0"| n3
+  n21 -->|"main out 0 to in 0"| n29
+  n21 -->|"main out 1 to in 0"| n22
+  n5 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 1 to in 0"| n6
+  n51 -->|"main out 0 to in 0"| n29
+  n51 -->|"main out 1 to in 0"| n22
+  n53 -->|"main out 0 to in 0"| n12
+  n53 -->|"main out 1 to in 0"| n9
+  n55 -->|"main out 0 to in 0"| n12
+  n55 -->|"main out 1 to in 0"| n9
+  n49 -->|"main out 0 to in 0"| n27
+  n49 -->|"main out 1 to in 0"| n28
+  n18 -->|"main out 0 to in 0"| n7
+  n3 -->|"main out 0 to in 0"| n44
+  n32 -->|"main out 0 to in 0"| n42
+  n32 -->|"main out 1 to in 0"| n9
+  n8 -->|"main out 0 to in 0"| n19
+  n4 -->|"main out 0 to in 0"| n11
+  n6 -->|"main out 0 to in 0"| n46
+  n9 -->|"main out 0 to in 0"| n15
+  n13 -->|"main out 0 to in 0"| n14
+  n22 -->|"main out 0 to in 0"| n23
+  n34 -->|"main out 0 to in 0"| n16
+  n31 -->|"main out 0 to in 0"| n32
+  n31 -->|"main out 1 to in 0"| n9
+  n30 -->|"main out 0 to in 0"| n31
+  n30 -->|"main out 1 to in 0"| n9
+  n2 -->|"main out 0 to in 0"| n52
+  n33 -->|"main out 0 to in 0"| n43
+  n33 -->|"main out 1 to in 0"| n22
+  n29 -->|"main out 0 to in 0"| n33
+  n29 -->|"main out 1 to in 0"| n22
+  n36 -->|"main out 0 to in 0"| n37
+  n36 -->|"main out 1 to in 0"| n39
+  n38 -->|"main out 0 to in 0"| n36
+  n38 -->|"main out 1 to in 0"| n39
+  n1 -->|"ai_languageModel out 0 to in 0"| n24
+  n45 -->|"ai_languageModel out 0 to in 0"| n44
+  n47 -->|"ai_languageModel out 0 to in 0"| n46
+  n25 -->|"main out 0 to in 0"| n40
+  n25 -->|"main out 1 to in 0"| n28
+  n27 -->|"main out 0 to in 0"| n0
+  n24 -->|"main out 0 to in 0"| n25
+  n41 -->|"main out 0 to in 0"| n2
+  n44 -->|"main out 0 to in 0"| n20
+  n46 -->|"main out 0 to in 0"| n10
+  n28 -->|"main out 0 to in 0"| n41
+  n28 -->|"main out 1 to in 0"| n34
+  n0 -->|"main out 0 to in 0"| n24
+  n35 -->|"main out 0 to in 0"| n49
+```
+
+[Diagram source](workflow.mmd)
+
+## Implementations
+
+| Implementation | Status |
+|---|---|
+| [n8n](implementations/n8n/README.md) | Sanitized source available; not runtime-tested |
+| [Plain Python](implementations/python/README.md) | Planned |
+| [Pydantic AI](implementations/pydantic-ai/README.md) | Planned |
+| [CrewAI Flow](implementations/crewai-flow/README.md) | Planned |
+| [CrewAI Crew](implementations/crewai-crew/README.md) | Planned |
+| [LangGraph](implementations/langgraph/README.md) | Planned |
+
+## Build or operate with an assistant
+
+[Claude](prompts/claude.md) · [Codex](prompts/codex.md) · [Grok Bot](prompts/grok-bot.md) · [Muse](prompts/muse.md) · [Dots](prompts/dots.md)
+
+Build instructions and operating instructions are separate. These are untested prompts, not additional working implementations.
+
+## Attribution
+
+Curated by Nik Bear Brown. Preserve the [n8n source provenance](implementations/n8n/provenance.json), [configuration record](implementations/n8n/configuration.json), and [license notice](../../licenses/zie619-mit.txt). Ported implementations must retain applicable upstream attribution; the repository has no blanket license replacing source licenses.

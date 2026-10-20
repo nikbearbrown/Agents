@@ -1,0 +1,65 @@
+# Mycroft - Patent Intelligence System
+
+This folder contains the **Mycroft - Patent Intelligence System** workflow. Its executable nodes use `code`, `emailSend`, `executeCommand`, `if`, `manualTrigger`, `readBinaryFile`, `set`. The table and connection map below are derived from the JSON, not an inferred guarantee of behavior.
+
+**Status:** Published sanitized source; not runtime-tested.
+
+## Files
+
+- [`mycroft-patent-intelligence-system.json`](mycroft-patent-intelligence-system.json): sanitized, inactive import copy with an overview sticky note.
+- [`provenance.json`](provenance.json): source attribution, original and publication hashes, selection and license evidence.
+- [`configuration.json`](configuration.json): credential types and redacted configuration locations; no credential values.
+
+## Setup
+
+1. Import the JSON into an isolated n8n instance, leaving it inactive.
+2. Create your own credentials in n8n and select them in the relevant nodes. Never paste secrets into a public workflow export.
+3. Replace `REPLACE_WITH_*` values with your own resource identifiers. Inspect URLs, webhook paths, destinations, file paths, database queries, and Code nodes before execution.
+4. Confirm required node packages and versions are available. Test with synthetic data and harmless destinations before enabling triggers or any external writes.
+
+**Credential types referenced by the source:** `smtp`
+
+**Entry nodes:** Manual Trigger
+
+## Configured nodes
+
+| Node | Type | Resource / operation |
+|---|---|---|
+| Manual Trigger | `manualTrigger` | Inspect parameters |
+| Set Variables | `set` | Inspect parameters |
+| Setup Github Repo | `executeCommand` | Inspect parameters |
+| Set Path Variables | `code` | Inspect parameters |
+| Setup Environment and Output Directories | `executeCommand` | Inspect parameters |
+| Extract Patents | `executeCommand` | Inspect parameters |
+| Check Extraction Success | `if` | Inspect parameters |
+| Process Patents | `executeCommand` | Inspect parameters |
+| Read Processed Data | `readBinaryFile` | Inspect parameters |
+| Read Metrics | `readBinaryFile` | Inspect parameters |
+| Send Report Email | `emailSend` | Inspect parameters |
+| Error Notification | `emailSend` | Inspect parameters |
+| Cleanup Repository | `executeCommand` | Inspect parameters |
+| Cleanup Repository Error | `executeCommand` | Inspect parameters |
+
+## Connection map
+
+- Manual Trigger → Set Variables (`main`, output 0, input 0)
+- Set Variables → Setup Github Repo (`main`, output 0, input 0)
+- Setup Github Repo → Set Path Variables (`main`, output 0, input 0)
+- Set Path Variables → Setup Environment and Output Directories (`main`, output 0, input 0)
+- Set Path Variables → Extract Patents (`main`, output 0, input 0)
+- Extract Patents → Check Extraction Success (`main`, output 0, input 0)
+- Check Extraction Success → Process Patents (`main`, output 0, input 0)
+- Check Extraction Success → Error Notification (`main`, output 1, input 0)
+- Process Patents → Read Metrics (`main`, output 0, input 0)
+- Read Processed Data → Send Report Email (`main`, output 0, input 0)
+- Read Metrics → Read Processed Data (`main`, output 0, input 0)
+- Send Report Email → Cleanup Repository (`main`, output 0, input 0)
+- Error Notification → Cleanup Repository Error (`main`, output 0, input 0)
+
+## Verification and provenance
+
+Selected from 2 collected snapshots. Deduplication is not a runtime audit. Known selection findings: `{}`.
+
+Source: Nik Bear Brown; permission confirmed by repository owner. License: **MIT**; preserve [the notice](../../../../licenses/nikbearbrown-mit.txt) and embedded attribution. Repository owner confirmed redistribution rights and authorized MIT licensing on 2026-10-19.
+
+Publication edits remove credential bindings, pinned/runtime data, detected secrets and selected personal/resource identifiers; they may require manual configuration. Annotation is a static inventory, not an AI-generated or runtime-verified explanation. Original source files are preserved locally.

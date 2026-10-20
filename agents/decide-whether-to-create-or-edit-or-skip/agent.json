@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "slug": "decide-whether-to-create-or-edit-or-skip",
+  "title": "Decide Whether to Create or Edit or Skip",
+  "purpose": "Adapt the published “Decide Whether to Create or Edit or Skip” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 12 executable nodes and 11 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Backup Now - Manual Trigger",
+    "Schedule Trigger"
+  ],
+  "terminal_nodes": [
+    "Create New File(s)",
+    "Edit Existing File(s)"
+  ],
+  "credential_types": [
+    "gitlabApi",
+    "n8nApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Backup Now - Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "n8n",
+        "type": "n8n-nodes-base.n8n",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Create New File(s)",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Edit Existing File(s)",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Derive Filename From Workflow Name",
+        "type": "n8n-nodes-base.set",
+        "version": 3.4,
+        "disabled": false
+      },
+      {
+        "name": "Fetch Existing File Content",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Skip Unchanged Files",
+        "type": "n8n-nodes-base.filter",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Fetch List of Existing Files",
+        "type": "n8n-nodes-base.gitlab",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Combine Gitlab Existing Files as Single List Item",
+        "type": "n8n-nodes-base.aggregate",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "File Exists in Gitlab?",
+        "type": "n8n-nodes-base.if",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "n8n",
+        "to": "Derive Filename From Workflow Name",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Globals",
+        "to": "Fetch List of Existing Files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Schedule Trigger",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Skip Unchanged Files",
+        "to": "Edit Existing File(s)",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File Exists in Gitlab?",
+        "to": "Fetch Existing File Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "File Exists in Gitlab?",
+        "to": "Create New File(s)",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Backup Now - Manual Trigger",
+        "to": "Globals",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch Existing File Content",
+        "to": "Skip Unchanged Files",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Fetch List of Existing Files",
+        "to": "Combine Gitlab Existing Files as Single List Item",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Derive Filename From Workflow Name",
+        "to": "File Exists in Gitlab?",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Combine Gitlab Existing Files as Single List Item",
+        "to": "n8n",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/implementations/n8n",
+      "files": [
+        "agents/decide-whether-to-create-or-edit-or-skip/implementations/n8n/decide-whether-to-create-or-edit-or-skip.json"
+      ],
+      "sha256": "28cc318d31043ed5611e8c1270851889eac0e8db9b9fa2b64eadee386ad22d37",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/decide-whether-to-create-or-edit-or-skip/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/decide-whether-to-create-or-edit-or-skip/implementations/n8n/provenance.json"
+}

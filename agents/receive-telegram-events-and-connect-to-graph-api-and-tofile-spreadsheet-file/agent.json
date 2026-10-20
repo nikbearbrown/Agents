@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "slug": "receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file",
+  "title": "receive telegram events and connect to graph api and tofile spreadsheet file",
+  "purpose": "Adapt the published “receive telegram events and connect to graph api and tofile spreadsheet file” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 10 executable nodes and 9 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Get interest name"
+  ],
+  "terminal_nodes": [
+    "No Operation, do nothing",
+    "Send the Spreadsheet file"
+  ],
+  "credential_types": [
+    "facebookGraphApi",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get interest name",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Check message contents",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Extract message",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Split Message",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Connect to Graph API",
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Split Interests into a Table",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get variables",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Create a Spreadsheet",
+        "type": "n8n-nodes-base.spreadsheetFile",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Send the Spreadsheet file",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Get variables",
+        "to": "Create a Spreadsheet",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Split Message",
+        "to": "Connect to Graph API",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Extract message",
+        "to": "Split Message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get interest name",
+        "to": "Check message contents",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Connect to Graph API",
+        "to": "Split Interests into a Table",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Create a Spreadsheet",
+        "to": "Send the Spreadsheet file",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check message contents",
+        "to": "Extract message",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Check message contents",
+        "to": "No Operation, do nothing",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Split Interests into a Table",
+        "to": "Get variables",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/n8n",
+      "files": [
+        "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/n8n/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file.json"
+      ],
+      "sha256": "39a9e699562feae7c10f0b5151bf7236e413e8d50d223a5accc42de2587e1b59",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-telegram-events-and-connect-to-graph-api-and-tofile-spreadsheet-file/implementations/n8n/provenance.json"
+}

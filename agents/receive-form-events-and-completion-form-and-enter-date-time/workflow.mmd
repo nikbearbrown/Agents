@@ -1,0 +1,37 @@
+flowchart LR
+  n0["n8n Form Trigger"]
+  n1["Form End"]
+  n2["Enter Date #38; Time"]
+  n3["Get Form Values"]
+  n4["Terms #38; Conditions"]
+  n5["OpenAI Chat Model"]
+  n6["Has Accepted#63;"]
+  n7["Send Receipt"]
+  n8["Wait for Approval"]
+  n9["Has Approval#63;"]
+  n10["OpenAI Chat Model1"]
+  n11["Create Appointment"]
+  n12["Send Rejection"]
+  n13["Decline"]
+  n14["Decline1"]
+  n15["Trigger Approval Process"]
+  n16["Execute Workflow Trigger"]
+  n17["Summarise Enquiry"]
+  n18["Enquiry Classifier"]
+  n7 -->|"main out 0 to in 0"| n1
+  n6 -->|"main out 0 to in 0"| n2
+  n6 -->|"main out 1 to in 0"| n14
+  n9 -->|"main out 0 to in 0"| n11
+  n9 -->|"main out 1 to in 0"| n12
+  n3 -->|"main out 0 to in 0"| n15
+  n0 -->|"main out 0 to in 0"| n18
+  n2 -->|"main out 0 to in 0"| n3
+  n5 -->|"ai_languageModel out 0 to in 0"| n18
+  n17 -->|"main out 0 to in 0"| n8
+  n8 -->|"main out 0 to in 0"| n9
+  n18 -->|"main out 0 to in 0"| n4
+  n18 -->|"main out 1 to in 0"| n13
+  n10 -->|"ai_languageModel out 0 to in 0"| n17
+  n4 -->|"main out 0 to in 0"| n6
+  n16 -->|"main out 0 to in 0"| n17
+  n15 -->|"main out 0 to in 0"| n7

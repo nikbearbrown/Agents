@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "slug": "automated-image-metadata-tagging-community-node",
+  "title": "Automated Image Metadata Tagging (Community Node)",
+  "purpose": "Adapt the published “Automated Image Metadata Tagging (Community Node)” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 6 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "Trigger: New file added to Google Drive Folder"
+  ],
+  "terminal_nodes": [
+    "Update Image File"
+  ],
+  "credential_types": [
+    "googleDriveOAuth2Api",
+    "openAiApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Trigger: New file added to Google Drive Folder",
+        "type": "n8n-nodes-base.googleDriveTrigger",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Download Image File",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Analyze Image Content",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "version": 1.8,
+        "disabled": false
+      },
+      {
+        "name": "Merge Metadata and Image File",
+        "type": "n8n-nodes-base.merge",
+        "version": 3,
+        "disabled": false
+      },
+      {
+        "name": "Write Metadata into Image",
+        "type": "n8n-nodes-exif-data.exifData",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Update Image File",
+        "type": "n8n-nodes-base.googleDrive",
+        "version": 3,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Download Image File",
+        "to": "Analyze Image Content",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Download Image File",
+        "to": "Merge Metadata and Image File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Analyze Image Content",
+        "to": "Merge Metadata and Image File",
+        "kind": "main",
+        "output": 0,
+        "input": 1
+      },
+      {
+        "from": "Write Metadata into Image",
+        "to": "Update Image File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge Metadata and Image File",
+        "to": "Write Metadata into Image",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Trigger: New file added to Google Drive Folder",
+        "to": "Download Image File",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/automated-image-metadata-tagging-community-node/implementations/n8n",
+      "files": [
+        "agents/automated-image-metadata-tagging-community-node/implementations/n8n/automated-image-metadata-tagging-community-node.json"
+      ],
+      "sha256": "313722c7616700a59856e94ebcd3fa6c718f60845183c8278e707fead4b70bc1",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/automated-image-metadata-tagging-community-node/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/automated-image-metadata-tagging-community-node/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/automated-image-metadata-tagging-community-node/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/automated-image-metadata-tagging-community-node/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/automated-image-metadata-tagging-community-node/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/automated-image-metadata-tagging-community-node/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/automated-image-metadata-tagging-community-node/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/automated-image-metadata-tagging-community-node/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/automated-image-metadata-tagging-community-node/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/automated-image-metadata-tagging-community-node/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/automated-image-metadata-tagging-community-node/implementations/n8n/provenance.json"
+}

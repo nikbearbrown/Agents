@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "slug": "receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time",
+  "title": "receive schedule events and list todoist and subtractfromdate date time",
+  "purpose": "Adapt the published “receive schedule events and list todoist and subtractfromdate date time” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 15 executable nodes and 15 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "at 5am",
+    "every 5 min"
+  ],
+  "terminal_nodes": [
+    "Move the tasks"
+  ],
+  "credential_types": [
+    "todoistApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "if after unsnooze date",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "at 5am",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "every 5 min",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Get snoozed tasks",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "if task is not a subtask",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "If task has due date",
+        "type": "n8n-nodes-base.if",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Get date to unsnooze",
+        "type": "n8n-nodes-base.dateTime",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Get inbox tasks to snooze",
+        "type": "n8n-nodes-base.todoist",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "Set inbox project id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "If not same project",
+        "type": "n8n-nodes-base.filter",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Set args to move",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Generate unique uuid for move",
+        "type": "n8n-nodes-base.crypto",
+        "version": 1,
+        "disabled": false
+      },
+      {
+        "name": "Merge all items into a list",
+        "type": "n8n-nodes-base.itemLists",
+        "version": 3.1,
+        "disabled": false
+      },
+      {
+        "name": "Move the tasks",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Set snoozed project id",
+        "type": "n8n-nodes-base.set",
+        "version": 3.2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "at 5am",
+        "to": "Get snoozed tasks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "every 5 min",
+        "to": "Get inbox tasks to snooze",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set args to move",
+        "to": "Generate unique uuid for move",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get snoozed tasks",
+        "to": "if task is not a subtask",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If not same project",
+        "to": "Set args to move",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get date to unsnooze",
+        "to": "if after unsnooze date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "If task has due date",
+        "to": "Get date to unsnooze",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set inbox project id",
+        "to": "If not same project",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Set snoozed project id",
+        "to": "If not same project",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if after unsnooze date",
+        "to": "Set inbox project id",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "if after unsnooze date",
+        "to": "Set snoozed project id",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "if task is not a subtask",
+        "to": "If task has due date",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Get inbox tasks to snooze",
+        "to": "if task is not a subtask",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Merge all items into a list",
+        "to": "Move the tasks",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Generate unique uuid for move",
+        "to": "Merge all items into a list",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/n8n",
+      "files": [
+        "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/n8n/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time.json"
+      ],
+      "sha256": "ecd5b3a618b42f3808ae28023f75021817bf186bc7e6d525c0e970b2d03f7ade",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/receive-schedule-events-and-list-todoist-and-subtractfromdate-date-time/implementations/n8n/provenance.json"
+}

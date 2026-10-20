@@ -1,0 +1,11 @@
+flowchart LR
+  n0["SFTP zip file content"]
+  n1["CRON Monday 2:45 am"]
+  n2["Send Zigbee2MQTT backup request"]
+  n3["MQTT Trigger - Backup Response"]
+  n4["Parse JSON Object from Message Text"]
+  n5["Convert to File - base64 to binary"]
+  n1 -->|"main out 0 to in 0"| n2
+  n3 -->|"main out 0 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n0
+  n4 -->|"main out 0 to in 0"| n5

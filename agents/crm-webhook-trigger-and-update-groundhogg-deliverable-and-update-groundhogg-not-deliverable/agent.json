@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "slug": "crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable",
+  "title": "crm webhook trigger and update groundhogg deliverable and update groundhogg not deliverable",
+  "purpose": "Adapt the published “crm webhook trigger and update groundhogg deliverable and update groundhogg not deliverable” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 6 executable nodes and 5 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "CRM Webhook Trigger"
+  ],
+  "terminal_nodes": [
+    "Update Groundhogg - Deliverable",
+    "Update Groundhogg - NOT Deliverable"
+  ],
+  "credential_types": [],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "Set Address Fields",
+        "type": "n8n-nodes-base.set",
+        "version": 3.3,
+        "disabled": false
+      },
+      {
+        "name": "CRM Webhook Trigger",
+        "type": "n8n-nodes-base.webhook",
+        "version": 1.1,
+        "disabled": false
+      },
+      {
+        "name": "Update Groundhogg - Deliverable",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Update Groundhogg - NOT Deliverable",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Address Verification",
+        "type": "n8n-nodes-base.httpRequest",
+        "version": 4.1,
+        "disabled": false
+      },
+      {
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "Switch",
+        "to": "Update Groundhogg - Deliverable",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Switch",
+        "to": "Update Groundhogg - NOT Deliverable",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "Set Address Fields",
+        "to": "Address Verification",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "CRM Webhook Trigger",
+        "to": "Set Address Fields",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "Address Verification",
+        "to": "Switch",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/n8n",
+      "files": [
+        "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/n8n/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable.json"
+      ],
+      "sha256": "a65a805ed1d1ea213ccd2071765de446c1718fcf55713b9e278f78a5e959e41d",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/crm-webhook-trigger-and-update-groundhogg-deliverable-and-update-groundhogg-not-deliverable/implementations/n8n/provenance.json"
+}

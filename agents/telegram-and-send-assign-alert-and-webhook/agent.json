@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "slug": "telegram-and-send-assign-alert-and-webhook",
+  "title": "telegram and send assign alert and webhook",
+  "purpose": "Adapt the published “telegram and send assign alert and webhook” workflow to other implementations while preserving its documented behavior.",
+  "specification_status": "source-derived-draft",
+  "overview": "The source contains 8 executable nodes and 7 connections. This draft is derived from the n8n export; it needs a human-reviewed purpose, input/output contract, and behavioral tests before a port can claim equivalence.",
+  "entry_nodes": [
+    "jira-webhook"
+  ],
+  "terminal_nodes": [
+    "Send Update",
+    "Send Create",
+    "Send Assign Alert"
+  ],
+  "credential_types": [
+    "httpHeaderAuth",
+    "telegramApi"
+  ],
+  "source_graph": {
+    "nodes": [
+      {
+        "name": "telegram account",
+        "type": "n8n-nodes-base.code",
+        "version": 2,
+        "disabled": false
+      },
+      {
+        "name": "check tg account exists",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "check type",
+        "type": "n8n-nodes-base.switch",
+        "version": 3.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Update",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Create",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "Send Assign Alert",
+        "type": "n8n-nodes-base.telegram",
+        "version": 1.2,
+        "disabled": false
+      },
+      {
+        "name": "check issue body, assignee and hook type",
+        "type": "n8n-nodes-base.if",
+        "version": 2.2,
+        "disabled": false
+      },
+      {
+        "name": "jira-webhook",
+        "type": "n8n-nodes-base.webhook",
+        "version": 2,
+        "disabled": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "check type",
+        "to": "Send Create",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check type",
+        "to": "Send Update",
+        "kind": "main",
+        "output": 1,
+        "input": 0
+      },
+      {
+        "from": "check type",
+        "to": "Send Assign Alert",
+        "kind": "main",
+        "output": 2,
+        "input": 0
+      },
+      {
+        "from": "jira-webhook",
+        "to": "check issue body, assignee and hook type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "telegram account",
+        "to": "check tg account exists",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check tg account exists",
+        "to": "check type",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      },
+      {
+        "from": "check issue body, assignee and hook type",
+        "to": "telegram account",
+        "kind": "main",
+        "output": 0,
+        "input": 0
+      }
+    ]
+  },
+  "unresolved": [
+    "Define input/output schemas and expected outputs.",
+    "Review source expressions, external actions, and failure behavior.",
+    "Determine whether model judgment is required or deterministic rules suffice."
+  ],
+  "implementations": [
+    {
+      "id": "n8n",
+      "label": "n8n",
+      "status": "source-available",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/implementations/n8n",
+      "files": [
+        "agents/telegram-and-send-assign-alert-and-webhook/implementations/n8n/telegram-and-send-assign-alert-and-webhook.json"
+      ],
+      "sha256": "18f32c151e0697e5550adda0630e74834626d40cc1b4bc61917180358f7bdd14",
+      "runtime_tested": false
+    },
+    {
+      "id": "python",
+      "label": "Plain Python",
+      "status": "planned",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/implementations/python",
+      "runtime_tested": false
+    },
+    {
+      "id": "pydantic-ai",
+      "label": "Pydantic AI",
+      "status": "planned",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/implementations/pydantic-ai",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-flow",
+      "label": "CrewAI Flow",
+      "status": "planned",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/implementations/crewai-flow",
+      "runtime_tested": false
+    },
+    {
+      "id": "crewai-crew",
+      "label": "CrewAI Crew",
+      "status": "planned",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/implementations/crewai-crew",
+      "runtime_tested": false
+    },
+    {
+      "id": "langgraph",
+      "label": "LangGraph",
+      "status": "planned",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/implementations/langgraph",
+      "runtime_tested": false
+    }
+  ],
+  "prompts": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/prompts/claude.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/prompts/codex.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "grok-bot",
+      "label": "Grok Bot",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/prompts/grok-bot.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "muse",
+      "label": "Muse",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/prompts/muse.md",
+      "status": "untested-build-and-operate-instructions"
+    },
+    {
+      "id": "dots",
+      "label": "Dots",
+      "path": "agents/telegram-and-send-assign-alert-and-webhook/prompts/dots.md",
+      "status": "untested-build-and-operate-instructions"
+    }
+  ],
+  "license": "MIT",
+  "provenance": "agents/telegram-and-send-assign-alert-and-webhook/implementations/n8n/provenance.json"
+}

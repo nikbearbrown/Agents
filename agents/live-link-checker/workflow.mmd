@@ -1,0 +1,19 @@
+flowchart LR
+  n0["Loop Over Items"]
+  n1["When clicking #8216;Test workflow#8217;"]
+  n2["Reads Google Sheets"]
+  n3["Cleans backlink url"]
+  n4["Sends HTTP POST Request to DataForSEO"]
+  n5["Waits 20 seconds"]
+  n6["Sends HTTP links request to DataforSeo"]
+  n7["Checks which backlinks exists on the landing page"]
+  n8["Sends data to Google sheets"]
+  n0 -->|"main out 1 to in 0"| n4
+  n5 -->|"main out 0 to in 0"| n6
+  n3 -->|"main out 0 to in 0"| n0
+  n2 -->|"main out 0 to in 0"| n3
+  n8 -->|"main out 0 to in 0"| n0
+  n1 -->|"main out 0 to in 0"| n2
+  n4 -->|"main out 0 to in 0"| n5
+  n6 -->|"main out 0 to in 0"| n7
+  n7 -->|"main out 0 to in 0"| n8
