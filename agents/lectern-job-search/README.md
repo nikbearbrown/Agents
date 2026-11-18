@@ -29,3 +29,7 @@ The [n8n implementation](implementations/n8n/README.md) contains five workflows,
 [Claude](prompts/claude.md) · [Codex](prompts/codex.md) · [Grok Bot](prompts/grok-bot.md) · [Muse](prompts/muse.md) · [Dots](prompts/dots.md)
 
 Curated by Nik Bear Brown. Preserve source attribution and distinguish reported test evidence from new execution.
+
+## Tested revision
+
+A [six-board Hetzner revision](implementations/n8n-hetzner-2026-11-18/README.md) adds country/K-12 filtering and expanded fixtures. It preserves the original implementation rather than silently narrowing its sixteen-board scope. It belongs to this same agent family, not a new family.

@@ -1,0 +1,34 @@
+n8n 1.113.3; disposable profile; no network, no credentials, nothing sent
+01-collect
+   PASS  ran without an error
+   PASS  'Normalise' produced one item
+   PASS  views identical to the Python normalise()
+   PASS  source status rows identical
+02-filter
+   PASS  ran without an error
+   PASS  'Assemble run' produced one item
+   PASS  every record identical to the Python (fields, keep decision, matched words, reject reason)
+   PASS  counts identical (kept, rejected by reason, duplicates)
+03-delta
+   PASS  ran without an error
+   PASS  'Diff' produced one item
+   PASS  new: same postings, same reasons as the Python diff()
+   PASS  changed: same postings, same reasons as the Python diff()
+   PASS  gone: same postings, same reasons as the Python diff()
+   PASS  first-time companies identical
+   PASS  a source that was down never closes its postings
+04-post-to-discord
+   PASS  ran without an error
+   PASS  'Result' produced one item
+   PASS  same rows in the same order as the Python build_messages()
+   PASS  message text byte-identical (with the heading added by the node)
+   PASS  nothing was sent (send is false)
+05-daily
+   PASS  ran without an error
+   PASS  'Daily summary' produced one item
+   PASS  first run: baseline is 'no earlier run'; every kept posting is new
+   PASS  state file written
+   PASS  same day again: refuses, because the state is not older than the run (as the Python does)
+   PASS  next day, same postings: nothing new, nothing changed, nothing gone, nothing to post
+   PASS  the state advanced to the later date
+ALL PASSED
